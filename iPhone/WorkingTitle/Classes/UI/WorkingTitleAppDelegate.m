@@ -7,6 +7,7 @@
 //
 
 #import "WorkingTitleAppDelegate.h"
+#import "Estimate.h"
 
 
 @implementation WorkingTitleAppDelegate
@@ -16,12 +17,18 @@
 
 @synthesize estimatesNavigationController;
 
+@synthesize estimates;
+
 
 #pragma mark -
 #pragma mark Application lifecycle
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    
-    
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+	
+	estimates = [NSArray arrayWithObjects: [[[Estimate alloc] initWithClientName:@"John Doe"] autorelease],
+										   [[[Estimate alloc] initWithClientName:@"John Smith"] autorelease],
+										   nil];
+
     // Change all navigation bars to black style.
 	[estimatesNavigationController.navigationBar setBarStyle:UIBarStyleBlack];
 
@@ -98,6 +105,7 @@
 
 
 - (void)dealloc {
+	[estimates release];
 	[estimatesNavigationController release];
     [tabBarController release];
     [window release];

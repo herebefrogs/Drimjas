@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		02B2C06E12DFF2DD00D3FEE0 /* EstimatesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02B2C06C12DFF2DD00D3FEE0 /* EstimatesViewController.m */; };
 		02B2C06F12DFF2DD00D3FEE0 /* Estimates.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02B2C06D12DFF2DD00D3FEE0 /* Estimates.xib */; };
+		02B2C0B312DFF90900D3FEE0 /* Estimate.m in Sources */ = {isa = PBXBuildFile; fileRef = 02B2C0B212DFF90900D3FEE0 /* Estimate.m */; };
 		1D3623260D0F684500981E51 /* WorkingTitleAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* WorkingTitleAppDelegate.m */; };
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
@@ -21,6 +22,8 @@
 		02B2C06B12DFF2DD00D3FEE0 /* EstimatesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EstimatesViewController.h; sourceTree = "<group>"; };
 		02B2C06C12DFF2DD00D3FEE0 /* EstimatesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EstimatesViewController.m; sourceTree = "<group>"; };
 		02B2C06D12DFF2DD00D3FEE0 /* Estimates.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Estimates.xib; sourceTree = "<group>"; };
+		02B2C0B112DFF90900D3FEE0 /* Estimate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Estimate.h; sourceTree = "<group>"; };
+		02B2C0B212DFF90900D3FEE0 /* Estimate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Estimate.m; sourceTree = "<group>"; };
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1D3623240D0F684500981E51 /* WorkingTitleAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkingTitleAppDelegate.h; sourceTree = "<group>"; };
 		1D3623250D0F684500981E51 /* WorkingTitleAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkingTitleAppDelegate.m; sourceTree = "<group>"; };
@@ -50,10 +53,10 @@
 		02B2C05D12DFEF9800D3FEE0 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				1D3623240D0F684500981E51 /* WorkingTitleAppDelegate.h */,
-				1D3623250D0F684500981E51 /* WorkingTitleAppDelegate.m */,
 				02B2C06B12DFF2DD00D3FEE0 /* EstimatesViewController.h */,
 				02B2C06C12DFF2DD00D3FEE0 /* EstimatesViewController.m */,
+				1D3623240D0F684500981E51 /* WorkingTitleAppDelegate.h */,
+				1D3623250D0F684500981E51 /* WorkingTitleAppDelegate.m */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -68,9 +71,19 @@
 			path = Resources/Views;
 			sourceTree = "<group>";
 		};
+		02B2C0B012DFF8EA00D3FEE0 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				02B2C0B112DFF90900D3FEE0 /* Estimate.h */,
+				02B2C0B212DFF90900D3FEE0 /* Estimate.m */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				02B2C0B012DFF8EA00D3FEE0 /* API */,
 				29B97316FDCFA39411CA2CEA /* main.m */,
 				02B2C05D12DFEF9800D3FEE0 /* UI */,
 			);
@@ -188,6 +201,7 @@
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
 				1D3623260D0F684500981E51 /* WorkingTitleAppDelegate.m in Sources */,
 				02B2C06E12DFF2DD00D3FEE0 /* EstimatesViewController.m in Sources */,
+				02B2C0B312DFF90900D3FEE0 /* Estimate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

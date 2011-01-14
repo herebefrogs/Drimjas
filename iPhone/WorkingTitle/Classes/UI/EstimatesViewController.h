@@ -8,9 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+@class WorkingTitleAppDelegate;
 
 @interface EstimatesViewController : UITableViewController {
-
+	WorkingTitleAppDelegate *appDelegate;
 }
+
+@property (nonatomic, retain) IBOutlet WorkingTitleAppDelegate *appDelegate;
 
 @end

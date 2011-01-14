@@ -7,10 +7,13 @@
 //
 
 #import "EstimatesViewController.h"
+#import "WorkingTitleAppDelegate.h"
+#import "Estimate.h"
 
 
 @implementation EstimatesViewController
 
+@synthesize appDelegate;
 
 #pragma mark -
 #pragma mark View lifecycle
@@ -57,14 +60,12 @@
 #pragma mark Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    // Return the number of sections.
     return 1;
 }
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    // Return the number of rows in the section.
-    return 0;
+    return appDelegate.estimates.count;
 }
 
 
@@ -77,8 +78,11 @@
     if (cell == nil) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
-    
-    // Configure the cell...
+
+	Estimate *estimate = [appDelegate.estimates objectAtIndex:indexPath.row];
+    cell.textLabel.text = estimate.clientName;
+
+	cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
     return cell;
 }
@@ -156,6 +160,7 @@
 
 
 - (void)dealloc {
+	[appDelegate release];
     [super dealloc];
 }
 
