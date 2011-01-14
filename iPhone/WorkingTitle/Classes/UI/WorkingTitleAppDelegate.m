@@ -14,13 +14,16 @@
 @synthesize window;
 @synthesize tabBarController;
 
+@synthesize estimatesNavigationController;
+
 
 #pragma mark -
 #pragma mark Application lifecycle
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    
     
-    // Override point for customization after application launch.
+    // Change all navigation bars to black style.
+	[estimatesNavigationController.navigationBar setBarStyle:UIBarStyleBlack];
 
     // Add the tab bar controller's view to the window and display.
     [self.window addSubview:tabBarController.view];
@@ -95,6 +98,7 @@
 
 
 - (void)dealloc {
+	[estimatesNavigationController release];
     [tabBarController release];
     [window release];
     [super dealloc];

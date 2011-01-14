@@ -1,5 +1,5 @@
 //
-//  FirstViewController.h
+//  EstimatesViewController.h
 //  WorkingTitle
 //
 //  Created by Jerome Lecomte on 11-01-13.
@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 
-@interface FirstViewController : UIViewController {
+@interface EstimatesViewController : UITableViewController {
 
 }
 
