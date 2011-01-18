@@ -7,6 +7,7 @@
 //
 
 #import "WorkingTitleAppDelegate.h"
+#import "ReviewEstimateViewController.h"
 #import "Estimate.h"
 
 
@@ -16,8 +17,15 @@
 @synthesize tabBarController;
 
 @synthesize estimatesNavigationController;
+@synthesize reviewEstimateViewController;
 
 @synthesize estimates;
+
+
+- (void)reviewEstimateAtIndex:(NSInteger)index {
+	reviewEstimateViewController.estimate = [self.estimates objectAtIndex:index];
+	[estimatesNavigationController pushViewController:reviewEstimateViewController animated:YES];
+}
 
 
 #pragma mark -
@@ -25,7 +33,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 	
-	estimates = [NSArray arrayWithObjects: [[[Estimate alloc] initWithClientName:@"John Doe"] autorelease],
+	self.estimates = [NSArray arrayWithObjects: [[[Estimate alloc] initWithClientName:@"John Doe"] autorelease],
 										   [[[Estimate alloc] initWithClientName:@"John Smith"] autorelease],
 										   nil];
 
@@ -106,6 +114,7 @@
 
 - (void)dealloc {
 	[estimates release];
+	[reviewEstimateViewController release];
 	[estimatesNavigationController release];
     [tabBarController release];
     [window release];

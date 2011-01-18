@@ -1,19 +1,26 @@
 //
-//  EstimatesViewController.m
+//  ReviewEstimateViewController.m
 //  WorkingTitle
 //
-//  Created by Jerome Lecomte on 11-01-13.
+//  Created by Jerome Lecomte on 11-01-17.
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import "EstimatesViewController.h"
-#import "WorkingTitleAppDelegate.h"
+#import "ReviewEstimateViewController.h"
 #import "Estimate.h"
 
 
-@implementation EstimatesViewController
+@implementation ReviewEstimateViewController
 
-@synthesize appDelegate;
+@synthesize estimate;
+
+- (void)setEstimate:(Estimate *)newEstimate {
+	if(estimate != newEstimate) {
+		[estimate release];
+		estimate = [newEstimate retain];
+		[self.tableView reloadData];
+	}
+}
 
 #pragma mark -
 #pragma mark View lifecycle
@@ -60,30 +67,29 @@
 #pragma mark Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    // Return the number of sections.
     return 1;
 }
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return appDelegate.estimates.count;
+    // Return the number of rows in the section.
+    return 1;
 }
 
 
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+
     static NSString *CellIdentifier = @"Cell";
-    
+
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
 
-	Estimate *estimate = [appDelegate.estimates objectAtIndex:indexPath.row];
     cell.textLabel.text = estimate.clientName;
 
-	cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    
     return cell;
 }
 
@@ -100,14 +106,14 @@
 /*
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source.
         [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
+    }
     else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
-    }   
+    }
 }
 */
 
@@ -132,7 +138,14 @@
 #pragma mark Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	[appDelegate reviewEstimateAtIndex:indexPath.row];
+    // Navigation logic may go here. Create and push another view controller.
+    /*
+    <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
+    // ...
+    // Pass the selected object to the new view controller.
+    [self.navigationController pushViewController:detailViewController animated:YES];
+    [detailViewController release];
+    */
 }
 
 
@@ -142,7 +155,7 @@
 - (void)didReceiveMemoryWarning {
     // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
-    
+
     // Relinquish ownership any cached data, images, etc. that aren't in use.
 }
 
@@ -153,7 +166,7 @@
 
 
 - (void)dealloc {
-	[appDelegate release];
+	[estimate release];
     [super dealloc];
 }
 
