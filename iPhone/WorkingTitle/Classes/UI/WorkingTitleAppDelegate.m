@@ -27,15 +27,21 @@
 	[estimatesNavigationController pushViewController:reviewEstimateViewController animated:YES];
 }
 
+- (void)addEstimateWithClientName:(NSString *)newClientName {
+	[self.estimates addObject: [[[Estimate alloc] initWithClientName:newClientName] autorelease]];
+}
+
+- (void)loadDefaultData {
+	self.estimates = [NSMutableArray arrayWithObjects: [[[Estimate alloc] initWithClientName:@"John Doe"] autorelease],
+					  [[[Estimate alloc] initWithClientName:@"John Smith"] autorelease],
+					  nil];
+}
 
 #pragma mark -
 #pragma mark Application lifecycle
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-	
-	self.estimates = [NSArray arrayWithObjects: [[[Estimate alloc] initWithClientName:@"John Doe"] autorelease],
-										   [[[Estimate alloc] initWithClientName:@"John Smith"] autorelease],
-										   nil];
+	[self loadDefaultData];
 
     // Change all navigation bars to black style.
 	[estimatesNavigationController.navigationBar setBarStyle:UIBarStyleBlack];

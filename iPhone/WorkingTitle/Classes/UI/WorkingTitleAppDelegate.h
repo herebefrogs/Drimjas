@@ -17,7 +17,7 @@
 	UINavigationController *estimatesNavigationController;
 	ReviewEstimateViewController *reviewEstimateViewController;
 	
-	NSArray *estimates;
+	NSMutableArray *estimates;
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
@@ -26,9 +26,10 @@
 @property (nonatomic, retain) IBOutlet UINavigationController *estimatesNavigationController;
 @property (nonatomic, retain) IBOutlet ReviewEstimateViewController *reviewEstimateViewController;
 
-@property (nonatomic, retain) NSArray *estimates;
+@property (nonatomic, retain) NSMutableArray *estimates;
 
 - (void)reviewEstimateAtIndex:(NSInteger)index;
+- (void)addEstimateWithClientName:(NSString *)newClientName;
 
 
 @end

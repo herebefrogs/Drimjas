@@ -1,45 +1,49 @@
 //
-//  EstimatesViewController.m
+//  AddEstimateViewController.m
 //  WorkingTitle
 //
-//  Created by Jerome Lecomte on 11-01-13.
+//  Created by Jerome Lecomte on 11-01-18.
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import "EstimatesViewController.h"
-#import "WorkingTitleAppDelegate.h"
 #import "AddEstimateViewController.h"
-#import "Estimate.h"
+#import "EstimatesViewController.h"
 
 
-@implementation EstimatesViewController
+@implementation AddEstimateViewController
 
-@synthesize appDelegate;
-@synthesize addEstimateViewController;
+@synthesize clientNameTextField;
+@synthesize clientNameCell;
 
+@synthesize estimatesViewController;
 
-- (void)addEstimateWithClientName:(NSString *)newClientName {
-	[self.appDelegate addEstimateWithClientName:newClientName];
-	[self.tableView reloadData];
+- (BOOL)addEstimate {
+	// discard empty names
+	if (clientNameTextField.text == nil || clientNameTextField.text.length == 0) {
+		return NO;
+	} else {
+		[estimatesViewController addEstimateWithClientName:clientNameTextField.text];
+		return YES;
+	}
 }
 
 #pragma mark -
 #pragma mark View lifecycle
 
 /*
- - (void)viewDidLoad {
- [super viewDidLoad];
- 
- // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
- // self.navigationItem.rightBarButtonItem = self.editButtonItem;
- }
- */
+- (void)viewDidLoad {
+    [super viewDidLoad];
 
-/*
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
+    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 */
+
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+	self.clientNameTextField.text = nil;
+}
 /*
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
@@ -68,30 +72,27 @@
 #pragma mark Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    // Return the number of sections.
     return 1;
 }
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return appDelegate.estimates.count;
+    // Return the number of rows in the section.
+    return 1;
 }
 
 
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    static NSString *CellIdentifier = @"Cell";
-    
+
+    static NSString *CellIdentifier = @"ClientNameCell";
+
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = clientNameCell;
     }
 
-	Estimate *estimate = [appDelegate.estimates objectAtIndex:indexPath.row];
-    cell.textLabel.text = estimate.clientName;
-
-	cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    
     return cell;
 }
 
@@ -140,14 +141,43 @@
 #pragma mark Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	[appDelegate reviewEstimateAtIndex:indexPath.row];
+    // Navigation logic may go here. Create and push another view controller.
+    /*
+    <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
+    // ...
+    // Pass the selected object to the new view controller.
+    [self.navigationController pushViewController:detailViewController animated:YES];
+    [detailViewController release];
+    */
 }
 
 #pragma mark -
-#pragma mark Button delegate
+#pragma mark Button & Textfield delegate
 
-- (IBAction)add:(id)sender {
-	[self presentModalViewController:addEstimateViewController animated:YES];
+- (IBAction)save:(id)sender {
+	[self addEstimate];
+	[self cancel:sender];
+}
+
+- (IBAction)cancel:(id)sender {
+	[self dismissModalViewControllerAnimated:YES];
+}
+
+// keyboard's Done button pressed
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+	BOOL nameValid = [self addEstimate];
+	if (nameValid) {
+		// hide keyboard
+		[textField resignFirstResponder];
+	}
+	return nameValid;
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+	// as client name is the only field and estimate has been saved,
+	// hide modal window. when there will be multiple field, it should
+	// probably do nothing
+	[self cancel:textField];
 }
 
 #pragma mark -
@@ -167,8 +197,8 @@
 
 
 - (void)dealloc {
-	[addEstimateViewController release];
-	[appDelegate release];
+	[clientNameCell release];
+	[clientNameTextField release];
     [super dealloc];
 }
 
