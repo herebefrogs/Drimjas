@@ -11,6 +11,9 @@
 @class EstimatesViewController;
 
 @interface AddEstimateViewController : UITableViewController <UITextFieldDelegate> {
+	// cannot be named 'navigationItem' as it gets masked by UIViewController's one
+	IBOutlet UINavigationItem *navItem;
+	
 	IBOutlet UITextField *clientNameTextField;
 	IBOutlet UITableViewCell *clientNameCell;
 

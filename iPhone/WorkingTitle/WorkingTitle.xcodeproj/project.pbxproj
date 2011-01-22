@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		021F685012E67D8700ECDDDD /* AddEstimateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 021F684E12E67D8700ECDDDD /* AddEstimateViewController.m */; };
 		021F685112E67D8700ECDDDD /* AddEstimate.xib in Resources */ = {isa = PBXBuildFile; fileRef = 021F684F12E67D8700ECDDDD /* AddEstimate.xib */; };
+		029C645312EB8389000B6E51 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 029C645112EB8389000B6E51 /* Localizable.strings */; };
 		02B2C06E12DFF2DD00D3FEE0 /* EstimatesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02B2C06C12DFF2DD00D3FEE0 /* EstimatesViewController.m */; };
 		02B2C06F12DFF2DD00D3FEE0 /* Estimates.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02B2C06D12DFF2DD00D3FEE0 /* Estimates.xib */; };
 		02B2C0B312DFF90900D3FEE0 /* Estimate.m in Sources */ = {isa = PBXBuildFile; fileRef = 02B2C0B212DFF90900D3FEE0 /* Estimate.m */; };
@@ -26,6 +27,8 @@
 		021F684D12E67D8700ECDDDD /* AddEstimateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddEstimateViewController.h; sourceTree = "<group>"; };
 		021F684E12E67D8700ECDDDD /* AddEstimateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddEstimateViewController.m; sourceTree = "<group>"; };
 		021F684F12E67D8700ECDDDD /* AddEstimate.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddEstimate.xib; sourceTree = "<group>"; };
+		029C645212EB8389000B6E51 /* en */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = en; path = Resources/en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		029C647112EB84E9000B6E51 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = Resources/fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		02B2C06B12DFF2DD00D3FEE0 /* EstimatesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EstimatesViewController.h; sourceTree = "<group>"; };
 		02B2C06C12DFF2DD00D3FEE0 /* EstimatesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EstimatesViewController.m; sourceTree = "<group>"; };
 		02B2C06D12DFF2DD00D3FEE0 /* Estimates.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Estimates.xib; sourceTree = "<group>"; };
@@ -138,6 +141,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				029C645112EB8389000B6E51 /* Localizable.strings */,
 				02B2C05E12DFEFB300D3FEE0 /* Views */,
 			);
 			name = Resources;
@@ -187,6 +191,8 @@
 				Japanese,
 				French,
 				German,
+				en,
+				fr,
 			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* WorkingTitle */;
 			projectDirPath = "";
@@ -206,6 +212,7 @@
 				02B2C06F12DFF2DD00D3FEE0 /* Estimates.xib in Resources */,
 				02E1C7A512E53834000D7747 /* ReviewEstimate.xib in Resources */,
 				021F685112E67D8700ECDDDD /* AddEstimate.xib in Resources */,
+				029C645312EB8389000B6E51 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -226,6 +233,18 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		029C645112EB8389000B6E51 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				029C645212EB8389000B6E51 /* en */,
+				029C647112EB84E9000B6E51 /* fr */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		1D6058940D05DD3E006BFB54 /* Debug */ = {

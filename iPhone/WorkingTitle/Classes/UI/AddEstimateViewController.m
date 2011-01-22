@@ -25,15 +25,11 @@
 #pragma mark -
 #pragma mark View lifecycle
 
-/*
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+	navItem.title = NSLocalizedString(@"Add Estimate", "AddEstimate Navigation Item Title");
+	clientNameTextField.placeholder = NSLocalizedString(@"Client Name", "ClientName Text Field Placeholder");
 }
-*/
-
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
