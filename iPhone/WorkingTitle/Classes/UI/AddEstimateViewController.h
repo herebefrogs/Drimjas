@@ -11,16 +11,11 @@
 @class EstimatesViewController;
 
 @interface AddEstimateViewController : UITableViewController <UITextFieldDelegate> {
-	UITextField *clientNameTextField;
-	UITableViewCell *clientNameCell;
+	IBOutlet UITextField *clientNameTextField;
+	IBOutlet UITableViewCell *clientNameCell;
 
-	EstimatesViewController *estimatesViewController;
+	IBOutlet EstimatesViewController *estimatesViewController;
 }
-
-@property (nonatomic, retain) IBOutlet UITextField *clientNameTextField;
-@property (nonatomic, retain) IBOutlet UITableViewCell *clientNameCell;
-
-@property (nonatomic, retain) IBOutlet EstimatesViewController *estimatesViewController;
 
 - (IBAction)save:(id)sender;
 - (IBAction)cancel:(id)sender;

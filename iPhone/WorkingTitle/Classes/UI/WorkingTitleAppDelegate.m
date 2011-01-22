@@ -19,13 +19,15 @@
 
 
 - (void)addEstimateWithClientName:(NSString *)newClientName {
-	[self.estimates addObject: [[[Estimate alloc] initWithClientName:newClientName] autorelease]];
+	[estimates addObject: [[[Estimate alloc] initWithClientName:newClientName] autorelease]];
 }
 
 - (void)loadDefaultData {
-	self.estimates = [NSMutableArray arrayWithObjects: [[[Estimate alloc] initWithClientName:@"John Doe"] autorelease],
-					  [[[Estimate alloc] initWithClientName:@"John Smith"] autorelease],
-					  nil];
+	estimates = [[NSMutableArray arrayWithObjects:
+					[[[Estimate alloc] initWithClientName:@"John Doe"] autorelease],
+					[[[Estimate alloc] initWithClientName:@"John Smith"] autorelease],
+					nil]
+				 retain];
 }
 
 #pragma mark -

@@ -19,7 +19,7 @@
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 @property (nonatomic, retain) IBOutlet UITabBarController *tabBarController;
 
-@property (nonatomic, retain) NSMutableArray *estimates;
+@property (nonatomic, readonly) NSMutableArray *estimates;
 
 - (void)addEstimateWithClientName:(NSString *)newClientName;
 

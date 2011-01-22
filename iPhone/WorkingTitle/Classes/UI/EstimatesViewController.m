@@ -15,18 +15,14 @@
 
 @implementation EstimatesViewController
 
-@synthesize appDelegate;
-@synthesize addEstimateViewController;
-@synthesize reviewEstimateViewController;
-
 
 - (void)addEstimateWithClientName:(NSString *)newClientName {
-	[self.appDelegate addEstimateWithClientName:newClientName];
+	[appDelegate addEstimateWithClientName:newClientName];
 	[self.tableView reloadData];
 }
 
 - (void)reviewEstimateAtIndex:(NSInteger)index {
-	self.reviewEstimateViewController.estimate = [self.appDelegate.estimates objectAtIndex:index];
+	reviewEstimateViewController.estimate = [appDelegate.estimates objectAtIndex:index];
 	[self.navigationController pushViewController:reviewEstimateViewController animated:YES];
 }
 

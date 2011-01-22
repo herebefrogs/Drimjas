@@ -12,11 +12,6 @@
 
 @implementation AddEstimateViewController
 
-@synthesize clientNameTextField;
-@synthesize clientNameCell;
-
-@synthesize estimatesViewController;
-
 - (BOOL)addEstimate {
 	// discard empty names
 	if (clientNameTextField.text == nil || clientNameTextField.text.length == 0) {
@@ -42,7 +37,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-	self.clientNameTextField.text = nil;
+	clientNameTextField.text = nil;
 }
 /*
 - (void)viewDidAppear:(BOOL)animated {
