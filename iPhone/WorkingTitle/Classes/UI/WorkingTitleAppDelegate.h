@@ -8,14 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@class ReviewEstimateViewController;
 
 @interface WorkingTitleAppDelegate : NSObject <UIApplicationDelegate, UITabBarControllerDelegate> {
     UIWindow *window;
     UITabBarController *tabBarController;
 	
 	UINavigationController *estimatesNavigationController;
-	ReviewEstimateViewController *reviewEstimateViewController;
 	
 	NSMutableArray *estimates;
 }
@@ -24,11 +22,9 @@
 @property (nonatomic, retain) IBOutlet UITabBarController *tabBarController;
 
 @property (nonatomic, retain) IBOutlet UINavigationController *estimatesNavigationController;
-@property (nonatomic, retain) IBOutlet ReviewEstimateViewController *reviewEstimateViewController;
 
 @property (nonatomic, retain) NSMutableArray *estimates;
 
-- (void)reviewEstimateAtIndex:(NSInteger)index;
 - (void)addEstimateWithClientName:(NSString *)newClientName;
 
 

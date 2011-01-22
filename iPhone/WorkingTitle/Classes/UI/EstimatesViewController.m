@@ -8,6 +8,7 @@
 
 #import "EstimatesViewController.h"
 #import "WorkingTitleAppDelegate.h"
+#import "ReviewEstimateViewController.h"
 #import "AddEstimateViewController.h"
 #import "Estimate.h"
 
@@ -16,11 +17,17 @@
 
 @synthesize appDelegate;
 @synthesize addEstimateViewController;
+@synthesize reviewEstimateViewController;
 
 
 - (void)addEstimateWithClientName:(NSString *)newClientName {
 	[self.appDelegate addEstimateWithClientName:newClientName];
 	[self.tableView reloadData];
+}
+
+- (void)reviewEstimateAtIndex:(NSInteger)index {
+	self.reviewEstimateViewController.estimate = [self.appDelegate.estimates objectAtIndex:index];
+	[appDelegate.estimatesNavigationController pushViewController:reviewEstimateViewController animated:YES];
 }
 
 #pragma mark -
@@ -140,7 +147,7 @@
 #pragma mark Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	[appDelegate reviewEstimateAtIndex:indexPath.row];
+	[self reviewEstimateAtIndex:indexPath.row];
 }
 
 #pragma mark -
@@ -167,6 +174,7 @@
 
 
 - (void)dealloc {
+	[reviewEstimateViewController release];
 	[addEstimateViewController release];
 	[appDelegate release];
     [super dealloc];

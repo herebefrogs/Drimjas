@@ -7,7 +7,6 @@
 //
 
 #import "WorkingTitleAppDelegate.h"
-#import "ReviewEstimateViewController.h"
 #import "Estimate.h"
 
 
@@ -17,15 +16,9 @@
 @synthesize tabBarController;
 
 @synthesize estimatesNavigationController;
-@synthesize reviewEstimateViewController;
 
 @synthesize estimates;
 
-
-- (void)reviewEstimateAtIndex:(NSInteger)index {
-	reviewEstimateViewController.estimate = [self.estimates objectAtIndex:index];
-	[estimatesNavigationController pushViewController:reviewEstimateViewController animated:YES];
-}
 
 - (void)addEstimateWithClientName:(NSString *)newClientName {
 	[self.estimates addObject: [[[Estimate alloc] initWithClientName:newClientName] autorelease]];
@@ -120,7 +113,6 @@
 
 - (void)dealloc {
 	[estimates release];
-	[reviewEstimateViewController release];
 	[estimatesNavigationController release];
     [tabBarController release];
     [window release];
