@@ -13,15 +13,11 @@
     UIWindow *window;
     UITabBarController *tabBarController;
 	
-	UINavigationController *estimatesNavigationController;
-	
 	NSMutableArray *estimates;
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 @property (nonatomic, retain) IBOutlet UITabBarController *tabBarController;
-
-@property (nonatomic, retain) IBOutlet UINavigationController *estimatesNavigationController;
 
 @property (nonatomic, retain) NSMutableArray *estimates;
 

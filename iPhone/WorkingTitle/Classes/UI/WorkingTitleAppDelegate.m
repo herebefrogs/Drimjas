@@ -15,8 +15,6 @@
 @synthesize window;
 @synthesize tabBarController;
 
-@synthesize estimatesNavigationController;
-
 @synthesize estimates;
 
 
@@ -35,9 +33,6 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 	[self loadDefaultData];
-
-    // Change all navigation bars to black style.
-	[estimatesNavigationController.navigationBar setBarStyle:UIBarStyleBlack];
 
     // Add the tab bar controller's view to the window and display.
     [self.window addSubview:tabBarController.view];
@@ -113,7 +108,6 @@
 
 - (void)dealloc {
 	[estimates release];
-	[estimatesNavigationController release];
     [tabBarController release];
     [window release];
     [super dealloc];

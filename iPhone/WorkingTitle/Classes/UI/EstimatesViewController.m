@@ -27,7 +27,7 @@
 
 - (void)reviewEstimateAtIndex:(NSInteger)index {
 	self.reviewEstimateViewController.estimate = [self.appDelegate.estimates objectAtIndex:index];
-	[appDelegate.estimatesNavigationController pushViewController:reviewEstimateViewController animated:YES];
+	[self.navigationController pushViewController:reviewEstimateViewController animated:YES];
 }
 
 #pragma mark -
