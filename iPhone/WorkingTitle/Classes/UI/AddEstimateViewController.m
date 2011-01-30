@@ -26,6 +26,9 @@
 #pragma mark View lifecycle
 
 - (void)viewDidLoad {
+#ifdef __ENABLE_UI_LOGS__
+	NSLog(@"AddEstimateViewController.viewDidLoad");
+#endif
     [super viewDidLoad];
 	navItem.title = NSLocalizedString(@"Add Estimate", "AddEstimate Navigation Item Title");
 	clientNameTextField.placeholder = NSLocalizedString(@"Client Name", "ClientName Text Field Placeholder");
@@ -182,14 +185,26 @@
 }
 
 - (void)viewDidUnload {
+#ifdef __ENABLE_UI_LOGS__
+	NSLog(@"AddEstimateViewController.viewDidUnload");
+#endif
     // Relinquish ownership of anything that can be recreated in viewDidLoad or on demand.
-    // For example: self.myOutlet = nil;
+	navItem.title = nil;
+	clientNameTextField.text = nil;
+	clientNameTextField.placeholder = nil;
+	clientNameTextField = nil;
+	clientNameCell = nil;
 }
 
 
 - (void)dealloc {
+#ifdef __ENABLE_UI_LOGS__
+	NSLog(@"AddEstimateViewController.dealloc");
+#endif
+	[estimatesViewController release];
 	[clientNameCell release];
 	[clientNameTextField release];
+	[navItem release];
     [super dealloc];
 }
 

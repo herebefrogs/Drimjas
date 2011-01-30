@@ -6,3 +6,6 @@
     #import <Foundation/Foundation.h>
     #import <UIKit/UIKit.h>
 #endif
+
+// Log a message when UI methods get called in custom view controller
+#define __ENABLE_UI_LOGS__

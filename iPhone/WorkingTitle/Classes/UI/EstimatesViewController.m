@@ -30,6 +30,9 @@
 #pragma mark View lifecycle
 
 - (void)viewDidLoad {
+#ifdef __ENABLE_UI_LOGS__
+	NSLog(@"EstimatesViewController.viewDidLoad");
+#endif
 	[super viewDidLoad];
 	self.title = NSLocalizedString(@"Estimates", @"Estimates Navigation Item Title");
 	self.navigationController.tabBarItem.title = NSLocalizedString(@"Estimates", @"Estimates Tab Bar Title");
@@ -160,12 +163,19 @@
 }
 
 - (void)viewDidUnload {
+#ifdef __ENABLE_UI_LOGS__
+	NSLog(@"EstimatesViewController.viewDidUnload");
+#endif
     // Relinquish ownership of anything that can be recreated in viewDidLoad or on demand.
-    // For example: self.myOutlet = nil;
+	reviewEstimateViewController = nil;
+	addEstimateViewController = nil;
 }
 
 
 - (void)dealloc {
+#ifdef __ENABLE_UI_LOGS__
+	NSLog(@"EstimatesViewController.dealloc");
+#endif
 	[reviewEstimateViewController release];
 	[addEstimateViewController release];
 	[appDelegate release];

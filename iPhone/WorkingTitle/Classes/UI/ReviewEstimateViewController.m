@@ -27,6 +27,9 @@
 
 
 - (void)viewDidLoad {
+#ifdef __ENABLE_UI_LOGS__
+	NSLog(@"ReviewEstimateViewController.viewDidLoad");
+#endif
     [super viewDidLoad];
 	self.title = NSLocalizedString(@"Review Estimate", "ReviewEstimate Navigation Item Title");
 }
@@ -158,12 +161,19 @@
 }
 
 - (void)viewDidUnload {
+#ifdef __ENABLE_UI_LOGS__
+	NSLog(@"ReviewEstimateViewController.viewDidUnload");
+#endif
     // Relinquish ownership of anything that can be recreated in viewDidLoad or on demand.
-    // For example: self.myOutlet = nil;
+	self.title = nil;
+	estimate = nil;
 }
 
 
 - (void)dealloc {
+#ifdef __ENABLE_UI_LOGS__
+	NSLog(@"ReviewEstimateViewController.dealloc");
+#endif
 	[estimate release];
     [super dealloc];
 }
