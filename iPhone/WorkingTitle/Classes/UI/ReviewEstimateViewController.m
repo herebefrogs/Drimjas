@@ -7,7 +7,10 @@
 //
 
 #import "ReviewEstimateViewController.h"
+// API
 #import "Estimate.h"
+// Utils
+#import "PDFManager.h"
 
 
 @implementation ReviewEstimateViewController
@@ -162,11 +165,11 @@
 #pragma mark Button delegage
 
 - (IBAction)savePDF:(id)sender {
-	NSLog(@"saving PDF of estimate %@", estimate.clientName);
+	[PDFManager savePDFForEstimate:estimate];
 }
 
 - (IBAction)email:(id)sender {
-	NSLog(@"emailing of estimate %@", estimate.clientName);
+	NSLog(@"emailing estimate %@", estimate.clientName);
 }
 
 - (IBAction)print:(id)sender {
