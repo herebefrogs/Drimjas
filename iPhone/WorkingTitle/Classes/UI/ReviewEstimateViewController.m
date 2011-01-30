@@ -32,24 +32,33 @@
 #endif
     [super viewDidLoad];
 	self.title = NSLocalizedString(@"Review Estimate", "ReviewEstimate Navigation Item Title");
+	pdfButton.title = NSLocalizedString(@"PDF", "ReviewEstimate Toolbar PDF Button Title");
+	emailButton.title = NSLocalizedString(@"Email", "ReviewEstimate Toolbar Email Button Title");
+	printButton.title = NSLocalizedString(@"Print", "ReviewEstimate Toolbar Print Button Title");
+
+	self.toolbarItems = [NSArray arrayWithObjects: spacerButton, pdfButton, emailButton,
+												   printButton, spacerButton, nil];
+	// note: navigation controller not set yet
 }
 
-
-/*
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+	// show toolbar with animation
+	[self.navigationController setToolbarHidden:NO animated:YES];
 }
-*/
+
 /*
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
 }
 */
-/*
+
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
+	// hide toolbar with animation
+	[self.navigationController setToolbarHidden:YES animated:YES];
 }
-*/
+
 /*
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
@@ -149,6 +158,20 @@
     */
 }
 
+#pragma mark -
+#pragma mark Button delegage
+
+- (IBAction)savePDF:(id)sender {
+	NSLog(@"saving PDF of estimate %@", estimate.clientName);
+}
+
+- (IBAction)email:(id)sender {
+	NSLog(@"emailing of estimate %@", estimate.clientName);
+}
+
+- (IBAction)print:(id)sender {
+	NSLog(@"printing estimate %@", estimate.clientName);
+}
 
 #pragma mark -
 #pragma mark Memory management
@@ -166,6 +189,13 @@
 #endif
     // Relinquish ownership of anything that can be recreated in viewDidLoad or on demand.
 	self.title = nil;
+	self.toolbarItems = nil;
+	pdfButton.title = nil;
+	pdfButton = nil;
+	emailButton.title = nil;
+	emailButton = nil;
+	printButton.title = nil;
+	printButton = nil;
 	estimate = nil;
 }
 
@@ -174,6 +204,10 @@
 #ifdef __ENABLE_UI_LOGS__
 	NSLog(@"ReviewEstimateViewController.dealloc");
 #endif
+	[spacerButton release];
+	[printButton release];
+	[emailButton release];
+	[pdfButton release];
 	[estimate release];
     [super dealloc];
 }

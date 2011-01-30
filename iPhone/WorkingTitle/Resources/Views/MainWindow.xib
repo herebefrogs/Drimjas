@@ -87,6 +87,17 @@
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<int key="IBUIBarStyle">1</int>
 					</object>
+					<object class="IBUIToolbar" key="IBUIToolbar" id="1038878684">
+						<nil key="NSNextResponder"/>
+						<int key="NSvFlags">256</int>
+						<string key="NSFrame">{{0, 436}, {320, 44}}</string>
+						<bool key="IBUIOpaque">NO</bool>
+						<bool key="IBUIClipsSubviews">YES</bool>
+						<int key="IBUIContentMode">4</int>
+						<bool key="IBUIMultipleTouchEnabled">YES</bool>
+						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+						<int key="IBUIBarStyle">1</int>
+					</object>
 					<object class="NSMutableArray" key="IBUIViewControllers">
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="IBUIViewController" id="149599049">
@@ -111,6 +122,7 @@
 							<bool key="IBUIHorizontal">NO</bool>
 						</object>
 					</object>
+					<bool key="IBUIToolbarHidden">NO</bool>
 				</object>
 				<object class="NSMutableArray" key="IBUIViewControllers">
 					<bool key="EncodedWithXMLCoder">YES</bool>
@@ -229,6 +241,7 @@
 							<reference ref="652701649"/>
 							<reference ref="149599049"/>
 							<reference ref="485023561"/>
+							<reference ref="1038878684"/>
 						</object>
 						<reference key="parent" ref="1034742383"/>
 					</object>
@@ -265,6 +278,11 @@
 						<reference key="object" ref="390307550"/>
 						<reference key="parent" ref="767557560"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">188</int>
+						<reference key="object" ref="1038878684"/>
+						<reference key="parent" ref="305059909"/>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -288,7 +306,7 @@
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>UIApplication</string>
 					<string>UIResponder</string>
-					<string>{{70, 276}, {320, 480}}</string>
+					<string>{{329, 276}, {320, 480}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>EstimatesViewController</string>
@@ -322,7 +340,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">187</int>
+			<int key="maxID">188</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -369,12 +387,14 @@
 							<string>clientNameCell</string>
 							<string>clientNameTextField</string>
 							<string>estimatesViewController</string>
+							<string>navItem</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>UITableViewCell</string>
 							<string>UITextField</string>
 							<string>EstimatesViewController</string>
+							<string>UINavigationItem</string>
 						</object>
 					</object>
 					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
@@ -384,6 +404,7 @@
 							<string>clientNameCell</string>
 							<string>clientNameTextField</string>
 							<string>estimatesViewController</string>
+							<string>navItem</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -398,6 +419,10 @@
 							<object class="IBToOneOutletInfo">
 								<string key="name">estimatesViewController</string>
 								<string key="candidateClassName">EstimatesViewController</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">navItem</string>
+								<string key="candidateClassName">UINavigationItem</string>
 							</object>
 						</object>
 					</object>
@@ -734,6 +759,14 @@
 					<object class="IBClassDescriptionSource" key="sourceIdentifier" id="482722875">
 						<string key="majorKey">IBFrameworkSource</string>
 						<string key="minorKey">UIKit.framework/Headers/UITextField.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">UIToolbar</string>
+					<string key="superclassName">UIView</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBFrameworkSource</string>
+						<string key="minorKey">UIKit.framework/Headers/UIToolbar.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">

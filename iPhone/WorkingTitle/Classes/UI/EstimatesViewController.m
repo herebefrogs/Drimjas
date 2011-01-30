@@ -36,8 +36,10 @@
 	[super viewDidLoad];
 	self.title = NSLocalizedString(@"Estimates", @"Estimates Navigation Item Title");
 	self.navigationController.tabBarItem.title = NSLocalizedString(@"Estimates", @"Estimates Tab Bar Title");
-}
 
+	// start with toolbar hidden (no animation)
+	self.navigationController.toolbarHidden = YES;
+}
 /*
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
