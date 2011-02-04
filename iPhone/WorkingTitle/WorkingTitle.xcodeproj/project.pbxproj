@@ -11,6 +11,7 @@
 		021F685112E67D8700ECDDDD /* AddEstimate.xib in Resources */ = {isa = PBXBuildFile; fileRef = 021F684F12E67D8700ECDDDD /* AddEstimate.xib */; };
 		0236618A12F8FA8000CD39EE /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0236618912F8FA8000CD39EE /* CoreText.framework */; };
 		029C645312EB8389000B6E51 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 029C645112EB8389000B6E51 /* Localizable.strings */; };
+		02A62E8B12FEF50500CAF63A /* PrintManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 02A62E8A12FEF50500CAF63A /* PrintManager.m */; };
 		02B2C06E12DFF2DD00D3FEE0 /* EstimatesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02B2C06C12DFF2DD00D3FEE0 /* EstimatesViewController.m */; };
 		02B2C06F12DFF2DD00D3FEE0 /* Estimates.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02B2C06D12DFF2DD00D3FEE0 /* Estimates.xib */; };
 		02B2C0B312DFF90900D3FEE0 /* Estimate.m in Sources */ = {isa = PBXBuildFile; fileRef = 02B2C0B212DFF90900D3FEE0 /* Estimate.m */; };
@@ -32,6 +33,8 @@
 		0236618912F8FA8000CD39EE /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		029C645212EB8389000B6E51 /* en */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = en; path = Resources/en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		029C647112EB84E9000B6E51 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = Resources/fr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		02A62E8912FEF50500CAF63A /* PrintManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrintManager.h; sourceTree = "<group>"; };
+		02A62E8A12FEF50500CAF63A /* PrintManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrintManager.m; sourceTree = "<group>"; };
 		02B2C06B12DFF2DD00D3FEE0 /* EstimatesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EstimatesViewController.h; sourceTree = "<group>"; };
 		02B2C06C12DFF2DD00D3FEE0 /* EstimatesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EstimatesViewController.m; sourceTree = "<group>"; };
 		02B2C06D12DFF2DD00D3FEE0 /* Estimates.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Estimates.xib; sourceTree = "<group>"; };
@@ -110,6 +113,8 @@
 			children = (
 				02FA838C12F7A69B00C713AF /* PDFManager.h */,
 				02FA838D12F7A69B00C713AF /* PDFManager.m */,
+				02A62E8912FEF50500CAF63A /* PrintManager.h */,
+				02A62E8A12FEF50500CAF63A /* PrintManager.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -247,6 +252,7 @@
 				02E1C7A412E53834000D7747 /* ReviewEstimateViewController.m in Sources */,
 				021F685012E67D8700ECDDDD /* AddEstimateViewController.m in Sources */,
 				02FA838E12F7A69B00C713AF /* PDFManager.m in Sources */,
+				02A62E8B12FEF50500CAF63A /* PrintManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
