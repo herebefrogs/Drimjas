@@ -8,11 +8,13 @@
 
 #import <UIKit/UIKit.h>
 // Utils
+#import "EmailManager.h"
 #import "PrintManager.h"
+
 
 @class Estimate;
 
-@interface ReviewEstimateViewController : UITableViewController <PrintNotifyDelegate> {
+@interface ReviewEstimateViewController : UITableViewController <PrintNotifyDelegate, MailNotifyDelegate> {
 	Estimate *estimate;
 	IBOutlet UIBarButtonItem *pdfButton;
 	IBOutlet UIBarButtonItem *emailButton;

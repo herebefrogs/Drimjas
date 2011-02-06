@@ -11,7 +11,6 @@
 #import "Estimate.h"
 // Utils
 #import "PDFManager.h"
-#import "PrintManager.h"
 
 
 @implementation ReviewEstimateViewController
@@ -40,16 +39,18 @@
 	emailButton.title = NSLocalizedString(@"Email", "ReviewEstimate Toolbar Email Button Title");
 	printButton.title = NSLocalizedString(@"Print", "ReviewEstimate Toolbar Print Button Title");
 
-	// if printing is available...
-	if ([PrintManager isPrintingAvailable]) {
-		// ... add the Print button to the toolbar
-		self.toolbarItems = [NSArray arrayWithObjects: spacerButton, pdfButton, emailButton,
-													   printButton, spacerButton, nil];
-	} else {
-		// ... otherwise don't add the Print button to the toolbar
-		self.toolbarItems = [NSArray arrayWithObjects: spacerButton, pdfButton, emailButton,
-												       spacerButton, nil];
+	NSMutableArray *items = [NSMutableArray arrayWithObjects: spacerButton, pdfButton, nil];
+	if ([EmailManager isMailAvailable]) {
+		// add Email button only if mail is available on iPhone
+		[items addObject:emailButton];
 	}
+	if ([PrintManager isPrintingAvailable]) {
+		// add Print button only if printing is available on iPhone
+		[items addObject:printButton];
+	}
+	[items addObject:spacerButton];
+	self.toolbarItems = items;
+
 	// note: navigation controller not set yet
 }
 
@@ -178,7 +179,7 @@
 }
 
 - (IBAction)email:(id)sender {
-	NSLog(@"emailing estimate %@", estimate.clientName);
+	[EmailManager mailEstimate:estimate withDelegate:self];
 }
 
 - (IBAction)print:(id)sender {
@@ -188,9 +189,15 @@
 #pragma mark -
 #pragma mark Print completed delegate
 
+- (void)mailSent:(MFMailComposeResult)result withError:(NSError *)error {
+	if (result == MFMailComposeResultFailed) {
+		NSLog(@"ReviewEstimateViewController.mailSent: failed to email estimate %@ with error %u: %@", estimate.clientName, error.code, error.domain);
+	}
+}
+
 - (void)printJobCompleted:(BOOL)completed withError:(NSError *)error {
 	if (error) {
-		NSLog(@"ReviewEstimateViewController.printCompleted: failed to print estimate %@ with error %u: %@",
+		NSLog(@"ReviewEstimateViewController.printJobCompleted: failed to print estimate %@ with error %u: %@",
 			  estimate.clientName, error.code, error.domain);
 	}
 }

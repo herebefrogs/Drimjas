@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0216F77212FF46E9007BC60F /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0216F77112FF46E9007BC60F /* MessageUI.framework */; };
 		021F685012E67D8700ECDDDD /* AddEstimateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 021F684E12E67D8700ECDDDD /* AddEstimateViewController.m */; };
 		021F685112E67D8700ECDDDD /* AddEstimate.xib in Resources */ = {isa = PBXBuildFile; fileRef = 021F684F12E67D8700ECDDDD /* AddEstimate.xib */; };
 		0236618A12F8FA8000CD39EE /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0236618912F8FA8000CD39EE /* CoreText.framework */; };
@@ -18,6 +19,7 @@
 		02E1C7A412E53834000D7747 /* ReviewEstimateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02E1C7A212E53834000D7747 /* ReviewEstimateViewController.m */; };
 		02E1C7A512E53834000D7747 /* ReviewEstimate.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02E1C7A312E53834000D7747 /* ReviewEstimate.xib */; };
 		02FA838E12F7A69B00C713AF /* PDFManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 02FA838D12F7A69B00C713AF /* PDFManager.m */; };
+		02FC633413062D7100681A03 /* EmailManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 02FC633313062D7100681A03 /* EmailManager.m */; };
 		1D3623260D0F684500981E51 /* WorkingTitleAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* WorkingTitleAppDelegate.m */; };
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
@@ -27,6 +29,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0216F77112FF46E9007BC60F /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		021F684D12E67D8700ECDDDD /* AddEstimateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddEstimateViewController.h; sourceTree = "<group>"; };
 		021F684E12E67D8700ECDDDD /* AddEstimateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddEstimateViewController.m; sourceTree = "<group>"; };
 		021F684F12E67D8700ECDDDD /* AddEstimate.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddEstimate.xib; sourceTree = "<group>"; };
@@ -45,6 +48,8 @@
 		02E1C7A312E53834000D7747 /* ReviewEstimate.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReviewEstimate.xib; sourceTree = "<group>"; };
 		02FA838C12F7A69B00C713AF /* PDFManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFManager.h; sourceTree = "<group>"; };
 		02FA838D12F7A69B00C713AF /* PDFManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFManager.m; sourceTree = "<group>"; };
+		02FC633213062D7100681A03 /* EmailManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmailManager.h; sourceTree = "<group>"; };
+		02FC633313062D7100681A03 /* EmailManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmailManager.m; sourceTree = "<group>"; };
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1D3623240D0F684500981E51 /* WorkingTitleAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkingTitleAppDelegate.h; sourceTree = "<group>"; };
 		1D3623250D0F684500981E51 /* WorkingTitleAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkingTitleAppDelegate.m; sourceTree = "<group>"; };
@@ -66,6 +71,7 @@
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				288765080DF74369002DB57D /* CoreGraphics.framework in Frameworks */,
 				0236618A12F8FA8000CD39EE /* CoreText.framework in Frameworks */,
+				0216F77212FF46E9007BC60F /* MessageUI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -111,6 +117,8 @@
 		02FA838B12F7A64B00C713AF /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				02FC633213062D7100681A03 /* EmailManager.h */,
+				02FC633313062D7100681A03 /* EmailManager.m */,
 				02FA838C12F7A69B00C713AF /* PDFManager.h */,
 				02FA838D12F7A69B00C713AF /* PDFManager.m */,
 				02A62E8912FEF50500CAF63A /* PrintManager.h */,
@@ -175,6 +183,7 @@
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
 				288765070DF74369002DB57D /* CoreGraphics.framework */,
 				0236618912F8FA8000CD39EE /* CoreText.framework */,
+				0216F77112FF46E9007BC60F /* MessageUI.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -253,6 +262,7 @@
 				021F685012E67D8700ECDDDD /* AddEstimateViewController.m in Sources */,
 				02FA838E12F7A69B00C713AF /* PDFManager.m in Sources */,
 				02A62E8B12FEF50500CAF63A /* PrintManager.m in Sources */,
+				02FC633413062D7100681A03 /* EmailManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
