@@ -7,7 +7,11 @@
 //
 
 #import "WorkingTitleAppDelegate.h"
+// API
 #import "Estimate.h"
+// UI
+#import "StartupViewController.h"
+#import "EstimatesViewController.h"
 
 
 @implementation WorkingTitleAppDelegate
@@ -17,6 +21,16 @@
 
 @synthesize estimates;
 
+- (void)selectEstimatesTab {
+	// dismiss startup view
+	[tabBarController dismissModalViewControllerAnimated:YES];
+	// not clear how that selects the estimates tab
+	// TODO verify that it works when there are multiple tabs
+}
+
+- (void)showAddEstimateView {
+	[estimatesViewController add:nil];
+}
 
 - (void)addEstimateWithClientName:(NSString *)newClientName {
 	[estimates addObject: [[[Estimate alloc] initWithClientName:newClientName] autorelease]];
@@ -37,8 +51,11 @@
 	[self loadDefaultData];
 
     // Add the tab bar controller's view to the window and display.
-    [self.window addSubview:tabBarController.view];
+	[self.window addSubview:tabBarController.view];
     [self.window makeKeyAndVisible];
+
+	// load startup view on top of tab bar controller's view
+	[tabBarController presentModalViewController:startupViewController animated:NO];
 
     return YES;
 }

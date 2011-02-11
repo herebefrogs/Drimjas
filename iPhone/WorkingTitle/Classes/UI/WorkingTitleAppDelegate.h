@@ -8,10 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+@class StartupViewController;
+@class EstimatesViewController;
 
 @interface WorkingTitleAppDelegate : NSObject <UIApplicationDelegate, UITabBarControllerDelegate> {
     UIWindow *window;
     UITabBarController *tabBarController;
+	IBOutlet StartupViewController *startupViewController;
+	IBOutlet EstimatesViewController *estimatesViewController;
 	
 	NSMutableArray *estimates;
 }
@@ -22,6 +26,9 @@
 @property (nonatomic, readonly) NSMutableArray *estimates;
 
 - (void)addEstimateWithClientName:(NSString *)newClientName;
+
+- (void)selectEstimatesTab;
+- (void)showAddEstimateView;
 
 
 @end
