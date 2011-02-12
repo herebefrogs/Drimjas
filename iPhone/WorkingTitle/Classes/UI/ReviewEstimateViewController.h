@@ -7,10 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+// Utils
+#import "PrintManager.h"
 
 @class Estimate;
 
-@interface ReviewEstimateViewController : UITableViewController {
+@interface ReviewEstimateViewController : UITableViewController <PrintNotifyDelegate> {
 	Estimate *estimate;
 	IBOutlet UIBarButtonItem *pdfButton;
 	IBOutlet UIBarButtonItem *emailButton;

@@ -7,13 +7,23 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @class Estimate;
+@protocol PrintNotifyDelegate;
+
 
 @interface PrintManager : NSObject {
 
 }
 
-+ (void)printEstimate:(Estimate *)estimate withHandlerWhenDone:(UIPrintInteractionCompletionHandler)handler;
++ (BOOL)isPrintingAvailable;
++ (void)printEstimate:(Estimate *)estimate withDelegate:(id<PrintNotifyDelegate>)delegate;
+
+@end
+
+@protocol PrintNotifyDelegate <NSObject>
+
+- (void)printJobCompleted:(BOOL)completed withError:(NSError *)error;
 
 @end

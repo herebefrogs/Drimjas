@@ -41,7 +41,7 @@
 	printButton.title = NSLocalizedString(@"Print", "ReviewEstimate Toolbar Print Button Title");
 
 	// if printing is available...
-	if ([UIPrintInteractionController isPrintingAvailable]) {
+	if ([PrintManager isPrintingAvailable]) {
 		// ... add the Print button to the toolbar
 		self.toolbarItems = [NSArray arrayWithObjects: spacerButton, pdfButton, emailButton,
 													   printButton, spacerButton, nil];
@@ -171,7 +171,7 @@
 }
 
 #pragma mark -
-#pragma mark Button delegage
+#pragma mark Button delegate
 
 - (IBAction)savePDF:(id)sender {
 	[PDFManager savePDFForEstimate:estimate];
@@ -182,14 +182,17 @@
 }
 
 - (IBAction)print:(id)sender {
-	// print completion handler/block/closure
-	void (^didPrint)(UIPrintInteractionController *, BOOL, NSError *) =
-				   ^(UIPrintInteractionController *pic, BOOL completed, NSError *error) {
-		if (error)
-			NSLog(@"ReviewEstimateViewController.didPrint failed to print estimate %@ due to error in domain %@ with error code %u", estimate.clientName, error.domain, error.code);
-	};
-	
-	[PrintManager printEstimate:estimate withHandlerWhenDone:didPrint];
+	[PrintManager printEstimate:estimate withDelegate:self];
+}
+
+#pragma mark -
+#pragma mark Print completed delegate
+
+- (void)printJobCompleted:(BOOL)completed withError:(NSError *)error {
+	if (error) {
+		NSLog(@"ReviewEstimateViewController.printCompleted: failed to print estimate %@ with error %u: %@",
+			  estimate.clientName, error.code, error.domain);
+	}
 }
 
 #pragma mark -
