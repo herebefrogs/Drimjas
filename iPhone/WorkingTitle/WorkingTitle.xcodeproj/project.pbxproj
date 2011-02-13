@@ -11,6 +11,8 @@
 		021F685012E67D8700ECDDDD /* AddEstimateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 021F684E12E67D8700ECDDDD /* AddEstimateViewController.m */; };
 		021F685112E67D8700ECDDDD /* AddEstimate.xib in Resources */ = {isa = PBXBuildFile; fileRef = 021F684F12E67D8700ECDDDD /* AddEstimate.xib */; };
 		0236618A12F8FA8000CD39EE /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0236618912F8FA8000CD39EE /* CoreText.framework */; };
+		028917E11308D1CD00945F4D /* Estimates.png in Resources */ = {isa = PBXBuildFile; fileRef = 028917DD1308D1CD00945F4D /* Estimates.png */; };
+		028917E21308D1CD00945F4D /* Estimates@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 028917DE1308D1CD00945F4D /* Estimates@2x.png */; };
 		029C645312EB8389000B6E51 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 029C645112EB8389000B6E51 /* Localizable.strings */; };
 		02A62E8B12FEF50500CAF63A /* PrintManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 02A62E8A12FEF50500CAF63A /* PrintManager.m */; };
 		02B2C06E12DFF2DD00D3FEE0 /* EstimatesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02B2C06C12DFF2DD00D3FEE0 /* EstimatesViewController.m */; };
@@ -21,6 +23,10 @@
 		02C81A59130788B8009029E9 /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = 02C81A56130788B8009029E9 /* iTunesArtwork */; };
 		02C81A5A130788B8009029E9 /* Search-Settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 02C81A57130788B8009029E9 /* Search-Settings.png */; };
 		02C81A5B130788B8009029E9 /* Search-Settings@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 02C81A58130788B8009029E9 /* Search-Settings@2x.png */; };
+		02C81A791307903C009029E9 /* Email.png in Resources */ = {isa = PBXBuildFile; fileRef = 02C81A771307903C009029E9 /* Email.png */; };
+		02C81A7A1307903C009029E9 /* Email@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 02C81A781307903C009029E9 /* Email@2x.png */; };
+		02C81A9413079755009029E9 /* Print.png in Resources */ = {isa = PBXBuildFile; fileRef = 02C81A9213079755009029E9 /* Print.png */; };
+		02C81A9513079755009029E9 /* Print@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 02C81A9313079755009029E9 /* Print@2x.png */; };
 		02E1C7A412E53834000D7747 /* ReviewEstimateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02E1C7A212E53834000D7747 /* ReviewEstimateViewController.m */; };
 		02E1C7A512E53834000D7747 /* ReviewEstimate.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02E1C7A312E53834000D7747 /* ReviewEstimate.xib */; };
 		02FA838E12F7A69B00C713AF /* PDFManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 02FA838D12F7A69B00C713AF /* PDFManager.m */; };
@@ -39,6 +45,8 @@
 		021F684E12E67D8700ECDDDD /* AddEstimateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddEstimateViewController.m; sourceTree = "<group>"; };
 		021F684F12E67D8700ECDDDD /* AddEstimate.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddEstimate.xib; sourceTree = "<group>"; };
 		0236618912F8FA8000CD39EE /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		028917DD1308D1CD00945F4D /* Estimates.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Estimates.png; path = Resources/Icons/Estimates.png; sourceTree = "<group>"; };
+		028917DE1308D1CD00945F4D /* Estimates@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Estimates@2x.png"; path = "Resources/Icons/Estimates@2x.png"; sourceTree = "<group>"; };
 		029C645212EB8389000B6E51 /* en */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = en; path = Resources/en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		029C647112EB84E9000B6E51 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = Resources/fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		02A62E8912FEF50500CAF63A /* PrintManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrintManager.h; sourceTree = "<group>"; };
@@ -53,6 +61,10 @@
 		02C81A56130788B8009029E9 /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; name = iTunesArtwork; path = Resources/Icons/iTunesArtwork; sourceTree = "<group>"; };
 		02C81A57130788B8009029E9 /* Search-Settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Search-Settings.png"; path = "Resources/Icons/Search-Settings.png"; sourceTree = "<group>"; };
 		02C81A58130788B8009029E9 /* Search-Settings@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Search-Settings@2x.png"; path = "Resources/Icons/Search-Settings@2x.png"; sourceTree = "<group>"; };
+		02C81A771307903C009029E9 /* Email.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Email.png; path = Resources/Icons/Email.png; sourceTree = "<group>"; };
+		02C81A781307903C009029E9 /* Email@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Email@2x.png"; path = "Resources/Icons/Email@2x.png"; sourceTree = "<group>"; };
+		02C81A9213079755009029E9 /* Print.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Print.png; path = Resources/Icons/Print.png; sourceTree = "<group>"; };
+		02C81A9313079755009029E9 /* Print@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Print@2x.png"; path = "Resources/Icons/Print@2x.png"; sourceTree = "<group>"; };
 		02E1C7A112E53834000D7747 /* ReviewEstimateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReviewEstimateViewController.h; sourceTree = "<group>"; };
 		02E1C7A212E53834000D7747 /* ReviewEstimateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReviewEstimateViewController.m; sourceTree = "<group>"; };
 		02E1C7A312E53834000D7747 /* ReviewEstimate.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReviewEstimate.xib; sourceTree = "<group>"; };
@@ -132,6 +144,12 @@
 				02C81A57130788B8009029E9 /* Search-Settings.png */,
 				02C81A58130788B8009029E9 /* Search-Settings@2x.png */,
 				02C81A56130788B8009029E9 /* iTunesArtwork */,
+				02C81A771307903C009029E9 /* Email.png */,
+				02C81A781307903C009029E9 /* Email@2x.png */,
+				028917DD1308D1CD00945F4D /* Estimates.png */,
+				028917DE1308D1CD00945F4D /* Estimates@2x.png */,
+				02C81A9213079755009029E9 /* Print.png */,
+				02C81A9313079755009029E9 /* Print@2x.png */,
 			);
 			name = Icons;
 			sourceTree = "<group>";
@@ -272,6 +290,12 @@
 				02C81A59130788B8009029E9 /* iTunesArtwork in Resources */,
 				02C81A5A130788B8009029E9 /* Search-Settings.png in Resources */,
 				02C81A5B130788B8009029E9 /* Search-Settings@2x.png in Resources */,
+				02C81A791307903C009029E9 /* Email.png in Resources */,
+				02C81A7A1307903C009029E9 /* Email@2x.png in Resources */,
+				02C81A9413079755009029E9 /* Print.png in Resources */,
+				02C81A9513079755009029E9 /* Print@2x.png in Resources */,
+				028917E11308D1CD00945F4D /* Estimates.png in Resources */,
+				028917E21308D1CD00945F4D /* Estimates@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

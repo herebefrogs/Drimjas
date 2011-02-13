@@ -36,8 +36,6 @@
     [super viewDidLoad];
 	self.title = NSLocalizedString(@"Review Estimate", "ReviewEstimate Navigation Item Title");
 	pdfButton.title = NSLocalizedString(@"PDF", "ReviewEstimate Toolbar PDF Button Title");
-	emailButton.title = NSLocalizedString(@"Email", "ReviewEstimate Toolbar Email Button Title");
-	printButton.title = NSLocalizedString(@"Print", "ReviewEstimate Toolbar Print Button Title");
 
 	NSMutableArray *items = [NSMutableArray arrayWithObjects: spacerButton, pdfButton, nil];
 	if ([EmailManager isMailAvailable]) {
@@ -221,9 +219,7 @@
 	self.toolbarItems = nil;
 	pdfButton.title = nil;
 	pdfButton = nil;
-	emailButton.title = nil;
 	emailButton = nil;
-	printButton.title = nil;
 	printButton = nil;
 	estimate = nil;
 }
