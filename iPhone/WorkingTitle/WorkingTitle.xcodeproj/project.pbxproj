@@ -16,6 +16,8 @@
 		023C7D8513099F9900FD360B /* Button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 023C7D8113099F9900FD360B /* Button@2x.png */; };
 		023C7D8613099F9900FD360B /* Title.png in Resources */ = {isa = PBXBuildFile; fileRef = 023C7D8213099F9900FD360B /* Title.png */; };
 		023C7D8713099F9900FD360B /* Title@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 023C7D8313099F9900FD360B /* Title@2x.png */; };
+		023C7DB91309A8D600FD360B /* Launch.png in Resources */ = {isa = PBXBuildFile; fileRef = 023C7DB71309A8D600FD360B /* Launch.png */; };
+		023C7DBA1309A8D600FD360B /* Launch@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 023C7DB81309A8D600FD360B /* Launch@2x.png */; };
 		028917E21308D1CD00945F4D /* Estimates@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 028917DE1308D1CD00945F4D /* Estimates@2x.png */; };
 		0299F96F1304D8ED001E1E3E /* StartupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0299F96D1304D8ED001E1E3E /* StartupViewController.m */; };
 		0299F9701304D8ED001E1E3E /* Startup.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0299F96E1304D8ED001E1E3E /* Startup.xib */; };
@@ -56,6 +58,8 @@
 		023C7D8113099F9900FD360B /* Button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Button@2x.png"; path = "Resources/Icons/Button@2x.png"; sourceTree = "<group>"; };
 		023C7D8213099F9900FD360B /* Title.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Title.png; path = Resources/Icons/Title.png; sourceTree = "<group>"; };
 		023C7D8313099F9900FD360B /* Title@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Title@2x.png"; path = "Resources/Icons/Title@2x.png"; sourceTree = "<group>"; };
+		023C7DB71309A8D600FD360B /* Launch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Launch.png; path = Resources/Icons/Launch.png; sourceTree = "<group>"; };
+		023C7DB81309A8D600FD360B /* Launch@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Launch@2x.png"; path = "Resources/Icons/Launch@2x.png"; sourceTree = "<group>"; };
 		028917DE1308D1CD00945F4D /* Estimates@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Estimates@2x.png"; path = "Resources/Icons/Estimates@2x.png"; sourceTree = "<group>"; };
 		0299F96C1304D8ED001E1E3E /* StartupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartupViewController.h; sourceTree = "<group>"; };
 		0299F96D1304D8ED001E1E3E /* StartupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartupViewController.m; sourceTree = "<group>"; };
@@ -155,6 +159,8 @@
 		02C81A41130784C2009029E9 /* Icons */ = {
 			isa = PBXGroup;
 			children = (
+				023C7DB71309A8D600FD360B /* Launch.png */,
+				023C7DB81309A8D600FD360B /* Launch@2x.png */,
 				02C81A421307853C009029E9 /* Application.png */,
 				02C81A431307853C009029E9 /* Application@2x.png */,
 				02C81A57130788B8009029E9 /* Search-Settings.png */,
@@ -321,6 +327,8 @@
 				023C7D8513099F9900FD360B /* Button@2x.png in Resources */,
 				023C7D8613099F9900FD360B /* Title.png in Resources */,
 				023C7D8713099F9900FD360B /* Title@2x.png in Resources */,
+				023C7DB91309A8D600FD360B /* Launch.png in Resources */,
+				023C7DBA1309A8D600FD360B /* Launch@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

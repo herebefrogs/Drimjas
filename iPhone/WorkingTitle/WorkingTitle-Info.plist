@@ -16,7 +16,7 @@
 		<string>Search-Settings@2x</string>
 	</array>
 	<key>UILaunchImageFile</key>
-	<string></string>
+	<string>Launch</string>
 	<key>CFBundleIdentifier</key>
 	<string>com.yourcompany.${PRODUCT_NAME:rfc1034identifier}</string>
 	<key>CFBundleInfoDictionaryVersion</key>

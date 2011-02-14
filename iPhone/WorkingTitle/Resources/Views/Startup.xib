@@ -12,6 +12,7 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
+			<integer value="1"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -61,7 +62,11 @@
 						</object>
 						<int key="IBUILineBreakMode">0</int>
 						<string key="IBUINormalTitle">Add Estimate</string>
-						<reference key="IBUIHighlightedTitleColor" ref="573099539"/>
+						<object class="NSColor" key="IBUIHighlightedTitleColor" id="780129086">
+							<int key="NSColorSpace">3</int>
+							<bytes key="NSWhite">MC42NjY2NjY2NjY3AA</bytes>
+						</object>
+						<reference key="IBUISelectedTitleColor" ref="780129086"/>
 						<object class="NSColor" key="IBUINormalTitleColor" id="698365714">
 							<int key="NSColorSpace">1</int>
 							<bytes key="NSRGB">MCAwIDAAA</bytes>
@@ -140,6 +145,7 @@
 					</object>
 				</object>
 				<string key="NSFrameSize">{320, 460}</string>
+				<reference key="NSSuperview"/>
 				<reference key="IBUIBackgroundColor" ref="573099539"/>
 				<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics"/>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
