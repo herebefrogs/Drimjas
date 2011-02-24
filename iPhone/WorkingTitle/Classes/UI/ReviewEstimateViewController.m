@@ -35,9 +35,8 @@
 #endif
     [super viewDidLoad];
 	self.title = NSLocalizedString(@"Review Estimate", "ReviewEstimate Navigation Item Title");
-	pdfButton.title = NSLocalizedString(@"PDF", "ReviewEstimate Toolbar PDF Button Title");
 
-	NSMutableArray *items = [NSMutableArray arrayWithObjects: spacerButton, pdfButton, nil];
+	NSMutableArray *items = [NSMutableArray arrayWithObject: spacerButton];
 	if ([EmailManager isMailAvailable]) {
 		// add Email button only if mail is available on iPhone
 		[items addObject:emailButton];
@@ -172,10 +171,6 @@
 #pragma mark -
 #pragma mark Button delegate
 
-- (IBAction)savePDF:(id)sender {
-	[PDFManager savePDFFileForEstimate:estimate];
-}
-
 - (IBAction)email:(id)sender {
 	[EmailManager mailEstimate:estimate withDelegate:self];
 }
@@ -216,8 +211,6 @@
     // Relinquish ownership of anything that can be recreated in viewDidLoad or on demand.
 	self.title = nil;
 	self.toolbarItems = nil;
-	pdfButton.title = nil;
-	pdfButton = nil;
 	emailButton = nil;
 	printButton = nil;
 	estimate = nil;
@@ -231,7 +224,6 @@
 	[spacerButton release];
 	[printButton release];
 	[emailButton release];
-	[pdfButton release];
 	[estimate release];
     [super dealloc];
 }

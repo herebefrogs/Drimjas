@@ -16,7 +16,6 @@
 
 @interface ReviewEstimateViewController : UITableViewController <PrintNotifyDelegate, MailNotifyDelegate> {
 	Estimate *estimate;
-	IBOutlet UIBarButtonItem *pdfButton;
 	IBOutlet UIBarButtonItem *emailButton;
 	IBOutlet UIBarButtonItem *printButton;
 	IBOutlet UIBarButtonItem *spacerButton;
@@ -24,7 +23,6 @@
 
 @property (nonatomic, retain) Estimate *estimate;
 
-- (IBAction)savePDF:(id)sender;
 - (IBAction)email:(id)sender;
 - (IBAction)print:(id)sender;
 
