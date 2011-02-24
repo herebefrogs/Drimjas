@@ -173,7 +173,7 @@
 #pragma mark Button delegate
 
 - (IBAction)savePDF:(id)sender {
-	[PDFManager savePDFForEstimate:estimate];
+	[PDFManager savePDFFileForEstimate:estimate];
 }
 
 - (IBAction)email:(id)sender {
@@ -189,14 +189,13 @@
 
 - (void)mailSent:(MFMailComposeResult)result withError:(NSError *)error {
 	if (result == MFMailComposeResultFailed) {
-		NSLog(@"ReviewEstimateViewController.mailSent: failed to email estimate %@ with error %u: %@", estimate.clientName, error.code, error.domain);
+		NSLog(@"ReviewEstimateViewController.mailSent: failed to email estimate %@ with error %@, %@", estimate.clientName, error, [error userInfo]);
 	}
 }
 
 - (void)printJobCompleted:(BOOL)completed withError:(NSError *)error {
 	if (error) {
-		NSLog(@"ReviewEstimateViewController.printJobCompleted: failed to print estimate %@ with error %u: %@",
-			  estimate.clientName, error.code, error.domain);
+		NSLog(@"ReviewEstimateViewController.printJobCompleted: failed to print estimate %@ with error %@, %@", estimate.clientName, error, [error userInfo]);
 	}
 }
 

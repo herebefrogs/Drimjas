@@ -14,7 +14,8 @@
 
 }
 
-+ (BOOL)savePDFForEstimate:(Estimate *)estimate;
++ (NSMutableData *)getPDFDataForEstimate:(Estimate *)estimate;
++ (BOOL)savePDFFileForEstimate:(Estimate *)estimate;
 + (NSString *)getPDFNameForEstimate:(Estimate *)estimate;
 + (NSString *)getPDFPathForEstimate:(Estimate *)estimate;
 

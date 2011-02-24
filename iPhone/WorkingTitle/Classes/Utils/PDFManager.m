@@ -76,12 +76,10 @@
 #pragma mark -
 #pragma mark Public protocol implementation
 
-+ (BOOL)savePDFForEstimate:(Estimate *)estimate {
-	BOOL saved = NO;
-	// name PDF file after estimate
-	NSString *filename = [PDFManager getPDFPathForEstimate:estimate];
++ (NSMutableData *)getPDFDataForEstimate:(Estimate *)estimate {
+	NSMutableData *pdfData = [[NSMutableData alloc] initWithCapacity: 1024];
 
-	// prepare text
+	// prepare estimate text
 	CFAttributedStringRef currentText = CFAttributedStringCreate(NULL, (CFStringRef)estimate.clientName, NULL);
 	if (currentText == NULL) {
 		NSLog(@"Could not create the attributed string for the framesetter");
@@ -91,37 +89,48 @@
 		if (framesetter == NULL) {
 			NSLog(@"Could not create the framesetter needed to lay out the atrributed string.");
 		} else {
-			// create PDF file
-			if (UIGraphicsBeginPDFContextToFile(filename, CGRectZero, nil)) {
-		
-				CFRange currentRange = CFRangeMake(0, 0);
-				NSInteger currentPage = 0;
+			// start PDF data
+			UIGraphicsBeginPDFContextToData(pdfData, CGRectZero, nil);
 
-				do {
-					// opan new page (Letter format)
-					UIGraphicsBeginPDFPageWithInfo(CGRectMake(0, 0, 612, 792), nil);
+			CFRange currentRange = CFRangeMake(0, 0);
+			NSInteger currentPage = 0;
+			BOOL saved = NO;
 
-					// keep track of number of pages (to print it at the bottom of each page for example)
-					currentPage++;
-					[PDFManager drawPageNumber:currentPage];
+			do {
+				// open new page (Letter format)
+				UIGraphicsBeginPDFPageWithInfo(CGRectMake(0, 0, 612, 792), nil);
 
-					currentRange = [PDFManager renderPage:currentPage withTextRange:currentRange andFramesetter:framesetter];
+				// keep track of number of pages (to print it at the bottom of each page for example)
+				currentPage++;
+				[PDFManager drawPageNumber:currentPage];
 
-					if (currentRange.location == CFAttributedStringGetLength((CFAttributedStringRef)currentText)) {
-						saved = YES;
-					}
-				} while (!saved);
-		
-				// close PDF file
-				UIGraphicsEndPDFContext();
-			}
+				currentRange = [PDFManager renderPage:currentPage withTextRange:currentRange andFramesetter:framesetter];
+
+				if (currentRange.location == CFAttributedStringGetLength((CFAttributedStringRef)currentText)) {
+					saved = YES;
+				}
+			} while (!saved);
+
+			// end PDF data
+			UIGraphicsEndPDFContext();
 
 			CFRelease(framesetter);
 		}
 
 		CFRelease(currentText);
 	}
-	return saved;
+
+	return pdfData;
+}
+
++ (BOOL)savePDFFileForEstimate:(Estimate *)estimate {
+	NSString *pdfPath = [PDFManager getPDFPathForEstimate:estimate];
+	NSData *pdfData = [PDFManager getPDFDataForEstimate:estimate];
+
+	BOOL written = [pdfData writeToFile:pdfPath atomically:NO];
+	[pdfData release];
+
+	return written;
 }
 
 + (NSString *)getPDFNameForEstimate:(Estimate *)estimate {
@@ -135,9 +144,13 @@
 + (NSString *)getPDFPathForEstimate:(Estimate *)estimate {
 	// locate application's Documents directory
 	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+	NSString* path = [paths objectAtIndex:0];
 
-	return [[paths objectAtIndex:0]
-				stringByAppendingPathComponent:[PDFManager getPDFNameForEstimate:estimate]];
+	// replace Documents by application's tmp directory
+	path = [[path stringByDeletingLastPathComponent] stringByAppendingPathComponent:@"tmp"];
+
+	return [path stringByAppendingPathComponent:[PDFManager getPDFNameForEstimate:estimate]];
+				
 }
 
 @end

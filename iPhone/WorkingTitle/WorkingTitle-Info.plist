@@ -32,7 +32,7 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>UIFileSharingEnabled</key>
-	<true/>
+	<false/>
 	<key>NSMainNibFile</key>
 	<string>MainWindow</string>
 </dict>

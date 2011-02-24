@@ -25,9 +25,6 @@ static id<PrintNotifyDelegate> _delegate;
 
 
 + (void)printEstimate:(Estimate *)estimate withDelegate:(id<PrintNotifyDelegate>)delegate {
-	// first save the estimate as PDF
-	[PDFManager savePDFForEstimate:estimate];
-
 	_delegate = [delegate retain];
 
 	UIPrintInfo *printInfo = [UIPrintInfo printInfo];
@@ -40,15 +37,19 @@ static id<PrintNotifyDelegate> _delegate;
 	controller.printInfo = printInfo;
 
 	// set printing data
-	controller.printingItem = [NSURL fileURLWithPath:[PDFManager getPDFPathForEstimate:estimate]];
+	NSData *pdfData = [PDFManager getPDFDataForEstimate:estimate];
+	controller.printingItem = pdfData;
 
 	// print completion handler/block/closure
 	void (^printCompleted)(UIPrintInteractionController *, BOOL, NSError *) =
 			^(UIPrintInteractionController *pic, BOOL completed, NSError *error) {
+
 		// notify delegate of print outcome
 		[_delegate printJobCompleted:completed withError:error];
 		// free up delegate
 		[_delegate release];
+		// free up pdf data
+		[pdfData release];
 	};
 
 /* Detect if iPad or iPhone to share same codebase	
