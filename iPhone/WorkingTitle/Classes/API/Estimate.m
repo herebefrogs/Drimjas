@@ -1,29 +1,16 @@
-//
+// 
 //  Estimate.m
 //  WorkingTitle
 //
-//  Created by Jerome Lecomte on 11-01-13.
+//  Created by Jerome Lecomte on 11-02-26.
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
 #import "Estimate.h"
 
 
-@implementation Estimate
+@implementation Estimate 
 
-@synthesize clientName;
-
-- (id) initWithClientName:(NSString *)newClientName {
-	self = [super init];
-	if (self) {
-		self.clientName = newClientName;
-	}
-	return self;
-}
-
-- (void)dealloc {
-	[clientName release];
-	[super dealloc];
-}
+@dynamic clientName;
 
 @end

@@ -2,19 +2,20 @@
 //  Estimate.h
 //  WorkingTitle
 //
-//  Created by Jerome Lecomte on 11-01-13.
+//  Created by Jerome Lecomte on 11-02-26.
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <CoreData/CoreData.h>
 
 
-@interface Estimate : NSObject {
-	NSString *clientName;
+@interface Estimate :  NSManagedObject  
+{
 }
 
-@property (nonatomic, retain) NSString *clientName;
-
-- (id)initWithClientName:(NSString *)newClientName;
+@property (nonatomic, retain) NSString * clientName;
 
 @end
+
+
+

@@ -39,6 +39,9 @@
 
 	// start with toolbar hidden (no animation)
 	self.navigationController.toolbarHidden = YES;
+	
+	
+	[appDelegate fetchEstimatesFromDB];
 }
 /*
 - (void)viewWillAppear:(BOOL)animated {
