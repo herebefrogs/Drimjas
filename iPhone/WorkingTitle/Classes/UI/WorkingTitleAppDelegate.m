@@ -94,7 +94,8 @@
 		NSLog(@"WorkingTitleAppDelegage.fetchEstimatesFromDB: failed with error %u.%@", error.code, error.domain);
     }   
 	
-    // Save our fetched data to an array  
+    // Save our fetched data to an array
+	[estimates release];
     estimates = [mutableFetchResults retain];  
     [mutableFetchResults release];
     [request release];  

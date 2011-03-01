@@ -68,6 +68,7 @@ BOOL clickedAddEstimateButton = NO;
     [super viewDidUnload];
 	addEstimate.titleLabel.text = nil;
 	estimates.title = nil;
+	[estimates release];
 	estimates = nil;
 }
 

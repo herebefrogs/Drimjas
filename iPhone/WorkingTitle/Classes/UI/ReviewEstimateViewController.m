@@ -213,6 +213,7 @@
 	self.toolbarItems = nil;
 	emailButton = nil;
 	printButton = nil;
+	[estimate release];
 	estimate = nil;
 }
 
