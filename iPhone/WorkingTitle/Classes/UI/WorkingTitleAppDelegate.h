@@ -37,6 +37,7 @@
 // estimates methods
 - (void)fetchEstimatesFromDB;
 - (void)addEstimateWithClientName:(NSString *)newClientName;
+- (BOOL)deleteEstimateAtIndex:(NSInteger)index;
 
 // startup screen methods
 - (void)selectEstimatesTab;

@@ -43,11 +43,31 @@
 		// TODO This is a serious error saying the record
 		//could not be saved. Advise the user to
 		//try again or restart the application.
-		NSLog(@"WorkingTitleAppDelegate.addEstimateWithClientName: failed with error %u.%@", error.code, error.domain);
+		NSLog(@"WorkingTitleAppDelegate.addEstimateWithClientName: failed with error %@, %@", error, [error userInfo]);
 	}
 
 	[estimates addObject:estimate];
 }
+
+- (BOOL)deleteEstimateAtIndex:(NSInteger)index {
+	Estimate *deletedEstimate = [estimates objectAtIndex:index];
+	[self.managedObjectContext deleteObject:deletedEstimate];
+
+	// save the context
+	NSError *error = nil;
+	if (![self.managedObjectContext save:&error]) {
+		// TODO This is a serious error saying the record
+		//could not be saved. Advise the user to
+		//try again or restart the application.
+		NSLog(@"WorkingTitleAppDelegate.deleteEstimateAtIndex: failed with error %@, %@", error, [error userInfo]);
+		return NO;
+	}
+
+	[estimates removeObjectAtIndex:index];
+
+	return YES;
+}
+
 
 - (void)fetchEstimatesFromDB {
     // Define our table/entity to use  

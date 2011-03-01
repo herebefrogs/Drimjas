@@ -39,7 +39,8 @@
 
 	// start with toolbar hidden (no animation)
 	self.navigationController.toolbarHidden = YES;
-	
+
+	self.navigationItem.leftBarButtonItem = self.editButtonItem;
 	
 	[appDelegate fetchEstimatesFromDB];
 }
@@ -112,19 +113,16 @@
 */
 
 
-/*
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source.
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
-    }   
+		// attempt deleting the estimate from the data store
+		if ([appDelegate deleteEstimateAtIndex:indexPath.row]) {
+			// delete the row from the data source.
+			[tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+		}
+    }  
 }
-*/
 
 
 /*
