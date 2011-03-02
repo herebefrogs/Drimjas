@@ -16,12 +16,15 @@
 
 @interface ReviewEstimateViewController : UITableViewController <PrintNotifyDelegate, MailNotifyDelegate> {
 	Estimate *estimate;
-	IBOutlet UIBarButtonItem *emailButton;
-	IBOutlet UIBarButtonItem *printButton;
-	IBOutlet UIBarButtonItem *spacerButton;
+	UIBarButtonItem *emailButton;
+	UIBarButtonItem *printButton;
+	UIBarButtonItem *spacerButton;
 }
 
 @property (nonatomic, retain) Estimate *estimate;
+@property (nonatomic, retain) IBOutlet UIBarButtonItem *emailButton;
+@property (nonatomic, retain) IBOutlet UIBarButtonItem *printButton;
+@property (nonatomic, retain) IBOutlet UIBarButtonItem *spacerButton;
 
 - (IBAction)email:(id)sender;
 - (IBAction)print:(id)sender;

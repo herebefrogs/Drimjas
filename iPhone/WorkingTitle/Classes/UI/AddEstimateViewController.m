@@ -12,6 +12,8 @@
 
 @implementation AddEstimateViewController
 
+@synthesize estimatesViewController, navItem, clientNameTextField, clientNameCell;
+
 - (BOOL)addEstimate {
 	// discard empty names
 	if (clientNameTextField.text == nil || clientNameTextField.text.length == 0) {
@@ -190,10 +192,12 @@
 #endif
     // Relinquish ownership of anything that can be recreated in viewDidLoad or on demand.
 	navItem.title = nil;
+	// note: don't release navItem as it will leak memory
 	clientNameTextField.text = nil;
 	clientNameTextField.placeholder = nil;
-	clientNameTextField = nil;
-	clientNameCell = nil;
+	self.clientNameTextField = nil;
+	self.clientNameCell = nil;
+	self.estimatesViewController = nil;
 }
 
 

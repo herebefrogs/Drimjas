@@ -11,11 +11,15 @@
 @class WorkingTitleAppDelegate;
 
 @interface StartupViewController : UIViewController <UITabBarDelegate> {
-	IBOutlet WorkingTitleAppDelegate *appDelegate;
-	
-	IBOutlet UIButton *addEstimate;
-	IBOutlet UITabBarItem *estimates;
+	WorkingTitleAppDelegate *appDelegate;
+
+	UIButton *addEstimate;
+	UITabBarItem *estimates;
 }
+
+@property (nonatomic, retain) IBOutlet WorkingTitleAppDelegate *appDelegate;
+@property (nonatomic, retain) IBOutlet UIButton *addEstimate;
+@property (nonatomic, retain) IBOutlet UITabBarItem *estimates;
 
 - (IBAction)click:(id)sender;
 

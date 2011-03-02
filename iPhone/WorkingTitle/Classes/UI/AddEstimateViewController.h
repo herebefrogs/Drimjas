@@ -12,13 +12,19 @@
 
 @interface AddEstimateViewController : UITableViewController <UITextFieldDelegate> {
 	// cannot be named 'navigationItem' as it gets masked by UIViewController's one
-	IBOutlet UINavigationItem *navItem;
+	UINavigationItem *navItem;
 	
-	IBOutlet UITextField *clientNameTextField;
-	IBOutlet UITableViewCell *clientNameCell;
+	UITextField *clientNameTextField;
+	UITableViewCell *clientNameCell;
 
-	IBOutlet EstimatesViewController *estimatesViewController;
+	EstimatesViewController *estimatesViewController;
 }
+
+@property (nonatomic, retain) IBOutlet EstimatesViewController *estimatesViewController;
+
+@property (nonatomic, retain) IBOutlet UINavigationItem *navItem;
+@property (nonatomic, retain) IBOutlet UITextField *clientNameTextField;
+@property (nonatomic, retain) IBOutlet UITableViewCell *clientNameCell;
 
 - (IBAction)save:(id)sender;
 - (IBAction)cancel:(id)sender;

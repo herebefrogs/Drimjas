@@ -13,12 +13,17 @@
 @class ReviewEstimateViewController;
 
 @interface EstimatesViewController : UITableViewController {
-	IBOutlet WorkingTitleAppDelegate *appDelegate;
-	IBOutlet AddEstimateViewController *addEstimateViewController;
-	IBOutlet ReviewEstimateViewController *reviewEstimateViewController;
+	WorkingTitleAppDelegate *appDelegate;
+	AddEstimateViewController *addEstimateViewController;
+	ReviewEstimateViewController *reviewEstimateViewController;
 }
 
-- (IBAction)add:(id)sender;
+@property (nonatomic, retain) IBOutlet WorkingTitleAppDelegate *appDelegate;
+@property (nonatomic, retain) IBOutlet AddEstimateViewController *addEstimateViewController;
+@property (nonatomic, retain) IBOutlet ReviewEstimateViewController *reviewEstimateViewController;
+
 - (void)addEstimateWithClientName:(NSString *)newClientName;
+
+- (IBAction)add:(id)sender;
 
 @end

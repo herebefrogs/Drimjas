@@ -15,10 +15,10 @@
 
 @implementation ReviewEstimateViewController
 
-@synthesize estimate;
+@synthesize estimate, emailButton, printButton, spacerButton;
 
 - (void)setEstimate:(Estimate *)newEstimate {
-	if(estimate != newEstimate) {
+	if (estimate != newEstimate) {
 		[estimate release];
 		estimate = [newEstimate retain];
 		[self.tableView reloadData];
@@ -211,10 +211,9 @@
     // Relinquish ownership of anything that can be recreated in viewDidLoad or on demand.
 	self.title = nil;
 	self.toolbarItems = nil;
-	emailButton = nil;
-	printButton = nil;
-	[estimate release];
-	estimate = nil;
+	self.emailButton = nil;
+	self.printButton = nil;
+	self.estimate = nil;
 }
 
 

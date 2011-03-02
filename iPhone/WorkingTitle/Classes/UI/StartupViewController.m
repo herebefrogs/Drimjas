@@ -13,6 +13,8 @@
 
 @implementation StartupViewController
 
+@synthesize appDelegate, addEstimate, estimates;
+
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
 #ifdef __ENABLE_UI_LOGS__
@@ -66,14 +68,16 @@ BOOL clickedAddEstimateButton = NO;
 	NSLog(@"StartupViewController.viewDidUnload");
 #endif
     [super viewDidUnload];
+	self.appDelegate = nil;
 	addEstimate.titleLabel.text = nil;
+	self.addEstimate = nil;
 	estimates.title = nil;
-	[estimates release];
-	estimates = nil;
+	self.estimates = nil;
 }
 
 
 - (void)dealloc {
+	[appDelegate release];
 	[estimates release];
 	[addEstimate release];
     [super dealloc];

@@ -15,15 +15,12 @@
 
 @implementation EstimatesViewController
 
+@synthesize appDelegate, addEstimateViewController, reviewEstimateViewController;
+
 
 - (void)addEstimateWithClientName:(NSString *)newClientName {
 	[appDelegate addEstimateWithClientName:newClientName];
 	[self.tableView reloadData];
-}
-
-- (void)reviewEstimateAtIndex:(NSInteger)index {
-	reviewEstimateViewController.estimate = [appDelegate.estimates objectAtIndex:index];
-	[self.navigationController pushViewController:reviewEstimateViewController animated:YES];
 }
 
 #pragma mark -
@@ -35,14 +32,12 @@
 #endif
 	[super viewDidLoad];
 	self.title = NSLocalizedString(@"Estimates", @"Estimates Navigation Item Title");
-	self.navigationController.tabBarItem.title = NSLocalizedString(@"Estimates", @"Estimates Tab Bar Title");
+	self.navigationController.tabBarItem.title = self.title;
 
 	// start with toolbar hidden (no animation)
 	self.navigationController.toolbarHidden = YES;
 
 	self.navigationItem.leftBarButtonItem = self.editButtonItem;
-	
-	[appDelegate fetchEstimatesFromDB];
 }
 /*
 - (void)viewWillAppear:(BOOL)animated {
@@ -145,8 +140,10 @@
 #pragma mark Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	[self reviewEstimateAtIndex:indexPath.row];
+	reviewEstimateViewController.estimate = [appDelegate.estimates objectAtIndex:indexPath.row];
+	[self.navigationController pushViewController:reviewEstimateViewController animated:YES];
 }
+
 
 #pragma mark -
 #pragma mark Button delegate
@@ -154,6 +151,7 @@
 - (IBAction)add:(id)sender {
 	[self presentModalViewController:addEstimateViewController animated:YES];
 }
+
 
 #pragma mark -
 #pragma mark Memory management
@@ -170,8 +168,11 @@
 	NSLog(@"EstimatesViewController.viewDidUnload");
 #endif
     // Relinquish ownership of anything that can be recreated in viewDidLoad or on demand.
-	reviewEstimateViewController = nil;
-	addEstimateViewController = nil;
+	self.reviewEstimateViewController = nil;
+	self.addEstimateViewController = nil;
+	self.navigationItem.leftBarButtonItem = nil;
+	// note: don't nil title or navigationController.tabBarItem.title
+	// as it may appear on the view currently displayed
 }
 
 

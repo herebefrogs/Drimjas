@@ -14,10 +14,11 @@
 @interface WorkingTitleAppDelegate : NSObject <UIApplicationDelegate, UITabBarControllerDelegate> {
     UIWindow *window;
     UITabBarController *tabBarController;
-	IBOutlet StartupViewController *startupViewController;
-	IBOutlet EstimatesViewController *estimatesViewController;
 	
-	NSMutableArray *estimates;
+	EstimatesViewController *estimatesViewController;
+	NSMutableArray *estimates_;
+
+	StartupViewController *startupViewController;
 
 @private
 	NSManagedObjectContext *managedObjectContext_;
@@ -25,23 +26,27 @@
     NSPersistentStoreCoordinator *persistentStoreCoordinator_;
 }
 
-@property (nonatomic, retain, readonly) NSManagedObjectContext *managedObjectContext;
-@property (nonatomic, retain, readonly) NSManagedObjectModel *managedObjectModel;
-@property (nonatomic, retain, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 @property (nonatomic, retain) IBOutlet UITabBarController *tabBarController;
 
-@property (nonatomic, readonly) NSMutableArray *estimates;
-
 // estimates methods
-- (void)fetchEstimatesFromDB;
+@property (nonatomic, retain) IBOutlet EstimatesViewController *estimatesViewController;
+@property (nonatomic, retain, readonly) NSMutableArray *estimates;
+
 - (void)addEstimateWithClientName:(NSString *)newClientName;
 - (BOOL)deleteEstimateAtIndex:(NSInteger)index;
 
 // startup screen methods
+@property (nonatomic, retain) IBOutlet StartupViewController *startupViewController;
+
 - (void)selectEstimatesTab;
 - (void)showAddEstimateView;
+
+// core data methods
+@property (nonatomic, retain, readonly) NSManagedObjectContext *managedObjectContext;
+@property (nonatomic, retain, readonly) NSManagedObjectModel *managedObjectModel;
+@property (nonatomic, retain, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
 - (NSURL *)applicationDocumentsDirectory;
 - (void)saveContext;
