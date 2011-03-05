@@ -9,17 +9,17 @@
 #import <UIKit/UIKit.h>
 
 @class WorkingTitleAppDelegate;
-@class AddEstimateViewController;
+@class AddEstimateClientInfoViewController;
 @class ReviewEstimateViewController;
 
 @interface EstimatesViewController : UITableViewController {
 	WorkingTitleAppDelegate *appDelegate;
-	AddEstimateViewController *addEstimateViewController;
+	UINavigationController *addEstimateNavigationController;
 	ReviewEstimateViewController *reviewEstimateViewController;
 }
 
 @property (nonatomic, retain) IBOutlet WorkingTitleAppDelegate *appDelegate;
-@property (nonatomic, retain) IBOutlet AddEstimateViewController *addEstimateViewController;
+@property (nonatomic, retain) IBOutlet UINavigationController *addEstimateNavigationController;
 @property (nonatomic, retain) IBOutlet ReviewEstimateViewController *reviewEstimateViewController;
 
 - (void)addEstimateWithClientName:(NSString *)newClientName;

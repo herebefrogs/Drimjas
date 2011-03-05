@@ -9,13 +9,13 @@
 #import "EstimatesViewController.h"
 #import "WorkingTitleAppDelegate.h"
 #import "ReviewEstimateViewController.h"
-#import "AddEstimateViewController.h"
+#import "AddEstimateClientInfoViewController.h"
 #import "Estimate.h"
 
 
 @implementation EstimatesViewController
 
-@synthesize appDelegate, addEstimateViewController, reviewEstimateViewController;
+@synthesize appDelegate, addEstimateNavigationController, reviewEstimateViewController;
 
 
 - (void)addEstimateWithClientName:(NSString *)newClientName {
@@ -149,7 +149,7 @@
 #pragma mark Button delegate
 
 - (IBAction)add:(id)sender {
-	[self presentModalViewController:addEstimateViewController animated:YES];
+	[self presentModalViewController:addEstimateNavigationController animated:YES];
 }
 
 
@@ -169,7 +169,7 @@
 #endif
     // Relinquish ownership of anything that can be recreated in viewDidLoad or on demand.
 	self.reviewEstimateViewController = nil;
-	self.addEstimateViewController = nil;
+	self.addEstimateNavigationController = nil;
 	self.navigationItem.leftBarButtonItem = nil;
 	// note: don't nil title or navigationController.tabBarItem.title
 	// as it may appear on the view currently displayed
@@ -181,7 +181,7 @@
 	NSLog(@"EstimatesViewController.dealloc");
 #endif
 	[reviewEstimateViewController release];
-	[addEstimateViewController release];
+	[addEstimateNavigationController release];
 	[appDelegate release];
     [super dealloc];
 }

@@ -10,10 +10,7 @@
 
 @class EstimatesViewController;
 
-@interface AddEstimateViewController : UITableViewController <UITextFieldDelegate> {
-	// cannot be named 'navigationItem' as it gets masked by UIViewController's one
-	UINavigationItem *navItem;
-	
+@interface AddEstimateClientInfoViewController : UITableViewController <UITextFieldDelegate> {
 	UITextField *clientNameTextField;
 	UITableViewCell *clientNameCell;
 
@@ -22,7 +19,6 @@
 
 @property (nonatomic, retain) IBOutlet EstimatesViewController *estimatesViewController;
 
-@property (nonatomic, retain) IBOutlet UINavigationItem *navItem;
 @property (nonatomic, retain) IBOutlet UITextField *clientNameTextField;
 @property (nonatomic, retain) IBOutlet UITableViewCell *clientNameCell;
 

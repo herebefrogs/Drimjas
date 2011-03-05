@@ -6,13 +6,13 @@
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import "AddEstimateViewController.h"
+#import "AddEstimateClientInfoViewController.h"
 #import "EstimatesViewController.h"
 
 
-@implementation AddEstimateViewController
+@implementation AddEstimateClientInfoViewController
 
-@synthesize estimatesViewController, navItem, clientNameTextField, clientNameCell;
+@synthesize estimatesViewController, clientNameTextField, clientNameCell;
 
 - (BOOL)addEstimate {
 	// discard empty names
@@ -29,10 +29,11 @@
 
 - (void)viewDidLoad {
 #ifdef __ENABLE_UI_LOGS__
-	NSLog(@"AddEstimateViewController.viewDidLoad");
+	NSLog(@"AddEstimateClientInfoViewController.viewDidLoad");
 #endif
     [super viewDidLoad];
-	navItem.title = NSLocalizedString(@"Add Estimate", "AddEstimate Navigation Item Title");
+	self.title = NSLocalizedString(@"Add Client", "AddEstimateClientInfo Navigation Item Title");
+	self.navigationController.tabBarItem.title = self.title;
 	clientNameTextField.placeholder = NSLocalizedString(@"Client Name", "ClientName Text Field Placeholder");
 }
 
@@ -188,27 +189,26 @@
 
 - (void)viewDidUnload {
 #ifdef __ENABLE_UI_LOGS__
-	NSLog(@"AddEstimateViewController.viewDidUnload");
+	NSLog(@"AddEstimateClientInfoViewController.viewDidUnload");
 #endif
     // Relinquish ownership of anything that can be recreated in viewDidLoad or on demand.
-	navItem.title = nil;
-	// note: don't release navItem as it will leak memory
 	clientNameTextField.text = nil;
 	clientNameTextField.placeholder = nil;
 	self.clientNameTextField = nil;
 	self.clientNameCell = nil;
 	self.estimatesViewController = nil;
+	// note: don't nil title or navigationController.tabBarItem.title
+	// as it may appear on the view currently displayed
 }
 
 
 - (void)dealloc {
 #ifdef __ENABLE_UI_LOGS__
-	NSLog(@"AddEstimateViewController.dealloc");
+	NSLog(@"AddEstimateClientInfoViewController.dealloc");
 #endif
 	[estimatesViewController release];
 	[clientNameCell release];
 	[clientNameTextField release];
-	[navItem release];
     [super dealloc];
 }
 

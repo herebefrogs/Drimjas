@@ -8,8 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		0216F77212FF46E9007BC60F /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0216F77112FF46E9007BC60F /* MessageUI.framework */; };
-		021F685012E67D8700ECDDDD /* AddEstimateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 021F684E12E67D8700ECDDDD /* AddEstimateViewController.m */; };
-		021F685112E67D8700ECDDDD /* AddEstimate.xib in Resources */ = {isa = PBXBuildFile; fileRef = 021F684F12E67D8700ECDDDD /* AddEstimate.xib */; };
+		021F685012E67D8700ECDDDD /* AddEstimateClientInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 021F684E12E67D8700ECDDDD /* AddEstimateClientInfoViewController.m */; };
+		021F685112E67D8700ECDDDD /* AddEstimateClientInfo.xib in Resources */ = {isa = PBXBuildFile; fileRef = 021F684F12E67D8700ECDDDD /* AddEstimateClientInfo.xib */; };
 		0236618A12F8FA8000CD39EE /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0236618912F8FA8000CD39EE /* CoreText.framework */; };
 		023C7D6813099CD200FD360B /* Estimates.png in Resources */ = {isa = PBXBuildFile; fileRef = 023C7D6713099CD200FD360B /* Estimates.png */; };
 		023C7D8413099F9900FD360B /* Button.png in Resources */ = {isa = PBXBuildFile; fileRef = 023C7D8013099F9900FD360B /* Button.png */; };
@@ -51,9 +51,9 @@
 
 /* Begin PBXFileReference section */
 		0216F77112FF46E9007BC60F /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
-		021F684D12E67D8700ECDDDD /* AddEstimateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddEstimateViewController.h; sourceTree = "<group>"; };
-		021F684E12E67D8700ECDDDD /* AddEstimateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddEstimateViewController.m; sourceTree = "<group>"; };
-		021F684F12E67D8700ECDDDD /* AddEstimate.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddEstimate.xib; sourceTree = "<group>"; };
+		021F684D12E67D8700ECDDDD /* AddEstimateClientInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddEstimateClientInfoViewController.h; sourceTree = "<group>"; };
+		021F684E12E67D8700ECDDDD /* AddEstimateClientInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddEstimateClientInfoViewController.m; sourceTree = "<group>"; };
+		021F684F12E67D8700ECDDDD /* AddEstimateClientInfo.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddEstimateClientInfo.xib; sourceTree = "<group>"; };
 		0236618912F8FA8000CD39EE /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		023C7D6713099CD200FD360B /* Estimates.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Estimates.png; path = Resources/Icons/Estimates.png; sourceTree = "<group>"; };
 		023C7D8013099F9900FD360B /* Button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Button.png; path = Resources/Icons/Button.png; sourceTree = "<group>"; };
@@ -125,8 +125,8 @@
 		02B2C05D12DFEF9800D3FEE0 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				021F684D12E67D8700ECDDDD /* AddEstimateViewController.h */,
-				021F684E12E67D8700ECDDDD /* AddEstimateViewController.m */,
+				021F684D12E67D8700ECDDDD /* AddEstimateClientInfoViewController.h */,
+				021F684E12E67D8700ECDDDD /* AddEstimateClientInfoViewController.m */,
 				02B2C06B12DFF2DD00D3FEE0 /* EstimatesViewController.h */,
 				02B2C06C12DFF2DD00D3FEE0 /* EstimatesViewController.m */,
 				02E1C7A112E53834000D7747 /* ReviewEstimateViewController.h */,
@@ -142,7 +142,7 @@
 		02B2C05E12DFEFB300D3FEE0 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				021F684F12E67D8700ECDDDD /* AddEstimate.xib */,
+				021F684F12E67D8700ECDDDD /* AddEstimateClientInfo.xib */,
 				02B2C06D12DFF2DD00D3FEE0 /* Estimates.xib */,
 				28AD73870D9D96C1002E5188 /* MainWindow.xib */,
 				02E1C7A312E53834000D7747 /* ReviewEstimate.xib */,
@@ -316,7 +316,7 @@
 				28AD73880D9D96C1002E5188 /* MainWindow.xib in Resources */,
 				02B2C06F12DFF2DD00D3FEE0 /* Estimates.xib in Resources */,
 				02E1C7A512E53834000D7747 /* ReviewEstimate.xib in Resources */,
-				021F685112E67D8700ECDDDD /* AddEstimate.xib in Resources */,
+				021F685112E67D8700ECDDDD /* AddEstimateClientInfo.xib in Resources */,
 				0299F9701304D8ED001E1E3E /* Startup.xib in Resources */,
 				029C645312EB8389000B6E51 /* Localizable.strings in Resources */,
 				02C81A441307853C009029E9 /* Application.png in Resources */,
@@ -350,7 +350,7 @@
 				1D3623260D0F684500981E51 /* WorkingTitleAppDelegate.m in Sources */,
 				02B2C06E12DFF2DD00D3FEE0 /* EstimatesViewController.m in Sources */,
 				02E1C7A412E53834000D7747 /* ReviewEstimateViewController.m in Sources */,
-				021F685012E67D8700ECDDDD /* AddEstimateViewController.m in Sources */,
+				021F685012E67D8700ECDDDD /* AddEstimateClientInfoViewController.m in Sources */,
 				02FA838E12F7A69B00C713AF /* PDFManager.m in Sources */,
 				02A62E8B12FEF50500CAF63A /* PrintManager.m in Sources */,
 				02FC633413062D7100681A03 /* EmailManager.m in Sources */,
