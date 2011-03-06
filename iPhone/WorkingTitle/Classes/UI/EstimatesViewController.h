@@ -13,12 +13,10 @@
 @class ReviewEstimateViewController;
 
 @interface EstimatesViewController : UITableViewController {
-	WorkingTitleAppDelegate *appDelegate;
 	UINavigationController *addEstimateNavigationController;
 	ReviewEstimateViewController *reviewEstimateViewController;
 }
 
-@property (nonatomic, retain) IBOutlet WorkingTitleAppDelegate *appDelegate;
 @property (nonatomic, retain) IBOutlet UINavigationController *addEstimateNavigationController;
 @property (nonatomic, retain) IBOutlet ReviewEstimateViewController *reviewEstimateViewController;
 

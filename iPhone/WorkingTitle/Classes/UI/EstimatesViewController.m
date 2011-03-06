@@ -7,19 +7,21 @@
 //
 
 #import "EstimatesViewController.h"
-#import "WorkingTitleAppDelegate.h"
+// API
+#import "Estimate.h"
+#import "DataStore.h"
+// Views
 #import "ReviewEstimateViewController.h"
 #import "AddEstimateClientInfoViewController.h"
-#import "Estimate.h"
 
 
 @implementation EstimatesViewController
 
-@synthesize appDelegate, addEstimateNavigationController, reviewEstimateViewController;
+@synthesize addEstimateNavigationController, reviewEstimateViewController;
 
 
 - (void)addEstimateWithClientName:(NSString *)newClientName {
-	[appDelegate addEstimateWithClientName:newClientName];
+	[[DataStore defaultStore] addEstimateWithClientName:newClientName];
 	[self.tableView reloadData];
 }
 
@@ -76,7 +78,8 @@
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return appDelegate.estimates.count;
+	DataStore *dataStore = [DataStore defaultStore];
+    return dataStore.estimates.count;
 }
 
 
@@ -90,7 +93,8 @@
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
 
-	Estimate *estimate = [appDelegate.estimates objectAtIndex:indexPath.row];
+	DataStore *dataStore = [DataStore defaultStore];
+	Estimate *estimate = [dataStore.estimates objectAtIndex:indexPath.row];
     cell.textLabel.text = estimate.clientName;
 
 	cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -112,7 +116,7 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
 		// attempt deleting the estimate from the data store
-		if ([appDelegate deleteEstimateAtIndex:indexPath.row]) {
+		if ([[DataStore defaultStore] deleteEstimateAtIndex:indexPath.row]) {
 			// delete the row from the data source.
 			[tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
 		}
@@ -140,7 +144,8 @@
 #pragma mark Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	reviewEstimateViewController.estimate = [appDelegate.estimates objectAtIndex:indexPath.row];
+	DataStore *dataStore = [DataStore defaultStore];
+	reviewEstimateViewController.estimate = [dataStore.estimates objectAtIndex:indexPath.row];
 	[self.navigationController pushViewController:reviewEstimateViewController animated:YES];
 }
 
@@ -182,7 +187,6 @@
 #endif
 	[reviewEstimateViewController release];
 	[addEstimateNavigationController release];
-	[appDelegate release];
     [super dealloc];
 }
 
