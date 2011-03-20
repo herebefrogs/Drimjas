@@ -62,8 +62,7 @@
 	
 	[controller setSubject:[NSString stringWithFormat:@"%@ %@",
 							NSLocalizedString(@"Estimate", "Estimate Mail Subject"),
-							// TODO use estimate order number instead
-							estimate.clientName]];
+							estimate.orderNumber]];
 	
 	NSArray *toRecepients = [NSArray arrayWithObjects:@"For Example <for@example.com>", nil];
 	[controller setToRecipients:toRecepients];

@@ -134,11 +134,9 @@
 }
 
 + (NSString *)getPDFNameForEstimate:(Estimate *)estimate {
-	return [[[NSLocalizedString(@"Estimate", @"Estimate PDF Filename")
-				stringByAppendingString:@"-"]
-				// TODO should use estimate order
-				stringByAppendingString:estimate.clientName]
-				stringByAppendingPathExtension:@"pdf"];
+	return [NSString stringWithFormat:@"%@-%@.pdf",
+				estimate.orderNumber,
+				NSLocalizedString(@"Estimate", @"Estimate PDF Filename")];
 }
 
 + (NSString *)getPDFPathForEstimate:(Estimate *)estimate {
