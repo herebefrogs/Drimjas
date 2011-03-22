@@ -86,12 +86,13 @@
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
     }
 
 	DataStore *dataStore = [DataStore defaultStore];
 	Estimate *estimate = [dataStore.estimates objectAtIndex:indexPath.row];
     cell.textLabel.text = estimate.clientName;
+	cell.detailTextLabel.text = estimate.orderNumber;
 
 	cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
