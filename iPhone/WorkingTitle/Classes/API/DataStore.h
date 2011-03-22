@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+@class Estimate;
 
 @interface DataStore : NSObject {
 
@@ -29,7 +30,6 @@
 - (void)didReceiveMemoryWarning;
 
 // core data methods
-// TODO really need to expose them?
 @property (nonatomic, retain, readonly) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, retain, readonly) NSManagedObjectModel *managedObjectModel;
 @property (nonatomic, retain, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;
@@ -39,7 +39,9 @@
 
 // estimate methods
 @property (nonatomic, retain, readonly) NSMutableArray *estimates;
-- (void)addEstimateWithClientName:(NSString *)newClientName;
+- (Estimate *)createEstimate;
+- (void)saveEstimate:(Estimate *)estimate;
+- (BOOL)deleteEstimate:(Estimate *)estimate;
 - (BOOL)deleteEstimateAtIndex:(NSInteger)index;
 
 @end

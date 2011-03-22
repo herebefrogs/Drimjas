@@ -8,19 +8,19 @@
 
 #import <UIKit/UIKit.h>
 
-@class EstimatesViewController;
+@class Estimate;
 
 @interface AddEstimateClientInfoViewController : UITableViewController <UITextFieldDelegate> {
 	UITextField *clientNameTextField;
 	UITableViewCell *clientNameCell;
 
-	EstimatesViewController *estimatesViewController;
+	Estimate *estimate;	// new estimate being created
 }
-
-@property (nonatomic, retain) IBOutlet EstimatesViewController *estimatesViewController;
 
 @property (nonatomic, retain) IBOutlet UITextField *clientNameTextField;
 @property (nonatomic, retain) IBOutlet UITableViewCell *clientNameCell;
+
+@property (nonatomic, retain) Estimate *estimate;
 
 - (IBAction)save:(id)sender;
 - (IBAction)cancel:(id)sender;

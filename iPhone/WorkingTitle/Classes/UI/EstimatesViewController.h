@@ -8,19 +8,18 @@
 
 #import <UIKit/UIKit.h>
 
-@class WorkingTitleAppDelegate;
 @class AddEstimateClientInfoViewController;
 @class ReviewEstimateViewController;
 
 @interface EstimatesViewController : UITableViewController {
 	UINavigationController *addEstimateNavigationController;
+	AddEstimateClientInfoViewController *addEstimateClientInfoViewController;
 	ReviewEstimateViewController *reviewEstimateViewController;
 }
 
 @property (nonatomic, retain) IBOutlet UINavigationController *addEstimateNavigationController;
+@property (nonatomic, retain) IBOutlet AddEstimateClientInfoViewController *addEstimateClientInfoViewController;
 @property (nonatomic, retain) IBOutlet ReviewEstimateViewController *reviewEstimateViewController;
-
-- (void)addEstimateWithClientName:(NSString *)newClientName;
 
 - (IBAction)add:(id)sender;
 

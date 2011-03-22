@@ -93,7 +93,14 @@ static DataStore *singleton_ = nil;
 		
 		NSError *error = nil;
 		persistentStoreCoordinator_ = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
-		if (![persistentStoreCoordinator_ addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error]) {
+		
+		// enable lightweight data model migration
+		NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:
+								 [NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption,
+								 [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption,
+								 nil];
+		
+		if (![persistentStoreCoordinator_ addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:options error:&error]) {
 			/*
 			 TODO Replace this implementation with code to handle the error appropriately.
 			 
@@ -159,9 +166,8 @@ static DataStore *singleton_ = nil;
 		[request setEntity:entity];
 		
 		// Define how we will sort the records
-		NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"clientName" ascending:YES];
-		NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
-		[request setSortDescriptors:sortDescriptors];
+		NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"date" ascending:NO];
+		[request setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];
 		[sortDescriptor release];
 		
 		// Fetch the records and handle an error
@@ -182,10 +188,11 @@ static DataStore *singleton_ = nil;
 	return estimates_;
 }
 
-- (void)addEstimateWithClientName:(NSString *)newClientName {
-	Estimate *estimate = (Estimate *)[NSEntityDescription insertNewObjectForEntityForName:@"Estimate" inManagedObjectContext:self.managedObjectContext];
-	[estimate setClientName:newClientName];
-	
+- (Estimate *)createEstimate {
+	return (Estimate *)[NSEntityDescription insertNewObjectForEntityForName:@"Estimate" inManagedObjectContext:self.managedObjectContext];
+}
+
+- (void)saveEstimate:(Estimate *)estimate {
 	// save the context
 	NSError *error;
 	if (![self.managedObjectContext save:&error]) {
@@ -194,14 +201,17 @@ static DataStore *singleton_ = nil;
 		//try again or restart the application.
 		NSLog(@"WorkingTitleAppDelegate.addEstimateWithClientName: failed with error %@, %@", error, [error userInfo]);
 	}
-	
+
 	[self.estimates addObject:estimate];
+
+	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"date" ascending:NO];
+	[self.estimates sortUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];
+	[sortDescriptor release];
 }
 
-- (BOOL)deleteEstimateAtIndex:(NSInteger)index {
-	Estimate *deletedEstimate = [estimates_ objectAtIndex:index];
-	[self.managedObjectContext deleteObject:deletedEstimate];
-	
+- (BOOL)deleteEstimate:(Estimate *)estimate {
+	[self.managedObjectContext deleteObject:estimate];
+
 	// save the context
 	NSError *error = nil;
 	if (![self.managedObjectContext save:&error]) {
@@ -211,10 +221,17 @@ static DataStore *singleton_ = nil;
 		NSLog(@"WorkingTitleAppDelegate.deleteEstimateAtIndex: failed with error %@, %@", error, [error userInfo]);
 		return NO;
 	}
-	
-	[self.estimates removeObjectAtIndex:index];
-	
+
+	// TODO
+	[self.estimates removeObject:estimate];
+
 	return YES;
+}
+
+- (BOOL)deleteEstimateAtIndex:(NSInteger)index {
+	Estimate *estimate = [estimates_ objectAtIndex:index];
+
+	return [self deleteEstimate:estimate];
 }
 
 

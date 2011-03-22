@@ -7,22 +7,16 @@
 //
 
 #import "AddEstimateClientInfoViewController.h"
-#import "EstimatesViewController.h"
+// API
+#import "Estimate.h"
+#import "Datastore.h"
 
 
 @implementation AddEstimateClientInfoViewController
 
-@synthesize estimatesViewController, clientNameTextField, clientNameCell;
-
-- (BOOL)addEstimate {
-	// discard empty names
-	if (clientNameTextField.text == nil || clientNameTextField.text.length == 0) {
-		return NO;
-	} else {
-		[estimatesViewController addEstimateWithClientName:clientNameTextField.text];
-		return YES;
-	}
-}
+@synthesize clientNameTextField;
+@synthesize clientNameCell;
+@synthesize estimate;
 
 #pragma mark -
 #pragma mark View lifecycle
@@ -39,7 +33,8 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-	clientNameTextField.text = nil;
+	// initialize client name from estimate
+	clientNameTextField.text = estimate.clientName;
 }
 /*
 - (void)viewDidAppear:(BOOL)animated {
@@ -152,30 +147,62 @@
 #pragma mark Button & Textfield delegate
 
 - (IBAction)save:(id)sender {
-	[self addEstimate];
-	[self cancel:sender];
-}
+	// hide keyboard if not already done
+	[clientNameTextField resignFirstResponder];
 
-- (IBAction)cancel:(id)sender {
+	// save current client name into estimate
+	estimate.clientName = clientNameTextField.text;
+	
+	NSDate *today = [[NSDate alloc] init];
+	estimate.date = today;
+	[today release];
+	
+	[estimate calculateNumber:[[DataStore defaultStore] estimates]];
+
+	// TODO save only if client name valid
+
+	// save estimate into estimates list
+	[[DataStore defaultStore] saveEstimate:estimate];
+
+	// trigger callback to refresh estimates table
+	estimate.callbackBlock();
+
+	// release estimate
+	self.estimate = nil;
+
+	// hide client info view
 	[self dismissModalViewControllerAnimated:YES];
 }
 
-// keyboard's Done button pressed
-- (BOOL)textFieldShouldReturn:(UITextField *)textField {
-	BOOL nameValid = [self addEstimate];
-	if (nameValid) {
-		// hide keyboard
-		[textField resignFirstResponder];
+- (IBAction)cancel:(id)sender {
+	// discard new estimate
+	[[DataStore defaultStore] deleteEstimate:estimate];
+
+	// release estimate
+	self.estimate = nil;
+
+	// hide client info view
+	[self dismissModalViewControllerAnimated:YES];
+}
+
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
+	if (textField.text == nil || textField.text.length == 0) {
+		// TODO show an overlay view next to text field to indicate it's empty
+		return NO;
 	}
-	return nameValid;
+	// hide keyboard
+	[textField resignFirstResponder];
+	return YES;
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
-	// as client name is the only field and estimate has been saved,
-	// hide modal window. when there will be multiple field, it should
-	// probably do nothing
-	[self cancel:textField];
+	// TODO hide overlay view if any
 }
+
+- (BOOL) textFieldShouldReturn:(UITextField *)textField {
+	return [self textFieldShouldEndEditing:textField];
+}
+
 
 #pragma mark -
 #pragma mark Memory management
@@ -196,7 +223,7 @@
 	clientNameTextField.placeholder = nil;
 	self.clientNameTextField = nil;
 	self.clientNameCell = nil;
-	self.estimatesViewController = nil;
+	self.estimate = nil;
 	// note: don't nil title or navigationController.tabBarItem.title
 	// as it may appear on the view currently displayed
 }
@@ -206,7 +233,7 @@
 #ifdef __ENABLE_UI_LOGS__
 	NSLog(@"AddEstimateClientInfoViewController.dealloc");
 #endif
-	[estimatesViewController release];
+	[estimate release];
 	[clientNameCell release];
 	[clientNameTextField release];
     [super dealloc];

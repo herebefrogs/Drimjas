@@ -10,20 +10,16 @@
 // API
 #import "Estimate.h"
 #import "DataStore.h"
-// Views
-#import "ReviewEstimateViewController.h"
+// UI
 #import "AddEstimateClientInfoViewController.h"
+#import "ReviewEstimateViewController.h"
 
 
 @implementation EstimatesViewController
 
-@synthesize addEstimateNavigationController, reviewEstimateViewController;
-
-
-- (void)addEstimateWithClientName:(NSString *)newClientName {
-	[[DataStore defaultStore] addEstimateWithClientName:newClientName];
-	[self.tableView reloadData];
-}
+@synthesize addEstimateNavigationController;
+@synthesize addEstimateClientInfoViewController;
+@synthesize reviewEstimateViewController;
 
 #pragma mark -
 #pragma mark View lifecycle
@@ -154,6 +150,14 @@
 #pragma mark Button delegate
 
 - (IBAction)add:(id)sender {
+	// create empty estimate
+	Estimate *estimate = [[DataStore defaultStore] createEstimate];
+	// set callback to reload table once estimate has been saved and added to list
+	estimate.callbackBlock = ^() {
+		[self.tableView reloadData];
+	};
+
+	addEstimateClientInfoViewController.estimate = estimate;
 	[self presentModalViewController:addEstimateNavigationController animated:YES];
 }
 
@@ -174,6 +178,7 @@
 #endif
     // Relinquish ownership of anything that can be recreated in viewDidLoad or on demand.
 	self.reviewEstimateViewController = nil;
+	self.addEstimateClientInfoViewController = nil;
 	self.addEstimateNavigationController = nil;
 	self.navigationItem.leftBarButtonItem = nil;
 	// note: don't nil title or navigationController.tabBarItem.title
@@ -186,6 +191,7 @@
 	NSLog(@"EstimatesViewController.dealloc");
 #endif
 	[reviewEstimateViewController release];
+	[addEstimateClientInfoViewController release];
 	[addEstimateNavigationController release];
     [super dealloc];
 }
