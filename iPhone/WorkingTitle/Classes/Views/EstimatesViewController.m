@@ -10,7 +10,7 @@
 // API
 #import "Estimate.h"
 #import "DataStore.h"
-// UI
+// Views
 #import "AddEstimateClientInfoViewController.h"
 #import "ReviewEstimateViewController.h"
 

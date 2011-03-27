@@ -132,7 +132,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		02B2C05D12DFEF9800D3FEE0 /* UI */ = {
+		02B2C05D12DFEF9800D3FEE0 /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				021F684D12E67D8700ECDDDD /* AddEstimateClientInfoViewController.h */,
@@ -146,7 +146,7 @@
 				1D3623240D0F684500981E51 /* WorkingTitleAppDelegate.h */,
 				1D3623250D0F684500981E51 /* WorkingTitleAppDelegate.m */,
 			);
-			path = UI;
+			path = Views;
 			sourceTree = "<group>";
 		};
 		02B2C05E12DFEFB300D3FEE0 /* Views */ = {
@@ -234,7 +234,7 @@
 				02B2C0B012DFF8EA00D3FEE0 /* API */,
 				02FA838B12F7A64B00C713AF /* Utils */,
 				02CC9CC8133FC9AD006160A7 /* Cells */,
-				02B2C05D12DFEF9800D3FEE0 /* UI */,
+				02B2C05D12DFEF9800D3FEE0 /* Views */,
 			);
 			path = Classes;
 			sourceTree = "<group>";

@@ -9,7 +9,7 @@
 #import "WorkingTitleAppDelegate.h"
 // API
 #import "DataStore.h"
-// UI
+// Views
 #import "StartupViewController.h"
 #import "EstimatesViewController.h"
 

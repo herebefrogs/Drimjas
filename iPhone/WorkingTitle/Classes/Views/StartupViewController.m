@@ -7,7 +7,7 @@
 //
 
 #import "StartupViewController.h"
-// UI
+// Views
 #import "WorkingTitleAppDelegate.h"
 
 
