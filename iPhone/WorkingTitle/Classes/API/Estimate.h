@@ -2,11 +2,13 @@
 //  Estimate.h
 //  WorkingTitle
 //
-//  Created by Jerome Lecomte on 11-02-26.
+//  Created by Jerome Lecomte on 11-03-27.
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
 #import <CoreData/CoreData.h>
+
+@class ClientInformation;
 
 typedef void (^EstimateSavedCallback)();
 
@@ -14,11 +16,11 @@ typedef void (^EstimateSavedCallback)();
 	EstimateSavedCallback callbackBlock;
 }
 
-@property (nonatomic, retain) NSString *clientName;
-@property (nonatomic, retain) NSDate *date;
 @property (nonatomic, retain) NSNumber *number;
-@property (nonatomic, retain, readonly) NSString *orderNumber;
+@property (nonatomic, retain) NSDate *date;
+@property (nonatomic, retain) ClientInformation *clientInfo;
 
+@property (nonatomic, retain, readonly) NSString *orderNumber;
 @property (nonatomic, copy) EstimateSavedCallback callbackBlock;
 
 - (void)calculateNumber:(NSArray *)estimates;

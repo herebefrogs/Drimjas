@@ -11,6 +11,16 @@
 @class TextFieldCell;
 @class Estimate;
 
+typedef enum  {
+	ClientInfoFieldName = 0,
+	ClientInfoFieldAddress1,
+	ClientInfoFieldAddress2,
+	ClientInfoFieldCity,
+	ClientInfoFieldState,
+	ClientInfoFieldPostalCode,
+	ClientInfoFieldCountry
+} ClientInfoField;
+
 @interface AddEstimateClientInfoViewController : UITableViewController <UITextFieldDelegate> {
 	TextFieldCell *textFieldCell;
 

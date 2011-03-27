@@ -9,6 +9,7 @@
 #import "AddEstimateClientInfoViewController.h"
 // API
 #import "Estimate.h"
+#import "ClientInformation.h"
 #import "Datastore.h"
 // Cells
 #import "TextFieldCell.h"
@@ -33,6 +34,16 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+
+	// initialize clint information if needed
+	if (estimate.clientInfo == nil) {
+		ClientInformation *clientInfo = [[DataStore defaultStore] createClientInformation];
+		estimate.clientInfo = clientInfo;
+
+		NSMutableSet *estimates = [clientInfo mutableSetValueForKey:@"estimates"];
+		[estimates addObject:estimate];
+	}
+
 	[self.tableView reloadData];
 }
 /*
@@ -69,7 +80,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return 1;
+    return 7;
 }
 
 
@@ -85,9 +96,37 @@
 		self.textFieldCell = nil;
     }
 
-	// initialize client name from estimate
-	cell.textField.placeholder = NSLocalizedString(@"Client Name", "ClientName Text Field Placeholder");
-	cell.textField.text = estimate.clientName;
+	cell.textField.tag = indexPath.row;
+
+	// initialize textfield value from estimate
+	if (indexPath.row == ClientInfoFieldName) {
+		cell.textField.placeholder = NSLocalizedString(@"Client Name", "Client Name Text Field Placeholder");
+		cell.textField.text = estimate.clientInfo.name;
+	}
+	else if (indexPath.row == ClientInfoFieldAddress1) {
+		cell.textField.placeholder = NSLocalizedString(@"Address1", "Address1 Text Field Placeholder");
+		cell.textField.text = estimate.clientInfo.address1;
+	}
+	else if (indexPath.row == ClientInfoFieldAddress2) {
+		cell.textField.placeholder = NSLocalizedString(@"Address2", "Address2 Text Field Placeholder");
+		cell.textField.text = estimate.clientInfo.address2;
+	}
+	else if (indexPath.row == ClientInfoFieldCity) {
+		cell.textField.placeholder = NSLocalizedString(@"City", "City Text Field Placeholder");
+		cell.textField.text = estimate.clientInfo.city;
+	}
+	else if (indexPath.row == ClientInfoFieldState) {
+		cell.textField.placeholder = NSLocalizedString(@"State", "State Text Field Placeholder");
+		cell.textField.text = estimate.clientInfo.state;
+	}
+	else if (indexPath.row == ClientInfoFieldPostalCode) {
+		cell.textField.placeholder = NSLocalizedString(@"PostalCode", "Postal Code Text Field Placeholder");
+		cell.textField.text = estimate.clientInfo.postalCode;
+	}
+	else if (indexPath.row == ClientInfoFieldCountry) {
+		cell.textField.placeholder = NSLocalizedString(@"Country", "Country Text Field Placeholder");
+		cell.textField.text = estimate.clientInfo.country;
+	}
 
     return cell;
 }
@@ -151,25 +190,30 @@
 #pragma mark Button & Textfield delegate
 
 - (IBAction)save:(id)sender {
-	NSDate *today = [[NSDate alloc] init];
-	estimate.date = today;
-	[today release];
+	TextFieldCell *cell = (TextFieldCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:ClientInfoFieldName inSection:0]];
+
+	// verify client name is provided before saving
+	if ([self textFieldShouldEndEditing:cell.textField]) {
+		NSDate *today = [[NSDate alloc] init];
+		estimate.date = today;
+		[today release];
 	
-	[estimate calculateNumber:[[DataStore defaultStore] estimates]];
+		[estimate calculateNumber:[[DataStore defaultStore] estimates]];
 
-	// TODO save only if client name valid
+		// TODO save only if client name valid
 
-	// save estimate into estimates list
-	[[DataStore defaultStore] saveEstimate:estimate];
+		// save estimate into estimates list
+		[[DataStore defaultStore] saveEstimate:estimate];
 
-	// trigger callback to refresh estimates table
-	estimate.callbackBlock();
+		// trigger callback to refresh estimates table
+		estimate.callbackBlock();
 
-	// release estimate
-	self.estimate = nil;
+		// release estimate
+		self.estimate = nil;
 
-	// hide client info view
-	[self dismissModalViewControllerAnimated:YES];
+		// hide client info view
+		[self dismissModalViewControllerAnimated:YES];
+	}
 }
 
 - (IBAction)cancel:(id)sender {
@@ -184,7 +228,10 @@
 }
 
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
-	if (textField.text == nil || textField.text.length == 0) {
+	// verify at least client name has been provided
+	if (textField.tag == ClientInfoFieldName
+		&& (textField.text == nil
+			|| textField.text.length == 0)) {
 		// TODO show an overlay view next to text field to indicate it's empty
 		return NO;
 	}
@@ -195,8 +242,28 @@
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
 	// TODO hide overlay view if any
-	// save current client name into estimate
-	estimate.clientName = textField.text;
+	// save textfield value into estimate
+	if (textField.tag == ClientInfoFieldName) {
+		estimate.clientInfo.name = textField.text;
+	}
+	else if (textField.tag == ClientInfoFieldAddress1) {
+		estimate.clientInfo.address1 = textField.text;
+	}
+	else if (textField.tag == ClientInfoFieldAddress2) {
+		estimate.clientInfo.address2 = textField.text;
+	}
+	else if (textField.tag == ClientInfoFieldCity) {
+		estimate.clientInfo.city = textField.text;
+	}
+	else if (textField.tag == ClientInfoFieldState) {
+		estimate.clientInfo.state = textField.text;
+	}
+	else if (textField.tag == ClientInfoFieldPostalCode) {
+		estimate.clientInfo.postalCode = textField.text;
+	}
+	else if (textField.tag == ClientInfoFieldCountry) {
+		estimate.clientInfo.country = textField.text;
+	}
 }
 
 - (BOOL) textFieldShouldReturn:(UITextField *)textField {

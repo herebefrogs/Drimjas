@@ -2,18 +2,19 @@
 //  Estimate.m
 //  WorkingTitle
 //
-//  Created by Jerome Lecomte on 11-02-26.
+//  Created by Jerome Lecomte on 11-03-27.
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
 #import "Estimate.h"
-
+// API
+#import "ClientInformation.h"
 
 @implementation Estimate 
 
-@dynamic clientName;
-@dynamic date;
 @dynamic number;
+@dynamic date;
+@dynamic clientInfo;
 
 @synthesize callbackBlock;
 
@@ -26,15 +27,14 @@
 	[numberFormatter setPaddingCharacter:@"0"];
 
 	NSString *orderNumber = [NSString stringWithFormat:@"%@%@",
-								[dateFormat stringFromDate:self.date],
-								[numberFormatter stringFromNumber:self.number]];
+							 [dateFormat stringFromDate:self.date],
+							 [numberFormatter stringFromNumber:self.number]];
 
 	[dateFormat release];
 	[numberFormatter release];
 
 	return orderNumber;
 }
-
 
 - (void)calculateNumber:(NSArray *)estimates {
 	// number of estimates on given date
@@ -62,16 +62,16 @@
 		}
 		// from now on, all estimates will be older than date
 		else if (dateComponents.year > estimateDateComponents.year
-				   || (dateComponents.year == estimateDateComponents.year
-					   && dateComponents.month > estimateDateComponents.month)
-				   || (dateComponents.year == estimateDateComponents.year
-					   && dateComponents.month == estimateDateComponents.month
-					   && dateComponents.day > estimateDateComponents.day)) {
-			*stop = YES;
-		}
+				 || (dateComponents.year == estimateDateComponents.year
+					 && dateComponents.month > estimateDateComponents.month)
+				 || (dateComponents.year == estimateDateComponents.year
+					 && dateComponents.month == estimateDateComponents.month
+					 && dateComponents.day > estimateDateComponents.day)) {
+					 *stop = YES;
+				 }
 		// if date is older than estimate, continue
 	}];
-	
+
 	self.number = [NSNumber numberWithInt:count + 1];
 }
 

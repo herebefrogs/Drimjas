@@ -9,6 +9,7 @@
 #import "ReviewEstimateViewController.h"
 // API
 #import "Estimate.h"
+#import "ClientInformation.h"
 // Utils
 #import "PDFManager.h"
 
@@ -106,7 +107,8 @@
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
 
-    cell.textLabel.text = estimate.clientName;
+    cell.textLabel.text = estimate.clientInfo.name;
+	NSLog(@"client info: %@", estimate.clientInfo);
 
     return cell;
 }
@@ -182,13 +184,13 @@
 
 - (void)mailSent:(MFMailComposeResult)result withError:(NSError *)error {
 	if (result == MFMailComposeResultFailed) {
-		NSLog(@"ReviewEstimateViewController.mailSent: failed to email estimate %@ with error %@, %@", estimate.clientName, error, [error userInfo]);
+		NSLog(@"ReviewEstimateViewController.mailSent: failed to email estimate %@ with error %@, %@", estimate.clientInfo.name, error, [error userInfo]);
 	}
 }
 
 - (void)printJobCompleted:(BOOL)completed withError:(NSError *)error {
 	if (error) {
-		NSLog(@"ReviewEstimateViewController.printJobCompleted: failed to print estimate %@ with error %@, %@", estimate.clientName, error, [error userInfo]);
+		NSLog(@"ReviewEstimateViewController.printJobCompleted: failed to print estimate %@ with error %@, %@", estimate.clientInfo.name, error, [error userInfo]);
 	}
 }
 

@@ -21,7 +21,6 @@
 		028917E21308D1CD00945F4D /* Estimates@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 028917DE1308D1CD00945F4D /* Estimates@2x.png */; };
 		02943B941319891100A719AA /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02943B931319891100A719AA /* CoreData.framework */; };
 		02943CB11319AB8400A719AA /* WorkingTitle.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 02943CAF1319AB8400A719AA /* WorkingTitle.xcdatamodeld */; };
-		02943D141319B4DC00A719AA /* Estimate.m in Sources */ = {isa = PBXBuildFile; fileRef = 02943D131319B4DC00A719AA /* Estimate.m */; };
 		0299F96F1304D8ED001E1E3E /* StartupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0299F96D1304D8ED001E1E3E /* StartupViewController.m */; };
 		0299F9701304D8ED001E1E3E /* Startup.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0299F96E1304D8ED001E1E3E /* Startup.xib */; };
 		029C645312EB8389000B6E51 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 029C645112EB8389000B6E51 /* Localizable.strings */; };
@@ -40,6 +39,8 @@
 		02C81A9513079755009029E9 /* Print@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 02C81A9313079755009029E9 /* Print@2x.png */; };
 		02CC9C96133FC324006160A7 /* TextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 02CC9C95133FC324006160A7 /* TextFieldCell.m */; };
 		02CC9C98133FC52D006160A7 /* TextFieldCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02CC9C97133FC52D006160A7 /* TextFieldCell.xib */; };
+		02CC9D82133FEA36006160A7 /* ClientInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = 02CC9D81133FEA36006160A7 /* ClientInformation.m */; };
+		02CC9D85133FEB2C006160A7 /* Estimate.m in Sources */ = {isa = PBXBuildFile; fileRef = 02CC9D84133FEB2C006160A7 /* Estimate.m */; };
 		02E1C7A412E53834000D7747 /* ReviewEstimateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02E1C7A212E53834000D7747 /* ReviewEstimateViewController.m */; };
 		02E1C7A512E53834000D7747 /* ReviewEstimate.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02E1C7A312E53834000D7747 /* ReviewEstimate.xib */; };
 		02FA838E12F7A69B00C713AF /* PDFManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 02FA838D12F7A69B00C713AF /* PDFManager.m */; };
@@ -68,8 +69,6 @@
 		028917DE1308D1CD00945F4D /* Estimates@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Estimates@2x.png"; path = "Resources/Icons/Estimates@2x.png"; sourceTree = "<group>"; };
 		02943B931319891100A719AA /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		02943CB01319AB8400A719AA /* WorkingTitle.xcdatamodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcdatamodel; path = WorkingTitle.xcdatamodel; sourceTree = "<group>"; };
-		02943D121319B4DC00A719AA /* Estimate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Estimate.h; sourceTree = "<group>"; };
-		02943D131319B4DC00A719AA /* Estimate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Estimate.m; sourceTree = "<group>"; };
 		0299F96C1304D8ED001E1E3E /* StartupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartupViewController.h; sourceTree = "<group>"; };
 		0299F96D1304D8ED001E1E3E /* StartupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartupViewController.m; sourceTree = "<group>"; };
 		0299F96E1304D8ED001E1E3E /* Startup.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Startup.xib; sourceTree = "<group>"; };
@@ -95,6 +94,11 @@
 		02CC9C94133FC324006160A7 /* TextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextFieldCell.h; sourceTree = "<group>"; };
 		02CC9C95133FC324006160A7 /* TextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextFieldCell.m; sourceTree = "<group>"; };
 		02CC9C97133FC52D006160A7 /* TextFieldCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = TextFieldCell.xib; path = Resources/Cells/TextFieldCell.xib; sourceTree = "<group>"; };
+		02CC9D7D133FE91D006160A7 /* WorkingTitle 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "WorkingTitle 4.xcdatamodel"; sourceTree = "<group>"; };
+		02CC9D80133FEA36006160A7 /* ClientInformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClientInformation.h; sourceTree = "<group>"; };
+		02CC9D81133FEA36006160A7 /* ClientInformation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClientInformation.m; sourceTree = "<group>"; };
+		02CC9D83133FEB2C006160A7 /* Estimate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Estimate.h; sourceTree = "<group>"; };
+		02CC9D84133FEB2C006160A7 /* Estimate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Estimate.m; sourceTree = "<group>"; };
 		02E1C7A112E53834000D7747 /* ReviewEstimateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReviewEstimateViewController.h; sourceTree = "<group>"; };
 		02E1C7A212E53834000D7747 /* ReviewEstimateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReviewEstimateViewController.m; sourceTree = "<group>"; };
 		02E1C7A312E53834000D7747 /* ReviewEstimate.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReviewEstimate.xib; sourceTree = "<group>"; };
@@ -165,8 +169,10 @@
 		02B2C0B012DFF8EA00D3FEE0 /* API */ = {
 			isa = PBXGroup;
 			children = (
-				02943D121319B4DC00A719AA /* Estimate.h */,
-				02943D131319B4DC00A719AA /* Estimate.m */,
+				02CC9D83133FEB2C006160A7 /* Estimate.h */,
+				02CC9D84133FEB2C006160A7 /* Estimate.m */,
+				02CC9D80133FEA36006160A7 /* ClientInformation.h */,
+				02CC9D81133FEA36006160A7 /* ClientInformation.m */,
 				02C25791132438C40057D944 /* DataStore.h */,
 				02C25792132438C40057D944 /* DataStore.m */,
 			);
@@ -388,9 +394,10 @@
 				02FC633413062D7100681A03 /* EmailManager.m in Sources */,
 				0299F96F1304D8ED001E1E3E /* StartupViewController.m in Sources */,
 				02943CB11319AB8400A719AA /* WorkingTitle.xcdatamodeld in Sources */,
-				02943D141319B4DC00A719AA /* Estimate.m in Sources */,
 				02C25793132438C40057D944 /* DataStore.m in Sources */,
 				02CC9C96133FC324006160A7 /* TextFieldCell.m in Sources */,
+				02CC9D82133FEA36006160A7 /* ClientInformation.m in Sources */,
+				02CC9D85133FEB2C006160A7 /* Estimate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -493,8 +500,9 @@
 				02943CB01319AB8400A719AA /* WorkingTitle.xcdatamodel */,
 				02F8E48813382D6500D75745 /* WorkingTitle 2.xcdatamodel */,
 				02AD02E113397F5400FCF6AA /* WorkingTitle 3.xcdatamodel */,
+				02CC9D7D133FE91D006160A7 /* WorkingTitle 4.xcdatamodel */,
 			);
-			currentVersion = 02AD02E113397F5400FCF6AA /* WorkingTitle 3.xcdatamodel */;
+			currentVersion = 02CC9D7D133FE91D006160A7 /* WorkingTitle 4.xcdatamodel */;
 			name = WorkingTitle.xcdatamodeld;
 			path = Resources/WorkingTitle.xcdatamodeld;
 			sourceTree = "<group>";

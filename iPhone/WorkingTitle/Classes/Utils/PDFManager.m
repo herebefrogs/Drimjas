@@ -9,7 +9,9 @@
 #import "PDFManager.h"
 #import <CoreGraphics/CoreGraphics.h>
 #import <CoreText/CoreText.h>
+// API
 #import "Estimate.h"
+#import "ClientInformation.h"
 
 
 @implementation PDFManager
@@ -80,7 +82,7 @@
 	NSMutableData *pdfData = [[NSMutableData alloc] initWithCapacity: 1024];
 
 	// prepare estimate text
-	CFAttributedStringRef currentText = CFAttributedStringCreate(NULL, (CFStringRef)estimate.clientName, NULL);
+	CFAttributedStringRef currentText = CFAttributedStringCreate(NULL, (CFStringRef)estimate.clientInfo.name, NULL);
 	if (currentText == NULL) {
 		NSLog(@"Could not create the attributed string for the framesetter");
 	} else {

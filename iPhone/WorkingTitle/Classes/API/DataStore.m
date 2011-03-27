@@ -8,6 +8,7 @@
 
 #import "DataStore.h"
 #import "Estimate.h"
+#import "ClientInformation.h"
 
 
 @implementation DataStore
@@ -177,7 +178,7 @@ static DataStore *singleton_ = nil;
 		if (!mutableFetchResults) {
 			// TODO Handle the error.
 			// This is a serious error and should advise the user to restart the application
-			NSLog(@"WorkingTitleAppDelegage.fetchEstimatesFromDB: failed with error %u.%@", error.code, error.domain);
+			NSLog(@"DataStore.estimates: failed with error %u.%@", error.code, error.domain);
 		}
 		
 		// Save our fetched data to an array
@@ -189,7 +190,8 @@ static DataStore *singleton_ = nil;
 }
 
 - (Estimate *)createEstimate {
-	return (Estimate *)[NSEntityDescription insertNewObjectForEntityForName:@"Estimate" inManagedObjectContext:self.managedObjectContext];
+	return (Estimate *)[NSEntityDescription insertNewObjectForEntityForName:@"Estimate"
+													 inManagedObjectContext:self.managedObjectContext];
 }
 
 - (void)saveEstimate:(Estimate *)estimate {
@@ -199,7 +201,7 @@ static DataStore *singleton_ = nil;
 		// TODO This is a serious error saying the record
 		//could not be saved. Advise the user to
 		//try again or restart the application.
-		NSLog(@"WorkingTitleAppDelegate.addEstimateWithClientName: failed with error %@, %@", error, [error userInfo]);
+		NSLog(@"DataStore.saveEstimate:%@ failed with error %@, %@", estimate, error, [error userInfo]);
 	}
 
 	[self.estimates addObject:estimate];
@@ -210,6 +212,14 @@ static DataStore *singleton_ = nil;
 }
 
 - (BOOL)deleteEstimate:(Estimate *)estimate {
+	ClientInformation *clientInfo = estimate.clientInfo;
+	[clientInfo removeEstimatesObject:estimate];
+
+	// TODO should or shouldn't we purge unused client info?
+	if (clientInfo.estimates == nil || clientInfo.estimates.count == 0) {
+		[self deleteClientInformation:clientInfo];
+	}
+
 	[self.managedObjectContext deleteObject:estimate];
 
 	// save the context
@@ -218,11 +228,10 @@ static DataStore *singleton_ = nil;
 		// TODO This is a serious error saying the record
 		//could not be saved. Advise the user to
 		//try again or restart the application.
-		NSLog(@"WorkingTitleAppDelegate.deleteEstimateAtIndex: failed with error %@, %@", error, [error userInfo]);
+		NSLog(@"DataStore.deleteEstimate:%@ failed with error %@, %@", estimate, error, [error userInfo]);
 		return NO;
 	}
 
-	// TODO
 	[self.estimates removeObject:estimate];
 
 	return YES;
@@ -233,6 +242,24 @@ static DataStore *singleton_ = nil;
 
 	return [self deleteEstimate:estimate];
 }
+
+# pragma mark -
+# pragma mark Client information stack
+
+- (ClientInformation *)createClientInformation {
+	return (ClientInformation *)[NSEntityDescription insertNewObjectForEntityForName:@"ClientInformation"
+															  inManagedObjectContext:self.managedObjectContext];
+}
+
+- (BOOL)deleteClientInformation:(ClientInformation *)clientInformation {
+	[self.managedObjectContext deleteObject:clientInformation];
+
+	// we only expect this method to be called by deleteEstimate:
+	// let it save the modified context
+
+	return YES;
+}
+
 
 
 #pragma mark -

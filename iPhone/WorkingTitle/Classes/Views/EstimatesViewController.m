@@ -9,6 +9,7 @@
 #import "EstimatesViewController.h"
 // API
 #import "Estimate.h"
+#import "ClientInformation.h"
 #import "DataStore.h"
 // Views
 #import "AddEstimateClientInfoViewController.h"
@@ -91,7 +92,7 @@
 
 	DataStore *dataStore = [DataStore defaultStore];
 	Estimate *estimate = [dataStore.estimates objectAtIndex:indexPath.row];
-    cell.textLabel.text = estimate.clientName;
+    cell.textLabel.text = estimate.clientInfo.name;
 	cell.detailTextLabel.text = estimate.orderNumber;
 
 	cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;

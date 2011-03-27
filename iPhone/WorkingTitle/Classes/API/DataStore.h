@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @class Estimate;
+@class ClientInformation;
 
 @interface DataStore : NSObject {
 
@@ -43,5 +44,9 @@
 - (void)saveEstimate:(Estimate *)estimate;
 - (BOOL)deleteEstimate:(Estimate *)estimate;
 - (BOOL)deleteEstimateAtIndex:(NSInteger)index;
+
+// client informatio methods
+- (ClientInformation *)createClientInformation;
+- (BOOL)deleteClientInformation:(ClientInformation *)clientInformation; // do not call from outside of DataStore
 
 @end
