@@ -8,17 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+@class TextFieldCell;
 @class Estimate;
 
 @interface AddEstimateClientInfoViewController : UITableViewController <UITextFieldDelegate> {
-	UITextField *clientNameTextField;
-	UITableViewCell *clientNameCell;
+	TextFieldCell *textFieldCell;
 
 	Estimate *estimate;	// new estimate being created
 }
 
-@property (nonatomic, retain) IBOutlet UITextField *clientNameTextField;
-@property (nonatomic, retain) IBOutlet UITableViewCell *clientNameCell;
+@property (nonatomic, retain) IBOutlet TextFieldCell *textFieldCell;
 
 @property (nonatomic, retain) Estimate *estimate;
 

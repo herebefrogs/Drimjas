@@ -10,12 +10,13 @@
 // API
 #import "Estimate.h"
 #import "Datastore.h"
+// Cells
+#import "TextFieldCell.h"
 
 
 @implementation AddEstimateClientInfoViewController
 
-@synthesize clientNameTextField;
-@synthesize clientNameCell;
+@synthesize textFieldCell;
 @synthesize estimate;
 
 #pragma mark -
@@ -28,13 +29,11 @@
     [super viewDidLoad];
 	self.title = NSLocalizedString(@"Add Client", "AddEstimateClientInfo Navigation Item Title");
 	self.navigationController.tabBarItem.title = self.title;
-	clientNameTextField.placeholder = NSLocalizedString(@"Client Name", "ClientName Text Field Placeholder");
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-	// initialize client name from estimate
-	clientNameTextField.text = estimate.clientName;
+	[self.tableView reloadData];
 }
 /*
 - (void)viewDidAppear:(BOOL)animated {
@@ -51,7 +50,6 @@
     [super viewDidDisappear:animated];
 }
 */
-
 // Override to allow orientations other than the default portrait orientation.
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     // Return YES for supported orientations.
@@ -78,12 +76,18 @@
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
-    static NSString *CellIdentifier = @"ClientNameCell";
+    static NSString *CellIdentifier = @"TextFieldCell";
 
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    TextFieldCell *cell = (TextFieldCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = clientNameCell;
+		[[NSBundle mainBundle] loadNibNamed:CellIdentifier owner:self options:nil];
+        cell = textFieldCell;
+		self.textFieldCell = nil;
     }
+
+	// initialize client name from estimate
+	cell.textField.placeholder = NSLocalizedString(@"Client Name", "ClientName Text Field Placeholder");
+	cell.textField.text = estimate.clientName;
 
     return cell;
 }
@@ -147,12 +151,6 @@
 #pragma mark Button & Textfield delegate
 
 - (IBAction)save:(id)sender {
-	// hide keyboard if not already done
-	[clientNameTextField resignFirstResponder];
-
-	// save current client name into estimate
-	estimate.clientName = clientNameTextField.text;
-	
 	NSDate *today = [[NSDate alloc] init];
 	estimate.date = today;
 	[today release];
@@ -197,6 +195,8 @@
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
 	// TODO hide overlay view if any
+	// save current client name into estimate
+	estimate.clientName = textField.text;
 }
 
 - (BOOL) textFieldShouldReturn:(UITextField *)textField {
@@ -219,10 +219,7 @@
 	NSLog(@"AddEstimateClientInfoViewController.viewDidUnload");
 #endif
     // Relinquish ownership of anything that can be recreated in viewDidLoad or on demand.
-	clientNameTextField.text = nil;
-	clientNameTextField.placeholder = nil;
-	self.clientNameTextField = nil;
-	self.clientNameCell = nil;
+	self.textFieldCell = nil;
 	self.estimate = nil;
 	// note: don't nil title or navigationController.tabBarItem.title
 	// as it may appear on the view currently displayed
@@ -234,8 +231,7 @@
 	NSLog(@"AddEstimateClientInfoViewController.dealloc");
 #endif
 	[estimate release];
-	[clientNameCell release];
-	[clientNameTextField release];
+	[textFieldCell release];
     [super dealloc];
 }
 
