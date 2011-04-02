@@ -9,6 +9,7 @@
 #import "DataStore.h"
 #import "Estimate.h"
 #import "ClientInformation.h"
+#import	"ContactInformation.h"
 
 
 @implementation DataStore
@@ -213,34 +214,56 @@ static DataStore *singleton_ = nil;
 		NSLog(@"DataStore.saveEstimate:%@ failed with error %@, %@", estimateStub_, error, [error userInfo]);
 	}
 
+	// note: after the context save, stubs have permanent IDs
+	[estimateStub_.clientInfo addContactInfos:[NSSet setWithArray:contactInfoStubs_]];
+
+	// associate each contact info with client info
+	for (ContactInformation *contactInfo in contactInfoStubs_) {
+		NSMutableSet *clientInfos = [contactInfo mutableSetValueForKey:@"clientInfos"];
+		[clientInfos addObject: estimateStub_.clientInfo];
+	}
+
+	// add the estimate to estimates list and reorder list by date
 	[self.estimates addObject:estimateStub_];
 
 	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"date" ascending:NO];
 	[self.estimates sortUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];
 	[sortDescriptor release];
 
+	// trigger the callback if any
 	if (estimateStub_.callbackBlock != nil) {
 		estimateStub_.callbackBlock();
 	}
 
+	// discard estimate & contact info stubs
+	[contactInfoStubs_ release];
+	contactInfoStubs_ = nil;
 	[estimateStub_ release];
 	estimateStub_ = nil;
 }
 
 - (void)deleteEstimateStub {
+	// note: clearing contact info stubs must happen before clearing
+	// the estimate stub as this will trigger a context save
+	for (ContactInformation *contactInfo in contactInfoStubs_) {
+		[self deleteContactInformation:contactInfo];
+	}
+
 	[self deleteEstimate:estimateStub_];
+
+	[contactInfoStubs_ release];
+	contactInfoStubs_ = nil;
 	[estimateStub_ release];
 	estimateStub_ = nil;
 }
 
 - (BOOL)deleteEstimate:(Estimate *)estimate {
+	// de-associate client info from estimate
+	// note: this might already be done by Delete Rule: Nullify in datamodel
 	ClientInformation *clientInfo = estimate.clientInfo;
 	[clientInfo removeEstimatesObject:estimate];
 
-	// TODO should or shouldn't we purge unused client info?
-	if (clientInfo.estimates == nil || clientInfo.estimates.count == 0) {
-		[self deleteClientInformation:clientInfo];
-	}
+	// note: do not delete orphan client info
 
 	[self.managedObjectContext deleteObject:estimate];
 
@@ -274,14 +297,53 @@ static DataStore *singleton_ = nil;
 }
 
 - (BOOL)deleteClientInformation:(ClientInformation *)clientInformation {
+	// de-associate each contact info from client info
+	// note: this could perhaps be achieved by setting Delete Rule to Cascade in datamodel
+	// but would require some logic to clear contactInfoStubs_
+	for (ContactInformation *contactInfo in [clientInformation.contactInfos allObjects]) {
+		[contactInfo removeClientInfosObject:clientInformation];
+
+		// delete orphan contact info
+		if (contactInfo.clientInfos == nil || contactInfo.clientInfos.count == 0) {
+			[self deleteContactInformation:contactInfo];
+		}
+	}
+
 	[self.managedObjectContext deleteObject:clientInformation];
 
 	// we only expect this method to be called by deleteEstimate:
-	// let it save the modified context
+	// so let it save the modified context
 
 	return YES;
 }
 
+#pragma mark -
+#pragma mark Contact information stack
+
+- (NSMutableArray *)contactInfoStubs {
+	if (contactInfoStubs_ == nil) {
+		contactInfoStubs_ = [[NSMutableArray alloc] init];
+	}
+	return contactInfoStubs_;
+}
+
+- (ContactInformation *)createContactInformationStub {
+	ContactInformation *contactInfo = (ContactInformation *)[NSEntityDescription insertNewObjectForEntityForName:@"ContactInformation"
+																						  inManagedObjectContext:self.managedObjectContext];
+
+	[self.contactInfoStubs addObject:contactInfo];
+
+	return contactInfo;
+}
+
+- (BOOL)deleteContactInformation:(ContactInformation *)contactInformation {
+	[self.managedObjectContext deleteObject:contactInformation];
+
+	// we only expect this method to be called by deleteClientInformation:
+	// as a result of a call to deleteEstimate: so let it save the modified context
+
+	return YES;
+}
 
 
 #pragma mark -
@@ -294,6 +356,7 @@ static DataStore *singleton_ = nil;
 	[managedObjectModel_ release];
 	[managedObjectContext_ release];
 	[persistentStoreCoordinator_ release];
+	[contactInfoStubs_ release];
 	[estimateStub_ release];
 	[estimates_ release];
 	[storeName_ release];

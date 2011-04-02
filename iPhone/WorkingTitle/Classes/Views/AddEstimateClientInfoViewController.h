@@ -7,21 +7,25 @@
 //
 
 #import <UIKit/UIKit.h>
+// Cells
+#import "TextFieldTableViewController.h"
 
-@class TextFieldCell;
+@class AddEstimateContactInfoViewController;
 @class Estimate;
 
-@interface AddEstimateClientInfoViewController : UITableViewController <UITextFieldDelegate> {
-	TextFieldCell *textFieldCell;
+@interface AddEstimateClientInfoViewController : TextFieldTableViewController {
+	UIBarButtonItem *nextButton;
+	AddEstimateContactInfoViewController *contactInfoViewController;
 
 	Estimate *estimate;	// new estimate being created
 }
 
-@property (nonatomic, retain) IBOutlet TextFieldCell *textFieldCell;
+@property (nonatomic, retain) IBOutlet UIBarButtonItem *nextButton;
+@property (nonatomic, retain) IBOutlet AddEstimateContactInfoViewController *contactInfoViewController;
 
 @property (nonatomic, retain) Estimate *estimate;
 
-- (IBAction)save:(id)sender;
+- (IBAction)next:(id)sender;
 - (IBAction)cancel:(id)sender;
 
 @end

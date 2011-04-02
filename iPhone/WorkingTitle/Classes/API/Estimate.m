@@ -45,7 +45,7 @@
 
 - (void)calculateNumber:(NSArray *)estimates {
 	// number of estimates on given date
-	__block NSInteger count = 0;
+	__block NSUInteger count = 0;
 
 	NSCalendar *calendar = [NSCalendar currentCalendar];
 	NSUInteger unitFlags = NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit;

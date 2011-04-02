@@ -9,16 +9,25 @@
 #import "ClientInformation.h"
 // API
 #import "Estimate.h"
+#import "ContactInformation.h"
 
 @implementation ClientInformation 
 
-@dynamic city;
+@dynamic name;
 @dynamic address1;
+@dynamic address2;
+@dynamic city;
+@dynamic state;
 @dynamic postalCode;
 @dynamic country;
-@dynamic name;
-@dynamic state;
-@dynamic address2;
+@dynamic contactInfos;
 @dynamic estimates;
+
+#pragma mark -
+#pragma mark Public methods stack
+
++ (BOOL)isNameValid:(NSString *)name {
+	return (name != nil && name.length > 0);
+}
 
 @end

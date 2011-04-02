@@ -11,7 +11,7 @@
 
 @protocol TableFields
 
-typedef enum  {
+typedef enum {
 	ClientInfoFieldName = 0,
 	ClientInfoFieldAddress1,
 	ClientInfoFieldAddress2,
@@ -19,7 +19,17 @@ typedef enum  {
 	ClientInfoFieldState,
 	ClientInfoFieldPostalCode,
 	ClientInfoFieldCountry,
+
 	numClientInfoField
 } ClientInfoField;
+
+typedef enum {
+	ContactInfoFieldName = 0,
+	ContactInfoFieldPhone,
+	ContactInfoFieldEmail,
+
+	numContactInfoField
+} ContactInfoField;
+
 
 @end

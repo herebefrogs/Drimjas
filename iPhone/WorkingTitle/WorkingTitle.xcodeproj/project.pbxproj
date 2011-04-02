@@ -18,6 +18,7 @@
 		023C7D8713099F9900FD360B /* Title@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 023C7D8313099F9900FD360B /* Title@2x.png */; };
 		023C7DB91309A8D600FD360B /* Launch.png in Resources */ = {isa = PBXBuildFile; fileRef = 023C7DB71309A8D600FD360B /* Launch.png */; };
 		023C7DBA1309A8D600FD360B /* Launch@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 023C7DB81309A8D600FD360B /* Launch@2x.png */; };
+		023E06AD134D52A60026209B /* TextFieldTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 023E06AC134D52A60026209B /* TextFieldTableViewController.m */; };
 		028917E21308D1CD00945F4D /* Estimates@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 028917DE1308D1CD00945F4D /* Estimates@2x.png */; };
 		02943B941319891100A719AA /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02943B931319891100A719AA /* CoreData.framework */; };
 		02943CB11319AB8400A719AA /* WorkingTitle.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 02943CAF1319AB8400A719AA /* WorkingTitle.xcdatamodeld */; };
@@ -25,6 +26,9 @@
 		0299F9701304D8ED001E1E3E /* Startup.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0299F96E1304D8ED001E1E3E /* Startup.xib */; };
 		029C645312EB8389000B6E51 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 029C645112EB8389000B6E51 /* Localizable.strings */; };
 		02A62E8B12FEF50500CAF63A /* PrintManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 02A62E8A12FEF50500CAF63A /* PrintManager.m */; };
+		02A8E5471347C79D00BAAF36 /* ContactInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = 02A8E5461347C79D00BAAF36 /* ContactInformation.m */; };
+		02A8E54B1347C88600BAAF36 /* AddEstimateContactInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02A8E5491347C88600BAAF36 /* AddEstimateContactInfoViewController.m */; };
+		02A8E54C1347C88600BAAF36 /* AddEstimateContactInfo.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02A8E54A1347C88600BAAF36 /* AddEstimateContactInfo.xib */; };
 		02B2C06E12DFF2DD00D3FEE0 /* EstimatesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02B2C06C12DFF2DD00D3FEE0 /* EstimatesViewController.m */; };
 		02B2C06F12DFF2DD00D3FEE0 /* Estimates.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02B2C06D12DFF2DD00D3FEE0 /* Estimates.xib */; };
 		02C25793132438C40057D944 /* DataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 02C25792132438C40057D944 /* DataStore.m */; };
@@ -66,6 +70,8 @@
 		023C7D8313099F9900FD360B /* Title@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Title@2x.png"; path = "Resources/Icons/Title@2x.png"; sourceTree = "<group>"; };
 		023C7DB71309A8D600FD360B /* Launch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Launch.png; path = Resources/Icons/Launch.png; sourceTree = "<group>"; };
 		023C7DB81309A8D600FD360B /* Launch@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Launch@2x.png"; path = "Resources/Icons/Launch@2x.png"; sourceTree = "<group>"; };
+		023E06AB134D52A60026209B /* TextFieldTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextFieldTableViewController.h; sourceTree = "<group>"; };
+		023E06AC134D52A60026209B /* TextFieldTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextFieldTableViewController.m; sourceTree = "<group>"; };
 		028917DE1308D1CD00945F4D /* Estimates@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Estimates@2x.png"; path = "Resources/Icons/Estimates@2x.png"; sourceTree = "<group>"; };
 		02943B931319891100A719AA /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		02943CB01319AB8400A719AA /* WorkingTitle.xcdatamodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcdatamodel; path = WorkingTitle.xcdatamodel; sourceTree = "<group>"; };
@@ -77,6 +83,12 @@
 		02A62E8912FEF50500CAF63A /* PrintManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrintManager.h; sourceTree = "<group>"; };
 		02A62E8A12FEF50500CAF63A /* PrintManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrintManager.m; sourceTree = "<group>"; };
 		02A8E4DD1347A95C00BAAF36 /* TableFields.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableFields.h; sourceTree = "<group>"; };
+		02A8E53F1347C54B00BAAF36 /* WorkingTitle 5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "WorkingTitle 5.xcdatamodel"; sourceTree = "<group>"; };
+		02A8E5451347C79D00BAAF36 /* ContactInformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactInformation.h; sourceTree = "<group>"; };
+		02A8E5461347C79D00BAAF36 /* ContactInformation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactInformation.m; sourceTree = "<group>"; };
+		02A8E5481347C88600BAAF36 /* AddEstimateContactInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddEstimateContactInfoViewController.h; sourceTree = "<group>"; };
+		02A8E5491347C88600BAAF36 /* AddEstimateContactInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddEstimateContactInfoViewController.m; sourceTree = "<group>"; };
+		02A8E54A1347C88600BAAF36 /* AddEstimateContactInfo.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddEstimateContactInfo.xib; sourceTree = "<group>"; };
 		02AD02E113397F5400FCF6AA /* WorkingTitle 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "WorkingTitle 3.xcdatamodel"; sourceTree = "<group>"; };
 		02B2C06B12DFF2DD00D3FEE0 /* EstimatesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EstimatesViewController.h; sourceTree = "<group>"; };
 		02B2C06C12DFF2DD00D3FEE0 /* EstimatesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EstimatesViewController.m; sourceTree = "<group>"; };
@@ -142,6 +154,8 @@
 			children = (
 				021F684D12E67D8700ECDDDD /* AddEstimateClientInfoViewController.h */,
 				021F684E12E67D8700ECDDDD /* AddEstimateClientInfoViewController.m */,
+				02A8E5481347C88600BAAF36 /* AddEstimateContactInfoViewController.h */,
+				02A8E5491347C88600BAAF36 /* AddEstimateContactInfoViewController.m */,
 				02B2C06B12DFF2DD00D3FEE0 /* EstimatesViewController.h */,
 				02B2C06C12DFF2DD00D3FEE0 /* EstimatesViewController.m */,
 				02E1C7A112E53834000D7747 /* ReviewEstimateViewController.h */,
@@ -159,6 +173,7 @@
 			isa = PBXGroup;
 			children = (
 				021F684F12E67D8700ECDDDD /* AddEstimateClientInfo.xib */,
+				02A8E54A1347C88600BAAF36 /* AddEstimateContactInfo.xib */,
 				02B2C06D12DFF2DD00D3FEE0 /* Estimates.xib */,
 				28AD73870D9D96C1002E5188 /* MainWindow.xib */,
 				02E1C7A312E53834000D7747 /* ReviewEstimate.xib */,
@@ -175,6 +190,8 @@
 				02CC9D84133FEB2C006160A7 /* Estimate.m */,
 				02CC9D80133FEA36006160A7 /* ClientInformation.h */,
 				02CC9D81133FEA36006160A7 /* ClientInformation.m */,
+				02A8E5451347C79D00BAAF36 /* ContactInformation.h */,
+				02A8E5461347C79D00BAAF36 /* ContactInformation.m */,
 				02C25791132438C40057D944 /* DataStore.h */,
 				02C25792132438C40057D944 /* DataStore.m */,
 			);
@@ -218,6 +235,8 @@
 			children = (
 				02CC9C94133FC324006160A7 /* TextFieldCell.h */,
 				02CC9C95133FC324006160A7 /* TextFieldCell.m */,
+				023E06AB134D52A60026209B /* TextFieldTableViewController.h */,
+				023E06AC134D52A60026209B /* TextFieldTableViewController.m */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -376,6 +395,7 @@
 				023C7DB91309A8D600FD360B /* Launch.png in Resources */,
 				023C7DBA1309A8D600FD360B /* Launch@2x.png in Resources */,
 				02CC9C98133FC52D006160A7 /* TextFieldCell.xib in Resources */,
+				02A8E54C1347C88600BAAF36 /* AddEstimateContactInfo.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -400,6 +420,9 @@
 				02CC9C96133FC324006160A7 /* TextFieldCell.m in Sources */,
 				02CC9D82133FEA36006160A7 /* ClientInformation.m in Sources */,
 				02CC9D85133FEB2C006160A7 /* Estimate.m in Sources */,
+				02A8E5471347C79D00BAAF36 /* ContactInformation.m in Sources */,
+				02A8E54B1347C88600BAAF36 /* AddEstimateContactInfoViewController.m in Sources */,
+				023E06AD134D52A60026209B /* TextFieldTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -503,8 +526,9 @@
 				02F8E48813382D6500D75745 /* WorkingTitle 2.xcdatamodel */,
 				02AD02E113397F5400FCF6AA /* WorkingTitle 3.xcdatamodel */,
 				02CC9D7D133FE91D006160A7 /* WorkingTitle 4.xcdatamodel */,
+				02A8E53F1347C54B00BAAF36 /* WorkingTitle 5.xcdatamodel */,
 			);
-			currentVersion = 02CC9D7D133FE91D006160A7 /* WorkingTitle 4.xcdatamodel */;
+			currentVersion = 02A8E53F1347C54B00BAAF36 /* WorkingTitle 5.xcdatamodel */;
 			name = WorkingTitle.xcdatamodeld;
 			path = Resources/WorkingTitle.xcdatamodeld;
 			sourceTree = "<group>";

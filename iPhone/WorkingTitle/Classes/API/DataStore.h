@@ -10,6 +10,7 @@
 
 @class Estimate;
 @class ClientInformation;
+@class ContactInformation;
 
 @interface DataStore : NSObject {
 
@@ -21,7 +22,9 @@
     NSPersistentStoreCoordinator *persistentStoreCoordinator_;
 	
 	NSMutableArray *estimates_;
-	Estimate *estimateStub_;	// estimate being created
+	Estimate *estimateStub_;			// estimate being created
+
+	NSMutableArray *contactInfoStubs_;	// ordered contact infos being created
 }
 
 // data store creation and management
@@ -51,5 +54,11 @@
 // client informatio methods
 - (ClientInformation *)createClientInformation;
 - (BOOL)deleteClientInformation:(ClientInformation *)clientInformation; // do not call from outside of DataStore
+
+// contact information methods
+@property (nonatomic, retain, readonly) NSMutableArray *contactInfoStubs;
+- (ContactInformation *)createContactInformationStub;
+- (BOOL)deleteContactInformation:(ContactInformation *)contactInformation; // do not call from outside of DataStore
+//- (BOOL)deleteContactInformation:(ContactInformation *)contactInformation fromClientInformation:(ClientInformation *)clientInformation;
 
 @end

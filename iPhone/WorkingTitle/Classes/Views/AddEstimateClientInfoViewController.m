@@ -14,13 +14,16 @@
 // Cells
 #import "TextFieldCell.h"
 // Views
+#import "AddEstimateContactInfoViewController.h"
 #import "TableFields.h"
 
 
 @implementation AddEstimateClientInfoViewController
 
-@synthesize textFieldCell;
+@synthesize nextButton;
+@synthesize contactInfoViewController;
 @synthesize estimate;
+
 
 #pragma mark -
 #pragma mark View lifecycle
@@ -32,10 +35,13 @@
     [super viewDidLoad];
 	self.title = NSLocalizedString(@"Add Client", "AddEstimateClientInfo Navigation Item Title");
 	self.navigationController.tabBarItem.title = self.title;
+	nextButton.title = NSLocalizedString(@"Next", "AddEstimateClientInfo Next Button Title");
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+
+	self.navigationItem.rightBarButtonItem = nextButton;
 
 	self.estimate = [[DataStore defaultStore] estimateStub];
 
@@ -48,6 +54,7 @@
 		[estimates addObject:estimate];
 	}
 
+	// reload table data to match estimate object
 	[self.tableView reloadData];
 }
 /*
@@ -60,11 +67,12 @@
     [super viewWillDisappear:animated];
 }
 */
-/*
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
+
+	// release estimate now that all textfield had a chance to save their input in it
+	self.estimate = nil;
 }
-*/
 // Override to allow orientations other than the default portrait orientation.
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     // Return YES for supported orientations.
@@ -193,21 +201,19 @@
 #pragma mark -
 #pragma mark Button & Textfield delegate
 
-- (IBAction)save:(id)sender {
+- (IBAction)next:(id)sender {
 	// retrieve client name cell if visible
 	TextFieldCell *cell = (TextFieldCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:ClientInfoFieldName inSection:0]];
 
 	// verify client name was provided before saving
-	if ((cell != nil && [self textFieldShouldEndEditing:cell.textField])
-		|| (estimate.clientInfo.name != nil && estimate.clientInfo.name != 0)) {
-		// save estimate into estimates list
-		[[DataStore defaultStore] saveEstimateStub];
+	if ((cell != nil && [ClientInformation isNameValid:cell.textField.text])
+		|| [ClientInformation isNameValid:estimate.clientInfo.name]) {
 
-		// release estimate
-		self.estimate = nil;
+		// hide keyboard
+		[lastTextFieldEdited resignFirstResponder];
 
 		// hide client info view
-		[self dismissModalViewControllerAnimated:YES];
+		[self.navigationController pushViewController:contactInfoViewController animated:YES];
 	}
 }
 
@@ -222,17 +228,8 @@
 	[self dismissModalViewControllerAnimated:YES];
 }
 
-- (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
-	// verify at least client name has been provided
-	if (textField.tag == ClientInfoFieldName
-		&& (textField.text == nil
-			|| textField.text.length == 0)) {
-		// TODO show an overlay view next to text field to indicate it's empty
-		return NO;
-	}
-	// hide keyboard
-	[textField resignFirstResponder];
-	return YES;
+- (BOOL)requiredFieldsProvided:(UITextField *)textField {
+	return (textField.tag != ClientInfoFieldName || [ClientInformation isNameValid:textField.text]);
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
@@ -261,11 +258,6 @@
 	}
 }
 
-- (BOOL) textFieldShouldReturn:(UITextField *)textField {
-	return [self textFieldShouldEndEditing:textField];
-}
-
-
 #pragma mark -
 #pragma mark Memory management
 
@@ -281,10 +273,12 @@
 	NSLog(@"AddEstimateClientInfoViewController.viewDidUnload");
 #endif
     // Relinquish ownership of anything that can be recreated in viewDidLoad or on demand.
-	self.textFieldCell = nil;
+	self.contactInfoViewController = nil;
+	self.nextButton = nil;
 	self.estimate = nil;
 	// note: don't nil title or navigationController.tabBarItem.title
 	// as it may appear on the view currently displayed
+	[super viewDidUnload];
 }
 
 
@@ -293,7 +287,8 @@
 	NSLog(@"AddEstimateClientInfoViewController.dealloc");
 #endif
 	[estimate release];
-	[textFieldCell release];
+	[nextButton release];
+	[contactInfoViewController release];
     [super dealloc];
 }
 
