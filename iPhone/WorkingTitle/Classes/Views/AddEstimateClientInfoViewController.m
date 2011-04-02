@@ -13,6 +13,8 @@
 #import "Datastore.h"
 // Cells
 #import "TextFieldCell.h"
+// Views
+#import "TableFields.h"
 
 
 @implementation AddEstimateClientInfoViewController
@@ -80,7 +82,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return 7;
+    return numClientInfoField;
 }
 
 

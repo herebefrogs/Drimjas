@@ -12,6 +12,8 @@
 #import "ClientInformation.h"
 // Utils
 #import "PDFManager.h"
+// Views
+#import "TableFields.h"
 
 
 @implementation ReviewEstimateViewController
@@ -93,7 +95,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return 1;
+    return numClientInfoField;
 }
 
 
@@ -107,8 +109,30 @@
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
 
-    cell.textLabel.text = estimate.clientInfo.name;
-	NSLog(@"client info: %@", estimate.clientInfo);
+	cell.textLabel.tag = indexPath.row;
+
+	// initialize textfield value from estimate
+	if (indexPath.row == ClientInfoFieldName) {
+		cell.textLabel.text  = estimate.clientInfo.name;
+	}
+	else if (indexPath.row == ClientInfoFieldAddress1) {
+		cell.textLabel.text  = estimate.clientInfo.address1;
+	}
+	else if (indexPath.row == ClientInfoFieldAddress2) {
+		cell.textLabel.text  = estimate.clientInfo.address2;
+	}
+	else if (indexPath.row == ClientInfoFieldCity) {
+		cell.textLabel.text  = estimate.clientInfo.city;
+	}
+	else if (indexPath.row == ClientInfoFieldState) {
+		cell.textLabel.text  = estimate.clientInfo.state;
+	}
+	else if (indexPath.row == ClientInfoFieldPostalCode) {
+		cell.textLabel.text  = estimate.clientInfo.postalCode;
+	}
+	else if (indexPath.row == ClientInfoFieldCountry) {
+		cell.textLabel.text  = estimate.clientInfo.country;
+	}
 
     return cell;
 }

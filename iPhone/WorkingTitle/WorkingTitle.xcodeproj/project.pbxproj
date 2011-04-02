@@ -76,6 +76,7 @@
 		029C647112EB84E9000B6E51 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = Resources/fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		02A62E8912FEF50500CAF63A /* PrintManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrintManager.h; sourceTree = "<group>"; };
 		02A62E8A12FEF50500CAF63A /* PrintManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrintManager.m; sourceTree = "<group>"; };
+		02A8E4DD1347A95C00BAAF36 /* TableFields.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableFields.h; sourceTree = "<group>"; };
 		02AD02E113397F5400FCF6AA /* WorkingTitle 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "WorkingTitle 3.xcdatamodel"; sourceTree = "<group>"; };
 		02B2C06B12DFF2DD00D3FEE0 /* EstimatesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EstimatesViewController.h; sourceTree = "<group>"; };
 		02B2C06C12DFF2DD00D3FEE0 /* EstimatesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EstimatesViewController.m; sourceTree = "<group>"; };
@@ -147,6 +148,7 @@
 				02E1C7A212E53834000D7747 /* ReviewEstimateViewController.m */,
 				0299F96C1304D8ED001E1E3E /* StartupViewController.h */,
 				0299F96D1304D8ED001E1E3E /* StartupViewController.m */,
+				02A8E4DD1347A95C00BAAF36 /* TableFields.h */,
 				1D3623240D0F684500981E51 /* WorkingTitleAppDelegate.h */,
 				1D3623250D0F684500981E51 /* WorkingTitleAppDelegate.m */,
 			);
