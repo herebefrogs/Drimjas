@@ -106,11 +106,11 @@
 		cell.textField.text = estimate.clientInfo.name;
 	}
 	else if (indexPath.row == ClientInfoFieldAddress1) {
-		cell.textField.placeholder = NSLocalizedString(@"Address1", "Address1 Text Field Placeholder");
+		cell.textField.placeholder = NSLocalizedString(@"Address 1", "Address 1 Text Field Placeholder");
 		cell.textField.text = estimate.clientInfo.address1;
 	}
 	else if (indexPath.row == ClientInfoFieldAddress2) {
-		cell.textField.placeholder = NSLocalizedString(@"Address2", "Address2 Text Field Placeholder");
+		cell.textField.placeholder = NSLocalizedString(@"Address 2", "Address 2 Text Field Placeholder");
 		cell.textField.text = estimate.clientInfo.address2;
 	}
 	else if (indexPath.row == ClientInfoFieldCity) {
@@ -122,7 +122,7 @@
 		cell.textField.text = estimate.clientInfo.state;
 	}
 	else if (indexPath.row == ClientInfoFieldPostalCode) {
-		cell.textField.placeholder = NSLocalizedString(@"PostalCode", "Postal Code Text Field Placeholder");
+		cell.textField.placeholder = NSLocalizedString(@"Postal Code", "Postal Code Text Field Placeholder");
 		cell.textField.text = estimate.clientInfo.postalCode;
 	}
 	else if (indexPath.row == ClientInfoFieldCountry) {
