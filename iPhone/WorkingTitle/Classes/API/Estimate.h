@@ -23,6 +23,4 @@ typedef void (^EstimateSavedCallback)();
 @property (nonatomic, retain, readonly) NSString *orderNumber;
 @property (nonatomic, copy) EstimateSavedCallback callbackBlock;
 
-- (void)calculateNumber:(NSArray *)estimates;
-
 @end

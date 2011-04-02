@@ -194,16 +194,8 @@
 - (IBAction)save:(id)sender {
 	TextFieldCell *cell = (TextFieldCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:ClientInfoFieldName inSection:0]];
 
-	// verify client name is provided before saving
+	// verify client name was provided before saving
 	if ([self textFieldShouldEndEditing:cell.textField]) {
-		NSDate *today = [[NSDate alloc] init];
-		estimate.date = today;
-		[today release];
-	
-		[estimate calculateNumber:[[DataStore defaultStore] estimates]];
-
-		// TODO save only if client name valid
-
 		// save estimate into estimates list
 		[[DataStore defaultStore] saveEstimate:estimate];
 

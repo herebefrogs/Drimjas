@@ -9,6 +9,7 @@
 #import "Estimate.h"
 // API
 #import "ClientInformation.h"
+#import "DataStore.h"
 
 @implementation Estimate 
 
@@ -17,6 +18,9 @@
 @dynamic clientInfo;
 
 @synthesize callbackBlock;
+
+#pragma mark -
+#pragma mark Public methods stack
 
 - (NSString *)orderNumber {
 	NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
@@ -35,6 +39,9 @@
 
 	return orderNumber;
 }
+
+#pragma mark -
+#pragma mark Private methods stack
 
 - (void)calculateNumber:(NSArray *)estimates {
 	// number of estimates on given date
@@ -74,6 +81,16 @@
 
 	self.number = [NSNumber numberWithInt:count + 1];
 }
+
+- (void) awakeFromInsert {
+	[super awakeFromInsert];
+	// initialize date & number values upon creation
+	self.date = [NSDate date];
+	[self calculateNumber:[[DataStore defaultStore] estimates]];
+}
+
+#pragma mark -
+#pragma mark Memory management stack
 
 - (void)dealloc {
 	[callbackBlock release];
