@@ -266,14 +266,6 @@ static DataStore *singleton_ = nil;
 #pragma mark Memory management stack
 
 - (void)didReceiveMemoryWarning {
-	[managedObjectModel_ release];
-	[managedObjectContext_ release];
-	[persistentStoreCoordinator_ release];
-	managedObjectModel_ = nil;
-	managedObjectContext_ = nil;
-	persistentStoreCoordinator_ = nil;
-	[estimates_ release];
-	estimates_ = nil;
 }
 
 - (void)dealloc {

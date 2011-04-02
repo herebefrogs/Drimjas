@@ -120,7 +120,6 @@
 #ifdef __ENABLE_UI_LOGS__
 	NSLog(@"appdelegate.applicationDidReceiveMemoryWarning");
 #endif
-	[[DataStore defaultStore] didReceiveMemoryWarning];
 }
 
 
