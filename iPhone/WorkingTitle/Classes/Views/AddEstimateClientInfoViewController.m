@@ -194,10 +194,12 @@
 #pragma mark Button & Textfield delegate
 
 - (IBAction)save:(id)sender {
+	// retrieve client name cell if visible
 	TextFieldCell *cell = (TextFieldCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:ClientInfoFieldName inSection:0]];
 
 	// verify client name was provided before saving
-	if ([self textFieldShouldEndEditing:cell.textField]) {
+	if ((cell != nil && [self textFieldShouldEndEditing:cell.textField])
+		|| (estimate.clientInfo.name != nil && estimate.clientInfo.name != 0)) {
 		// save estimate into estimates list
 		[[DataStore defaultStore] saveEstimateStub];
 
