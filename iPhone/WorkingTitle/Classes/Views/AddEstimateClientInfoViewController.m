@@ -37,7 +37,9 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
 
-	// initialize clint information if needed
+	self.estimate = [[DataStore defaultStore] estimateStub];
+
+	// initialize client information if needed
 	if (estimate.clientInfo == nil) {
 		ClientInformation *clientInfo = [[DataStore defaultStore] createClientInformation];
 		estimate.clientInfo = clientInfo;
@@ -197,10 +199,7 @@
 	// verify client name was provided before saving
 	if ([self textFieldShouldEndEditing:cell.textField]) {
 		// save estimate into estimates list
-		[[DataStore defaultStore] saveEstimate:estimate];
-
-		// trigger callback to refresh estimates table
-		estimate.callbackBlock();
+		[[DataStore defaultStore] saveEstimateStub];
 
 		// release estimate
 		self.estimate = nil;
@@ -212,7 +211,7 @@
 
 - (IBAction)cancel:(id)sender {
 	// discard new estimate
-	[[DataStore defaultStore] deleteEstimate:estimate];
+	[[DataStore defaultStore] deleteEstimateStub];
 
 	// release estimate
 	self.estimate = nil;

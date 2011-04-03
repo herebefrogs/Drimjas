@@ -189,26 +189,48 @@ static DataStore *singleton_ = nil;
 	return estimates_;
 }
 
-- (Estimate *)createEstimate {
-	return (Estimate *)[NSEntityDescription insertNewObjectForEntityForName:@"Estimate"
-													 inManagedObjectContext:self.managedObjectContext];
+- (Estimate *)estimateStub {
+	return estimateStub_;
 }
 
-- (void)saveEstimate:(Estimate *)estimate {
+- (Estimate *)createEstimateStub {
+	[estimateStub_ release];
+
+	estimateStub_ = [(Estimate *)[NSEntityDescription insertNewObjectForEntityForName:@"Estimate"
+															   inManagedObjectContext:self.managedObjectContext]
+					 retain];
+
+	return estimateStub_;
+}
+
+- (void)saveEstimateStub {
 	// save the context
 	NSError *error;
 	if (![self.managedObjectContext save:&error]) {
 		// TODO This is a serious error saying the record
 		//could not be saved. Advise the user to
 		//try again or restart the application.
-		NSLog(@"DataStore.saveEstimate:%@ failed with error %@, %@", estimate, error, [error userInfo]);
+		NSLog(@"DataStore.saveEstimate:%@ failed with error %@, %@", estimateStub_, error, [error userInfo]);
 	}
 
-	[self.estimates addObject:estimate];
+	[self.estimates addObject:estimateStub_];
 
 	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"date" ascending:NO];
 	[self.estimates sortUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];
 	[sortDescriptor release];
+
+	if (estimateStub_.callbackBlock != nil) {
+		estimateStub_.callbackBlock();
+	}
+
+	[estimateStub_ release];
+	estimateStub_ = nil;
+}
+
+- (void)deleteEstimateStub {
+	[self deleteEstimate:estimateStub_];
+	[estimateStub_ release];
+	estimateStub_ = nil;
 }
 
 - (BOOL)deleteEstimate:(Estimate *)estimate {
@@ -272,6 +294,7 @@ static DataStore *singleton_ = nil;
 	[managedObjectModel_ release];
 	[managedObjectContext_ release];
 	[persistentStoreCoordinator_ release];
+	[estimateStub_ release];
 	[estimates_ release];
 	[storeName_ release];
 	[super dealloc];

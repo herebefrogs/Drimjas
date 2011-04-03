@@ -153,13 +153,12 @@
 
 - (IBAction)add:(id)sender {
 	// create empty estimate
-	Estimate *estimate = [[DataStore defaultStore] createEstimate];
+	Estimate *estimate = [[DataStore defaultStore] createEstimateStub];
 	// set callback to reload table once estimate has been saved and added to list
 	estimate.callbackBlock = ^() {
 		[self.tableView reloadData];
 	};
 
-	addEstimateClientInfoViewController.estimate = estimate;
 	[self presentModalViewController:addEstimateNavigationController animated:YES];
 }
 

@@ -21,6 +21,7 @@
     NSPersistentStoreCoordinator *persistentStoreCoordinator_;
 	
 	NSMutableArray *estimates_;
+	Estimate *estimateStub_;	// estimate being created
 }
 
 // data store creation and management
@@ -40,8 +41,10 @@
 
 // estimate methods
 @property (nonatomic, retain, readonly) NSMutableArray *estimates;
-- (Estimate *)createEstimate;
-- (void)saveEstimate:(Estimate *)estimate;
+@property (nonatomic, retain, readonly) Estimate *estimateStub;
+- (Estimate *)createEstimateStub;
+- (void)saveEstimateStub;
+- (void)deleteEstimateStub;
 - (BOOL)deleteEstimate:(Estimate *)estimate;
 - (BOOL)deleteEstimateAtIndex:(NSInteger)index;
 
