@@ -10,6 +10,7 @@
 // API
 #import "Estimate.h"
 #import "ClientInformation.h"
+#import "ContactInformation.h"
 // Utils
 #import "PDFManager.h"
 // Views
@@ -82,13 +83,13 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
-    return 1;
+    return 1 + estimate.clientInfo.contactInfos.count;
 }
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return numClientInfoField;
+	return (section == 0) ? numClientInfoField : numContactInfoField;
 }
 
 
@@ -104,27 +105,40 @@
 
 	cell.textLabel.tag = indexPath.row;
 
-	// initialize textfield value from estimate
-	if (indexPath.row == ClientInfoFieldName) {
-		cell.textLabel.text  = estimate.clientInfo.name;
-	}
-	else if (indexPath.row == ClientInfoFieldAddress1) {
-		cell.textLabel.text  = estimate.clientInfo.address1;
-	}
-	else if (indexPath.row == ClientInfoFieldAddress2) {
-		cell.textLabel.text  = estimate.clientInfo.address2;
-	}
-	else if (indexPath.row == ClientInfoFieldCity) {
-		cell.textLabel.text  = estimate.clientInfo.city;
-	}
-	else if (indexPath.row == ClientInfoFieldState) {
-		cell.textLabel.text  = estimate.clientInfo.state;
-	}
-	else if (indexPath.row == ClientInfoFieldPostalCode) {
-		cell.textLabel.text  = estimate.clientInfo.postalCode;
-	}
-	else if (indexPath.row == ClientInfoFieldCountry) {
-		cell.textLabel.text  = estimate.clientInfo.country;
+	if (indexPath.section == 0) {
+		// initialize textfield value from estimate
+		if (indexPath.row == ClientInfoFieldName) {
+			cell.textLabel.text = estimate.clientInfo.name;
+		}
+		else if (indexPath.row == ClientInfoFieldAddress1) {
+			cell.textLabel.text = estimate.clientInfo.address1;
+		}
+		else if (indexPath.row == ClientInfoFieldAddress2) {
+			cell.textLabel.text = estimate.clientInfo.address2;
+		}
+		else if (indexPath.row == ClientInfoFieldCity) {
+			cell.textLabel.text = estimate.clientInfo.city;
+		}
+		else if (indexPath.row == ClientInfoFieldState) {
+			cell.textLabel.text = estimate.clientInfo.state;
+		}
+		else if (indexPath.row == ClientInfoFieldPostalCode) {
+			cell.textLabel.text = estimate.clientInfo.postalCode;
+		}
+		else if (indexPath.row == ClientInfoFieldCountry) {
+			cell.textLabel.text = estimate.clientInfo.country;
+		}
+	} else {
+		// BUG #5: must have saved contact info order to be able to lookup one by index
+		ContactInformation *contactInfo = [[estimate.clientInfo.contactInfos allObjects] objectAtIndex:indexPath.section - 1];
+
+		if (indexPath.row == ContactInfoFieldName) {
+			cell.textLabel.text = contactInfo.name;
+		} else if (indexPath.row == ContactInfoFieldPhone) {
+			cell.textLabel.text = contactInfo.phone;
+		} else if (indexPath.row == ContactInfoFieldEmail) {
+			cell.textLabel.text = contactInfo.email;
+		}
 	}
 
     return cell;
