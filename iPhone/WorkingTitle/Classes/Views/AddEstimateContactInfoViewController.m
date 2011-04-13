@@ -194,6 +194,9 @@
 		[contactInfos removeObjectAtIndex:indexPath.section - 1];
 
 		[self.tableView deleteSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationFade];
+
+		// discard reference to textfield now that its section has been deleted
+		lastTextFieldEdited = nil;
 	}
 }
 
