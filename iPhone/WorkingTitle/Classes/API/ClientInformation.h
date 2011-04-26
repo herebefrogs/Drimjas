@@ -7,11 +7,13 @@
 //
 
 #import <CoreData/CoreData.h>
+// API
+#import "BaseObject.h"
 
 @class Estimate;
 @class ContactInformation;
 
-@interface ClientInformation :  NSManagedObject {
+@interface ClientInformation : BaseObject {
 }
 
 @property (nonatomic, retain) NSString *name;

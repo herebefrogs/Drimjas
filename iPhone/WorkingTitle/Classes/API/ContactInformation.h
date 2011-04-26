@@ -7,16 +7,18 @@
 //
 
 #import <CoreData/CoreData.h>
+// API
+#import "BaseObject.h"
 
 @class ClientInformation;
 
-@interface ContactInformation :  NSManagedObject {
+@interface ContactInformation : BaseObject {
 }
 
-@property (nonatomic, retain) NSString * email;
-@property (nonatomic, retain) NSString * phone;
-@property (nonatomic, retain) NSString * name;
-@property (nonatomic, retain) NSSet* clientInfos;
+@property (nonatomic, retain) NSString *email;
+@property (nonatomic, retain) NSString *phone;
+@property (nonatomic, retain) NSString *name;
+@property (nonatomic, retain) NSSet *clientInfos;
 
 @end
 

@@ -7,12 +7,14 @@
 //
 
 #import <CoreData/CoreData.h>
+// API
+#import "BaseObject.h"
 
 @class ClientInformation;
 
 typedef void (^EstimateSavedCallback)();
 
-@interface Estimate :  NSManagedObject {
+@interface Estimate : BaseObject {
 	EstimateSavedCallback callbackBlock;
 }
 

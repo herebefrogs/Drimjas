@@ -11,6 +11,7 @@
 		021F685012E67D8700ECDDDD /* AddEstimateClientInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 021F684E12E67D8700ECDDDD /* AddEstimateClientInfoViewController.m */; };
 		021F685112E67D8700ECDDDD /* AddEstimateClientInfo.xib in Resources */ = {isa = PBXBuildFile; fileRef = 021F684F12E67D8700ECDDDD /* AddEstimateClientInfo.xib */; };
 		0236618A12F8FA8000CD39EE /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0236618912F8FA8000CD39EE /* CoreText.framework */; };
+		023AE59B13665C7000E8A88D /* BaseObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 023AE59A13665C7000E8A88D /* BaseObject.m */; };
 		023C7D6813099CD200FD360B /* Estimates.png in Resources */ = {isa = PBXBuildFile; fileRef = 023C7D6713099CD200FD360B /* Estimates.png */; };
 		023C7D8413099F9900FD360B /* Button.png in Resources */ = {isa = PBXBuildFile; fileRef = 023C7D8013099F9900FD360B /* Button.png */; };
 		023C7D8513099F9900FD360B /* Button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 023C7D8113099F9900FD360B /* Button@2x.png */; };
@@ -63,6 +64,9 @@
 		021F684E12E67D8700ECDDDD /* AddEstimateClientInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddEstimateClientInfoViewController.m; sourceTree = "<group>"; };
 		021F684F12E67D8700ECDDDD /* AddEstimateClientInfo.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddEstimateClientInfo.xib; sourceTree = "<group>"; };
 		0236618912F8FA8000CD39EE /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		023AE58E1366587B00E8A88D /* WorkingTitle 6.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "WorkingTitle 6.xcdatamodel"; sourceTree = "<group>"; };
+		023AE59913665C7000E8A88D /* BaseObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseObject.h; sourceTree = "<group>"; };
+		023AE59A13665C7000E8A88D /* BaseObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseObject.m; sourceTree = "<group>"; };
 		023C7D6713099CD200FD360B /* Estimates.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Estimates.png; path = Resources/Icons/Estimates.png; sourceTree = "<group>"; };
 		023C7D8013099F9900FD360B /* Button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Button.png; path = Resources/Icons/Button.png; sourceTree = "<group>"; };
 		023C7D8113099F9900FD360B /* Button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Button@2x.png"; path = "Resources/Icons/Button@2x.png"; sourceTree = "<group>"; };
@@ -186,6 +190,8 @@
 		02B2C0B012DFF8EA00D3FEE0 /* API */ = {
 			isa = PBXGroup;
 			children = (
+				023AE59913665C7000E8A88D /* BaseObject.h */,
+				023AE59A13665C7000E8A88D /* BaseObject.m */,
 				02CC9D83133FEB2C006160A7 /* Estimate.h */,
 				02CC9D84133FEB2C006160A7 /* Estimate.m */,
 				02CC9D80133FEA36006160A7 /* ClientInformation.h */,
@@ -423,6 +429,7 @@
 				02A8E5471347C79D00BAAF36 /* ContactInformation.m in Sources */,
 				02A8E54B1347C88600BAAF36 /* AddEstimateContactInfoViewController.m in Sources */,
 				023E06AD134D52A60026209B /* TextFieldTableViewController.m in Sources */,
+				023AE59B13665C7000E8A88D /* BaseObject.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -527,8 +534,9 @@
 				02AD02E113397F5400FCF6AA /* WorkingTitle 3.xcdatamodel */,
 				02CC9D7D133FE91D006160A7 /* WorkingTitle 4.xcdatamodel */,
 				02A8E53F1347C54B00BAAF36 /* WorkingTitle 5.xcdatamodel */,
+				023AE58E1366587B00E8A88D /* WorkingTitle 6.xcdatamodel */,
 			);
-			currentVersion = 02A8E53F1347C54B00BAAF36 /* WorkingTitle 5.xcdatamodel */;
+			currentVersion = 023AE58E1366587B00E8A88D /* WorkingTitle 6.xcdatamodel */;
 			name = WorkingTitle.xcdatamodeld;
 			path = Resources/WorkingTitle.xcdatamodeld;
 			sourceTree = "<group>";
