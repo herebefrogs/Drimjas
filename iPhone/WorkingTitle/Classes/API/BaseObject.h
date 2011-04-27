@@ -12,11 +12,15 @@
 @interface BaseObject : NSManagedObject {
 }
 
+// we make a distinction between "saved" in the Core Data sense (meaning object has been persisted
+// in the data store) and "saved" in the application sense (meaning object has completed the creation
+// process and is now a first-class citizen)
+// the status property tracks the latter
 @property (nonatomic, retain) NSNumber *status;
 
 typedef enum {
-	Created = 0,
-	Active = 1
+	StatusCreated = 0,	// managed object being filled during creation process
+	StatusActive = 1	// managed object has completed creation process and is a first-class citizen
 } Status;
 
 @end

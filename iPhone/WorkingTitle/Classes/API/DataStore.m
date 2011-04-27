@@ -181,7 +181,7 @@ static DataStore *singleton_ = nil;
 			// This is a serious error and should advise the user to restart the application
 			NSLog(@"DataStore.estimates: failed with error %u.%@", error.code, error.domain);
 		}
-		
+
 		// Save our fetched data to an array
 		estimates_ = [mutableFetchResults retain];
 		[mutableFetchResults release];
@@ -205,6 +205,25 @@ static DataStore *singleton_ = nil;
 }
 
 - (void)saveEstimateStub {
+	NSNumber *active = [NSNumber numberWithInt:StatusActive];
+
+	// flag each stub as "active"
+	estimateStub_.status = active;
+	estimateStub_.clientInfo.status	= active;
+	for (ContactInformation *contactInfo in contactInfoStubs_) {
+		contactInfo.status = active;
+	}
+	[active release];
+
+	// associate contact infos to client info
+	[estimateStub_.clientInfo addContactInfos:[NSSet setWithArray:contactInfoStubs_]];
+
+	// associate each contact info with client info
+	for (ContactInformation *contactInfo in contactInfoStubs_) {
+		NSMutableSet *clientInfos = [contactInfo mutableSetValueForKey:@"clientInfos"];
+		[clientInfos addObject: estimateStub_.clientInfo];
+	}
+
 	// save the context
 	NSError *error;
 	if (![self.managedObjectContext save:&error]) {
@@ -215,13 +234,6 @@ static DataStore *singleton_ = nil;
 	}
 
 	// note: after the context save, stubs have permanent IDs
-	[estimateStub_.clientInfo addContactInfos:[NSSet setWithArray:contactInfoStubs_]];
-
-	// associate each contact info with client info
-	for (ContactInformation *contactInfo in contactInfoStubs_) {
-		NSMutableSet *clientInfos = [contactInfo mutableSetValueForKey:@"clientInfos"];
-		[clientInfos addObject: estimateStub_.clientInfo];
-	}
 
 	// add the estimate to estimates list and reorder list by date
 	[self.estimates addObject:estimateStub_];
@@ -243,12 +255,6 @@ static DataStore *singleton_ = nil;
 }
 
 - (void)deleteEstimateStub {
-	// note: clearing contact info stubs must happen before clearing
-	// the estimate stub as this will trigger a context save
-	for (ContactInformation *contactInfo in contactInfoStubs_) {
-		[self deleteContactInformation:contactInfo];
-	}
-
 	[self deleteEstimate:estimateStub_];
 
 	[contactInfoStubs_ release];
@@ -263,7 +269,9 @@ static DataStore *singleton_ = nil;
 	ClientInformation *clientInfo = estimate.clientInfo;
 	[clientInfo removeEstimatesObject:estimate];
 
-	// note: do not delete orphan client info
+	if ([clientInfo.status integerValue] == StatusCreated) {
+		[self deleteClientInformation:clientInfo];
+	}
 
 	[self.managedObjectContext deleteObject:estimate];
 
@@ -297,16 +305,14 @@ static DataStore *singleton_ = nil;
 }
 
 - (BOOL)deleteClientInformation:(ClientInformation *)clientInformation {
+	NSArray *contactInfos = [clientInformation.status integerValue] == StatusCreated ? contactInfoStubs_ : [clientInformation.contactInfos allObjects];
 	// de-associate each contact info from client info
 	// note: this could perhaps be achieved by setting Delete Rule to Cascade in datamodel
 	// but would require some logic to clear contactInfoStubs_
-	for (ContactInformation *contactInfo in [clientInformation.contactInfos allObjects]) {
+	for (ContactInformation *contactInfo in contactInfos) {
 		[contactInfo removeClientInfosObject:clientInformation];
 
-		// delete orphan contact info
-		if (contactInfo.clientInfos == nil || contactInfo.clientInfos.count == 0) {
-			[self deleteContactInformation:contactInfo];
-		}
+		[self deleteContactInformation:contactInfo];
 	}
 
 	[self.managedObjectContext deleteObject:clientInformation];
