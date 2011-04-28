@@ -60,6 +60,7 @@
 
 /* Begin PBXFileReference section */
 		0216F77112FF46E9007BC60F /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		021E547313690BEA00849A20 /* WorkingTitle 7.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "WorkingTitle 7.xcdatamodel"; sourceTree = "<group>"; };
 		021F684D12E67D8700ECDDDD /* AddEstimateClientInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddEstimateClientInfoViewController.h; sourceTree = "<group>"; };
 		021F684E12E67D8700ECDDDD /* AddEstimateClientInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddEstimateClientInfoViewController.m; sourceTree = "<group>"; };
 		021F684F12E67D8700ECDDDD /* AddEstimateClientInfo.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddEstimateClientInfo.xib; sourceTree = "<group>"; };
@@ -535,8 +536,9 @@
 				02CC9D7D133FE91D006160A7 /* WorkingTitle 4.xcdatamodel */,
 				02A8E53F1347C54B00BAAF36 /* WorkingTitle 5.xcdatamodel */,
 				023AE58E1366587B00E8A88D /* WorkingTitle 6.xcdatamodel */,
+				021E547313690BEA00849A20 /* WorkingTitle 7.xcdatamodel */,
 			);
-			currentVersion = 023AE58E1366587B00E8A88D /* WorkingTitle 6.xcdatamodel */;
+			currentVersion = 021E547313690BEA00849A20 /* WorkingTitle 7.xcdatamodel */;
 			name = WorkingTitle.xcdatamodeld;
 			path = Resources/WorkingTitle.xcdatamodeld;
 			sourceTree = "<group>";

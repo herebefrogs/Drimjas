@@ -18,16 +18,6 @@
 @property (nonatomic, retain) NSString *email;
 @property (nonatomic, retain) NSString *phone;
 @property (nonatomic, retain) NSString *name;
-@property (nonatomic, retain) NSSet *clientInfos;
+@property (nonatomic, retain) ClientInformation *clientInfo;
 
 @end
-
-
-@interface ContactInformation (CoreDataGeneratedAccessors)
-- (void)addClientInfosObject:(ClientInformation *)value;
-- (void)removeClientInfosObject:(ClientInformation *)value;
-- (void)addClientInfos:(NSSet *)value;
-- (void)removeClientInfos:(NSSet *)value;
-
-@end
-

@@ -220,8 +220,7 @@ static DataStore *singleton_ = nil;
 
 	// associate each contact info with client info
 	for (ContactInformation *contactInfo in contactInfoStubs_) {
-		NSMutableSet *clientInfos = [contactInfo mutableSetValueForKey:@"clientInfos"];
-		[clientInfos addObject: estimateStub_.clientInfo];
+		contactInfo.clientInfo = estimateStub_.clientInfo;
 	}
 
 	// save the context
@@ -306,12 +305,8 @@ static DataStore *singleton_ = nil;
 
 - (BOOL)deleteClientInformation:(ClientInformation *)clientInformation {
 	NSArray *contactInfos = [clientInformation.status integerValue] == StatusCreated ? contactInfoStubs_ : [clientInformation.contactInfos allObjects];
-	// de-associate each contact info from client info
-	// note: this could perhaps be achieved by setting Delete Rule to Cascade in datamodel
-	// but would require some logic to clear contactInfoStubs_
-	for (ContactInformation *contactInfo in contactInfos) {
-		[contactInfo removeClientInfosObject:clientInformation];
 
+	for (ContactInformation *contactInfo in contactInfos) {
 		[self deleteContactInformation:contactInfo];
 	}
 
