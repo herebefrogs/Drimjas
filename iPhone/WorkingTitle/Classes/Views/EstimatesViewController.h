@@ -8,17 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
-@class AddEstimateClientInfoViewController;
+@class AddEstimateNewOrPickClientInfoViewController;
 @class ReviewEstimateViewController;
 
 @interface EstimatesViewController : UITableViewController {
 	UINavigationController *addEstimateNavigationController;
-	AddEstimateClientInfoViewController *addEstimateClientInfoViewController;
+	AddEstimateNewOrPickClientInfoViewController *newOrPickClientInfoViewController;
 	ReviewEstimateViewController *reviewEstimateViewController;
 }
 
 @property (nonatomic, retain) IBOutlet UINavigationController *addEstimateNavigationController;
-@property (nonatomic, retain) IBOutlet AddEstimateClientInfoViewController *addEstimateClientInfoViewController;
+@property (nonatomic, retain) IBOutlet AddEstimateNewOrPickClientInfoViewController *newOrPickClientInfoViewController;
 @property (nonatomic, retain) IBOutlet ReviewEstimateViewController *reviewEstimateViewController;
 
 - (IBAction)add:(id)sender;

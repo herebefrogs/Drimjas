@@ -26,6 +26,5 @@
 @property (nonatomic, retain) Estimate *estimate;
 
 - (IBAction)next:(id)sender;
-- (IBAction)cancel:(id)sender;
 
 @end

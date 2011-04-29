@@ -254,7 +254,9 @@ static DataStore *singleton_ = nil;
 }
 
 - (void)deleteEstimateStub {
-	[self deleteEstimate:estimateStub_];
+	if (estimateStub_) {
+		[self deleteEstimate:estimateStub_];
+	}
 
 	[contactInfoStubs_ release];
 	contactInfoStubs_ = nil;
@@ -263,13 +265,15 @@ static DataStore *singleton_ = nil;
 }
 
 - (BOOL)deleteEstimate:(Estimate *)estimate {
-	// de-associate client info from estimate
-	// note: this might already be done by Delete Rule: Nullify in datamodel
-	ClientInformation *clientInfo = estimate.clientInfo;
-	[clientInfo removeEstimatesObject:estimate];
+	if (estimate.clientInfo) {
+		// de-associate client info from estimate
+		// note: this might already be done by Delete Rule: Nullify in datamodel
+		ClientInformation *clientInfo = estimate.clientInfo;
+		[clientInfo removeEstimatesObject:estimate];
 
-	if ([clientInfo.status integerValue] == StatusCreated) {
-		[self deleteClientInformation:clientInfo];
+		if ([clientInfo.status integerValue] == StatusCreated) {
+			[self deleteClientInformation:clientInfo];
+		}
 	}
 
 	[self.managedObjectContext deleteObject:estimate];

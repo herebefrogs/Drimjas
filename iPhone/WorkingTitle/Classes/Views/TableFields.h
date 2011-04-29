@@ -12,6 +12,13 @@
 @protocol TableFields
 
 typedef enum {
+	NewClientInfoSection = 0,
+	PickClientInfoSection,
+	
+	numClientInfoSection
+} ClientInfoSection;
+
+typedef enum {
 	ClientInfoFieldName = 0,
 	ClientInfoFieldAddress1,
 	ClientInfoFieldAddress2,

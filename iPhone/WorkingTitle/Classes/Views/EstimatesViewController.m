@@ -12,14 +12,14 @@
 #import "ClientInformation.h"
 #import "DataStore.h"
 // Views
-#import "AddEstimateClientInfoViewController.h"
+#import "AddEstimateNewOrPickClientInfoViewController.h"
 #import "ReviewEstimateViewController.h"
 
 
 @implementation EstimatesViewController
 
 @synthesize addEstimateNavigationController;
-@synthesize addEstimateClientInfoViewController;
+@synthesize newOrPickClientInfoViewController;
 @synthesize reviewEstimateViewController;
 
 #pragma mark -
@@ -178,7 +178,7 @@
 #endif
     // Relinquish ownership of anything that can be recreated in viewDidLoad or on demand.
 	self.reviewEstimateViewController = nil;
-	self.addEstimateClientInfoViewController = nil;
+	self.newOrPickClientInfoViewController = nil;
 	self.addEstimateNavigationController = nil;
 	self.navigationItem.leftBarButtonItem = nil;
 	// note: don't nil title or navigationController.tabBarItem.title
@@ -191,7 +191,7 @@
 	NSLog(@"EstimatesViewController.dealloc");
 #endif
 	[reviewEstimateViewController release];
-	[addEstimateClientInfoViewController release];
+	[newOrPickClientInfoViewController release];
 	[addEstimateNavigationController release];
     [super dealloc];
 }

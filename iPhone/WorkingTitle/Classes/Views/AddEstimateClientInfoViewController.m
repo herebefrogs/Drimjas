@@ -33,7 +33,7 @@
 	NSLog(@"AddEstimateClientInfoViewController.viewDidLoad");
 #endif
     [super viewDidLoad];
-	self.title = NSLocalizedString(@"Add Client", "AddEstimateClientInfo Navigation Item Title");
+	self.title = NSLocalizedString(@"New Client", "AddEstimateClientInfo Navigation Item Title");
 	self.navigationController.tabBarItem.title = self.title;
 	nextButton.title = NSLocalizedString(@"Next", "AddEstimateClientInfo Next Button Title");
 }
@@ -215,17 +215,6 @@
 		// hide client info view
 		[self.navigationController pushViewController:contactInfoViewController animated:YES];
 	}
-}
-
-- (IBAction)cancel:(id)sender {
-	// discard new estimate
-	[[DataStore defaultStore] deleteEstimateStub];
-
-	// release estimate
-	self.estimate = nil;
-
-	// hide client info view
-	[self dismissModalViewControllerAnimated:YES];
 }
 
 - (BOOL)requiredFieldsProvided:(UITextField *)textField {

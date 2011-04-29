@@ -33,6 +33,8 @@
 		02B2C06E12DFF2DD00D3FEE0 /* EstimatesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02B2C06C12DFF2DD00D3FEE0 /* EstimatesViewController.m */; };
 		02B2C06F12DFF2DD00D3FEE0 /* Estimates.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02B2C06D12DFF2DD00D3FEE0 /* Estimates.xib */; };
 		02C25793132438C40057D944 /* DataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 02C25792132438C40057D944 /* DataStore.m */; };
+		02C75243136A429F00EC4BF5 /* AddEstimateNewOrPickClientInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02C75241136A429F00EC4BF5 /* AddEstimateNewOrPickClientInfoViewController.m */; };
+		02C75244136A429F00EC4BF5 /* AddEstimateNewOrPickClientInfo.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02C75242136A429F00EC4BF5 /* AddEstimateNewOrPickClientInfo.xib */; };
 		02C81A441307853C009029E9 /* Application.png in Resources */ = {isa = PBXBuildFile; fileRef = 02C81A421307853C009029E9 /* Application.png */; };
 		02C81A451307853C009029E9 /* Application@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 02C81A431307853C009029E9 /* Application@2x.png */; };
 		02C81A59130788B8009029E9 /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = 02C81A56130788B8009029E9 /* iTunesArtwork */; };
@@ -100,6 +102,9 @@
 		02B2C06D12DFF2DD00D3FEE0 /* Estimates.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Estimates.xib; sourceTree = "<group>"; };
 		02C25791132438C40057D944 /* DataStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataStore.h; sourceTree = "<group>"; };
 		02C25792132438C40057D944 /* DataStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataStore.m; sourceTree = "<group>"; };
+		02C75240136A429F00EC4BF5 /* AddEstimateNewOrPickClientInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddEstimateNewOrPickClientInfoViewController.h; sourceTree = "<group>"; };
+		02C75241136A429F00EC4BF5 /* AddEstimateNewOrPickClientInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddEstimateNewOrPickClientInfoViewController.m; sourceTree = "<group>"; };
+		02C75242136A429F00EC4BF5 /* AddEstimateNewOrPickClientInfo.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddEstimateNewOrPickClientInfo.xib; sourceTree = "<group>"; };
 		02C81A421307853C009029E9 /* Application.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Application.png; path = Resources/Icons/Application.png; sourceTree = "<group>"; };
 		02C81A431307853C009029E9 /* Application@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Application@2x.png"; path = "Resources/Icons/Application@2x.png"; sourceTree = "<group>"; };
 		02C81A56130788B8009029E9 /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; name = iTunesArtwork; path = Resources/Icons/iTunesArtwork; sourceTree = "<group>"; };
@@ -161,6 +166,8 @@
 				021F684E12E67D8700ECDDDD /* AddEstimateClientInfoViewController.m */,
 				02A8E5481347C88600BAAF36 /* AddEstimateContactInfoViewController.h */,
 				02A8E5491347C88600BAAF36 /* AddEstimateContactInfoViewController.m */,
+				02C75240136A429F00EC4BF5 /* AddEstimateNewOrPickClientInfoViewController.h */,
+				02C75241136A429F00EC4BF5 /* AddEstimateNewOrPickClientInfoViewController.m */,
 				02B2C06B12DFF2DD00D3FEE0 /* EstimatesViewController.h */,
 				02B2C06C12DFF2DD00D3FEE0 /* EstimatesViewController.m */,
 				02E1C7A112E53834000D7747 /* ReviewEstimateViewController.h */,
@@ -179,6 +186,7 @@
 			children = (
 				021F684F12E67D8700ECDDDD /* AddEstimateClientInfo.xib */,
 				02A8E54A1347C88600BAAF36 /* AddEstimateContactInfo.xib */,
+				02C75242136A429F00EC4BF5 /* AddEstimateNewOrPickClientInfo.xib */,
 				02B2C06D12DFF2DD00D3FEE0 /* Estimates.xib */,
 				28AD73870D9D96C1002E5188 /* MainWindow.xib */,
 				02E1C7A312E53834000D7747 /* ReviewEstimate.xib */,
@@ -403,6 +411,7 @@
 				023C7DBA1309A8D600FD360B /* Launch@2x.png in Resources */,
 				02CC9C98133FC52D006160A7 /* TextFieldCell.xib in Resources */,
 				02A8E54C1347C88600BAAF36 /* AddEstimateContactInfo.xib in Resources */,
+				02C75244136A429F00EC4BF5 /* AddEstimateNewOrPickClientInfo.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -431,6 +440,7 @@
 				02A8E54B1347C88600BAAF36 /* AddEstimateContactInfoViewController.m in Sources */,
 				023E06AD134D52A60026209B /* TextFieldTableViewController.m in Sources */,
 				023AE59B13665C7000E8A88D /* BaseObject.m in Sources */,
+				02C75243136A429F00EC4BF5 /* AddEstimateNewOrPickClientInfoViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
