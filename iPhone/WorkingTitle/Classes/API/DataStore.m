@@ -160,21 +160,19 @@ static DataStore *singleton_ = nil;
 
 - (NSMutableArray *)estimates {
 	if (estimates_ == nil) {
-		// Define our table/entity to use
-		NSEntityDescription *entity = [NSEntityDescription entityForName:@"Estimate" inManagedObjectContext:self.managedObjectContext];
+		// Estimate fetch request
+		NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+		fetchRequest.entity = [NSEntityDescription entityForName:@"Estimate"
+										  inManagedObjectContext:self.managedObjectContext];
 		
-		// Setup the fetch request
-		NSFetchRequest *request = [[NSFetchRequest alloc] init];
-		[request setEntity:entity];
-		
-		// Define how we will sort the records
+		// Sort estimates by date (newest estimate first, oldest estimate last)
 		NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"date" ascending:NO];
-		[request setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];
+		fetchRequest.sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
 		[sortDescriptor release];
 		
 		// Fetch the records and handle an error
 		NSError *error;
-		NSMutableArray *mutableFetchResults = [[self.managedObjectContext executeFetchRequest:request error:&error]	mutableCopy];
+		NSMutableArray *mutableFetchResults = [[self.managedObjectContext executeFetchRequest:fetchRequest error:&error] mutableCopy];
 		
 		if (!mutableFetchResults) {
 			// TODO Handle the error.
@@ -185,7 +183,7 @@ static DataStore *singleton_ = nil;
 		// Save our fetched data to an array
 		estimates_ = [mutableFetchResults retain];
 		[mutableFetchResults release];
-		[request release];
+		[fetchRequest release];
 	}
 	return estimates_;
 }
@@ -302,6 +300,43 @@ static DataStore *singleton_ = nil;
 # pragma mark -
 # pragma mark Client information stack
 
+- (NSFetchedResultsController *)clientInfosFetchedResultsController {
+	if (clientInfosFetchedResultsController_ == nil) {
+		// ClientInfo fetch request
+		NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+		fetchRequest.entity = [NSEntityDescription entityForName:@"ClientInformation"
+										  inManagedObjectContext:self.managedObjectContext];
+
+		// fetch only "active" ClientInfo
+		fetchRequest.predicate = [NSPredicate predicateWithFormat:@"status = %@", [NSNumber numberWithInt:StatusActive]]; 
+
+		// sort ClientInfo alphabetically
+		NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
+		fetchRequest.sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
+		[sortDescriptor release];
+
+		// buffer up to 16 ClientInfo
+		fetchRequest.fetchBatchSize = 16;
+
+		// ClientInfo fetched results controller
+		clientInfosFetchedResultsController_ = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
+																				   managedObjectContext:self.managedObjectContext
+																					 sectionNameKeyPath:nil
+																							  cacheName:@"Root"];
+
+		[fetchRequest release];
+
+		NSError *error = nil;
+		if (![clientInfosFetchedResultsController_ performFetch:&error]) {
+			// TODO This is a serious error saying the records
+			//could not be fetched. Advise the user to try
+			//again or restart the application.
+			NSLog(@"DataStore.clientInfosFetchedResultsController: fetch failed with error %@, %@", error, [error userInfo]);
+		}
+	}
+	return clientInfosFetchedResultsController_;
+}
+
 - (ClientInformation *)createClientInformation {
 	return (ClientInformation *)[NSEntityDescription insertNewObjectForEntityForName:@"ClientInformation"
 															  inManagedObjectContext:self.managedObjectContext];
@@ -362,6 +397,7 @@ static DataStore *singleton_ = nil;
 	[managedObjectContext_ release];
 	[persistentStoreCoordinator_ release];
 	[contactInfoStubs_ release];
+	[clientInfosFetchedResultsController_ release];
 	[estimateStub_ release];
 	[estimates_ release];
 	[storeName_ release];

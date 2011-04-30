@@ -24,6 +24,8 @@
 	NSMutableArray *estimates_;
 	Estimate *estimateStub_;			// estimate being created
 
+	NSFetchedResultsController *clientInfosFetchedResultsController_;
+
 	NSMutableArray *contactInfoStubs_;	// ordered contact infos being created
 }
 
@@ -52,6 +54,7 @@
 - (BOOL)deleteEstimateAtIndex:(NSInteger)index;
 
 // client informatio methods
+- (NSFetchedResultsController *)clientInfosFetchedResultsController;
 - (ClientInformation *)createClientInformation;
 - (BOOL)deleteClientInformation:(ClientInformation *)clientInformation; // do not call from outside of DataStore
 

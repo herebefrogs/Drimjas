@@ -11,11 +11,13 @@
 #import "DataStore.h"
 // Views
 #import "AddEstimateClientInfoViewController.h"
+#import "AddEstimatePickClientInfoViewController.h"
 #import "TableFields.h"
 
 @implementation AddEstimateNewOrPickClientInfoViewController
 
 @synthesize addEstimateClientInfoViewController;
+@synthesize pickClientInfoViewController;
 
 #pragma mark -
 #pragma mark View lifecycle
@@ -81,8 +83,7 @@
 	if (indexPath.section == NewClientInfoSection) {
 		[self.navigationController pushViewController:addEstimateClientInfoViewController animated:YES];
 	} else if (indexPath.section == PickClientInfoSection) {
-		// TODO will need to purge ClientInfo in estimate if selecting "pick" (use case add->new->back->pick)
-		NSLog(@"pick existing client information not yet implemented");
+		[self.navigationController pushViewController:pickClientInfoViewController animated:YES];
 	}
 }
 
@@ -106,6 +107,7 @@
 #endif
 	// Relinquish ownership of anything that can be recreated in viewDidLoad or on demand.
 	self.addEstimateClientInfoViewController = nil;
+	self.pickClientInfoViewController = nil;
 	// note: don't nil title or navigationController.tabBarItem.title
 	// as it may appear on the view currently displayed
 	[super viewDidUnload];
@@ -116,6 +118,7 @@
 	NSLog(@"AddEstimateNewOrPickClientInfoViewController.dealloc");
 #endif
 	[addEstimateClientInfoViewController release];
+	[pickClientInfoViewController release];
 	[super dealloc];
 }
 

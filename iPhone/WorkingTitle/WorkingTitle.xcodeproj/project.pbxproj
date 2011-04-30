@@ -26,6 +26,8 @@
 		0299F96F1304D8ED001E1E3E /* StartupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0299F96D1304D8ED001E1E3E /* StartupViewController.m */; };
 		0299F9701304D8ED001E1E3E /* Startup.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0299F96E1304D8ED001E1E3E /* Startup.xib */; };
 		029C645312EB8389000B6E51 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 029C645112EB8389000B6E51 /* Localizable.strings */; };
+		029DACA1136BA00A00AF4A6F /* AddEstimatePickClientInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 029DAC9F136BA00A00AF4A6F /* AddEstimatePickClientInfoViewController.m */; };
+		029DACA2136BA00A00AF4A6F /* AddEstimatePickClientInfo.xib in Resources */ = {isa = PBXBuildFile; fileRef = 029DACA0136BA00A00AF4A6F /* AddEstimatePickClientInfo.xib */; };
 		02A62E8B12FEF50500CAF63A /* PrintManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 02A62E8A12FEF50500CAF63A /* PrintManager.m */; };
 		02A8E5471347C79D00BAAF36 /* ContactInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = 02A8E5461347C79D00BAAF36 /* ContactInformation.m */; };
 		02A8E54B1347C88600BAAF36 /* AddEstimateContactInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02A8E5491347C88600BAAF36 /* AddEstimateContactInfoViewController.m */; };
@@ -87,6 +89,9 @@
 		0299F96E1304D8ED001E1E3E /* Startup.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Startup.xib; sourceTree = "<group>"; };
 		029C645212EB8389000B6E51 /* en */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = en; path = Resources/en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		029C647112EB84E9000B6E51 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = Resources/fr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		029DAC9E136BA00A00AF4A6F /* AddEstimatePickClientInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddEstimatePickClientInfoViewController.h; sourceTree = "<group>"; };
+		029DAC9F136BA00A00AF4A6F /* AddEstimatePickClientInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddEstimatePickClientInfoViewController.m; sourceTree = "<group>"; };
+		029DACA0136BA00A00AF4A6F /* AddEstimatePickClientInfo.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddEstimatePickClientInfo.xib; sourceTree = "<group>"; };
 		02A62E8912FEF50500CAF63A /* PrintManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrintManager.h; sourceTree = "<group>"; };
 		02A62E8A12FEF50500CAF63A /* PrintManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrintManager.m; sourceTree = "<group>"; };
 		02A8E4DD1347A95C00BAAF36 /* TableFields.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableFields.h; sourceTree = "<group>"; };
@@ -168,6 +173,8 @@
 				02A8E5491347C88600BAAF36 /* AddEstimateContactInfoViewController.m */,
 				02C75240136A429F00EC4BF5 /* AddEstimateNewOrPickClientInfoViewController.h */,
 				02C75241136A429F00EC4BF5 /* AddEstimateNewOrPickClientInfoViewController.m */,
+				029DAC9E136BA00A00AF4A6F /* AddEstimatePickClientInfoViewController.h */,
+				029DAC9F136BA00A00AF4A6F /* AddEstimatePickClientInfoViewController.m */,
 				02B2C06B12DFF2DD00D3FEE0 /* EstimatesViewController.h */,
 				02B2C06C12DFF2DD00D3FEE0 /* EstimatesViewController.m */,
 				02E1C7A112E53834000D7747 /* ReviewEstimateViewController.h */,
@@ -187,6 +194,7 @@
 				021F684F12E67D8700ECDDDD /* AddEstimateClientInfo.xib */,
 				02A8E54A1347C88600BAAF36 /* AddEstimateContactInfo.xib */,
 				02C75242136A429F00EC4BF5 /* AddEstimateNewOrPickClientInfo.xib */,
+				029DACA0136BA00A00AF4A6F /* AddEstimatePickClientInfo.xib */,
 				02B2C06D12DFF2DD00D3FEE0 /* Estimates.xib */,
 				28AD73870D9D96C1002E5188 /* MainWindow.xib */,
 				02E1C7A312E53834000D7747 /* ReviewEstimate.xib */,
@@ -412,6 +420,7 @@
 				02CC9C98133FC52D006160A7 /* TextFieldCell.xib in Resources */,
 				02A8E54C1347C88600BAAF36 /* AddEstimateContactInfo.xib in Resources */,
 				02C75244136A429F00EC4BF5 /* AddEstimateNewOrPickClientInfo.xib in Resources */,
+				029DACA2136BA00A00AF4A6F /* AddEstimatePickClientInfo.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -441,6 +450,7 @@
 				023E06AD134D52A60026209B /* TextFieldTableViewController.m in Sources */,
 				023AE59B13665C7000E8A88D /* BaseObject.m in Sources */,
 				02C75243136A429F00EC4BF5 /* AddEstimateNewOrPickClientInfoViewController.m in Sources */,
+				029DACA1136BA00A00AF4A6F /* AddEstimatePickClientInfoViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
