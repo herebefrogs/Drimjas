@@ -40,6 +40,10 @@
 	return orderNumber;
 }
 
+- (BOOL)isEmpty {
+	return (self.clientInfo == nil) || (self.clientInfo.name == nil);
+}
+
 #pragma mark -
 #pragma mark Private methods stack
 
