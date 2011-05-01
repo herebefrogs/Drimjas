@@ -20,14 +20,6 @@
 
 @synthesize estimate, emailButton, printButton, spacerButton;
 
-- (void)setEstimate:(Estimate *)newEstimate {
-	if (estimate != newEstimate) {
-		[estimate release];
-		estimate = [newEstimate retain];
-		[self.tableView reloadData];
-	}
-}
-
 #pragma mark -
 #pragma mark View lifecycle
 
@@ -58,6 +50,7 @@
     [super viewWillAppear:animated];
 	// show toolbar with animation
 	[self.navigationController setToolbarHidden:NO animated:YES];
+	[self.tableView reloadData];
 }
 
 /*
