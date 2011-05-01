@@ -1,0 +1,152 @@
+//
+//  AddEstimateReviewClientInfoViewController.m
+//  WorkingTitle
+//
+//  Created by Jerome Lecomte on 11-05-01.
+//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//
+
+#import "AddEstimateReviewClientInfoViewController.h"
+// API
+#import "ClientInformation.h"
+#import "ContactInformation.h"
+// View
+#import "TableFields.h"
+
+@implementation AddEstimateReviewClientInfoViewController
+
+@synthesize clientInfo;
+
+#pragma mark -
+#pragma mark View lifecycle
+
+- (void)viewDidLoad {
+#ifdef __ENABLE_UI_LOGS__
+	NSLog(@"AddEstimateReviewClientInfoViewController.viewDidLoad");
+#endif
+    [super viewDidLoad];
+	self.title = NSLocalizedString(@"Review Client", "AddEstimateReviewClientInfo Navigation Item Title");
+	self.navigationController.tabBarItem.title = self.title;
+}
+	
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+	[self.tableView reloadData];
+}
+
+// Override to allow orientations other than the default portrait orientation.
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+    return YES;
+}
+
+
+#pragma mark -
+#pragma mark Table view data source
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1 + clientInfo.contactInfos.count;
+}
+
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+	// TODO enumerate the number of filled fields in each client and contact
+    return (section == 0) ? numClientInfoField : numContactInfoField;
+}
+
+
+// Customize the appearance of table view cells.
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    static NSString *CellIdentifier = @"Cell";
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+    }
+    
+	if (indexPath.section == 0) {
+		// initialize textfield value from estimate
+		if (indexPath.row == ClientInfoFieldName) {
+			cell.textLabel.text = clientInfo.name;
+		}
+		else if (indexPath.row == ClientInfoFieldAddress1) {
+			cell.textLabel.text = clientInfo.address1;
+		}
+		else if (indexPath.row == ClientInfoFieldAddress2) {
+			cell.textLabel.text = clientInfo.address2;
+		}
+		else if (indexPath.row == ClientInfoFieldCity) {
+			cell.textLabel.text = clientInfo.city;
+		}
+		else if (indexPath.row == ClientInfoFieldState) {
+			cell.textLabel.text = clientInfo.state;
+		}
+		else if (indexPath.row == ClientInfoFieldPostalCode) {
+			cell.textLabel.text = clientInfo.postalCode;
+		}
+		else if (indexPath.row == ClientInfoFieldCountry) {
+			cell.textLabel.text = clientInfo.country;
+		}
+	} else {
+		// BUG #5: must have saved contact info order to be able to lookup one by index
+		ContactInformation *contactInfo = [[clientInfo.contactInfos allObjects] objectAtIndex:indexPath.section - 1];
+
+		if (indexPath.row == ContactInfoFieldName) {
+			cell.textLabel.text = contactInfo.name;
+		} else if (indexPath.row == ContactInfoFieldPhone) {
+			cell.textLabel.text = contactInfo.phone;
+		} else if (indexPath.row == ContactInfoFieldEmail) {
+			cell.textLabel.text = contactInfo.email;
+		}
+	}
+	return cell;
+}
+
+// TODO will need to purge ClientInfo in estimate when validating "pick" in AddEstimateReviewPickedClientInfoViewController (use case add->new->back->pick->review)
+// next:
+
+#pragma mark -
+#pragma mark Table view delegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    // Navigation logic may go here. Create and push another view controller.
+    /*
+    <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
+    // ...
+    // Pass the selected object to the new view controller.
+    [self.navigationController pushViewController:detailViewController animated:YES];
+    [detailViewController release];
+    */
+}
+
+
+#pragma mark -
+#pragma mark Memory management
+
+- (void)didReceiveMemoryWarning {
+    // Releases the view if it doesn't have a superview.
+    [super didReceiveMemoryWarning];
+    
+    // Relinquish ownership any cached data, images, etc. that aren't in use.
+}
+
+- (void)viewDidUnload {
+#ifdef __ENABLE_UI_LOGS__
+	NSLog(@"AddEstimateReviewClientInfoViewController.viewDidUnload");
+#endif
+    // Relinquish ownership of anything that can be recreated in viewDidLoad or on demand.
+	self.clientInfo = nil;
+}
+
+
+- (void)dealloc {
+#ifdef __ENABLE_UI_LOGS__
+	NSLog(@"AddEstimateReviewClientInfoViewController.dealloc");
+#endif
+	[clientInfo release];
+    [super dealloc];
+}
+
+
+@end
+

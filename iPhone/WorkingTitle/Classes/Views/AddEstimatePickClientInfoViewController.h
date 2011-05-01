@@ -8,11 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+@class AddEstimateReviewClientInfoViewController;
 
 @interface AddEstimatePickClientInfoViewController : UITableViewController <NSFetchedResultsControllerDelegate> {
 	NSFetchedResultsController *clientInfos;
+	AddEstimateReviewClientInfoViewController *reviewClientInfoViewController;
 }
 
 @property (nonatomic, retain) NSFetchedResultsController *clientInfos;
+@property (nonatomic, retain) IBOutlet AddEstimateReviewClientInfoViewController *reviewClientInfoViewController;
 
 @end

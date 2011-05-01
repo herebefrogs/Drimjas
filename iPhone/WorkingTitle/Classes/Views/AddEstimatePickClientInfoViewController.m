@@ -10,11 +10,14 @@
 // API
 #import "ClientInformation.h"
 #import "DataStore.h"
+// Views
+#import "AddEstimateReviewClientInfoViewController.h"
 
 
 @implementation AddEstimatePickClientInfoViewController
 
 @synthesize clientInfos;
+@synthesize reviewClientInfoViewController;
 
 #pragma mark -
 #pragma mark View lifecycle
@@ -72,16 +75,9 @@
 #pragma mark Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	// TODO will need to purge ClientInfo in estimate when validating "pick" in AddEstimateReviewPickedClientInfoViewController (use case add->new->back->pick->review)
+	reviewClientInfoViewController.clientInfo = [clientInfos objectAtIndexPath:indexPath];
 
-	// Navigation logic may go here. Create and push another view controller.
-    /*
-    <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-    // ...
-    // Pass the selected object to the new view controller.
-    [self.navigationController pushViewController:detailViewController animated:YES];
-    [detailViewController release];
-    */
+	[self.navigationController pushViewController:reviewClientInfoViewController animated:YES];
 }
 
 #pragma mark -
@@ -108,6 +104,7 @@
     // Relinquish ownership of anything that can be recreated in viewDidLoad or on demand.
 	clientInfos.delegate = nil;
 	self.clientInfos = nil;
+	self.reviewClientInfoViewController = nil;
 }
 
 
@@ -116,6 +113,7 @@
 	NSLog(@"AddEstimatePickClientInfoViewController.dealloc");
 #endif
 	[clientInfos release];
+	[reviewClientInfoViewController release];
     [super dealloc];
 }
 
