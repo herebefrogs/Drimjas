@@ -240,24 +240,24 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 					<string key="className">AddEstimateContactInfoViewController</string>
 					<string key="superclassName">TextFieldTableViewController</string>
 					<object class="NSMutableDictionary" key="actions">
-						<string key="NS.key.0">save:</string>
+						<string key="NS.key.0">next:</string>
 						<string key="NS.object.0">id</string>
 					</object>
 					<object class="NSMutableDictionary" key="actionInfosByName">
-						<string key="NS.key.0">save:</string>
+						<string key="NS.key.0">next:</string>
 						<object class="IBActionInfo" key="NS.object.0">
-							<string key="name">save:</string>
+							<string key="name">next:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 					</object>
 					<object class="NSMutableDictionary" key="outlets">
-						<string key="NS.key.0">saveButton</string>
+						<string key="NS.key.0">nextButton</string>
 						<string key="NS.object.0">UIBarButtonItem</string>
 					</object>
 					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<string key="NS.key.0">saveButton</string>
+						<string key="NS.key.0">nextButton</string>
 						<object class="IBToOneOutletInfo" key="NS.object.0">
-							<string key="name">saveButton</string>
+							<string key="name">nextButton</string>
 							<string key="candidateClassName">UIBarButtonItem</string>
 						</object>
 					</object>

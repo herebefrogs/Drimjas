@@ -356,8 +356,8 @@ static DataStore *singleton_ = nil;
 
 	[self.managedObjectContext deleteObject:clientInformation];
 
-	// we only expect this method to be called by deleteEstimate:
-	// so let it save the modified context
+	// NOTE: assume this will be validated by either deleteEstimate[Stub]: or saveEstimateStub:
+	// TODO: won't be true when deleting ClientInfo from Options screen
 
 	return YES;
 }

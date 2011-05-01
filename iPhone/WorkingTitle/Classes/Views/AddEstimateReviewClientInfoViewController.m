@@ -10,11 +10,16 @@
 // API
 #import "ClientInformation.h"
 #import "ContactInformation.h"
+#import "Estimate.h"
+#import "DataStore.h"
 // View
+#import "AddEstimateLineItemsViewController.h"
 #import "TableFields.h"
 
 @implementation AddEstimateReviewClientInfoViewController
 
+@synthesize nextButton;
+@synthesize lineItemsViewController;
 @synthesize clientInfo;
 
 #pragma mark -
@@ -27,10 +32,15 @@
     [super viewDidLoad];
 	self.title = NSLocalizedString(@"Review Client", "AddEstimateReviewClientInfo Navigation Item Title");
 	self.navigationController.tabBarItem.title = self.title;
+	nextButton.title = NSLocalizedString(@"Next", "Next Navigation Item Title");
 }
 	
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+
+	self.navigationItem.rightBarButtonItem = nextButton;
+
+	// reload table data to match selected client info
 	[self.tableView reloadData];
 }
 
@@ -102,8 +112,26 @@
 	return cell;
 }
 
-// TODO will need to purge ClientInfo in estimate when validating "pick" in AddEstimateReviewPickedClientInfoViewController (use case add->new->back->pick->review)
-// next:
+#pragma mark -
+#pragma mark Button  delegate
+
+- (IBAction)next:(id)sender {
+	Estimate *estimate = [[DataStore defaultStore] estimateStub];
+
+	// delete or deassociate previously set client info
+	if ([estimate.clientInfo.status integerValue] == StatusCreated) {
+		[[DataStore defaultStore] deleteClientInformation:estimate.clientInfo];
+	}
+	else if ([estimate.clientInfo.status integerValue] == StatusActive) {
+		[estimate.clientInfo removeEstimatesObject:estimate];
+	}
+
+	// associate client info and estimate with each other
+	estimate.clientInfo = clientInfo;
+	[clientInfo addEstimatesObject:estimate];
+
+	[self.navigationController pushViewController:lineItemsViewController animated:YES];
+}
 
 #pragma mark -
 #pragma mark Table view delegate
@@ -135,6 +163,8 @@
 	NSLog(@"AddEstimateReviewClientInfoViewController.viewDidUnload");
 #endif
     // Relinquish ownership of anything that can be recreated in viewDidLoad or on demand.
+	self.nextButton = nil;
+	self.lineItemsViewController = nil;
 	self.clientInfo = nil;
 }
 
@@ -143,6 +173,8 @@
 #ifdef __ENABLE_UI_LOGS__
 	NSLog(@"AddEstimateReviewClientInfoViewController.dealloc");
 #endif
+	[nextButton release];
+	[lineItemsViewController release];
 	[clientInfo release];
     [super dealloc];
 }

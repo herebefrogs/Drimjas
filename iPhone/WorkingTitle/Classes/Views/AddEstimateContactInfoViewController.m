@@ -8,20 +8,20 @@
 
 #import "AddEstimateContactInfoViewController.h"
 // API
-#import "Estimate.h"
 #import "ClientInformation.h"
 #import "ContactInformation.h"
 #import "DataStore.h"
 // Cells
 #import "TextFieldCell.h"
 // Views
+#import "AddEstimateLineItemsViewController.h"
 #import "TableFields.h"
 
 
 @implementation AddEstimateContactInfoViewController
 
-@synthesize saveButton;
-@synthesize estimate;
+@synthesize nextButton;
+@synthesize lineItemsViewController;
 @synthesize contactInfos;
 
 #pragma mark -
@@ -43,9 +43,8 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
 
-	self.navigationItem.rightBarButtonItem = saveButton;
+	self.navigationItem.rightBarButtonItem = nextButton;
 
-	self.estimate = [[DataStore defaultStore] estimateStub];
 	self.contactInfos = [[DataStore defaultStore] contactInfoStubs];
 
 	// reload table data to match contact infos array
@@ -66,7 +65,6 @@
     [super viewDidDisappear:animated];
 
 	// release estimate & contact infos now that all textfield had a chance to save their input in it
-	self.estimate = nil;
 	self.contactInfos = nil;
 }
 
@@ -239,19 +237,9 @@
 #pragma mark -
 #pragma mark Button delegate
 
-- (IBAction)save:(id)sender {
-	// save estimate into estimates list
-	[[DataStore defaultStore] saveEstimateStub];
-
-	// release estimate & contact infos
-	self.estimate = nil;
-	self.contactInfos = nil;
-
-	// hide client info view
-	[self dismissModalViewControllerAnimated:YES];
-
-	// reset navigation controller to first view
-	[self.navigationController popToRootViewControllerAnimated:YES];
+- (IBAction)next:(id)sender {
+	// TODO maybe should associate contact info stubs to client info stub right away
+	[self.navigationController pushViewController:lineItemsViewController animated:YES];
 }
 
 
@@ -270,8 +258,8 @@
 	NSLog(@"AddEstimateContactInfoViewController.viewDidUnload");
 #endif
     // Relinquish ownership of anything that can be recreated in viewDidLoad or on demand.
-	self.saveButton = nil;
-	self.estimate = nil;
+	self.nextButton = nil;
+	self.lineItemsViewController = nil;
 	self.contactInfos = nil;
 	// note: don't nil title or navigationController.tabBarItem.title
 	// as it may appear on the view currently displayed
@@ -282,8 +270,8 @@
 #ifdef __ENABLE_UI_LOGS__
 	NSLog(@"AddEstimateContactInfoViewController.dealloc");
 #endif
-	[saveButton release];
-	[estimate release];
+	[nextButton release];
+	[lineItemsViewController release];
 	[contactInfos release];
     [super dealloc];
 }

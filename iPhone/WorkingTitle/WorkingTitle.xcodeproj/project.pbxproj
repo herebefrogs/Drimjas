@@ -34,6 +34,8 @@
 		02A8E54C1347C88600BAAF36 /* AddEstimateContactInfo.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02A8E54A1347C88600BAAF36 /* AddEstimateContactInfo.xib */; };
 		02AA0B5F136DAF13005E9158 /* AddEstimateReviewClientInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02AA0B5D136DAF13005E9158 /* AddEstimateReviewClientInfoViewController.m */; };
 		02AA0B60136DAF13005E9158 /* AddEstimateReviewClientInfo.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02AA0B5E136DAF13005E9158 /* AddEstimateReviewClientInfo.xib */; };
+		02AA0C01136DCB20005E9158 /* AddEstimateLineItemsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02AA0BFF136DCB20005E9158 /* AddEstimateLineItemsViewController.m */; };
+		02AA0C02136DCB20005E9158 /* AddEstimateLineItems.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02AA0C00136DCB20005E9158 /* AddEstimateLineItems.xib */; };
 		02B2C06E12DFF2DD00D3FEE0 /* EstimatesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02B2C06C12DFF2DD00D3FEE0 /* EstimatesViewController.m */; };
 		02B2C06F12DFF2DD00D3FEE0 /* Estimates.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02B2C06D12DFF2DD00D3FEE0 /* Estimates.xib */; };
 		02C25793132438C40057D944 /* DataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 02C25792132438C40057D944 /* DataStore.m */; };
@@ -106,6 +108,9 @@
 		02AA0B5C136DAF13005E9158 /* AddEstimateReviewClientInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddEstimateReviewClientInfoViewController.h; sourceTree = "<group>"; };
 		02AA0B5D136DAF13005E9158 /* AddEstimateReviewClientInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddEstimateReviewClientInfoViewController.m; sourceTree = "<group>"; };
 		02AA0B5E136DAF13005E9158 /* AddEstimateReviewClientInfo.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddEstimateReviewClientInfo.xib; sourceTree = "<group>"; };
+		02AA0BFE136DCB20005E9158 /* AddEstimateLineItemsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddEstimateLineItemsViewController.h; sourceTree = "<group>"; };
+		02AA0BFF136DCB20005E9158 /* AddEstimateLineItemsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddEstimateLineItemsViewController.m; sourceTree = "<group>"; };
+		02AA0C00136DCB20005E9158 /* AddEstimateLineItems.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddEstimateLineItems.xib; sourceTree = "<group>"; };
 		02AD02E113397F5400FCF6AA /* WorkingTitle 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "WorkingTitle 3.xcdatamodel"; sourceTree = "<group>"; };
 		02B2C06B12DFF2DD00D3FEE0 /* EstimatesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EstimatesViewController.h; sourceTree = "<group>"; };
 		02B2C06C12DFF2DD00D3FEE0 /* EstimatesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EstimatesViewController.m; sourceTree = "<group>"; };
@@ -174,6 +179,8 @@
 			children = (
 				02A8E5481347C88600BAAF36 /* AddEstimateContactInfoViewController.h */,
 				02A8E5491347C88600BAAF36 /* AddEstimateContactInfoViewController.m */,
+				02AA0BFE136DCB20005E9158 /* AddEstimateLineItemsViewController.h */,
+				02AA0BFF136DCB20005E9158 /* AddEstimateLineItemsViewController.m */,
 				021F684D12E67D8700ECDDDD /* AddEstimateNewClientInfoViewController.h */,
 				021F684E12E67D8700ECDDDD /* AddEstimateNewClientInfoViewController.m */,
 				02C75240136A429F00EC4BF5 /* AddEstimateNewOrPickClientInfoViewController.h */,
@@ -199,6 +206,7 @@
 			isa = PBXGroup;
 			children = (
 				02A8E54A1347C88600BAAF36 /* AddEstimateContactInfo.xib */,
+				02AA0C00136DCB20005E9158 /* AddEstimateLineItems.xib */,
 				021F684F12E67D8700ECDDDD /* AddEstimateNewClientInfo.xib */,
 				02C75242136A429F00EC4BF5 /* AddEstimateNewOrPickClientInfo.xib */,
 				029DACA0136BA00A00AF4A6F /* AddEstimatePickClientInfo.xib */,
@@ -430,6 +438,7 @@
 				02C75244136A429F00EC4BF5 /* AddEstimateNewOrPickClientInfo.xib in Resources */,
 				029DACA2136BA00A00AF4A6F /* AddEstimatePickClientInfo.xib in Resources */,
 				02AA0B60136DAF13005E9158 /* AddEstimateReviewClientInfo.xib in Resources */,
+				02AA0C02136DCB20005E9158 /* AddEstimateLineItems.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -461,6 +470,7 @@
 				02C75243136A429F00EC4BF5 /* AddEstimateNewOrPickClientInfoViewController.m in Sources */,
 				029DACA1136BA00A00AF4A6F /* AddEstimatePickClientInfoViewController.m in Sources */,
 				02AA0B5F136DAF13005E9158 /* AddEstimateReviewClientInfoViewController.m in Sources */,
+				02AA0C01136DCB20005E9158 /* AddEstimateLineItemsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

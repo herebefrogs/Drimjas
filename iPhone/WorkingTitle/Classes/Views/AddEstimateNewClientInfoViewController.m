@@ -35,7 +35,7 @@
     [super viewDidLoad];
 	self.title = NSLocalizedString(@"New Client", "AddEstimateNewClientInfo Navigation Item Title");
 	self.navigationController.tabBarItem.title = self.title;
-	nextButton.title = NSLocalizedString(@"Next", "AddEstimateNewClientInfo Next Button Title");
+	nextButton.title = NSLocalizedString(@"Next", "Next Navigation Item Title");
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -45,7 +45,14 @@
 
 	self.estimate = [[DataStore defaultStore] estimateStub];
 
-	// initialize client information if needed
+	// if existing client info set, deassociate it
+	if ([estimate.clientInfo.status integerValue] == StatusActive) {
+		[estimate.clientInfo removeEstimatesObject:estimate];
+
+		estimate.clientInfo = nil;
+	}
+
+	// initialize new client information if needed
 	if (estimate.clientInfo == nil) {
 		ClientInformation *clientInfo = [[DataStore defaultStore] createClientInformation];
 		estimate.clientInfo = clientInfo;
@@ -57,16 +64,7 @@
 	// reload table data to match estimate object
 	[self.tableView reloadData];
 }
-/*
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-}
-*/
-/*
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-}
-*/
+
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
 
@@ -143,61 +141,6 @@
     return cell;
 }
 
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source.
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
-    }   
-}
-*/
-
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-
-#pragma mark -
-#pragma mark Table view delegate
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-    <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-    // ...
-    // Pass the selected object to the new view controller.
-    [self.navigationController pushViewController:detailViewController animated:YES];
-    [detailViewController release];
-    */
-}
-
 #pragma mark -
 #pragma mark Button & Textfield delegate
 
@@ -212,7 +155,6 @@
 		// hide keyboard
 		[lastTextFieldEdited resignFirstResponder];
 
-		// hide client info view
 		[self.navigationController pushViewController:contactInfoViewController animated:YES];
 	}
 }

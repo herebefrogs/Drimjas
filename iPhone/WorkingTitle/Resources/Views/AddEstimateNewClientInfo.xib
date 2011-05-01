@@ -247,13 +247,13 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 					<string key="className">AddEstimateContactInfoViewController</string>
 					<string key="superclassName">UITableViewController</string>
 					<object class="NSMutableDictionary" key="outlets">
-						<string key="NS.key.0">saveButton</string>
+						<string key="NS.key.0">nextButton</string>
 						<string key="NS.object.0">UIBarButtonItem</string>
 					</object>
 					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<string key="NS.key.0">saveButton</string>
+						<string key="NS.key.0">nextButton</string>
 						<object class="IBToOneOutletInfo" key="NS.object.0">
-							<string key="name">saveButton</string>
+							<string key="name">nextButton</string>
 							<string key="candidateClassName">UIBarButtonItem</string>
 						</object>
 					</object>
