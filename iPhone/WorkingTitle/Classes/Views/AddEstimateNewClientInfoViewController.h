@@ -13,7 +13,7 @@
 @class AddEstimateContactInfoViewController;
 @class Estimate;
 
-@interface AddEstimateClientInfoViewController : TextFieldTableViewController {
+@interface AddEstimateNewClientInfoViewController : TextFieldTableViewController {
 	UIBarButtonItem *nextButton;
 	AddEstimateContactInfoViewController *contactInfoViewController;
 

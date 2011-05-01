@@ -6,7 +6,7 @@
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import "AddEstimateClientInfoViewController.h"
+#import "AddEstimateNewClientInfoViewController.h"
 // API
 #import "Estimate.h"
 #import "ClientInformation.h"
@@ -18,7 +18,7 @@
 #import "TableFields.h"
 
 
-@implementation AddEstimateClientInfoViewController
+@implementation AddEstimateNewClientInfoViewController
 
 @synthesize nextButton;
 @synthesize contactInfoViewController;
@@ -30,12 +30,12 @@
 
 - (void)viewDidLoad {
 #ifdef __ENABLE_UI_LOGS__
-	NSLog(@"AddEstimateClientInfoViewController.viewDidLoad");
+	NSLog(@"AddEstimateNewClientInfoViewController.viewDidLoad");
 #endif
     [super viewDidLoad];
-	self.title = NSLocalizedString(@"New Client", "AddEstimateClientInfo Navigation Item Title");
+	self.title = NSLocalizedString(@"New Client", "AddEstimateNewClientInfo Navigation Item Title");
 	self.navigationController.tabBarItem.title = self.title;
-	nextButton.title = NSLocalizedString(@"Next", "AddEstimateClientInfo Next Button Title");
+	nextButton.title = NSLocalizedString(@"Next", "AddEstimateNewClientInfo Next Button Title");
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -259,7 +259,7 @@
 
 - (void)viewDidUnload {
 #ifdef __ENABLE_UI_LOGS__
-	NSLog(@"AddEstimateClientInfoViewController.viewDidUnload");
+	NSLog(@"AddEstimateNewClientInfoViewController.viewDidUnload");
 #endif
     // Relinquish ownership of anything that can be recreated in viewDidLoad or on demand.
 	self.contactInfoViewController = nil;
@@ -273,7 +273,7 @@
 
 - (void)dealloc {
 #ifdef __ENABLE_UI_LOGS__
-	NSLog(@"AddEstimateClientInfoViewController.dealloc");
+	NSLog(@"AddEstimateNewClientInfoViewController.dealloc");
 #endif
 	[estimate release];
 	[nextButton release];

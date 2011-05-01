@@ -10,13 +10,13 @@
 // API
 #import "DataStore.h"
 // Views
-#import "AddEstimateClientInfoViewController.h"
+#import "AddEstimateNewClientInfoViewController.h"
 #import "AddEstimatePickClientInfoViewController.h"
 #import "TableFields.h"
 
 @implementation AddEstimateNewOrPickClientInfoViewController
 
-@synthesize addEstimateClientInfoViewController;
+@synthesize newClientInfoViewController;
 @synthesize pickClientInfoViewController;
 
 #pragma mark -
@@ -81,7 +81,7 @@
 	[cell setSelected:NO animated:YES];	
 
 	if (indexPath.section == NewClientInfoSection) {
-		[self.navigationController pushViewController:addEstimateClientInfoViewController animated:YES];
+		[self.navigationController pushViewController:newClientInfoViewController animated:YES];
 	} else if (indexPath.section == PickClientInfoSection) {
 		[self.navigationController pushViewController:pickClientInfoViewController animated:YES];
 	}
@@ -106,7 +106,7 @@
 	NSLog(@"AddEstimateNewOrPickClientInfoViewController.viewDidUnload");
 #endif
 	// Relinquish ownership of anything that can be recreated in viewDidLoad or on demand.
-	self.addEstimateClientInfoViewController = nil;
+	self.newClientInfoViewController = nil;
 	self.pickClientInfoViewController = nil;
 	// note: don't nil title or navigationController.tabBarItem.title
 	// as it may appear on the view currently displayed
@@ -117,7 +117,7 @@
 #ifdef __ENABLE_UI_LOGS__
 	NSLog(@"AddEstimateNewOrPickClientInfoViewController.dealloc");
 #endif
-	[addEstimateClientInfoViewController release];
+	[newClientInfoViewController release];
 	[pickClientInfoViewController release];
 	[super dealloc];
 }

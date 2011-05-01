@@ -8,15 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
-@class AddEstimateClientInfoViewController;
+@class AddEstimateNewClientInfoViewController;
 @class AddEstimatePickClientInfoViewController;
 
 @interface AddEstimateNewOrPickClientInfoViewController : UITableViewController {
-	AddEstimateClientInfoViewController *addEstimateClientInfoViewController;
+	AddEstimateNewClientInfoViewController *newClientInfoViewController;
 	AddEstimatePickClientInfoViewController *pickClientInfoViewController;
 }
 
-@property (nonatomic, retain) IBOutlet AddEstimateClientInfoViewController *addEstimateClientInfoViewController;
+@property (nonatomic, retain) IBOutlet AddEstimateNewClientInfoViewController *newClientInfoViewController;
 @property (nonatomic, retain) IBOutlet AddEstimatePickClientInfoViewController *pickClientInfoViewController;
 
 - (IBAction)cancel:(id)sender;
