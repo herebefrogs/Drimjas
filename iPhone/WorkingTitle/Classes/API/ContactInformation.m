@@ -9,12 +9,52 @@
 #import "ContactInformation.h"
 // API
 #import "ClientInformation.h"
+// Objective-C
+
 
 @implementation ContactInformation 
 
-@dynamic email;
-@dynamic phone;
 @dynamic name;
+@dynamic phone;
+@dynamic email;
 @dynamic clientInfo;
+
+- (NSInteger)numSetProperties {
+	NSInteger count = 0;
+
+	if (self.name != nil && self.name.length > 0) {
+		count++;
+	}
+	if (self.phone != nil && self.phone.length > 0) {
+		count++;
+	}
+	if (self.email != nil && self.email.length > 0) {
+		count++;
+	}
+
+	return count;
+}
+
+- (NSString *)getSetPropertyWithIndex:(NSInteger)index {
+	if (self.name != nil && self.name.length > 0) {
+		if (index == 0) {
+			return self.name;
+		}
+		index--;
+	}
+	if (self.phone != nil && self.phone.length > 0) {
+		if (index == 0) {
+			return self.phone;
+		}
+		index--;
+	}
+	if (self.email != nil && self.email.length > 0) {
+		if (index == 0) {
+			return self.email;
+		}
+		index--;
+	}
+	return nil;
+}
 
 @end

@@ -27,6 +27,8 @@
 @property (nonatomic, retain) NSSet *estimates;
 
 + (BOOL)isNameValid:(NSString *)name;
+- (NSInteger)numSetProperties;
+- (NSString *)getSetPropertyWithIndex:(NSInteger)index;
 
 @end
 

@@ -59,8 +59,13 @@
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-	// TODO enumerate the number of filled fields in each client and contact
-    return (section == 0) ? numClientInfoField : numContactInfoField;
+    if (section == 0) {
+		return [clientInfo numSetProperties];
+	} else {
+		// BUG #5: must have saved contact info order to be able to lookup one by index
+		ContactInformation *contactInfo = [[clientInfo.contactInfos allObjects] objectAtIndex:section - 1];
+		return [contactInfo numSetProperties];
+	}
 }
 
 
@@ -75,40 +80,14 @@
     }
     
 	if (indexPath.section == 0) {
-		// initialize textfield value from estimate
-		if (indexPath.row == ClientInfoFieldName) {
-			cell.textLabel.text = clientInfo.name;
-		}
-		else if (indexPath.row == ClientInfoFieldAddress1) {
-			cell.textLabel.text = clientInfo.address1;
-		}
-		else if (indexPath.row == ClientInfoFieldAddress2) {
-			cell.textLabel.text = clientInfo.address2;
-		}
-		else if (indexPath.row == ClientInfoFieldCity) {
-			cell.textLabel.text = clientInfo.city;
-		}
-		else if (indexPath.row == ClientInfoFieldState) {
-			cell.textLabel.text = clientInfo.state;
-		}
-		else if (indexPath.row == ClientInfoFieldPostalCode) {
-			cell.textLabel.text = clientInfo.postalCode;
-		}
-		else if (indexPath.row == ClientInfoFieldCountry) {
-			cell.textLabel.text = clientInfo.country;
-		}
+		cell.textLabel.text = [clientInfo getSetPropertyWithIndex:indexPath.row];
 	} else {
 		// BUG #5: must have saved contact info order to be able to lookup one by index
 		ContactInformation *contactInfo = [[clientInfo.contactInfos allObjects] objectAtIndex:indexPath.section - 1];
 
-		if (indexPath.row == ContactInfoFieldName) {
-			cell.textLabel.text = contactInfo.name;
-		} else if (indexPath.row == ContactInfoFieldPhone) {
-			cell.textLabel.text = contactInfo.phone;
-		} else if (indexPath.row == ContactInfoFieldEmail) {
-			cell.textLabel.text = contactInfo.email;
-		}
+		cell.textLabel.text = [contactInfo getSetPropertyWithIndex:indexPath.row];
 	}
+
 	return cell;
 }
 

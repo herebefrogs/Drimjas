@@ -15,9 +15,12 @@
 @interface ContactInformation : BaseObject {
 }
 
-@property (nonatomic, retain) NSString *email;
-@property (nonatomic, retain) NSString *phone;
 @property (nonatomic, retain) NSString *name;
+@property (nonatomic, retain) NSString *phone;
+@property (nonatomic, retain) NSString *email;
 @property (nonatomic, retain) ClientInformation *clientInfo;
+
+- (NSInteger)numSetProperties;
+- (NSString *)getSetPropertyWithIndex:(NSInteger)index;
 
 @end
