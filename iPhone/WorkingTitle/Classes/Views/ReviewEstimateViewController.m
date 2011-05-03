@@ -82,17 +82,19 @@
 #pragma mark Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    // Return the number of sections.
-    return 1 + estimate.clientInfo.contactInfos.count;
+    return 2 + estimate.clientInfo.contactInfos.count;
 }
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == 0) {
+		// order number
+		return 1;
+	} else if (section == 1) {
 		return [estimate.clientInfo numSetProperties];
 	} else {
 		// BUG #5: must have saved contact info order to be able to lookup one by index
-		ContactInformation *contactInfo = [[estimate.clientInfo.contactInfos allObjects] objectAtIndex:section - 1];
+		ContactInformation *contactInfo = [[estimate.clientInfo.contactInfos allObjects] objectAtIndex:section - 2];
 		return [contactInfo numSetProperties];
 	}
 }
@@ -111,10 +113,12 @@
 	cell.textLabel.tag = indexPath.row;
 
 	if (indexPath.section == 0) {
+		cell.textLabel.text = [estimate orderNumber];
+	} else if (indexPath.section == 1) {
 		cell.textLabel.text = [estimate.clientInfo getSetPropertyWithIndex:indexPath.row];
 	} else {
 		// BUG #5: must have saved contact info order to be able to lookup one by index
-		ContactInformation *contactInfo = [[estimate.clientInfo.contactInfos allObjects] objectAtIndex:indexPath.section - 1];
+		ContactInformation *contactInfo = [[estimate.clientInfo.contactInfos allObjects] objectAtIndex:indexPath.section - 2];
 		
 		cell.textLabel.text = [contactInfo getSetPropertyWithIndex:indexPath.row];
 	}
