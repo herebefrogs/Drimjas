@@ -19,8 +19,8 @@
 @property (nonatomic, retain) NSNumber *status;
 
 typedef enum {
-	StatusCreated = 0,	// managed object being filled during creation process
-	StatusActive = 1	// managed object has completed creation process and is a first-class citizen
+	StatusCreated = 1,	// managed object being filled during creation process
+	StatusActive = 2	// managed object has completed creation process and is a first-class citizen
 } Status;
 
 @end
