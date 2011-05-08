@@ -62,6 +62,12 @@
 /* AddEstimateReviewClientInfo Navigation Item Title */
 "Review Client" = "Review Client";
 
+/* AddEstimateLineItems Navigation Item Title */
+"Add Line Item" = "Add Line Item";
+
+/* AddEstimateLineItem Add A Line Item Row */
+"Add a Line Item" = "Add a Line Item";
+
 /* ReviewEstimate View Controller Navigation Item Title */
 "Review Estimate" = "Review Estimate";
 

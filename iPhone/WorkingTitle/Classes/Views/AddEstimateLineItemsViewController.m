@@ -19,9 +19,18 @@
 
 
 - (void)viewDidLoad {
-    [super viewDidLoad];
+#ifdef __ENABLE_UI_LOGS__
+	NSLog(@"AddEstimateLineItemsViewController.viewDidLoad");
+#endif
+	[super viewDidLoad];
+	self.title = NSLocalizedString(@"Add Line Item", "AddEstimateLineItems Navigation Item Title");
+	self.navigationController.tabBarItem.title = self.title;
 
     self.navigationItem.rightBarButtonItem = nextButton;
+
+	// show add/delete widgets in front of rows
+	[self.tableView setEditing:YES animated:NO];
+	self.tableView.allowsSelectionDuringEditing = YES;
 }
 
 
@@ -57,32 +66,52 @@
 #pragma mark Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    // Return the number of sections.
+    // 1 section per line item selection, plus 1 section to add a line item
     return 1;
 }
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    // Return the number of rows in the section.
-    return 1;
+	// TODO this section's index should be the last
+	if (section == 0) {
+		// "add a line item" section has only 1 row
+		return 1;
+	}
+	return 0;
 }
 
 
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    static NSString *CellIdentifier = @"Cell";
-    
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
-    }
-    
-    // Configure the cell...
-    
-    return cell;
+	// TODO this section's index should be the last
+    if (indexPath.section == 0) {
+		static NSString *CellIdentifier = @"Cell";
+
+		UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+		if (cell == nil) {
+			cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+		}
+
+		cell.textLabel.text = NSLocalizedString(@"Add a Line Item", "AddEstimateLineItem Add A Line Item Row");
+
+		return cell;
+	}
+
+	return nil;
 }
 
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
+	// show a plus sign in front of "add a line item" row
+	// TODO this section index should be last
+	if (indexPath.section == 0) {
+		return UITableViewCellEditingStyleInsert;
+	}
+	// show a minus sign in front of 1st row of a contact info section
+	else if (indexPath.section != 0 && indexPath.row == 0) {
+		return UITableViewCellEditingStyleDelete;
+	}
+	return UITableViewCellEditingStyleNone;
+}
 
 /*
 // Override to support conditional editing of the table view.
@@ -128,14 +157,14 @@
 #pragma mark Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-    <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-    // ...
-    // Pass the selected object to the new view controller.
-    [self.navigationController pushViewController:detailViewController animated:YES];
-    [detailViewController release];
-    */
+	// TODO this section index should be last
+	if (indexPath.section == 0) {
+		// deselect cell immediately
+		UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+		[cell setSelected:NO animated:YES];
+
+		// TODO add a line item section
+	}
 }
 
 #pragma mark -
@@ -164,12 +193,18 @@
 }
 
 - (void)viewDidUnload {
+#ifdef __ENABLE_UI_LOGS__
+	NSLog(@"AddEstimateLineItemsViewController.viewDidUnload");
+#endif
     // Relinquish ownership of anything that can be recreated in viewDidLoad or on demand.
     self.nextButton = nil;
 }
 
 
 - (void)dealloc {
+#ifdef __ENABLE_UI_LOGS__
+	NSLog(@"AddEstimateLineItemsViewController.dealloc");
+#endif
 	[nextButton release];
     [super dealloc];
 }

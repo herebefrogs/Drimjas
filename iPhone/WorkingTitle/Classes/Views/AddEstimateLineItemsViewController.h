@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+// Cells
+#import "TextFieldTableViewController.h"
 
 
-@interface AddEstimateLineItemsViewController : UITableViewController {
+@interface AddEstimateLineItemsViewController : TextFieldTableViewController {
 	UIBarButtonItem *nextButton;
 }
 
