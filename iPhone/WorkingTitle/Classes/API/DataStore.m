@@ -210,21 +210,29 @@ static DataStore *singleton_ = nil;
 - (void)saveEstimateStub {
 	NSNumber *active = [NSNumber numberWithInt:StatusActive];
 
+	if ([estimateStub_.clientInfo.status integerValue] == StatusCreated) {
+		// associate contact infos to client info
+		[estimateStub_.clientInfo addContactInfos:[NSSet setWithArray:contactInfoStubs_]];
+
+		// associate each contact info with client info
+		for (ContactInformation *contactInfo in contactInfoStubs_) {
+			contactInfo.clientInfo = estimateStub_.clientInfo;
+			contactInfo.status = active;
+		}
+
+		estimateStub_.clientInfo.status	= active;
+	}
+	else if ([estimateStub_.clientInfo.status integerValue] == StatusActive
+			 && [contactInfoStubs_ count] > 0) {
+		// delete contact infos stubs that may have been created
+		for (ContactInformation *contactInfo in contactInfoStubs_) {
+			[[DataStore defaultStore] deleteContactInformation:contactInfo];
+		}
+	}
+
 	// flag each stub as "active"
 	estimateStub_.status = active;
-	estimateStub_.clientInfo.status	= active;
-	for (ContactInformation *contactInfo in contactInfoStubs_) {
-		contactInfo.status = active;
-	}
 	[active release];
-
-	// associate contact infos to client info
-	[estimateStub_.clientInfo addContactInfos:[NSSet setWithArray:contactInfoStubs_]];
-
-	// associate each contact info with client info
-	for (ContactInformation *contactInfo in contactInfoStubs_) {
-		contactInfo.clientInfo = estimateStub_.clientInfo;
-	}
 
 	// save the context
 	NSError *error;
