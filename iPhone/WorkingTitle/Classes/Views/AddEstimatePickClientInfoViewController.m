@@ -83,7 +83,7 @@
 #pragma mark -
 #pragma mark FetchedResultsController delegate
 
-- (void)controllerWillChangeContent:(NSFetchedResultsController*)controller {
+- (void)controllerDidChangeContent:(NSFetchedResultsController*)controller {
 	[self.tableView reloadData];
 }
 
