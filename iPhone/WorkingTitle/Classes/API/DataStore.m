@@ -400,6 +400,45 @@ static DataStore *singleton_ = nil;
 
 
 #pragma mark -
+#pragma mark Line Item Selections stack
+
+- (NSFetchedResultsController *)lineItemSelectionsForEstimate:(Estimate *)estimate {
+	// LineItemSelection fetch request
+	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+	fetchRequest.entity = [NSEntityDescription entityForName:@"LineItemSelection"
+									  inManagedObjectContext:self.managedObjectContext];
+	
+	// fetch only LineItemSelections associated to this Estimate
+	// TODO debug
+	fetchRequest.predicate = [NSPredicate predicateWithFormat:@"estimate = %@", estimate];
+	
+	// sort LineItemSelections by insertion order
+	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"index" ascending:YES];
+	fetchRequest.sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
+	[sortDescriptor release];
+	
+	// buffer up to 16 LineItemSelections
+	fetchRequest.fetchBatchSize = 16;
+	
+	// LineItemSelection fetched results controller
+	NSFetchedResultsController *lineItemSelections = [[[NSFetchedResultsController alloc]
+													  initWithFetchRequest:fetchRequest
+													  managedObjectContext:self.managedObjectContext
+													  sectionNameKeyPath:@"index"
+													  cacheName:@"Root"]
+													 autorelease];
+	
+	[fetchRequest release];
+	
+	return lineItemSelections;
+}
+
+- (LineItemSelection *)createLineItemSelection {
+	return (LineItemSelection *)[NSEntityDescription insertNewObjectForEntityForName:@"LineItemSelection"
+															  inManagedObjectContext:self.managedObjectContext];
+}
+
+#pragma mark -
 #pragma mark Memory management stack
 
 - (void)didReceiveMemoryWarning {

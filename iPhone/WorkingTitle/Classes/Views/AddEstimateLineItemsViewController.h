@@ -10,12 +10,19 @@
 // Cells
 #import "TextFieldTableViewController.h"
 
+@class Estimate;
 
-@interface AddEstimateLineItemsViewController : TextFieldTableViewController {
+@interface AddEstimateLineItemsViewController : TextFieldTableViewController <NSFetchedResultsControllerDelegate> {
 	UIBarButtonItem *nextButton;
+
+	NSFetchedResultsController *lineItemSelections;
+	Estimate *estimate;
 }
 
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *nextButton;
+
+@property (nonatomic, retain) NSFetchedResultsController *lineItemSelections;
+@property (nonatomic, retain) Estimate *estimate;
 
 - (IBAction)next:(id)sender;
 

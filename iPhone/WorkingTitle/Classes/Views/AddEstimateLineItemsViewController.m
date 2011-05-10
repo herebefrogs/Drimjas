@@ -9,10 +9,17 @@
 #import "AddEstimateLineItemsViewController.h"
 // API
 #import "DataStore.h"
+#import "Estimate.h"
+#import "LineItemSelection.h"
+#import "LineItem.h"
+// Views
+#import "TableFields.h"
 
 @implementation AddEstimateLineItemsViewController
 
 @synthesize nextButton;
+@synthesize lineItemSelections;
+@synthesize estimate;
 
 #pragma mark -
 #pragma mark View lifecycle
@@ -33,12 +40,14 @@
 	self.tableView.allowsSelectionDuringEditing = YES;
 }
 
-
-/*
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+	
+	self.estimate = [[DataStore defaultStore] estimateStub];
+	self.lineItemSelections = [[DataStore defaultStore] lineItemSelectionsForEstimate:estimate];
+	lineItemSelections.delegate = self;
 }
-*/
+
 /*
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
@@ -49,11 +58,12 @@
     [super viewWillDisappear:animated];
 }
 */
-/*
+
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
+	self.estimate = nil;
+	self.lineItemSelections = nil;
 }
-*/
 
 // Override to allow orientations other than the default portrait orientation.
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
@@ -67,25 +77,24 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // 1 section per line item selection, plus 1 section to add a line item
-    return 1;
+    return 1 + lineItemSelections.sections.count;
 }
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-	// TODO this section's index should be the last
-	if (section == 0) {
+	if (section == lineItemSelections.sections.count) {
 		// "add a line item" section has only 1 row
 		return 1;
+	} else {
+		return numLineItemSelectionField;
 	}
-	return 0;
 }
 
 
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-	// TODO this section's index should be the last
-    if (indexPath.section == 0) {
-		static NSString *CellIdentifier = @"Cell";
+    if (indexPath.section == lineItemSelections.sections.count) {
+		static NSString *CellIdentifier = @"AddLineItemSelectionCell";
 
 		UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 		if (cell == nil) {
@@ -95,6 +104,29 @@
 		cell.textLabel.text = NSLocalizedString(@"Add a Line Item", "AddEstimateLineItem Add A Line Item Row");
 
 		return cell;
+	} else {
+		static NSString *CellIdentifier = @"TextFieldCell";
+		
+		UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+		if (cell == nil) {
+			cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+		}
+
+		NSIndexPath *listIndexPath = [NSIndexPath indexPathForRow:1 inSection:indexPath.section];
+		LineItemSelection *lineItem = [lineItemSelections objectAtIndexPath:listIndexPath];
+
+		if (indexPath.row == LineItemSelectionFieldName) {
+			cell.textLabel.text = lineItem.lineItem.name;
+		} else if (indexPath.row == LineItemSelectionFieldDetails) {
+			cell.textLabel.text = lineItem.details;
+		} else if (indexPath.row == LineItemSelectionFieldQuantity) {
+			cell.textLabel.text = [lineItem.quantity stringValue];
+		} else if (indexPath.row == LineItemSelectionFieldUnitCost) {
+			cell.textLabel.text = [lineItem.unitCost stringValue];
+		}
+		
+		return cell;
+		
 	}
 
 	return nil;
@@ -102,12 +134,11 @@
 
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
 	// show a plus sign in front of "add a line item" row
-	// TODO this section index should be last
-	if (indexPath.section == 0) {
+	if (indexPath.section == lineItemSelections.sections.count) {
 		return UITableViewCellEditingStyleInsert;
 	}
 	// show a minus sign in front of 1st row of a contact info section
-	else if (indexPath.section != 0 && indexPath.row == 0) {
+	else if (indexPath.section != lineItemSelections.sections.count && indexPath.row == 0) {
 		return UITableViewCellEditingStyleDelete;
 	}
 	return UITableViewCellEditingStyleNone;
@@ -121,20 +152,26 @@
 }
 */
 
+- (void)insertLineItemSelectionForIndexPath:(NSIndexPath *)indexPath {
+	LineItemSelection *lineItemSelection = [[DataStore defaultStore] createLineItemSelection];
+	lineItemSelection.index = [NSNumber numberWithInteger:lineItemSelections.sections.count];
 
-/*
+	[estimate addLineItemsObject:lineItemSelection];
+	NSLog(@"click! estimate has %u line item selection(s)", estimate.lineItems.count);
+	
+	//[self controllerDidChangeContent:lineItemSelections];
+	//[lineItemSelections performFetch:nil];
+
+	// actually what should be done
+	//[self.navigationController pushViewController:pickLineItemViewController animated:YES];
+}
+
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source.
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
+	if (editingStyle == UITableViewCellEditingStyleInsert) {
+		[self insertLineItemSelectionForIndexPath:indexPath];
     }   
 }
-*/
 
 
 /*
@@ -157,14 +194,21 @@
 #pragma mark Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	// TODO this section index should be last
-	if (indexPath.section == 0) {
+	if (indexPath.section == lineItemSelections.sections.count) {
 		// deselect cell immediately
 		UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
 		[cell setSelected:NO animated:YES];
 
-		// TODO add a line item section
+		[self insertLineItemSelectionForIndexPath:indexPath];
 	}
+}
+
+#pragma mark -
+#pragma mark FetchedResultsController delegate
+
+- (void)controllerDidChangeContent:(NSFetchedResultsController*)controller {
+	NSLog(@"lineitemselection controller changed");
+	[self.tableView reloadData];
 }
 
 #pragma mark -
@@ -198,6 +242,9 @@
 #endif
     // Relinquish ownership of anything that can be recreated in viewDidLoad or on demand.
     self.nextButton = nil;
+	lineItemSelections.delegate = nil;
+	self.lineItemSelections = nil;
+	self.estimate = nil;
 }
 
 
@@ -206,6 +253,8 @@
 	NSLog(@"AddEstimateLineItemsViewController.dealloc");
 #endif
 	[nextButton release];
+	[lineItemSelections release];
+	[estimate release];
     [super dealloc];
 }
 

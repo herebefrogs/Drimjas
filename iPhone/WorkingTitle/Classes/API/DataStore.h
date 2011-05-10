@@ -11,6 +11,7 @@
 @class Estimate;
 @class ClientInformation;
 @class ContactInformation;
+@class LineItemSelection;
 
 @interface DataStore : NSObject {
 
@@ -63,5 +64,14 @@
 - (ContactInformation *)createContactInformationStub;
 - (BOOL)deleteContactInformation:(ContactInformation *)contactInformation; // do not call from outside of DataStore
 //- (BOOL)deleteContactInformation:(ContactInformation *)contactInformation fromClientInformation:(ClientInformation *)clientInformation;
+
+@end
+
+
+
+@interface DataStore (LineItemSelectionAccessors)
+
+- (NSFetchedResultsController *)lineItemSelectionsForEstimate:(Estimate *)estimate;
+- (LineItemSelection *)createLineItemSelection;
 
 @end

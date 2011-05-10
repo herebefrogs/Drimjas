@@ -38,5 +38,13 @@ typedef enum {
 	numContactInfoField
 } ContactInfoField;
 
+typedef enum {
+	LineItemSelectionFieldName = 0,
+	LineItemSelectionFieldDetails,
+	LineItemSelectionFieldQuantity,
+	LineItemSelectionFieldUnitCost,
+
+	numLineItemSelectionField
+} LineItemSelectionField;
 
 @end
