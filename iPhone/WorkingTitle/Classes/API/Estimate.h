@@ -11,6 +11,7 @@
 #import "BaseObject.h"
 
 @class ClientInformation;
+@class LineItemSelection;
 
 typedef void (^EstimateSavedCallback)();
 
@@ -21,9 +22,19 @@ typedef void (^EstimateSavedCallback)();
 @property (nonatomic, retain) NSNumber *number;
 @property (nonatomic, retain) NSDate *date;
 @property (nonatomic, retain) ClientInformation *clientInfo;
+@property (nonatomic, retain) NSSet *lineItems;
 @property (nonatomic, copy) EstimateSavedCallback callbackBlock;
 
 - (NSString *)orderNumber;
 - (BOOL)isEmpty;
+
+@end
+
+
+@interface Estimate (CoreDataGeneratedAccessors)
+- (void)addLineItemsObject:(LineItemSelection *)value;
+- (void)removeLineItemsObject:(LineItemSelection *)value;
+- (void)addLineItems:(NSSet *)value;
+- (void)removeLineItems:(NSSet *)value;
 
 @end

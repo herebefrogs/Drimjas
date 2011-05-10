@@ -10,12 +10,14 @@
 // API
 #import "ClientInformation.h"
 #import "DataStore.h"
+#import "LineItemSelection.h"
 
 @implementation Estimate 
 
 @dynamic number;
 @dynamic date;
 @dynamic clientInfo;
+@dynamic lineItems;
 
 @synthesize callbackBlock;
 
