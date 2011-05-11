@@ -26,6 +26,7 @@
 	Estimate *estimateStub_;			// estimate being created
 
 	NSFetchedResultsController *clientInfosFetchedResultsController_;
+	NSFetchedResultsController *lineItemsFetchedResultsController_;
 
 	NSMutableArray *contactInfoStubs_;	// ordered contact infos being created
 }
@@ -74,5 +75,12 @@
 - (NSFetchedResultsController *)lineItemSelectionsForEstimate:(Estimate *)estimate;
 - (LineItemSelection *)createLineItemSelection;
 - (BOOL)deleteLineItemSelection:(LineItemSelection *)lineItemSelection;
+
+@end
+
+
+@interface DataStore (LineItemAccessors)
+
+- (NSFetchedResultsController *)lineItemsFetchedResultsController;
 
 @end

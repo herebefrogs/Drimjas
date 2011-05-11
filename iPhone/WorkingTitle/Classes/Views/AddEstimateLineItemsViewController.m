@@ -16,10 +16,12 @@
 #import "TextFieldCell.h"
 // Views
 #import "TableFields.h"
+#import "AddEstimatePickLineItemViewController.h"
 
 @implementation AddEstimateLineItemsViewController
 
 @synthesize nextButton;
+@synthesize pickLineItemViewController;
 @synthesize lineItemSelections;
 @synthesize estimate;
 
@@ -387,6 +389,7 @@ BOOL _insertLineItem = NO;
 #endif
     // Relinquish ownership of anything that can be recreated in viewDidLoad or on demand.
     self.nextButton = nil;
+	self.pickLineItemViewController = nil;
 	lineItemSelections.delegate = nil;
 	self.lineItemSelections = nil;
 	self.estimate = nil;
@@ -398,6 +401,7 @@ BOOL _insertLineItem = NO;
 	NSLog(@"AddEstimateLineItemsViewController.dealloc");
 #endif
 	[nextButton release];
+	[pickLineItemViewController release];
 	[lineItemSelections release];
 	[estimate release];
     [super dealloc];

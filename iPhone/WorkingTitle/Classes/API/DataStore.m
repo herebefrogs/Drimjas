@@ -407,6 +407,49 @@ static DataStore *singleton_ = nil;
 	return YES;
 }
 
+#pragma mark -
+#pragma mark Line Item stack
+
+- (NSFetchedResultsController *)lineItemsFetchedResultsController {
+	if (lineItemsFetchedResultsController_ == nil) {
+		// LineItem fetch request
+		NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+		
+		fetchRequest.entity = [NSEntityDescription entityForName:@"LineItem"
+										  inManagedObjectContext:self.managedObjectContext];
+		
+		// fetch only "active " LineItem
+		fetchRequest.predicate = [NSPredicate predicateWithFormat:@"status = %@", [NSNumber numberWithInt:StatusActive]];
+		
+		// sort LineItem alphabetically
+		NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
+		fetchRequest.sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
+		[sortDescriptor release];
+		
+		// buffer up to 16 LineItem
+		fetchRequest.fetchBatchSize = 16;
+		
+		// LineItem fetched results controller
+		lineItemsFetchedResultsController_ = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
+																				 managedObjectContext:self.managedObjectContext
+																				   sectionNameKeyPath:nil
+																							cacheName:@"Root"];
+		
+		[fetchRequest release];
+		
+		NSError *error = nil;
+		if (![lineItemsFetchedResultsController_ performFetch:&error]) {
+			// TODO This is a serious error saying the records
+			//could not be fetched. Advise the user to try
+			//again or restart the application.
+			NSLog(@"DataStore.lineItemsFetchedResultsController: fetch failed with error %@, %@", error, [error userInfo]);
+		}
+		
+		// TODO initialize from plist if empty
+	}
+	return lineItemsFetchedResultsController_;
+}
+
 
 #pragma mark -
 #pragma mark Line Item Selections stack
@@ -479,6 +522,7 @@ static DataStore *singleton_ = nil;
 	[persistentStoreCoordinator_ release];
 	[contactInfoStubs_ release];
 	[clientInfosFetchedResultsController_ release];
+	[lineItemsFetchedResultsController_ release];
 	[estimateStub_ release];
 	[estimates_ release];
 	[storeName_ release];
