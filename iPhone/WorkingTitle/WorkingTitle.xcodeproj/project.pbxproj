@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		02022CA61378CDFC00536FEA /* LineItemSelection.m in Sources */ = {isa = PBXBuildFile; fileRef = 02022CA51378CDFC00536FEA /* LineItemSelection.m */; };
 		0216F77212FF46E9007BC60F /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0216F77112FF46E9007BC60F /* MessageUI.framework */; };
+		021C0D32137B73A2007E641C /* LineItemDefaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = 021C0D31137B73A2007E641C /* LineItemDefaults.plist */; };
 		021F685012E67D8700ECDDDD /* AddEstimateNewClientInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 021F684E12E67D8700ECDDDD /* AddEstimateNewClientInfoViewController.m */; };
 		021F685112E67D8700ECDDDD /* AddEstimateNewClientInfo.xib in Resources */ = {isa = PBXBuildFile; fileRef = 021F684F12E67D8700ECDDDD /* AddEstimateNewClientInfo.xib */; };
 		0236618A12F8FA8000CD39EE /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0236618912F8FA8000CD39EE /* CoreText.framework */; };
@@ -75,6 +76,7 @@
 		02022CA41378CDFC00536FEA /* LineItemSelection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LineItemSelection.h; sourceTree = "<group>"; };
 		02022CA51378CDFC00536FEA /* LineItemSelection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LineItemSelection.m; sourceTree = "<group>"; };
 		0216F77112FF46E9007BC60F /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		021C0D31137B73A2007E641C /* LineItemDefaults.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = LineItemDefaults.plist; path = Resources/LineItemDefaults.plist; sourceTree = "<group>"; };
 		021E547313690BEA00849A20 /* WorkingTitle 7.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "WorkingTitle 7.xcdatamodel"; sourceTree = "<group>"; };
 		021F684D12E67D8700ECDDDD /* AddEstimateNewClientInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddEstimateNewClientInfoViewController.h; sourceTree = "<group>"; };
 		021F684E12E67D8700ECDDDD /* AddEstimateNewClientInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddEstimateNewClientInfoViewController.m; sourceTree = "<group>"; };
@@ -361,6 +363,7 @@
 				029C645112EB8389000B6E51 /* Localizable.strings */,
 				02CC9C99133FC53C006160A7 /* Cells */,
 				02B2C05E12DFEFB300D3FEE0 /* Views */,
+				021C0D31137B73A2007E641C /* LineItemDefaults.plist */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -459,6 +462,7 @@
 				02AA0B60136DAF13005E9158 /* AddEstimateReviewClientInfo.xib in Resources */,
 				02AA0C02136DCB20005E9158 /* AddEstimateLineItems.xib in Resources */,
 				02DE9887137A12D3007C5FED /* AddEstimatePickLineItem.xib in Resources */,
+				021C0D32137B73A2007E641C /* LineItemDefaults.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -12,6 +12,7 @@
 @class ClientInformation;
 @class ContactInformation;
 @class LineItemSelection;
+@class LineItem;
 
 @interface DataStore : NSObject {
 
@@ -82,5 +83,6 @@
 @interface DataStore (LineItemAccessors)
 
 - (NSFetchedResultsController *)lineItemsFetchedResultsController;
+- (LineItem *)createLineItem;
 
 @end

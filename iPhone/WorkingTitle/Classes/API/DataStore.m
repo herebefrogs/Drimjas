@@ -12,6 +12,7 @@
 #import "ClientInformation.h"
 #import	"ContactInformation.h"
 #import "LineItemSelection.h"
+#import "LineItem.h"
 
 
 @implementation DataStore
@@ -410,6 +411,61 @@ static DataStore *singleton_ = nil;
 #pragma mark -
 #pragma mark Line Item stack
 
+- (void)loadDefaultLineItems {
+	NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"LineItemDefaults" ofType:@"plist"];
+	NSData *plistXML = [[NSFileManager defaultManager] contentsAtPath:plistPath];
+
+	NSString *errorDesc = nil;
+	NSPropertyListFormat format;
+	NSArray *plistItems = (NSArray *)[NSPropertyListSerialization
+										  propertyListFromData:plistXML
+										  mutabilityOption:NSPropertyListImmutable
+										  format:&format
+										  errorDescription:&errorDesc];
+
+	if (plistItems == nil) {
+		// TODO This is a serious error saying the record
+		//could not be saved. Advise the user to
+		//try again or restart the application.
+		NSLog(@"DataStore.loadDefaultLineItems: read failed with error %@", errorDesc);
+	}
+
+	for (NSString *name in plistItems) {
+		LineItem *lineItem = [self createLineItem];
+		lineItem.name = NSLocalizedString(name, "");
+		NSString *details_key = [name stringByAppendingString:@" Description"];
+		NSString *details = NSLocalizedString(details_key, "");
+		// some line items have no description, so avoid setting the lookup key as one
+		if (details != details_key) {
+			lineItem.details = details;
+		}
+		lineItem.preset = [NSNumber numberWithInt:YES];
+		lineItem.status = [NSNumber numberWithInt:StatusActive];
+	}
+
+	// save the context
+	NSError *error = nil;
+	if (![self.managedObjectContext save:&error]) {
+		// TODO This is a serious error saying the record
+		//could not be saved. Advise the user to
+		//try again or restart the application.
+		NSLog(@"DataStore.loadDefaultLineItems: save failed with error %@, %@", error, [error userInfo]);
+	}
+
+	// fetch results again
+	if (![lineItemsFetchedResultsController_ performFetch:&error]) {
+		// TODO This is a serious error saying the record
+		//could not be saved. Advise the user to
+		//try again or restart the application.
+		NSLog(@"DataStore.loadDefaultLineItems: fetch failed with error %@, %@", error, [error userInfo]);
+	}
+}
+
+- (LineItem *)createLineItem {
+	return (LineItem *)[NSEntityDescription insertNewObjectForEntityForName:@"LineItem"
+													 inManagedObjectContext:self.managedObjectContext];
+}
+
 - (NSFetchedResultsController *)lineItemsFetchedResultsController {
 	if (lineItemsFetchedResultsController_ == nil) {
 		// LineItem fetch request
@@ -445,7 +501,9 @@ static DataStore *singleton_ = nil;
 			NSLog(@"DataStore.lineItemsFetchedResultsController: fetch failed with error %@, %@", error, [error userInfo]);
 		}
 		
-		// TODO initialize from plist if empty
+		if (lineItemsFetchedResultsController_.fetchedObjects.count == 0) {
+			[self loadDefaultLineItems];
+		}
 	}
 	return lineItemsFetchedResultsController_;
 }

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<string>Creative Fee</string>
+	<string>Producer Day(s)</string>
+	<string>Licensing</string>
+	<string>Location Scouting Day(s)</string>
+	<string>Test Shoot Day(s)</string>
+	<string>Casting Day</string>
+	<string>Wardrobe Stylist Day(s)</string>
+	<string>Hair &amp; Makeup Stylist Day(s)</string>
+	<string>Assistant Day(s)</string>
+	<string>Digital Tech Day(s)</string>
+	<string>Retouching Hour(s)</string>
+	<string>Certificate of Insurance</string>
+	<string>Catering</string>
+	<string>Production Incidentals</string>
+	<string>Major Travel Expenses</string>
+	<string>Lodging</string>
+	<string>Media</string>
+	<string>Adult Talent</string>
+	<string>Child Talent</string>
+	<string>Handling &amp; Shipping</string>
+</array>
+</plist>

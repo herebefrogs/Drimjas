@@ -92,3 +92,64 @@
 
 /* Estimate Email Body */
 "Estimate Email Body" = "Corps Temporaire Du Courriel Pour Le Devis";
+
+/****************** Line items section ****************/
+"Creative Fee" = "Creative Fee";
+"Creative Fee Description" = "Concept (details to be entered here) and time";
+
+"Producer Day(s)" = "Producer Day(s)";
+"Producer Day(s) Description" = "Planning and organization of shoot";
+
+"Licensing" = "Licensing";
+"Licensing Description" = "Licensing of image(s)";
+
+"Location Scouting Day(s)" = "Location Scouting Day(s)";
+"Location Scouting Day(s) Description" = "Location research, permit seeking, scouting and conditions forecasting";
+
+"Test Shoot Day(s)" = "Test Shoot Day(s)";
+"Test Shoot Day(s) Description" = "Shoot of stand-in subject, equipment check and post processing";
+
+"Casting Day" = "Casting Day";
+"Casting Day Description" = "Expenses to modelling agencies, casting call and interview";
+
+"Wardrobe Stylist Day(s)" = "Wardrobe Stylist Day(s)";
+"Wardrobe Stylist Day(s) Description" = "Shoot, pull, misc incidentals";
+
+"Hair & Makeup Stylist Day(s)" = "Hair & Makeup Stylist Day(s)";
+"Hair & Makeup Stylist Day(s) Description" = "";
+
+"Assistant Day(s)" = "Assistant Day(s)";
+"Assistant Day(s) Description" = "Photographer's assistant";
+
+"Digital Tech Day(s)" = "Digital Tech Day(s)";
+"Digital Tech Day(s) Description" = "Pre-production, production and post-production work";
+
+"Retouching Hour(s)" = "Retouching Hour(s)";
+"Retouching Hour(s) Description" = "Pre-production, production and post-production";
+
+"Certificate of Insurance" = "Certificate of Insurance";
+"Certificate of Insurance Description" = "";
+
+"Catering" = "Catering";
+"Catering Description" = "";
+
+"Production Incidentals" = "Production Incidentals";
+"Production Incidentals Description" = "Mileage, Parking, Tolls, misc";
+
+"Major Travel Expenses" = "Major Travel Expenses";
+"Major Travel Expenses Description" = "Flights, etc";
+
+"Lodging" = "Lodging";
+"Lodging Description" = "Hotels";
+
+"Media" = "Media";
+"Media Description" = "DVDs, prints, other media";
+
+"Adult Talent" = "Adult Talent";
+"Adult Talent Description" = "Model / subject billing";
+
+"Child Talent" = "Child Talent";
+"Child Talent Description" = "Model / subject billing";
+
+"Handling & Shipping" = "Handling & Shipping";
+"Handling & Shipping Description" = "";

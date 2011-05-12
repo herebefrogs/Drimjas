@@ -34,40 +34,17 @@
 	lineItems.delegate = self;
 }
 
-
-/*
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-}
-*/
-/*
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-}
-*/
-/*
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-}
-*/
-/*
-- (void)viewDidDisappear:(BOOL)animated {
-    [super viewDidDisappear:animated];
-}
-*/
-
 // Override to allow orientations other than the default portrait orientation.
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     return YES;
 }
 
 
-
 #pragma mark -
 #pragma mark Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return lineItems.sections.count;
+    return 1;
 }
 
 
@@ -79,23 +56,36 @@
 
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    static NSString *CellIdentifier = @"Cell";
-    
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
-    }
 
-	id<NSFetchedResultsSectionInfo> sectionInfo = [lineItems.sections objectAtIndex:indexPath.section];
-	if (indexPath.section == sectionInfo.numberOfObjects) {
+	if (indexPath.row == 0) {
+		static NSString *CellIdentifier = @"AddLineItemCell";
+
+		UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+		if (cell == nil) {
+			cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+		}
+
 		cell.textLabel.text = NSLocalizedString(@"Add a Line Item", "AddEstimatePickLineItem Add A Line Item Row");
+		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+
+		return cell;
 	} else {
+		static NSString *CellIdentifier = @"LineItemCell";
+
+		UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+		if (cell == nil) {
+			cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
+		}
+
+		// NOTE: reduce index path by 1 to account for extra "add a line item" row not in line items list
+		indexPath = [NSIndexPath indexPathForRow:indexPath.row - 1 inSection:indexPath.section];
+
 		LineItem *lineItem = [lineItems objectAtIndexPath:indexPath];
 		cell.textLabel.text = NSLocalizedString(lineItem.name, "");
-	}
+		cell.detailTextLabel.text = NSLocalizedString(lineItem.details, "");
 
-    return cell;
+		return cell;
+	}
 }
 
 
@@ -119,22 +109,6 @@
     else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
     }   
-}
-*/
-
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
 }
 */
 
