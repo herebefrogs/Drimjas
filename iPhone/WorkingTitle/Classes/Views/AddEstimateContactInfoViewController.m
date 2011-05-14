@@ -34,6 +34,7 @@
 	[super viewDidLoad];
 	self.title = NSLocalizedString(@"Add Contact", "AddEstimateContactInfo Navigation Item Title");
 	self.navigationController.tabBarItem.title = self.title;
+	nextButton.title = NSLocalizedString(@"Next", "Next Navigation Item Title");
 
 	// show add/delete widgets in front of rows
 	[self.tableView setEditing:YES animated:NO];
