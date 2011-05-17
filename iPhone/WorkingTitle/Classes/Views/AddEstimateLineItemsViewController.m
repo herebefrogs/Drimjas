@@ -42,26 +42,21 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-	
+
+	// it might be problematic later to always fetch a stub, maybe previous view controller should set it
 	self.estimate = [[DataStore defaultStore] estimateStub];
 	self.lineItemSelections = [[DataStore defaultStore] lineItemSelectionsForEstimate:estimate];
 	lineItemSelections.delegate = self;
-}
 
-/*
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
+	[self.tableView reloadData];
 }
-*/
-/*
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-}
-*/
 
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
+
+	// it might be problematic for next controller to pass value back that estimate is cleared
 	self.estimate = nil;
+	lineItemSelections.delegate = nil;
 	self.lineItemSelections = nil;
 }
 
@@ -71,11 +66,40 @@
 }
 
 
+#pragma mark -
+#pragma mark Private stack
+
+- (void)_configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+	NSIndexPath *listIndexPath = [NSIndexPath indexPathForRow:0 inSection:indexPath.section];
+	LineItemSelection *lineItem = [lineItemSelections objectAtIndexPath:listIndexPath];
+
+	if (indexPath.row == LineItemSelectionFieldName) {
+		cell.textLabel.text = lineItem.lineItem.name;
+	} else if (indexPath.row == LineItemSelectionFieldDetails) {
+		cell.textLabel.text = lineItem.details;
+	} else if (indexPath.row == LineItemSelectionFieldQuantity) {
+		cell.textLabel.text = [lineItem.quantity stringValue];
+	} else if (indexPath.row == LineItemSelectionFieldUnitCost) {
+		cell.textLabel.text = [lineItem.unitCost stringValue];
+	}
+}
+
+- (void)_insertLineItemSelectionForIndexPath:(NSIndexPath *)indexPath {
+	LineItemSelection *lineItemSelection = [[DataStore defaultStore] createLineItemSelection];
+
+	lineItemSelection.index = [NSNumber numberWithInteger:lineItemSelections.sections.count];
+	lineItemSelection.estimate = estimate;
+	[estimate addLineItemsObject:lineItemSelection];
+
+	NSLog(@"click! estimate has %u line item selection(s), fetched controller %u", estimate.lineItems.count, lineItemSelections.sections.count);
+}
+
 
 #pragma mark -
 #pragma mark Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+	NSLog(@"number of section in table %u", lineItemSelections.sections.count);
     // 1 section per line item selection, plus 1 section to add a line item
     return 1 + lineItemSelections.sections.count;
 }
@@ -89,7 +113,6 @@
 		return numLineItemSelectionField;
 	}
 }
-
 
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -112,21 +135,8 @@
 			cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
 		}
 
-		NSIndexPath *listIndexPath = [NSIndexPath indexPathForRow:1 inSection:indexPath.section];
-		LineItemSelection *lineItem = [lineItemSelections objectAtIndexPath:listIndexPath];
-
-		if (indexPath.row == LineItemSelectionFieldName) {
-			cell.textLabel.text = lineItem.lineItem.name;
-		} else if (indexPath.row == LineItemSelectionFieldDetails) {
-			cell.textLabel.text = lineItem.details;
-		} else if (indexPath.row == LineItemSelectionFieldQuantity) {
-			cell.textLabel.text = [lineItem.quantity stringValue];
-		} else if (indexPath.row == LineItemSelectionFieldUnitCost) {
-			cell.textLabel.text = [lineItem.unitCost stringValue];
-		}
-		
+		[self _configureCell:cell atIndexPath:indexPath];
 		return cell;
-		
 	}
 
 	return nil;
@@ -152,24 +162,10 @@
 }
 */
 
-- (void)insertLineItemSelectionForIndexPath:(NSIndexPath *)indexPath {
-	LineItemSelection *lineItemSelection = [[DataStore defaultStore] createLineItemSelection];
-	lineItemSelection.index = [NSNumber numberWithInteger:lineItemSelections.sections.count];
-
-	[estimate addLineItemsObject:lineItemSelection];
-	NSLog(@"click! estimate has %u line item selection(s)", estimate.lineItems.count);
-	
-	//[self controllerDidChangeContent:lineItemSelections];
-	//[lineItemSelections performFetch:nil];
-
-	// actually what should be done
-	//[self.navigationController pushViewController:pickLineItemViewController animated:YES];
-}
-
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
 	if (editingStyle == UITableViewCellEditingStyleInsert) {
-		[self insertLineItemSelectionForIndexPath:indexPath];
+		[self _insertLineItemSelectionForIndexPath:indexPath];
     }   
 }
 
@@ -199,16 +195,66 @@
 		UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
 		[cell setSelected:NO animated:YES];
 
-		[self insertLineItemSelectionForIndexPath:indexPath];
+		[self _insertLineItemSelectionForIndexPath:indexPath];
 	}
 }
+
 
 #pragma mark -
 #pragma mark FetchedResultsController delegate
 
-- (void)controllerDidChangeContent:(NSFetchedResultsController*)controller {
-	NSLog(@"lineitemselection controller changed");
-	[self.tableView reloadData];
+- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
+	NSLog(@"controllerWillChangeContent");
+    // The fetch controller is about to start sending change notifications, so prepare the table view for updates.
+	[self.tableView beginUpdates];
+}
+
+
+- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath {
+	NSLog(@"didChangeObject");
+
+    UITableView *tableView = self.tableView;
+
+    switch(type) {
+        case NSFetchedResultsChangeInsert:
+            [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+        case NSFetchedResultsChangeDelete:
+            [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+		// TODO these 2 are probably not needed
+        case NSFetchedResultsChangeUpdate:
+			NSLog(@"didChangeObject update");
+            [self _configureCell:[tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
+            break;
+        case NSFetchedResultsChangeMove:
+			NSLog(@"didChangeObject move");
+			[tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            // Reloading the section inserts a new row and ensures that titles are updated appropriately.
+            [tableView reloadSections:[NSIndexSet indexSetWithIndex:newIndexPath.section] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+    }
+}
+
+
+- (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id <NSFetchedResultsSectionInfo>)sectionInfo atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type {
+	NSLog(@"didChangeSection");
+
+    switch(type) {
+        case NSFetchedResultsChangeInsert:
+            [self.tableView insertSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+        case NSFetchedResultsChangeDelete:
+            [self.tableView deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+    }
+}
+
+
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
+	NSLog(@"controllerDidChangeContent");
+	// The fetch controller has sent all current change notifications, so tell the table view to process all updates.
+    [self.tableView endUpdates];
 }
 
 #pragma mark -

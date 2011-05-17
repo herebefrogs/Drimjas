@@ -409,7 +409,6 @@ static DataStore *singleton_ = nil;
 									  inManagedObjectContext:self.managedObjectContext];
 	
 	// fetch only LineItemSelections associated to this Estimate
-	// TODO debug
 	fetchRequest.predicate = [NSPredicate predicateWithFormat:@"estimate = %@", estimate];
 	
 	// sort LineItemSelections by insertion order
@@ -430,6 +429,14 @@ static DataStore *singleton_ = nil;
 	
 	[fetchRequest release];
 	
+	NSError *error = nil;
+	if (![lineItemSelections performFetch:&error]) {
+		// TODO This is a serious error saying the records
+		//could not be fetched. Advise the user to try
+		//again or restart the application.
+		NSLog(@"DataStore.lineItemSelectionsForEstimate:%@ fetch failed with error %@, %@", estimate, error, [error userInfo]);
+	}
+
 	return lineItemSelections;
 }
 
