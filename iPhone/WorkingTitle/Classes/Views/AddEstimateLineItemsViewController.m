@@ -69,6 +69,11 @@
 #pragma mark -
 #pragma mark Private stack
 
+- (NSInteger)_addLineItemSection {
+	// "add line item" section is always last
+	return lineItemSelections.sections.count;
+}
+
 - (void)_configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
 	NSIndexPath *listIndexPath = [NSIndexPath indexPathForRow:0 inSection:indexPath.section];
 	LineItemSelection *lineItem = [lineItemSelections objectAtIndexPath:listIndexPath];
@@ -106,7 +111,7 @@
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-	if (section == lineItemSelections.sections.count) {
+	if (section == [self _addLineItemSection]) {
 		// "add a line item" section has only 1 row
 		return 1;
 	} else {
@@ -116,7 +121,7 @@
 
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == lineItemSelections.sections.count) {
+    if (indexPath.section == [self _addLineItemSection]) {
 		static NSString *CellIdentifier = @"AddLineItemSelectionCell";
 
 		UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -144,11 +149,11 @@
 
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
 	// show a plus sign in front of "add a line item" row
-	if (indexPath.section == lineItemSelections.sections.count) {
+	if (indexPath.section == [self _addLineItemSection]) {
 		return UITableViewCellEditingStyleInsert;
 	}
 	// show a minus sign in front of 1st row of a contact info section
-	else if (indexPath.section != lineItemSelections.sections.count && indexPath.row == 0) {
+	else if (indexPath.section != [self _addLineItemSection] && indexPath.row == 0) {
 		return UITableViewCellEditingStyleDelete;
 	}
 	return UITableViewCellEditingStyleNone;
@@ -190,7 +195,7 @@
 #pragma mark Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	if (indexPath.section == lineItemSelections.sections.count) {
+	if (indexPath.section == [self _addLineItemSection]) {
 		// deselect cell immediately
 		UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
 		[cell setSelected:NO animated:YES];
