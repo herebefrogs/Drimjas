@@ -222,7 +222,7 @@
 
     switch(type) {
         case NSFetchedResultsChangeInsert:
-            [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+            [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationBottom];
             break;
         case NSFetchedResultsChangeDelete:
             [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
@@ -247,7 +247,7 @@
 
     switch(type) {
         case NSFetchedResultsChangeInsert:
-            [self.tableView insertSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
+            [self.tableView insertSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationBottom];
             break;
         case NSFetchedResultsChangeDelete:
             [self.tableView deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
@@ -260,6 +260,9 @@
 	NSLog(@"controllerDidChangeContent");
 	// The fetch controller has sent all current change notifications, so tell the table view to process all updates.
     [self.tableView endUpdates];
+
+	NSIndexPath *addLineItemIndexPath = [NSIndexPath indexPathForRow:0 inSection:[self _addLineItemSection]];
+	[self.tableView scrollToRowAtIndexPath:addLineItemIndexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
 }
 
 #pragma mark -
