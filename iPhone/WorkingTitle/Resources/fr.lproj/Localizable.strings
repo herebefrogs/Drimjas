@@ -68,6 +68,21 @@
 /* AddEstimateLineItem Add A Line Item Row */
 "Add a Line Item" = "Ajouter un Poste";
 
+/* AddEstimateLineItems Line Item Textfield placeholder */
+"Select Line Item" = "Choisir un Poste";
+
+/* AddEstimateLineItems Description Textfield placeholder */
+"Description" = "Description";
+
+/* AddEstimateLineItems Quantity Textfield placeholder */
+"Quantity" = "Quantité";
+
+/* AddEstimateLineItems Unit Cost Textfield placeholder */
+"Unit Cost" = "Coût Unitaire";
+
+/* AddEstimatePickLineItems Navigation Item Title */
+"Pick Line Item" = "Choisir un Poste";
+
 /* ReviewEstimate View Controller Navigation Item Title */
 "Review Estimate" = "Aperçu du Devis";
 

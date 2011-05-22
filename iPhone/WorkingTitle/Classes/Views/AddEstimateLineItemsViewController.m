@@ -12,6 +12,8 @@
 #import "Estimate.h"
 #import "LineItemSelection.h"
 #import "LineItem.h"
+// Cells
+#import "TextFieldCell.h"
 // Views
 #import "TableFields.h"
 
@@ -75,18 +77,38 @@
 }
 
 - (void)_configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
-//	NSIndexPath *listIndexPath = [NSIndexPath indexPathForRow:0 inSection:indexPath.section];
-//	LineItemSelection *lineItem = [lineItemSelections objectAtIndexPath:listIndexPath];
-	LineItemSelection *lineItem = [lineItemSelections.fetchedObjects objectAtIndex:indexPath.section];
+	if (indexPath.section == [self _addLineItemSection]) {
+		cell.textLabel.text = NSLocalizedString(@"Add a Line Item", "AddEstimateLineItem Add A Line Item Row");
+	} else {
+		LineItemSelection *lineItem = [lineItemSelections.fetchedObjects objectAtIndex:indexPath.section];
 
-	if (indexPath.row == LineItemSelectionFieldName) {
-		cell.textLabel.text = lineItem.lineItem.name;
-	} else if (indexPath.row == LineItemSelectionFieldDetails) {
-		cell.textLabel.text = lineItem.details;
-	} else if (indexPath.row == LineItemSelectionFieldQuantity) {
-		cell.textLabel.text = [lineItem.quantity stringValue];
-	} else if (indexPath.row == LineItemSelectionFieldUnitCost) {
-		cell.textLabel.text = [lineItem.unitCost stringValue];
+		if (indexPath.row == LineItemSelectionFieldName) {
+			cell.textLabel.text = lineItem.lineItem.name;
+			cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+		}
+		else {
+			TextFieldCell *tfCell = (TextFieldCell *)cell;
+
+			if (indexPath.row == LineItemSelectionFieldDetails) {
+				tfCell.textField.text = lineItem.details;
+				tfCell.textField.autocapitalizationType = UITextAutocapitalizationTypeSentences;
+				tfCell.textField.placeholder = NSLocalizedString(@"Description", "AddEstimateLineItemsViewController Description Textfield placeholder");
+			}
+			else if (indexPath.row == LineItemSelectionFieldQuantity) {
+				if ([lineItem.quantity intValue]) {
+					tfCell.textField.text = [lineItem.quantity stringValue];
+				}
+				tfCell.textField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
+				tfCell.textField.placeholder = NSLocalizedString(@"Quantity", "AddEstimateLineItemsViewController Quantity Textfield placeholder");
+			}
+			else if (indexPath.row == LineItemSelectionFieldUnitCost) {
+				if ([lineItem.unitCost intValue]) {
+					tfCell.textField.text = [lineItem.unitCost stringValue];
+				}
+				tfCell.textField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
+				tfCell.textField.placeholder = NSLocalizedString(@"Unit Cost", "AddEstimateLineItemsViewController Unit Cost Textfield placeholder");
+			}
+		}
 	}
 }
 
@@ -145,30 +167,29 @@ BOOL _insertLineItem = NO;
 
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == [self _addLineItemSection]) {
-		static NSString *CellIdentifier = @"AddLineItemSelectionCell";
+	UITableViewCell *cell = nil;
 
-		UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (indexPath.section == [self _addLineItemSection] || indexPath.row == LineItemSelectionFieldName) {
+		static NSString *CellIdentifier = @"Cell";
+
+		cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 		if (cell == nil) {
 			cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
 		}
-
-		cell.textLabel.text = NSLocalizedString(@"Add a Line Item", "AddEstimateLineItem Add A Line Item Row");
-
-		return cell;
 	} else {
 		static NSString *CellIdentifier = @"TextFieldCell";
 		
-		UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+		cell = (TextFieldCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 		if (cell == nil) {
-			cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+			[[NSBundle mainBundle] loadNibNamed:CellIdentifier owner:self options:nil];
+			cell = textFieldCell;
+			self.textFieldCell = nil;
 		}
-
-		[self _configureCell:cell atIndexPath:indexPath];
-		return cell;
 	}
 
-	return nil;
+	[self _configureCell:cell atIndexPath:indexPath];
+
+	return cell;
 }
 
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -229,6 +250,9 @@ BOOL _insertLineItem = NO;
 
 		[self _insertLineItemSelectionForIndexPath:indexPath];
 	}
+	else if (indexPath.row == LineItemSelectionFieldName) {
+		// TODO open "pick line item screen"
+	}
 }
 
 
@@ -254,13 +278,10 @@ BOOL _insertLineItem = NO;
         case NSFetchedResultsChangeDelete:
             [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
             break;
-		// TODO these 2 are probably not needed
         case NSFetchedResultsChangeUpdate:
-			NSLog(@"didChangeObject update at indexPath %@", indexPath);
             [self _configureCell:[tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
             break;
         case NSFetchedResultsChangeMove:
-			NSLog(@"didChangeObject move at indexPath %@", indexPath);
 			[tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
             // Reloading the section inserts a new row and ensures that titles are updated appropriately.
             [tableView reloadSections:[NSIndexSet indexSetWithIndex:newIndexPath.section] withRowAnimation:UITableViewRowAnimationFade];
