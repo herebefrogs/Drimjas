@@ -91,8 +91,8 @@
 		0299F96C1304D8ED001E1E3E /* StartupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartupViewController.h; sourceTree = "<group>"; };
 		0299F96D1304D8ED001E1E3E /* StartupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartupViewController.m; sourceTree = "<group>"; };
 		0299F96E1304D8ED001E1E3E /* Startup.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Startup.xib; sourceTree = "<group>"; };
-		029C645212EB8389000B6E51 /* en */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = en; path = Resources/en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		029C647112EB84E9000B6E51 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = Resources/fr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		029C645212EB8389000B6E51 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = Resources/en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		029C647112EB84E9000B6E51 /* fr */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = fr; path = Resources/fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		029DAC9E136BA00A00AF4A6F /* AddEstimatePickClientInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddEstimatePickClientInfoViewController.h; sourceTree = "<group>"; };
 		029DAC9F136BA00A00AF4A6F /* AddEstimatePickClientInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddEstimatePickClientInfoViewController.m; sourceTree = "<group>"; };
 		029DACA0136BA00A00AF4A6F /* AddEstimatePickClientInfo.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddEstimatePickClientInfo.xib; sourceTree = "<group>"; };
