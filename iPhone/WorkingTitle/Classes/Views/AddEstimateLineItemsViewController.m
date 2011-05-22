@@ -75,8 +75,9 @@
 }
 
 - (void)_configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
-	NSIndexPath *listIndexPath = [NSIndexPath indexPathForRow:0 inSection:indexPath.section];
-	LineItemSelection *lineItem = [lineItemSelections objectAtIndexPath:listIndexPath];
+//	NSIndexPath *listIndexPath = [NSIndexPath indexPathForRow:0 inSection:indexPath.section];
+//	LineItemSelection *lineItem = [lineItemSelections objectAtIndexPath:listIndexPath];
+	LineItemSelection *lineItem = [lineItemSelections.fetchedObjects objectAtIndex:indexPath.section];
 
 	if (indexPath.row == LineItemSelectionFieldName) {
 		cell.textLabel.text = lineItem.lineItem.name;
@@ -89,14 +90,37 @@
 	}
 }
 
+BOOL _insertLineItem = NO;
+
 - (void)_insertLineItemSelectionForIndexPath:(NSIndexPath *)indexPath {
 	LineItemSelection *lineItemSelection = [[DataStore defaultStore] createLineItemSelection];
+
+	_insertLineItem = YES;
 
 	lineItemSelection.index = [NSNumber numberWithInteger:lineItemSelections.sections.count];
 	lineItemSelection.estimate = estimate;
 	[estimate addLineItemsObject:lineItemSelection];
 
 	NSLog(@"click! estimate has %u line item selection(s), fetched controller %u", estimate.lineItems.count, lineItemSelections.sections.count);
+}
+
+- (void)_deleteLineItemSelectionForIndexPath:(NSIndexPath *)indexPath {
+	LineItemSelection *deleted = [lineItemSelections.fetchedObjects objectAtIndex:indexPath.section];
+
+	// shift all indexes down by 1 for line item selections after the one being deleted
+	NSRange afterDeleted;
+	afterDeleted.location = indexPath.section;
+	afterDeleted.length = lineItemSelections.sections.count - indexPath.section;
+	for (LineItemSelection *lineItem in [lineItemSelections.fetchedObjects subarrayWithRange:afterDeleted]) {
+		if ([lineItem.index intValue] > indexPath.section) {
+			lineItem.index = [NSNumber numberWithInt:[lineItem.index intValue] - 1];
+		}
+	}
+
+	// deassociate line item selection from estimate
+	[estimate removeLineItemsObject:deleted];
+	// delete line item selection
+	[[DataStore defaultStore] deleteLineItemSelection:deleted];
 }
 
 
@@ -171,7 +195,10 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
 	if (editingStyle == UITableViewCellEditingStyleInsert) {
 		[self _insertLineItemSelectionForIndexPath:indexPath];
-    }   
+    }
+	else if (editingStyle == UITableViewCellEditingStyleDelete) {
+		[self _deleteLineItemSelectionForIndexPath:indexPath];
+	}
 }
 
 
@@ -216,7 +243,7 @@
 
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath {
-	NSLog(@"didChangeObject");
+	NSLog(@"didChangeObject at indexPath %@", indexPath);
 
     UITableView *tableView = self.tableView;
 
@@ -229,11 +256,11 @@
             break;
 		// TODO these 2 are probably not needed
         case NSFetchedResultsChangeUpdate:
-			NSLog(@"didChangeObject update");
+			NSLog(@"didChangeObject update at indexPath %@", indexPath);
             [self _configureCell:[tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
             break;
         case NSFetchedResultsChangeMove:
-			NSLog(@"didChangeObject move");
+			NSLog(@"didChangeObject move at indexPath %@", indexPath);
 			[tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
             // Reloading the section inserts a new row and ensures that titles are updated appropriately.
             [tableView reloadSections:[NSIndexSet indexSetWithIndex:newIndexPath.section] withRowAnimation:UITableViewRowAnimationFade];
@@ -261,8 +288,12 @@
 	// The fetch controller has sent all current change notifications, so tell the table view to process all updates.
     [self.tableView endUpdates];
 
-	NSIndexPath *addLineItemIndexPath = [NSIndexPath indexPathForRow:0 inSection:[self _addLineItemSection]];
-	[self.tableView scrollToRowAtIndexPath:addLineItemIndexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+	if (_insertLineItem) {
+		_insertLineItem = NO;
+
+		NSIndexPath *addLineItemIndexPath = [NSIndexPath indexPathForRow:0 inSection:[self _addLineItemSection]];
+		[self.tableView scrollToRowAtIndexPath:addLineItemIndexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+	}
 }
 
 #pragma mark -

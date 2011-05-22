@@ -7,9 +7,11 @@
 //
 
 #import "DataStore.h"
+// API
 #import "Estimate.h"
 #import "ClientInformation.h"
 #import	"ContactInformation.h"
+#import "LineItemSelection.h"
 
 
 @implementation DataStore
@@ -444,6 +446,16 @@ static DataStore *singleton_ = nil;
 	return (LineItemSelection *)[NSEntityDescription insertNewObjectForEntityForName:@"LineItemSelection"
 															  inManagedObjectContext:self.managedObjectContext];
 }
+
+- (BOOL)deleteLineItemSelection:(LineItemSelection *)lineItemSelection {
+	[self.managedObjectContext deleteObject:lineItemSelection];
+	
+	// we only expect this method to be called by deleteEstimate: or as part of
+	// "line items" screen edition so let them save the modified context
+	
+	return YES;
+}
+
 
 #pragma mark -
 #pragma mark Memory management stack

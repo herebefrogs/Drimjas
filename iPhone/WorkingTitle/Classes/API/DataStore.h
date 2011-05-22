@@ -73,5 +73,6 @@
 
 - (NSFetchedResultsController *)lineItemSelectionsForEstimate:(Estimate *)estimate;
 - (LineItemSelection *)createLineItemSelection;
+- (BOOL)deleteLineItemSelection:(LineItemSelection *)lineItemSelection;
 
 @end
