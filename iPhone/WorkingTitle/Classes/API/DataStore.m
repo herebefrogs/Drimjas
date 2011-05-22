@@ -234,6 +234,9 @@ static DataStore *singleton_ = nil;
 
 	// flag each stub as "active"
 	estimateStub_.status = active;
+	for (LineItemSelection *lineItem in estimateStub_.lineItems) {
+		lineItem.status = active;
+	}
 	[active release];
 
 	// save the context
@@ -287,6 +290,10 @@ static DataStore *singleton_ = nil;
 		if ([clientInfo.status integerValue] == StatusCreated) {
 			[self deleteClientInformation:clientInfo];
 		}
+	}
+
+	for (LineItemSelection *lineItem in estimate.lineItems) {
+		[self deleteLineItemSelection:lineItem];
 	}
 
 	[self.managedObjectContext deleteObject:estimate];
@@ -448,6 +455,9 @@ static DataStore *singleton_ = nil;
 }
 
 - (BOOL)deleteLineItemSelection:(LineItemSelection *)lineItemSelection {
+	// deassociate line item from deleted selection
+	[lineItemSelection.lineItem removeLineItemSelectionsObject:lineItemSelection];
+
 	[self.managedObjectContext deleteObject:lineItemSelection];
 	
 	// we only expect this method to be called by deleteEstimate: or as part of
