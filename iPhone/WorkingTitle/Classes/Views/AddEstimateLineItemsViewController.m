@@ -123,7 +123,7 @@ BOOL _insertLineItem = NO;
 	lineItemSelection.estimate = estimate;
 	[estimate addLineItemsObject:lineItemSelection];
 
-	NSLog(@"click! estimate has %u line item selection(s), fetched controller %u", estimate.lineItems.count, lineItemSelections.sections.count);
+	// TODO open "pick line item screen"
 }
 
 - (void)_deleteLineItemSelectionForIndexPath:(NSIndexPath *)indexPath {
@@ -145,12 +145,21 @@ BOOL _insertLineItem = NO;
 	[[DataStore defaultStore] deleteLineItemSelection:deleted];
 }
 
+- (NSNumber *)_numberWithString:(NSString *)string {
+	NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+
+	NSNumber *number = [numberFormatter numberFromString:string];
+
+	[numberFormatter release];
+
+	return number;
+}
+
 
 #pragma mark -
 #pragma mark Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-	NSLog(@"number of section in table %u", lineItemSelections.sections.count);
     // 1 section per line item selection, plus 1 section to add a line item
     return 1 + lineItemSelections.sections.count;
 }
@@ -161,6 +170,7 @@ BOOL _insertLineItem = NO;
 		// "add a line item" section has only 1 row
 		return 1;
 	} else {
+		// TODO special case: Handling & Shipping doesn't need a quantity row
 		return numLineItemSelectionField;
 	}
 }
@@ -185,6 +195,8 @@ BOOL _insertLineItem = NO;
 			cell = textFieldCell;
 			self.textFieldCell = nil;
 		}
+
+		((TextFieldCell *) cell).textField.tag = (10 * indexPath.section) + indexPath.row;
 	}
 
 	[self _configureCell:cell atIndexPath:indexPath];
@@ -260,20 +272,17 @@ BOOL _insertLineItem = NO;
 #pragma mark FetchedResultsController delegate
 
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
-	NSLog(@"controllerWillChangeContent");
     // The fetch controller is about to start sending change notifications, so prepare the table view for updates.
 	[self.tableView beginUpdates];
 }
 
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath {
-	NSLog(@"didChangeObject at indexPath %@", indexPath);
-
     UITableView *tableView = self.tableView;
 
     switch(type) {
         case NSFetchedResultsChangeInsert:
-            [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationBottom];
+			[tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationBottom];
             break;
         case NSFetchedResultsChangeDelete:
             [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
@@ -291,8 +300,6 @@ BOOL _insertLineItem = NO;
 
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id <NSFetchedResultsSectionInfo>)sectionInfo atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type {
-	NSLog(@"didChangeSection");
-
     switch(type) {
         case NSFetchedResultsChangeInsert:
             [self.tableView insertSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationBottom];
@@ -305,17 +312,44 @@ BOOL _insertLineItem = NO;
 
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
-	NSLog(@"controllerDidChangeContent");
 	// The fetch controller has sent all current change notifications, so tell the table view to process all updates.
     [self.tableView endUpdates];
 
 	if (_insertLineItem) {
 		_insertLineItem = NO;
 
+		// scroll to keep "Add a Line Item" row always visible at the bottom of the screen
 		NSIndexPath *addLineItemIndexPath = [NSIndexPath indexPathForRow:0 inSection:[self _addLineItemSection]];
 		[self.tableView scrollToRowAtIndexPath:addLineItemIndexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
 	}
 }
+
+
+#pragma mark -
+#pragma mark Textfield delegate
+
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+	NSUInteger section = textField.tag / 10;
+	NSUInteger row = textField.tag - (10 * section);
+
+	NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:section];
+	LineItemSelection *lineItem = [lineItemSelections objectAtIndexPath:indexPath];
+
+	// TODO hide overlay view if any
+	// save textfield value into line item selection
+	if (row == LineItemSelectionFieldDetails) {
+		lineItem.details = textField.text;
+	}
+	else if (row == LineItemSelectionFieldQuantity) {
+		lineItem.quantity = [self _numberWithString:textField.text];
+		// TODO show an overlay if nil
+	}
+	else if (row == LineItemSelectionFieldUnitCost) {
+		lineItem.unitCost = [self _numberWithString:textField.text];
+		// TODO show an overlay if nil
+	}
+}
+
 
 #pragma mark -
 #pragma mark Button delegate
