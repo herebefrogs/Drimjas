@@ -10,10 +10,12 @@
 // API
 #import "DataStore.h"
 #import "LineItem.h"
+#import "LineItemSelection.h"
 
 @implementation AddEstimatePickLineItemViewController
 
 @synthesize lineItems;
+@synthesize lineItemSelection;
 
 #pragma mark -
 #pragma mark View lifecycle
@@ -141,14 +143,24 @@
 #pragma mark Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-    <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-    // ...
-    // Pass the selected object to the new view controller.
-    [self.navigationController pushViewController:detailViewController animated:YES];
-    [detailViewController release];
-    */
+	// deselect cell immediately
+	UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+	[cell setSelected:NO animated:YES];
+
+	if (indexPath.row == 0) {
+		// TODO open New Line Item screen
+		NSLog(@"open New Line Item screen");
+	} else {
+		// NOTE: reduce index path by 1 to account for extra "add a line item" row not in line items list
+		indexPath = [NSIndexPath indexPathForRow:indexPath.row - 1 inSection:indexPath.section];
+		LineItem *lineItem = [lineItems objectAtIndexPath:indexPath];
+
+		lineItemSelection.lineItem = lineItem;
+		lineItemSelection.details = lineItem.details;
+		[lineItem addLineItemSelectionsObject:lineItemSelection];
+
+		[self.navigationController popViewControllerAnimated:YES];
+	}
 }
 
 #pragma mark -
@@ -173,7 +185,9 @@
 	NSLog(@"AddEstimatePickLineItemViewController.viewDidUnload");
 #endif
     // Relinquish ownership of anything that can be recreated in viewDidLoad or on demand.
-    // For example: self.myOutlet = nil;
+    lineItems.delegate = nil;
+	self.lineItems = nil;
+	self.lineItemSelection = nil;
 }
 
 
@@ -181,6 +195,8 @@
 #ifdef __ENABLE_UI_LOGS__
 	NSLog(@"AddEstimatePickLineItemViewController.dealloc");
 #endif
+	[lineItems release];
+	[lineItemSelection release];
     [super dealloc];
 }
 

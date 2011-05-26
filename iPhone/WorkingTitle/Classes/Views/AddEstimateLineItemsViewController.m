@@ -114,6 +114,12 @@
 	}
 }
 
+- (void)_showLineItemListForSelection:(LineItemSelection *)lineItemSelection {
+	pickLineItemViewController.lineItemSelection = lineItemSelection;
+
+	[self.navigationController pushViewController:pickLineItemViewController animated:YES];
+}
+
 BOOL _insertLineItem = NO;
 
 - (void)_insertLineItemSelectionForIndexPath:(NSIndexPath *)indexPath {
@@ -125,7 +131,7 @@ BOOL _insertLineItem = NO;
 	lineItemSelection.estimate = estimate;
 	[estimate addLineItemsObject:lineItemSelection];
 
-	// TODO open "pick line item screen"
+	[self _showLineItemListForSelection:lineItemSelection];
 }
 
 - (void)_deleteLineItemSelectionForIndexPath:(NSIndexPath *)indexPath {
@@ -262,15 +268,15 @@ BOOL _insertLineItem = NO;
 #pragma mark Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	if (indexPath.section == [self _addLineItemSection]) {
-		// deselect cell immediately
-		UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-		[cell setSelected:NO animated:YES];
+	// deselect cell immediately
+	UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+	[cell setSelected:NO animated:YES];
 
+	if (indexPath.section == [self _addLineItemSection]) {
 		[self _insertLineItemSelectionForIndexPath:indexPath];
 	}
 	else if (indexPath.row == LineItemSelectionFieldName) {
-		// TODO open "pick line item screen"
+		[self _showLineItemListForSelection:[lineItemSelections objectAtIndexPath:indexPath]];
 	}
 }
 

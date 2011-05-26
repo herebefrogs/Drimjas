@@ -8,11 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+@class LineItemSelection;
 
 @interface AddEstimatePickLineItemViewController : UITableViewController <NSFetchedResultsControllerDelegate> {
 	NSFetchedResultsController *lineItems;
+
+	LineItemSelection *lineItemSelection;
 }
 
 @property (nonatomic, retain) NSFetchedResultsController *lineItems;
+@property (nonatomic, retain) LineItemSelection *lineItemSelection;
 
 @end
