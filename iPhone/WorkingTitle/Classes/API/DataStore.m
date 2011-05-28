@@ -431,7 +431,7 @@ static DataStore *singleton_ = nil;
 	}
 
 	for (NSString *name in plistItems) {
-		LineItem *lineItem = [self createLineItem];
+		LineItem *lineItem = [self createLineItemWithPreset:YES];
 		lineItem.name = NSLocalizedString(name, "");
 		NSString *details_key = [name stringByAppendingString:@" Description"];
 		NSString *details = NSLocalizedString(details_key, "");
@@ -439,8 +439,7 @@ static DataStore *singleton_ = nil;
 		if (details != details_key) {
 			lineItem.details = details;
 		}
-		lineItem.preset = [NSNumber numberWithInt:YES];
-		lineItem.status = [NSNumber numberWithInt:StatusActive];
+		[self saveLineItem:lineItem];
 	}
 
 	// save the context
@@ -461,10 +460,31 @@ static DataStore *singleton_ = nil;
 	}
 }
 
-- (LineItem *)createLineItem {
-	return (LineItem *)[NSEntityDescription insertNewObjectForEntityForName:@"LineItem"
+- (LineItem *)createLineItemWithPreset:(BOOL)preset {
+	LineItem *lineItem = (LineItem *)[NSEntityDescription insertNewObjectForEntityForName:@"LineItem"
 													 inManagedObjectContext:self.managedObjectContext];
+
+	lineItem.preset = [NSNumber numberWithInt:preset];
+
+	return lineItem;
 }
+
+- (BOOL)saveLineItem:(LineItem *)lineItem {
+	lineItem.status = [NSNumber numberWithInt:StatusActive];
+
+	[self saveContext];
+
+	return YES;
+}
+
+- (BOOL)deleteLineItem:(LineItem *)lineItem {
+	[self.managedObjectContext deleteObject:lineItem];
+
+	[self saveContext];
+
+	return YES;
+}
+
 
 - (NSFetchedResultsController *)lineItemsFetchedResultsController {
 	if (lineItemsFetchedResultsController_ == nil) {

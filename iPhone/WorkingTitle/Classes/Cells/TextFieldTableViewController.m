@@ -26,6 +26,31 @@
 }
 
 #pragma mark -
+#pragma mark Table view delegate
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString *CellIdentifier = @"TextFieldCell";
+
+    TextFieldCell *cell = (TextFieldCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+		[[NSBundle mainBundle] loadNibNamed:CellIdentifier owner:self options:nil];
+        cell = textFieldCell;
+		self.textFieldCell = nil;
+    }
+
+	cell.textField.tag = (10 * indexPath.section) + indexPath.row;
+
+	[self configureCell:cell atIndexPath:indexPath];
+
+	return cell;
+}
+
+- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+	// subclasses should override this method to perfom custom cell configuration
+}
+
+
+#pragma mark -
 #pragma mark Textfield delegate
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {

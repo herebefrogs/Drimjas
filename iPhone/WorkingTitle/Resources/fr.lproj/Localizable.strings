@@ -83,6 +83,15 @@
 /* AddEstimatePickLineItems Navigation Item Title */
 "Pick Line Item" = "Choisir un Poste";
 
+/* NewLineItems Navigation Item Title */
+"New Line Item" = "Nouveau Poste";
+
+/* NewLineItem Name Textfield */
+"Line Item Name" = "Nom du Poste";
+
+/* NewLineItem Name Textfield */
+"Description" = "Description";
+
 /* ReviewEstimate View Controller Navigation Item Title */
 "Review Estimate" = "Aperçu du Devis";
 

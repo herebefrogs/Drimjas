@@ -11,11 +11,14 @@
 #import "DataStore.h"
 #import "LineItem.h"
 #import "LineItemSelection.h"
+// Views
+#import "NewLineItemViewController.h"
 
 @implementation AddEstimatePickLineItemViewController
 
 @synthesize lineItems;
 @synthesize lineItemSelection;
+@synthesize newLineItemViewController;
 
 #pragma mark -
 #pragma mark View lifecycle
@@ -122,8 +125,7 @@
 	[cell setSelected:NO animated:YES];
 
 	if (indexPath.row == 0) {
-		// TODO open New Line Item screen
-		NSLog(@"open New Line Item screen");
+		[self.navigationController pushViewController:newLineItemViewController animated:YES];
 	} else {
 		// NOTE: reduce index path by 1 to account for extra "add a line item" row not in line items list
 		indexPath = [NSIndexPath indexPathForRow:indexPath.row - 1 inSection:indexPath.section];
@@ -162,6 +164,7 @@
     lineItems.delegate = nil;
 	self.lineItems = nil;
 	self.lineItemSelection = nil;
+	self.newLineItemViewController = nil;
 }
 
 
@@ -171,6 +174,7 @@
 #endif
 	[lineItems release];
 	[lineItemSelection release];
+	[newLineItemViewController release];
     [super dealloc];
 }
 

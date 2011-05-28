@@ -83,6 +83,15 @@
 /* AddEstimatePickLineItems Navigation Item Title */
 "Pick Line Item" = "Pick Line Item";
 
+/* NewLineItems Navigation Item Title */
+"New Line Item" = "New Line Item";
+
+/* NewLineItem Name Textfield */
+"Line Item Name" = "Line Item Name";
+
+/* NewLineItem Name Textfield */
+"Description" = "Description";
+
 /* ReviewEstimate View Controller Navigation Item Title */
 "Review Estimate" = "Review Estimate";
 

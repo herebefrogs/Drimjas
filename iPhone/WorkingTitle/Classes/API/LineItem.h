@@ -20,6 +20,8 @@
 @property (nonatomic, retain) NSString *name;
 @property (nonatomic, retain) NSSet *lineItemSelections;
 
+- (BOOL)isValid;	// return whether or not the minimal required fields have been set
+
 @end
 
 

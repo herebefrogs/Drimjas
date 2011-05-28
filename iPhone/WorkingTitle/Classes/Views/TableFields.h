@@ -47,4 +47,11 @@ typedef enum {
 	numLineItemSelectionField
 } LineItemSelectionField;
 
+typedef enum {
+	LineItemFieldName = 0,
+	LineItemFieldDetails,
+
+	numLineItemField
+} LineItemField;
+
 @end

@@ -17,4 +17,9 @@
 @dynamic name;
 @dynamic lineItemSelections;
 
+
+- (BOOL)isValid {
+	return (self.name != nil && self.name.length > 0);
+}
+
 @end
