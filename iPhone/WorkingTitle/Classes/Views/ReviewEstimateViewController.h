@@ -15,10 +15,15 @@
 @class Estimate;
 
 @interface ReviewEstimateViewController : UITableViewController <PrintNotifyDelegate, MailNotifyDelegate> {
-	Estimate *estimate;
 	UIBarButtonItem *emailButton;
 	UIBarButtonItem *printButton;
 	UIBarButtonItem *spacerButton;
+
+	Estimate *estimate;
+	NSInteger indexFirstContact;
+	NSInteger indexFirstLineItem;
+	NSInteger indexLastSection;
+	NSArray *lineItemSelections;
 }
 
 @property (nonatomic, retain) Estimate *estimate;

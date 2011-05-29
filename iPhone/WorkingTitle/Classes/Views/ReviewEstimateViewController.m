@@ -11,6 +11,9 @@
 #import "Estimate.h"
 #import "ClientInformation.h"
 #import "ContactInformation.h"
+#import "DataStore.h"
+#import "LineItem.h"
+#import "LineItemSelection.h"
 // Utils
 #import "PDFManager.h"
 // Views
@@ -19,7 +22,25 @@
 
 @implementation ReviewEstimateViewController
 
-@synthesize estimate, emailButton, printButton, spacerButton;
+@synthesize estimate;
+@synthesize emailButton;
+@synthesize printButton;
+@synthesize spacerButton;
+
+- (void)setEstimate:(Estimate *)newEstimate {
+	[estimate release];
+	[lineItemSelections release];
+
+	estimate = [newEstimate retain];
+	if (estimate) {
+		indexFirstContact = 2;
+		indexFirstLineItem = indexFirstContact + estimate.clientInfo.contactInfos.count;
+		indexLastSection = indexFirstLineItem + estimate.lineItems.count;
+		NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"index" ascending:YES];
+		lineItemSelections = [[estimate.lineItems sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]] retain];
+		[sortDescriptor release];
+	}
+}
 
 #pragma mark -
 #pragma mark View lifecycle
@@ -82,20 +103,26 @@
 #pragma mark Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2 + estimate.clientInfo.contactInfos.count;
+    return 2 + estimate.clientInfo.contactInfos.count + estimate.lineItems.count;
 }
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (section == 0) {
+	if (section == 0) {
 		// order number
 		return 1;
-	} else if (section == 1) {
+	}
+	else if (section == 1) {
 		return [estimate.clientInfo numSetProperties];
-	} else {
+	}
+	else if (section >= indexFirstContact && section < indexFirstLineItem) {
 		// BUG #5: must have saved contact info order to be able to lookup one by index
-		ContactInformation *contactInfo = [[estimate.clientInfo.contactInfos allObjects] objectAtIndex:section - 2];
+		ContactInformation *contactInfo = [[estimate.clientInfo.contactInfos allObjects] objectAtIndex:(section - indexFirstContact)];
 		return [contactInfo numSetProperties];
+	}
+	else {
+		// collapsing Quantity & Unit Cost rows together
+		return numLineItemSelectionField - 1;
 	}
 }
 
@@ -110,19 +137,42 @@
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
 
-	cell.textLabel.tag = indexPath.row;
-
 	if (indexPath.section == 0) {
 		cell.textLabel.text = [estimate orderNumber];
-	} else if (indexPath.section == 1) {
+	}
+	else if (indexPath.section == 1) {
 		cell.textLabel.text = [estimate.clientInfo getSetPropertyWithIndex:indexPath.row];
-	} else {
+	}
+	else if (indexPath.section >= indexFirstContact && indexPath.section < indexFirstLineItem) {
 		// BUG #5: must have saved contact info order to be able to lookup one by index
-		ContactInformation *contactInfo = [[estimate.clientInfo.contactInfos allObjects] objectAtIndex:indexPath.section - 2];
+		ContactInformation *contactInfo = [[estimate.clientInfo.contactInfos allObjects] objectAtIndex:(indexPath.section - indexFirstContact)];
 		
 		cell.textLabel.text = [contactInfo getSetPropertyWithIndex:indexPath.row];
 	}
-	
+	else if (indexPath.section >= indexFirstLineItem && indexPath.section < indexLastSection) {
+		LineItemSelection *lineItem = (LineItemSelection *)[lineItemSelections objectAtIndex:(indexPath.section - indexFirstLineItem)];
+
+		if (indexPath.row == LineItemSelectionFieldName) {
+			cell.textLabel.text = lineItem.lineItem.name;
+		}
+		else if (indexPath.row == LineItemSelectionFieldDetails) {
+			cell.textLabel.text = lineItem.details;
+		}
+		else if (indexPath.row == LineItemSelectionFieldQuantity) {
+			NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+
+			[numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
+			NSString *quantity = [numberFormatter stringFromNumber:lineItem.quantity];
+
+			[numberFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
+			[numberFormatter setCurrencyCode:@"CAD"];
+			NSString *unitCost = [numberFormatter stringFromNumber:lineItem.unitCost];
+
+			cell.textLabel.text = [NSString stringWithFormat:@"%@ x %@", quantity, unitCost];
+			[numberFormatter release];
+		}
+	}
+
     return cell;
 }
 
@@ -227,6 +277,8 @@
 	self.emailButton = nil;
 	self.printButton = nil;
 	self.estimate = nil;
+	[lineItemSelections release];
+	lineItemSelections = nil;
 }
 
 
@@ -238,6 +290,7 @@
 	[printButton release];
 	[emailButton release];
 	[estimate release];
+	[lineItemSelections release];
     [super dealloc];
 }
 
