@@ -78,6 +78,11 @@
 	return lineItemSelections.sections.count;
 }
 
+- (BOOL)_lineItem:(LineItemSelection *)lineItem isHandlingAndShippingQuantityAtIndexPath:(NSIndexPath *)indexPath {
+	return indexPath.row == LineItemSelectionFieldQuantity 
+			&& [lineItem.lineItem.name isEqualToString:NSLocalizedString(@"Handling & Shipping", "")];
+}
+
 - (void)_configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
 	if (indexPath.section == [self _addLineItemSection]) {
 		cell.textLabel.text = NSLocalizedString(@"Add a Line Item", "AddEstimateLineItem Add A Line Item Row");
@@ -87,6 +92,9 @@
 		if (indexPath.row == LineItemSelectionFieldName) {
 			cell.textLabel.text = lineItem.lineItem.name;
 			cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+		}
+		else if ([self _lineItem:lineItem isHandlingAndShippingQuantityAtIndexPath:indexPath]) {
+			cell.textLabel.text = [lineItem.quantity stringValue];
 		}
 		else {
 			TextFieldCell *tfCell = (TextFieldCell *)cell;
@@ -192,7 +200,10 @@ BOOL _insertLineItem = NO;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 	UITableViewCell *cell = nil;
 
-    if (indexPath.section == [self _addLineItemSection] || indexPath.row == LineItemSelectionFieldName) {
+    if (indexPath.section == [self _addLineItemSection]
+		|| indexPath.row == LineItemSelectionFieldName
+		|| [self _lineItem:[lineItemSelections.fetchedObjects objectAtIndex:indexPath.section] isHandlingAndShippingQuantityAtIndexPath:indexPath]) {
+
 		static NSString *CellIdentifier = @"Cell";
 
 		cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];

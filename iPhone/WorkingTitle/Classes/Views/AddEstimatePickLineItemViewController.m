@@ -133,6 +133,9 @@
 
 		lineItemSelection.lineItem = lineItem;
 		lineItemSelection.details = lineItem.details;
+		if ([lineItem.name isEqualToString:NSLocalizedString(@"Handling & Shipping", "")]) {
+			lineItemSelection.quantity = [NSNumber numberWithInt:1];
+		}
 		[lineItem addLineItemSelectionsObject:lineItemSelection];
 
 		[self.navigationController popViewControllerAnimated:YES];
