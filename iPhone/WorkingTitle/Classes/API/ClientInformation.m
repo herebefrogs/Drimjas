@@ -27,73 +27,73 @@
 #pragma mark Public methods stack
 
 + (BOOL)isNameValid:(NSString *)name {
-	return (name != nil && name.length > 0);
+	return (name.length > 0);
 }
 
 - (NSInteger)numSetProperties {
 	NSInteger count = 0;
-	if (self.name != nil && self.name.length > 0) {
+	if (self.name.length > 0) {
 		count++;
 	}
-	if (self.address1 != nil && self.address1.length > 0) {
+	if (self.address1.length > 0) {
 		count++;
 	}
-	if (self.address2 != nil && self.address2.length > 0) {
+	if (self.address2.length > 0) {
 		count++;
 	}
-	if (self.city != nil && self.city.length > 0) {
+	if (self.city.length > 0) {
 		count++;
 	}
-	if (self.state != nil && self.state.length > 0) {
+	if (self.state.length > 0) {
 		count++;
 	}
-	if (self.postalCode != nil && self.postalCode.length > 0) {
+	if (self.postalCode.length > 0) {
 		count++;
 	}
-	if (self.country != nil && self.country.length > 0) {
+	if (self.country.length > 0) {
 		count++;
 	}
 	return count;
 }
 
 - (NSString *)getSetPropertyWithIndex:(NSInteger)index {
-	if (self.name != nil && self.name.length > 0) {
+	if (self.name.length > 0) {
 		if (index == 0) {
 			return self.name;
 		}
 		index--;
 	}
-	if (self.address1 != nil && self.address1.length > 0) {
+	if (self.address1.length > 0) {
 		if (index == 0) {
 			return self.address1;
 		}
 		index--;
 	}
-	if (self.address2 != nil && self.address2.length > 0) {
+	if (self.address2.length > 0) {
 		if (index == 0) {
 			return self.address2;
 		}
 		index--;
 	}
-	if (self.city != nil && self.city.length > 0) {
+	if (self.city.length > 0) {
 		if (index == 0) {
 			return self.city;
 		}
 		index--;
 	}
-	if (self.state != nil && self.state.length > 0) {
+	if (self.state.length > 0) {
 		if (index == 0) {
 			return self.state;
 		}
 		index--;
 	}
-	if (self.postalCode != nil && self.postalCode.length > 0) {
+	if (self.postalCode.length > 0) {
 		if (index == 0) {
 			return self.postalCode;
 		}
 		index--;
 	}
-	if (self.country != nil && self.country.length > 0) {
+	if (self.country.length > 0) {
 		if (index == 0) {
 			return self.country;
 		}

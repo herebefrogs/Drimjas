@@ -22,13 +22,13 @@
 - (NSInteger)numSetProperties {
 	NSInteger count = 0;
 
-	if (self.name != nil && self.name.length > 0) {
+	if (self.name.length > 0) {
 		count++;
 	}
-	if (self.phone != nil && self.phone.length > 0) {
+	if (self.phone.length > 0) {
 		count++;
 	}
-	if (self.email != nil && self.email.length > 0) {
+	if (self.email.length > 0) {
 		count++;
 	}
 
@@ -36,19 +36,19 @@
 }
 
 - (NSString *)getSetPropertyWithIndex:(NSInteger)index {
-	if (self.name != nil && self.name.length > 0) {
+	if (self.name.length > 0) {
 		if (index == 0) {
 			return self.name;
 		}
 		index--;
 	}
-	if (self.phone != nil && self.phone.length > 0) {
+	if (self.phone.length > 0) {
 		if (index == 0) {
 			return self.phone;
 		}
 		index--;
 	}
-	if (self.email != nil && self.email.length > 0) {
+	if (self.email.length > 0) {
 		if (index == 0) {
 			return self.email;
 		}
