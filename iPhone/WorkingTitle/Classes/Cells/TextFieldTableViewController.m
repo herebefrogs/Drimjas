@@ -49,6 +49,10 @@
 	// subclasses should override this method to perfom custom cell configuration
 }
 
+- (BOOL)tableView:(UITableView *)tableView shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath {
+	// embed Insert/Delete controls inside cells so they still take the entire screen width
+	return NO;
+}
 
 #pragma mark -
 #pragma mark Textfield delegate
