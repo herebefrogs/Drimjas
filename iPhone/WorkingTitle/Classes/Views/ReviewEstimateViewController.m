@@ -121,8 +121,10 @@
 		return [contactInfo numSetProperties];
 	}
 	else {
-		// collapsing Quantity & Unit Cost rows together
-		return numLineItemSelectionField - 1;
+		LineItemSelection *lineItem = (LineItemSelection *)[lineItemSelections objectAtIndex:(section - indexFirstLineItem)];
+
+		// collapse Quantity & Unit Cost rows together, and skip Description row if empty
+		return numLineItemSelectionField - (lineItem.details.length > 0 ? 1 : 2);
 	}
 }
 
@@ -155,10 +157,11 @@
 		if (indexPath.row == LineItemSelectionFieldName) {
 			cell.textLabel.text = lineItem.lineItem.name;
 		}
-		else if (indexPath.row == LineItemSelectionFieldDetails) {
+		else if (indexPath.row == LineItemSelectionFieldDetails && lineItem.details.length > 0) {
 			cell.textLabel.text = lineItem.details;
 		}
-		else if (indexPath.row == LineItemSelectionFieldQuantity) {
+		else if (indexPath.row == LineItemSelectionFieldQuantity
+				 || (indexPath.row == LineItemSelectionFieldDetails && lineItem.details.length == 0)) {
 			NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
 
 			[numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
