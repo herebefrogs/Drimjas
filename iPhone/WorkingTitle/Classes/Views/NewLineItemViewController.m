@@ -85,6 +85,8 @@ BOOL added = NO;
 #pragma mark Table view delegate
 
 - (void)configureCell:(UITableViewCell *)aCell atIndexPath:(NSIndexPath *)indexPath {
+	[super configureCell:aCell atIndexPath:indexPath];
+
 	TextFieldCell *tfCell = (TextFieldCell *)aCell;
 
 	if (indexPath.row == LineItemFieldName) {

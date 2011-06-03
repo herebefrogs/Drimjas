@@ -95,8 +95,11 @@
 		}
 		else if ([self _lineItem:lineItem isHandlingAndShippingQuantityAtIndexPath:indexPath]) {
 			cell.textLabel.text = [lineItem.quantity stringValue];
+			cell.selectionStyle = UITableViewCellSelectionStyleNone;
 		}
 		else {
+			cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
 			TextFieldCell *tfCell = (TextFieldCell *)cell;
 
 			if (indexPath.row == LineItemSelectionFieldDetails) {

@@ -47,6 +47,7 @@
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
 	// subclasses should override this method to perfom custom cell configuration
+	cell.selectionStyle = UITableViewCellSelectionStyleNone;
 }
 
 - (BOOL)tableView:(UITableView *)tableView shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath {

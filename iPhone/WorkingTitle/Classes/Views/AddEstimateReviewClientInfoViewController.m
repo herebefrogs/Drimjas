@@ -78,7 +78,9 @@
     if (cell == nil) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
-    
+
+	cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
 	if (indexPath.section == 0) {
 		cell.textLabel.text = [clientInfo getSetPropertyWithIndex:indexPath.row];
 	} else {

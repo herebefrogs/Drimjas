@@ -138,6 +138,8 @@
 		cell.textField.text = estimate.clientInfo.country;
 	}
 
+	cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
     return cell;
 }
 
