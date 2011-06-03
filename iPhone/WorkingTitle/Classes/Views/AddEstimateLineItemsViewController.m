@@ -91,7 +91,7 @@
 
 		if (indexPath.row == LineItemSelectionFieldName) {
 			cell.textLabel.text = lineItem.lineItem.name;
-			cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+			cell.editingAccessoryType = UITableViewCellAccessoryDisclosureIndicator;
 		}
 		else if ([self _lineItem:lineItem isHandlingAndShippingQuantityAtIndexPath:indexPath]) {
 			cell.textLabel.text = [lineItem.quantity stringValue];
