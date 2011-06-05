@@ -2,6 +2,12 @@
 /* Startup View Controller & Estimates View Controller Navigation Item & Tab Bar Title */
 "Estimates" = "Devis";
 
+/* Startup View Controller & Contracts View Controller Navigation Item & Tab Bar Title */
+"Contracts" = "Contrats";
+
+/* Startup View Controller & Options View Controller Navigation Item & Tab Bar Title */
+"Options" = "Options";
+
 /* Startup View Controller Button */
 "Add Estimate" = "Nouveau Devis";
 

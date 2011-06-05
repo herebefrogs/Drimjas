@@ -9,11 +9,29 @@
 #import "StartupViewController.h"
 // Views
 #import "WorkingTitleAppDelegate.h"
+#import "TabBarItems.h"
 
 
 @implementation StartupViewController
 
-@synthesize appDelegate, addEstimate, estimates;
+@synthesize appDelegate;
+@synthesize tabBar;
+
+NSInteger buttonTagClicked_ = 0;
+
+- (IBAction)click:(id)sender {
+	UIButton *clicked = (UIButton *)sender;
+
+	// view controllers have to load before add: can be called so
+	// register add button has been clicked until startup view is dismissed
+	buttonTagClicked_ = clicked.tag;
+
+	[appDelegate selectTabBarItemWithTag:clicked.tag];
+}
+
+- (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item {
+	[appDelegate selectTabBarItemWithTag:item.tag];
+}
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
@@ -21,40 +39,36 @@
 	NSLog(@"StartupViewController.viewDidLoad");
 #endif
     [super viewDidLoad];
-	addEstimate.titleLabel.text = NSLocalizedString(@"Add Estimate", @"Startup View Controller Button");
-	estimates.title = NSLocalizedString(@"Estimates", @"Estimates Tab Bar Title");
-}
 
-// Override to allow orientations other than the default portrait orientation.
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    return YES;
-}
-
-- (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item {
-	if (item == estimates) {
-		[appDelegate selectEstimatesTab];
+	// IMPORTANT: as 0 is the tag for Estimates, all button objects
+	// in startup.xib must have their tag set to 1+
+	for (UIView *subview in self.view.subviews) {
+		if (subview.tag == TabBarItemEstimates) {
+			UIButton *addEstimate = (UIButton *)subview;
+			addEstimate.titleLabel.text = NSLocalizedString(@"Add Estimate", @"Startup View Controller Button");
+		}
 	}
-}
 
-BOOL clickedAddEstimateButton = NO;
-
-- (IBAction)click:(id)sender {
-	if (sender == addEstimate) {
-		// estimate view controller has to load before add: can be called
-		// so register the add button has been clicked until startup view is dismissed
-		clickedAddEstimateButton = YES;
-		// select the estimate tab which will dismiss startup view
-		[appDelegate selectEstimatesTab];
-	}
+	// get authoritative list of tab bar items from main window
+	[tabBar setItems:appDelegate.tabBarController.tabBar.items animated:YES];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
 	[super viewDidDisappear:animated];
-	// startup view has been dismissed, call add: on the appropriate view controller
-	if (clickedAddEstimateButton) {
-		[appDelegate showAddEstimateView];
+
+	// startup view has been dismissed, call add: on the appropriate view controller if necessary
+	if (buttonTagClicked_ >= TabBarItemEstimates) {
+		[appDelegate showAddViewWithTag:buttonTagClicked_];
+		buttonTagClicked_ = 0;
 	}
 }
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+	// only allow portrait orientation on main window not to be bothered
+	// with laying out buttons properly in landscape orientation
+    return interfaceOrientation == UIInterfaceOrientationPortrait;
+}
+
 
 - (void)didReceiveMemoryWarning {
     // Releases the view if it doesn't have a superview.
@@ -69,17 +83,13 @@ BOOL clickedAddEstimateButton = NO;
 #endif
     [super viewDidUnload];
 	self.appDelegate = nil;
-	addEstimate.titleLabel.text = nil;
-	self.addEstimate = nil;
-	estimates.title = nil;
-	self.estimates = nil;
+	self.tabBar = nil;
 }
 
 
 - (void)dealloc {
 	[appDelegate release];
-	[estimates release];
-	[addEstimate release];
+	[tabBar release];
     [super dealloc];
 }
 

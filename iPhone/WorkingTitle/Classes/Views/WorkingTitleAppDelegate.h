@@ -26,7 +26,7 @@
 @property (nonatomic, retain) IBOutlet StartupViewController *startupViewController;
 
 // startup screen methods
-- (void)selectEstimatesTab;
-- (void)showAddEstimateView;
+- (void)selectTabBarItemWithTag:(NSInteger)tag;
+- (void)showAddViewWithTag:(NSInteger)tag;
 
 @end

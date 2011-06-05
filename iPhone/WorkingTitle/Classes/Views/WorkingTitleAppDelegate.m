@@ -12,6 +12,7 @@
 // Views
 #import "StartupViewController.h"
 #import "EstimatesViewController.h"
+#import "TabBarItems.h"
 
 
 @implementation WorkingTitleAppDelegate
@@ -22,15 +23,21 @@
 #pragma mark -
 #pragma mark Startup screen methods
 
-- (void)selectEstimatesTab {
+- (void)selectTabBarItemWithTag:(NSInteger)tag {
 	// dismiss startup view
 	[tabBarController dismissModalViewControllerAnimated:YES];
-	// not clear how that selects the estimates tab
-	// TODO verify that it works when there are multiple tabs
+
+	// each tab bar item's tag set to its index in the tab bar + 1 (since 0 is the default tag value)
+	tabBarController.selectedIndex = (tag - 1);
 }
 
-- (void)showAddEstimateView {
-	[estimatesViewController add:nil];
+- (void)showAddViewWithTag:(NSInteger)tag {
+	if (tag == TabBarItemEstimates) {
+		[estimatesViewController add:nil];
+	}
+	else if (tag == TabBarItemContracts) {
+		NSLog(@"open \"new contract\" screen");
+	}
 }
 
 
