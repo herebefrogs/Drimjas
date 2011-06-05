@@ -16,6 +16,8 @@
 #import "LineItemSelection.h"
 // Utils
 #import "PDFManager.h"
+// Cells
+#import "EditSectionHeader.h"
 // Views
 #import "TableFields.h"
 
@@ -26,6 +28,7 @@
 @synthesize emailButton;
 @synthesize printButton;
 @synthesize spacerButton;
+@synthesize editSectionHeader;
 
 - (void)setEstimate:(Estimate *)newEstimate {
 	[estimate release];
@@ -105,21 +108,16 @@
     return ReviewEstimateSectionContactInfo + estimate.clientInfo.contactInfos.count + estimate.lineItems.count;
 }
 
+
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
 	switch (section) {
 		case ReviewEstimateSectionOrderNumber:
 			return NSLocalizedString(@"Order Number", "Review Estimate Order Number section title");
-		case ReviewEstimateSectionClientInfo:
-			return NSLocalizedString(@"Client Information", "Review Estimate Client Information section title");
-		case ReviewEstimateSectionContactInfo:
-			return NSLocalizedString(@"Contact Information", "Review Estimate Contact Information section title");
 		default:
-			if (section == indexFirstLineItem) {
-				return NSLocalizedString(@"Line Items", "Review Estimate Line Items section title");
-			}
 			return nil;
 	}
 }
+
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 	if (section == ReviewEstimateSectionOrderNumber) {
@@ -239,16 +237,41 @@
 #pragma mark -
 #pragma mark Table view delegate
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-    <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-    // ...
-    // Pass the selected object to the new view controller.
-    [self.navigationController pushViewController:detailViewController animated:YES];
-    [detailViewController release];
-    */
+- (UIView *)loadEditSectionHeaderForTag:(NSInteger)tag withTitle:(NSString *)title {
+	EditSectionHeader *editHeader;
+
+	if (editSectionHeader == nil) {
+		[[NSBundle mainBundle] loadNibNamed:@"EditSectionHeader" owner:self options:nil];
+		editHeader = editSectionHeader;
+		self.editSectionHeader = nil;
+	}
+
+	editHeader.header.text = NSLocalizedString(title, "");
+	[editHeader.edit setTitle:NSLocalizedString(@"Edit", "") forState:UIControlStateNormal];
+	editHeader.edit.tag = tag;
+
+	return editHeader;
 }
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+	switch (section) {
+		case ReviewEstimateSectionClientInfo:
+			return [self loadEditSectionHeaderForTag:ReviewEstimateSectionClientInfo withTitle:@"Client Information"];
+			break;
+		case ReviewEstimateSectionContactInfo:
+			return [self loadEditSectionHeaderForTag:ReviewEstimateSectionContactInfo withTitle:@"Contact Information"];
+		default:
+			if (section == indexFirstLineItem) {
+				return [self loadEditSectionHeaderForTag:indexFirstLineItem withTitle:@"Line Items"];
+			}
+			return nil;
+	}
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+	return 30.0;
+}
+
 
 #pragma mark -
 #pragma mark Button delegate
@@ -259,6 +282,11 @@
 
 - (IBAction)print:(id)sender {
 	[PrintManager printEstimate:estimate withDelegate:self];
+}
+
+- (IBAction)modify:(id)sender {
+	UIButton *edit = (UIButton *)sender;
+	NSLog(@"Edit section %u", edit.tag);
 }
 
 #pragma mark -
@@ -293,6 +321,7 @@
     // Relinquish ownership of anything that can be recreated in viewDidLoad or on demand.
 	self.title = nil;
 	self.toolbarItems = nil;
+	self.editSectionHeader = nil;
 	self.emailButton = nil;
 	self.printButton = nil;
 	self.estimate = nil;
@@ -305,6 +334,7 @@
 #ifdef __ENABLE_UI_LOGS__
 	NSLog(@"ReviewEstimateViewController.dealloc");
 #endif
+	[editSectionHeader release];
 	[spacerButton release];
 	[printButton release];
 	[emailButton release];

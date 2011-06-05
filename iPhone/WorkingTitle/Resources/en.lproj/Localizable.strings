@@ -116,6 +116,9 @@
 /* Review Estimate Line Items section title */
 "Line Items" = "Line Items";
 
+/* Review Estimate Edit button */
+"Edit" = "Edit";
+
 /********************* Utils section ******************/
 /* Estimate PDF filename & Mail Subject */
 "Estimate" = "Estimate";

@@ -113,6 +113,9 @@
 /* Review Estimate Line Items section title */
 "Line Items" = "Postes";
 
+/* Review Estimate Edit button */
+"Edit" = "Modifier";
+
 /********************* Utils section ******************/
 /* Estimate PDF filename & Mail Subject */
 "Estimate" = "Devis";

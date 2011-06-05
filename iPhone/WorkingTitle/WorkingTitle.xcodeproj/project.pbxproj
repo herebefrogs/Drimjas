@@ -56,6 +56,8 @@
 		02CB99E3139BE16F00FF2A3C /* Contracts@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 02CB99DF139BE16F00FF2A3C /* Contracts@2x.png */; };
 		02CB99E4139BE16F00FF2A3C /* Options.png in Resources */ = {isa = PBXBuildFile; fileRef = 02CB99E0139BE16F00FF2A3C /* Options.png */; };
 		02CB99E5139BE16F00FF2A3C /* Options@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 02CB99E1139BE16F00FF2A3C /* Options@2x.png */; };
+		02CB9A5F139C16B600FF2A3C /* EditSectionHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 02CB9A5E139C16B600FF2A3C /* EditSectionHeader.m */; };
+		02CB9A6D139C19ED00FF2A3C /* EditSectionHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02CB9A6C139C19ED00FF2A3C /* EditSectionHeader.xib */; };
 		02CC9C96133FC324006160A7 /* TextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 02CC9C95133FC324006160A7 /* TextFieldCell.m */; };
 		02CC9C98133FC52D006160A7 /* TextFieldCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02CC9C97133FC52D006160A7 /* TextFieldCell.xib */; };
 		02CC9D82133FEA36006160A7 /* ClientInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = 02CC9D81133FEA36006160A7 /* ClientInformation.m */; };
@@ -149,6 +151,9 @@
 		02CB99DF139BE16F00FF2A3C /* Contracts@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Contracts@2x.png"; path = "Resources/Icons/Contracts@2x.png"; sourceTree = "<group>"; };
 		02CB99E0139BE16F00FF2A3C /* Options.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Options.png; path = Resources/Icons/Options.png; sourceTree = "<group>"; };
 		02CB99E1139BE16F00FF2A3C /* Options@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Options@2x.png"; path = "Resources/Icons/Options@2x.png"; sourceTree = "<group>"; };
+		02CB9A5D139C16B600FF2A3C /* EditSectionHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditSectionHeader.h; sourceTree = "<group>"; };
+		02CB9A5E139C16B600FF2A3C /* EditSectionHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditSectionHeader.m; sourceTree = "<group>"; };
+		02CB9A6C139C19ED00FF2A3C /* EditSectionHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = EditSectionHeader.xib; path = Resources/Cells/EditSectionHeader.xib; sourceTree = "<group>"; };
 		02CC9C94133FC324006160A7 /* TextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextFieldCell.h; sourceTree = "<group>"; };
 		02CC9C95133FC324006160A7 /* TextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextFieldCell.m; sourceTree = "<group>"; };
 		02CC9C97133FC52D006160A7 /* TextFieldCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = TextFieldCell.xib; path = Resources/Cells/TextFieldCell.xib; sourceTree = "<group>"; };
@@ -308,6 +313,7 @@
 			isa = PBXGroup;
 			children = (
 				02CC9C97133FC52D006160A7 /* TextFieldCell.xib */,
+				02CB9A6C139C19ED00FF2A3C /* EditSectionHeader.xib */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -315,6 +321,8 @@
 		02CC9CC8133FC9AD006160A7 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				02CB9A5D139C16B600FF2A3C /* EditSectionHeader.h */,
+				02CB9A5E139C16B600FF2A3C /* EditSectionHeader.m */,
 				02CC9C94133FC324006160A7 /* TextFieldCell.h */,
 				02CC9C95133FC324006160A7 /* TextFieldCell.m */,
 				023E06AB134D52A60026209B /* TextFieldTableViewController.h */,
@@ -490,6 +498,7 @@
 				02CB99E3139BE16F00FF2A3C /* Contracts@2x.png in Resources */,
 				02CB99E4139BE16F00FF2A3C /* Options.png in Resources */,
 				02CB99E5139BE16F00FF2A3C /* Options@2x.png in Resources */,
+				02CB9A6D139C19ED00FF2A3C /* EditSectionHeader.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -526,6 +535,7 @@
 				02DE987B137A10C1007C5FED /* LineItem.m in Sources */,
 				02DE9886137A12D3007C5FED /* AddEstimatePickLineItemViewController.m in Sources */,
 				02FA0484138F3C94001CF3B0 /* NewLineItemViewController.m in Sources */,
+				02CB9A5F139C16B600FF2A3C /* EditSectionHeader.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

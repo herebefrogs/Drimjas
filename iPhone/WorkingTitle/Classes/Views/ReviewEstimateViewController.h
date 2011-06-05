@@ -13,11 +13,14 @@
 
 
 @class Estimate;
+@class EditSectionHeader;
 
 @interface ReviewEstimateViewController : UITableViewController <PrintNotifyDelegate, MailNotifyDelegate> {
 	UIBarButtonItem *emailButton;
 	UIBarButtonItem *printButton;
 	UIBarButtonItem *spacerButton;
+
+	EditSectionHeader *editSectionHeader;
 
 	Estimate *estimate;
 	NSInteger indexFirstLineItem;
@@ -29,8 +32,10 @@
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *emailButton;
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *printButton;
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *spacerButton;
+@property (nonatomic, retain) IBOutlet EditSectionHeader *editSectionHeader;
 
 - (IBAction)email:(id)sender;
 - (IBAction)print:(id)sender;
+- (IBAction)modify:(id)sender;
 
 @end
