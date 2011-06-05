@@ -45,7 +45,8 @@ NSInteger buttonTagClicked_ = 0;
 	for (UIView *subview in self.view.subviews) {
 		if (subview.tag == TabBarItemEstimates) {
 			UIButton *addEstimate = (UIButton *)subview;
-			addEstimate.titleLabel.text = NSLocalizedString(@"Add Estimate", @"Startup View Controller Button");
+			[addEstimate setTitle:NSLocalizedString(@"Add Estimate", @"Startup View Controller Button")
+						 forState:UIControlStateNormal];
 		}
 	}
 
