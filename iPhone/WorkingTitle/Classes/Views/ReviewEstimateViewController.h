@@ -20,7 +20,6 @@
 	UIBarButtonItem *spacerButton;
 
 	Estimate *estimate;
-	NSInteger indexFirstContact;
 	NSInteger indexFirstLineItem;
 	NSInteger indexLastSection;
 	NSArray *lineItemSelections;

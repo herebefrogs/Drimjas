@@ -12,6 +12,12 @@
 @protocol TableFields
 
 typedef enum {
+	ReviewEstimateSectionOrderNumber = 0,
+	ReviewEstimateSectionClientInfo,
+	ReviewEstimateSectionContactInfo,
+} ReviewEstimateSection;
+
+typedef enum {
 	NewClientInfoSection = 0,
 	PickClientInfoSection,
 	

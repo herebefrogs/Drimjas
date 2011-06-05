@@ -101,6 +101,21 @@
 /* ReviewEstimate View Controller Navigation Item Title */
 "Review Estimate" = "Review Estimate";
 
+/* Review Estimate Order Number section title */
+"Order Number" = "Order Number";
+
+/* Review Estimate Client Information section title */
+"Client Information" = "Client Information";
+
+/* Review Estimate Client Information section title */
+"Client Information" = "Client Information";
+
+/* Review Estimate Contact Information section title */
+"Contact Information" = "Contact Information";
+
+/* Review Estimate Line Items section title */
+"Line Items" = "Line Items";
+
 /********************* Utils section ******************/
 /* Estimate PDF filename & Mail Subject */
 "Estimate" = "Estimate";

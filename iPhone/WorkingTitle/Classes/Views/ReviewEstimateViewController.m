@@ -33,8 +33,7 @@
 
 	estimate = [newEstimate retain];
 	if (estimate) {
-		indexFirstContact = 2;
-		indexFirstLineItem = indexFirstContact + estimate.clientInfo.contactInfos.count;
+		indexFirstLineItem = ReviewEstimateSectionContactInfo + estimate.clientInfo.contactInfos.count;
 		indexLastSection = indexFirstLineItem + estimate.lineItems.count;
 		NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"index" ascending:YES];
 		lineItemSelections = [[estimate.lineItems sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]] retain];
@@ -103,21 +102,36 @@
 #pragma mark Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2 + estimate.clientInfo.contactInfos.count + estimate.lineItems.count;
+    return ReviewEstimateSectionContactInfo + estimate.clientInfo.contactInfos.count + estimate.lineItems.count;
 }
 
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+	switch (section) {
+		case ReviewEstimateSectionOrderNumber:
+			return NSLocalizedString(@"Order Number", "Review Estimate Order Number section title");
+		case ReviewEstimateSectionClientInfo:
+			return NSLocalizedString(@"Client Information", "Review Estimate Client Information section title");
+		case ReviewEstimateSectionContactInfo:
+			return NSLocalizedString(@"Contact Information", "Review Estimate Contact Information section title");
+		default:
+			if (section == indexFirstLineItem) {
+				return NSLocalizedString(@"Line Items", "Review Estimate Line Items section title");
+			}
+			return nil;
+	}
+}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-	if (section == 0) {
+	if (section == ReviewEstimateSectionOrderNumber) {
 		// order number
 		return 1;
 	}
-	else if (section == 1) {
+	else if (section == ReviewEstimateSectionClientInfo) {
 		return [estimate.clientInfo numSetProperties];
 	}
-	else if (section >= indexFirstContact && section < indexFirstLineItem) {
+	else if (section >= ReviewEstimateSectionContactInfo && section < indexFirstLineItem) {
 		// BUG #5: must have saved contact info order to be able to lookup one by index
-		ContactInformation *contactInfo = [[estimate.clientInfo.contactInfos allObjects] objectAtIndex:(section - indexFirstContact)];
+		ContactInformation *contactInfo = [[estimate.clientInfo.contactInfos allObjects] objectAtIndex:(section - ReviewEstimateSectionContactInfo)];
 		return [contactInfo numSetProperties];
 	}
 	else {
@@ -141,15 +155,15 @@
 
 	cell.selectionStyle = UITableViewCellSelectionStyleNone;
 
-	if (indexPath.section == 0) {
+	if (indexPath.section == ReviewEstimateSectionOrderNumber) {
 		cell.textLabel.text = [estimate orderNumber];
 	}
-	else if (indexPath.section == 1) {
+	else if (indexPath.section == ReviewEstimateSectionClientInfo) {
 		cell.textLabel.text = [estimate.clientInfo getSetPropertyWithIndex:indexPath.row];
 	}
-	else if (indexPath.section >= indexFirstContact && indexPath.section < indexFirstLineItem) {
+	else if (indexPath.section >= ReviewEstimateSectionContactInfo && indexPath.section < indexFirstLineItem) {
 		// BUG #5: must have saved contact info order to be able to lookup one by index
-		ContactInformation *contactInfo = [[estimate.clientInfo.contactInfos allObjects] objectAtIndex:(indexPath.section - indexFirstContact)];
+		ContactInformation *contactInfo = [[estimate.clientInfo.contactInfos allObjects] objectAtIndex:(indexPath.section - ReviewEstimateSectionContactInfo)];
 		
 		cell.textLabel.text = [contactInfo getSetPropertyWithIndex:indexPath.row];
 	}
