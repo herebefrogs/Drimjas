@@ -166,6 +166,76 @@ static DataStore *singleton_ = nil;
 #pragma mark -
 #pragma mark Estimate stack
 
+- (void)loadSampleEstimates {
+	NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"SampleEstimates" ofType:@"plist"];
+	NSData *plistXML = [[NSFileManager defaultManager] contentsAtPath:plistPath];
+
+	NSString *errorDesc = nil;
+	NSPropertyListFormat format;
+	NSArray *plistItems = (NSArray *)[NSPropertyListSerialization
+									  propertyListFromData:plistXML
+									  mutabilityOption:NSPropertyListImmutable
+									  format:&format
+									  errorDescription:&errorDesc];
+
+	if (plistItems == nil) {
+		NSLog(@"DataStore.loadSampleEstimates: read failed with error %@", errorDesc);
+	}
+
+	for (NSDictionary *estimate_data in plistItems) {
+		Estimate *estimate = [self createEstimateStub];
+		estimate.date = [estimate_data valueForKey:@"date"];
+		estimate.number = [estimate_data valueForKey:@"number"];
+
+		NSDictionary *client_data = [estimate_data valueForKey:@"client"];
+		ClientInformation *client = [self createClientInformation];
+		client.name = [client_data valueForKey:@"name"];
+		client.address1 = [client_data valueForKey:@"address1"];
+		client.address2 = [client_data valueForKey:@"address2"];
+		client.city = [client_data valueForKey:@"city"];
+		client.state = [client_data valueForKey:@"state"];
+		client.postalCode = [client_data valueForKey:@"postal_code"];
+		client.country = [client_data valueForKey:@"country"];
+		estimate.clientInfo = client;
+		[client addEstimatesObject:estimate];
+
+		for (NSDictionary *contact_data in [client_data valueForKey:@"contact_info"]) {
+			ContactInformation *contact = [self createContactInformationStub];
+			contact.name = [contact_data valueForKey:@"name"];
+			contact.email = [contact_data valueForKey:@"email"];
+			contact.phone = [contact_data valueForKey:@"phone"];
+			contact.clientInfo = client;
+			[client addContactInfosObject:contact];
+		}
+
+		NSInteger i = 0;
+		for (NSDictionary *line_item_data in [estimate_data valueForKey:@"line_items"]) {
+			BOOL (^predicate)(id, NSUInteger, BOOL*) = ^(id obj, NSUInteger idx, BOOL *stop) {
+				LineItem *lineItem = (LineItem *)obj;
+				if ([lineItem.name isEqualToString:[line_item_data valueForKey:@"name"]]) {
+					stop = (BOOL *)YES;
+					return YES;
+				}
+				return NO;
+			};
+			NSInteger index = [[[self lineItemsFetchedResultsController] fetchedObjects] indexOfObjectPassingTest:predicate];
+
+			LineItemSelection *item = [self createLineItemSelection];
+			if (index != NSNotFound) {
+				item.lineItem = [[[self lineItemsFetchedResultsController] fetchedObjects] objectAtIndex:index];
+			}
+			item.index = [NSNumber numberWithInt:i++];
+			item.details = [line_item_data valueForKey:@"details"];
+			item.quantity = [line_item_data valueForKey:@"quantity"];
+			item.unitCost = [line_item_data valueForKey:@"unit_cost"];
+			item.estimate = estimate;
+			[estimate addLineItemsObject:item];
+		}
+
+		[self saveEstimateStub];
+	}
+}
+
 - (NSMutableArray *)estimates {
 	if (estimates_ == nil) {
 		// Estimate fetch request
@@ -181,7 +251,7 @@ static DataStore *singleton_ = nil;
 		// Fetch the records and handle an error
 		NSError *error;
 		NSMutableArray *mutableFetchResults = [[self.managedObjectContext executeFetchRequest:fetchRequest error:&error] mutableCopy];
-		
+
 		if (!mutableFetchResults) {
 			// TODO Handle the error.
 			// This is a serious error and should advise the user to restart the application
@@ -190,6 +260,12 @@ static DataStore *singleton_ = nil;
 
 		// Save our fetched data to an array
 		estimates_ = [mutableFetchResults retain];
+
+#ifdef __LOAD_SAMPLE_ESTIMATES__
+		if (estimates_.count == 0) {
+			[self loadSampleEstimates];
+		}
+#endif
 		[mutableFetchResults release];
 		[fetchRequest release];
 	}

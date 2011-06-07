@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>date</key>
+		<date>2011-05-05T02:55:01Z</date>
+		<key>number</key>
+		<integer>1</integer>
+		<key>client</key>
+		<dict>
+			<key>name</key>
+			<string>John McEnroe</string>
+			<key>address1</key>
+			<string>East 81st Street </string>
+			<key>city</key>
+			<string>New York City</string>
+			<key>country</key>
+			<string>United States</string>
+			<key>contact_info</key>
+			<array>
+				<dict>
+					<key>name</key>
+					<string>Robert Agent</string>
+					<key>email</key>
+					<string>r_agent@mcenroe.name</string>
+					<key>phone</key>
+					<string>1-123-456-7890</string>
+				</dict>
+			</array>
+		</dict>
+		<key>line_items</key>
+		<array>
+			<dict>
+				<key>name</key>
+				<string>Creative Fee</string>
+				<key>details</key>
+				<string>Match photo shoot</string>
+				<key>quantity</key>
+				<integer>1</integer>
+				<key>unit_cost</key>
+				<integer>500</integer>
+			</dict>
+		</array>
+	</dict>
+</array>
+</plist>

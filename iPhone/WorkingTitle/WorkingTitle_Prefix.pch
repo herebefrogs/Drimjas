@@ -10,3 +10,6 @@
 
 // Log a message when UI methods get called in custom view controller
 #define __ENABLE_UI_LOGS__
+
+// Load sample estimates for screenshot purposes
+#define __LOAD_SAMPLE_ESTIMATES__
