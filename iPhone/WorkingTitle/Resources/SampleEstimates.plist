@@ -29,6 +29,118 @@
 				</dict>
 			</array>
 		</dict>
+    </dict>
+    <dict>
+		<key>date</key>
+		<date>2011-02-08T08:21:01Z</date>
+		<key>number</key>
+        <integer>1</integer>
+		<key>client</key>
+		<dict>
+			<key>name</key>
+			<string>Wernham Hogg</string>
+			<key>address1</key>
+			<string>67 Eastern Avenue West</string>
+			<key>city</key>
+			<string>Barrie</string>
+			<key>country</key>
+			<string>Albania</string>
+			<key>contact_info</key>
+			<array>
+				<dict>
+					<key>name</key>
+					<string>Tim Horton</string>
+					<key>email</key>
+					<string>tim_horton@hogg.com</string>
+					<key>phone</key>
+					<string>1-123-456-7890</string>
+				</dict>
+			</array>
+		</dict>
+    </dict>
+    <dict>
+		<key>date</key>
+		<date>2011-02-01T12:56:01Z</date>
+		<key>number</key>
+        <integer>1</integer>
+		<key>client</key>
+		<dict>
+			<key>name</key>
+			<string>72 Windows Inc</string>
+			<key>address1</key>
+			<string>999 Letsbe Avenue</string>
+			<key>city</key>
+			<string>Oxford</string>
+			<key>country</key>
+			<string>United Kingdom</string>
+			<key>contact_info</key>
+			<array>
+				<dict>
+					<key>name</key>
+					<string>Earnest Thistlethwaite</string>
+					<key>email</key>
+					<string>ernie@72windows.co.uk</string>
+					<key>phone</key>
+					<string>1-123-456-7890</string>
+				</dict>
+			</array>
+		</dict>
+    </dict>
+    <dict>
+		<key>date</key>
+		<date>2011-01-30T06:11:01Z</date>
+		<key>number</key>
+        <integer>1</integer>
+		<key>client</key>
+		<dict>
+			<key>name</key>
+			<string>Naps R Us</string>
+			<key>address1</key>
+			<string>9 Cloud Road</string>
+			<key>city</key>
+			<string>Los Angeles</string>
+			<key>country</key>
+			<string>USA</string>
+			<key>contact_info</key>
+			<array>
+				<dict>
+					<key>name</key>
+					<string>Jack Dee</string>
+					<key>email</key>
+					<string>jd@napsrus.com</string>
+					<key>phone</key>
+					<string>1-123-456-7890</string>
+				</dict>
+			</array>
+		</dict>
+    </dict>
+    <dict>
+		<key>date</key>
+		<date>2011-01-26T06:33:01Z</date>
+		<key>number</key>
+        <integer>1</integer>
+		<key>client</key>
+		<dict>
+			<key>name</key>
+			<string>Thumb Tack Universe</string>
+			<key>address1</key>
+			<string>1280 Resolution Crescent</string>
+			<key>city</key>
+			<string>Edmonton</string>
+			<key>country</key>
+			<string>New Zealand</string>
+			<key>contact_info</key>
+			<array>
+				<dict>
+					<key>name</key>
+					<string>Katherine Anderson</string>
+					<key>email</key>
+					<string>kate@thumbtackuniverse.co.nz</string>
+					<key>phone</key>
+					<string>1-123-456-7890</string>
+				</dict>
+			</array>
+		</dict>
 		<key>line_items</key>
 		<array>
 			<dict>
@@ -39,7 +151,57 @@
 				<key>quantity</key>
 				<integer>1</integer>
 				<key>unit_cost</key>
-				<integer>500</integer>
+				<integer>2000</integer>
+			</dict>
+			<dict>
+				<key>name</key>
+				<string>Licensing</string>
+				<key>details</key>
+				<string>Nationwide billboard use of 3 images for 2 years</string>
+				<key>quantity</key>
+				<integer>1</integer>
+				<key>unit_cost</key>
+				<integer>18000</integer>
+			</dict>
+			<dict>
+				<key>name</key>
+				<string>Wardrobe Stylist Day(s)</string>
+				<key>details</key>
+				<string>Clothing pull and consultation</string>
+				<key>quantity</key>
+				<integer>1</integer>
+				<key>unit_cost</key>
+				<integer>800</integer>
+			</dict>
+			<dict>
+				<key>name</key>
+				<string>Location Scouting Day(s)</string>
+				<key>details</key>
+				<string>Hiring of local specialist and inspection</string>
+				<key>quantity</key>
+				<integer>2</integer>
+				<key>unit_cost</key>
+				<integer>1000</integer>
+			</dict>
+			<dict>
+				<key>name</key>
+				<string>Hair &amp; Makeup Stylist Day(s)</string>
+				<key>details</key>
+				<string>Stylist for shoot day</string>
+				<key>quantity</key>
+				<integer>1</integer>
+				<key>unit_cost</key>
+				<integer>750</integer>
+			</dict>
+			<dict>
+				<key>name</key>
+				<string>Adult Talent</string>
+				<key>details</key>
+				<string>Three models from Algonquin Agency</string>
+				<key>quantity</key>
+				<integer>1</integer>
+				<key>unit_cost</key>
+				<integer>3000</integer>
 			</dict>
 		</array>
 	</dict>
