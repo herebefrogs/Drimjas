@@ -66,6 +66,12 @@
 #pragma mark -
 #pragma mark Table view data source
 
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+	id <NSFetchedResultsSectionInfo> sectionInfo = [estimates.sections objectAtIndex:section];
+    return [sectionInfo name];
+}
+
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return estimates.sections.count;
 }

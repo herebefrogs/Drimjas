@@ -260,7 +260,7 @@ static DataStore *singleton_ = nil;
 
 		estimatesFetchedResultsController_ = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
 																				managedObjectContext:self.managedObjectContext
-																				   sectionNameKeyPath:nil
+																				   sectionNameKeyPath:@"monthYear"
 																						cacheName:@"Root"];
 
 		[fetchRequest release];

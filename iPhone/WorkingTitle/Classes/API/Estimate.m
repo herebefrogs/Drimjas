@@ -22,6 +22,16 @@
 #pragma mark -
 #pragma mark Public methods stack
 
+- (NSString *)monthYear {
+	NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+	[dateFormat setDateFormat:@"MMMM YYYY"];
+
+	NSString *monthYear = [dateFormat stringFromDate:self.date];
+	[dateFormat release];
+
+	return monthYear;
+}
+
 - (NSString *)orderNumber {
 	NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
 	[dateFormat setDateFormat:@"YYYYMMdd"];

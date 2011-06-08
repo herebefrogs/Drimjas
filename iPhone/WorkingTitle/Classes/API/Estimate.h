@@ -21,6 +21,8 @@
 @property (nonatomic, retain) ClientInformation *clientInfo;
 @property (nonatomic, retain) NSSet *lineItems;
 
+@property (nonatomic, readonly) NSString *monthYear;
+
 - (NSString *)orderNumber;
 - (BOOL)isEmpty;
 
