@@ -234,42 +234,53 @@ static DataStore *singleton_ = nil;
 
 		[self saveEstimateStub];
 	}
+
+	NSError *error = nil;
+	if (![estimatesFetchedResultsController_ performFetch:&error]) {
+		NSLog(@"DataStore.loadSampleEstimates: fetch failed with error %@, %@", error, [error userInfo]);
+	}
 }
 
-- (NSMutableArray *)estimates {
-	if (estimates_ == nil) {
+- (NSFetchedResultsController *)estimatesFetchedResultsController {
+	if (estimatesFetchedResultsController_ == nil) {
 		// Estimate fetch request
 		NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
 		fetchRequest.entity = [NSEntityDescription entityForName:@"Estimate"
 										  inManagedObjectContext:self.managedObjectContext];
-		
+
+		// TODO fetch only active ones?
+
 		// Sort estimates by date (newest estimate first, oldest estimate last)
 		NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"date" ascending:NO];
 		fetchRequest.sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
 		[sortDescriptor release];
-		
-		// Fetch the records and handle an error
-		NSError *error;
-		NSMutableArray *mutableFetchResults = [[self.managedObjectContext executeFetchRequest:fetchRequest error:&error] mutableCopy];
 
-		if (!mutableFetchResults) {
-			// TODO Handle the error.
-			// This is a serious error and should advise the user to restart the application
-			NSLog(@"DataStore.estimates: failed with error %u.%@", error.code, error.domain);
+		// buffer up to 16 Estimate
+		fetchRequest.fetchBatchSize = 16;
+
+		estimatesFetchedResultsController_ = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
+																				managedObjectContext:self.managedObjectContext
+																				   sectionNameKeyPath:nil
+																						cacheName:@"Root"];
+
+		[fetchRequest release];
+
+		NSError *error = nil;
+		if (![estimatesFetchedResultsController_ performFetch:&error]) {
+			// TODO This is a serious error saying the records
+			//could not be fetched. Advise the user to try
+			//again or restart the application.
+			NSLog(@"DataStore.estimatesFetchedResultsController: fetch failed with error %@, %@", error, [error userInfo]);
 		}
 
-		// Save our fetched data to an array
-		estimates_ = [mutableFetchResults retain];
-
 #ifdef __LOAD_SAMPLE_ESTIMATES__
-		if (estimates_.count == 0) {
+		if (estimatesFetchedResultsController_.fetchedObjects.count == 0) {
 			[self loadSampleEstimates];
 		}
 #endif
-		[mutableFetchResults release];
-		[fetchRequest release];
+
 	}
-	return estimates_;
+	return estimatesFetchedResultsController_;
 }
 
 - (Estimate *)estimateStub {
@@ -327,18 +338,6 @@ static DataStore *singleton_ = nil;
 
 	// note: after the context save, stubs have permanent IDs
 
-	// add the estimate to estimates list and reorder list by date
-	[self.estimates addObject:estimateStub_];
-
-	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"date" ascending:NO];
-	[self.estimates sortUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];
-	[sortDescriptor release];
-
-	// trigger the callback if any
-	if (estimateStub_.callbackBlock != nil) {
-		estimateStub_.callbackBlock();
-	}
-
 	// discard estimate & contact info stubs
 	[contactInfoStubs_ release];
 	contactInfoStubs_ = nil;
@@ -385,16 +384,9 @@ static DataStore *singleton_ = nil;
 		return NO;
 	}
 
-	[self.estimates removeObject:estimate];
-
 	return YES;
 }
 
-- (BOOL)deleteEstimateAtIndex:(NSInteger)index {
-	Estimate *estimate = [estimates_ objectAtIndex:index];
-
-	return [self deleteEstimate:estimate];
-}
 
 # pragma mark -
 # pragma mark Client information stack
@@ -675,10 +667,10 @@ static DataStore *singleton_ = nil;
 	[managedObjectContext_ release];
 	[persistentStoreCoordinator_ release];
 	[contactInfoStubs_ release];
+	[estimatesFetchedResultsController_ release];
 	[clientInfosFetchedResultsController_ release];
 	[lineItemsFetchedResultsController_ release];
 	[estimateStub_ release];
-	[estimates_ release];
 	[storeName_ release];
 	[super dealloc];
 }

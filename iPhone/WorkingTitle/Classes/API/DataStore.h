@@ -23,9 +23,9 @@
     NSManagedObjectModel *managedObjectModel_;
     NSPersistentStoreCoordinator *persistentStoreCoordinator_;
 	
-	NSMutableArray *estimates_;
 	Estimate *estimateStub_;			// estimate being created
 
+	NSFetchedResultsController *estimatesFetchedResultsController_;
 	NSFetchedResultsController *clientInfosFetchedResultsController_;
 	NSFetchedResultsController *lineItemsFetchedResultsController_;
 
@@ -47,15 +47,6 @@
 - (NSURL *)applicationDocumentsDirectory;
 - (void)saveContext;
 
-// estimate methods
-@property (nonatomic, retain, readonly) NSMutableArray *estimates;
-@property (nonatomic, retain, readonly) Estimate *estimateStub;
-- (Estimate *)createEstimateStub;
-- (void)saveEstimateStub;
-- (void)deleteEstimateStub;
-- (BOOL)deleteEstimate:(Estimate *)estimate;
-- (BOOL)deleteEstimateAtIndex:(NSInteger)index;
-
 // client informatio methods
 - (NSFetchedResultsController *)clientInfosFetchedResultsController;
 - (ClientInformation *)createClientInformation;
@@ -69,6 +60,17 @@
 
 @end
 
+
+@interface DataStore (EstimateAccessors)
+
+@property (nonatomic, retain, readonly) Estimate *estimateStub;
+- (NSFetchedResultsController *)estimatesFetchedResultsController;
+- (Estimate *)createEstimateStub;
+- (void)saveEstimateStub;
+- (void)deleteEstimateStub;
+- (BOOL)deleteEstimate:(Estimate *)estimate;
+
+@end
 
 
 @interface DataStore (LineItemSelectionAccessors)

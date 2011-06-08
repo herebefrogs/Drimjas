@@ -13,17 +13,13 @@
 @class ClientInformation;
 @class LineItemSelection;
 
-typedef void (^EstimateSavedCallback)();
-
 @interface Estimate : BaseObject {
-	EstimateSavedCallback callbackBlock;
 }
 
 @property (nonatomic, retain) NSNumber *number;
 @property (nonatomic, retain) NSDate *date;
 @property (nonatomic, retain) ClientInformation *clientInfo;
 @property (nonatomic, retain) NSSet *lineItems;
-@property (nonatomic, copy) EstimateSavedCallback callbackBlock;
 
 - (NSString *)orderNumber;
 - (BOOL)isEmpty;

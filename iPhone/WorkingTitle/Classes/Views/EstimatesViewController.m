@@ -21,6 +21,7 @@
 @synthesize addEstimateNavigationController;
 @synthesize newOrPickClientInfoViewController;
 @synthesize reviewEstimateViewController;
+@synthesize estimates;
 
 #pragma mark -
 #pragma mark View lifecycle
@@ -37,27 +38,10 @@
 	self.navigationController.toolbarHidden = YES;
 
 	self.navigationItem.leftBarButtonItem = self.editButtonItem;
+
+	self.estimates = [[DataStore defaultStore] estimatesFetchedResultsController];
+	estimates.delegate = self;
 }
-/*
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-}
-*/
-/*
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-}
-*/
-/*
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-}
-*/
-/*
-- (void)viewDidDisappear:(BOOL)animated {
-    [super viewDidDisappear:animated];
-}
-*/
 
 // Override to allow orientations other than the default portrait orientation.
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
@@ -67,16 +51,28 @@
 
 
 #pragma mark -
-#pragma mark Table view data source
+#pragma mark Private implementation stack
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+
+- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+	Estimate *estimate = [estimates objectAtIndexPath:indexPath];
+    cell.textLabel.text = estimate.clientInfo.name;
+	cell.detailTextLabel.text = estimate.orderNumber;
+
+	cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 }
 
 
+#pragma mark -
+#pragma mark Table view data source
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return estimates.sections.count;
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-	DataStore *dataStore = [DataStore defaultStore];
-    return dataStore.estimates.count;
+	id<NSFetchedResultsSectionInfo> sectionInfo = [estimates.sections objectAtIndex:section];
+    return [sectionInfo numberOfObjects];
 }
 
 
@@ -90,61 +86,76 @@
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
     }
 
-	DataStore *dataStore = [DataStore defaultStore];
-	Estimate *estimate = [dataStore.estimates objectAtIndex:indexPath.row];
-    cell.textLabel.text = estimate.clientInfo.name;
-	cell.detailTextLabel.text = estimate.orderNumber;
-
-	cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+	[self configureCell:cell atIndexPath:indexPath];
     
     return cell;
 }
 
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-		// attempt deleting the estimate from the data store
-		if ([[DataStore defaultStore] deleteEstimateAtIndex:indexPath.row]) {
-			// delete the row from the data source.
-			[tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-		}
+		[[DataStore defaultStore] deleteEstimate:[estimates objectAtIndexPath:indexPath]];
     }  
 }
-
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 
 #pragma mark -
 #pragma mark Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	DataStore *dataStore = [DataStore defaultStore];
-	reviewEstimateViewController.estimate = [dataStore.estimates objectAtIndex:indexPath.row];
+	reviewEstimateViewController.estimate = [estimates objectAtIndexPath:indexPath];
+
 	[self.navigationController pushViewController:reviewEstimateViewController animated:YES];
+}
+
+
+#pragma mark -
+#pragma mark FetchedResultsController delegate
+
+- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
+    // The fetch controller is about to start sending change notifications, so prepare the table view for updates.
+	[self.tableView beginUpdates];
+}
+
+
+- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath {
+    UITableView *tableView = self.tableView;
+
+    switch(type) {
+        case NSFetchedResultsChangeInsert:
+			[tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationBottom];
+            break;
+        case NSFetchedResultsChangeDelete:
+            [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+        case NSFetchedResultsChangeUpdate:
+            [self configureCell:[tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
+            break;
+        case NSFetchedResultsChangeMove:
+			[tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            // Reloading the section inserts a new row and ensures that titles are updated appropriately.
+            [tableView reloadSections:[NSIndexSet indexSetWithIndex:newIndexPath.section] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+    }
+}
+
+
+- (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id <NSFetchedResultsSectionInfo>)sectionInfo atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type {
+    switch(type) {
+        case NSFetchedResultsChangeInsert:
+            [self.tableView insertSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationBottom];
+            break;
+        case NSFetchedResultsChangeDelete:
+            [self.tableView deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+    }
+}
+
+
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
+	// The fetch controller has sent all current change notifications, so tell the table view to process all updates.
+    [self.tableView endUpdates];
 }
 
 
@@ -152,12 +163,6 @@
 #pragma mark Button delegate
 
 - (IBAction)add:(id)sender {
-	// create empty estimate
-	Estimate *estimate = [[DataStore defaultStore] createEstimateStub];
-	// set callback to reload table once estimate has been saved and added to list
-	estimate.callbackBlock = ^() {
-		[self.tableView reloadData];
-	};
 	[self presentModalViewController:addEstimateNavigationController animated:YES];
 }
 
@@ -180,6 +185,7 @@
 	self.reviewEstimateViewController = nil;
 	self.newOrPickClientInfoViewController = nil;
 	self.addEstimateNavigationController = nil;
+	self.estimates = nil;
 	self.navigationItem.leftBarButtonItem = nil;
 	// note: don't nil title or navigationController.tabBarItem.title
 	// as it may appear on the view currently displayed
@@ -193,6 +199,7 @@
 	[reviewEstimateViewController release];
 	[newOrPickClientInfoViewController release];
 	[addEstimateNavigationController release];
+	[estimates release];
     [super dealloc];
 }
 

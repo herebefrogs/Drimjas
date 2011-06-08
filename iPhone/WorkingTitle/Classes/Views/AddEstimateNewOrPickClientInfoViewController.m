@@ -80,6 +80,10 @@
 	UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
 	[cell setSelected:NO animated:YES];	
 
+	if ([[DataStore defaultStore] estimateStub] == nil) {
+		[[DataStore defaultStore] createEstimateStub];
+	}
+
 	if (indexPath.section == NewClientInfoSection) {
 		[self.navigationController pushViewController:newClientInfoViewController animated:YES];
 	} else if (indexPath.section == PickClientInfoSection) {

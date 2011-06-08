@@ -19,8 +19,6 @@
 @dynamic clientInfo;
 @dynamic lineItems;
 
-@synthesize callbackBlock;
-
 #pragma mark -
 #pragma mark Public methods stack
 
@@ -92,14 +90,13 @@
 	[super awakeFromInsert];
 	// initialize date & number values upon creation
 	self.date = [NSDate date];
-	[self calculateNumber:[[DataStore defaultStore] estimates]];
+	[self calculateNumber:[[[DataStore defaultStore] estimatesFetchedResultsController] fetchedObjects]];
 }
 
 #pragma mark -
 #pragma mark Memory management stack
 
 - (void)dealloc {
-	[callbackBlock release];
 	[super dealloc];
 }
 
