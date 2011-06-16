@@ -13,6 +13,7 @@
 @class ContactInformation;
 @class LineItemSelection;
 @class LineItem;
+@class Currency;
 
 @interface DataStore : NSObject {
 
@@ -28,6 +29,8 @@
 	NSFetchedResultsController *estimatesFetchedResultsController_;
 	NSFetchedResultsController *clientInfosFetchedResultsController_;
 	NSFetchedResultsController *lineItemsFetchedResultsController_;
+
+	Currency *currency_;
 
 	NSMutableArray *contactInfoStubs_;	// ordered contact infos being created
 }
@@ -50,7 +53,7 @@
 // client informatio methods
 - (NSFetchedResultsController *)clientInfosFetchedResultsController;
 - (ClientInformation *)createClientInformation;
-- (BOOL)deleteClientInformation:(ClientInformation *)clientInformation; // do not call from outside of DataStore
+- (BOOL)deleteClientInformation:(ClientInformation *)clientInformation;
 
 // contact information methods
 @property (nonatomic, retain, readonly) NSMutableArray *contactInfoStubs;
@@ -88,5 +91,13 @@
 - (LineItem *)createLineItemWithPreset:(BOOL)preset;
 - (BOOL)saveLineItem:(LineItem *)lineItem;
 - (BOOL)deleteLineItem:(LineItem *)lineItem;
+
+@end
+
+
+@interface DataStore (CurrencyAccessors)
+
+@property (nonatomic, readonly) Currency *currency;
+- (void)saveCurrency;
 
 @end

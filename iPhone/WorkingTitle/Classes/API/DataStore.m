@@ -13,6 +13,7 @@
 #import	"ContactInformation.h"
 #import "LineItemSelection.h"
 #import "LineItem.h"
+#import "Currency.h"
 
 
 @implementation DataStore
@@ -657,6 +658,53 @@ static DataStore *singleton_ = nil;
 
 
 #pragma mark -
+#pragma mark Currency stack
+
+- (Currency *)currency {
+	if (currency_ == nil) {
+		// load currency from data store
+		NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+		fetchRequest.entity = [NSEntityDescription entityForName:@"Currency"
+										  inManagedObjectContext:self.managedObjectContext];
+
+		NSError *error;
+		NSArray *fetchedObjects = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+
+		if (!fetchedObjects) {
+			// TODO Handle the error
+			// This is a serious error blablabla
+			NSLog(@"DataStore.currency: fetch failed with error %@, %@", error, [error userInfo]);
+		}
+		// TODO assert fetchedObject.count <= 1
+		if (fetchedObjects.count > 1) {
+			NSLog(@"DataStore.currency: assertion failed (more than 1 currency created)");
+		}
+
+		if (fetchedObjects.count > 0) {
+			currency_ = (Currency *)[fetchedObjects objectAtIndex:0];
+		} else {
+			currency_ = (Currency *)[NSEntityDescription insertNewObjectForEntityForName:@"Currency"
+																  inManagedObjectContext:self.managedObjectContext];
+		}
+		[currency_ retain];
+
+		[fetchRequest release];
+	}
+
+	return currency_;
+}
+
+- (void)saveCurrency {
+	if (currency_) {
+		if ([currency_.status integerValue] == StatusCreated) {
+			currency_.status = [NSNumber numberWithInt:StatusActive];
+		}
+
+		[self saveContext];
+	}
+}
+
+#pragma mark -
 #pragma mark Memory management stack
 
 - (void)didReceiveMemoryWarning {
@@ -670,6 +718,7 @@ static DataStore *singleton_ = nil;
 	[estimatesFetchedResultsController_ release];
 	[clientInfosFetchedResultsController_ release];
 	[lineItemsFetchedResultsController_ release];
+	[currency_ release];
 	[estimateStub_ release];
 	[storeName_ release];
 	[super dealloc];

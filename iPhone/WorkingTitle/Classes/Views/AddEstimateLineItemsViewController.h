@@ -11,22 +11,28 @@
 #import "TextFieldTableViewController.h"
 
 @class AddEstimatePickLineItemViewController;
+@class TaxesAndCurrencyViewController;
 @class Estimate;
 
 @interface AddEstimateLineItemsViewController : TextFieldTableViewController <NSFetchedResultsControllerDelegate> {
 	UIBarButtonItem *nextButton;
+	UIBarButtonItem *saveButton;
 	AddEstimatePickLineItemViewController *pickLineItemViewController;
+	TaxesAndCurrencyViewController *taxesAndCurrencyViewController;
 
 	NSFetchedResultsController *lineItemSelections;
 	Estimate *estimate;
 }
 
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *nextButton;
+@property (nonatomic, retain) IBOutlet UIBarButtonItem *saveButton;
 @property (nonatomic, retain) IBOutlet AddEstimatePickLineItemViewController *pickLineItemViewController;
+@property (nonatomic, retain) IBOutlet TaxesAndCurrencyViewController *taxesAndCurrencyViewController;
 
 @property (nonatomic, retain) NSFetchedResultsController *lineItemSelections;
 @property (nonatomic, retain) Estimate *estimate;
 
 - (IBAction)next:(id)sender;
+- (IBAction)save:(id)sender;
 
 @end

@@ -8,10 +8,11 @@
 
 #import "ReviewEstimateViewController.h"
 // API
-#import "Estimate.h"
 #import "ClientInformation.h"
 #import "ContactInformation.h"
+#import "Currency.h"
 #import "DataStore.h"
+#import "Estimate.h"
 #import "LineItem.h"
 #import "LineItemSelection.h"
 // Utils
@@ -182,7 +183,7 @@
 			NSString *quantity = [numberFormatter stringFromNumber:lineItem.quantity];
 
 			[numberFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
-			[numberFormatter setCurrencyCode:@"CAD"];
+			[numberFormatter setCurrencyCode:[[[DataStore defaultStore] currency] isoCode]];
 			NSString *unitCost = [numberFormatter stringFromNumber:lineItem.unitCost];
 
 			cell.textLabel.text = [NSString stringWithFormat:@"%@ x %@", quantity, unitCost];

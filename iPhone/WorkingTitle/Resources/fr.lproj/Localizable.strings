@@ -98,6 +98,12 @@
 /* NewLineItem Name Textfield */
 "Description" = "Description";
 
+/* TaxesAndCurrency Currency Code Placeholder */
+"Currency Code" = "Code de la devise à 3 lettres";
+
+/* TaxesAndCurrencyView Navigation Item Title */
+"Taxes & Currency" = "Taxes & devise";
+
 /* ReviewEstimate View Controller Navigation Item Title */
 "Review Estimate" = "Aperçu du Devis";
 

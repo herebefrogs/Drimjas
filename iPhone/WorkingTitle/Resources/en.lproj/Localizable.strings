@@ -98,6 +98,12 @@
 /* NewLineItem Name Textfield */
 "Description" = "Description";
 
+/* TaxesAndCurrencyView Navigation Item Title */
+"Taxes & Currency" = "Taxes & Currency";
+
+/* TaxesAndCurrency Currency Code Placeholder */
+"Currency Code" = "3-Letter Currency Code";
+
 /* ReviewEstimate View Controller Navigation Item Title */
 "Review Estimate" = "Review Estimate";
 

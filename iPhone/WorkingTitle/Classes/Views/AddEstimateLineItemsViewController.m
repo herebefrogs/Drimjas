@@ -12,16 +12,20 @@
 #import "Estimate.h"
 #import "LineItemSelection.h"
 #import "LineItem.h"
+#import	"Currency.h"
 // Cells
 #import "TextFieldCell.h"
 // Views
 #import "TableFields.h"
 #import "AddEstimatePickLineItemViewController.h"
+#import "TaxesAndCurrencyViewController.h"
 
 @implementation AddEstimateLineItemsViewController
 
 @synthesize nextButton;
+@synthesize saveButton;
 @synthesize pickLineItemViewController;
+@synthesize	taxesAndCurrencyViewController;
 @synthesize lineItemSelections;
 @synthesize estimate;
 
@@ -36,8 +40,7 @@
 	[super viewDidLoad];
 	self.title = NSLocalizedString(@"Add Line Item", "AddEstimateLineItems Navigation Item Title");
 	self.navigationController.tabBarItem.title = self.title;
-
-    self.navigationItem.rightBarButtonItem = nextButton;
+	nextButton.title = NSLocalizedString(@"Next", "Next Navigation Item Title");
 
 	// show add/delete widgets in front of rows
 	[self.tableView setEditing:YES animated:NO];
@@ -51,6 +54,10 @@
 	self.estimate = [[DataStore defaultStore] estimateStub];
 	self.lineItemSelections = [[DataStore defaultStore] lineItemSelectionsForEstimate:estimate];
 	lineItemSelections.delegate = self;
+
+	Currency *currency = [[[DataStore defaultStore] currency] retain];
+	self.navigationItem.rightBarButtonItem = ([currency.status integerValue] == StatusActive) ? saveButton : nextButton;
+	[currency release];
 
 	[self.tableView reloadData];
 }
@@ -382,6 +389,10 @@ BOOL _insertLineItem = NO;
 #pragma mark Button delegate
 
 - (IBAction)next:(id)sender {
+	[self.navigationController pushViewController:taxesAndCurrencyViewController animated:YES];
+}
+
+- (IBAction)save:(id)sender {
 	// save estimate into estimates list
 	[[DataStore defaultStore] saveEstimateStub];
 
@@ -409,7 +420,9 @@ BOOL _insertLineItem = NO;
 #endif
     // Relinquish ownership of anything that can be recreated in viewDidLoad or on demand.
     self.nextButton = nil;
+    self.saveButton = nil;
 	self.pickLineItemViewController = nil;
+	self.taxesAndCurrencyViewController = nil;
 	lineItemSelections.delegate = nil;
 	self.lineItemSelections = nil;
 	self.estimate = nil;
@@ -421,7 +434,9 @@ BOOL _insertLineItem = NO;
 	NSLog(@"AddEstimateLineItemsViewController.dealloc");
 #endif
 	[nextButton release];
+	[saveButton release];
 	[pickLineItemViewController release];
+	[taxesAndCurrencyViewController release];
 	[lineItemSelections release];
 	[estimate release];
     [super dealloc];

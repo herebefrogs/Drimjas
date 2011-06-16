@@ -60,4 +60,8 @@ typedef enum {
 	numLineItemField
 } LineItemField;
 
+typedef enum {
+	TaxesAndCurrencySectionCurrency = 0,
+} TaxesAndCurrencySection;
+
 @end

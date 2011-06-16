@@ -23,6 +23,8 @@
 		023C7DBA1309A8D600FD360B /* Launch@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 023C7DB81309A8D600FD360B /* Launch@2x.png */; };
 		023E06AD134D52A60026209B /* TextFieldTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 023E06AC134D52A60026209B /* TextFieldTableViewController.m */; };
 		0288D97D13A99E8F001E6641 /* Currency.m in Sources */ = {isa = PBXBuildFile; fileRef = 0288D97C13A99E8F001E6641 /* Currency.m */; };
+		0288D99F13A9A306001E6641 /* TaxesAndCurrencyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0288D99D13A9A306001E6641 /* TaxesAndCurrencyViewController.m */; };
+		0288D9A013A9A306001E6641 /* TaxesAndCurrency.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0288D99E13A9A306001E6641 /* TaxesAndCurrency.xib */; };
 		028917E21308D1CD00945F4D /* Estimates@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 028917DE1308D1CD00945F4D /* Estimates@2x.png */; };
 		02943B941319891100A719AA /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02943B931319891100A719AA /* CoreData.framework */; };
 		02943CB11319AB8400A719AA /* WorkingTitle.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 02943CAF1319AB8400A719AA /* WorkingTitle.xcdatamodeld */; };
@@ -108,6 +110,9 @@
 		0288D97613A99C47001E6641 /* WorkingTitle 9.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "WorkingTitle 9.xcdatamodel"; sourceTree = "<group>"; };
 		0288D97B13A99E8F001E6641 /* Currency.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Currency.h; sourceTree = "<group>"; };
 		0288D97C13A99E8F001E6641 /* Currency.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Currency.m; sourceTree = "<group>"; };
+		0288D99C13A9A306001E6641 /* TaxesAndCurrencyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaxesAndCurrencyViewController.h; sourceTree = "<group>"; };
+		0288D99D13A9A306001E6641 /* TaxesAndCurrencyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaxesAndCurrencyViewController.m; sourceTree = "<group>"; };
+		0288D99E13A9A306001E6641 /* TaxesAndCurrency.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TaxesAndCurrency.xib; sourceTree = "<group>"; };
 		028917DE1308D1CD00945F4D /* Estimates@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Estimates@2x.png"; path = "Resources/Icons/Estimates@2x.png"; sourceTree = "<group>"; };
 		02943B931319891100A719AA /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		02943CB01319AB8400A719AA /* WorkingTitle.xcdatamodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcdatamodel; path = WorkingTitle.xcdatamodel; sourceTree = "<group>"; };
@@ -243,6 +248,8 @@
 				0299F96D1304D8ED001E1E3E /* StartupViewController.m */,
 				02CB998A139BD56200FF2A3C /* TabBarItems.h */,
 				02A8E4DD1347A95C00BAAF36 /* TableFields.h */,
+				0288D99C13A9A306001E6641 /* TaxesAndCurrencyViewController.h */,
+				0288D99D13A9A306001E6641 /* TaxesAndCurrencyViewController.m */,
 				1D3623240D0F684500981E51 /* WorkingTitleAppDelegate.h */,
 				1D3623250D0F684500981E51 /* WorkingTitleAppDelegate.m */,
 			);
@@ -264,6 +271,7 @@
 				02FA0483138F3C94001CF3B0 /* NewLineItem.xib */,
 				02E1C7A312E53834000D7747 /* ReviewEstimate.xib */,
 				0299F96E1304D8ED001E1E3E /* Startup.xib */,
+				0288D99E13A9A306001E6641 /* TaxesAndCurrency.xib */,
 			);
 			name = Views;
 			path = Resources/Views;
@@ -513,6 +521,7 @@
 				02CB99E5139BE16F00FF2A3C /* Options@2x.png in Resources */,
 				02CB9A6D139C19ED00FF2A3C /* EditSectionHeader.xib in Resources */,
 				029F3683139DC9F800BA07A5 /* SampleEstimates.plist in Resources */,
+				0288D9A013A9A306001E6641 /* TaxesAndCurrency.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -551,6 +560,7 @@
 				02FA0484138F3C94001CF3B0 /* NewLineItemViewController.m in Sources */,
 				02CB9A5F139C16B600FF2A3C /* EditSectionHeader.m in Sources */,
 				0288D97D13A99E8F001E6641 /* Currency.m in Sources */,
+				0288D99F13A9A306001E6641 /* TaxesAndCurrencyViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
