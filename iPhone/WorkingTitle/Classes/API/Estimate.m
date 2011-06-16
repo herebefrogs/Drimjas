@@ -103,11 +103,5 @@
 	[self calculateNumber:[[[DataStore defaultStore] estimatesFetchedResultsController] fetchedObjects]];
 }
 
-#pragma mark -
-#pragma mark Memory management stack
-
-- (void)dealloc {
-	[super dealloc];
-}
 
 @end

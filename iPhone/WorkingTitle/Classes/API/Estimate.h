@@ -22,9 +22,8 @@
 @property (nonatomic, retain) NSSet *lineItems;
 
 @property (nonatomic, readonly) NSString *monthYear;
-
-- (NSString *)orderNumber;
-- (BOOL)isEmpty;
+@property (nonatomic, readonly) NSString *orderNumber;
+@property (nonatomic, readonly) BOOL isEmpty;
 
 @end
 
