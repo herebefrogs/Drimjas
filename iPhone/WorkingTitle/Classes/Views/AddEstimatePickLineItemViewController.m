@@ -31,7 +31,6 @@
     [super viewDidLoad];
 
 	self.title = NSLocalizedString(@"Pick Line Item", "AddEstimatePickLineItems Navigation Item Title");
-	self.navigationController.tabBarItem.title = self.title;
 
 	self.lineItems = [[DataStore defaultStore] lineItemsFetchedResultsController];
 	lineItems.delegate = self;

@@ -11,16 +11,19 @@
 #import "TextFieldTableViewController.h"
 
 @class Currency;
+@class ReviewEstimateViewController;
 
 @interface TaxesAndCurrencyViewController : TextFieldTableViewController {
 	UIBarButtonItem *nextButton;
 	UIBarButtonItem *saveButton;
+	ReviewEstimateViewController *reviewEstimateViewController;
 
 	Currency *currency;
 }
 
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *nextButton;
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *saveButton;
+@property (nonatomic, retain) IBOutlet ReviewEstimateViewController *reviewEstimateViewController;
 
 @property (nonatomic, retain) IBOutlet Currency *currency;
 

@@ -13,6 +13,7 @@
 // Cells
 #import "TextFieldCell.h"
 // Views
+#import "ReviewEstimateViewController.h"
 #import "TableFields.h"
 
 
@@ -21,6 +22,7 @@
 
 @synthesize nextButton;
 @synthesize saveButton;
+@synthesize reviewEstimateViewController;
 @synthesize currency;
 
 #pragma mark -
@@ -32,7 +34,6 @@
 #endif
 	[super viewDidLoad];
 	self.title = NSLocalizedString(@"Taxes & Currency", "TaxesAndCurrencyView Navigation Item Title");
-	self.navigationController.tabBarItem.title = self.title;
 	nextButton.title = NSLocalizedString(@"Next", "Next Navigation Item Title");
 
 	self.currency = [[DataStore defaultStore] currency];
@@ -179,13 +180,14 @@
 	[[DataStore defaultStore] saveCurrency];
 
 	// save estimate into estimates list
-	[[DataStore defaultStore] saveEstimateStub];
+	reviewEstimateViewController.estimate = [[DataStore defaultStore] saveEstimateStub];
 
-	// hide client info view
-	[self dismissModalViewControllerAnimated:YES];
-
-	// reset navigation controller to first view
-	[self.navigationController popToRootViewControllerAnimated:YES];
+	// reset navigation controller to review estimate view controller
+	UIViewController *rootController = [self.navigationController.viewControllers objectAtIndex:0];
+	[self.navigationController setViewControllers:[NSArray arrayWithObjects:rootController,
+												   reviewEstimateViewController,
+												   nil]
+										 animated:YES];
 }
 
 #pragma mark -
@@ -205,6 +207,7 @@
     // Relinquish ownership of anything that can be recreated in viewDidLoad or on demand.
     self.nextButton = nil;
     self.saveButton = nil;
+	self.reviewEstimateViewController = nil;
 	self.currency = nil;
 }
 
@@ -215,6 +218,7 @@
 #endif
 	[nextButton release];
 	[saveButton release];
+	[reviewEstimateViewController release];
 	[currency release];
     [super dealloc];
 }

@@ -298,7 +298,7 @@ static DataStore *singleton_ = nil;
 	return estimateStub_;
 }
 
-- (void)saveEstimateStub {
+- (Estimate *)saveEstimateStub {
 	NSNumber *active = [NSNumber numberWithInt:StatusActive];
 
 	if ([estimateStub_.clientInfo.status integerValue] == StatusCreated) {
@@ -338,12 +338,15 @@ static DataStore *singleton_ = nil;
 	}
 
 	// note: after the context save, stubs have permanent IDs
+	Estimate *savedEstimate = [estimateStub_ autorelease];
 
 	// discard estimate & contact info stubs
 	[contactInfoStubs_ release];
 	contactInfoStubs_ = nil;
 	[estimateStub_ release];
 	estimateStub_ = nil;
+
+	return savedEstimate;
 }
 
 - (void)deleteEstimateStub {

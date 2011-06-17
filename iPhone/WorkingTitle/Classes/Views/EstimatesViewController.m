@@ -18,7 +18,6 @@
 
 @implementation EstimatesViewController
 
-@synthesize addEstimateNavigationController;
 @synthesize newOrPickClientInfoViewController;
 @synthesize reviewEstimateViewController;
 @synthesize estimates;
@@ -169,7 +168,7 @@
 #pragma mark Button delegate
 
 - (IBAction)add:(id)sender {
-	[self presentModalViewController:addEstimateNavigationController animated:YES];
+	[self.navigationController pushViewController:newOrPickClientInfoViewController animated:YES];
 }
 
 
@@ -190,7 +189,6 @@
     // Relinquish ownership of anything that can be recreated in viewDidLoad or on demand.
 	self.reviewEstimateViewController = nil;
 	self.newOrPickClientInfoViewController = nil;
-	self.addEstimateNavigationController = nil;
 	self.estimates = nil;
 	self.navigationItem.leftBarButtonItem = nil;
 	// note: don't nil title or navigationController.tabBarItem.title
@@ -204,7 +202,6 @@
 #endif
 	[reviewEstimateViewController release];
 	[newOrPickClientInfoViewController release];
-	[addEstimateNavigationController release];
 	[estimates release];
     [super dealloc];
 }

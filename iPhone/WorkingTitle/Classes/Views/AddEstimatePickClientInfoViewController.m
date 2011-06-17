@@ -28,7 +28,6 @@
 #endif
     [super viewDidLoad];
 	self.title = NSLocalizedString(@"Pick Client", "AddEstimatePickClientInfo Navigation Item Title");
-	self.navigationController.tabBarItem.title = self.title;
 
 	self.clientInfos = [[DataStore defaultStore] clientInfosFetchedResultsController];
 	clientInfos.delegate = self;

@@ -34,7 +34,6 @@
 #endif
     [super viewDidLoad];
 	self.title = NSLocalizedString(@"New Client", "AddEstimateNewClientInfo Navigation Item Title");
-	self.navigationController.tabBarItem.title = self.title;
 	nextButton.title = NSLocalizedString(@"Next", "Next Navigation Item Title");
 }
 

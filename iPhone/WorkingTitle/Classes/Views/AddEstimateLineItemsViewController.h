@@ -11,6 +11,7 @@
 #import "TextFieldTableViewController.h"
 
 @class AddEstimatePickLineItemViewController;
+@class ReviewEstimateViewController;
 @class TaxesAndCurrencyViewController;
 @class Estimate;
 
@@ -18,6 +19,7 @@
 	UIBarButtonItem *nextButton;
 	UIBarButtonItem *saveButton;
 	AddEstimatePickLineItemViewController *pickLineItemViewController;
+	ReviewEstimateViewController *reviewEstimateViewController;
 	TaxesAndCurrencyViewController *taxesAndCurrencyViewController;
 
 	NSFetchedResultsController *lineItemSelections;
@@ -27,6 +29,7 @@
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *nextButton;
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *saveButton;
 @property (nonatomic, retain) IBOutlet AddEstimatePickLineItemViewController *pickLineItemViewController;
+@property (nonatomic, retain) IBOutlet ReviewEstimateViewController *reviewEstimateViewController;
 @property (nonatomic, retain) IBOutlet TaxesAndCurrencyViewController *taxesAndCurrencyViewController;
 
 @property (nonatomic, retain) NSFetchedResultsController *lineItemSelections;

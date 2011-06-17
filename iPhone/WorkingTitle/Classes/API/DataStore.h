@@ -69,7 +69,7 @@
 @property (nonatomic, retain, readonly) Estimate *estimateStub;
 - (NSFetchedResultsController *)estimatesFetchedResultsController;
 - (Estimate *)createEstimateStub;
-- (void)saveEstimateStub;
+- (Estimate *)saveEstimateStub;
 - (void)deleteEstimateStub;
 - (BOOL)deleteEstimate:(Estimate *)estimate;
 

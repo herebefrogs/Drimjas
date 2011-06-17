@@ -18,6 +18,7 @@
 // Views
 #import "TableFields.h"
 #import "AddEstimatePickLineItemViewController.h"
+#import "ReviewEstimateViewController.h"
 #import "TaxesAndCurrencyViewController.h"
 
 @implementation AddEstimateLineItemsViewController
@@ -25,6 +26,7 @@
 @synthesize nextButton;
 @synthesize saveButton;
 @synthesize pickLineItemViewController;
+@synthesize reviewEstimateViewController;
 @synthesize	taxesAndCurrencyViewController;
 @synthesize lineItemSelections;
 @synthesize estimate;
@@ -39,7 +41,6 @@
 #endif
 	[super viewDidLoad];
 	self.title = NSLocalizedString(@"Add Line Item", "AddEstimateLineItems Navigation Item Title");
-	self.navigationController.tabBarItem.title = self.title;
 	nextButton.title = NSLocalizedString(@"Next", "Next Navigation Item Title");
 
 	// show add/delete widgets in front of rows
@@ -394,13 +395,14 @@ BOOL _insertLineItem = NO;
 
 - (IBAction)save:(id)sender {
 	// save estimate into estimates list
-	[[DataStore defaultStore] saveEstimateStub];
+	reviewEstimateViewController.estimate = [[DataStore defaultStore] saveEstimateStub];
 
-	// hide client info view
-	[self dismissModalViewControllerAnimated:YES];
-
-	// reset navigation controller to first view
-	[self.navigationController popToRootViewControllerAnimated:YES];
+	// reset navigation controller to review estimate view controller
+	UIViewController *rootController = [self.navigationController.viewControllers objectAtIndex:0];
+	[self.navigationController setViewControllers:[NSArray arrayWithObjects:rootController,
+																		    reviewEstimateViewController,
+																		    nil]
+										 animated:YES];
 }
 
 
@@ -422,6 +424,7 @@ BOOL _insertLineItem = NO;
     self.nextButton = nil;
     self.saveButton = nil;
 	self.pickLineItemViewController = nil;
+	self.reviewEstimateViewController = nil;
 	self.taxesAndCurrencyViewController = nil;
 	lineItemSelections.delegate = nil;
 	self.lineItemSelections = nil;
@@ -436,6 +439,7 @@ BOOL _insertLineItem = NO;
 	[nextButton release];
 	[saveButton release];
 	[pickLineItemViewController release];
+	[reviewEstimateViewController release];
 	[taxesAndCurrencyViewController release];
 	[lineItemSelections release];
 	[estimate release];

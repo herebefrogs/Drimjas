@@ -38,7 +38,6 @@ BOOL added = NO;
 	[super viewDidLoad];
 
 	self.title = NSLocalizedString(@"New Line Item", "NewLineItems Navigation Item Title");
-	self.navigationController.tabBarItem.title = self.title;
 
 	self.navigationItem.rightBarButtonItem = addButton;
 }

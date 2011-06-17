@@ -28,7 +28,6 @@
 #endif
     [super viewDidLoad];
 	self.title = NSLocalizedString(@"Add Client", "AddEstimateNewOrPickClientInfo Navigation Item Title");
-	self.navigationController.tabBarItem.title = self.title;
 }
 
 // Override to allow orientations other than the default portrait orientation.
@@ -99,7 +98,7 @@
 	[[DataStore defaultStore] deleteEstimateStub];
 	
 	// hide new or pick client info view
-	[self dismissModalViewControllerAnimated:YES];
+	[self.navigationController popToRootViewControllerAnimated:YES];
 }
 	
 #pragma mark -
