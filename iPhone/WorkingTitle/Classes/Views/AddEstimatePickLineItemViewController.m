@@ -119,10 +119,6 @@
 #pragma mark Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	// deselect cell immediately
-	UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-	[cell setSelected:NO animated:YES];
-
 	if (indexPath.row == 0) {
 		[self.navigationController pushViewController:newLineItemViewController animated:YES];
 	} else {

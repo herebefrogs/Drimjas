@@ -75,10 +75,6 @@
 #pragma mark Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	// deselect cell immediately
-	UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-	[cell setSelected:NO animated:YES];	
-
 	if ([[DataStore defaultStore] estimateStub] == nil) {
 		[[DataStore defaultStore] createEstimateStub];
 	}

@@ -290,10 +290,6 @@ BOOL _insertLineItem = NO;
 #pragma mark Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	// deselect cell immediately
-	UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-	[cell setSelected:NO animated:YES];
-
 	if (indexPath.section == [self _addLineItemSection]) {
 		[self _insertLineItemSelectionForIndexPath:indexPath];
 	}
