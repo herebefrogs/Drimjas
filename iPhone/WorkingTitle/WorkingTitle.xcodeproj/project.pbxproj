@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		02022CA61378CDFC00536FEA /* LineItemSelection.m in Sources */ = {isa = PBXBuildFile; fileRef = 02022CA51378CDFC00536FEA /* LineItemSelection.m */; };
+		020886D013AC41D000164320 /* ContractsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 020886CE13AC41D000164320 /* ContractsViewController.m */; };
+		020886D113AC41D000164320 /* Contracts.xib in Resources */ = {isa = PBXBuildFile; fileRef = 020886CF13AC41D000164320 /* Contracts.xib */; };
 		0216F77212FF46E9007BC60F /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0216F77112FF46E9007BC60F /* MessageUI.framework */; };
 		021C0D32137B73A2007E641C /* LineItemDefaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = 021C0D31137B73A2007E641C /* LineItemDefaults.plist */; };
 		021F685012E67D8700ECDDDD /* AddEstimateNewClientInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 021F684E12E67D8700ECDDDD /* AddEstimateNewClientInfoViewController.m */; };
@@ -88,6 +90,9 @@
 		02022C9F1378CD8700536FEA /* WorkingTitle 8.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "WorkingTitle 8.xcdatamodel"; sourceTree = "<group>"; };
 		02022CA41378CDFC00536FEA /* LineItemSelection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LineItemSelection.h; sourceTree = "<group>"; };
 		02022CA51378CDFC00536FEA /* LineItemSelection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LineItemSelection.m; sourceTree = "<group>"; };
+		020886CD13AC41D000164320 /* ContractsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContractsViewController.h; sourceTree = "<group>"; };
+		020886CE13AC41D000164320 /* ContractsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContractsViewController.m; sourceTree = "<group>"; };
+		020886CF13AC41D000164320 /* Contracts.xib */ = {isa = PBXFileReference; explicitFileType = file.xib; path = Contracts.xib; sourceTree = "<group>"; };
 		0216F77112FF46E9007BC60F /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		021C0D31137B73A2007E641C /* LineItemDefaults.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = LineItemDefaults.plist; path = Resources/LineItemDefaults.plist; sourceTree = "<group>"; };
 		021E547313690BEA00849A20 /* WorkingTitle 7.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "WorkingTitle 7.xcdatamodel"; sourceTree = "<group>"; };
@@ -238,6 +243,8 @@
 				02DE9884137A12D3007C5FED /* AddEstimatePickLineItemViewController.m */,
 				02AA0B5C136DAF13005E9158 /* AddEstimateReviewClientInfoViewController.h */,
 				02AA0B5D136DAF13005E9158 /* AddEstimateReviewClientInfoViewController.m */,
+				020886CD13AC41D000164320 /* ContractsViewController.h */,
+				020886CE13AC41D000164320 /* ContractsViewController.m */,
 				02B2C06B12DFF2DD00D3FEE0 /* EstimatesViewController.h */,
 				02B2C06C12DFF2DD00D3FEE0 /* EstimatesViewController.m */,
 				02FA0481138F3C94001CF3B0 /* NewLineItemViewController.h */,
@@ -266,6 +273,7 @@
 				029DACA0136BA00A00AF4A6F /* AddEstimatePickClientInfo.xib */,
 				02DE9885137A12D3007C5FED /* AddEstimatePickLineItem.xib */,
 				02AA0B5E136DAF13005E9158 /* AddEstimateReviewClientInfo.xib */,
+				020886CF13AC41D000164320 /* Contracts.xib */,
 				02B2C06D12DFF2DD00D3FEE0 /* Estimates.xib */,
 				28AD73870D9D96C1002E5188 /* MainWindow.xib */,
 				02FA0483138F3C94001CF3B0 /* NewLineItem.xib */,
@@ -522,6 +530,7 @@
 				02CB9A6D139C19ED00FF2A3C /* EditSectionHeader.xib in Resources */,
 				029F3683139DC9F800BA07A5 /* SampleEstimates.plist in Resources */,
 				0288D9A013A9A306001E6641 /* TaxesAndCurrency.xib in Resources */,
+				020886D113AC41D000164320 /* Contracts.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -561,6 +570,7 @@
 				02CB9A5F139C16B600FF2A3C /* EditSectionHeader.m in Sources */,
 				0288D97D13A99E8F001E6641 /* Currency.m in Sources */,
 				0288D99F13A9A306001E6641 /* TaxesAndCurrencyViewController.m in Sources */,
+				020886D013AC41D000164320 /* ContractsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
