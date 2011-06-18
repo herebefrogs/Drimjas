@@ -64,4 +64,13 @@ typedef enum {
 	TaxesAndCurrencySectionCurrency = 0,
 } TaxesAndCurrencySection;
 
+typedef enum {
+	OptionsFieldClients = 0,
+	OptionsFieldLineItems,
+	OptionsFieldTaxes,
+	OptionsFieldPhotographerInfo,
+
+	numOptionsField
+} OptionsField;
+
 @end

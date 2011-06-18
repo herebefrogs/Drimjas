@@ -98,7 +98,7 @@
 /* NewLineItem Name Textfield */
 "Description" = "Description";
 
-/* TaxesAndCurrencyView Navigation Item Title */
+/* TaxesAndCurrencyView Navigation Item Title & Options Taxes & Currency Title */
 "Taxes & Currency" = "Taxes & Currency";
 
 /* TaxesAndCurrency Currency Code Placeholder */
@@ -124,6 +124,15 @@
 
 /* Review Estimate Edit button */
 "Edit" = "Edit";
+
+/* Options Clients Title */
+"Clients" = "Clients";
+
+/* Options Line Items Title */
+"Line Items" = "Line Items";
+
+/* Options Photographer Information */
+"Photographer Information" = "Photographer Information";
 
 /********************* Utils section ******************/
 /* Estimate PDF filename & Mail Subject */
