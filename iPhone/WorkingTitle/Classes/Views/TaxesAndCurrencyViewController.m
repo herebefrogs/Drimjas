@@ -8,8 +8,9 @@
 
 #import "TaxesAndCurrencyViewController.h"
 // API
-#import "DataStore.h"
 #import "Currency.h"
+#import "DataStore.h"
+#import "Tax.h"
 // Cells
 #import "TextFieldCell.h"
 // Views
@@ -23,7 +24,7 @@
 @synthesize nextButton;
 @synthesize saveButton;
 @synthesize reviewEstimateViewController;
-@synthesize currency;
+@synthesize taxesAndCurrency;
 
 #pragma mark -
 #pragma mark View lifecycle
@@ -36,9 +37,15 @@
 	self.title = NSLocalizedString(@"Taxes & Currency", "TaxesAndCurrencyView Navigation Item Title");
 	nextButton.title = NSLocalizedString(@"Next", "Next Navigation Item Title");
 
-	self.currency = [[DataStore defaultStore] currency];
-
     self.navigationItem.rightBarButtonItem = self.saveButton;
+
+	self.taxesAndCurrency = [[DataStore defaultStore] taxesAndCurrencyFetchedResultsController];
+	taxesAndCurrency.delegate = self;
+		
+	// show add/delete widgets in front of rows
+	[self.tableView setEditing:YES animated:NO];
+	self.tableView.allowsSelectionDuringEditing = YES;
+	
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -47,112 +54,212 @@
 	[self.tableView reloadData];
 }
 
-/*
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-}
-*/
-/*
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-}
-*/
-/*
-- (void)viewDidDisappear:(BOOL)animated {
-    [super viewDidDisappear:animated];
-}
-*/
-
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     return YES;
 }
 
 
 #pragma mark -
+#pragma mark Private methods stack
+
+- (NSUInteger)_addTaxSection {
+	// "add tax" section is always last
+	return taxesAndCurrency.sections.count;
+}
+
+BOOL _insertTax = NO;
+
+- (void)_insertTaxAtIndexPath:(NSIndexPath *)indexPath {
+	_insertTax = YES;
+
+	[[DataStore defaultStore] createTax];
+}
+
+- (void)_deleteTaxAtIndexPath:(NSIndexPath *)indexPath {
+	// NOTE: force textfield input to be processed while its tag is still valid
+	// (aka before sections get reordered as a result of the deletion)
+	[lastTextFieldEdited resignFirstResponder];
+	lastTextFieldEdited = nil;
+
+	NSAssert(indexPath.section != 0, @"Cannot delete Currency");
+
+	Tax *deleted = [taxesAndCurrency.fetchedObjects objectAtIndex:indexPath.section];
+	
+	// shift all indexes down by 1 for taxes after the one being deleted
+	NSRange afterDeleted;
+	afterDeleted.location = indexPath.section;
+	afterDeleted.length = taxesAndCurrency.sections.count - indexPath.section;
+	for (Tax *tax in [taxesAndCurrency.fetchedObjects subarrayWithRange:afterDeleted]) {
+		if ([tax.index intValue] > indexPath.section) {
+			tax.index = [NSNumber numberWithInt:[tax.index intValue] - 1];
+		}
+	}
+	
+	[[DataStore defaultStore] deleteTax:deleted];
+}
+
+#pragma mark -
 #pragma mark Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    // Return the number of sections.
-    return 1;
+    // 1 section per tax or currency, plus 1 section to add a tax
+    return taxesAndCurrency.sections.count + 1;
 }
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    // Return the number of rows in the section.
-    return 1;
+	if (section == [self _addTaxSection] || section == TaxesAndCurrencySectionCurrency) {
+		return 1;
+	}
+	else {
+		return numTaxesField;
+	}
 }
 
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return [super tableView:tableView cellForRowAtIndexPath:indexPath];
+	if (indexPath.section == [self _addTaxSection]) {
+
+		static NSString *CellIdentifier = @"Cell";
+
+		UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+		if (cell == nil) {
+			cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+		}
+
+		[self configureCell:cell atIndexPath:indexPath];
+
+		return cell;
+	}
+	else {
+		return [super tableView:tableView cellForRowAtIndexPath:indexPath];
+	}
 }
 
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
+	// show a plus sign in front of "add a tax" row
+	if (indexPath.section == [self _addTaxSection]) {
+		return UITableViewCellEditingStyleInsert;
+	}
+	// show a minus sign in front of 1st row of a tax section
+	else if (indexPath.section != TaxesAndCurrencySectionCurrency && indexPath.row == 0) {
+		return UITableViewCellEditingStyleDelete;
+	}
+	return UITableViewCellEditingStyleNone;
 }
-*/
 
-
-/*
-// Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source.
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+    if (editingStyle == UITableViewCellEditingStyleInsert) {
+        [self _insertTaxAtIndexPath:indexPath];
     }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
-    }   
+    else if (editingStyle == UITableViewCellEditingStyleDelete) {
+		[self _deleteTaxAtIndexPath:indexPath];
+    }  
 }
-*/
-
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
 
 #pragma mark -
 #pragma mark Table view delegate
 
 - (void)configureCell:(UITableViewCell *)aCell atIndexPath:(NSIndexPath *)indexPath {
-	[super configureCell:aCell atIndexPath:indexPath];
+	if (indexPath.section == [self _addTaxSection]) {
+		aCell.textLabel.text = NSLocalizedString(@"Add a Tax", "TaxesAndCurrency Add A Tax Row");
+	} else {
+		[super configureCell:aCell atIndexPath:indexPath];
 
-	TextFieldCell *tfCell = (TextFieldCell *)aCell;
+		TextFieldCell *tfCell = (TextFieldCell *)aCell;
 
-	if (indexPath.section == TaxesAndCurrencySectionCurrency) {
-		tfCell.textField.text = currency.isoCode;
-		tfCell.textField.placeholder = NSLocalizedString(@"Currency Code", "TaxesAndCurrency Currency Code Placeholder");
-		tfCell.textField.autocorrectionType = UITextAutocorrectionTypeNo;
+		if (indexPath.section == TaxesAndCurrencySectionCurrency) {
+			Currency *currency = [taxesAndCurrency.fetchedObjects objectAtIndex:indexPath.section];
+
+			tfCell.textField.text = currency.isoCode;
+			tfCell.textField.placeholder = NSLocalizedString(@"Currency Code", "TaxesAndCurrency Currency Code Placeholder");
+			tfCell.textField.autocorrectionType = UITextAutocorrectionTypeNo;
+		} else {
+			Tax *tax = [taxesAndCurrency.fetchedObjects objectAtIndex:indexPath.section];
+			
+			if (indexPath.row == TaxesFieldName) {
+				tfCell.textField.text = tax.name;
+				tfCell.textField.autocapitalizationType = UITextAutocapitalizationTypeAllCharacters;
+				tfCell.textField.autocorrectionType = UITextAutocorrectionTypeNo;
+				tfCell.textField.placeholder = NSLocalizedString(@"Tax Name", "TaxesAndCurrency Tax Name Textfield placeholder");
+			}
+			else if (indexPath.row == TaxesFieldPercent) {
+				if ([tax.percent floatValue]) {
+					tfCell.textField.text = [tax.percent stringValue];
+				}
+				tfCell.textField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
+				tfCell.textField.placeholder = NSLocalizedString(@"Percent", "TaxesAndCurrency Percent Textfield placeholder");
+			}
+		}
 	}
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-    <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-    // ...
-    // Pass the selected object to the new view controller.
-    [self.navigationController pushViewController:detailViewController animated:YES];
-    [detailViewController release];
-    */
+	if (indexPath.section == [self _addTaxSection]) {
+		UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+		[cell setSelected:NO animated:YES];
+		
+		[self _insertTaxAtIndexPath:indexPath];
+	}
 }
+
+
+#pragma mark -
+#pragma mark FetchedResultsController delegate
+
+- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
+    // The fetch controller is about to start sending change notifications, so prepare the table view for updates.
+	[self.tableView beginUpdates];
+}
+
+
+- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath {
+    UITableView *tableView = self.tableView;
+	
+    switch(type) {
+        case NSFetchedResultsChangeInsert:
+			[tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationBottom];
+            break;
+        case NSFetchedResultsChangeDelete:
+            [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+        case NSFetchedResultsChangeUpdate:
+            [self configureCell:[tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
+            break;
+        case NSFetchedResultsChangeMove:
+			[tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            // Reloading the section inserts a new row and ensures that titles are updated appropriately.
+            [tableView reloadSections:[NSIndexSet indexSetWithIndex:newIndexPath.section] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+    }
+}
+
+
+- (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id <NSFetchedResultsSectionInfo>)sectionInfo atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type {
+    switch(type) {
+        case NSFetchedResultsChangeInsert:
+            [self.tableView insertSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationBottom];
+            break;
+        case NSFetchedResultsChangeDelete:
+            [self.tableView deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+    }
+}
+
+
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
+	// The fetch controller has sent all current change notifications, so tell the table view to process all updates.
+    [self.tableView endUpdates];
+
+	if (_insertTax) {
+		_insertTax = NO;
+		
+		// scroll to keep "add a tax" section always visible at the bottom of the screen
+		NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:[self _addTaxSection]];
+		[self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+	}
+}
+
 
 #pragma mark -
 #pragma mark Textfield delegate
@@ -161,10 +268,24 @@
 	NSUInteger section = textField.tag / 10;
 	NSUInteger row = textField.tag - (10 * section);
 
-	NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:section];
-
-	if (indexPath.section == TaxesAndCurrencySectionCurrency) {
+	if (section == TaxesAndCurrencySectionCurrency) {
+		Currency *currency = [taxesAndCurrency.fetchedObjects objectAtIndex:section];
 		currency.isoCode = textField.text;
+	}
+	else {
+		Tax *tax = [taxesAndCurrency.fetchedObjects objectAtIndex:section];
+
+		// TODO hide overlay view if any
+		// save textfield value into tax
+		if (row == TaxesFieldName) {
+			tax.name = textField.text;
+		}
+		else if (row == TaxesFieldPercent) {
+			NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+			tax.percent = [numberFormatter numberFromString:textField.text];
+			[numberFormatter release];
+			// TODO show an overlay if nil
+		}
 	}
 }
 
@@ -176,8 +297,7 @@
 }
 
 - (IBAction)save:(id)sender {
-	// TODO save taxes
-	[[DataStore defaultStore] saveCurrency];
+	[[DataStore defaultStore] saveTaxesAndCurrency];
 
 	// save estimate into estimates list
 	reviewEstimateViewController.estimate = [[DataStore defaultStore] saveEstimateStub];
@@ -208,7 +328,7 @@
     self.nextButton = nil;
     self.saveButton = nil;
 	self.reviewEstimateViewController = nil;
-	self.currency = nil;
+	self.taxesAndCurrency = nil;
 }
 
 
@@ -219,7 +339,7 @@
 	[nextButton release];
 	[saveButton release];
 	[reviewEstimateViewController release];
-	[currency release];
+	[taxesAndCurrency release];
     [super dealloc];
 }
 

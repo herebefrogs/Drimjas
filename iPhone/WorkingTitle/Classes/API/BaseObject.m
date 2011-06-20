@@ -11,6 +11,7 @@
 
 @implementation BaseObject 
 
+@dynamic subEntityName;
 @dynamic status;
 
 @end

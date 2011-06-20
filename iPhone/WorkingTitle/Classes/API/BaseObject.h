@@ -12,6 +12,9 @@
 @interface BaseObject : NSManagedObject {
 }
 
+// unfortunately, entity.name cannot be accessed to filter sub-entities in a predicate
+@property (nonatomic, retain) NSString *subEntityName;
+
 // we make a distinction between "saved" in the Core Data sense (meaning object has been persisted
 // in the data store) and "saved" in the application sense (meaning object has completed the creation
 // process and is now a first-class citizen)

@@ -104,6 +104,15 @@
 /* TaxesAndCurrency Currency Code Placeholder */
 "Currency Code" = "3-Letter Currency Code";
 
+/* TaxesAndCurrencyView Add a Tax Row */
+"Add a Tax" = "Add a Tax";
+
+/* TaxesAndCurrencyView Tax Name Texfield placeholder */
+"Tax Name" = "Tax Name";
+
+/* TaxesAndCurrencyView Tax Name Texfield placeholder */
+"Percent" = "Percent";
+
 /* ReviewEstimate View Controller Navigation Item Title */
 "Review Estimate" = "Review Estimate";
 

@@ -50,6 +50,7 @@
 		02AA0C02136DCB20005E9158 /* AddEstimateLineItems.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02AA0C00136DCB20005E9158 /* AddEstimateLineItems.xib */; };
 		02B2C06E12DFF2DD00D3FEE0 /* EstimatesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02B2C06C12DFF2DD00D3FEE0 /* EstimatesViewController.m */; };
 		02B2C06F12DFF2DD00D3FEE0 /* Estimates.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02B2C06D12DFF2DD00D3FEE0 /* Estimates.xib */; };
+		02B6326613B1D9D5003E4081 /* IndexedObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 02B6326513B1D9D5003E4081 /* IndexedObject.m */; };
 		02C25793132438C40057D944 /* DataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 02C25792132438C40057D944 /* DataStore.m */; };
 		02C75243136A429F00EC4BF5 /* AddEstimateNewOrPickClientInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02C75241136A429F00EC4BF5 /* AddEstimateNewOrPickClientInfoViewController.m */; };
 		02C75244136A429F00EC4BF5 /* AddEstimateNewOrPickClientInfo.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02C75242136A429F00EC4BF5 /* AddEstimateNewOrPickClientInfo.xib */; };
@@ -159,6 +160,8 @@
 		02B2C06B12DFF2DD00D3FEE0 /* EstimatesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EstimatesViewController.h; sourceTree = "<group>"; };
 		02B2C06C12DFF2DD00D3FEE0 /* EstimatesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EstimatesViewController.m; sourceTree = "<group>"; };
 		02B2C06D12DFF2DD00D3FEE0 /* Estimates.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Estimates.xib; sourceTree = "<group>"; };
+		02B6326413B1D9D5003E4081 /* IndexedObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IndexedObject.h; sourceTree = "<group>"; };
+		02B6326513B1D9D5003E4081 /* IndexedObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IndexedObject.m; sourceTree = "<group>"; };
 		02C25791132438C40057D944 /* DataStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataStore.h; sourceTree = "<group>"; };
 		02C25792132438C40057D944 /* DataStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataStore.m; sourceTree = "<group>"; };
 		02C75240136A429F00EC4BF5 /* AddEstimateNewOrPickClientInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddEstimateNewOrPickClientInfoViewController.h; sourceTree = "<group>"; };
@@ -306,12 +309,14 @@
 				0288D97C13A99E8F001E6641 /* Currency.m */,
 				02C25791132438C40057D944 /* DataStore.h */,
 				02C25792132438C40057D944 /* DataStore.m */,
-				02CC9D83133FEB2C006160A7 /* Estimate.h */,
-				02CC9D84133FEB2C006160A7 /* Estimate.m */,
 				02CC9D80133FEA36006160A7 /* ClientInformation.h */,
 				02CC9D81133FEA36006160A7 /* ClientInformation.m */,
 				02A8E5451347C79D00BAAF36 /* ContactInformation.h */,
 				02A8E5461347C79D00BAAF36 /* ContactInformation.m */,
+				02CC9D83133FEB2C006160A7 /* Estimate.h */,
+				02CC9D84133FEB2C006160A7 /* Estimate.m */,
+				02B6326413B1D9D5003E4081 /* IndexedObject.h */,
+				02B6326513B1D9D5003E4081 /* IndexedObject.m */,
 				02DE9879137A10C1007C5FED /* LineItem.h */,
 				02DE987A137A10C1007C5FED /* LineItem.m */,
 				02022CA41378CDFC00536FEA /* LineItemSelection.h */,
@@ -588,6 +593,7 @@
 				020886D013AC41D000164320 /* ContractsViewController.m in Sources */,
 				020886EA13AC439100164320 /* OptionsViewController.m in Sources */,
 				0263BCE813AEE31200ECD5D2 /* Tax.m in Sources */,
+				02B6326613B1D9D5003E4081 /* IndexedObject.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

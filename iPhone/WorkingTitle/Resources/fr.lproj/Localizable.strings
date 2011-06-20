@@ -104,6 +104,15 @@
 /* TaxesAndCurrencyView Navigation Item Title & Options Taxes & Currency Title */
 "Taxes & Currency" = "Taxes & devise";
 
+/* TaxesAndCurrencyView Add a Tax Row */
+"Add a Tax" = "Ajouter une taxe";
+
+/* TaxesAndCurrencyView Tax Name Texfield placeholder */
+"Tax Name" = "Nom de la taxe";
+
+/* TaxesAndCurrencyView Tax Name Texfield placeholder */
+"Percent" = "Percentage";
+
 /* ReviewEstimate View Controller Navigation Item Title */
 "Review Estimate" = "Aperçu du Devis";
 

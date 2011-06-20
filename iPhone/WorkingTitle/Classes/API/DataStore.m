@@ -8,18 +8,20 @@
 
 #import "DataStore.h"
 // API
-#import "Estimate.h"
 #import "ClientInformation.h"
 #import	"ContactInformation.h"
+#import "Estimate.h"
+#import "IndexedObject.h"
 #import "LineItemSelection.h"
 #import "LineItem.h"
 #import "Currency.h"
+#import "Tax.h"
 
 
 @implementation DataStore
 
 #pragma mark -
-#pragma mark Class stack
+#pragma mark Core Data stack
 
 // shared singleton instance
 static DataStore *singleton_ = nil;
@@ -35,10 +37,6 @@ static DataStore *singleton_ = nil;
 	}
 }
 
-
-#pragma mark -
-#pragma mark Ctor stack
-
 - (id)initWithName:(NSString *)storeName {
 	self = [super init];
 	if (self) {
@@ -51,9 +49,6 @@ static DataStore *singleton_ = nil;
 	return [self initWithName:@"defaultDataStore"];
 }
 
-
-#pragma mark -
-#pragma mark Core Data stack
 
 /**
  Returns the managed object context for the application.
@@ -678,10 +673,8 @@ static DataStore *singleton_ = nil;
 			// This is a serious error blablabla
 			NSLog(@"DataStore.currency: fetch failed with error %@, %@", error, [error userInfo]);
 		}
-		// TODO assert fetchedObject.count <= 1
-		if (fetchedObjects.count > 1) {
-			NSLog(@"DataStore.currency: assertion failed (more than 1 currency created)");
-		}
+		
+		NSAssert(fetchedObjects.count <= 1, @"More than 1 currency created");
 
 		if (fetchedObjects.count > 0) {
 			currency_ = (Currency *)[fetchedObjects objectAtIndex:0];
@@ -697,14 +690,74 @@ static DataStore *singleton_ = nil;
 	return currency_;
 }
 
-- (void)saveCurrency {
-	if (currency_) {
-		if ([currency_.status integerValue] == StatusCreated) {
-			currency_.status = [NSNumber numberWithInt:StatusActive];
+- (NSFetchedResultsController *)taxesAndCurrencyFetchedResultsController {
+	if (!taxesAndCurrencyFetchedResultsController_) {
+		NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+
+		fetchRequest.entity = [NSEntityDescription entityForName:@"IndexedObject"
+										  inManagedObjectContext:self.managedObjectContext];
+
+		// fetch only Currency and Tax objects
+		fetchRequest.predicate = [NSPredicate predicateWithFormat:@"subEntityName IN %@", [NSArray arrayWithObjects:@"Currency", @"Tax", nil]];
+
+		NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"index" ascending:YES];
+		fetchRequest.sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
+		[sortDescriptor release];
+		
+		fetchRequest.fetchBatchSize = 16;
+		
+		taxesAndCurrencyFetchedResultsController_ = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
+																			 managedObjectContext:self.managedObjectContext
+																			   sectionNameKeyPath:@"index"
+																						cacheName:@"Root"];
+		
+		[fetchRequest release];
+		
+		NSError *error = nil;
+		if (![taxesAndCurrencyFetchedResultsController_ performFetch:&error]) {
+			// TODO This is a serious error saying the records
+			//could not be fetched. Advise the user to try
+			//again or restart the application.
+			NSLog(@"DataStore.taxesAndCurrencyFetchedResultsController: fetch failed with error %@, %@", error, [error userInfo]);
 		}
+		
+		if (taxesAndCurrencyFetchedResultsController_.fetchedObjects.count == 0) {
+			// TODO call currency instead
+			[NSEntityDescription insertNewObjectForEntityForName:@"Currency" inManagedObjectContext:self.managedObjectContext];
+			// TODO fetched once more instead? is savecontext any use (given its not done in currency)
+			[self saveContext];
+		}
+	}
+	return taxesAndCurrencyFetchedResultsController_;
+}
+
+- (Tax *)createTax {
+	return (Tax *)[NSEntityDescription insertNewObjectForEntityForName:@"Tax"
+												inManagedObjectContext:self.managedObjectContext];
+}
+
+- (BOOL)deleteTax:(Tax *)tax {
+	[self.managedObjectContext deleteObject:tax];
+
+	[self saveContext];
+
+	return YES;
+}
+
+- (BOOL)saveTaxesAndCurrency {
+	if (taxesAndCurrencyFetchedResultsController_) {
+		NSNumber *active = [NSNumber numberWithInt:StatusActive];
+		for (IndexedObject *taxOrCurrency in taxesAndCurrencyFetchedResultsController_.fetchedObjects) {
+			if ([taxOrCurrency.status intValue] == StatusCreated) {
+				taxOrCurrency.status = active;
+			}
+		}
+		[active release];
 
 		[self saveContext];
 	}
+
+	return YES;
 }
 
 #pragma mark -
@@ -721,6 +774,7 @@ static DataStore *singleton_ = nil;
 	[estimatesFetchedResultsController_ release];
 	[clientInfosFetchedResultsController_ release];
 	[lineItemsFetchedResultsController_ release];
+	[taxesAndCurrencyFetchedResultsController_ release];
 	[currency_ release];
 	[estimateStub_ release];
 	[storeName_ release];

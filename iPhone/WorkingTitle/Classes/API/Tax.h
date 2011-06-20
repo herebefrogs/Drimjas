@@ -7,10 +7,10 @@
 //
 
 #import <CoreData/CoreData.h>
-#import "BaseObject.h"
+#import "IndexedObject.h"
 
 
-@interface Tax : BaseObject {
+@interface Tax : IndexedObject {
 }
 
 @property (nonatomic, retain) NSString *name;

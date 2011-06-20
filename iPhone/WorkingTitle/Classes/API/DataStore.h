@@ -14,52 +14,54 @@
 @class LineItemSelection;
 @class LineItem;
 @class Currency;
+@class Tax;
 
 @interface DataStore : NSObject {
 
 @private
+	// core data
 	NSString *storeName_;
 
 	NSManagedObjectContext *managedObjectContext_;
     NSManagedObjectModel *managedObjectModel_;
     NSPersistentStoreCoordinator *persistentStoreCoordinator_;
-	
-	Estimate *estimateStub_;			// estimate being created
+
+	// estimate & estimate attributes
+	Estimate *estimateStub_;
 
 	NSFetchedResultsController *estimatesFetchedResultsController_;
 	NSFetchedResultsController *clientInfosFetchedResultsController_;
 	NSFetchedResultsController *lineItemsFetchedResultsController_;
 
-	Currency *currency_;
-
 	NSMutableArray *contactInfoStubs_;	// ordered contact infos being created
+
+	// general settings
+	Currency *currency_;
+	NSFetchedResultsController *taxesAndCurrencyFetchedResultsController_;
 }
-
-// data store creation and management
-+ (DataStore *)defaultStore;
-+ (void)setDefaultStore:(DataStore *)newDataStore;
-
-- (id)initWithName:(NSString *)storeName;
-- (void)didReceiveMemoryWarning;
-
-// core data methods
-@property (nonatomic, retain, readonly) NSManagedObjectContext *managedObjectContext;
-@property (nonatomic, retain, readonly) NSManagedObjectModel *managedObjectModel;
-@property (nonatomic, retain, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;
-
-- (NSURL *)applicationDocumentsDirectory;
-- (void)saveContext;
-
-// client informatio methods
-- (NSFetchedResultsController *)clientInfosFetchedResultsController;
-- (ClientInformation *)createClientInformation;
-- (BOOL)deleteClientInformation:(ClientInformation *)clientInformation;
 
 // contact information methods
 @property (nonatomic, retain, readonly) NSMutableArray *contactInfoStubs;
 - (ContactInformation *)createContactInformationStub;
 - (BOOL)deleteContactInformation:(ContactInformation *)contactInformation; // do not call from outside of DataStore
 //- (BOOL)deleteContactInformation:(ContactInformation *)contactInformation fromClientInformation:(ClientInformation *)clientInformation;
+
+@end
+
+
+@interface DataStore (CoreDataAccessors)
+
++ (DataStore *)defaultStore;
++ (void)setDefaultStore:(DataStore *)newDataStore;
+- (id)initWithName:(NSString *)storeName;
+- (void)didReceiveMemoryWarning;
+
+@property (nonatomic, retain, readonly) NSManagedObjectContext *managedObjectContext;
+@property (nonatomic, retain, readonly) NSManagedObjectModel *managedObjectModel;
+@property (nonatomic, retain, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;
+
+- (NSURL *)applicationDocumentsDirectory;
+- (void)saveContext;
 
 @end
 
@@ -72,6 +74,15 @@
 - (Estimate *)saveEstimateStub;
 - (void)deleteEstimateStub;
 - (BOOL)deleteEstimate:(Estimate *)estimate;
+
+@end
+
+
+@interface DataStore (ClientAccessors)
+
+- (NSFetchedResultsController *)clientInfosFetchedResultsController;
+- (ClientInformation *)createClientInformation;
+- (BOOL)deleteClientInformation:(ClientInformation *)clientInformation;
 
 @end
 
@@ -95,9 +106,12 @@
 @end
 
 
-@interface DataStore (CurrencyAccessors)
+@interface DataStore (TaxesAndCurrencyAccessors)
 
 @property (nonatomic, readonly) Currency *currency;
-- (void)saveCurrency;
+@property (nonatomic, readonly) NSFetchedResultsController *taxesAndCurrencyFetchedResultsController;
+- (Tax *)createTax;
+- (BOOL)deleteTax:(Tax *)tax;
+- (BOOL)saveTaxesAndCurrency;
 
 @end

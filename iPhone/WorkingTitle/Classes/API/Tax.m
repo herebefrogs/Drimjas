@@ -7,11 +7,21 @@
 //
 
 #import "Tax.h"
+// API
+#import "DataStore.h"
 
 
 @implementation Tax
 
 @dynamic name;
 @dynamic percent;
+
+- (void) awakeFromInsert {
+	[super awakeFromInsert];
+
+	self.subEntityName = @"Tax";
+
+	self.index = [NSNumber numberWithInt:[[[[DataStore defaultStore] taxesAndCurrencyFetchedResultsController] sections] count]];
+}
 
 @end

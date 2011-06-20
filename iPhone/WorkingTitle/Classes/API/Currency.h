@@ -7,10 +7,10 @@
 //
 
 #import <CoreData/CoreData.h>
-#import "BaseObject.h"
+#import "IndexedObject.h"
 
 
-@interface Currency : BaseObject {
+@interface Currency : IndexedObject {
 }
 
 @property (nonatomic, retain) NSString *isoCode;
