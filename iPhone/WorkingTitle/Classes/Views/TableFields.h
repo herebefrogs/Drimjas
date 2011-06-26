@@ -72,6 +72,23 @@ typedef enum {
 } TaxesField;
 
 typedef enum {
+	MyInfoFieldName = 0,
+	MyInfoFieldAddress1,
+	MyInfoFieldAddress2,
+	MyInfoFieldCity,
+	MyInfoFieldState,
+	MyInfoFieldPostalCode,
+	MyInfoFieldCountry,
+	MyInfoFieldBusinessNumber,
+	MyInfoFieldPhone,
+	MyInfoFieldFax,
+	MyInfoFieldEmail,
+	MyInfoFieldWebsite,
+
+	numMyInfoField
+} MyInfoField;
+
+typedef enum {
 	OptionsFieldClients = 0,
 	OptionsFieldLineItems,
 	OptionsFieldTaxes,

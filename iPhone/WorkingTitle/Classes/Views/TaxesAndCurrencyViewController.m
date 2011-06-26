@@ -10,10 +10,12 @@
 // API
 #import "Currency.h"
 #import "DataStore.h"
+#import "MyInfo.h"
 #import "Tax.h"
 // Cells
 #import "TextFieldCell.h"
 // Views
+#import "MyInfoViewController.h"
 #import "ReviewEstimateViewController.h"
 #import "TableFields.h"
 
@@ -23,6 +25,7 @@
 
 @synthesize nextButton;
 @synthesize saveButton;
+@synthesize myInfoViewController;
 @synthesize reviewEstimateViewController;
 @synthesize taxesAndCurrency;
 
@@ -37,8 +40,6 @@
 	self.title = NSLocalizedString(@"Taxes & Currency", "TaxesAndCurrencyView Navigation Item Title");
 	nextButton.title = NSLocalizedString(@"Next", "Next Navigation Item Title");
 
-    self.navigationItem.rightBarButtonItem = self.saveButton;
-
 	self.taxesAndCurrency = [[DataStore defaultStore] taxesAndCurrencyFetchedResultsController];
 	taxesAndCurrency.delegate = self;
 		
@@ -50,6 +51,8 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+
+	self.navigationItem.rightBarButtonItem = [MyInfo isMyInfoSet] ? saveButton : nextButton;
 
 	[self.tableView reloadData];
 }
@@ -293,7 +296,16 @@ BOOL _insertTax = NO;
 #pragma mark Button delegate
 
 - (IBAction)next:(id)sender {
-	NSLog(@"open Photographer Information screen");
+	if (![MyInfo isMyInfoSet]) {
+		[[DataStore defaultStore] saveTaxesAndCurrency];
+
+		[self.navigationController pushViewController:myInfoViewController animated:YES];
+	}
+	else {
+		// maybe user went into Options screens and set My Information while
+		// this screen was open; therefore Estimate is now ready to be saved
+		[self save:sender];
+	}
 }
 
 - (IBAction)save:(id)sender {
@@ -327,6 +339,7 @@ BOOL _insertTax = NO;
     // Relinquish ownership of anything that can be recreated in viewDidLoad or on demand.
     self.nextButton = nil;
     self.saveButton = nil;
+	self.myInfoViewController = nil;
 	self.reviewEstimateViewController = nil;
 	self.taxesAndCurrency = nil;
 }
@@ -338,6 +351,7 @@ BOOL _insertTax = NO;
 #endif
 	[nextButton release];
 	[saveButton release];
+	[myInfoViewController release];
 	[reviewEstimateViewController release];
 	[taxesAndCurrency release];
     [super dealloc];

@@ -13,6 +13,7 @@
 #import "LineItemSelection.h"
 #import "LineItem.h"
 #import	"Currency.h"
+#import "MyInfo.h"
 // Cells
 #import "TextFieldCell.h"
 // Views
@@ -20,6 +21,7 @@
 #import "AddEstimatePickLineItemViewController.h"
 #import "ReviewEstimateViewController.h"
 #import "TaxesAndCurrencyViewController.h"
+#import "MyInfoViewController.h"
 
 @implementation AddEstimateLineItemsViewController
 
@@ -28,6 +30,7 @@
 @synthesize pickLineItemViewController;
 @synthesize reviewEstimateViewController;
 @synthesize	taxesAndCurrencyViewController;
+@synthesize myInfoViewController;
 @synthesize lineItemSelections;
 @synthesize estimate;
 
@@ -56,9 +59,7 @@
 	self.lineItemSelections = [[DataStore defaultStore] lineItemSelectionsForEstimate:estimate];
 	lineItemSelections.delegate = self;
 
-	Currency *currency = [[[DataStore defaultStore] currency] retain];
-	self.navigationItem.rightBarButtonItem = ([currency.status integerValue] == StatusActive) ? saveButton : nextButton;
-	[currency release];
+	self.navigationItem.rightBarButtonItem = ([Currency isCurrencySet] && [MyInfo isMyInfoSet]) ? saveButton : nextButton;
 
 	[self.tableView reloadData];
 }
@@ -386,7 +387,17 @@ BOOL _insertLineItem = NO;
 #pragma mark Button delegate
 
 - (IBAction)next:(id)sender {
-	[self.navigationController pushViewController:taxesAndCurrencyViewController animated:YES];
+	if (![Currency isCurrencySet]) {
+		[self.navigationController pushViewController:taxesAndCurrencyViewController animated:YES];
+	}
+	else if (![MyInfo isMyInfoSet]) {
+		[self.navigationController pushViewController:myInfoViewController animated:YES];
+	}
+	else {
+		// maybe user went into Options screens and set both Currency/Taxes & My Information
+		// while this screen was open; therefore Estimate is now ready to be saved
+		[self save:sender];
+	}
 }
 
 - (IBAction)save:(id)sender {
@@ -422,6 +433,7 @@ BOOL _insertLineItem = NO;
 	self.pickLineItemViewController = nil;
 	self.reviewEstimateViewController = nil;
 	self.taxesAndCurrencyViewController = nil;
+	self.myInfoViewController = nil;
 	lineItemSelections.delegate = nil;
 	self.lineItemSelections = nil;
 	self.estimate = nil;
@@ -437,6 +449,7 @@ BOOL _insertLineItem = NO;
 	[pickLineItemViewController release];
 	[reviewEstimateViewController release];
 	[taxesAndCurrencyViewController release];
+	[myInfoViewController release];
 	[lineItemSelections release];
 	[estimate release];
     [super dealloc];

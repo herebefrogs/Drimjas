@@ -7,7 +7,8 @@
 //
 
 #import "Currency.h"
-
+// API
+#import "DataStore.h"
 
 @implementation Currency
 
@@ -26,6 +27,10 @@
 	NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
 	self.isoCode = [numberFormatter currencyCode];
 	[numberFormatter release];
+}
+
++ (BOOL)isCurrencySet {
+	return StatusActive == [[[[DataStore defaultStore] currency] status] intValue];
 }
 
 @end

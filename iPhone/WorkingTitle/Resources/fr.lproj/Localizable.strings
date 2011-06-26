@@ -30,7 +30,7 @@
 "Address 1" = "Adresse 1";
 
 /* AddEstimateNewClientInfo View Controller Address 2 Text Field Placeholder */
-"Address2" = "Adresse 2";
+"Address 2" = "Adresse 2";
 
 /* AddEstimateNewClientInfo View Controller City Text Field Placeholder */
 "City" = "Ville";
@@ -112,6 +112,22 @@
 
 /* TaxesAndCurrencyView Tax Name Texfield placeholder */
 "Percent" = "Percentage";
+
+/* MyInfoViewController Navigation Item Title */
+"My Information" = "Mes informations";
+
+/* MyInfoViewController My Name Textfield Placholder */
+"My Company Name" = "Nom de ma société";
+
+/* MyInfoViewController Business Number Textfield Placeholder */
+"Business Number" = "Numéro d'immatriculation";
+
+/* MyInfoViewController Fax Textfield Placeholder */
+"Fax" = "Fax";
+
+/* MyInfoViewController Website Textfield Placeholder */
+"Website" = "Site Internet";
+
 
 /* ReviewEstimate View Controller Navigation Item Title */
 "Review Estimate" = "Aperçu du Devis";

@@ -45,8 +45,9 @@
 	return cell;
 }
 
+// subclasses should override this method to perfom custom cell configuration
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
-	// subclasses should override this method to perfom custom cell configuration
+	// prevent textfield cells to be selected
 	cell.selectionStyle = UITableViewCellSelectionStyleNone;
 }
 

@@ -9,6 +9,7 @@
 #import <CoreData/CoreData.h>
 #import "ClientInformation.h"
 
+@class ContactInformation;
 
 @interface MyInfo : ClientInformation {
 }
@@ -16,6 +17,9 @@
 @property (nonatomic, retain) NSString *businessNumber;
 @property (nonatomic, retain) NSString *fax;
 @property (nonatomic, retain) NSString *website;
+@property (nonatomic, readonly) ContactInformation* contactInfo;
+
++ (BOOL)isMyInfoSet;
 
 @end
 

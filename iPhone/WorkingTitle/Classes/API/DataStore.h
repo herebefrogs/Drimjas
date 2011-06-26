@@ -15,6 +15,7 @@
 @class LineItem;
 @class Currency;
 @class Tax;
+@class MyInfo;
 
 @interface DataStore : NSObject {
 
@@ -38,11 +39,13 @@
 	// general settings
 	Currency *currency_;
 	NSFetchedResultsController *taxesAndCurrencyFetchedResultsController_;
+	MyInfo *myInfo_;
 }
 
 // contact information methods
 @property (nonatomic, retain, readonly) NSMutableArray *contactInfoStubs;
 - (ContactInformation *)createContactInformationStub;
+- (ContactInformation *)addContactInfoToClientInfo:(ClientInformation *)clientInfo;
 - (BOOL)deleteContactInformation:(ContactInformation *)contactInformation; // do not call from outside of DataStore
 //- (BOOL)deleteContactInformation:(ContactInformation *)contactInformation fromClientInformation:(ClientInformation *)clientInformation;
 
@@ -113,5 +116,13 @@
 - (Tax *)createTax;
 - (BOOL)deleteTax:(Tax *)tax;
 - (BOOL)saveTaxesAndCurrency;
+
+@end
+
+
+@interface DataStore (MyInfoAccessors)
+
+@property (nonatomic, readonly) MyInfo *myInfo;
+- (void)saveMyInfo;
 
 @end

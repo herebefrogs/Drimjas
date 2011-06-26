@@ -13,6 +13,7 @@
 @class AddEstimatePickLineItemViewController;
 @class ReviewEstimateViewController;
 @class TaxesAndCurrencyViewController;
+@class MyInfoViewController;
 @class Estimate;
 
 @interface AddEstimateLineItemsViewController : TextFieldTableViewController <NSFetchedResultsControllerDelegate> {
@@ -21,6 +22,7 @@
 	AddEstimatePickLineItemViewController *pickLineItemViewController;
 	ReviewEstimateViewController *reviewEstimateViewController;
 	TaxesAndCurrencyViewController *taxesAndCurrencyViewController;
+	MyInfoViewController *myInfoViewController;
 
 	NSFetchedResultsController *lineItemSelections;
 	Estimate *estimate;
@@ -31,6 +33,7 @@
 @property (nonatomic, retain) IBOutlet AddEstimatePickLineItemViewController *pickLineItemViewController;
 @property (nonatomic, retain) IBOutlet ReviewEstimateViewController *reviewEstimateViewController;
 @property (nonatomic, retain) IBOutlet TaxesAndCurrencyViewController *taxesAndCurrencyViewController;
+@property (nonatomic, retain) IBOutlet MyInfoViewController *myInfoViewController;
 
 @property (nonatomic, retain) NSFetchedResultsController *lineItemSelections;
 @property (nonatomic, retain) Estimate *estimate;

@@ -15,4 +15,6 @@
 
 @property (nonatomic, retain) NSString *isoCode;
 
++ (BOOL)isCurrencySet;
+
 @end

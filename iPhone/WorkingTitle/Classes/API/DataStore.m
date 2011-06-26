@@ -16,6 +16,7 @@
 #import "LineItem.h"
 #import "Currency.h"
 #import "Tax.h"
+#import "MyInfo.h"
 
 
 @implementation DataStore
@@ -398,7 +399,8 @@ static DataStore *singleton_ = nil;
 										  inManagedObjectContext:self.managedObjectContext];
 
 		// fetch only "active" ClientInfo
-		fetchRequest.predicate = [NSPredicate predicateWithFormat:@"status = %@", [NSNumber numberWithInt:StatusActive]]; 
+		fetchRequest.predicate = [NSPredicate predicateWithFormat:@"status = %@ AND subEntityName = %@", 
+																  [NSNumber numberWithInt:StatusActive], @"ClientInfo"]; 
 
 		// sort ClientInfo alphabetically
 		NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
@@ -462,6 +464,16 @@ static DataStore *singleton_ = nil;
 																						  inManagedObjectContext:self.managedObjectContext];
 
 	[self.contactInfoStubs addObject:contactInfo];
+
+	return contactInfo;
+}
+
+- (ContactInformation *)addContactInfoToClientInfo:(ClientInformation *)clientInfo {
+	ContactInformation *contactInfo = (ContactInformation *)[NSEntityDescription insertNewObjectForEntityForName:@"ContactInformation"
+																						  inManagedObjectContext:self.managedObjectContext];
+
+	[clientInfo addContactInfosObject:contactInfo];
+	contactInfo.clientInfo = clientInfo;
 
 	return contactInfo;
 }
@@ -760,6 +772,56 @@ static DataStore *singleton_ = nil;
 	return YES;
 }
 
+
+#pragma mark -
+#pragma mark My Information stack
+
+- (MyInfo *)myInfo {
+	if (myInfo_ == nil) {
+		// load my information from data store
+		NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+		fetchRequest.entity = [NSEntityDescription entityForName:@"MyInfo"
+										  inManagedObjectContext:self.managedObjectContext];
+
+		NSError *error;
+		NSArray *fetchedObjects = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+
+		if (!fetchedObjects) {
+			// TODO Handle the error
+			// This is a serious error blablabla
+			NSLog(@"DataStore.myInfo: fetch failed with error %@, %@", error, [error userInfo]);
+		}
+
+		NSAssert(fetchedObjects.count <= 1, @"More than 1 my information created");
+
+		if (fetchedObjects.count > 0) {
+			myInfo_ = (MyInfo *)[fetchedObjects objectAtIndex:0];
+		} else {
+			myInfo_ = (MyInfo *)[NSEntityDescription insertNewObjectForEntityForName:@"MyInfo"
+																  inManagedObjectContext:self.managedObjectContext];
+
+			[self addContactInfoToClientInfo:myInfo_];
+		}
+		[myInfo_ retain];
+
+		[fetchRequest release];
+	}
+
+	return myInfo_;
+}
+
+- (void)saveMyInfo {
+	if (myInfo_) {
+		// TODO also validate myInfo? what are the required fields
+		if ([myInfo_.status intValue] == StatusCreated) {
+			myInfo_.status = [NSNumber numberWithInt:StatusActive];
+		}
+
+		[self saveContext];
+	}
+}
+
+
 #pragma mark -
 #pragma mark Memory management stack
 
@@ -776,6 +838,7 @@ static DataStore *singleton_ = nil;
 	[lineItemsFetchedResultsController_ release];
 	[taxesAndCurrencyFetchedResultsController_ release];
 	[currency_ release];
+	[myInfo_ release];
 	[estimateStub_ release];
 	[storeName_ release];
 	[super dealloc];

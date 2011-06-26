@@ -113,6 +113,21 @@
 /* TaxesAndCurrencyView Tax Name Texfield placeholder */
 "Percent" = "Percent";
 
+/* MyInfoViewController Navigation Item Title */
+"My Information" = "My Information";
+
+/* MyInfoViewController My Name Textfield Placholder */
+"My Company Name" = "My Company Name";
+
+/* MyInfoViewController Business Number Textfield Placeholder */
+"Business Number" = "Business Number";
+
+/* MyInfoViewController Fax Textfield Placeholder */
+"Fax" = "Fax";
+
+/* MyInfoViewController Website Textfield Placeholder */
+"Website" = "Website";
+
 /* ReviewEstimate View Controller Navigation Item Title */
 "Review Estimate" = "Review Estimate";
 

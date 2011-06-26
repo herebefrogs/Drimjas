@@ -32,6 +32,8 @@
 		0288D9A013A9A306001E6641 /* TaxesAndCurrency.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0288D99E13A9A306001E6641 /* TaxesAndCurrency.xib */; };
 		028917E21308D1CD00945F4D /* Estimates@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 028917DE1308D1CD00945F4D /* Estimates@2x.png */; };
 		028CCBA113B795CD0073C88F /* MyInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 028CCBA013B795CD0073C88F /* MyInfo.m */; };
+		028CCBD213B7A4910073C88F /* MyInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 028CCBD013B7A4910073C88F /* MyInfoViewController.m */; };
+		028CCBD313B7A4910073C88F /* MyInfo.xib in Resources */ = {isa = PBXBuildFile; fileRef = 028CCBD113B7A4910073C88F /* MyInfo.xib */; };
 		02943B941319891100A719AA /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02943B931319891100A719AA /* CoreData.framework */; };
 		02943CB11319AB8400A719AA /* WorkingTitle.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 02943CAF1319AB8400A719AA /* WorkingTitle.xcdatamodeld */; };
 		0299F96F1304D8ED001E1E3E /* StartupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0299F96D1304D8ED001E1E3E /* StartupViewController.m */; };
@@ -133,6 +135,9 @@
 		028CCB9913B794C40073C88F /* WorkingTitle 11.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "WorkingTitle 11.xcdatamodel"; sourceTree = "<group>"; };
 		028CCB9F13B795CD0073C88F /* MyInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyInfo.h; sourceTree = "<group>"; };
 		028CCBA013B795CD0073C88F /* MyInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyInfo.m; sourceTree = "<group>"; };
+		028CCBCF13B7A4910073C88F /* MyInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyInfoViewController.h; sourceTree = "<group>"; };
+		028CCBD013B7A4910073C88F /* MyInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyInfoViewController.m; sourceTree = "<group>"; };
+		028CCBD113B7A4910073C88F /* MyInfo.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyInfo.xib; sourceTree = "<group>"; };
 		02943B931319891100A719AA /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		02943CB01319AB8400A719AA /* WorkingTitle.xcdatamodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcdatamodel; path = WorkingTitle.xcdatamodel; sourceTree = "<group>"; };
 		0299F96C1304D8ED001E1E3E /* StartupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartupViewController.h; sourceTree = "<group>"; };
@@ -263,6 +268,8 @@
 				020886CE13AC41D000164320 /* ContractsViewController.m */,
 				02B2C06B12DFF2DD00D3FEE0 /* EstimatesViewController.h */,
 				02B2C06C12DFF2DD00D3FEE0 /* EstimatesViewController.m */,
+				028CCBCF13B7A4910073C88F /* MyInfoViewController.h */,
+				028CCBD013B7A4910073C88F /* MyInfoViewController.m */,
 				02FA0481138F3C94001CF3B0 /* NewLineItemViewController.h */,
 				02FA0482138F3C94001CF3B0 /* NewLineItemViewController.m */,
 				020886E713AC439100164320 /* OptionsViewController.h */,
@@ -294,6 +301,7 @@
 				020886CF13AC41D000164320 /* Contracts.xib */,
 				02B2C06D12DFF2DD00D3FEE0 /* Estimates.xib */,
 				28AD73870D9D96C1002E5188 /* MainWindow.xib */,
+				028CCBD113B7A4910073C88F /* MyInfo.xib */,
 				02FA0483138F3C94001CF3B0 /* NewLineItem.xib */,
 				020886E913AC439100164320 /* Options.xib */,
 				02E1C7A312E53834000D7747 /* ReviewEstimate.xib */,
@@ -311,12 +319,12 @@
 				023AE59A13665C7000E8A88D /* BaseObject.m */,
 				0288D97B13A99E8F001E6641 /* Currency.h */,
 				0288D97C13A99E8F001E6641 /* Currency.m */,
-				02C25791132438C40057D944 /* DataStore.h */,
-				02C25792132438C40057D944 /* DataStore.m */,
 				02CC9D80133FEA36006160A7 /* ClientInformation.h */,
 				02CC9D81133FEA36006160A7 /* ClientInformation.m */,
 				02A8E5451347C79D00BAAF36 /* ContactInformation.h */,
 				02A8E5461347C79D00BAAF36 /* ContactInformation.m */,
+				02C25791132438C40057D944 /* DataStore.h */,
+				02C25792132438C40057D944 /* DataStore.m */,
 				02CC9D83133FEB2C006160A7 /* Estimate.h */,
 				02CC9D84133FEB2C006160A7 /* Estimate.m */,
 				02B6326413B1D9D5003E4081 /* IndexedObject.h */,
@@ -557,6 +565,7 @@
 				0288D9A013A9A306001E6641 /* TaxesAndCurrency.xib in Resources */,
 				020886D113AC41D000164320 /* Contracts.xib in Resources */,
 				020886EB13AC439100164320 /* Options.xib in Resources */,
+				028CCBD313B7A4910073C88F /* MyInfo.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -601,6 +610,7 @@
 				0263BCE813AEE31200ECD5D2 /* Tax.m in Sources */,
 				02B6326613B1D9D5003E4081 /* IndexedObject.m in Sources */,
 				028CCBA113B795CD0073C88F /* MyInfo.m in Sources */,
+				028CCBD213B7A4910073C88F /* MyInfoViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
