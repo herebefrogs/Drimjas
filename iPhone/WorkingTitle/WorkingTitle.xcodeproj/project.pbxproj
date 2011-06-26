@@ -31,6 +31,7 @@
 		0288D99F13A9A306001E6641 /* TaxesAndCurrencyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0288D99D13A9A306001E6641 /* TaxesAndCurrencyViewController.m */; };
 		0288D9A013A9A306001E6641 /* TaxesAndCurrency.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0288D99E13A9A306001E6641 /* TaxesAndCurrency.xib */; };
 		028917E21308D1CD00945F4D /* Estimates@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 028917DE1308D1CD00945F4D /* Estimates@2x.png */; };
+		028CCBA113B795CD0073C88F /* MyInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 028CCBA013B795CD0073C88F /* MyInfo.m */; };
 		02943B941319891100A719AA /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02943B931319891100A719AA /* CoreData.framework */; };
 		02943CB11319AB8400A719AA /* WorkingTitle.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 02943CAF1319AB8400A719AA /* WorkingTitle.xcdatamodeld */; };
 		0299F96F1304D8ED001E1E3E /* StartupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0299F96D1304D8ED001E1E3E /* StartupViewController.m */; };
@@ -129,6 +130,9 @@
 		0288D99D13A9A306001E6641 /* TaxesAndCurrencyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaxesAndCurrencyViewController.m; sourceTree = "<group>"; };
 		0288D99E13A9A306001E6641 /* TaxesAndCurrency.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TaxesAndCurrency.xib; sourceTree = "<group>"; };
 		028917DE1308D1CD00945F4D /* Estimates@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Estimates@2x.png"; path = "Resources/Icons/Estimates@2x.png"; sourceTree = "<group>"; };
+		028CCB9913B794C40073C88F /* WorkingTitle 11.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "WorkingTitle 11.xcdatamodel"; sourceTree = "<group>"; };
+		028CCB9F13B795CD0073C88F /* MyInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyInfo.h; sourceTree = "<group>"; };
+		028CCBA013B795CD0073C88F /* MyInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyInfo.m; sourceTree = "<group>"; };
 		02943B931319891100A719AA /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		02943CB01319AB8400A719AA /* WorkingTitle.xcdatamodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcdatamodel; path = WorkingTitle.xcdatamodel; sourceTree = "<group>"; };
 		0299F96C1304D8ED001E1E3E /* StartupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartupViewController.h; sourceTree = "<group>"; };
@@ -321,6 +325,8 @@
 				02DE987A137A10C1007C5FED /* LineItem.m */,
 				02022CA41378CDFC00536FEA /* LineItemSelection.h */,
 				02022CA51378CDFC00536FEA /* LineItemSelection.m */,
+				028CCB9F13B795CD0073C88F /* MyInfo.h */,
+				028CCBA013B795CD0073C88F /* MyInfo.m */,
 				0263BCE613AEE31200ECD5D2 /* Tax.h */,
 				0263BCE713AEE31200ECD5D2 /* Tax.m */,
 			);
@@ -594,6 +600,7 @@
 				020886EA13AC439100164320 /* OptionsViewController.m in Sources */,
 				0263BCE813AEE31200ECD5D2 /* Tax.m in Sources */,
 				02B6326613B1D9D5003E4081 /* IndexedObject.m in Sources */,
+				028CCBA113B795CD0073C88F /* MyInfo.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -703,8 +710,9 @@
 				02022C9F1378CD8700536FEA /* WorkingTitle 8.xcdatamodel */,
 				0288D97613A99C47001E6641 /* WorkingTitle 9.xcdatamodel */,
 				0263BCE313AEE21400ECD5D2 /* WorkingTitle 10.xcdatamodel */,
+				028CCB9913B794C40073C88F /* WorkingTitle 11.xcdatamodel */,
 			);
-			currentVersion = 0263BCE313AEE21400ECD5D2 /* WorkingTitle 10.xcdatamodel */;
+			currentVersion = 028CCB9913B794C40073C88F /* WorkingTitle 11.xcdatamodel */;
 			name = WorkingTitle.xcdatamodeld;
 			path = Resources/WorkingTitle.xcdatamodeld;
 			sourceTree = "<group>";

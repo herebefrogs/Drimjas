@@ -23,6 +23,13 @@
 @dynamic contactInfos;
 @dynamic estimates;
 
+
+- (void)awakeFromInsert {
+	[super awakeFromInsert];
+	
+	self.subEntityName = @"ClientInfo";
+}
+
 #pragma mark -
 #pragma mark Public methods stack
 
