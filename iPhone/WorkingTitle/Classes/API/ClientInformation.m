@@ -7,6 +7,7 @@
 //
 
 #import "ClientInformation.h"
+
 // API
 #import "Estimate.h"
 #import "ContactInformation.h"
@@ -37,75 +38,33 @@
 	return (name.length > 0);
 }
 
-- (NSInteger)numSetProperties {
+- (NSInteger)numSetProperties {	
+	NSArray *properties = [NSArray arrayWithObjects:@"name", @"address1", @"address2", @"city", @"state", @"postalCode", @"country", nil];
+
 	NSInteger count = 0;
-	if (self.name.length > 0) {
-		count++;
+	for (NSString *property in properties) {
+		NSString *value = [self valueForKey:property];
+		if (value.length > 0) {
+			count++;
+		}
 	}
-	if (self.address1.length > 0) {
-		count++;
-	}
-	if (self.address2.length > 0) {
-		count++;
-	}
-	if (self.city.length > 0) {
-		count++;
-	}
-	if (self.state.length > 0) {
-		count++;
-	}
-	if (self.postalCode.length > 0) {
-		count++;
-	}
-	if (self.country.length > 0) {
-		count++;
-	}
+
 	return count;
 }
 
 - (NSString *)getSetPropertyWithIndex:(NSInteger)index {
-	if (self.name.length > 0) {
-		if (index == 0) {
-			return self.name;
+	NSArray *properties = [NSArray arrayWithObjects:@"name", @"address1", @"address2", @"city", @"state", @"postalCode", @"country", nil];
+
+	for (NSString *property in properties) {
+		NSString *value = [self valueForKey:property];
+		if (value.length > 0) {
+			if (index == 0) {
+				return value;
+			}
+			index--;
 		}
-		index--;
 	}
-	if (self.address1.length > 0) {
-		if (index == 0) {
-			return self.address1;
-		}
-		index--;
-	}
-	if (self.address2.length > 0) {
-		if (index == 0) {
-			return self.address2;
-		}
-		index--;
-	}
-	if (self.city.length > 0) {
-		if (index == 0) {
-			return self.city;
-		}
-		index--;
-	}
-	if (self.state.length > 0) {
-		if (index == 0) {
-			return self.state;
-		}
-		index--;
-	}
-	if (self.postalCode.length > 0) {
-		if (index == 0) {
-			return self.postalCode;
-		}
-		index--;
-	}
-	if (self.country.length > 0) {
-		if (index == 0) {
-			return self.country;
-		}
-		index--;
-	}
+
 	return nil;
 }
 

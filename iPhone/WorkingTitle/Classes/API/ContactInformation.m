@@ -20,40 +20,32 @@
 @dynamic clientInfo;
 
 - (NSInteger)numSetProperties {
+	NSArray *properties = [NSArray arrayWithObjects:@"name", @"phone", @"email", nil];
+	
 	NSInteger count = 0;
-
-	if (self.name.length > 0) {
-		count++;
+	for (NSString *property in properties) {
+		NSString *value = [self valueForKey:property];
+		if (value.length > 0) {
+			count++;
+		}
 	}
-	if (self.phone.length > 0) {
-		count++;
-	}
-	if (self.email.length > 0) {
-		count++;
-	}
-
+	
 	return count;
 }
 
 - (NSString *)getSetPropertyWithIndex:(NSInteger)index {
-	if (self.name.length > 0) {
-		if (index == 0) {
-			return self.name;
+	NSArray *properties = [NSArray arrayWithObjects:@"name", @"phone", @"email", nil];
+	
+	for (NSString *property in properties) {
+		NSString *value = [self valueForKey:property];
+		if (value.length > 0) {
+			if (index == 0) {
+				return value;
+			}
+			index--;
 		}
-		index--;
 	}
-	if (self.phone.length > 0) {
-		if (index == 0) {
-			return self.phone;
-		}
-		index--;
-	}
-	if (self.email.length > 0) {
-		if (index == 0) {
-			return self.email;
-		}
-		index--;
-	}
+
 	return nil;
 }
 
