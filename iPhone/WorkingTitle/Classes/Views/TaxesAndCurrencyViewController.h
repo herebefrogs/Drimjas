@@ -20,6 +20,7 @@
 	ReviewEstimateViewController *reviewEstimateViewController;
 
 	NSFetchedResultsController *taxesAndCurrency;
+	BOOL optionsMode;
 }
 
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *nextButton;
@@ -28,6 +29,7 @@
 @property (nonatomic, retain) IBOutlet ReviewEstimateViewController *reviewEstimateViewController;
 
 @property (nonatomic, retain) NSFetchedResultsController *taxesAndCurrency;
+@property (nonatomic, assign) BOOL optionsMode;
 
 - (IBAction)next:(id)sender;
 - (IBAction)save:(id)sender;

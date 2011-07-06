@@ -9,11 +9,14 @@
 #import <UIKit/UIKit.h>
 
 @class MyInfoViewController;
+@class TaxesAndCurrencyViewController;
 
 @interface OptionsViewController : UITableViewController {
 	MyInfoViewController *myInfoViewController;
+	TaxesAndCurrencyViewController *taxesAndCurrencyViewController;
 }
 
 @property (nonatomic, retain) IBOutlet MyInfoViewController *myInfoViewController;
+@property (nonatomic, retain) IBOutlet TaxesAndCurrencyViewController *taxesAndCurrencyViewController;
 
 @end

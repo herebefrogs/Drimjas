@@ -10,11 +10,13 @@
 // Views
 #import "MyInfoViewController.h"
 #import "TableFields.h"
+#import "TaxesAndCurrencyViewController.h"
 
 @implementation OptionsViewController
 
 
 @synthesize myInfoViewController;
+@synthesize taxesAndCurrencyViewController;
 
 #pragma mark -
 #pragma mark View lifecycle
@@ -27,27 +29,6 @@
 	self.title = NSLocalizedString(@"Options", @"Options Navigation Item Title");
 	self.navigationController.tabBarItem.title = self.title;
 }
-
-/*
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-}
-*/
-/*
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-}
-*/
-/*
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-}
-*/
-/*
-- (void)viewDidDisappear:(BOOL)animated {
-    [super viewDidDisappear:animated];
-}
-*/
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     return YES;
@@ -98,46 +79,6 @@
 }
 
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source.
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
-    }   
-}
-*/
-
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-
 #pragma mark -
 #pragma mark Table view delegate
 
@@ -149,7 +90,8 @@
 		NSLog(@"Open line items screen");
 	}
 	else if (indexPath.row == OptionsFieldTaxes) {
-		NSLog(@"Open taxes & currency screen");
+		taxesAndCurrencyViewController.optionsMode = YES;
+		[self.navigationController pushViewController:taxesAndCurrencyViewController animated:YES];
 	}
 	else if (indexPath.row == OptionsFieldMyInfo) {
 		myInfoViewController.optionsMode = YES;
@@ -173,6 +115,7 @@
 	NSLog(@"OptionsViewController.viewDidUnload");
 #endif
     self.myInfoViewController = nil;
+	self.taxesAndCurrencyViewController = nil;
 }
 
 
@@ -181,6 +124,7 @@
 	NSLog(@"OptionsViewController.dealloc");
 #endif
 	[myInfoViewController release];
+	[taxesAndCurrencyViewController release];
     [super dealloc];
 }
 

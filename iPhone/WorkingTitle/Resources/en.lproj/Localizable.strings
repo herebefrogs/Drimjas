@@ -116,7 +116,7 @@
 /* MyInfoViewController Navigation Item Title */
 "My Information" = "My Information";
 
-/* MyInfoViewController Table Header */
+/* MyInfoViewController & TaxesAndCurrencyViewController Table Header */
 "This can later be changed from the Options tab" = "This can later be changed from the Options tab";
 
 /* MyInfoViewController My Name Textfield Placholder */
