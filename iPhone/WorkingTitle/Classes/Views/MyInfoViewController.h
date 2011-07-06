@@ -18,12 +18,14 @@
 	ReviewEstimateViewController *reviewEstimateViewController;
 
 	MyInfo *myInfo;
+	BOOL optionsMode;
 }
 
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *saveButton;
 @property (nonatomic, retain) IBOutlet ReviewEstimateViewController *reviewEstimateViewController;
 
 @property (nonatomic, retain) MyInfo *myInfo;
+@property (nonatomic, assign) BOOL optionsMode;
 
 - (IBAction)save:(id)sender;
 

@@ -299,6 +299,7 @@ BOOL _insertTax = NO;
 	if (![MyInfo isMyInfoSet]) {
 		[[DataStore defaultStore] saveTaxesAndCurrency];
 
+		myInfoViewController.optionsMode = NO;
 		[self.navigationController pushViewController:myInfoViewController animated:YES];
 	}
 	else {

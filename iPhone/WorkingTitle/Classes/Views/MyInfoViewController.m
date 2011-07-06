@@ -24,6 +24,7 @@
 @synthesize saveButton;
 @synthesize reviewEstimateViewController;
 @synthesize myInfo;
+@synthesize optionsMode;
 
 #pragma mark -
 #pragma mark View lifecycle
@@ -40,6 +41,13 @@
 	self.myInfo = [[DataStore defaultStore] myInfo];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+
+	// refresh table in case user is viewing MyInfo screen from 1st Estimate creation & Options menu screens at the same time
+	[self.tableView reloadData];
+}
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
 	return YES;
 }
@@ -47,6 +55,12 @@
 
 #pragma mark -
 #pragma mark Table view data source
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    return !optionsMode
+		? NSLocalizedString(@"This can later be changed from the Options tab", "MyInfoViewController Table Header")
+		: nil;
+}
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
@@ -179,15 +193,21 @@
 - (IBAction)save:(id)sender {
 	[[DataStore defaultStore] saveMyInfo];
 
-	// save estimate into estimates list
-	reviewEstimateViewController.estimate = [[DataStore defaultStore] saveEstimateStub];
+	if (optionsMode) {
+		// go back to Options screen
+		[self.navigationController popViewControllerAnimated:YES];
+	}
+	else {
+		// save estimate into estimates list
+		reviewEstimateViewController.estimate = [[DataStore defaultStore] saveEstimateStub];
 
-	// reset navigation controller to review estimate view controller
-	UIViewController *rootController = [self.navigationController.viewControllers objectAtIndex:0];
-	[self.navigationController setViewControllers:[NSArray arrayWithObjects:rootController,
-												   reviewEstimateViewController,
-												   nil]
-										 animated:YES];
+		// reset navigation controller to review estimate view controller
+		UIViewController *rootController = [self.navigationController.viewControllers objectAtIndex:0];
+		[self.navigationController setViewControllers:[NSArray arrayWithObjects:rootController,
+													   reviewEstimateViewController,
+													   nil]
+											 animated:YES];
+	}
 }
 
 #pragma mark -

@@ -116,6 +116,9 @@
 /* MyInfoViewController Navigation Item Title */
 "My Information" = "Mes informations";
 
+/* MyInfoViewController Table Header */
+"This can later be changed from the Options tab" = "Ceci peut être changé ultérieurement à partir de l'onglet Options";
+
 /* MyInfoViewController My Name Textfield Placholder */
 "My Company Name" = "Nom de ma société";
 
@@ -152,9 +155,6 @@
 
 /* Options Line Items Title */
 "Line Items" = "Postes";
-
-/* Options Photographer Information */
-"Photographer Information" = "Information du photographe";
 
 /********************* Utils section ******************/
 /* Estimate PDF filename & Mail Subject */

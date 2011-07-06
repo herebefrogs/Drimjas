@@ -391,6 +391,7 @@ BOOL _insertLineItem = NO;
 		[self.navigationController pushViewController:taxesAndCurrencyViewController animated:YES];
 	}
 	else if (![MyInfo isMyInfoSet]) {
+		myInfoViewController.optionsMode = NO;
 		[self.navigationController pushViewController:myInfoViewController animated:YES];
 	}
 	else {

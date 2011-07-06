@@ -8,10 +8,13 @@
 
 #import "OptionsViewController.h"
 // Views
+#import "MyInfoViewController.h"
 #import "TableFields.h"
 
 @implementation OptionsViewController
 
+
+@synthesize myInfoViewController;
 
 #pragma mark -
 #pragma mark View lifecycle
@@ -85,8 +88,8 @@
 	else if (indexPath.row == OptionsFieldTaxes) {
 		cell.textLabel.text = NSLocalizedString(@"Taxes & Currency", "Options Currency & Taxes Title");
 	}
-	else if (indexPath.row == OptionsFieldPhotographerInfo) {
-		cell.textLabel.text = NSLocalizedString(@"Photographer Information", "Options Photographer Information Title");
+	else if (indexPath.row == OptionsFieldMyInfo) {
+		cell.textLabel.text = NSLocalizedString(@"My Information", "Options My Information Title");
 	}
 	
 	cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -139,14 +142,19 @@
 #pragma mark Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-    <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-    // ...
-    // Pass the selected object to the new view controller.
-    [self.navigationController pushViewController:detailViewController animated:YES];
-    [detailViewController release];
-    */
+    if (indexPath.row == OptionsFieldClients) {
+		NSLog(@"Open clients screen");
+	}
+	else if (indexPath.row == OptionsFieldLineItems) {
+		NSLog(@"Open line items screen");
+	}
+	else if (indexPath.row == OptionsFieldTaxes) {
+		NSLog(@"Open taxes & currency screen");
+	}
+	else if (indexPath.row == OptionsFieldMyInfo) {
+		myInfoViewController.optionsMode = YES;
+		[self.navigationController pushViewController:myInfoViewController animated:YES];
+	}
 }
 
 
@@ -164,8 +172,7 @@
 #ifdef __ENABLE_UI_LOGS__
 	NSLog(@"OptionsViewController.viewDidUnload");
 #endif
-    // Relinquish ownership of anything that can be recreated in viewDidLoad or on demand.
-    // For example: self.myOutlet = nil;
+    self.myInfoViewController = nil;
 }
 
 
@@ -173,6 +180,7 @@
 #ifdef __ENABLE_UI_LOGS__
 	NSLog(@"OptionsViewController.dealloc");
 #endif
+	[myInfoViewController release];
     [super dealloc];
 }
 

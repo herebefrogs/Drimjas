@@ -8,9 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+@class MyInfoViewController;
 
 @interface OptionsViewController : UITableViewController {
-
+	MyInfoViewController *myInfoViewController;
 }
+
+@property (nonatomic, retain) IBOutlet MyInfoViewController *myInfoViewController;
 
 @end
