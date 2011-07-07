@@ -1,12 +1,12 @@
 //
-//  AddEstimatePickLineItem.m
+//  LineItemsViewController.m
 //  WorkingTitle
 //
 //  Created by Jerome Lecomte on 11-05-10.
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import "AddEstimatePickLineItemViewController.h"
+#import "LineItemsViewController.h"
 // API
 #import "DataStore.h"
 #import "LineItem.h"
@@ -14,7 +14,7 @@
 // Views
 #import "NewLineItemViewController.h"
 
-@implementation AddEstimatePickLineItemViewController
+@implementation LineItemsViewController
 
 @synthesize lineItems;
 @synthesize lineItemSelection;
@@ -26,11 +26,11 @@
 
 - (void)viewDidLoad {
 #ifdef __ENABLE_UI_LOGS__
-	NSLog(@"AddEstimatePickLineItemViewController.viewDidLoad");
+	NSLog(@"LineItemsViewController.viewDidLoad");
 #endif
     [super viewDidLoad];
 
-	self.title = NSLocalizedString(@"Pick Line Item", "AddEstimatePickLineItems Navigation Item Title");
+	self.title = NSLocalizedString(@"Pick Line Item", "LineItemsViewController Navigation Item Title");
 
 	self.lineItems = [[DataStore defaultStore] lineItemsFetchedResultsController];
 	lineItems.delegate = self;
@@ -67,7 +67,7 @@
 			cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
 		}
 
-		cell.textLabel.text = NSLocalizedString(@"Add a Line Item", "AddEstimatePickLineItem Add A Line Item Row");
+		cell.textLabel.text = NSLocalizedString(@"Add a Line Item", "LineItemsViewController Add A Line Item Row");
 		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 
 		return cell;
@@ -156,7 +156,7 @@
 
 - (void)viewDidUnload {
 #ifdef __ENABLE_UI_LOGS__
-	NSLog(@"AddEstimatePickLineItemViewController.viewDidUnload");
+	NSLog(@"LineItemsViewController.viewDidUnload");
 #endif
     // Relinquish ownership of anything that can be recreated in viewDidLoad or on demand.
     lineItems.delegate = nil;
@@ -168,7 +168,7 @@
 
 - (void)dealloc {
 #ifdef __ENABLE_UI_LOGS__
-	NSLog(@"AddEstimatePickLineItemViewController.dealloc");
+	NSLog(@"LineItemsViewController.dealloc");
 #endif
 	[lineItems release];
 	[lineItemSelection release];

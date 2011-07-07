@@ -86,7 +86,7 @@
 /* AddEstimateLineItems Unit Cost Textfield placeholder */
 "Unit Cost" = "Coût Unitaire";
 
-/* AddEstimatePickLineItems Navigation Item Title */
+/* LineItems Navigation Item Title */
 "Pick Line Item" = "Choisir un Poste";
 
 /* NewLineItems Navigation Item Title */

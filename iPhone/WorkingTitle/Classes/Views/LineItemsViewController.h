@@ -1,5 +1,5 @@
 //
-//  AddEstimatePickLineItem.h
+//  LineItemsViewController.h
 //  WorkingTitle
 //
 //  Created by Jerome Lecomte on 11-05-10.
@@ -11,7 +11,7 @@
 @class LineItemSelection;
 @class NewLineItemViewController;
 
-@interface AddEstimatePickLineItemViewController : UITableViewController <NSFetchedResultsControllerDelegate> {
+@interface LineItemsViewController : UITableViewController <NSFetchedResultsControllerDelegate> {
 	NSFetchedResultsController *lineItems;
 
 	LineItemSelection *lineItemSelection;

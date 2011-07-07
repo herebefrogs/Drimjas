@@ -2,9 +2,9 @@
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="7.10">
 	<data>
 		<int key="IBDocument.SystemTarget">1056</int>
-		<string key="IBDocument.SystemVersion">10J869</string>
+		<string key="IBDocument.SystemVersion">10K540</string>
 		<string key="IBDocument.InterfaceBuilderVersion">823</string>
-		<string key="IBDocument.AppKitVersion">1038.35</string>
+		<string key="IBDocument.AppKitVersion">1038.36</string>
 		<string key="IBDocument.HIToolboxVersion">461.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -97,7 +97,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 				<int key="IBUIStyle">1</int>
 			</object>
 			<object class="IBUIViewController" id="944347942">
-				<string key="IBUINibName">AddEstimatePickLineItem</string>
+				<string key="IBUINibName">LineItems</string>
 				<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics"/>
 				<object class="IBUISimulatedOrientationMetrics" key="IBUISimulatedOrientationMetrics">
 					<int key="interfaceOrientation">1</int>
@@ -161,14 +161,6 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 					<int key="connectionID">7</int>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">pickLineItemViewController</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="944347942"/>
-					</object>
-					<int key="connectionID">15</int>
-				</object>
-				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">save:</string>
 						<reference key="source" ref="76443317"/>
@@ -223,6 +215,14 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 						<reference key="destination" ref="257355326"/>
 					</object>
 					<int key="connectionID">28</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">lineItemsViewController</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="944347942"/>
+					</object>
+					<int key="connectionID">29</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -309,7 +309,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>AddEstimateLineItemsViewController</string>
 					<string>UIResponder</string>
-					<string>AddEstimatePickLineItemViewController</string>
+					<string>LineItemsViewController</string>
 					<string>{{350, 265}, {320, 480}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -343,7 +343,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">28</int>
+			<int key="maxID">29</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -387,18 +387,18 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>lineItemsViewController</string>
 							<string>myInfoViewController</string>
 							<string>nextButton</string>
-							<string>pickLineItemViewController</string>
 							<string>reviewEstimateViewController</string>
 							<string>saveButton</string>
 							<string>taxesAndCurrencyViewController</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>LineItemsViewController</string>
 							<string>MyInfoViewController</string>
 							<string>UIBarButtonItem</string>
-							<string>AddEstimatePickLineItemViewController</string>
 							<string>ReviewEstimateViewController</string>
 							<string>UIBarButtonItem</string>
 							<string>TaxesAndCurrencyViewController</string>
@@ -408,9 +408,9 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>lineItemsViewController</string>
 							<string>myInfoViewController</string>
 							<string>nextButton</string>
-							<string>pickLineItemViewController</string>
 							<string>reviewEstimateViewController</string>
 							<string>saveButton</string>
 							<string>taxesAndCurrencyViewController</string>
@@ -418,16 +418,16 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<object class="IBToOneOutletInfo">
+								<string key="name">lineItemsViewController</string>
+								<string key="candidateClassName">LineItemsViewController</string>
+							</object>
+							<object class="IBToOneOutletInfo">
 								<string key="name">myInfoViewController</string>
 								<string key="candidateClassName">MyInfoViewController</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">nextButton</string>
 								<string key="candidateClassName">UIBarButtonItem</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">pickLineItemViewController</string>
-								<string key="candidateClassName">AddEstimatePickLineItemViewController</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">reviewEstimateViewController</string>
@@ -446,25 +446,6 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">Classes/Views/AddEstimateLineItemsViewController.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">AddEstimatePickLineItemViewController</string>
-					<string key="superclassName">UITableViewController</string>
-					<object class="NSMutableDictionary" key="outlets">
-						<string key="NS.key.0">newLineItemViewController</string>
-						<string key="NS.object.0">NewLineItemViewController</string>
-					</object>
-					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<string key="NS.key.0">newLineItemViewController</string>
-						<object class="IBToOneOutletInfo" key="NS.object.0">
-							<string key="name">newLineItemViewController</string>
-							<string key="candidateClassName">NewLineItemViewController</string>
-						</object>
-					</object>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">Classes/Views/AddEstimatePickLineItemViewController.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
@@ -505,6 +486,25 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">Classes/Cells/EditSectionHeader.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">LineItemsViewController</string>
+					<string key="superclassName">UITableViewController</string>
+					<object class="NSMutableDictionary" key="outlets">
+						<string key="NS.key.0">newLineItemViewController</string>
+						<string key="NS.object.0">NewLineItemViewController</string>
+					</object>
+					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<string key="NS.key.0">newLineItemViewController</string>
+						<object class="IBToOneOutletInfo" key="NS.object.0">
+							<string key="name">newLineItemViewController</string>
+							<string key="candidateClassName">NewLineItemViewController</string>
+						</object>
+					</object>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">Classes/Views/LineItemsViewController.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">

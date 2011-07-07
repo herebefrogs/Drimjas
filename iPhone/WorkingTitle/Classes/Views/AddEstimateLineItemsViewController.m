@@ -18,7 +18,7 @@
 #import "TextFieldCell.h"
 // Views
 #import "TableFields.h"
-#import "AddEstimatePickLineItemViewController.h"
+#import "LineItemsViewController.h"
 #import "ReviewEstimateViewController.h"
 #import "TaxesAndCurrencyViewController.h"
 #import "MyInfoViewController.h"
@@ -27,7 +27,7 @@
 
 @synthesize nextButton;
 @synthesize saveButton;
-@synthesize pickLineItemViewController;
+@synthesize lineItemsViewController;
 @synthesize reviewEstimateViewController;
 @synthesize	taxesAndCurrencyViewController;
 @synthesize myInfoViewController;
@@ -135,9 +135,9 @@
 }
 
 - (void)_showLineItemListForSelection:(LineItemSelection *)lineItemSelection {
-	pickLineItemViewController.lineItemSelection = lineItemSelection;
+	lineItemsViewController.lineItemSelection = lineItemSelection;
 
-	[self.navigationController pushViewController:pickLineItemViewController animated:YES];
+	[self.navigationController pushViewController:lineItemsViewController animated:YES];
 }
 
 BOOL _insertLineItem = NO;
@@ -431,7 +431,7 @@ BOOL _insertLineItem = NO;
     // Relinquish ownership of anything that can be recreated in viewDidLoad or on demand.
     self.nextButton = nil;
     self.saveButton = nil;
-	self.pickLineItemViewController = nil;
+	self.lineItemsViewController = nil;
 	self.reviewEstimateViewController = nil;
 	self.taxesAndCurrencyViewController = nil;
 	self.myInfoViewController = nil;
@@ -447,7 +447,7 @@ BOOL _insertLineItem = NO;
 #endif
 	[nextButton release];
 	[saveButton release];
-	[pickLineItemViewController release];
+	[lineItemsViewController release];
 	[reviewEstimateViewController release];
 	[taxesAndCurrencyViewController release];
 	[myInfoViewController release];
