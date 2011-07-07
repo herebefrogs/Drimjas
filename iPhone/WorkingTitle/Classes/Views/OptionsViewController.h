@@ -8,15 +8,18 @@
 
 #import <UIKit/UIKit.h>
 
+@class LineItemsViewController;
 @class MyInfoViewController;
 @class TaxesAndCurrencyViewController;
 
 @interface OptionsViewController : UITableViewController {
-	MyInfoViewController *myInfoViewController;
+	LineItemsViewController *lineItemsViewController;
 	TaxesAndCurrencyViewController *taxesAndCurrencyViewController;
+	MyInfoViewController *myInfoViewController;
 }
 
-@property (nonatomic, retain) IBOutlet MyInfoViewController *myInfoViewController;
+@property (nonatomic, retain) IBOutlet LineItemsViewController *lineItemsViewController;
 @property (nonatomic, retain) IBOutlet TaxesAndCurrencyViewController *taxesAndCurrencyViewController;
+@property (nonatomic, retain) IBOutlet MyInfoViewController *myInfoViewController;
 
 @end

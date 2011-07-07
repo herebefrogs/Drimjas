@@ -23,4 +23,6 @@
 @property (nonatomic, retain) Estimate *estimate;
 @property (nonatomic, retain) LineItem *lineItem;
 
+- (void)copyLineItem:(LineItem *)newLineItem;
+
 @end

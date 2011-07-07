@@ -12,15 +12,17 @@
 @class NewLineItemViewController;
 
 @interface LineItemsViewController : UITableViewController <NSFetchedResultsControllerDelegate> {
-	NSFetchedResultsController *lineItems;
+	NewLineItemViewController *newLineItemViewController;
 
+	NSFetchedResultsController *lineItems;
 	LineItemSelection *lineItemSelection;
 
-	NewLineItemViewController *newLineItemViewController;
+	BOOL optionsMode;
 }
 
+@property (nonatomic, retain) IBOutlet NewLineItemViewController *newLineItemViewController;
 @property (nonatomic, retain) NSFetchedResultsController *lineItems;
 @property (nonatomic, retain) LineItemSelection *lineItemSelection;
-@property (nonatomic, retain) IBOutlet NewLineItemViewController *newLineItemViewController;
+@property (nonatomic, assign) BOOL optionsMode;
 
 @end

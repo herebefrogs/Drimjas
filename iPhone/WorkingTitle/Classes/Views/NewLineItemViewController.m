@@ -23,6 +23,7 @@
 @synthesize addButton;
 @synthesize lineItem;
 @synthesize lineItemSelection;
+@synthesize optionsMode;
 
 
 #pragma mark -
@@ -129,15 +130,15 @@ BOOL added = NO;
 		// saving line item will be done when screen disappear
 		added = YES;
 
-		// fill in line item selection from new line item
-		lineItemSelection.lineItem = lineItem;
-		lineItemSelection.details = lineItem.details;
-		// NOTE: we shouldn't have to worry about quantity since user isn't going to create Handling & Shipping
-		[lineItem addLineItemSelectionsObject:lineItemSelection];
+		if (!optionsMode) {
+			// fill in line item selection from new line item
+			[lineItemSelection copyLineItem:lineItem];
+		}
 
-		// go back to line item selection screen (2 view controllers down the navigation stack)
-		NSRange allButLast2 = NSMakeRange(0, self.navigationController.viewControllers.count - 2);
-		[self.navigationController setViewControllers:[self.navigationController.viewControllers subarrayWithRange:allButLast2]
+		// in estimate mode, go back to line item selection screen (2 view controllers down the navigation stack)
+		// in options mode, go back to line items screen (1 view controller down the navigation stack)
+		NSRange allButLast1Or2 = NSMakeRange(0, self.navigationController.viewControllers.count - (optionsMode ? 1 : 2));
+		[self.navigationController setViewControllers:[self.navigationController.viewControllers subarrayWithRange:allButLast1Or2]
 											 animated:YES];
 	}
 }

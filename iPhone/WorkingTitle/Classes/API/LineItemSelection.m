@@ -20,4 +20,17 @@
 @dynamic estimate;
 @dynamic lineItem;
 
+- (void)copyLineItem:(LineItem *)newLineItem {
+	// deassociate current line item
+	[self.lineItem removeLineItemSelectionsObject:self];
+
+	// associate new line item
+	self.lineItem = newLineItem;
+	self.details = newLineItem.details;
+	if ([newLineItem.name isEqualToString:NSLocalizedString(@"Handling & Shipping", "")]) {
+		self.quantity = [NSNumber numberWithInt:1];
+	}
+	[newLineItem addLineItemSelectionsObject:self];
+}
+
 @end

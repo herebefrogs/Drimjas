@@ -557,6 +557,18 @@ static DataStore *singleton_ = nil;
 }
 
 - (BOOL)deleteLineItem:(LineItem *)lineItem {
+	// as line item selections will be removed from the set, the fast enumeration
+	// must work from an immutable copy to prevent raising exceptions
+	NSSet *immutableCopy = [lineItem.lineItemSelections copy];
+
+	// remove line item from all line item selections referencing it
+	// NOTE: this is pretty disruptive for underlying estimates but user has been warned
+	for (LineItemSelection *lineItemSelection in immutableCopy) {
+		lineItemSelection.lineItem = nil;
+	}
+	
+	[immutableCopy release];
+
 	[self.managedObjectContext deleteObject:lineItem];
 
 	[self saveContext];

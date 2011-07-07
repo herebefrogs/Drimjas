@@ -8,15 +8,16 @@
 
 #import "OptionsViewController.h"
 // Views
+#import "LineItemsViewController.h"
 #import "MyInfoViewController.h"
 #import "TableFields.h"
 #import "TaxesAndCurrencyViewController.h"
 
 @implementation OptionsViewController
 
-
-@synthesize myInfoViewController;
+@synthesize lineItemsViewController;
 @synthesize taxesAndCurrencyViewController;
+@synthesize myInfoViewController;
 
 #pragma mark -
 #pragma mark View lifecycle
@@ -87,7 +88,8 @@
 		NSLog(@"Open clients screen");
 	}
 	else if (indexPath.row == OptionsFieldLineItems) {
-		NSLog(@"Open line items screen");
+		lineItemsViewController.optionsMode = YES;
+		[self.navigationController pushViewController:lineItemsViewController animated:YES];
 	}
 	else if (indexPath.row == OptionsFieldTaxes) {
 		taxesAndCurrencyViewController.optionsMode = YES;
@@ -114,8 +116,9 @@
 #ifdef __ENABLE_UI_LOGS__
 	NSLog(@"OptionsViewController.viewDidUnload");
 #endif
-    self.myInfoViewController = nil;
+	self.lineItemsViewController = nil;
 	self.taxesAndCurrencyViewController = nil;
+    self.myInfoViewController = nil;
 }
 
 
@@ -123,8 +126,9 @@
 #ifdef __ENABLE_UI_LOGS__
 	NSLog(@"OptionsViewController.dealloc");
 #endif
-	[myInfoViewController release];
+	[lineItemsViewController release];
 	[taxesAndCurrencyViewController release];
+	[myInfoViewController release];
     [super dealloc];
 }
 
