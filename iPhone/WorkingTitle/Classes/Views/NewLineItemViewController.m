@@ -10,6 +10,7 @@
 // API
 #import "DataStore.h"
 #import "LineItem.h"
+#import "LineItemSelection.h"
 // Cells
 #import "TextFieldCell.h"
 // Views
@@ -21,6 +22,7 @@
 
 @synthesize addButton;
 @synthesize lineItem;
+@synthesize lineItemSelection;
 
 
 #pragma mark -
@@ -127,7 +129,16 @@ BOOL added = NO;
 		// saving line item will be done when screen disappear
 		added = YES;
 
-		[self.navigationController popViewControllerAnimated:YES];
+		// fill in line item selection from new line item
+		lineItemSelection.lineItem = lineItem;
+		lineItemSelection.details = lineItem.details;
+		// NOTE: we shouldn't have to worry about quantity since user isn't going to create Handling & Shipping
+		[lineItem addLineItemSelectionsObject:lineItemSelection];
+
+		// go back to line item selection screen (2 view controllers down the navigation stack)
+		NSRange allButLast2 = NSMakeRange(0, self.navigationController.viewControllers.count - 2);
+		[self.navigationController setViewControllers:[self.navigationController.viewControllers subarrayWithRange:allButLast2]
+											 animated:YES];
 	}
 }
 
@@ -150,6 +161,7 @@ BOOL added = NO;
     // Release any retained subviews of the main view.
     self.addButton = nil;
 	self.lineItem = nil;
+	self.lineItemSelection = nil;
 }
 
 
@@ -159,6 +171,7 @@ BOOL added = NO;
 #endif
 	[addButton release];
 	[lineItem release];
+	[lineItemSelection release];
     [super dealloc];
 }
 

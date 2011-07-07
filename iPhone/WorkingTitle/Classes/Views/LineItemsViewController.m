@@ -120,6 +120,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	if (indexPath.row == 0) {
+		newLineItemViewController.lineItemSelection = lineItemSelection;
 		[self.navigationController pushViewController:newLineItemViewController animated:YES];
 	} else {
 		// NOTE: reduce index path by 1 to account for extra "add a line item" row not in line items list

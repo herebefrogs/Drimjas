@@ -12,16 +12,19 @@
 
 
 @class LineItem;
+@class LineItemSelection;
 
 
 @interface NewLineItemViewController : TextFieldTableViewController {
 	UIBarButtonItem *addButton;
 
-	LineItem *lineItem;	// Line Item being created
+	LineItem *lineItem;						// Line Item being created
+	LineItemSelection *lineItemSelection;	// Line Item Selection being added to an Estimate
 }
 
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *addButton;
 @property (nonatomic, retain) LineItem *lineItem;
+@property (nonatomic, retain) LineItemSelection *lineItemSelection;
 
 - (IBAction)add:(id)sender;
 
