@@ -10,19 +10,19 @@
 // Cells
 #import "TextFieldTableViewController.h"
 
-@class ReviewEstimateViewController;
+@class EstimateDetailViewController;
 @class MyInfo;
 
 @interface MyInfoViewController : TextFieldTableViewController <UITextFieldDelegate> {
 	UIBarButtonItem *saveButton;
-	ReviewEstimateViewController *reviewEstimateViewController;
+	EstimateDetailViewController *estimateDetailViewController;
 
 	MyInfo *myInfo;
 	BOOL optionsMode;
 }
 
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *saveButton;
-@property (nonatomic, retain) IBOutlet ReviewEstimateViewController *reviewEstimateViewController;
+@property (nonatomic, retain) IBOutlet EstimateDetailViewController *estimateDetailViewController;
 
 @property (nonatomic, retain) MyInfo *myInfo;
 @property (nonatomic, assign) BOOL optionsMode;

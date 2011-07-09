@@ -1,5 +1,5 @@
 //
-//  ReviewEstimateViewController.h
+//  EstimateDetailViewController.h
 //  WorkingTitle
 //
 //  Created by Jerome Lecomte on 11-01-17.
@@ -15,7 +15,7 @@
 @class Estimate;
 @class EditSectionHeader;
 
-@interface ReviewEstimateViewController : UITableViewController <PrintNotifyDelegate, MailNotifyDelegate> {
+@interface EstimateDetailViewController : UITableViewController <PrintNotifyDelegate, MailNotifyDelegate> {
 	UIBarButtonItem *emailButton;
 	UIBarButtonItem *printButton;
 	UIBarButtonItem *spacerButton;

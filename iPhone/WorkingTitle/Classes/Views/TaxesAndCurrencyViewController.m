@@ -16,7 +16,7 @@
 #import "TextFieldCell.h"
 // Views
 #import "MyInfoViewController.h"
-#import "ReviewEstimateViewController.h"
+#import "EstimateDetailViewController.h"
 #import "TableFields.h"
 
 
@@ -26,7 +26,7 @@
 @synthesize nextButton;
 @synthesize saveButton;
 @synthesize myInfoViewController;
-@synthesize reviewEstimateViewController;
+@synthesize estimateDetailViewController;
 @synthesize taxesAndCurrency;
 @synthesize optionsMode;
 
@@ -326,12 +326,12 @@ BOOL _insertTax = NO;
 	}
 	else {
 		// save estimate into estimates list
-		reviewEstimateViewController.estimate = [[DataStore defaultStore] saveEstimateStub];
+		estimateDetailViewController.estimate = [[DataStore defaultStore] saveEstimateStub];
 
 		// reset navigation controller to review estimate view controller
 		UIViewController *rootController = [self.navigationController.viewControllers objectAtIndex:0];
 		[self.navigationController setViewControllers:[NSArray arrayWithObjects:rootController,
-													   reviewEstimateViewController,
+													   estimateDetailViewController,
 													   nil]
 											 animated:YES];
 	}
@@ -355,7 +355,7 @@ BOOL _insertTax = NO;
     self.nextButton = nil;
     self.saveButton = nil;
 	self.myInfoViewController = nil;
-	self.reviewEstimateViewController = nil;
+	self.estimateDetailViewController = nil;
 	self.taxesAndCurrency = nil;
 }
 
@@ -367,7 +367,7 @@ BOOL _insertTax = NO;
 	[nextButton release];
 	[saveButton release];
 	[myInfoViewController release];
-	[reviewEstimateViewController release];
+	[estimateDetailViewController release];
 	[taxesAndCurrency release];
     [super dealloc];
 }

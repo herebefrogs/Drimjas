@@ -94,7 +94,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 				<int key="IBUISystemItemIdentifier">3</int>
 			</object>
 			<object class="IBUIViewController" id="432040776">
-				<string key="IBUINibName">ReviewEstimate</string>
+				<string key="IBUINibName">EstimateDetail</string>
 				<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics"/>
 				<object class="IBUISimulatedOrientationMetrics" key="IBUISimulatedOrientationMetrics">
 					<int key="interfaceOrientation">1</int>
@@ -148,7 +148,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">reviewEstimateViewController</string>
+						<string key="label">estimateDetailViewController</string>
 						<reference key="source" ref="372490531"/>
 						<reference key="destination" ref="432040776"/>
 					</object>
@@ -210,7 +210,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 					<string>MyInfoViewController</string>
 					<string>UIResponder</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-					<string>ReviewEstimateViewController</string>
+					<string>EstimateDetailViewController</string>
 					<string>{{350, 242}, {320, 480}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>{{329, 276}, {320, 480}}</string>
@@ -296,12 +296,12 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>reviewEstimateViewController</string>
+							<string>estimateDetailViewController</string>
 							<string>saveButton</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>ReviewEstimateViewController</string>
+							<string>EstimateDetailViewController</string>
 							<string>UIBarButtonItem</string>
 						</object>
 					</object>
@@ -309,14 +309,14 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>reviewEstimateViewController</string>
+							<string>estimateDetailViewController</string>
 							<string>saveButton</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<object class="IBToOneOutletInfo">
-								<string key="name">reviewEstimateViewController</string>
-								<string key="candidateClassName">ReviewEstimateViewController</string>
+								<string key="name">estimateDetailViewController</string>
+								<string key="candidateClassName">EstimateDetailViewController</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">saveButton</string>
@@ -330,7 +330,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
-					<string key="className">ReviewEstimateViewController</string>
+					<string key="className">EstimateDetailViewController</string>
 					<string key="superclassName">UITableViewController</string>
 					<object class="NSMutableDictionary" key="actions">
 						<bool key="EncodedWithXMLCoder">YES</bool>
@@ -419,7 +419,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">Classes/Views/ReviewEstimateViewController.h</string>
+						<string key="minorKey">Classes/Views/EstimateDetailViewController.h</string>
 					</object>
 				</object>
 			</object>

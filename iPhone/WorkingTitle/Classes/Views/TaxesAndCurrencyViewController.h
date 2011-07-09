@@ -11,13 +11,13 @@
 #import "TextFieldTableViewController.h"
 
 @class MyInfoViewController;
-@class ReviewEstimateViewController;
+@class EstimateDetailViewController;
 
 @interface TaxesAndCurrencyViewController : TextFieldTableViewController <NSFetchedResultsControllerDelegate> {
 	UIBarButtonItem *nextButton;
 	UIBarButtonItem *saveButton;
 	MyInfoViewController *myInfoViewController;
-	ReviewEstimateViewController *reviewEstimateViewController;
+	EstimateDetailViewController *estimateDetailViewController;
 
 	NSFetchedResultsController *taxesAndCurrency;
 	BOOL optionsMode;
@@ -26,7 +26,7 @@
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *nextButton;
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *saveButton;
 @property (nonatomic, retain) IBOutlet MyInfoViewController *myInfoViewController;
-@property (nonatomic, retain) IBOutlet ReviewEstimateViewController *reviewEstimateViewController;
+@property (nonatomic, retain) IBOutlet EstimateDetailViewController *estimateDetailViewController;
 
 @property (nonatomic, retain) NSFetchedResultsController *taxesAndCurrency;
 @property (nonatomic, assign) BOOL optionsMode;

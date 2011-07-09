@@ -134,7 +134,7 @@
 /* MyInfoViewController Website Textfield Placeholder */
 "Website" = "Website";
 
-/* ReviewEstimate View Controller Navigation Item Title */
+/* EstimateDetail View Controller Navigation Item Title */
 "Review Estimate" = "Review Estimate";
 
 /* Review Estimate Order Number section title */

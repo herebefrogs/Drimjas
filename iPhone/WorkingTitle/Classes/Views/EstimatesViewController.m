@@ -13,13 +13,13 @@
 #import "DataStore.h"
 // Views
 #import "AddEstimateNewOrPickClientInfoViewController.h"
-#import "ReviewEstimateViewController.h"
+#import "EstimateDetailViewController.h"
 
 
 @implementation EstimatesViewController
 
 @synthesize newOrPickClientInfoViewController;
-@synthesize reviewEstimateViewController;
+@synthesize estimateDetailViewController;
 @synthesize estimates;
 
 #pragma mark -
@@ -109,9 +109,9 @@
 #pragma mark Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	reviewEstimateViewController.estimate = [estimates objectAtIndexPath:indexPath];
+	estimateDetailViewController.estimate = [estimates objectAtIndexPath:indexPath];
 
-	[self.navigationController pushViewController:reviewEstimateViewController animated:YES];
+	[self.navigationController pushViewController:estimateDetailViewController animated:YES];
 }
 
 
@@ -187,7 +187,7 @@
 	NSLog(@"EstimatesViewController.viewDidUnload");
 #endif
     // Relinquish ownership of anything that can be recreated in viewDidLoad or on demand.
-	self.reviewEstimateViewController = nil;
+	self.estimateDetailViewController = nil;
 	self.newOrPickClientInfoViewController = nil;
 	self.estimates = nil;
 	self.navigationItem.leftBarButtonItem = nil;
@@ -200,7 +200,7 @@
 #ifdef __ENABLE_UI_LOGS__
 	NSLog(@"EstimatesViewController.dealloc");
 #endif
-	[reviewEstimateViewController release];
+	[estimateDetailViewController release];
 	[newOrPickClientInfoViewController release];
 	[estimates release];
     [super dealloc];

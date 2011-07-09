@@ -19,7 +19,7 @@
 // Views
 #import "TableFields.h"
 #import "LineItemsViewController.h"
-#import "ReviewEstimateViewController.h"
+#import "EstimateDetailViewController.h"
 #import "TaxesAndCurrencyViewController.h"
 #import "MyInfoViewController.h"
 
@@ -28,7 +28,7 @@
 @synthesize nextButton;
 @synthesize saveButton;
 @synthesize lineItemsViewController;
-@synthesize reviewEstimateViewController;
+@synthesize estimateDetailViewController;
 @synthesize	taxesAndCurrencyViewController;
 @synthesize myInfoViewController;
 @synthesize lineItemSelections;
@@ -380,12 +380,12 @@ BOOL _insertLineItem = NO;
 
 - (IBAction)save:(id)sender {
 	// save estimate into estimates list
-	reviewEstimateViewController.estimate = [[DataStore defaultStore] saveEstimateStub];
+	estimateDetailViewController.estimate = [[DataStore defaultStore] saveEstimateStub];
 
 	// reset navigation controller to review estimate view controller
 	UIViewController *rootController = [self.navigationController.viewControllers objectAtIndex:0];
 	[self.navigationController setViewControllers:[NSArray arrayWithObjects:rootController,
-																		    reviewEstimateViewController,
+																		    estimateDetailViewController,
 																		    nil]
 										 animated:YES];
 }
@@ -409,7 +409,7 @@ BOOL _insertLineItem = NO;
     self.nextButton = nil;
     self.saveButton = nil;
 	self.lineItemsViewController = nil;
-	self.reviewEstimateViewController = nil;
+	self.estimateDetailViewController = nil;
 	self.taxesAndCurrencyViewController = nil;
 	self.myInfoViewController = nil;
 	lineItemSelections.delegate = nil;
@@ -425,7 +425,7 @@ BOOL _insertLineItem = NO;
 	[nextButton release];
 	[saveButton release];
 	[lineItemsViewController release];
-	[reviewEstimateViewController release];
+	[estimateDetailViewController release];
 	[taxesAndCurrencyViewController release];
 	[myInfoViewController release];
 	[lineItemSelections release];

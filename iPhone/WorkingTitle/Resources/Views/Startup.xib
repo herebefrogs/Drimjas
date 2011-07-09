@@ -722,13 +722,13 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>addEstimateNavigationController</string>
 							<string>newOrPickClientInfoViewController</string>
-							<string>reviewEstimateViewController</string>
+							<string>estimateDetailViewController</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>UINavigationController</string>
 							<string>AddEstimateNewOrPickClientInfoViewController</string>
-							<string>ReviewEstimateViewController</string>
+							<string>EstimateDetailViewController</string>
 						</object>
 					</object>
 					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
@@ -737,7 +737,7 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>addEstimateNavigationController</string>
 							<string>newOrPickClientInfoViewController</string>
-							<string>reviewEstimateViewController</string>
+							<string>estimateDetailViewController</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -750,8 +750,8 @@
 								<string key="candidateClassName">AddEstimateNewOrPickClientInfoViewController</string>
 							</object>
 							<object class="IBToOneOutletInfo">
-								<string key="name">reviewEstimateViewController</string>
-								<string key="candidateClassName">ReviewEstimateViewController</string>
+								<string key="name">estimateDetailViewController</string>
+								<string key="candidateClassName">EstimateDetailViewController</string>
 							</object>
 						</object>
 					</object>
@@ -810,7 +810,7 @@
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
-					<string key="className">ReviewEstimateViewController</string>
+					<string key="className">EstimateDetailViewController</string>
 					<string key="superclassName">UITableViewController</string>
 					<object class="NSMutableDictionary" key="actions">
 						<bool key="EncodedWithXMLCoder">YES</bool>
@@ -885,7 +885,7 @@
 					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">Classes/Views/ReviewEstimateViewController.h</string>
+						<string key="minorKey">Classes/Views/EstimateDetailViewController.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">

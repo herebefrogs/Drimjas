@@ -58,7 +58,7 @@
 				<float key="IBUISectionFooterHeight">22</float>
 			</object>
 			<object class="IBUIViewController" id="891262546">
-				<string key="IBUINibName">ReviewEstimate</string>
+				<string key="IBUINibName">EstimateDetail</string>
 				<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics"/>
 				<object class="IBUISimulatedOrientationMetrics" key="IBUISimulatedOrientationMetrics">
 					<int key="interfaceOrientation">1</int>
@@ -114,7 +114,7 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">reviewEstimateViewController</string>
+						<string key="label">estimateDetailViewController</string>
 						<reference key="source" ref="372490531"/>
 						<reference key="destination" ref="891262546"/>
 					</object>
@@ -212,7 +212,7 @@
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>EstimatesViewController</string>
 					<string>UIResponder</string>
-					<string>ReviewEstimateViewController</string>
+					<string>EstimateDetailViewController</string>
 					<string>{{258, 84}, {320, 480}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>AddEstimateNewOrPickClientInfoViewController</string>
@@ -637,13 +637,13 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>estimates</string>
 							<string>newOrPickClientInfoViewController</string>
-							<string>reviewEstimateViewController</string>
+							<string>estimateDetailViewController</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>NSFetchedResultsController</string>
 							<string>AddEstimateNewOrPickClientInfoViewController</string>
-							<string>ReviewEstimateViewController</string>
+							<string>EstimateDetailViewController</string>
 						</object>
 					</object>
 					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
@@ -652,7 +652,7 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>estimates</string>
 							<string>newOrPickClientInfoViewController</string>
-							<string>reviewEstimateViewController</string>
+							<string>estimateDetailViewController</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -665,8 +665,8 @@
 								<string key="candidateClassName">AddEstimateNewOrPickClientInfoViewController</string>
 							</object>
 							<object class="IBToOneOutletInfo">
-								<string key="name">reviewEstimateViewController</string>
-								<string key="candidateClassName">ReviewEstimateViewController</string>
+								<string key="name">estimateDetailViewController</string>
+								<string key="candidateClassName">EstimateDetailViewController</string>
 							</object>
 						</object>
 					</object>
@@ -725,7 +725,7 @@
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
-					<string key="className">ReviewEstimateViewController</string>
+					<string key="className">EstimateDetailViewController</string>
 					<string key="superclassName">UITableViewController</string>
 					<object class="NSMutableDictionary" key="actions">
 						<bool key="EncodedWithXMLCoder">YES</bool>
@@ -814,7 +814,7 @@
 					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">Classes/Views/ReviewEstimateViewController.h</string>
+						<string key="minorKey">Classes/Views/EstimateDetailViewController.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">

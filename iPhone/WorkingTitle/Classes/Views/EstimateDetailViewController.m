@@ -1,12 +1,12 @@
 //
-//  ReviewEstimateViewController.m
+//  EstimateDetailViewController.m
 //  WorkingTitle
 //
 //  Created by Jerome Lecomte on 11-01-17.
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import "ReviewEstimateViewController.h"
+#import "EstimateDetailViewController.h"
 // API
 #import "ClientInfo.h"
 #import "ContactInformation.h"
@@ -23,7 +23,7 @@
 #import "TableFields.h"
 
 
-@implementation ReviewEstimateViewController
+@implementation EstimateDetailViewController
 
 @synthesize estimate;
 @synthesize emailButton;
@@ -37,7 +37,7 @@
 
 	estimate = [newEstimate retain];
 	if (estimate) {
-		indexFirstLineItem = ReviewEstimateSectionContactInfo + estimate.clientInfo.contactInfos.count;
+		indexFirstLineItem = EstimateDetailSectionContactInfo + estimate.clientInfo.contactInfos.count;
 		indexLastSection = indexFirstLineItem + estimate.lineItems.count;
 		NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"index" ascending:YES];
 		lineItemSelections = [[estimate.lineItems sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]] retain];
@@ -51,10 +51,10 @@
 
 - (void)viewDidLoad {
 #ifdef __ENABLE_UI_LOGS__
-	NSLog(@"ReviewEstimateViewController.viewDidLoad");
+	NSLog(@"EstimateDetailViewController.viewDidLoad");
 #endif
     [super viewDidLoad];
-	self.title = NSLocalizedString(@"Review Estimate", "ReviewEstimate Navigation Item Title");
+	self.title = NSLocalizedString(@"Review Estimate", "EstimateDetail Navigation Item Title");
 
 	NSMutableArray *items = [NSMutableArray arrayWithObject: spacerButton];
 	if ([EmailManager isMailAvailable]) {
@@ -106,13 +106,13 @@
 #pragma mark Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return ReviewEstimateSectionContactInfo + estimate.clientInfo.contactInfos.count + estimate.lineItems.count;
+    return EstimateDetailSectionContactInfo + estimate.clientInfo.contactInfos.count + estimate.lineItems.count;
 }
 
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
 	switch (section) {
-		case ReviewEstimateSectionOrderNumber:
+		case EstimateDetailSectionOrderNumber:
 			return NSLocalizedString(@"Order Number", "Review Estimate Order Number section title");
 		default:
 			return nil;
@@ -121,16 +121,16 @@
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-	if (section == ReviewEstimateSectionOrderNumber) {
+	if (section == EstimateDetailSectionOrderNumber) {
 		// order number
 		return 1;
 	}
-	else if (section == ReviewEstimateSectionClientInfo) {
+	else if (section == EstimateDetailSectionClientInfo) {
 		return [estimate.clientInfo numSetProperties];
 	}
-	else if (section >= ReviewEstimateSectionContactInfo && section < indexFirstLineItem) {
+	else if (section >= EstimateDetailSectionContactInfo && section < indexFirstLineItem) {
 		// BUG #5: must have saved contact info order to be able to lookup one by index
-		ContactInformation *contactInfo = [[estimate.clientInfo.contactInfos allObjects] objectAtIndex:(section - ReviewEstimateSectionContactInfo)];
+		ContactInformation *contactInfo = [[estimate.clientInfo.contactInfos allObjects] objectAtIndex:(section - EstimateDetailSectionContactInfo)];
 		return [contactInfo numSetProperties];
 	}
 	else {
@@ -154,15 +154,15 @@
 
 	cell.selectionStyle = UITableViewCellSelectionStyleNone;
 
-	if (indexPath.section == ReviewEstimateSectionOrderNumber) {
+	if (indexPath.section == EstimateDetailSectionOrderNumber) {
 		cell.textLabel.text = [estimate orderNumber];
 	}
-	else if (indexPath.section == ReviewEstimateSectionClientInfo) {
+	else if (indexPath.section == EstimateDetailSectionClientInfo) {
 		cell.textLabel.text = [estimate.clientInfo getSetPropertyWithIndex:indexPath.row];
 	}
-	else if (indexPath.section >= ReviewEstimateSectionContactInfo && indexPath.section < indexFirstLineItem) {
+	else if (indexPath.section >= EstimateDetailSectionContactInfo && indexPath.section < indexFirstLineItem) {
 		// BUG #5: must have saved contact info order to be able to lookup one by index
-		ContactInformation *contactInfo = [[estimate.clientInfo.contactInfos allObjects] objectAtIndex:(indexPath.section - ReviewEstimateSectionContactInfo)];
+		ContactInformation *contactInfo = [[estimate.clientInfo.contactInfos allObjects] objectAtIndex:(indexPath.section - EstimateDetailSectionContactInfo)];
 		
 		cell.textLabel.text = [contactInfo getSetPropertyWithIndex:indexPath.row];
 	}
@@ -278,11 +278,11 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
 	switch (section) {
-		case ReviewEstimateSectionClientInfo:
-			return [self loadEditSectionHeaderForTag:ReviewEstimateSectionClientInfo withTitle:@"Client Information"];
+		case EstimateDetailSectionClientInfo:
+			return [self loadEditSectionHeaderForTag:EstimateDetailSectionClientInfo withTitle:@"Client Information"];
 			break;
-		case ReviewEstimateSectionContactInfo:
-			return [self loadEditSectionHeaderForTag:ReviewEstimateSectionContactInfo withTitle:@"Contact Information"];
+		case EstimateDetailSectionContactInfo:
+			return [self loadEditSectionHeaderForTag:EstimateDetailSectionContactInfo withTitle:@"Contact Information"];
 		default:
 			if (section == indexFirstLineItem) {
 				return [self loadEditSectionHeaderForTag:indexFirstLineItem withTitle:@"Line Items"];
@@ -317,13 +317,13 @@
 
 - (void)mailSent:(MFMailComposeResult)result withError:(NSError *)error {
 	if (result == MFMailComposeResultFailed) {
-		NSLog(@"ReviewEstimateViewController.mailSent: failed to email estimate %@ with error %@, %@", estimate.clientInfo.name, error, [error userInfo]);
+		NSLog(@"EstimateDetailViewController.mailSent: failed to email estimate %@ with error %@, %@", estimate.clientInfo.name, error, [error userInfo]);
 	}
 }
 
 - (void)printJobCompleted:(BOOL)completed withError:(NSError *)error {
 	if (error) {
-		NSLog(@"ReviewEstimateViewController.printJobCompleted: failed to print estimate %@ with error %@, %@", estimate.clientInfo.name, error, [error userInfo]);
+		NSLog(@"EstimateDetailViewController.printJobCompleted: failed to print estimate %@ with error %@, %@", estimate.clientInfo.name, error, [error userInfo]);
 	}
 }
 
@@ -339,7 +339,7 @@
 
 - (void)viewDidUnload {
 #ifdef __ENABLE_UI_LOGS__
-	NSLog(@"ReviewEstimateViewController.viewDidUnload");
+	NSLog(@"EstimateDetailViewController.viewDidUnload");
 #endif
     // Relinquish ownership of anything that can be recreated in viewDidLoad or on demand.
 	self.title = nil;
@@ -355,7 +355,7 @@
 
 - (void)dealloc {
 #ifdef __ENABLE_UI_LOGS__
-	NSLog(@"ReviewEstimateViewController.dealloc");
+	NSLog(@"EstimateDetailViewController.dealloc");
 #endif
 	[editSectionHeader release];
 	[spacerButton release];

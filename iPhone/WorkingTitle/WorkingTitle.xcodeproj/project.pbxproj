@@ -79,8 +79,8 @@
 		02DE987B137A10C1007C5FED /* LineItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 02DE987A137A10C1007C5FED /* LineItem.m */; };
 		02DE9886137A12D3007C5FED /* LineItemsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02DE9884137A12D3007C5FED /* LineItemsViewController.m */; };
 		02DE9887137A12D3007C5FED /* LineItems.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02DE9885137A12D3007C5FED /* LineItems.xib */; };
-		02E1C7A412E53834000D7747 /* ReviewEstimateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02E1C7A212E53834000D7747 /* ReviewEstimateViewController.m */; };
-		02E1C7A512E53834000D7747 /* ReviewEstimate.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02E1C7A312E53834000D7747 /* ReviewEstimate.xib */; };
+		02E1C7A412E53834000D7747 /* EstimateDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02E1C7A212E53834000D7747 /* EstimateDetailViewController.m */; };
+		02E1C7A512E53834000D7747 /* EstimateDetail.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02E1C7A312E53834000D7747 /* EstimateDetail.xib */; };
 		02FA0484138F3C94001CF3B0 /* NewLineItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02FA0482138F3C94001CF3B0 /* NewLineItemViewController.m */; };
 		02FA0485138F3C94001CF3B0 /* NewLineItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02FA0483138F3C94001CF3B0 /* NewLineItem.xib */; };
 		02FA838E12F7A69B00C713AF /* PDFManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 02FA838D12F7A69B00C713AF /* PDFManager.m */; };
@@ -207,9 +207,9 @@
 		02DE9884137A12D3007C5FED /* LineItemsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LineItemsViewController.m; sourceTree = "<group>"; };
 		02DE9885137A12D3007C5FED /* LineItems.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LineItems.xib; sourceTree = "<group>"; };
 		02DFF86113C8C2CE00300ADD /* WorkingTitle 12.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "WorkingTitle 12.xcdatamodel"; sourceTree = "<group>"; };
-		02E1C7A112E53834000D7747 /* ReviewEstimateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReviewEstimateViewController.h; sourceTree = "<group>"; };
-		02E1C7A212E53834000D7747 /* ReviewEstimateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReviewEstimateViewController.m; sourceTree = "<group>"; };
-		02E1C7A312E53834000D7747 /* ReviewEstimate.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReviewEstimate.xib; sourceTree = "<group>"; };
+		02E1C7A112E53834000D7747 /* EstimateDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EstimateDetailViewController.h; sourceTree = "<group>"; };
+		02E1C7A212E53834000D7747 /* EstimateDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EstimateDetailViewController.m; sourceTree = "<group>"; };
+		02E1C7A312E53834000D7747 /* EstimateDetail.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EstimateDetail.xib; sourceTree = "<group>"; };
 		02F8E48813382D6500D75745 /* WorkingTitle 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "WorkingTitle 2.xcdatamodel"; sourceTree = "<group>"; };
 		02FA0481138F3C94001CF3B0 /* NewLineItemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewLineItemViewController.h; sourceTree = "<group>"; };
 		02FA0482138F3C94001CF3B0 /* NewLineItemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewLineItemViewController.m; sourceTree = "<group>"; };
@@ -265,6 +265,8 @@
 				02AA0B5D136DAF13005E9158 /* ClientInfoDetailViewController.m */,
 				029DAC9E136BA00A00AF4A6F /* ClientInfosViewController.h */,
 				029DAC9F136BA00A00AF4A6F /* ClientInfosViewController.m */,
+				02E1C7A112E53834000D7747 /* EstimateDetailViewController.h */,
+				02E1C7A212E53834000D7747 /* EstimateDetailViewController.m */,
 				02B2C06B12DFF2DD00D3FEE0 /* EstimatesViewController.h */,
 				02B2C06C12DFF2DD00D3FEE0 /* EstimatesViewController.m */,
 				02DE9883137A12D3007C5FED /* LineItemsViewController.h */,
@@ -275,8 +277,6 @@
 				02FA0482138F3C94001CF3B0 /* NewLineItemViewController.m */,
 				020886E713AC439100164320 /* OptionsViewController.h */,
 				020886E813AC439100164320 /* OptionsViewController.m */,
-				02E1C7A112E53834000D7747 /* ReviewEstimateViewController.h */,
-				02E1C7A212E53834000D7747 /* ReviewEstimateViewController.m */,
 				0299F96C1304D8ED001E1E3E /* StartupViewController.h */,
 				0299F96D1304D8ED001E1E3E /* StartupViewController.m */,
 				02CB998A139BD56200FF2A3C /* TabBarItems.h */,
@@ -299,13 +299,13 @@
 				02AA0B5E136DAF13005E9158 /* ClientInfoDetail.xib */,
 				029DACA0136BA00A00AF4A6F /* ClientInfos.xib */,
 				020886CF13AC41D000164320 /* Contracts.xib */,
+				02E1C7A312E53834000D7747 /* EstimateDetail.xib */,
 				02B2C06D12DFF2DD00D3FEE0 /* Estimates.xib */,
 				02DE9885137A12D3007C5FED /* LineItems.xib */,
 				28AD73870D9D96C1002E5188 /* MainWindow.xib */,
 				028CCBD113B7A4910073C88F /* MyInfo.xib */,
 				02FA0483138F3C94001CF3B0 /* NewLineItem.xib */,
 				020886E913AC439100164320 /* Options.xib */,
-				02E1C7A312E53834000D7747 /* ReviewEstimate.xib */,
 				0299F96E1304D8ED001E1E3E /* Startup.xib */,
 				0288D99E13A9A306001E6641 /* TaxesAndCurrency.xib */,
 			);
@@ -527,7 +527,7 @@
 			files = (
 				28AD73880D9D96C1002E5188 /* MainWindow.xib in Resources */,
 				02B2C06F12DFF2DD00D3FEE0 /* Estimates.xib in Resources */,
-				02E1C7A512E53834000D7747 /* ReviewEstimate.xib in Resources */,
+				02E1C7A512E53834000D7747 /* EstimateDetail.xib in Resources */,
 				021F685112E67D8700ECDDDD /* AddEstimateNewClientInfo.xib in Resources */,
 				0299F9701304D8ED001E1E3E /* Startup.xib in Resources */,
 				029C645312EB8389000B6E51 /* Localizable.strings in Resources */,
@@ -580,7 +580,7 @@
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
 				1D3623260D0F684500981E51 /* WorkingTitleAppDelegate.m in Sources */,
 				02B2C06E12DFF2DD00D3FEE0 /* EstimatesViewController.m in Sources */,
-				02E1C7A412E53834000D7747 /* ReviewEstimateViewController.m in Sources */,
+				02E1C7A412E53834000D7747 /* EstimateDetailViewController.m in Sources */,
 				021F685012E67D8700ECDDDD /* AddEstimateNewClientInfoViewController.m in Sources */,
 				02FA838E12F7A69B00C713AF /* PDFManager.m in Sources */,
 				02A62E8B12FEF50500CAF63A /* PrintManager.m in Sources */,

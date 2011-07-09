@@ -9,16 +9,16 @@
 #import <UIKit/UIKit.h>
 
 @class AddEstimateNewOrPickClientInfoViewController;
-@class ReviewEstimateViewController;
+@class EstimateDetailViewController;
 
 @interface EstimatesViewController : UITableViewController <NSFetchedResultsControllerDelegate> {
 	AddEstimateNewOrPickClientInfoViewController *newOrPickClientInfoViewController;
-	ReviewEstimateViewController *reviewEstimateViewController;
+	EstimateDetailViewController *estimateDetailViewController;
 	NSFetchedResultsController *estimates;
 }
 
 @property (nonatomic, retain) IBOutlet AddEstimateNewOrPickClientInfoViewController *newOrPickClientInfoViewController;
-@property (nonatomic, retain) IBOutlet ReviewEstimateViewController *reviewEstimateViewController;
+@property (nonatomic, retain) IBOutlet EstimateDetailViewController *estimateDetailViewController;
 @property (nonatomic, retain) IBOutlet NSFetchedResultsController *estimates;
 
 - (IBAction)add:(id)sender;
