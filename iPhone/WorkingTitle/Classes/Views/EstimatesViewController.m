@@ -9,7 +9,7 @@
 #import "EstimatesViewController.h"
 // API
 #import "Estimate.h"
-#import "ClientInformation.h"
+#import "ClientInfo.h"
 #import "DataStore.h"
 // Views
 #import "AddEstimateNewOrPickClientInfoViewController.h"

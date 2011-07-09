@@ -10,7 +10,7 @@
 // API
 #import "BaseObject.h"
 
-@class ClientInformation;
+@class ClientInfo;
 @class LineItemSelection;
 
 @interface Estimate : BaseObject {
@@ -18,7 +18,7 @@
 
 @property (nonatomic, retain) NSNumber *number;
 @property (nonatomic, retain) NSDate *date;
-@property (nonatomic, retain) ClientInformation *clientInfo;
+@property (nonatomic, retain) ClientInfo *clientInfo;
 @property (nonatomic, retain) NSSet *lineItems;
 
 @property (nonatomic, readonly) NSString *monthYear;

@@ -7,11 +7,11 @@
 //
 
 #import <CoreData/CoreData.h>
-#import "ClientInformation.h"
+#import "ClientInfo.h"
 
 @class ContactInformation;
 
-@interface MyInfo : ClientInformation {
+@interface MyInfo : ClientInfo {
 }
 
 @property (nonatomic, retain) NSString *businessNumber;

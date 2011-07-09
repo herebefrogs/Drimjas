@@ -8,7 +8,7 @@
 
 #import "DataStore.h"
 // API
-#import "ClientInformation.h"
+#import "ClientInfo.h"
 #import	"ContactInformation.h"
 #import "Estimate.h"
 #import "IndexedObject.h"
@@ -185,7 +185,7 @@ static DataStore *singleton_ = nil;
 		estimate.number = [estimate_data valueForKey:@"number"];
 
 		NSDictionary *client_data = [estimate_data valueForKey:@"client"];
-		ClientInformation *client = [self createClientInformation];
+		ClientInfo *client = [self createClientInfo];
 		client.name = [client_data valueForKey:@"name"];
 		client.address1 = [client_data valueForKey:@"address1"];
 		client.address2 = [client_data valueForKey:@"address2"];
@@ -360,11 +360,11 @@ static DataStore *singleton_ = nil;
 	if (estimate.clientInfo) {
 		// de-associate client info from estimate
 		// note: this might already be done by Delete Rule: Nullify in datamodel
-		ClientInformation *clientInfo = estimate.clientInfo;
+		ClientInfo *clientInfo = estimate.clientInfo;
 		[clientInfo removeEstimatesObject:estimate];
 
 		if ([clientInfo.status integerValue] == StatusCreated) {
-			[self deleteClientInformation:clientInfo];
+			[self deleteClientInfo:clientInfo];
 		}
 	}
 
@@ -395,7 +395,7 @@ static DataStore *singleton_ = nil;
 	if (clientInfosFetchedResultsController_ == nil) {
 		// ClientInfo fetch request
 		NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-		fetchRequest.entity = [NSEntityDescription entityForName:@"ClientInformation"
+		fetchRequest.entity = [NSEntityDescription entityForName:@"ClientInfo"
 										  inManagedObjectContext:self.managedObjectContext];
 
 		// fetch only "active" ClientInfo
@@ -429,19 +429,19 @@ static DataStore *singleton_ = nil;
 	return clientInfosFetchedResultsController_;
 }
 
-- (ClientInformation *)createClientInformation {
-	return (ClientInformation *)[NSEntityDescription insertNewObjectForEntityForName:@"ClientInformation"
+- (ClientInfo *)createClientInfo {
+	return (ClientInfo *)[NSEntityDescription insertNewObjectForEntityForName:@"ClientInfo"
 															  inManagedObjectContext:self.managedObjectContext];
 }
 
-- (BOOL)deleteClientInformation:(ClientInformation *)clientInformation {
-	NSArray *contactInfos = [clientInformation.status integerValue] == StatusCreated ? contactInfoStubs_ : [clientInformation.contactInfos allObjects];
+- (BOOL)deleteClientInfo:(ClientInfo *)clientInfo {
+	NSArray *contactInfos = [clientInfo.status intValue] == StatusCreated ? contactInfoStubs_ : [clientInfo.contactInfos allObjects];
 
 	for (ContactInformation *contactInfo in contactInfos) {
 		[self deleteContactInformation:contactInfo];
 	}
 
-	[self.managedObjectContext deleteObject:clientInformation];
+	[self.managedObjectContext deleteObject:clientInfo];
 
 	// NOTE: assume this will be validated by either deleteEstimate[Stub]: or saveEstimateStub:
 	// TODO: won't be true when deleting ClientInfo from Options screen
@@ -468,7 +468,7 @@ static DataStore *singleton_ = nil;
 	return contactInfo;
 }
 
-- (ContactInformation *)addContactInfoToClientInfo:(ClientInformation *)clientInfo {
+- (ContactInformation *)addContactInfoToClientInfo:(ClientInfo *)clientInfo {
 	ContactInformation *contactInfo = (ContactInformation *)[NSEntityDescription insertNewObjectForEntityForName:@"ContactInformation"
 																						  inManagedObjectContext:self.managedObjectContext];
 
@@ -481,7 +481,7 @@ static DataStore *singleton_ = nil;
 - (BOOL)deleteContactInformation:(ContactInformation *)contactInformation {
 	[self.managedObjectContext deleteObject:contactInformation];
 
-	// we only expect this method to be called by deleteClientInformation:
+	// we only expect this method to be called by deleteClientInfo:
 	// as a result of a call to deleteEstimate: so let it save the modified context
 
 	return YES;

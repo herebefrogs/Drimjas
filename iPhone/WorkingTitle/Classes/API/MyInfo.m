@@ -8,7 +8,7 @@
 
 #import "MyInfo.h"
 // API
-#import "ClientInformation.h"
+#import "ClientInfo.h"
 #import "ContactInformation.h"
 #import "DataStore.h"
 

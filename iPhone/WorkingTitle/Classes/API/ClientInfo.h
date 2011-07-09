@@ -1,5 +1,5 @@
 //
-//  ClientInformation.h
+//  ClientInfo.h
 //  WorkingTitle
 //
 //  Created by Jerome Lecomte on 11-03-27.
@@ -13,7 +13,7 @@
 @class Estimate;
 @class ContactInformation;
 
-@interface ClientInformation : BaseObject {
+@interface ClientInfo : BaseObject {
 }
 
 @property (nonatomic, retain) NSString *name;
@@ -33,7 +33,7 @@
 @end
 
 
-@interface ClientInformation (CoreDataGeneratedAccessors)
+@interface ClientInfo (CoreDataGeneratedAccessors)
 - (void)addContactInfosObject:(ContactInformation *)value;
 - (void)removeContactInfosObject:(ContactInformation *)value;
 - (void)addContactInfos:(NSSet *)value;

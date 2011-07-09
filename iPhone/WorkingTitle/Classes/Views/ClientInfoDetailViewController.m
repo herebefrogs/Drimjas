@@ -8,7 +8,7 @@
 
 #import "ClientInfoDetailViewController.h"
 // API
-#import "ClientInformation.h"
+#import "ClientInfo.h"
 #import "ContactInformation.h"
 #import "Estimate.h"
 #import "DataStore.h"
@@ -100,7 +100,7 @@
 
 	// delete or deassociate previously set client info
 	if ([estimate.clientInfo.status integerValue] == StatusCreated) {
-		[[DataStore defaultStore] deleteClientInformation:estimate.clientInfo];
+		[[DataStore defaultStore] deleteClientInfo:estimate.clientInfo];
 	}
 	else if ([estimate.clientInfo.status integerValue] == StatusActive) {
 		[estimate.clientInfo removeEstimatesObject:estimate];

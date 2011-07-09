@@ -8,7 +8,7 @@
 
 #import "ContactInformation.h"
 // API
-#import "ClientInformation.h"
+#import "ClientInfo.h"
 // Objective-C
 
 

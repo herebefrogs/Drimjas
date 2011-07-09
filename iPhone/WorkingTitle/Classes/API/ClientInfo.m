@@ -1,18 +1,18 @@
 // 
-//  ClientInformation.m
+//  ClientInfo.m
 //  WorkingTitle
 //
 //  Created by Jerome Lecomte on 11-03-27.
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import "ClientInformation.h"
+#import "ClientInfo.h"
 
 // API
 #import "Estimate.h"
 #import "ContactInformation.h"
 
-@implementation ClientInformation 
+@implementation ClientInfo 
 
 @dynamic name;
 @dynamic address1;

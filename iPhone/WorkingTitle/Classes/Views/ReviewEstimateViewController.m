@@ -8,7 +8,7 @@
 
 #import "ReviewEstimateViewController.h"
 // API
-#import "ClientInformation.h"
+#import "ClientInfo.h"
 #import "ContactInformation.h"
 #import "Currency.h"
 #import "DataStore.h"

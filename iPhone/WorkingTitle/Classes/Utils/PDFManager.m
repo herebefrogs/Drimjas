@@ -11,7 +11,7 @@
 #import <CoreText/CoreText.h>
 // API
 #import "Estimate.h"
-#import "ClientInformation.h"
+#import "ClientInfo.h"
 
 
 @implementation PDFManager

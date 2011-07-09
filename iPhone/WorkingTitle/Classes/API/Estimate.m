@@ -8,7 +8,7 @@
 
 #import "Estimate.h"
 // API
-#import "ClientInformation.h"
+#import "ClientInfo.h"
 #import "DataStore.h"
 #import "LineItemSelection.h"
 

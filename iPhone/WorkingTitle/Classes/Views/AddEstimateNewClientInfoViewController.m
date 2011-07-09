@@ -9,7 +9,7 @@
 #import "AddEstimateNewClientInfoViewController.h"
 // API
 #import "Estimate.h"
-#import "ClientInformation.h"
+#import "ClientInfo.h"
 #import "Datastore.h"
 // Cells
 #import "TextFieldCell.h"
@@ -53,7 +53,7 @@
 
 	// initialize new client information if needed
 	if (estimate.clientInfo == nil) {
-		ClientInformation *clientInfo = [[DataStore defaultStore] createClientInformation];
+		ClientInfo *clientInfo = [[DataStore defaultStore] createClientInfo];
 		estimate.clientInfo = clientInfo;
 
 		NSMutableSet *estimates = [clientInfo mutableSetValueForKey:@"estimates"];
@@ -150,8 +150,8 @@
 	TextFieldCell *cell = (TextFieldCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:ClientInfoFieldName inSection:0]];
 
 	// verify client name was provided before saving
-	if ((cell != nil && [ClientInformation isNameValid:cell.textField.text])
-		|| [ClientInformation isNameValid:estimate.clientInfo.name]) {
+	if ((cell != nil && [ClientInfo isNameValid:cell.textField.text])
+		|| [ClientInfo isNameValid:estimate.clientInfo.name]) {
 
 		// hide keyboard
 		[lastTextFieldEdited resignFirstResponder];
@@ -161,7 +161,7 @@
 }
 
 - (BOOL)requiredFieldsProvided:(UITextField *)textField {
-	return (textField.tag != ClientInfoFieldName || [ClientInformation isNameValid:textField.text]);
+	return (textField.tag != ClientInfoFieldName || [ClientInfo isNameValid:textField.text]);
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {

@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @class Estimate;
-@class ClientInformation;
+@class ClientInfo;
 @class ContactInformation;
 @class LineItemSelection;
 @class LineItem;
@@ -45,9 +45,9 @@
 // contact information methods
 @property (nonatomic, retain, readonly) NSMutableArray *contactInfoStubs;
 - (ContactInformation *)createContactInformationStub;
-- (ContactInformation *)addContactInfoToClientInfo:(ClientInformation *)clientInfo;
+- (ContactInformation *)addContactInfoToClientInfo:(ClientInfo *)clientInfo;
 - (BOOL)deleteContactInformation:(ContactInformation *)contactInformation; // do not call from outside of DataStore
-//- (BOOL)deleteContactInformation:(ContactInformation *)contactInformation fromClientInformation:(ClientInformation *)clientInformation;
+//- (BOOL)deleteContactInformation:(ContactInformation *)contactInformation fromClientInfo:(ClientInfo *)clientInfo;
 
 @end
 
@@ -84,8 +84,8 @@
 @interface DataStore (ClientAccessors)
 
 - (NSFetchedResultsController *)clientInfosFetchedResultsController;
-- (ClientInformation *)createClientInformation;
-- (BOOL)deleteClientInformation:(ClientInformation *)clientInformation;
+- (ClientInfo *)createClientInfo;
+- (BOOL)deleteClientInfo:(ClientInfo *)clientInfo;
 
 @end
 

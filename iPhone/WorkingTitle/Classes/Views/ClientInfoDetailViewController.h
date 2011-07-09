@@ -8,18 +8,18 @@
 
 #import <UIKit/UIKit.h>
 
-@class ClientInformation;
+@class ClientInfo;
 @class AddEstimateLineItemsViewController;
 
 @interface ClientInfoDetailViewController : UITableViewController {
 	UIBarButtonItem *nextButton;
 	AddEstimateLineItemsViewController *lineItemsViewController;
-	ClientInformation *clientInfo;
+	ClientInfo *clientInfo;
 }
 
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *nextButton;
 @property (nonatomic, retain) IBOutlet AddEstimateLineItemsViewController *lineItemsViewController;
-@property (nonatomic, retain) ClientInformation *clientInfo;
+@property (nonatomic, retain) ClientInfo *clientInfo;
 
 - (IBAction)next:(id)sender;
 

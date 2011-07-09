@@ -8,7 +8,7 @@
 
 #import "ClientInfosViewController.h"
 // API
-#import "ClientInformation.h"
+#import "ClientInfo.h"
 #import "DataStore.h"
 // Views
 #import "ClientInfoDetailViewController.h"
@@ -64,7 +64,7 @@
 		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     
-    ClientInformation *clientInfo = [clientInfos objectAtIndexPath:indexPath];
+    ClientInfo *clientInfo = [clientInfos objectAtIndexPath:indexPath];
 	cell.textLabel.text = clientInfo.name;
 
     return cell;
