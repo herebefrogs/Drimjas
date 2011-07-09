@@ -39,8 +39,8 @@
 		0299F96F1304D8ED001E1E3E /* StartupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0299F96D1304D8ED001E1E3E /* StartupViewController.m */; };
 		0299F9701304D8ED001E1E3E /* Startup.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0299F96E1304D8ED001E1E3E /* Startup.xib */; };
 		029C645312EB8389000B6E51 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 029C645112EB8389000B6E51 /* Localizable.strings */; };
-		029DACA1136BA00A00AF4A6F /* AddEstimatePickClientInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 029DAC9F136BA00A00AF4A6F /* AddEstimatePickClientInfoViewController.m */; };
-		029DACA2136BA00A00AF4A6F /* AddEstimatePickClientInfo.xib in Resources */ = {isa = PBXBuildFile; fileRef = 029DACA0136BA00A00AF4A6F /* AddEstimatePickClientInfo.xib */; };
+		029DACA1136BA00A00AF4A6F /* ClientInfosViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 029DAC9F136BA00A00AF4A6F /* ClientInfosViewController.m */; };
+		029DACA2136BA00A00AF4A6F /* ClientInfos.xib in Resources */ = {isa = PBXBuildFile; fileRef = 029DACA0136BA00A00AF4A6F /* ClientInfos.xib */; };
 		029F3683139DC9F800BA07A5 /* SampleEstimates.plist in Resources */ = {isa = PBXBuildFile; fileRef = 029F3682139DC9F800BA07A5 /* SampleEstimates.plist */; };
 		02A1FC8D13A1B47E00C2A3A9 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02A1FC8C13A1B47E00C2A3A9 /* QuartzCore.framework */; };
 		02A62E8B12FEF50500CAF63A /* PrintManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 02A62E8A12FEF50500CAF63A /* PrintManager.m */; };
@@ -145,9 +145,9 @@
 		0299F96E1304D8ED001E1E3E /* Startup.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Startup.xib; sourceTree = "<group>"; };
 		029C645212EB8389000B6E51 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = Resources/en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		029C647112EB84E9000B6E51 /* fr */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = fr; path = Resources/fr.lproj/Localizable.strings; sourceTree = "<group>"; };
-		029DAC9E136BA00A00AF4A6F /* AddEstimatePickClientInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddEstimatePickClientInfoViewController.h; sourceTree = "<group>"; };
-		029DAC9F136BA00A00AF4A6F /* AddEstimatePickClientInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddEstimatePickClientInfoViewController.m; sourceTree = "<group>"; };
-		029DACA0136BA00A00AF4A6F /* AddEstimatePickClientInfo.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddEstimatePickClientInfo.xib; sourceTree = "<group>"; };
+		029DAC9E136BA00A00AF4A6F /* ClientInfosViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClientInfosViewController.h; sourceTree = "<group>"; };
+		029DAC9F136BA00A00AF4A6F /* ClientInfosViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClientInfosViewController.m; sourceTree = "<group>"; };
+		029DACA0136BA00A00AF4A6F /* ClientInfos.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ClientInfos.xib; sourceTree = "<group>"; };
 		029F3682139DC9F800BA07A5 /* SampleEstimates.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = SampleEstimates.plist; path = Resources/SampleEstimates.plist; sourceTree = "<group>"; };
 		02A1FC8C13A1B47E00C2A3A9 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		02A62E8912FEF50500CAF63A /* PrintManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrintManager.h; sourceTree = "<group>"; };
@@ -258,12 +258,12 @@
 				021F684E12E67D8700ECDDDD /* AddEstimateNewClientInfoViewController.m */,
 				02C75240136A429F00EC4BF5 /* AddEstimateNewOrPickClientInfoViewController.h */,
 				02C75241136A429F00EC4BF5 /* AddEstimateNewOrPickClientInfoViewController.m */,
-				029DAC9E136BA00A00AF4A6F /* AddEstimatePickClientInfoViewController.h */,
-				029DAC9F136BA00A00AF4A6F /* AddEstimatePickClientInfoViewController.m */,
 				02AA0B5C136DAF13005E9158 /* AddEstimateReviewClientInfoViewController.h */,
 				02AA0B5D136DAF13005E9158 /* AddEstimateReviewClientInfoViewController.m */,
 				020886CD13AC41D000164320 /* ContractsViewController.h */,
 				020886CE13AC41D000164320 /* ContractsViewController.m */,
+				029DAC9E136BA00A00AF4A6F /* ClientInfosViewController.h */,
+				029DAC9F136BA00A00AF4A6F /* ClientInfosViewController.m */,
 				02B2C06B12DFF2DD00D3FEE0 /* EstimatesViewController.h */,
 				02B2C06C12DFF2DD00D3FEE0 /* EstimatesViewController.m */,
 				02DE9883137A12D3007C5FED /* LineItemsViewController.h */,
@@ -295,8 +295,8 @@
 				02AA0C00136DCB20005E9158 /* AddEstimateLineItems.xib */,
 				021F684F12E67D8700ECDDDD /* AddEstimateNewClientInfo.xib */,
 				02C75242136A429F00EC4BF5 /* AddEstimateNewOrPickClientInfo.xib */,
-				029DACA0136BA00A00AF4A6F /* AddEstimatePickClientInfo.xib */,
 				02AA0B5E136DAF13005E9158 /* AddEstimateReviewClientInfo.xib */,
+				029DACA0136BA00A00AF4A6F /* ClientInfos.xib */,
 				020886CF13AC41D000164320 /* Contracts.xib */,
 				02B2C06D12DFF2DD00D3FEE0 /* Estimates.xib */,
 				02DE9885137A12D3007C5FED /* LineItems.xib */,
@@ -550,7 +550,7 @@
 				02CC9C98133FC52D006160A7 /* TextFieldCell.xib in Resources */,
 				02A8E54C1347C88600BAAF36 /* AddEstimateContactInfo.xib in Resources */,
 				02C75244136A429F00EC4BF5 /* AddEstimateNewOrPickClientInfo.xib in Resources */,
-				029DACA2136BA00A00AF4A6F /* AddEstimatePickClientInfo.xib in Resources */,
+				029DACA2136BA00A00AF4A6F /* ClientInfos.xib in Resources */,
 				02AA0B60136DAF13005E9158 /* AddEstimateReviewClientInfo.xib in Resources */,
 				02AA0C02136DCB20005E9158 /* AddEstimateLineItems.xib in Resources */,
 				02DE9887137A12D3007C5FED /* LineItems.xib in Resources */,
@@ -595,7 +595,7 @@
 				023E06AD134D52A60026209B /* TextFieldTableViewController.m in Sources */,
 				023AE59B13665C7000E8A88D /* BaseObject.m in Sources */,
 				02C75243136A429F00EC4BF5 /* AddEstimateNewOrPickClientInfoViewController.m in Sources */,
-				029DACA1136BA00A00AF4A6F /* AddEstimatePickClientInfoViewController.m in Sources */,
+				029DACA1136BA00A00AF4A6F /* ClientInfosViewController.m in Sources */,
 				02AA0B5F136DAF13005E9158 /* AddEstimateReviewClientInfoViewController.m in Sources */,
 				02AA0C01136DCB20005E9158 /* AddEstimateLineItemsViewController.m in Sources */,
 				02022CA61378CDFC00536FEA /* LineItemSelection.m in Sources */,

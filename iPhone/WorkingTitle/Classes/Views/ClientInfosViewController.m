@@ -1,12 +1,12 @@
 //
-//  AddEstimatePickClientInfoViewController.m
+//  ClientInfosViewController.m
 //  WorkingTitle
 //
 //  Created by Jerome Lecomte on 11-04-29.
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import "AddEstimatePickClientInfoViewController.h"
+#import "ClientInfosViewController.h"
 // API
 #import "ClientInformation.h"
 #import "DataStore.h"
@@ -14,7 +14,7 @@
 #import "AddEstimateReviewClientInfoViewController.h"
 
 
-@implementation AddEstimatePickClientInfoViewController
+@implementation ClientInfosViewController
 
 @synthesize clientInfos;
 @synthesize reviewClientInfoViewController;
@@ -24,10 +24,10 @@
 
 - (void)viewDidLoad {
 #ifdef __ENABLE_UI_LOGS__
-	NSLog(@"AddEstimatePickClientInfoViewController.viewDidLoad");
+	NSLog(@"ClientInfosViewController.viewDidLoad");
 #endif
     [super viewDidLoad];
-	self.title = NSLocalizedString(@"Pick Client", "AddEstimatePickClientInfo Navigation Item Title");
+	self.title = NSLocalizedString(@"Pick Client", "ClientInfos Navigation Item Title");
 
 	self.clientInfos = [[DataStore defaultStore] clientInfosFetchedResultsController];
 	clientInfos.delegate = self;
@@ -98,7 +98,7 @@
 
 - (void)viewDidUnload {
 #ifdef __ENABLE_UI_LOGS__
-	NSLog(@"AddEstimatePickClientInfoViewController.viewDidUnload");
+	NSLog(@"ClientInfosViewController.viewDidUnload");
 #endif
     // Relinquish ownership of anything that can be recreated in viewDidLoad or on demand.
 	clientInfos.delegate = nil;
@@ -109,7 +109,7 @@
 
 - (void)dealloc {
 #ifdef __ENABLE_UI_LOGS__
-	NSLog(@"AddEstimatePickClientInfoViewController.dealloc");
+	NSLog(@"ClientInfosViewController.dealloc");
 #endif
 	[clientInfos release];
 	[reviewClientInfoViewController release];

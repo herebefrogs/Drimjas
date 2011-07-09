@@ -151,7 +151,7 @@
 				</object>
 				<object class="NSMutableArray" key="dict.values">
 					<bool key="EncodedWithXMLCoder">YES</bool>
-					<string>AddEstimatePickClientInfoViewController</string>
+					<string>ClientInfosViewController</string>
 					<string>UIResponder</string>
 					<string>{{329, 276}, {320, 480}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -182,7 +182,7 @@
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
 				<bool key="EncodedWithXMLCoder">YES</bool>
 				<object class="IBPartialClassDescription">
-					<string key="className">AddEstimatePickClientInfoViewController</string>
+					<string key="className">ClientInfosViewController</string>
 					<string key="superclassName">UITableViewController</string>
 					<object class="NSMutableDictionary" key="outlets">
 						<string key="NS.key.0">reviewClientInfoViewController</string>
@@ -197,7 +197,7 @@
 					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">Classes/Views/AddEstimatePickClientInfoViewController.h</string>
+						<string key="minorKey">Classes/Views/ClientInfosViewController.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">

@@ -600,12 +600,12 @@
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>newClientInfoViewController</string>
-							<string>pickClientInfoViewController</string>
+							<string>clientInfosViewController</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>AddEstimateNewClientInfoViewController</string>
-							<string>AddEstimatePickClientInfoViewController</string>
+							<string>ClientInfosViewController</string>
 						</object>
 					</object>
 					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
@@ -613,7 +613,7 @@
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>newClientInfoViewController</string>
-							<string>pickClientInfoViewController</string>
+							<string>clientInfosViewController</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -622,8 +622,8 @@
 								<string key="candidateClassName">AddEstimateNewClientInfoViewController</string>
 							</object>
 							<object class="IBToOneOutletInfo">
-								<string key="name">pickClientInfoViewController</string>
-								<string key="candidateClassName">AddEstimatePickClientInfoViewController</string>
+								<string key="name">clientInfosViewController</string>
+								<string key="candidateClassName">ClientInfosViewController</string>
 							</object>
 						</object>
 					</object>
@@ -633,7 +633,7 @@
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
-					<string key="className">AddEstimatePickClientInfoViewController</string>
+					<string key="className">ClientInfosViewController</string>
 					<string key="superclassName">UITableViewController</string>
 					<object class="NSMutableDictionary" key="outlets">
 						<string key="NS.key.0">reviewClientInfoViewController</string>
@@ -648,7 +648,7 @@
 					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">Classes/Views/AddEstimatePickClientInfoViewController.h</string>
+						<string key="minorKey">Classes/Views/ClientInfosViewController.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">

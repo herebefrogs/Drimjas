@@ -62,7 +62,7 @@
 /* Email Text Field Placeholder */
 "Email" = "Adresse Electronique";
 
-/* AddEstimatePickClientInfo Navigation Item Title */
+/* ClientInfos Navigation Item Title */
 "Pick Client" = "Choisir un Client";
 
 /* AddEstimateReviewClientInfo Navigation Item Title */

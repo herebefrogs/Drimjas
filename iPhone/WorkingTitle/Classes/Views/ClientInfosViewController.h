@@ -1,5 +1,5 @@
 //
-//  AddEstimatePickClientInfoViewController.h
+//  ClientInfosViewController.h
 //  WorkingTitle
 //
 //  Created by Jerome Lecomte on 11-04-29.
@@ -10,7 +10,7 @@
 
 @class AddEstimateReviewClientInfoViewController;
 
-@interface AddEstimatePickClientInfoViewController : UITableViewController <NSFetchedResultsControllerDelegate> {
+@interface ClientInfosViewController : UITableViewController <NSFetchedResultsControllerDelegate> {
 	NSFetchedResultsController *clientInfos;
 	AddEstimateReviewClientInfoViewController *reviewClientInfoViewController;
 }
