@@ -8,6 +8,7 @@
 
 #import "OptionsViewController.h"
 // Views
+#import "ClientInfosViewController.h"
 #import "LineItemsViewController.h"
 #import "MyInfoViewController.h"
 #import "TableFields.h"
@@ -15,6 +16,7 @@
 
 @implementation OptionsViewController
 
+@synthesize clientInfosViewController;
 @synthesize lineItemsViewController;
 @synthesize taxesAndCurrencyViewController;
 @synthesize myInfoViewController;
@@ -85,7 +87,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == OptionsFieldClients) {
-		NSLog(@"Open clients screen");
+		clientInfosViewController.optionsMode = YES;
+		[self.navigationController pushViewController:clientInfosViewController animated:YES];
 	}
 	else if (indexPath.row == OptionsFieldLineItems) {
 		lineItemsViewController.optionsMode = YES;
@@ -116,6 +119,7 @@
 #ifdef __ENABLE_UI_LOGS__
 	NSLog(@"OptionsViewController.viewDidUnload");
 #endif
+	self.clientInfosViewController = nil;
 	self.lineItemsViewController = nil;
 	self.taxesAndCurrencyViewController = nil;
     self.myInfoViewController = nil;
@@ -126,6 +130,7 @@
 #ifdef __ENABLE_UI_LOGS__
 	NSLog(@"OptionsViewController.dealloc");
 #endif
+	[clientInfosViewController release];
 	[lineItemsViewController release];
 	[taxesAndCurrencyViewController release];
 	[myInfoViewController release];

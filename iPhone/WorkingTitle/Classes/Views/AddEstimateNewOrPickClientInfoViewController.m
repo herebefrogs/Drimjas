@@ -82,6 +82,7 @@
 	if (indexPath.section == NewClientInfoSection) {
 		[self.navigationController pushViewController:newClientInfoViewController animated:YES];
 	} else if (indexPath.section == PickClientInfoSection) {
+		clientInfosViewController.optionsMode = NO;
 		[self.navigationController pushViewController:clientInfosViewController animated:YES];
 	}
 }

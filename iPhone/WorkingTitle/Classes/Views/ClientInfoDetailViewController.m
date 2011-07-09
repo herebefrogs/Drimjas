@@ -18,9 +18,11 @@
 
 @implementation ClientInfoDetailViewController
 
+@synthesize deleteButton;
 @synthesize nextButton;
 @synthesize lineItemsViewController;
 @synthesize clientInfo;
+@synthesize optionsMode;
 
 #pragma mark -
 #pragma mark View lifecycle
@@ -32,12 +34,13 @@
     [super viewDidLoad];
 	self.title = NSLocalizedString(@"Review Client", "ClientInfoDetail Navigation Item Title");
 	nextButton.title = NSLocalizedString(@"Next", "Next Navigation Item Title");
+	deleteButton.title = NSLocalizedString(@"Delete", "Delete Navigation Item Title");
 }
 	
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
 
-	self.navigationItem.rightBarButtonItem = nextButton;
+	self.navigationItem.rightBarButtonItem = optionsMode ? deleteButton : nextButton;
 
 	// reload table data to match selected client info
 	[self.tableView reloadData];
@@ -99,10 +102,10 @@
 	Estimate *estimate = [[DataStore defaultStore] estimateStub];
 
 	// delete or deassociate previously set client info
-	if ([estimate.clientInfo.status integerValue] == StatusCreated) {
-		[[DataStore defaultStore] deleteClientInfo:estimate.clientInfo];
+	if ([estimate.clientInfo.status intValue] == StatusCreated) {
+		[[DataStore defaultStore] deleteClientInfo:estimate.clientInfo andSave:NO];
 	}
-	else if ([estimate.clientInfo.status integerValue] == StatusActive) {
+	else if ([estimate.clientInfo.status intValue] == StatusActive) {
 		[estimate.clientInfo removeEstimatesObject:estimate];
 	}
 
@@ -113,20 +116,11 @@
 	[self.navigationController pushViewController:lineItemsViewController animated:YES];
 }
 
-#pragma mark -
-#pragma mark Table view delegate
+- (IBAction)delete:(id)sender {
+	[[DataStore defaultStore] deleteClientInfo:clientInfo andSave:YES];
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-    <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-    // ...
-    // Pass the selected object to the new view controller.
-    [self.navigationController pushViewController:detailViewController animated:YES];
-    [detailViewController release];
-    */
+	[self.navigationController popViewControllerAnimated:YES];
 }
-
 
 #pragma mark -
 #pragma mark Memory management

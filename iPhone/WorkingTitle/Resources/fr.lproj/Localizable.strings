@@ -47,6 +47,9 @@
 /* Next Navigation Item Title */
 "Next" = "Suivant";
 
+/* Delete Navigation Item Title */
+"Delete" = "Supprimer";
+
 /* AddEstimateContactInfo Navigation Item Title */
 "Add Contact" = "Nouveau Contact";
 

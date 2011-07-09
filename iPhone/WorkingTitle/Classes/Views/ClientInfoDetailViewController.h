@@ -12,15 +12,21 @@
 @class AddEstimateLineItemsViewController;
 
 @interface ClientInfoDetailViewController : UITableViewController {
+	UIBarButtonItem *deleteButton;
 	UIBarButtonItem *nextButton;
 	AddEstimateLineItemsViewController *lineItemsViewController;
 	ClientInfo *clientInfo;
+
+	BOOL optionsMode;
 }
 
+@property (nonatomic, retain) IBOutlet UIBarButtonItem *deleteButton;
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *nextButton;
 @property (nonatomic, retain) IBOutlet AddEstimateLineItemsViewController *lineItemsViewController;
 @property (nonatomic, retain) ClientInfo *clientInfo;
+@property (nonatomic, assign) BOOL optionsMode;
 
+- (IBAction)delete:(id)sender;
 - (IBAction)next:(id)sender;
 
 @end

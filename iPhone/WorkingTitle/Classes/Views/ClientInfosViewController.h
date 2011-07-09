@@ -11,11 +11,14 @@
 @class ClientInfoDetailViewController;
 
 @interface ClientInfosViewController : UITableViewController <NSFetchedResultsControllerDelegate> {
-	NSFetchedResultsController *clientInfos;
 	ClientInfoDetailViewController *clientInfoDetailViewController;
+	NSFetchedResultsController *clientInfos;
+
+	BOOL optionsMode;
 }
 
-@property (nonatomic, retain) NSFetchedResultsController *clientInfos;
 @property (nonatomic, retain) IBOutlet ClientInfoDetailViewController *clientInfoDetailViewController;
+@property (nonatomic, retain) NSFetchedResultsController *clientInfos;
+@property (nonatomic, assign) BOOL optionsMode;
 
 @end

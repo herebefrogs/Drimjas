@@ -18,6 +18,7 @@
 
 @synthesize clientInfos;
 @synthesize clientInfoDetailViewController;
+@synthesize optionsMode;
 
 #pragma mark -
 #pragma mark View lifecycle
@@ -33,9 +34,32 @@
 	clientInfos.delegate = self;
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+
+	if (optionsMode) {
+		// show add/delete widgets in front of rows
+		[self.tableView setEditing:YES animated:NO];
+		self.tableView.allowsSelectionDuringEditing = YES;
+	}
+
+	// refresh table in case user is viewing Client Infos screen from Estimate creation & Options menu screens at the same time
+	[self.tableView reloadData];
+}
+
 // Override to allow orientations other than the default portrait orientation.
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
 	return YES;
+}
+
+
+#pragma mark -
+#pragma mark Private method stack
+
+- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+    ClientInfo *clientInfo = [clientInfos objectAtIndexPath:indexPath];
+	cell.textLabel.text = clientInfo.name;
+	cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 }
 
 
@@ -55,17 +79,15 @@
 
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+
     static NSString *CellIdentifier = @"Cell";
-    
+
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
-		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
-    
-    ClientInfo *clientInfo = [clientInfos objectAtIndexPath:indexPath];
-	cell.textLabel.text = clientInfo.name;
+
+	[self configureCell:cell atIndexPath:indexPath];
 
     return cell;
 }
@@ -73,17 +95,50 @@
 #pragma mark -
 #pragma mark Table view delegate
 
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+		[[DataStore defaultStore] deleteClientInfo:[clientInfos objectAtIndexPath:indexPath]
+										   andSave:YES];
+    }
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	clientInfoDetailViewController.clientInfo = [clientInfos objectAtIndexPath:indexPath];
-
+	clientInfoDetailViewController.optionsMode = optionsMode;
 	[self.navigationController pushViewController:clientInfoDetailViewController animated:YES];
 }
 
 #pragma mark -
 #pragma mark FetchedResultsController delegate
 
-- (void)controllerDidChangeContent:(NSFetchedResultsController*)controller {
-	[self.tableView reloadData];
+- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
+    // The fetch controller is about to start sending change notifications, so prepare the table view for updates.
+	[self.tableView beginUpdates];
+}
+
+- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath {
+    UITableView *tableView = self.tableView;
+
+    switch(type) {
+        case NSFetchedResultsChangeInsert:
+			[tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationBottom];
+            break;
+        case NSFetchedResultsChangeDelete:
+            [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+        case NSFetchedResultsChangeUpdate:
+            [self configureCell:[tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
+            break;
+        case NSFetchedResultsChangeMove:
+			[tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            // Reloading the section inserts a new row and ensures that titles are updated appropriately.
+            [tableView reloadSections:[NSIndexSet indexSetWithIndex:newIndexPath.section] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+    }
+}
+
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
+    [self.tableView endUpdates];
 }
 
 #pragma mark -

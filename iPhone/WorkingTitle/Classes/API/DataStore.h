@@ -85,7 +85,7 @@
 
 - (NSFetchedResultsController *)clientInfosFetchedResultsController;
 - (ClientInfo *)createClientInfo;
-- (BOOL)deleteClientInfo:(ClientInfo *)clientInfo;
+- (BOOL)deleteClientInfo:(ClientInfo *)clientInfo andSave:(BOOL)save;
 
 @end
 

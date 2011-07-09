@@ -363,8 +363,8 @@ static DataStore *singleton_ = nil;
 		ClientInfo *clientInfo = estimate.clientInfo;
 		[clientInfo removeEstimatesObject:estimate];
 
-		if ([clientInfo.status integerValue] == StatusCreated) {
-			[self deleteClientInfo:clientInfo];
+		if ([clientInfo.status intValue] == StatusCreated) {
+			[self deleteClientInfo:clientInfo andSave:NO];
 		}
 	}
 
@@ -434,17 +434,30 @@ static DataStore *singleton_ = nil;
 															  inManagedObjectContext:self.managedObjectContext];
 }
 
-- (BOOL)deleteClientInfo:(ClientInfo *)clientInfo {
-	NSArray *contactInfos = [clientInfo.status intValue] == StatusCreated ? contactInfoStubs_ : [clientInfo.contactInfos allObjects];
+- (BOOL)deleteClientInfo:(ClientInfo *)clientInfo andSave:(BOOL)save {
+	// as estimates will be removed from the set, the fast enumeration
+	// must work from an immutable copy to prevent raising exceptions
+	NSSet *immutableCopy = [clientInfo.estimates copy];
+	
+	// remove client info from all estimates referencing it
+	// NOTE: this is pretty disruptive for underlying estimates but user has been warned
+	for (Estimate *estimate in immutableCopy) {
+		estimate.clientInfo = nil;
+	}
+	
+	[immutableCopy release];
 
+	NSArray *contactInfos = [clientInfo.status intValue] == StatusCreated ? contactInfoStubs_ : [clientInfo.contactInfos allObjects];
+	
 	for (ContactInformation *contactInfo in contactInfos) {
 		[self deleteContactInformation:contactInfo];
 	}
 
 	[self.managedObjectContext deleteObject:clientInfo];
 
-	// NOTE: assume this will be validated by either deleteEstimate[Stub]: or saveEstimateStub:
-	// TODO: won't be true when deleting ClientInfo from Options screen
+	if (save) {
+		[self saveContext];
+	}
 
 	return YES;
 }
