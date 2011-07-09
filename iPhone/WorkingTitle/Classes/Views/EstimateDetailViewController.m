@@ -20,34 +20,47 @@
 // Cells
 #import "EditSectionHeader.h"
 // Views
+#import "AddEstimateLineItemsViewController.h"
 #import "TableFields.h"
 
 
 @implementation EstimateDetailViewController
 
-@synthesize estimate;
+#pragma mark -
+#pragma mark Private methods stack
+
+- (void)reloadIndexes {
+	indexFirstLineItem = EstimateDetailSectionContactInfo + estimate.clientInfo.contactInfos.count;
+	indexLastSection = indexFirstLineItem + estimate.lineItems.count;
+	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"index" ascending:YES];
+	[lineItemSelections release];
+	lineItemSelections = [[estimate.lineItems sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]] retain];
+	[sortDescriptor release];
+}
+
+
+#pragma mark -
+#pragma mark Properties stack
+
 @synthesize emailButton;
 @synthesize printButton;
 @synthesize spacerButton;
 @synthesize editSectionHeader;
+@synthesize lineItemSelectionsViewController;
+@synthesize estimate;
 
 - (void)setEstimate:(Estimate *)newEstimate {
 	[estimate release];
-	[lineItemSelections release];
 
 	estimate = [newEstimate retain];
 	if (estimate) {
-		indexFirstLineItem = EstimateDetailSectionContactInfo + estimate.clientInfo.contactInfos.count;
-		indexLastSection = indexFirstLineItem + estimate.lineItems.count;
-		NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"index" ascending:YES];
-		lineItemSelections = [[estimate.lineItems sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]] retain];
-		[sortDescriptor release];
+		[self reloadIndexes];
 	}
 }
 
+
 #pragma mark -
 #pragma mark View lifecycle
-
 
 - (void)viewDidLoad {
 #ifdef __ENABLE_UI_LOGS__
@@ -75,26 +88,16 @@
     [super viewWillAppear:animated];
 	// show toolbar with animation
 	[self.navigationController setToolbarHidden:NO animated:YES];
+
+	[self reloadIndexes];
 	[self.tableView reloadData];
 }
-
-/*
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-}
-*/
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
 	// hide toolbar with animation
 	[self.navigationController setToolbarHidden:YES animated:YES];
 }
-
-/*
-- (void)viewDidDisappear:(BOOL)animated {
-    [super viewDidDisappear:animated];
-}
-*/
 
 // Override to allow orientations other than the default portrait orientation.
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
@@ -195,46 +198,6 @@
 }
 
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source.
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
-    }
-}
-*/
-
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-
 #pragma mark -
 #pragma mark Table view delegate
 
@@ -309,7 +272,15 @@
 
 - (IBAction)modify:(id)sender {
 	UIButton *edit = (UIButton *)sender;
-	NSLog(@"Edit section %u", edit.tag);
+
+	if (edit.tag == indexFirstLineItem) {
+		lineItemSelectionsViewController.estimate = estimate;
+		lineItemSelectionsViewController.editMode = YES;
+		[self.navigationController pushViewController:lineItemSelectionsViewController animated:YES];
+	}
+	else {
+		NSLog(@"Edit section %u", edit.tag);
+	}
 }
 
 #pragma mark -
@@ -347,6 +318,7 @@
 	self.editSectionHeader = nil;
 	self.emailButton = nil;
 	self.printButton = nil;
+	self.lineItemSelectionsViewController = nil;
 	self.estimate = nil;
 	[lineItemSelections release];
 	lineItemSelections = nil;
@@ -361,6 +333,7 @@
 	[spacerButton release];
 	[printButton release];
 	[emailButton release];
+	[lineItemSelectionsViewController release];
 	[estimate release];
 	[lineItemSelections release];
     [super dealloc];

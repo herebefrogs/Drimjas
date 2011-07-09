@@ -113,6 +113,7 @@
 	estimate.clientInfo = clientInfo;
 	[clientInfo addEstimatesObject:estimate];
 
+	lineItemsViewController.editMode = NO;
 	[self.navigationController pushViewController:lineItemsViewController animated:YES];
 }
 

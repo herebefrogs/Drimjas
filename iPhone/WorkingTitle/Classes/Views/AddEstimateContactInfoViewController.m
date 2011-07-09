@@ -238,7 +238,7 @@
 #pragma mark Button delegate
 
 - (IBAction)next:(id)sender {
-	// TODO maybe should associate contact info stubs to client info stub right away
+	lineItemsViewController.editMode = NO;
 	[self.navigationController pushViewController:lineItemsViewController animated:YES];
 }
 

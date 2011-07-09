@@ -33,6 +33,7 @@
 @synthesize myInfoViewController;
 @synthesize lineItemSelections;
 @synthesize estimate;
+@synthesize editMode;
 
 #pragma mark -
 #pragma mark View lifecycle
@@ -54,23 +55,17 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
 
-	// it might be problematic later to always fetch a stub, maybe previous view controller should set it
-	self.estimate = [[DataStore defaultStore] estimateStub];
+	if (!editMode) {
+		self.estimate = [[DataStore defaultStore] estimateStub];
+	}
 	self.lineItemSelections = [[DataStore defaultStore] lineItemSelectionsForEstimate:estimate];
 	lineItemSelections.delegate = self;
 
-	self.navigationItem.rightBarButtonItem = ([Currency isCurrencySet] && [MyInfo isMyInfoSet]) ? saveButton : nextButton;
+	// show Next button if taxes & currency or my info aren't set yet
+	// show Save button if they are or if editing the line item selections from estimate detail screen
+	self.navigationItem.rightBarButtonItem = ([Currency isCurrencySet] && [MyInfo isMyInfoSet]) || editMode ? saveButton : nextButton;
 
 	[self.tableView reloadData];
-}
-
-- (void)viewDidDisappear:(BOOL)animated {
-    [super viewDidDisappear:animated];
-
-	// it might be problematic for next controller to pass value back that estimate is cleared
-	self.estimate = nil;
-	lineItemSelections.delegate = nil;
-	self.lineItemSelections = nil;
 }
 
 // Override to allow orientations other than the default portrait orientation.
@@ -382,12 +377,19 @@ BOOL _insertLineItem = NO;
 	// save estimate into estimates list
 	estimateDetailViewController.estimate = [[DataStore defaultStore] saveEstimateStub];
 
-	// reset navigation controller to review estimate view controller
-	UIViewController *rootController = [self.navigationController.viewControllers objectAtIndex:0];
-	[self.navigationController setViewControllers:[NSArray arrayWithObjects:rootController,
-																		    estimateDetailViewController,
-																		    nil]
-										 animated:YES];
+	if (editMode) {
+		// go back to estimate detail view controller (just before in the stack)
+		[self.navigationController popViewControllerAnimated:YES];
+	}
+	else {
+		// reset navigation controller to estimates list & estimate detail view controllers,
+		// discarding any estimate creation view controllers in between
+		UIViewController *rootController = [self.navigationController.viewControllers objectAtIndex:0];
+		[self.navigationController setViewControllers:[NSArray arrayWithObjects:rootController,
+																				estimateDetailViewController,
+																				nil]
+											 animated:YES];
+	}
 }
 
 

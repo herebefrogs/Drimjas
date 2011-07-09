@@ -26,6 +26,8 @@
 
 	NSFetchedResultsController *lineItemSelections;
 	Estimate *estimate;
+
+	BOOL editMode;
 }
 
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *nextButton;
@@ -37,6 +39,7 @@
 
 @property (nonatomic, retain) NSFetchedResultsController *lineItemSelections;
 @property (nonatomic, retain) Estimate *estimate;
+@property (nonatomic, assign) BOOL editMode;
 
 - (IBAction)next:(id)sender;
 - (IBAction)save:(id)sender;
