@@ -1,12 +1,12 @@
 //
-//  AddEstimateReviewClientInfoViewController.m
+//  ClientInfoDetailViewController.m
 //  WorkingTitle
 //
 //  Created by Jerome Lecomte on 11-05-01.
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import "AddEstimateReviewClientInfoViewController.h"
+#import "ClientInfoDetailViewController.h"
 // API
 #import "ClientInformation.h"
 #import "ContactInformation.h"
@@ -16,7 +16,7 @@
 #import "AddEstimateLineItemsViewController.h"
 #import "TableFields.h"
 
-@implementation AddEstimateReviewClientInfoViewController
+@implementation ClientInfoDetailViewController
 
 @synthesize nextButton;
 @synthesize lineItemsViewController;
@@ -27,10 +27,10 @@
 
 - (void)viewDidLoad {
 #ifdef __ENABLE_UI_LOGS__
-	NSLog(@"AddEstimateReviewClientInfoViewController.viewDidLoad");
+	NSLog(@"ClientInfoDetailViewController.viewDidLoad");
 #endif
     [super viewDidLoad];
-	self.title = NSLocalizedString(@"Review Client", "AddEstimateReviewClientInfo Navigation Item Title");
+	self.title = NSLocalizedString(@"Review Client", "ClientInfoDetail Navigation Item Title");
 	nextButton.title = NSLocalizedString(@"Next", "Next Navigation Item Title");
 }
 	
@@ -140,7 +140,7 @@
 
 - (void)viewDidUnload {
 #ifdef __ENABLE_UI_LOGS__
-	NSLog(@"AddEstimateReviewClientInfoViewController.viewDidUnload");
+	NSLog(@"ClientInfoDetailViewController.viewDidUnload");
 #endif
     // Relinquish ownership of anything that can be recreated in viewDidLoad or on demand.
 	self.nextButton = nil;
@@ -151,7 +151,7 @@
 
 - (void)dealloc {
 #ifdef __ENABLE_UI_LOGS__
-	NSLog(@"AddEstimateReviewClientInfoViewController.dealloc");
+	NSLog(@"ClientInfoDetailViewController.dealloc");
 #endif
 	[nextButton release];
 	[lineItemsViewController release];

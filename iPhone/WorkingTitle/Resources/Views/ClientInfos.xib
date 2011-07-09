@@ -60,7 +60,7 @@
 				<float key="IBUISectionFooterHeight">22</float>
 			</object>
 			<object class="IBUIViewController" id="732476350">
-				<string key="IBUINibName">AddEstimateReviewClientInfo</string>
+				<string key="IBUINibName">ClientInfoDetail</string>
 				<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics"/>
 				<object class="IBUISimulatedOrientationMetrics" key="IBUISimulatedOrientationMetrics">
 					<int key="interfaceOrientation">1</int>
@@ -98,7 +98,7 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">reviewClientInfoViewController</string>
+						<string key="label">clientInfoDetailViewController</string>
 						<reference key="source" ref="372490531"/>
 						<reference key="destination" ref="732476350"/>
 					</object>
@@ -155,7 +155,7 @@
 					<string>UIResponder</string>
 					<string>{{329, 276}, {320, 480}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-					<string>AddEstimateReviewClientInfoViewController</string>
+					<string>ClientInfoDetailViewController</string>
 					<string>{{350, 265}, {320, 480}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				</object>
@@ -185,14 +185,14 @@
 					<string key="className">ClientInfosViewController</string>
 					<string key="superclassName">UITableViewController</string>
 					<object class="NSMutableDictionary" key="outlets">
-						<string key="NS.key.0">reviewClientInfoViewController</string>
-						<string key="NS.object.0">AddEstimateReviewClientInfoViewController</string>
+						<string key="NS.key.0">clientInfoDetailViewController</string>
+						<string key="NS.object.0">ClientInfoDetailViewController</string>
 					</object>
 					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<string key="NS.key.0">reviewClientInfoViewController</string>
+						<string key="NS.key.0">clientInfoDetailViewController</string>
 						<object class="IBToOneOutletInfo" key="NS.object.0">
-							<string key="name">reviewClientInfoViewController</string>
-							<string key="candidateClassName">AddEstimateReviewClientInfoViewController</string>
+							<string key="name">clientInfoDetailViewController</string>
+							<string key="candidateClassName">ClientInfoDetailViewController</string>
 						</object>
 					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
@@ -201,11 +201,11 @@
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
-					<string key="className">AddEstimateReviewClientInfoViewController</string>
+					<string key="className">ClientInfoDetailViewController</string>
 					<string key="superclassName">UITableViewController</string>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">Classes/Views/AddEstimateReviewClientInfoViewController.h</string>
+						<string key="minorKey">Classes/Views/ClientInfoDetailViewController.h</string>
 					</object>
 				</object>
 			</object>

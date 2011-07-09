@@ -65,7 +65,7 @@
 /* ClientInfos Navigation Item Title */
 "Pick Client" = "Pick Client";
 
-/* AddEstimateReviewClientInfo Navigation Item Title */
+/* ClientInfoDetail Navigation Item Title */
 "Review Client" = "Review Client";
 
 /* AddEstimateLineItems Navigation Item Title */

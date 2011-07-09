@@ -636,14 +636,14 @@
 					<string key="className">ClientInfosViewController</string>
 					<string key="superclassName">UITableViewController</string>
 					<object class="NSMutableDictionary" key="outlets">
-						<string key="NS.key.0">reviewClientInfoViewController</string>
-						<string key="NS.object.0">AddEstimateReviewClientInfoViewController</string>
+						<string key="NS.key.0">clientInfoDetailViewController</string>
+						<string key="NS.object.0">ClientInfoDetailViewController</string>
 					</object>
 					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<string key="NS.key.0">reviewClientInfoViewController</string>
+						<string key="NS.key.0">clientInfoDetailViewController</string>
 						<object class="IBToOneOutletInfo" key="NS.object.0">
-							<string key="name">reviewClientInfoViewController</string>
-							<string key="candidateClassName">AddEstimateReviewClientInfoViewController</string>
+							<string key="name">clientInfoDetailViewController</string>
+							<string key="candidateClassName">ClientInfoDetailViewController</string>
 						</object>
 					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
@@ -652,7 +652,7 @@
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
-					<string key="className">AddEstimateReviewClientInfoViewController</string>
+					<string key="className">ClientInfoDetailViewController</string>
 					<string key="superclassName">UITableViewController</string>
 					<object class="NSMutableDictionary" key="actions">
 						<string key="NS.key.0">next:</string>
@@ -699,7 +699,7 @@
 					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">Classes/Views/AddEstimateReviewClientInfoViewController.h</string>
+						<string key="minorKey">Classes/Views/ClientInfoDetailViewController.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">

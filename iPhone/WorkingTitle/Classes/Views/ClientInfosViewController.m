@@ -11,13 +11,13 @@
 #import "ClientInformation.h"
 #import "DataStore.h"
 // Views
-#import "AddEstimateReviewClientInfoViewController.h"
+#import "ClientInfoDetailViewController.h"
 
 
 @implementation ClientInfosViewController
 
 @synthesize clientInfos;
-@synthesize reviewClientInfoViewController;
+@synthesize clientInfoDetailViewController;
 
 #pragma mark -
 #pragma mark View lifecycle
@@ -74,9 +74,9 @@
 #pragma mark Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	reviewClientInfoViewController.clientInfo = [clientInfos objectAtIndexPath:indexPath];
+	clientInfoDetailViewController.clientInfo = [clientInfos objectAtIndexPath:indexPath];
 
-	[self.navigationController pushViewController:reviewClientInfoViewController animated:YES];
+	[self.navigationController pushViewController:clientInfoDetailViewController animated:YES];
 }
 
 #pragma mark -
@@ -103,7 +103,7 @@
     // Relinquish ownership of anything that can be recreated in viewDidLoad or on demand.
 	clientInfos.delegate = nil;
 	self.clientInfos = nil;
-	self.reviewClientInfoViewController = nil;
+	self.clientInfoDetailViewController = nil;
 }
 
 
@@ -112,7 +112,7 @@
 	NSLog(@"ClientInfosViewController.dealloc");
 #endif
 	[clientInfos release];
-	[reviewClientInfoViewController release];
+	[clientInfoDetailViewController release];
     [super dealloc];
 }
 

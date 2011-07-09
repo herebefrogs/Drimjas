@@ -1,5 +1,5 @@
 //
-//  AddEstimateReviewClientInfoViewController.h
+//  ClientInfoDetailViewController.h
 //  WorkingTitle
 //
 //  Created by Jerome Lecomte on 11-05-01.
@@ -11,7 +11,7 @@
 @class ClientInformation;
 @class AddEstimateLineItemsViewController;
 
-@interface AddEstimateReviewClientInfoViewController : UITableViewController {
+@interface ClientInfoDetailViewController : UITableViewController {
 	UIBarButtonItem *nextButton;
 	AddEstimateLineItemsViewController *lineItemsViewController;
 	ClientInformation *clientInfo;
