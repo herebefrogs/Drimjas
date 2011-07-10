@@ -9,7 +9,7 @@
 #import "ClientInfoDetailViewController.h"
 // API
 #import "ClientInfo.h"
-#import "ContactInformation.h"
+#import "ContactInfo.h"
 #import "Estimate.h"
 #import "DataStore.h"
 // View
@@ -65,7 +65,7 @@
 		return [clientInfo numSetProperties];
 	} else {
 		// BUG #5: must have saved contact info order to be able to lookup one by index
-		ContactInformation *contactInfo = [[clientInfo.contactInfos allObjects] objectAtIndex:section - 1];
+		ContactInfo *contactInfo = [[clientInfo.contactInfos allObjects] objectAtIndex:section - 1];
 		return [contactInfo numSetProperties];
 	}
 }
@@ -87,7 +87,7 @@
 		cell.textLabel.text = [clientInfo getSetPropertyWithIndex:indexPath.row];
 	} else {
 		// BUG #5: must have saved contact info order to be able to lookup one by index
-		ContactInformation *contactInfo = [[clientInfo.contactInfos allObjects] objectAtIndex:indexPath.section - 1];
+		ContactInfo *contactInfo = [[clientInfo.contactInfos allObjects] objectAtIndex:indexPath.section - 1];
 
 		cell.textLabel.text = [contactInfo getSetPropertyWithIndex:indexPath.row];
 	}

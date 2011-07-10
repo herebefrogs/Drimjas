@@ -9,7 +9,7 @@
 #import "AddEstimateContactInfoViewController.h"
 // API
 #import "ClientInfo.h"
-#import "ContactInformation.h"
+#import "ContactInfo.h"
 #import "DataStore.h"
 // Cells
 #import "TextFieldCell.h"
@@ -126,7 +126,7 @@
 		NSUInteger section = indexPath.section - 1;
 		cell.textField.tag = 10*section + indexPath.row;
 
-		ContactInformation *contactInfo = [contactInfos objectAtIndex:section];
+		ContactInfo *contactInfo = [contactInfos objectAtIndex:section];
 
 		// initialize textfield value from contact info
 		if (indexPath.row == ContactInfoFieldName) {
@@ -174,7 +174,7 @@
 
 - (void)insertContactInfoSection {
 	// add a new contact information
-	[[DataStore defaultStore] createContactInformationStub];
+	[[DataStore defaultStore] createContactInfoStub];
 
 	[self.tableView insertSections:[NSIndexSet indexSetWithIndex:contactInfos.count]
 				  withRowAnimation:UITableViewRowAnimationFade];
@@ -219,7 +219,7 @@
 	NSUInteger section = textField.tag / 10;
 	NSUInteger row = textField.tag - (10 * section);
 
-	ContactInformation *contactInfo = [contactInfos objectAtIndex:section];
+	ContactInfo *contactInfo = [contactInfos objectAtIndex:section];
 
 	// TODO hide overlay view if any
 	// save textfield value into estimate

@@ -1,23 +1,29 @@
 // 
-//  ContactInformation.m
+//  ContactInfo.m
 //  WorkingTitle
 //
 //  Created by Jerome Lecomte on 11-04-02.
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import "ContactInformation.h"
+#import "ContactInfo.h"
 // API
 #import "ClientInfo.h"
-// Objective-C
 
 
-@implementation ContactInformation 
+@implementation ContactInfo
 
 @dynamic name;
 @dynamic phone;
 @dynamic email;
 @dynamic clientInfo;
+
+
+- (void) awakeFromInsert {
+	[super awakeFromInsert];
+	
+	self.subEntityName = @"ContactInfo";
+}
 
 - (NSInteger)numSetProperties {
 	NSArray *properties = [NSArray arrayWithObjects:@"name", @"phone", @"email", nil];

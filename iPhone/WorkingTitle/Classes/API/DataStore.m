@@ -9,7 +9,7 @@
 #import "DataStore.h"
 // API
 #import "ClientInfo.h"
-#import	"ContactInformation.h"
+#import	"ContactInfo.h"
 #import "Estimate.h"
 #import "IndexedObject.h"
 #import "LineItemSelection.h"
@@ -197,7 +197,7 @@ static DataStore *singleton_ = nil;
 		[client addEstimatesObject:estimate];
 
 		for (NSDictionary *contact_data in [client_data valueForKey:@"contact_info"]) {
-			ContactInformation *contact = [self createContactInformationStub];
+			ContactInfo *contact = [self createContactInfoStub];
 			contact.name = [contact_data valueForKey:@"name"];
 			contact.email = [contact_data valueForKey:@"email"];
 			contact.phone = [contact_data valueForKey:@"phone"];
@@ -302,7 +302,7 @@ static DataStore *singleton_ = nil;
 		[estimateStub_.clientInfo addContactInfos:[NSSet setWithArray:contactInfoStubs_]];
 
 		// associate each contact info with client info
-		for (ContactInformation *contactInfo in contactInfoStubs_) {
+		for (ContactInfo *contactInfo in contactInfoStubs_) {
 			contactInfo.clientInfo = estimateStub_.clientInfo;
 			contactInfo.status = active;
 		}
@@ -312,8 +312,8 @@ static DataStore *singleton_ = nil;
 	else if ([estimateStub_.clientInfo.status integerValue] == StatusActive
 			 && [contactInfoStubs_ count] > 0) {
 		// delete contact infos stubs that may have been created
-		for (ContactInformation *contactInfo in contactInfoStubs_) {
-			[[DataStore defaultStore] deleteContactInformation:contactInfo];
+		for (ContactInfo *contactInfo in contactInfoStubs_) {
+			[[DataStore defaultStore] deleteContactInfo:contactInfo];
 		}
 	}
 
@@ -447,10 +447,8 @@ static DataStore *singleton_ = nil;
 	
 	[immutableCopy release];
 
-	NSArray *contactInfos = [clientInfo.status intValue] == StatusCreated ? contactInfoStubs_ : [clientInfo.contactInfos allObjects];
-	
-	for (ContactInformation *contactInfo in contactInfos) {
-		[self deleteContactInformation:contactInfo];
+	for (ContactInfo *contactInfo in contactInfos) {
+		[self deleteContactInfo:contactInfo];
 	}
 
 	[self.managedObjectContext deleteObject:clientInfo];
@@ -472,8 +470,8 @@ static DataStore *singleton_ = nil;
 	return contactInfoStubs_;
 }
 
-- (ContactInformation *)createContactInformationStub {
-	ContactInformation *contactInfo = (ContactInformation *)[NSEntityDescription insertNewObjectForEntityForName:@"ContactInformation"
+- (ContactInfo *)createContactInfoStub {
+	ContactInfo *contactInfo = (ContactInfo *)[NSEntityDescription insertNewObjectForEntityForName:@"ContactInfo"
 																						  inManagedObjectContext:self.managedObjectContext];
 
 	[self.contactInfoStubs addObject:contactInfo];
@@ -481,8 +479,8 @@ static DataStore *singleton_ = nil;
 	return contactInfo;
 }
 
-- (ContactInformation *)addContactInfoToClientInfo:(ClientInfo *)clientInfo {
-	ContactInformation *contactInfo = (ContactInformation *)[NSEntityDescription insertNewObjectForEntityForName:@"ContactInformation"
+- (ContactInfo *)addContactInfoToClientInfo:(ClientInfo *)clientInfo {
+	ContactInfo *contactInfo = (ContactInfo *)[NSEntityDescription insertNewObjectForEntityForName:@"ContactInfo"
 																						  inManagedObjectContext:self.managedObjectContext];
 
 	[clientInfo addContactInfosObject:contactInfo];
@@ -491,8 +489,8 @@ static DataStore *singleton_ = nil;
 	return contactInfo;
 }
 
-- (BOOL)deleteContactInformation:(ContactInformation *)contactInformation {
-	[self.managedObjectContext deleteObject:contactInformation];
+- (BOOL)deleteContactInfo:(ContactInfo *)contactInfo {
+	[self.managedObjectContext deleteObject:contactInfo];
 
 	// we only expect this method to be called by deleteClientInfo:
 	// as a result of a call to deleteEstimate: so let it save the modified context

@@ -10,7 +10,7 @@
 
 // API
 #import "Estimate.h"
-#import "ContactInformation.h"
+#import "ContactInfo.h"
 
 @implementation ClientInfo 
 

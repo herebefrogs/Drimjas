@@ -10,7 +10,7 @@
 
 @class Estimate;
 @class ClientInfo;
-@class ContactInformation;
+@class ContactInfo;
 @class LineItemSelection;
 @class LineItem;
 @class Currency;
@@ -44,10 +44,10 @@
 
 // contact information methods
 @property (nonatomic, retain, readonly) NSMutableArray *contactInfoStubs;
-- (ContactInformation *)createContactInformationStub;
-- (ContactInformation *)addContactInfoToClientInfo:(ClientInfo *)clientInfo;
-- (BOOL)deleteContactInformation:(ContactInformation *)contactInformation; // do not call from outside of DataStore
-//- (BOOL)deleteContactInformation:(ContactInformation *)contactInformation fromClientInfo:(ClientInfo *)clientInfo;
+- (ContactInfo *)createContactInfoStub;
+- (ContactInfo *)addContactInfoToClientInfo:(ClientInfo *)clientInfo;
+- (BOOL)deleteContactInfo:(ContactInfo *)contactInfo; // do not call from outside of DataStore
+//- (BOOL)deleteContactInfo:(ContactInfo *)contactInfo fromClientInfo:(ClientInfo *)clientInfo;
 
 @end
 

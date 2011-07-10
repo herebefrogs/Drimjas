@@ -9,7 +9,7 @@
 #import "EstimateDetailViewController.h"
 // API
 #import "ClientInfo.h"
-#import "ContactInformation.h"
+#import "ContactInfo.h"
 #import "Currency.h"
 #import "DataStore.h"
 #import "Estimate.h"
@@ -133,7 +133,7 @@
 	}
 	else if (section >= EstimateDetailSectionContactInfo && section < indexFirstLineItem) {
 		// BUG #5: must have saved contact info order to be able to lookup one by index
-		ContactInformation *contactInfo = [[estimate.clientInfo.contactInfos allObjects] objectAtIndex:(section - EstimateDetailSectionContactInfo)];
+		ContactInfo *contactInfo = [[estimate.clientInfo.contactInfos allObjects] objectAtIndex:(section - EstimateDetailSectionContactInfo)];
 		return [contactInfo numSetProperties];
 	}
 	else {
@@ -165,7 +165,7 @@
 	}
 	else if (indexPath.section >= EstimateDetailSectionContactInfo && indexPath.section < indexFirstLineItem) {
 		// BUG #5: must have saved contact info order to be able to lookup one by index
-		ContactInformation *contactInfo = [[estimate.clientInfo.contactInfos allObjects] objectAtIndex:(indexPath.section - EstimateDetailSectionContactInfo)];
+		ContactInfo *contactInfo = [[estimate.clientInfo.contactInfos allObjects] objectAtIndex:(indexPath.section - EstimateDetailSectionContactInfo)];
 		
 		cell.textLabel.text = [contactInfo getSetPropertyWithIndex:indexPath.row];
 	}

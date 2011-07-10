@@ -8,7 +8,7 @@
 
 #import "MyInfoViewController.h"
 // API
-#import "ContactInformation.h"
+#import "ContactInfo.h"
 #import "DataStore.h"
 #import "MyInfo.h"
 // Cells

@@ -1,5 +1,5 @@
 //
-//  ContactInformation.h
+//  ContactInfo.h
 //  WorkingTitle
 //
 //  Created by Jerome Lecomte on 11-04-02.
@@ -8,11 +8,11 @@
 
 #import <CoreData/CoreData.h>
 // API
-#import "BaseObject.h"
+#import "IndexedObject.h"
 
 @class ClientInfo;
 
-@interface ContactInformation : BaseObject {
+@interface ContactInfo : IndexedObject {
 }
 
 @property (nonatomic, retain) NSString *name;

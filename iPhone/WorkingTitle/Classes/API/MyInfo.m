@@ -9,7 +9,7 @@
 #import "MyInfo.h"
 // API
 #import "ClientInfo.h"
-#import "ContactInformation.h"
+#import "ContactInfo.h"
 #import "DataStore.h"
 
 @implementation MyInfo
@@ -25,11 +25,11 @@
 	self.subEntityName = @"MyInfo";
 }
 
-- (ContactInformation *)contactInfo {
+- (ContactInfo *)contactInfo {
 	NSAssert([[self.contactInfos allObjects] count] > 0, @"No contact info created");
 	NSAssert([[self.contactInfos allObjects] count] < 2, @"More than 1 contact info created");
 
-	return (ContactInformation *)[[self.contactInfos allObjects] objectAtIndex:0];
+	return (ContactInfo *)[[self.contactInfos allObjects] objectAtIndex:0];
 }
 
 + (BOOL)isMyInfoSet {

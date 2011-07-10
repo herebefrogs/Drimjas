@@ -11,7 +11,7 @@
 #import "BaseObject.h"
 
 @class Estimate;
-@class ContactInformation;
+@class ContactInfo;
 
 @interface ClientInfo : BaseObject {
 }
@@ -34,8 +34,8 @@
 
 
 @interface ClientInfo (CoreDataGeneratedAccessors)
-- (void)addContactInfosObject:(ContactInformation *)value;
-- (void)removeContactInfosObject:(ContactInformation *)value;
+- (void)addContactInfosObject:(ContactInfo *)value;
+- (void)removeContactInfosObject:(ContactInfo *)value;
 - (void)addContactInfos:(NSSet *)value;
 - (void)removeContactInfos:(NSSet *)value;
 
