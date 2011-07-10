@@ -21,8 +21,9 @@
 @implementation ContactInfosViewController
 
 @synthesize nextButton;
-@synthesize lineItemsViewController;
+@synthesize lineItemsSelectionViewController;
 @synthesize contactInfos;
+@synthesize clientInfo;
 
 #pragma mark -
 #pragma mark View lifecycle
@@ -45,27 +46,12 @@
 
 	self.navigationItem.rightBarButtonItem = nextButton;
 
-	self.contactInfos = [[DataStore defaultStore] contactInfoStubs];
+	self.clientInfo = [[[DataStore defaultStore] estimateStub] clientInfo];
+	self.contactInfos = [[DataStore defaultStore] contactInfosForClientInfo:clientInfo];
+	contactInfos.delegate = self;
 
 	// reload table data to match contact infos array
 	[self.tableView reloadData];
-}
-
-/*
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-}
-*/
-/*
-- (void)viewWillDisappear:(BOOL)animated {
-	[super viewWillDisappear:animated];
-}
-*/
-- (void)viewDidDisappear:(BOOL)animated {
-    [super viewDidDisappear:animated];
-
-	// release estimate & contact infos now that all textfield had a chance to save their input in it
-	self.contactInfos = nil;
 }
 
 // Override to allow orientations other than the default portrait orientation.
@@ -74,18 +60,88 @@
 }
 
 
+#pragma mark -
+#pragma mark Private stack
+
+- (NSInteger)_addContactInfoSection {
+	// "add contact info" section is always last
+	return contactInfos.sections.count;
+}
+
+BOOL _contactInfoInserted = NO;
+
+- (void)_insertContactInfoAtSection:(NSUInteger)section {
+	ContactInfo *contactInfo = [[DataStore defaultStore] createContactInfo];
+	[clientInfo bindContactInfo:contactInfo];
+
+	_contactInfoInserted = YES;
+
+	contactInfo.index = [NSNumber numberWithInt:section];
+}
+
+- (void) _deleteContactInfoAtSection:(NSUInteger)section {
+	// NOTE: force textfield input to be processed while its tag is still valid
+	// (aka before sections get reordered as a result of the deletion)
+	[lastTextFieldEdited resignFirstResponder];
+	lastTextFieldEdited = nil;
+
+	ContactInfo *deleted = [contactInfos.fetchedObjects objectAtIndex:section];
+
+	// shift all indexes down by 1 for line item selections after the one being deleted
+	NSRange afterDeleted;
+	afterDeleted.location = section;
+	afterDeleted.length = contactInfos.sections.count - section;
+	for (ContactInfo *contactInfo in [contactInfos.fetchedObjects subarrayWithRange:afterDeleted]) {
+		contactInfo.index = [NSNumber numberWithInt:[contactInfo.index intValue] - 1];
+	}
+
+	[clientInfo unbindContactInfo:deleted];
+	[[DataStore defaultStore] deleteContactInfo:deleted];
+}
+
+- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == [self _addContactInfoSection]) {
+		cell.textLabel.text = NSLocalizedString(@"Add a Contact", "ContactInfos Add A Contact Row");
+	}
+	else {
+		[super configureCell:cell atIndexPath:indexPath];
+		TextFieldCell *tfCell = (TextFieldCell *)cell;
+
+		ContactInfo *contactInfo = [contactInfos.fetchedObjects objectAtIndex:indexPath.section];
+
+		// initialize textfield value from contact info
+		if (indexPath.row == ContactInfoFieldName) {
+			tfCell.textField.placeholder = NSLocalizedString(@"Contact Name", "Contact Name Text Field Placeholder");
+			tfCell.textField.text = contactInfo.name;
+		}
+		else if (indexPath.row == ContactInfoFieldPhone) {
+			tfCell.textField.placeholder = NSLocalizedString(@"Phone", "Phone Text Field Placeholder");
+			tfCell.textField.keyboardType = UIKeyboardTypePhonePad;
+			// TODO add a phone number mask
+			tfCell.textField.text = contactInfo.phone;
+		}
+		else if (indexPath.row == ContactInfoFieldEmail) {
+			tfCell.textField.placeholder = NSLocalizedString(@"Email", "Email Text Field Placeholder");
+			tfCell.textField.keyboardType = UIKeyboardTypeEmailAddress;
+			tfCell.textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+			tfCell.textField.autocorrectionType = UITextAutocorrectionTypeNo;
+			tfCell.textField.text = contactInfo.email;
+		}
+	}
+}
+
 
 #pragma mark -
 #pragma mark Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // 1 section per contact info, plus 1 section to add a contact info
-    return 1 + self.contactInfos.count;
+    return 1 + contactInfos.sections.count;
 }
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-	if (section == 0) {
+	if (section == [self _addContactInfoSection]) {
 		// "add a contact info" section has only 1 row
 		return 1;
 	} else {
@@ -97,8 +153,7 @@
 
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-
-    if (indexPath.section == 0) {
+    if (indexPath.section == [self _addContactInfoSection]) {
 		static NSString *CellIdentifier = @"Cell";
 
 		UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -106,95 +161,37 @@
 			cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
 		}
 
-		cell.textLabel.text = NSLocalizedString(@"Add a Contact", "Add Estimate Contact Information View Controller Add A Contact Row");
+		[self configureCell:cell atIndexPath:indexPath];
 
 		return cell;
 	}
-	else {	
-		static NSString *CellIdentifier = @"TextFieldCell";
-
-		TextFieldCell *cell = (TextFieldCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-		if (cell == nil) {
-			[[NSBundle mainBundle] loadNibNamed:CellIdentifier owner:self options:nil];
-			cell = textFieldCell;
-			self.textFieldCell = nil;
-		}
-
-		// note:
-		// - row is bounded to 3, so it will never spill on section which is unbounded
-		// - section index decreased by 1 to account for "add a contact" section
-		NSUInteger section = indexPath.section - 1;
-		cell.textField.tag = 10*section + indexPath.row;
-
-		ContactInfo *contactInfo = [contactInfos objectAtIndex:section];
-
-		// initialize textfield value from contact info
-		if (indexPath.row == ContactInfoFieldName) {
-			cell.textField.placeholder = NSLocalizedString(@"Contact Name", "Contact Name Text Field Placeholder");
-			cell.textField.text = contactInfo.name;
-		}
-		else if (indexPath.row == ContactInfoFieldPhone) {
-			cell.textField.placeholder = NSLocalizedString(@"Phone", "Phone Text Field Placeholder");
-			cell.textField.keyboardType = UIKeyboardTypePhonePad;
-			// TODO add a phone number mask
-			cell.textField.text = contactInfo.phone;
-		}
-		else if (indexPath.row == ContactInfoFieldEmail) {
-			cell.textField.placeholder = NSLocalizedString(@"Email", "Email Text Field Placeholder");
-			cell.textField.keyboardType = UIKeyboardTypeEmailAddress;
-			cell.textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
-			cell.textField.autocorrectionType = UITextAutocorrectionTypeNo;
-			cell.textField.text = contactInfo.email;
-		}
-
-		cell.selectionStyle = UITableViewCellSelectionStyleNone;
-
-		return cell;
+	else {
+		return [super tableView:tableView cellForRowAtIndexPath:indexPath];
 	}
 }
 
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
 	// show a plus sign in front of "add a contact" row
-	if (indexPath.section == 0) {
+	if (indexPath.section == [self _addContactInfoSection]) {
 		return UITableViewCellEditingStyleInsert;
 	}
-	// show a minus sign in front of 1st row of a contact info section
-	else if (indexPath.section != 0 && indexPath.row == 0) {
-		return UITableViewCellEditingStyleDelete;
+	else {
+		// show a minus sign in front of 1st row of a contact info section
+		if (indexPath.row == ContactInfoFieldName) {
+			return UITableViewCellEditingStyleDelete;
+		}
+		else {
+			return UITableViewCellEditingStyleNone;
+		}
 	}
-	return UITableViewCellEditingStyleNone;
-}
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-- (void)insertContactInfoSection {
-	// add a new contact information
-	[[DataStore defaultStore] createContactInfoStub];
-
-	[self.tableView insertSections:[NSIndexSet indexSetWithIndex:contactInfos.count]
-				  withRowAnimation:UITableViewRowAnimationFade];
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
 	if (editingStyle == UITableViewCellEditingStyleInsert) {
-		[self insertContactInfoSection];
+		[self _insertContactInfoAtSection:indexPath.section];
 	}
 	else if (editingStyle == UITableViewCellEditingStyleDelete) {
-		// hide keyboard if visible
-		[lastTextFieldEdited resignFirstResponder];
-
-		// note: section index decremented to account for "add a contact" section
-		[contactInfos removeObjectAtIndex:indexPath.section - 1];
-
-		[self.tableView deleteSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationFade];
-
-		// discard reference to textfield now that its section has been deleted
-		lastTextFieldEdited = nil;
+		[self _deleteContactInfoAtSection:indexPath.section];
 	}
 }
 
@@ -203,12 +200,67 @@
 #pragma mark Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	if (indexPath.section == 0) {
-		// deselect cell immediately
-		UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+	if (indexPath.section == [self _addContactInfoSection]) {
+		UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
 		[cell setSelected:NO animated:YES];
 
-		[self insertContactInfoSection];
+		[self _insertContactInfoAtSection:indexPath.section];
+	}
+}
+
+#pragma mark -
+#pragma mark FetchedResultsController delegate
+
+- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
+    // The fetch controller is about to start sending change notifications, so prepare the table view for updates.
+	[self.tableView beginUpdates];
+}
+
+
+- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath {
+    UITableView *tableView = self.tableView;
+
+    switch(type) {
+        case NSFetchedResultsChangeInsert:
+			[tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationBottom];
+            break;
+        case NSFetchedResultsChangeDelete:
+            [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+        case NSFetchedResultsChangeUpdate:
+            [self configureCell:[tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
+            break;
+        case NSFetchedResultsChangeMove:
+			[tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            // Reloading the section inserts a new row and ensures that titles are updated appropriately.
+            [tableView reloadSections:[NSIndexSet indexSetWithIndex:newIndexPath.section] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+    }
+}
+
+
+- (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id <NSFetchedResultsSectionInfo>)sectionInfo atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type {
+    switch(type) {
+        case NSFetchedResultsChangeInsert:
+            [self.tableView insertSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationBottom];
+            break;
+        case NSFetchedResultsChangeDelete:
+            [self.tableView deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+    }
+}
+
+
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
+	// The fetch controller has sent all current change notifications, so tell the table view to process all updates.
+    [self.tableView endUpdates];
+
+	if (_contactInfoInserted) {
+		_contactInfoInserted = NO;
+
+		// scroll to keep "Add a Contact Info" row always visible at the bottom of the screen
+		NSIndexPath *addContactInfoIndexPath = [NSIndexPath indexPathForRow:0 inSection:[self _addContactInfoSection]];
+		[self.tableView scrollToRowAtIndexPath:addContactInfoIndexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
 	}
 }
 
@@ -219,7 +271,7 @@
 	NSUInteger section = textField.tag / 10;
 	NSUInteger row = textField.tag - (10 * section);
 
-	ContactInfo *contactInfo = [contactInfos objectAtIndex:section];
+	ContactInfo *contactInfo = [contactInfos.fetchedObjects objectAtIndex:section];
 
 	// TODO hide overlay view if any
 	// save textfield value into estimate
@@ -238,8 +290,8 @@
 #pragma mark Button delegate
 
 - (IBAction)next:(id)sender {
-	lineItemsViewController.editMode = NO;
-	[self.navigationController pushViewController:lineItemsViewController animated:YES];
+	lineItemsSelectionViewController.editMode = NO;
+	[self.navigationController pushViewController:lineItemsSelectionViewController animated:YES];
 }
 
 
@@ -259,8 +311,9 @@
 #endif
     // Relinquish ownership of anything that can be recreated in viewDidLoad or on demand.
 	self.nextButton = nil;
-	self.lineItemsViewController = nil;
+	self.lineItemsSelectionViewController = nil;
 	self.contactInfos = nil;
+	self.clientInfo = nil;
 	// note: don't nil title or navigationController.tabBarItem.title
 	// as it may appear on the view currently displayed
 }
@@ -271,8 +324,9 @@
 	NSLog(@"ContactInfosViewController.dealloc");
 #endif
 	[nextButton release];
-	[lineItemsViewController release];
+	[lineItemsSelectionViewController release];
 	[contactInfos release];
+	[clientInfo release];
     [super dealloc];
 }
 

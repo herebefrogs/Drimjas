@@ -64,8 +64,8 @@
     if (section == 0) {
 		return [clientInfo numSetProperties];
 	} else {
-		// BUG #5: must have saved contact info order to be able to lookup one by index
-		ContactInfo *contactInfo = [[clientInfo.contactInfos allObjects] objectAtIndex:section - 1];
+		ContactInfo *contactInfo = [clientInfo contactInfoAtIndex:section - 1];
+
 		return [contactInfo numSetProperties];
 	}
 }
@@ -86,8 +86,7 @@
 	if (indexPath.section == 0) {
 		cell.textLabel.text = [clientInfo getSetPropertyWithIndex:indexPath.row];
 	} else {
-		// BUG #5: must have saved contact info order to be able to lookup one by index
-		ContactInfo *contactInfo = [[clientInfo.contactInfos allObjects] objectAtIndex:indexPath.section - 1];
+		ContactInfo *contactInfo = [clientInfo contactInfoAtIndex:indexPath.section - 1];
 
 		cell.textLabel.text = [contactInfo getSetPropertyWithIndex:indexPath.row];
 	}

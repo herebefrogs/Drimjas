@@ -28,12 +28,16 @@
 
 + (BOOL)isNameValid:(NSString *)name;
 - (NSInteger)numSetProperties;
-- (NSString *)getSetPropertyWithIndex:(NSInteger)index;
+- (NSString *)getSetPropertyWithIndex:(NSUInteger)index;
+- (ContactInfo *)contactInfoAtIndex:(NSUInteger)index;
+- (void)bindContactInfo:(ContactInfo *)contactInfo;
+- (void)unbindContactInfo:(ContactInfo *)contactInfo;
 
 @end
 
 
 @interface ClientInfo (CoreDataGeneratedAccessors)
+
 - (void)addContactInfosObject:(ContactInfo *)value;
 - (void)removeContactInfosObject:(ContactInfo *)value;
 - (void)addContactInfos:(NSSet *)value;

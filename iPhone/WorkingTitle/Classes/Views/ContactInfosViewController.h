@@ -11,17 +11,21 @@
 #import "TextFieldTableViewController.h"
 
 @class AddEstimateLineItemsViewController;
+@class ClientInfo;
 
-@interface ContactInfosViewController : TextFieldTableViewController {
+@interface ContactInfosViewController : TextFieldTableViewController <NSFetchedResultsControllerDelegate> {
 	UIBarButtonItem *nextButton;
-	AddEstimateLineItemsViewController *lineItemsViewController;
+	AddEstimateLineItemsViewController *lineItemsSelectionViewController;
 
-	NSMutableArray *contactInfos; // ordered contact infos being created
+	NSFetchedResultsController *contactInfos;
+	ClientInfo *clientInfo;
 }
 
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *nextButton;
-@property (nonatomic, retain) IBOutlet AddEstimateLineItemsViewController *lineItemsViewController;
-@property (nonatomic, retain) NSMutableArray *contactInfos;
+@property (nonatomic, retain) IBOutlet AddEstimateLineItemsViewController *lineItemsSelectionViewController;
+@property (nonatomic, retain) NSFetchedResultsController *contactInfos;
+@property (nonatomic, retain) ClientInfo *clientInfo;
+
 
 - (IBAction)next:(id)sender;
 

@@ -52,7 +52,7 @@
 	return count;
 }
 
-- (NSString *)getSetPropertyWithIndex:(NSInteger)index {
+- (NSString *)getSetPropertyWithIndex:(NSUInteger)index {
 	NSArray *properties = [NSArray arrayWithObjects:@"name", @"address1", @"address2", @"city", @"state", @"postalCode", @"country", nil];
 
 	for (NSString *property in properties) {
@@ -67,5 +67,26 @@
 
 	return nil;
 }
+
+- (ContactInfo *)contactInfoAtIndex:(NSUInteger)index {
+	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"index" ascending:YES];
+	ContactInfo *contactInfo = (ContactInfo *)[[self.contactInfos sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]] objectAtIndex:index];
+	[sortDescriptor release];
+
+	return contactInfo;
+}
+
+- (void)bindContactInfo:(ContactInfo *)contactInfo {
+	contactInfo.clientInfo = self;
+	[self addContactInfosObject:contactInfo];
+}
+
+- (void)unbindContactInfo:(ContactInfo *)contactInfo {
+	NSAssert(contactInfo.clientInfo == self, @"can't unbind ContactInfo which isn't bound to ClientInfo");
+
+	contactInfo.clientInfo = nil;
+	[self removeContactInfosObject:contactInfo];
+}
+
 
 @end

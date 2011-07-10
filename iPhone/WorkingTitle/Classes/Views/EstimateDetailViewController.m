@@ -32,6 +32,7 @@
 - (void)reloadIndexes {
 	indexFirstLineItem = EstimateDetailSectionContactInfo + estimate.clientInfo.contactInfos.count;
 	indexLastSection = indexFirstLineItem + estimate.lineItems.count;
+
 	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"index" ascending:YES];
 	[lineItemSelections release];
 	lineItemSelections = [[estimate.lineItems sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]] retain];
@@ -132,8 +133,8 @@
 		return [estimate.clientInfo numSetProperties];
 	}
 	else if (section >= EstimateDetailSectionContactInfo && section < indexFirstLineItem) {
-		// BUG #5: must have saved contact info order to be able to lookup one by index
-		ContactInfo *contactInfo = [[estimate.clientInfo.contactInfos allObjects] objectAtIndex:(section - EstimateDetailSectionContactInfo)];
+		ContactInfo *contactInfo = [estimate.clientInfo contactInfoAtIndex:section - EstimateDetailSectionContactInfo];
+
 		return [contactInfo numSetProperties];
 	}
 	else {
@@ -164,9 +165,8 @@
 		cell.textLabel.text = [estimate.clientInfo getSetPropertyWithIndex:indexPath.row];
 	}
 	else if (indexPath.section >= EstimateDetailSectionContactInfo && indexPath.section < indexFirstLineItem) {
-		// BUG #5: must have saved contact info order to be able to lookup one by index
-		ContactInfo *contactInfo = [[estimate.clientInfo.contactInfos allObjects] objectAtIndex:(indexPath.section - EstimateDetailSectionContactInfo)];
-		
+		ContactInfo *contactInfo = [estimate.clientInfo contactInfoAtIndex:indexPath.section - EstimateDetailSectionContactInfo];
+
 		cell.textLabel.text = [contactInfo getSetPropertyWithIndex:indexPath.row];
 	}
 	else if (indexPath.section >= indexFirstLineItem && indexPath.section < indexLastSection) {

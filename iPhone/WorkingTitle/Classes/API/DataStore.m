@@ -196,16 +196,17 @@ static DataStore *singleton_ = nil;
 		estimate.clientInfo = client;
 		[client addEstimatesObject:estimate];
 
+		NSInteger i = 0;
 		for (NSDictionary *contact_data in [client_data valueForKey:@"contact_info"]) {
-			ContactInfo *contact = [self createContactInfoStub];
+			ContactInfo *contact = [self createContactInfo];
+			contact.index = [NSNumber numberWithInt:i++];
 			contact.name = [contact_data valueForKey:@"name"];
 			contact.email = [contact_data valueForKey:@"email"];
 			contact.phone = [contact_data valueForKey:@"phone"];
-			contact.clientInfo = client;
-			[client addContactInfosObject:contact];
+			[client bindContactInfo:contact];
 		}
 
-		NSInteger i = 0;
+		i = 0;
 		for (NSDictionary *line_item_data in [estimate_data valueForKey:@"line_items"]) {
 			BOOL (^predicate)(id, NSUInteger, BOOL*) = ^(id obj, NSUInteger idx, BOOL *stop) {
 				LineItem *lineItem = (LineItem *)obj;
@@ -297,28 +298,12 @@ static DataStore *singleton_ = nil;
 - (Estimate *)saveEstimateStub {
 	NSNumber *active = [NSNumber numberWithInt:StatusActive];
 
-	if ([estimateStub_.clientInfo.status integerValue] == StatusCreated) {
-		// associate contact infos to client info
-		[estimateStub_.clientInfo addContactInfos:[NSSet setWithArray:contactInfoStubs_]];
-
-		// associate each contact info with client info
-		for (ContactInfo *contactInfo in contactInfoStubs_) {
-			contactInfo.clientInfo = estimateStub_.clientInfo;
-			contactInfo.status = active;
-		}
-
-		estimateStub_.clientInfo.status	= active;
-	}
-	else if ([estimateStub_.clientInfo.status integerValue] == StatusActive
-			 && [contactInfoStubs_ count] > 0) {
-		// delete contact infos stubs that may have been created
-		for (ContactInfo *contactInfo in contactInfoStubs_) {
-			[[DataStore defaultStore] deleteContactInfo:contactInfo];
-		}
-	}
-
 	// flag each stub as "active"
 	estimateStub_.status = active;
+	estimateStub_.clientInfo.status = active;
+	for (ContactInfo *contactInfo in estimateStub_.clientInfo.contactInfos) {
+		contactInfo.status = active;
+	}
 	for (LineItemSelection *lineItem in estimateStub_.lineItems) {
 		lineItem.status = active;
 	}
@@ -336,9 +321,7 @@ static DataStore *singleton_ = nil;
 	// note: after the context save, stubs have permanent IDs
 	Estimate *savedEstimate = [estimateStub_ autorelease];
 
-	// discard estimate & contact info stubs
-	[contactInfoStubs_ release];
-	contactInfoStubs_ = nil;
+	// discard estimate stub
 	[estimateStub_ release];
 	estimateStub_ = nil;
 
@@ -350,8 +333,6 @@ static DataStore *singleton_ = nil;
 		[self deleteEstimate:estimateStub_];
 	}
 
-	[contactInfoStubs_ release];
-	contactInfoStubs_ = nil;
 	[estimateStub_ release];
 	estimateStub_ = nil;
 }
@@ -447,8 +428,7 @@ static DataStore *singleton_ = nil;
 	
 	[immutableCopy release];
 
-	NSArray *contactInfos = [clientInfo.status intValue] == StatusCreated ? contactInfoStubs_ : [clientInfo.contactInfos allObjects];
-	for (ContactInfo *contactInfo in contactInfos) {
+	for (ContactInfo *contactInfo in clientInfo.contactInfos) {
 		[self deleteContactInfo:contactInfo];
 	}
 
@@ -464,37 +444,55 @@ static DataStore *singleton_ = nil;
 #pragma mark -
 #pragma mark Contact information stack
 
-- (NSMutableArray *)contactInfoStubs {
-	if (contactInfoStubs_ == nil) {
-		contactInfoStubs_ = [[NSMutableArray alloc] init];
+
+- (NSFetchedResultsController *)contactInfosForClientInfo:(ClientInfo *)clientInfo {
+	// ContactInfo fetch request
+	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+	fetchRequest.entity = [NSEntityDescription entityForName:@"ContactInfo"
+									  inManagedObjectContext:self.managedObjectContext];
+
+	// fetch only ContactInfo associated to this ClientInfo
+	fetchRequest.predicate = [NSPredicate predicateWithFormat:@"clientInfo = %@", clientInfo];
+
+	// sort ContactInfo by insertion order
+	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"index" ascending:YES];
+	fetchRequest.sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
+	[sortDescriptor release];
+
+	// buffer up to 16 ContactInfo
+	fetchRequest.fetchBatchSize = 16;
+
+	// ContactInfo fetched results controller
+	NSFetchedResultsController *contactInfos = [[[NSFetchedResultsController alloc]
+													   initWithFetchRequest:fetchRequest
+													   managedObjectContext:self.managedObjectContext
+													   sectionNameKeyPath:@"index"
+													   cacheName:@"Root"]
+													  autorelease];
+
+	[fetchRequest release];
+
+	NSError *error = nil;
+	if (![contactInfos performFetch:&error]) {
+		// TODO This is a serious error saying the records
+		//could not be fetched. Advise the user to try
+		//again or restart the application.
+		NSLog(@"DataStore.contactInfosForClientInfo:%@ fetch failed with error %@, %@", clientInfo, error, [error userInfo]);
 	}
-	return contactInfoStubs_;
+
+	return contactInfos;
 }
 
-- (ContactInfo *)createContactInfoStub {
-	ContactInfo *contactInfo = (ContactInfo *)[NSEntityDescription insertNewObjectForEntityForName:@"ContactInfo"
-																						  inManagedObjectContext:self.managedObjectContext];
-
-	[self.contactInfoStubs addObject:contactInfo];
-
-	return contactInfo;
-}
-
-- (ContactInfo *)addContactInfoToClientInfo:(ClientInfo *)clientInfo {
-	ContactInfo *contactInfo = (ContactInfo *)[NSEntityDescription insertNewObjectForEntityForName:@"ContactInfo"
-																						  inManagedObjectContext:self.managedObjectContext];
-
-	[clientInfo addContactInfosObject:contactInfo];
-	contactInfo.clientInfo = clientInfo;
-
-	return contactInfo;
+- (ContactInfo *)createContactInfo {
+	return (ContactInfo *)[NSEntityDescription insertNewObjectForEntityForName:@"ContactInfo"
+														inManagedObjectContext:self.managedObjectContext];
 }
 
 - (BOOL)deleteContactInfo:(ContactInfo *)contactInfo {
 	[self.managedObjectContext deleteObject:contactInfo];
 
-	// we only expect this method to be called by deleteClientInfo:
-	// as a result of a call to deleteEstimate: so let it save the modified context
+	// we only expect this method to be called by deleteClientInfo: or as part of
+	// "contact infos" screen edition so let them save the modified context
 
 	return YES;
 }
@@ -824,7 +822,10 @@ static DataStore *singleton_ = nil;
 			myInfo_ = (MyInfo *)[NSEntityDescription insertNewObjectForEntityForName:@"MyInfo"
 																  inManagedObjectContext:self.managedObjectContext];
 
-			[self addContactInfoToClientInfo:myInfo_];
+			// add exactly 1 ContactInfo to MyInfo
+			ContactInfo *contactInfo = [self createContactInfo];
+			[myInfo_ bindContactInfo:contactInfo];
+			contactInfo.index = 0;
 		}
 		[myInfo_ retain];
 
@@ -856,7 +857,6 @@ static DataStore *singleton_ = nil;
 	[managedObjectModel_ release];
 	[managedObjectContext_ release];
 	[persistentStoreCoordinator_ release];
-	[contactInfoStubs_ release];
 	[estimatesFetchedResultsController_ release];
 	[clientInfosFetchedResultsController_ release];
 	[lineItemsFetchedResultsController_ release];

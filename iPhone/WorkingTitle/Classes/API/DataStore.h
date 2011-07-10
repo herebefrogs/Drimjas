@@ -34,20 +34,11 @@
 	NSFetchedResultsController *clientInfosFetchedResultsController_;
 	NSFetchedResultsController *lineItemsFetchedResultsController_;
 
-	NSMutableArray *contactInfoStubs_;	// ordered contact infos being created
-
 	// general settings
 	Currency *currency_;
 	NSFetchedResultsController *taxesAndCurrencyFetchedResultsController_;
 	MyInfo *myInfo_;
 }
-
-// contact information methods
-@property (nonatomic, retain, readonly) NSMutableArray *contactInfoStubs;
-- (ContactInfo *)createContactInfoStub;
-- (ContactInfo *)addContactInfoToClientInfo:(ClientInfo *)clientInfo;
-- (BOOL)deleteContactInfo:(ContactInfo *)contactInfo; // do not call from outside of DataStore
-//- (BOOL)deleteContactInfo:(ContactInfo *)contactInfo fromClientInfo:(ClientInfo *)clientInfo;
 
 @end
 
@@ -86,6 +77,15 @@
 - (NSFetchedResultsController *)clientInfosFetchedResultsController;
 - (ClientInfo *)createClientInfo;
 - (BOOL)deleteClientInfo:(ClientInfo *)clientInfo andSave:(BOOL)save;
+
+@end
+
+
+@interface DataStore (ContactAccessors)
+
+- (NSFetchedResultsController *)contactInfosForClientInfo:(ClientInfo *)clientInfo;
+- (ContactInfo *)createContactInfo;
+- (BOOL)deleteContactInfo:(ContactInfo *)contactInfo;
 
 @end
 
