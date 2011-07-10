@@ -1,5 +1,5 @@
 //
-//  AddEstimateContactInfoViewController.h
+//  ContactInfosViewController.h
 //  WorkingTitle
 //
 //  Created by Jerome Lecomte on 11-04-02.
@@ -12,7 +12,7 @@
 
 @class AddEstimateLineItemsViewController;
 
-@interface AddEstimateContactInfoViewController : TextFieldTableViewController {
+@interface ContactInfosViewController : TextFieldTableViewController {
 	UIBarButtonItem *nextButton;
 	AddEstimateLineItemsViewController *lineItemsViewController;
 

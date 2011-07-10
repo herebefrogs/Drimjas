@@ -10,18 +10,18 @@
 // Cells
 #import "TextFieldTableViewController.h"
 
-@class AddEstimateContactInfoViewController;
+@class ContactInfosViewController;
 @class Estimate;
 
 @interface AddEstimateNewClientInfoViewController : TextFieldTableViewController {
 	UIBarButtonItem *nextButton;
-	AddEstimateContactInfoViewController *contactInfoViewController;
+	ContactInfosViewController *contactInfosViewController;
 
 	Estimate *estimate;	// new estimate being created
 }
 
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *nextButton;
-@property (nonatomic, retain) IBOutlet AddEstimateContactInfoViewController *contactInfoViewController;
+@property (nonatomic, retain) IBOutlet ContactInfosViewController *contactInfosViewController;
 
 @property (nonatomic, retain) Estimate *estimate;
 

@@ -14,14 +14,14 @@
 // Cells
 #import "TextFieldCell.h"
 // Views
-#import "AddEstimateContactInfoViewController.h"
+#import "ContactInfosViewController.h"
 #import "TableFields.h"
 
 
 @implementation AddEstimateNewClientInfoViewController
 
 @synthesize nextButton;
-@synthesize contactInfoViewController;
+@synthesize contactInfosViewController;
 @synthesize estimate;
 
 
@@ -156,7 +156,7 @@
 		// hide keyboard
 		[lastTextFieldEdited resignFirstResponder];
 
-		[self.navigationController pushViewController:contactInfoViewController animated:YES];
+		[self.navigationController pushViewController:contactInfosViewController animated:YES];
 	}
 }
 
@@ -205,7 +205,7 @@
 	NSLog(@"AddEstimateNewClientInfoViewController.viewDidUnload");
 #endif
     // Relinquish ownership of anything that can be recreated in viewDidLoad or on demand.
-	self.contactInfoViewController = nil;
+	self.contactInfosViewController = nil;
 	self.nextButton = nil;
 	self.estimate = nil;
 	// note: don't nil title or navigationController.tabBarItem.title
@@ -220,7 +220,7 @@
 #endif
 	[estimate release];
 	[nextButton release];
-	[contactInfoViewController release];
+	[contactInfosViewController release];
     [super dealloc];
 }
 

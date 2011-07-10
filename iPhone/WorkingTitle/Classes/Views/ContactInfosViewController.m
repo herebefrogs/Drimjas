@@ -1,12 +1,12 @@
 //
-//  AddEstimateContactInfoViewController.m
+//  ContactInfosViewController.m
 //  WorkingTitle
 //
 //  Created by Jerome Lecomte on 11-04-02.
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import "AddEstimateContactInfoViewController.h"
+#import "ContactInfosViewController.h"
 // API
 #import "ClientInfo.h"
 #import "ContactInfo.h"
@@ -18,7 +18,7 @@
 #import "TableFields.h"
 
 
-@implementation AddEstimateContactInfoViewController
+@implementation ContactInfosViewController
 
 @synthesize nextButton;
 @synthesize lineItemsViewController;
@@ -29,10 +29,10 @@
 
 - (void)viewDidLoad {
 #ifdef __ENABLE_UI_LOGS__
-	NSLog(@"AddEstimateContactInfoViewController.viewDidLoad");
+	NSLog(@"ContactInfosViewController.viewDidLoad");
 #endif
 	[super viewDidLoad];
-	self.title = NSLocalizedString(@"Add Contact", "AddEstimateContactInfo Navigation Item Title");
+	self.title = NSLocalizedString(@"Add Contact", "ContactInfos Navigation Item Title");
 	nextButton.title = NSLocalizedString(@"Next", "Next Navigation Item Title");
 
 	// show add/delete widgets in front of rows
@@ -255,7 +255,7 @@
 
 - (void)viewDidUnload {
 #ifdef __ENABLE_UI_LOGS__
-	NSLog(@"AddEstimateContactInfoViewController.viewDidUnload");
+	NSLog(@"ContactInfosViewController.viewDidUnload");
 #endif
     // Relinquish ownership of anything that can be recreated in viewDidLoad or on demand.
 	self.nextButton = nil;
@@ -268,7 +268,7 @@
 
 - (void)dealloc {
 #ifdef __ENABLE_UI_LOGS__
-	NSLog(@"AddEstimateContactInfoViewController.dealloc");
+	NSLog(@"ContactInfosViewController.dealloc");
 #endif
 	[nextButton release];
 	[lineItemsViewController release];

@@ -45,8 +45,8 @@
 		02A1FC8D13A1B47E00C2A3A9 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02A1FC8C13A1B47E00C2A3A9 /* QuartzCore.framework */; };
 		02A62E8B12FEF50500CAF63A /* PrintManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 02A62E8A12FEF50500CAF63A /* PrintManager.m */; };
 		02A8E5471347C79D00BAAF36 /* ContactInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 02A8E5461347C79D00BAAF36 /* ContactInfo.m */; };
-		02A8E54B1347C88600BAAF36 /* AddEstimateContactInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02A8E5491347C88600BAAF36 /* AddEstimateContactInfoViewController.m */; };
-		02A8E54C1347C88600BAAF36 /* AddEstimateContactInfo.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02A8E54A1347C88600BAAF36 /* AddEstimateContactInfo.xib */; };
+		02A8E54B1347C88600BAAF36 /* ContactInfosViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02A8E5491347C88600BAAF36 /* ContactInfosViewController.m */; };
+		02A8E54C1347C88600BAAF36 /* ContactInfos.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02A8E54A1347C88600BAAF36 /* ContactInfos.xib */; };
 		02AA0B5F136DAF13005E9158 /* ClientInfoDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02AA0B5D136DAF13005E9158 /* ClientInfoDetailViewController.m */; };
 		02AA0B60136DAF13005E9158 /* ClientInfoDetail.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02AA0B5E136DAF13005E9158 /* ClientInfoDetail.xib */; };
 		02AA0C01136DCB20005E9158 /* AddEstimateLineItemsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02AA0BFF136DCB20005E9158 /* AddEstimateLineItemsViewController.m */; };
@@ -156,9 +156,9 @@
 		02A8E53F1347C54B00BAAF36 /* WorkingTitle 5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "WorkingTitle 5.xcdatamodel"; sourceTree = "<group>"; };
 		02A8E5451347C79D00BAAF36 /* ContactInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactInfo.h; sourceTree = "<group>"; };
 		02A8E5461347C79D00BAAF36 /* ContactInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactInfo.m; sourceTree = "<group>"; };
-		02A8E5481347C88600BAAF36 /* AddEstimateContactInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddEstimateContactInfoViewController.h; sourceTree = "<group>"; };
-		02A8E5491347C88600BAAF36 /* AddEstimateContactInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddEstimateContactInfoViewController.m; sourceTree = "<group>"; };
-		02A8E54A1347C88600BAAF36 /* AddEstimateContactInfo.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddEstimateContactInfo.xib; sourceTree = "<group>"; };
+		02A8E5481347C88600BAAF36 /* ContactInfosViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactInfosViewController.h; sourceTree = "<group>"; };
+		02A8E5491347C88600BAAF36 /* ContactInfosViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactInfosViewController.m; sourceTree = "<group>"; };
+		02A8E54A1347C88600BAAF36 /* ContactInfos.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContactInfos.xib; sourceTree = "<group>"; };
 		02AA0B5C136DAF13005E9158 /* ClientInfoDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClientInfoDetailViewController.h; sourceTree = "<group>"; };
 		02AA0B5D136DAF13005E9158 /* ClientInfoDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClientInfoDetailViewController.m; sourceTree = "<group>"; };
 		02AA0B5E136DAF13005E9158 /* ClientInfoDetail.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ClientInfoDetail.xib; sourceTree = "<group>"; };
@@ -252,20 +252,20 @@
 		02B2C05D12DFEF9800D3FEE0 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				02A8E5481347C88600BAAF36 /* AddEstimateContactInfoViewController.h */,
-				02A8E5491347C88600BAAF36 /* AddEstimateContactInfoViewController.m */,
 				02AA0BFE136DCB20005E9158 /* AddEstimateLineItemsViewController.h */,
 				02AA0BFF136DCB20005E9158 /* AddEstimateLineItemsViewController.m */,
 				021F684D12E67D8700ECDDDD /* AddEstimateNewClientInfoViewController.h */,
 				021F684E12E67D8700ECDDDD /* AddEstimateNewClientInfoViewController.m */,
 				02C75240136A429F00EC4BF5 /* AddEstimateNewOrPickClientInfoViewController.h */,
 				02C75241136A429F00EC4BF5 /* AddEstimateNewOrPickClientInfoViewController.m */,
-				020886CD13AC41D000164320 /* ContractsViewController.h */,
-				020886CE13AC41D000164320 /* ContractsViewController.m */,
 				02AA0B5C136DAF13005E9158 /* ClientInfoDetailViewController.h */,
 				02AA0B5D136DAF13005E9158 /* ClientInfoDetailViewController.m */,
 				029DAC9E136BA00A00AF4A6F /* ClientInfosViewController.h */,
 				029DAC9F136BA00A00AF4A6F /* ClientInfosViewController.m */,
+				02A8E5481347C88600BAAF36 /* ContactInfosViewController.h */,
+				02A8E5491347C88600BAAF36 /* ContactInfosViewController.m */,
+				020886CD13AC41D000164320 /* ContractsViewController.h */,
+				020886CE13AC41D000164320 /* ContractsViewController.m */,
 				02E1C7A112E53834000D7747 /* EstimateDetailViewController.h */,
 				02E1C7A212E53834000D7747 /* EstimateDetailViewController.m */,
 				02B2C06B12DFF2DD00D3FEE0 /* EstimatesViewController.h */,
@@ -293,12 +293,12 @@
 		02B2C05E12DFEFB300D3FEE0 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				02A8E54A1347C88600BAAF36 /* AddEstimateContactInfo.xib */,
 				02AA0C00136DCB20005E9158 /* AddEstimateLineItems.xib */,
 				021F684F12E67D8700ECDDDD /* AddEstimateNewClientInfo.xib */,
 				02C75242136A429F00EC4BF5 /* AddEstimateNewOrPickClientInfo.xib */,
 				02AA0B5E136DAF13005E9158 /* ClientInfoDetail.xib */,
 				029DACA0136BA00A00AF4A6F /* ClientInfos.xib */,
+				02A8E54A1347C88600BAAF36 /* ContactInfos.xib */,
 				020886CF13AC41D000164320 /* Contracts.xib */,
 				02E1C7A312E53834000D7747 /* EstimateDetail.xib */,
 				02B2C06D12DFF2DD00D3FEE0 /* Estimates.xib */,
@@ -550,7 +550,7 @@
 				023C7DB91309A8D600FD360B /* Launch.png in Resources */,
 				023C7DBA1309A8D600FD360B /* Launch@2x.png in Resources */,
 				02CC9C98133FC52D006160A7 /* TextFieldCell.xib in Resources */,
-				02A8E54C1347C88600BAAF36 /* AddEstimateContactInfo.xib in Resources */,
+				02A8E54C1347C88600BAAF36 /* ContactInfos.xib in Resources */,
 				02C75244136A429F00EC4BF5 /* AddEstimateNewOrPickClientInfo.xib in Resources */,
 				029DACA2136BA00A00AF4A6F /* ClientInfos.xib in Resources */,
 				02AA0B60136DAF13005E9158 /* ClientInfoDetail.xib in Resources */,
@@ -593,7 +593,7 @@
 				02CC9D82133FEA36006160A7 /* ClientInfo.m in Sources */,
 				02CC9D85133FEB2C006160A7 /* Estimate.m in Sources */,
 				02A8E5471347C79D00BAAF36 /* ContactInfo.m in Sources */,
-				02A8E54B1347C88600BAAF36 /* AddEstimateContactInfoViewController.m in Sources */,
+				02A8E54B1347C88600BAAF36 /* ContactInfosViewController.m in Sources */,
 				023E06AD134D52A60026209B /* TextFieldTableViewController.m in Sources */,
 				023AE59B13665C7000E8A88D /* BaseObject.m in Sources */,
 				02C75243136A429F00EC4BF5 /* AddEstimateNewOrPickClientInfoViewController.m in Sources */,

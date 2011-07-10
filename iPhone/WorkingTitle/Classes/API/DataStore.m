@@ -447,6 +447,7 @@ static DataStore *singleton_ = nil;
 	
 	[immutableCopy release];
 
+	NSArray *contactInfos = [clientInfo.status intValue] == StatusCreated ? contactInfoStubs_ : [clientInfo.contactInfos allObjects];
 	for (ContactInfo *contactInfo in contactInfos) {
 		[self deleteContactInfo:contactInfo];
 	}

@@ -50,7 +50,7 @@
 /* Delete Navigation Item Title */
 "Delete" = "Supprimer";
 
-/* AddEstimateContactInfo Navigation Item Title */
+/* ContactInfos Navigation Item Title */
 "Add Contact" = "Nouveau Contact";
 
 /* Add Estimate Contact Information View Controller Add A Contact Row */
