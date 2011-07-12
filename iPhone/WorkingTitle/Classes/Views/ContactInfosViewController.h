@@ -15,18 +15,24 @@
 
 @interface ContactInfosViewController : TextFieldTableViewController <NSFetchedResultsControllerDelegate> {
 	UIBarButtonItem *nextButton;
+	UIBarButtonItem *saveButton;
 	AddEstimateLineItemsViewController *lineItemsSelectionViewController;
 
 	NSFetchedResultsController *contactInfos;
 	ClientInfo *clientInfo;
+
+	BOOL editMode;
 }
 
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *nextButton;
+@property (nonatomic, retain) IBOutlet UIBarButtonItem *saveButton;
 @property (nonatomic, retain) IBOutlet AddEstimateLineItemsViewController *lineItemsSelectionViewController;
 @property (nonatomic, retain) NSFetchedResultsController *contactInfos;
 @property (nonatomic, retain) ClientInfo *clientInfo;
+@property (nonatomic, assign) BOOL editMode;
 
 
 - (IBAction)next:(id)sender;
+- (IBAction)save:(id)sender;
 
 @end

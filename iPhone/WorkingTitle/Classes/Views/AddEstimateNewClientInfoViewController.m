@@ -156,6 +156,7 @@
 		// hide keyboard
 		[lastTextFieldEdited resignFirstResponder];
 
+		contactInfosViewController.editMode = NO;
 		[self.navigationController pushViewController:contactInfosViewController animated:YES];
 	}
 }

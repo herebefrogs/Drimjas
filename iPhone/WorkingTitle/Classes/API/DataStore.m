@@ -300,10 +300,7 @@ static DataStore *singleton_ = nil;
 
 	// flag each stub as "active"
 	estimateStub_.status = active;
-	estimateStub_.clientInfo.status = active;
-	for (ContactInfo *contactInfo in estimateStub_.clientInfo.contactInfos) {
-		contactInfo.status = active;
-	}
+	[self saveClientInfo:estimateStub_.clientInfo];
 	for (LineItemSelection *lineItem in estimateStub_.lineItems) {
 		lineItem.status = active;
 	}
@@ -413,6 +410,20 @@ static DataStore *singleton_ = nil;
 - (ClientInfo *)createClientInfo {
 	return (ClientInfo *)[NSEntityDescription insertNewObjectForEntityForName:@"ClientInfo"
 															  inManagedObjectContext:self.managedObjectContext];
+}
+
+- (BOOL)saveClientInfo:(ClientInfo *)clientInfo {
+	// TODO perform some validation to determine the status
+	NSNumber *active = [NSNumber numberWithInt:StatusActive];
+	clientInfo.status = active;
+	for (ContactInfo *contactInfo in clientInfo.contactInfos) {
+		contactInfo.status = active;
+	}
+	[active release];
+
+	[self saveContext];
+
+	return YES;
 }
 
 - (BOOL)deleteClientInfo:(ClientInfo *)clientInfo andSave:(BOOL)save {

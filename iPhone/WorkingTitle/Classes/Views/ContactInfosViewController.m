@@ -21,9 +21,11 @@
 @implementation ContactInfosViewController
 
 @synthesize nextButton;
+@synthesize saveButton;
 @synthesize lineItemsSelectionViewController;
 @synthesize contactInfos;
 @synthesize clientInfo;
+@synthesize editMode;
 
 #pragma mark -
 #pragma mark View lifecycle
@@ -44,14 +46,31 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
 
-	self.navigationItem.rightBarButtonItem = nextButton;
-
-	self.clientInfo = [[[DataStore defaultStore] estimateStub] clientInfo];
+	if (!editMode) {
+		self.clientInfo = [[[DataStore defaultStore] estimateStub] clientInfo];
+	}
 	self.contactInfos = [[DataStore defaultStore] contactInfosForClientInfo:clientInfo];
 	contactInfos.delegate = self;
 
+	self.navigationItem.rightBarButtonItem = editMode ? saveButton : nextButton;
+
 	// reload table data to match contact infos array
 	[self.tableView reloadData];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+	// when pressing Back button, give a chance to textfield currently edited
+	// to save its text before previous view controller's viewWillAppear triggers
+	[lastTextFieldEdited resignFirstResponder];
+
+	[super viewWillDisappear:animated];
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+	[super viewDidDisappear:animated];
+
+	self.clientInfo = nil;
+	self.contactInfos = nil;
 }
 
 // Override to allow orientations other than the default portrait orientation.
@@ -294,6 +313,14 @@ BOOL _contactInfoInserted = NO;
 	[self.navigationController pushViewController:lineItemsSelectionViewController animated:YES];
 }
 
+- (IBAction)save:(id)sender {
+	[lastTextFieldEdited resignFirstResponder];
+
+	[[DataStore defaultStore] saveClientInfo:clientInfo];
+
+	[self.navigationController popViewControllerAnimated:YES];
+}
+
 
 #pragma mark -
 #pragma mark Memory management
@@ -311,6 +338,7 @@ BOOL _contactInfoInserted = NO;
 #endif
     // Relinquish ownership of anything that can be recreated in viewDidLoad or on demand.
 	self.nextButton = nil;
+	self.saveButton = nil;
 	self.lineItemsSelectionViewController = nil;
 	self.contactInfos = nil;
 	self.clientInfo = nil;
@@ -324,6 +352,7 @@ BOOL _contactInfoInserted = NO;
 	NSLog(@"ContactInfosViewController.dealloc");
 #endif
 	[nextButton release];
+	[saveButton release];
 	[lineItemsSelectionViewController release];
 	[contactInfos release];
 	[clientInfo release];

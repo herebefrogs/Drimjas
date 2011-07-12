@@ -21,6 +21,7 @@
 #import "EditSectionHeader.h"
 // Views
 #import "AddEstimateLineItemsViewController.h"
+#import "ContactInfosViewController.h"
 #import "TableFields.h"
 
 
@@ -48,6 +49,7 @@
 @synthesize spacerButton;
 @synthesize editSectionHeader;
 @synthesize lineItemSelectionsViewController;
+@synthesize contactInfosViewController;
 @synthesize estimate;
 
 - (void)setEstimate:(Estimate *)newEstimate {
@@ -273,7 +275,12 @@
 - (IBAction)modify:(id)sender {
 	UIButton *edit = (UIButton *)sender;
 
-	if (edit.tag == indexFirstLineItem) {
+	if (edit.tag == EstimateDetailSectionContactInfo) {
+		contactInfosViewController.clientInfo = estimate.clientInfo;
+		contactInfosViewController.editMode = YES;
+		[self.navigationController pushViewController:contactInfosViewController animated:YES];
+	}
+	else if (edit.tag == indexFirstLineItem) {
 		lineItemSelectionsViewController.estimate = estimate;
 		lineItemSelectionsViewController.editMode = YES;
 		[self.navigationController pushViewController:lineItemSelectionsViewController animated:YES];
@@ -319,6 +326,7 @@
 	self.emailButton = nil;
 	self.printButton = nil;
 	self.lineItemSelectionsViewController = nil;
+	self.contactInfosViewController = nil;
 	self.estimate = nil;
 	[lineItemSelections release];
 	lineItemSelections = nil;
@@ -334,6 +342,7 @@
 	[printButton release];
 	[emailButton release];
 	[lineItemSelectionsViewController release];
+	[contactInfosViewController release];
 	[estimate release];
 	[lineItemSelections release];
     [super dealloc];

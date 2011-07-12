@@ -85,6 +85,7 @@
 
 - (NSFetchedResultsController *)contactInfosForClientInfo:(ClientInfo *)clientInfo;
 - (ContactInfo *)createContactInfo;
+- (BOOL)saveClientInfo:(ClientInfo *)clientInfo;
 - (BOOL)deleteContactInfo:(ContactInfo *)contactInfo;
 
 @end
