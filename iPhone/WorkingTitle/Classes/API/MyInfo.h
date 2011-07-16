@@ -3,7 +3,7 @@
 //  WorkingTitle
 //
 //  Created by Jerome Lecomte on 11-06-26.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//  Copyright 2011 David J Peacock Photography. All rights reserved.
 //
 
 #import <CoreData/CoreData.h>
