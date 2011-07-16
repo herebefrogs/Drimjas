@@ -21,8 +21,10 @@
 @implementation NewClientInfoViewController
 
 @synthesize nextButton;
+@synthesize saveButton;
 @synthesize contactInfosViewController;
 @synthesize estimate;
+@synthesize editMode;
 
 
 #pragma mark -
@@ -40,28 +42,36 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
 
-	self.navigationItem.rightBarButtonItem = nextButton;
+	self.navigationItem.rightBarButtonItem = editMode ? saveButton : nextButton;
 
-	self.estimate = [[DataStore defaultStore] estimateStub];
+	if (!editMode) {
+		self.estimate = [[DataStore defaultStore] estimateStub];
 
-	// if existing client info set, deassociate it
-	if ([estimate.clientInfo.status integerValue] == StatusActive) {
-		[estimate.clientInfo removeEstimatesObject:estimate];
+		// if existing client info set, deassociate it
+		if ([estimate.clientInfo.status integerValue] == StatusActive) {
+			[estimate.clientInfo removeEstimatesObject:estimate];
 
-		estimate.clientInfo = nil;
-	}
+			estimate.clientInfo = nil;
+		}
 
-	// initialize new client information if needed
-	if (estimate.clientInfo == nil) {
-		ClientInfo *clientInfo = [[DataStore defaultStore] createClientInfo];
-		estimate.clientInfo = clientInfo;
-
-		NSMutableSet *estimates = [clientInfo mutableSetValueForKey:@"estimates"];
-		[estimates addObject:estimate];
+		// initialize new client information if needed
+		if (estimate.clientInfo == nil) {
+			ClientInfo *clientInfo = [[DataStore defaultStore] createClientInfo];
+			estimate.clientInfo = clientInfo;
+			[clientInfo addEstimatesObject:estimate];
+		}
 	}
 
 	// reload table data to match estimate object
 	[self.tableView reloadData];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+	// when pressing Back button, give a chance to textfield currently edited
+	// to save its text before previous view controller's viewWillAppear triggers
+	[lastTextFieldEdited resignFirstResponder];
+
+	[super viewWillDisappear:animated];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
@@ -70,6 +80,7 @@
 	// release estimate now that all textfield had a chance to save their input in it
 	self.estimate = nil;
 }
+
 // Override to allow orientations other than the default portrait orientation.
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     // Return YES for supported orientations.
@@ -93,19 +104,11 @@
 }
 
 
-// Customize the appearance of table view cells.
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+#pragma mark -
+#pragma mark Table view delegate
 
-    static NSString *CellIdentifier = @"TextFieldCell";
-
-    TextFieldCell *cell = (TextFieldCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-		[[NSBundle mainBundle] loadNibNamed:CellIdentifier owner:self options:nil];
-        cell = textFieldCell;
-		self.textFieldCell = nil;
-    }
-
-	cell.textField.tag = indexPath.row;
+- (void)configureCell:(TextFieldCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+	[super configureCell:cell atIndexPath:indexPath];
 
 	// initialize textfield value from estimate
 	if (indexPath.row == ClientInfoFieldName) {
@@ -136,10 +139,6 @@
 		cell.textField.placeholder = NSLocalizedString(@"Country", "Country Text Field Placeholder");
 		cell.textField.text = estimate.clientInfo.country;
 	}
-
-	cell.selectionStyle = UITableViewCellSelectionStyleNone;
-
-    return cell;
 }
 
 #pragma mark -
@@ -161,32 +160,43 @@
 	}
 }
 
+- (IBAction)save:(id)sender {
+	[lastTextFieldEdited resignFirstResponder];
+
+	[[DataStore defaultStore] saveClientInfo:estimate.clientInfo];
+
+	[self.navigationController popViewControllerAnimated:YES];
+}
+
 - (BOOL)requiredFieldsProvided:(UITextField *)textField {
 	return (textField.tag != ClientInfoFieldName || [ClientInfo isNameValid:textField.text]);
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
+	NSUInteger section = textField.tag / 10;
+	NSUInteger row = textField.tag - (10 * section);
+
 	// TODO hide overlay view if any
 	// save textfield value into estimate
-	if (textField.tag == ClientInfoFieldName) {
+	if (row == ClientInfoFieldName) {
 		estimate.clientInfo.name = textField.text;
 	}
-	else if (textField.tag == ClientInfoFieldAddress1) {
+	else if (row == ClientInfoFieldAddress1) {
 		estimate.clientInfo.address1 = textField.text;
 	}
-	else if (textField.tag == ClientInfoFieldAddress2) {
+	else if (row == ClientInfoFieldAddress2) {
 		estimate.clientInfo.address2 = textField.text;
 	}
-	else if (textField.tag == ClientInfoFieldCity) {
+	else if (row == ClientInfoFieldCity) {
 		estimate.clientInfo.city = textField.text;
 	}
-	else if (textField.tag == ClientInfoFieldState) {
+	else if (row == ClientInfoFieldState) {
 		estimate.clientInfo.state = textField.text;
 	}
-	else if (textField.tag == ClientInfoFieldPostalCode) {
+	else if (row == ClientInfoFieldPostalCode) {
 		estimate.clientInfo.postalCode = textField.text;
 	}
-	else if (textField.tag == ClientInfoFieldCountry) {
+	else if (row == ClientInfoFieldCountry) {
 		estimate.clientInfo.country = textField.text;
 	}
 }
@@ -206,8 +216,9 @@
 	NSLog(@"NewClientInfoViewController.viewDidUnload");
 #endif
     // Relinquish ownership of anything that can be recreated in viewDidLoad or on demand.
-	self.contactInfosViewController = nil;
 	self.nextButton = nil;
+	self.saveButton = nil;
+	self.contactInfosViewController = nil;
 	self.estimate = nil;
 	// note: don't nil title or navigationController.tabBarItem.title
 	// as it may appear on the view currently displayed
@@ -219,9 +230,10 @@
 #ifdef __ENABLE_UI_LOGS__
 	NSLog(@"NewClientInfoViewController.dealloc");
 #endif
-	[estimate release];
 	[nextButton release];
+	[saveButton release];
 	[contactInfosViewController release];
+	[estimate release];
     [super dealloc];
 }
 

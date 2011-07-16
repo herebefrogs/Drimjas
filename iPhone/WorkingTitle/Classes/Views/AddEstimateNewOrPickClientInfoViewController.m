@@ -80,8 +80,10 @@
 	}
 
 	if (indexPath.section == NewClientInfoSection) {
+		newClientInfoViewController.editMode = NO;
 		[self.navigationController pushViewController:newClientInfoViewController animated:YES];
-	} else if (indexPath.section == PickClientInfoSection) {
+	}
+	else if (indexPath.section == PickClientInfoSection) {
 		clientInfosViewController.optionsMode = NO;
 		[self.navigationController pushViewController:clientInfosViewController animated:YES];
 	}

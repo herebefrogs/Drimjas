@@ -15,16 +15,21 @@
 
 @interface NewClientInfoViewController : TextFieldTableViewController {
 	UIBarButtonItem *nextButton;
+	UIBarButtonItem *saveButton;
 	ContactInfosViewController *contactInfosViewController;
 
 	Estimate *estimate;	// new estimate being created
+
+	BOOL editMode;
 }
 
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *nextButton;
+@property (nonatomic, retain) IBOutlet UIBarButtonItem *saveButton;
 @property (nonatomic, retain) IBOutlet ContactInfosViewController *contactInfosViewController;
-
 @property (nonatomic, retain) Estimate *estimate;
+@property (nonatomic, assign) BOOL editMode;
 
 - (IBAction)next:(id)sender;
+- (IBAction)save:(id)sender;
 
 @end

@@ -22,6 +22,7 @@
 // Views
 #import "AddEstimateLineItemsViewController.h"
 #import "ContactInfosViewController.h"
+#import "NewClientInfoViewController.h"
 #import "TableFields.h"
 
 
@@ -50,6 +51,7 @@
 @synthesize editSectionHeader;
 @synthesize lineItemSelectionsViewController;
 @synthesize contactInfosViewController;
+@synthesize newClientInfoViewController;
 @synthesize estimate;
 
 - (void)setEstimate:(Estimate *)newEstimate {
@@ -275,7 +277,12 @@
 - (IBAction)modify:(id)sender {
 	UIButton *edit = (UIButton *)sender;
 
-	if (edit.tag == EstimateDetailSectionContactInfo) {
+	if (edit.tag == EstimateDetailSectionClientInfo) {
+		newClientInfoViewController.estimate = estimate;
+		newClientInfoViewController.editMode = YES;
+		[self.navigationController pushViewController:newClientInfoViewController animated:YES];
+	}
+	else if (edit.tag == EstimateDetailSectionContactInfo) {
 		contactInfosViewController.clientInfo = estimate.clientInfo;
 		contactInfosViewController.editMode = YES;
 		[self.navigationController pushViewController:contactInfosViewController animated:YES];
@@ -284,9 +291,6 @@
 		lineItemSelectionsViewController.estimate = estimate;
 		lineItemSelectionsViewController.editMode = YES;
 		[self.navigationController pushViewController:lineItemSelectionsViewController animated:YES];
-	}
-	else {
-		NSLog(@"Edit section %u", edit.tag);
 	}
 }
 
@@ -327,6 +331,7 @@
 	self.printButton = nil;
 	self.lineItemSelectionsViewController = nil;
 	self.contactInfosViewController = nil;
+	self.newClientInfoViewController = nil;
 	self.estimate = nil;
 	[lineItemSelections release];
 	lineItemSelections = nil;
@@ -343,6 +348,7 @@
 	[emailButton release];
 	[lineItemSelectionsViewController release];
 	[contactInfosViewController release];
+	[newClientInfoViewController release];
 	[estimate release];
 	[lineItemSelections release];
     [super dealloc];

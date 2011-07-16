@@ -38,6 +38,7 @@
 		self.textFieldCell = nil;
     }
 
+	// FIXME will work for no more than 10 rows per section
 	cell.textField.tag = (10 * indexPath.section) + indexPath.row;
 
 	[self configureCell:cell atIndexPath:indexPath];

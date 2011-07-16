@@ -16,6 +16,7 @@
 @class EditSectionHeader;
 @class AddEstimateLineItemsViewController;
 @class ContactInfosViewController;
+@class NewClientInfoViewController;
 
 @interface EstimateDetailViewController : UITableViewController <PrintNotifyDelegate, MailNotifyDelegate> {
 	UIBarButtonItem *emailButton;
@@ -26,6 +27,7 @@
 
 	AddEstimateLineItemsViewController *lineItemSelectionsViewController;
 	ContactInfosViewController *contactInfosViewController;
+	NewClientInfoViewController *newClientInfoViewController;
 
 	Estimate *estimate;
 	NSInteger indexFirstLineItem;
@@ -39,6 +41,7 @@
 @property (nonatomic, retain) IBOutlet EditSectionHeader *editSectionHeader;
 @property (nonatomic, retain) IBOutlet AddEstimateLineItemsViewController *lineItemSelectionsViewController;
 @property (nonatomic, retain) IBOutlet ContactInfosViewController *contactInfosViewController;
+@property (nonatomic, retain) IBOutlet NewClientInfoViewController *newClientInfoViewController;
 @property (nonatomic, retain) Estimate *estimate;
 
 - (IBAction)email:(id)sender;
