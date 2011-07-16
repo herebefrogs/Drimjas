@@ -1,6 +1,6 @@
 //
 //  StartupViewController.m
-//  WorkingTitle
+//  Drimjas
 //
 //  Created by Jerome Lecomte on 11-02-10.
 //  Copyright 2011 David J Peacock Photography. All rights reserved.
@@ -8,7 +8,7 @@
 
 #import "StartupViewController.h"
 // Views
-#import "WorkingTitleAppDelegate.h"
+#import "DrimjasAppDelegate.h"
 #import "TabBarItems.h"
 
 

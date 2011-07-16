@@ -1,6 +1,6 @@
 //
 //  PrintManager.h
-//  WorkingTitle
+//  Drimjas
 //
 //  Created by Jerome Lecomte on 11-02-06.
 //  Copyright 2011 David J Peacock Photography. All rights reserved.

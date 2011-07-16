@@ -911,7 +911,7 @@
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>WorkingTitleAppDelegate</string>
+							<string>DrimjasAppDelegate</string>
 							<string>UITabBar</string>
 						</object>
 					</object>
@@ -926,7 +926,7 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<object class="IBToOneOutletInfo">
 								<string key="name">appDelegate</string>
-								<string key="candidateClassName">WorkingTitleAppDelegate</string>
+								<string key="candidateClassName">DrimjasAppDelegate</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">tabBar</string>
@@ -978,7 +978,7 @@
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
-					<string key="className">WorkingTitleAppDelegate</string>
+					<string key="className">DrimjasAppDelegate</string>
 					<string key="superclassName">NSObject</string>
 					<object class="NSMutableDictionary" key="outlets">
 						<bool key="EncodedWithXMLCoder">YES</bool>
@@ -1028,7 +1028,7 @@
 					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">Classes/Views/WorkingTitleAppDelegate.h</string>
+						<string key="minorKey">Classes/Views/DrimjasAppDelegate.h</string>
 					</object>
 				</object>
 			</object>
@@ -1312,7 +1312,7 @@
 			<integer value="3000" key="NS.object.0"/>
 		</object>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
-		<string key="IBDocument.LastKnownRelativeProjectPath">../../WorkingTitle.xcodeproj</string>
+		<string key="IBDocument.LastKnownRelativeProjectPath">../../Drimjas.xcodeproj</string>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<object class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
 			<bool key="EncodedWithXMLCoder">YES</bool>

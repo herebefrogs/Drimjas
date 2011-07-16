@@ -1,6 +1,6 @@
 //
-//  WorkingTitleAppDelegate.h
-//  WorkingTitle
+//  DrimjasAppDelegate.h
+//  Drimjas
 //
 //  Created by Jerome Lecomte on 11-01-13.
 //  Copyright 2011 David J Peacock Photography. All rights reserved.
@@ -11,7 +11,7 @@
 @class StartupViewController;
 @class EstimatesViewController;
 
-@interface WorkingTitleAppDelegate : NSObject <UIApplicationDelegate, UITabBarControllerDelegate> {
+@interface DrimjasAppDelegate : NSObject <UIApplicationDelegate, UITabBarControllerDelegate> {
     UIWindow *window;
     UITabBarController *tabBarController;
 	

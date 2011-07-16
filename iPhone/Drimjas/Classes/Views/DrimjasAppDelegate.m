@@ -1,12 +1,12 @@
 //
-//  WorkingTitleAppDelegate.m
-//  WorkingTitle
+//  DrimjasAppDelegate.m
+//  Drimjas
 //
 //  Created by Jerome Lecomte on 11-01-13.
 //  Copyright 2011 David J Peacock Photography. All rights reserved.
 //
 
-#import "WorkingTitleAppDelegate.h"
+#import "DrimjasAppDelegate.h"
 // API
 #import "DataStore.h"
 // Views
@@ -15,7 +15,7 @@
 #import "TabBarItems.h"
 
 
-@implementation WorkingTitleAppDelegate
+@implementation DrimjasAppDelegate
 
 @synthesize window, startupViewController, tabBarController, estimatesViewController;
 
@@ -46,7 +46,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 	// initialize data store
-	DataStore *dataStore = [[DataStore alloc] initWithName:@"WorkingTitle"];
+	DataStore *dataStore = [[DataStore alloc] initWithName:@"Drimjas"];
 	[DataStore setDefaultStore:dataStore];
 	[dataStore release];
 	
