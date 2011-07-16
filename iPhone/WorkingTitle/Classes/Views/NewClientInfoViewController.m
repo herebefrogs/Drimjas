@@ -6,7 +6,7 @@
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import "AddEstimateNewClientInfoViewController.h"
+#import "NewClientInfoViewController.h"
 // API
 #import "Estimate.h"
 #import "ClientInfo.h"
@@ -18,7 +18,7 @@
 #import "TableFields.h"
 
 
-@implementation AddEstimateNewClientInfoViewController
+@implementation NewClientInfoViewController
 
 @synthesize nextButton;
 @synthesize contactInfosViewController;
@@ -30,10 +30,10 @@
 
 - (void)viewDidLoad {
 #ifdef __ENABLE_UI_LOGS__
-	NSLog(@"AddEstimateNewClientInfoViewController.viewDidLoad");
+	NSLog(@"NewClientInfoViewController.viewDidLoad");
 #endif
     [super viewDidLoad];
-	self.title = NSLocalizedString(@"New Client", "AddEstimateNewClientInfo Navigation Item Title");
+	self.title = NSLocalizedString(@"New Client", "NewClientInfo Navigation Item Title");
 	nextButton.title = NSLocalizedString(@"Next", "Next Navigation Item Title");
 }
 
@@ -203,7 +203,7 @@
 
 - (void)viewDidUnload {
 #ifdef __ENABLE_UI_LOGS__
-	NSLog(@"AddEstimateNewClientInfoViewController.viewDidUnload");
+	NSLog(@"NewClientInfoViewController.viewDidUnload");
 #endif
     // Relinquish ownership of anything that can be recreated in viewDidLoad or on demand.
 	self.contactInfosViewController = nil;
@@ -217,7 +217,7 @@
 
 - (void)dealloc {
 #ifdef __ENABLE_UI_LOGS__
-	NSLog(@"AddEstimateNewClientInfoViewController.dealloc");
+	NSLog(@"NewClientInfoViewController.dealloc");
 #endif
 	[estimate release];
 	[nextButton release];

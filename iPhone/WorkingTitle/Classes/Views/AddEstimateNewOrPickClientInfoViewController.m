@@ -10,7 +10,7 @@
 // API
 #import "DataStore.h"
 // Views
-#import "AddEstimateNewClientInfoViewController.h"
+#import "NewClientInfoViewController.h"
 #import "ClientInfosViewController.h"
 #import "TableFields.h"
 

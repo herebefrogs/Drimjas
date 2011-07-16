@@ -20,28 +20,28 @@
 /* AddEstimateNewOrPickClientInfo Pick Existing Client Section */
 "Pick Existing Client Information" = "Pick Existing Client Information";
 
-/* AddEstimateNewClientInfo View Controller Navigation Item Title */
+/* NewClientInfo View Controller Navigation Item Title */
 "New Client" = "New Client";
 
-/* AddEstimateNewClientInfo View Controller Client Name Text Field Placeholder */
+/* NewClientInfo View Controller Client Name Text Field Placeholder */
 "Client Name" = "Client Name";
 
-/* AddEstimateNewClientInfo View Controller Address 1 Text Field Placeholder */
+/* NewClientInfo View Controller Address 1 Text Field Placeholder */
 "Address 1" = "Address 1";
 
-/* AddEstimateNewClientInfo View Controller Address 2 Text Field Placeholder */
+/* NewClientInfo View Controller Address 2 Text Field Placeholder */
 "Address 2" = "Address 2";
 
-/* AddEstimateNewClientInfo View Controller City Text Field Placeholder */
+/* NewClientInfo View Controller City Text Field Placeholder */
 "City" = "City";
 
-/* AddEstimateNewClientInfo View Controller State/Province Field Placeholder */
+/* NewClientInfo View Controller State/Province Field Placeholder */
 "State" = "State/Province";
 
-/* AddEstimateNewClientInfo View Controller Postal Code Field Placeholder */
+/* NewClientInfo View Controller Postal Code Field Placeholder */
 "Postal Code" = "Postal Code";
 
-/* AddEstimateNewClientInfo View Controller Country Field Placeholder */
+/* NewClientInfo View Controller Country Field Placeholder */
 "Country" = "Country";
 
 /* Next Navigation Item Title */

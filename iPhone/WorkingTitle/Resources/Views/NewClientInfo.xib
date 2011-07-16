@@ -209,7 +209,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 				</object>
 				<object class="NSMutableArray" key="dict.values">
 					<bool key="EncodedWithXMLCoder">YES</bool>
-					<string>AddEstimateNewClientInfoViewController</string>
+					<string>NewClientInfoViewController</string>
 					<string>UIResponder</string>
 					<string>ContactInfosViewController</string>
 					<string>{{350, 254}, {320, 480}}</string>
@@ -263,7 +263,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
-					<string key="className">AddEstimateNewClientInfoViewController</string>
+					<string key="className">NewClientInfoViewController</string>
 					<string key="superclassName">UITableViewController</string>
 					<object class="NSMutableDictionary" key="actions">
 						<bool key="EncodedWithXMLCoder">YES</bool>

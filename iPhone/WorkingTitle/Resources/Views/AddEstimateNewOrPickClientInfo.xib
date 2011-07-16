@@ -87,7 +87,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 				<float key="IBUISectionFooterHeight">10</float>
 			</object>
 			<object class="IBUIViewController" id="165049000">
-				<string key="IBUINibName">AddEstimateNewClientInfo</string>
+				<string key="IBUINibName">NewClientInfo</string>
 				<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics"/>
 				<object class="IBUISimulatedOrientationMetrics" key="IBUISimulatedOrientationMetrics">
 					<int key="interfaceOrientation">1</int>
@@ -210,7 +210,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>{{462, 244}, {320, 480}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-					<string>AddEstimateNewClientInfoViewController</string>
+					<string>NewClientInfoViewController</string>
 					<string>{{350, 265}, {320, 480}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				</object>
@@ -267,7 +267,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
-					<string key="className">AddEstimateNewClientInfoViewController</string>
+					<string key="className">NewClientInfoViewController</string>
 					<string key="superclassName">TextFieldTableViewController</string>
 					<object class="NSMutableDictionary" key="actions">
 						<string key="NS.key.0">next:</string>
@@ -314,11 +314,11 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">Classes/Views/AddEstimateNewClientInfoViewController.h</string>
+						<string key="minorKey">Classes/Views/NewClientInfoViewController.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
-					<string key="className">AddEstimateNewClientInfoViewController</string>
+					<string key="className">NewClientInfoViewController</string>
 					<string key="superclassName">TextFieldTableViewController</string>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBUserSource</string>
@@ -348,7 +348,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>AddEstimateNewClientInfoViewController</string>
+							<string>NewClientInfoViewController</string>
 							<string>ClientInfosViewController</string>
 						</object>
 					</object>
@@ -363,7 +363,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<object class="IBToOneOutletInfo">
 								<string key="name">newClientInfoViewController</string>
-								<string key="candidateClassName">AddEstimateNewClientInfoViewController</string>
+								<string key="candidateClassName">NewClientInfoViewController</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">clientInfosViewController</string>
