@@ -32,8 +32,8 @@
 #pragma mark Private methods stack
 
 - (void)reloadIndexes {
-	indexFirstLineItem = EstimateDetailSectionContactInfo + estimate.clientInfo.contactInfos.count;
-	indexLastSection = indexFirstLineItem + estimate.lineItems.count;
+	indexFirstLineItem = EstimateDetailSectionContactInfo + MAX(1, estimate.clientInfo.contactInfos.count);
+	indexLastSection = indexFirstLineItem + MAX(1, estimate.lineItems.count);
 
 	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"index" ascending:YES];
 	[lineItemSelections release];
@@ -114,7 +114,11 @@
 #pragma mark Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return EstimateDetailSectionContactInfo + estimate.clientInfo.contactInfos.count + estimate.lineItems.count;
+    return EstimateDetailSectionContactInfo
+			// even if there isn't a ContactInfo object, add an empty section to show Modify button
+			+ MAX(1, estimate.clientInfo.contactInfos.count)
+			// even if there isn't a LineItemSelection object, add an empty section to show Modify button
+			+ MAX(1, estimate.lineItems.count);
 }
 
 
@@ -137,15 +141,27 @@
 		return [estimate.clientInfo numSetProperties];
 	}
 	else if (section >= EstimateDetailSectionContactInfo && section < indexFirstLineItem) {
-		ContactInfo *contactInfo = [estimate.clientInfo contactInfoAtIndex:section - EstimateDetailSectionContactInfo];
+		if (estimate.clientInfo.contactInfos.count == 0) {
+			// empty section to show Modify button
+			return 0;
+		}
+		else {
+			ContactInfo *contactInfo = [estimate.clientInfo contactInfoAtIndex:section - EstimateDetailSectionContactInfo];
 
-		return [contactInfo numSetProperties];
+			return [contactInfo numSetProperties];
+		}
 	}
 	else {
-		LineItemSelection *lineItem = (LineItemSelection *)[lineItemSelections objectAtIndex:(section - indexFirstLineItem)];
+		if (estimate.lineItems.count == 0) {
+			// empty section to show Modify button
+			return 0;
+		}
+		else {
+			LineItemSelection *lineItem = (LineItemSelection *)[lineItemSelections objectAtIndex:(section - indexFirstLineItem)];
 
-		// collapse Quantity & Unit Cost rows together, and skip Description row if empty
-		return numLineItemSelectionField - (lineItem.details.length > 0 ? 1 : 2);
+			// collapse Quantity & Unit Cost rows together, and skip Description row if empty
+			return numLineItemSelectionField - (lineItem.details.length > 0 ? 1 : 2);
+		}
 	}
 }
 
