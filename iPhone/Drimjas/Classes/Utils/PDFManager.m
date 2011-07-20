@@ -10,14 +10,31 @@
 #import <CoreGraphics/CoreGraphics.h>
 #import <CoreText/CoreText.h>
 // API
-#import "Estimate.h"
 #import "ClientInfo.h"
-
+#import "DataStore.h"
+#import "Estimate.h"
+#import "MyInfo.h"
+// Utils
+#import "DrimjasInfo.h"
 
 @implementation PDFManager
 
 #pragma mark -
 #pragma mark Internal utility messages implementation
+
++ (CGRect)paperSizeForUserLocale {
+	NSString *countryCode = [[NSLocale autoupdatingCurrentLocale] objectForKey:NSLocaleCountryCode];
+	NSLog(@"country code: %@", countryCode);
+
+	// assumes United States and Canada are on Letter paper
+	// while the rest of the world is on ISO A4 paper
+	if ([countryCode isEqualToString:@"US"] || [countryCode isEqualToString:@"CA"]) {
+		return CGRectMake(0, 0, 612, 792);
+	} else {
+		// approximation based on 72pt/inch and 25.4mm/inch
+		return CGRectMake(0, 0, 595, 842);
+	}
+}
 
 // Use Core Text to draw the text in a frame on the page.
 + (CFRange)renderPage:(NSInteger)pageNum withTextRange:(CFRange)currentRange
@@ -75,11 +92,15 @@
 	[pageString drawInRect:stringRect withFont:theFont];
 }
 
+
 #pragma mark -
 #pragma mark Public protocol implementation
 
 + (NSMutableData *)getPDFDataForEstimate:(Estimate *)estimate {
 	NSMutableData *pdfData = [[[NSMutableData alloc] initWithCapacity: 1024] autorelease];
+
+	// start PDF data
+	UIGraphicsBeginPDFContextToData(pdfData, [self paperSizeForUserLocale], [self pdfInfoForEstimate:estimate]);
 
 	// prepare estimate text
 	CFAttributedStringRef currentText = CFAttributedStringCreate(NULL, (CFStringRef)estimate.clientInfo.name, NULL);
@@ -91,8 +112,6 @@
 		if (framesetter == NULL) {
 			NSLog(@"Could not create the framesetter needed to lay out the atrributed string.");
 		} else {
-			// start PDF data
-			UIGraphicsBeginPDFContextToData(pdfData, CGRectZero, nil);
 
 			CFRange currentRange = CFRangeMake(0, 0);
 			NSInteger currentPage = 0;
@@ -100,7 +119,7 @@
 
 			do {
 				// open new page (Letter format)
-				UIGraphicsBeginPDFPageWithInfo(CGRectMake(0, 0, 612, 792), nil);
+				UIGraphicsBeginPDFPageWithInfo([self paperSizeForUserLocale], nil);
 
 				// keep track of number of pages (to print it at the bottom of each page for example)
 				currentPage++;
@@ -113,14 +132,15 @@
 				}
 			} while (!saved);
 
-			// end PDF data
-			UIGraphicsEndPDFContext();
 
 			CFRelease(framesetter);
 		}
 
 		CFRelease(currentText);
 	}
+
+	// end PDF data
+	UIGraphicsEndPDFContext();
 
 	return pdfData;
 }
@@ -151,6 +171,22 @@
 
 	return [path stringByAppendingPathComponent:[PDFManager getPDFNameForEstimate:estimate]];
 				
+}
+
++ (NSString *)pdfTitleForEstimate:(Estimate *)estimate {
+	return [NSString stringWithFormat:@"%@ #%@",
+				NSLocalizedString(@"Estimate", @"Estimate PDF Title"),
+			estimate.orderNumber];
+}
+
++ (NSDictionary *)pdfInfoForEstimate:(Estimate *)estimate {
+	DataStore *dataStore = [DataStore defaultStore];
+
+	return [NSDictionary dictionaryWithObjectsAndKeys:
+				[[dataStore myInfo] name], kCGPDFContextAuthor,
+				[DrimjasInfo title], kCGPDFContextCreator,
+				[self pdfTitleForEstimate:estimate], kCGPDFContextTitle,
+				nil];
 }
 
 @end
