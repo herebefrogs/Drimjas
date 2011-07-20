@@ -222,7 +222,7 @@
 #pragma mark Table view delegate
 
 - (UIView *)loadEditSectionHeaderForTag:(NSInteger)tag withTitle:(NSString *)title {
-	EditSectionHeader *editHeader;
+	EditSectionHeader *editHeader = nil;
 
 	if (editSectionHeader == nil) {
 		[[NSBundle mainBundle] loadNibNamed:@"EditSectionHeader" owner:self options:nil];

@@ -37,8 +37,7 @@ static id<PrintNotifyDelegate> _delegate;
 	controller.printInfo = printInfo;
 
 	// set printing data
-	NSData *pdfData = [PDFManager getPDFDataForEstimate:estimate];
-	controller.printingItem = pdfData;
+	controller.printingItem = [PDFManager getPDFDataForEstimate:estimate];
 
 	// print completion handler/block/closure
 	void (^printCompleted)(UIPrintInteractionController *, BOOL, NSError *) =
@@ -49,7 +48,6 @@ static id<PrintNotifyDelegate> _delegate;
 		// free up delegate
 		[_delegate release];
 		// free up pdf data
-		[pdfData release];
 	};
 
 /* Detect if iPad or iPhone to share same codebase	

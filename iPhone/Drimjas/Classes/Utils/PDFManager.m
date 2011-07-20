@@ -79,7 +79,7 @@
 #pragma mark Public protocol implementation
 
 + (NSMutableData *)getPDFDataForEstimate:(Estimate *)estimate {
-	NSMutableData *pdfData = [[NSMutableData alloc] initWithCapacity: 1024];
+	NSMutableData *pdfData = [[[NSMutableData alloc] initWithCapacity: 1024] autorelease];
 
 	// prepare estimate text
 	CFAttributedStringRef currentText = CFAttributedStringCreate(NULL, (CFStringRef)estimate.clientInfo.name, NULL);
@@ -127,7 +127,7 @@
 
 + (BOOL)savePDFFileForEstimate:(Estimate *)estimate {
 	NSString *pdfPath = [PDFManager getPDFPathForEstimate:estimate];
-	NSData *pdfData = [PDFManager getPDFDataForEstimate:estimate];
+	NSData *pdfData = [[PDFManager getPDFDataForEstimate:estimate] retain];
 
 	BOOL written = [pdfData writeToFile:pdfPath atomically:NO];
 	[pdfData release];

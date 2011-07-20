@@ -211,7 +211,7 @@ static DataStore *singleton_ = nil;
 			BOOL (^predicate)(id, NSUInteger, BOOL*) = ^(id obj, NSUInteger idx, BOOL *stop) {
 				LineItem *lineItem = (LineItem *)obj;
 				if ([lineItem.name isEqualToString:[line_item_data valueForKey:@"name"]]) {
-					stop = (BOOL *)YES;
+					*stop = YES;
 					return YES;
 				}
 				return NO;
@@ -304,7 +304,6 @@ static DataStore *singleton_ = nil;
 	for (LineItemSelection *lineItem in estimateStub_.lineItems) {
 		lineItem.status = active;
 	}
-	[active release];
 
 	// save the context
 	NSError *error;
@@ -797,7 +796,6 @@ static DataStore *singleton_ = nil;
 				taxOrCurrency.status = active;
 			}
 		}
-		[active release];
 
 		[self saveContext];
 	}
