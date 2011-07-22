@@ -36,7 +36,7 @@
 "City" = "City";
 
 /* NewClientInfo View Controller State/Province Field Placeholder */
-"State" = "State/Province";
+"State" = "State / Province";
 
 /* NewClientInfo View Controller Postal Code Field Placeholder */
 "Postal Code" = "Postal Code";
@@ -167,6 +167,15 @@
 
 /* Estimate Email Body */
 "Estimate Email Body" = "Estimate Email Body Placeholder";
+
+/* Client properties as appearing on PDF */
+"client.name" = "Name:";
+"client.address1" = "Address:";
+"client.address2" = "Address:";
+"client.city" = "City:";
+"client.state" = "Prov. / State:";
+"client.postalCode" = "Postal Code:";
+"client.country" = "Country:";
 
 /****************** Line items section ****************/
 "Creative Fee" = "Creative Fee";

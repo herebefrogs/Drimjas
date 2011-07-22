@@ -13,11 +13,18 @@
 #import "ClientInfo.h"
 #import "DataStore.h"
 #import "Estimate.h"
+#import "KeyValue.h"
 #import "MyInfo.h"
 // Utils
 #import "DrimjasInfo.h"
 
 @implementation PDFManager
+
+
+NSUInteger MARGIN = 72;				// 72 pt = 1 inch = 2.54 cm
+NSUInteger PLAIN_FONT_SIZE = 10;
+NSUInteger LINE_PADDING = 2;		// vertical padding between 2 lines
+NSUInteger LABEL_PADDING = 10;		// horizontal padding between key & value columns
 
 #pragma mark -
 #pragma mark Internal utility messages implementation
@@ -76,7 +83,7 @@
 	return currentRange;
 }
 
-+ (void)drawPageNumber:(NSInteger)pageNum {
++ (void)_drawPageNumber:(NSInteger)pageNum {
 	NSString* pageString = [NSString stringWithFormat:@"Page %d", pageNum];
 	UIFont* theFont = [UIFont systemFontOfSize:12];
 	CGSize maxSize = CGSizeMake(612, 72);
@@ -92,52 +99,68 @@
 	[pageString drawInRect:stringRect withFont:theFont];
 }
 
++ (CGPoint)_renderClientInfo:(ClientInfo *)clientInfo withPage:(CGRect)page {
+	UIFont *plainFont = [UIFont systemFontOfSize:PLAIN_FONT_SIZE];
+
+	NSUInteger x = MARGIN;
+	NSUInteger y = MARGIN;
+	NSUInteger maxKeyWidth = 0;
+	NSUInteger maxHeight = PLAIN_FONT_SIZE + LINE_PADDING;
+	// no wider than half the page (margins not included), no taller than 1 margin
+	CGSize maxSize = CGSizeMake(CGRectGetWidth(page)/2 - MARGIN, maxHeight);
+
+	NSArray *properties = [clientInfo nonEmptyProperties];
+	// place all property names first
+	for (KeyValue *pair in properties) {
+		NSString *clientProperty = [NSString stringWithFormat:@"client.%@", pair.key];
+		NSString *text = NSLocalizedString(clientProperty, "Property name");
+
+		CGSize textSize = [text sizeWithFont:plainFont constrainedToSize:maxSize lineBreakMode:UILineBreakModeTailTruncation];
+
+		CGRect textPath = CGRectMake(x, y, textSize.width, textSize.height);
+
+		[text drawInRect:textPath withFont:plainFont];
+
+		y += textSize.height + LINE_PADDING;
+		maxKeyWidth = MAX(maxKeyWidth, textSize.width);
+	}
+
+	x += maxKeyWidth + LABEL_PADDING;
+	y = MARGIN;
+	NSUInteger maxValueWidth = 0;
+	// line up all property values vertically
+	maxSize.width -= x;
+	for (KeyValue *pair in properties) {
+		NSString *text = pair.value;
+		// TODO put this in a method
+		CGSize textSize = [text sizeWithFont:plainFont constrainedToSize:maxSize lineBreakMode:UILineBreakModeTailTruncation];
+
+		CGRect textPath = CGRectMake(x, y, textSize.width, textSize.height);
+
+		[text drawInRect:textPath withFont:plainFont];
+
+		y += textSize.height + LINE_PADDING;
+		maxValueWidth = MAX(maxValueWidth, textSize.width);
+	}
+
+	return CGPointMake(x + maxValueWidth, y);
+}
 
 #pragma mark -
 #pragma mark Public protocol implementation
 
-+ (NSMutableData *)getPDFDataForEstimate:(Estimate *)estimate {
++ (NSMutableData *)pdfDataForEstimate:(Estimate *)estimate {
 	NSMutableData *pdfData = [[[NSMutableData alloc] initWithCapacity: 1024] autorelease];
 
+	CGRect page = [self paperSizeForUserLocale];
 	// start PDF data
-	UIGraphicsBeginPDFContextToData(pdfData, [self paperSizeForUserLocale], [self pdfInfoForEstimate:estimate]);
+	UIGraphicsBeginPDFContextToData(pdfData, page, [self pdfInfoForEstimate:estimate]);
 
-	// prepare estimate text
-	CFAttributedStringRef currentText = CFAttributedStringCreate(NULL, (CFStringRef)estimate.clientInfo.name, NULL);
-	if (currentText == NULL) {
-		NSLog(@"Could not create the attributed string for the framesetter");
-	} else {
-		// prepare text formatter
-		CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString(currentText);
-		if (framesetter == NULL) {
-			NSLog(@"Could not create the framesetter needed to lay out the atrributed string.");
-		} else {
+	// open new page
+	UIGraphicsBeginPDFPageWithInfo(page, nil);
 
-			CFRange currentRange = CFRangeMake(0, 0);
-			NSInteger currentPage = 0;
-			BOOL saved = NO;
-
-			do {
-				// open new page (Letter format)
-				UIGraphicsBeginPDFPageWithInfo([self paperSizeForUserLocale], nil);
-
-				// keep track of number of pages (to print it at the bottom of each page for example)
-				currentPage++;
-				[PDFManager drawPageNumber:currentPage];
-
-				currentRange = [PDFManager renderPage:currentPage withTextRange:currentRange andFramesetter:framesetter];
-
-				if (currentRange.location == CFAttributedStringGetLength((CFAttributedStringRef)currentText)) {
-					saved = YES;
-				}
-			} while (!saved);
-
-
-			CFRelease(framesetter);
-		}
-
-		CFRelease(currentText);
-	}
+	[PDFManager _renderClientInfo:estimate.clientInfo withPage:page];
+	[PDFManager _drawPageNumber:1];
 
 	// end PDF data
 	UIGraphicsEndPDFContext();
@@ -147,7 +170,7 @@
 
 + (BOOL)savePDFFileForEstimate:(Estimate *)estimate {
 	NSString *pdfPath = [PDFManager getPDFPathForEstimate:estimate];
-	NSData *pdfData = [[PDFManager getPDFDataForEstimate:estimate] retain];
+	NSData *pdfData = [[PDFManager pdfDataForEstimate:estimate] retain];
 
 	BOOL written = [pdfData writeToFile:pdfPath atomically:NO];
 	[pdfData release];

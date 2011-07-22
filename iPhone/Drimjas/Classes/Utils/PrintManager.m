@@ -37,7 +37,7 @@ static id<PrintNotifyDelegate> _delegate;
 	controller.printInfo = printInfo;
 
 	// set printing data
-	controller.printingItem = [PDFManager getPDFDataForEstimate:estimate];
+	controller.printingItem = [PDFManager pdfDataForEstimate:estimate];
 
 	// print completion handler/block/closure
 	void (^printCompleted)(UIPrintInteractionController *, BOOL, NSError *) =

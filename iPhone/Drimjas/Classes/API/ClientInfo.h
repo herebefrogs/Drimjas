@@ -27,8 +27,9 @@
 @property (nonatomic, retain) NSSet *estimates;
 
 + (BOOL)isNameValid:(NSString *)name;
-- (NSInteger)numSetProperties;
-- (NSString *)getSetPropertyWithIndex:(NSUInteger)index;
+- (NSArray *)nonEmptyProperties;
+- (NSInteger)countNonEmptyProperties;
+- (NSString *)nonEmptyPropertyWithIndex:(NSUInteger)index;
 - (ContactInfo *)contactInfoAtIndex:(NSUInteger)index;
 - (void)bindContactInfo:(ContactInfo *)contactInfo;
 - (void)unbindContactInfo:(ContactInfo *)contactInfo;

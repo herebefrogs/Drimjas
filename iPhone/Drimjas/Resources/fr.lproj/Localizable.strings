@@ -24,7 +24,7 @@
 "New Client" = "Nouveau Client";
 
 /* NewClientInfo View Controller Client Name Text Field Placeholder */
-"Client Name" = "Nom du Client";
+"Client Name" = "Nom du client";
 
 /* NewClientInfo View Controller Address 1 Text Field Placeholder */
 "Address 1" = "Adresse 1";
@@ -165,6 +165,15 @@
 
 /* Estimate Email Body */
 "Estimate Email Body" = "Corps Temporaire Du Courriel Pour Le Devis";
+
+/* Client properties as appearing on PDF */
+"client.name" = "Nom:";
+"client.address1" = "Adresse:";
+"client.address2" = "Adresse:";
+"client.city" = "Ville:";
+"client.state" = "Département:";
+"client.postalCode" = "Code postale:";
+"client.country" = "Pays:";
 
 /****************** Line items section ****************/
 "Creative Fee" = "Creative Fee";

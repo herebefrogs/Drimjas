@@ -56,6 +56,7 @@
 		02B2C06F12DFF2DD00D3FEE0 /* Estimates.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02B2C06D12DFF2DD00D3FEE0 /* Estimates.xib */; };
 		02B6326613B1D9D5003E4081 /* IndexedObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 02B6326513B1D9D5003E4081 /* IndexedObject.m */; };
 		02C25793132438C40057D944 /* DataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 02C25792132438C40057D944 /* DataStore.m */; };
+		02C6509A13D922B200ABEFF7 /* KeyValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 02C6509913D922B200ABEFF7 /* KeyValue.m */; };
 		02C75243136A429F00EC4BF5 /* AddEstimateNewOrPickClientInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02C75241136A429F00EC4BF5 /* AddEstimateNewOrPickClientInfoViewController.m */; };
 		02C75244136A429F00EC4BF5 /* AddEstimateNewOrPickClientInfo.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02C75242136A429F00EC4BF5 /* AddEstimateNewOrPickClientInfo.xib */; };
 		02C81A441307853C009029E9 /* Application.png in Resources */ = {isa = PBXBuildFile; fileRef = 02C81A421307853C009029E9 /* Application.png */; };
@@ -176,6 +177,8 @@
 		02B6326513B1D9D5003E4081 /* IndexedObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IndexedObject.m; sourceTree = "<group>"; };
 		02C25791132438C40057D944 /* DataStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataStore.h; sourceTree = "<group>"; };
 		02C25792132438C40057D944 /* DataStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataStore.m; sourceTree = "<group>"; };
+		02C6509813D922B200ABEFF7 /* KeyValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KeyValue.h; path = ../Utils/KeyValue.h; sourceTree = "<group>"; };
+		02C6509913D922B200ABEFF7 /* KeyValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KeyValue.m; path = ../Utils/KeyValue.m; sourceTree = "<group>"; };
 		02C75240136A429F00EC4BF5 /* AddEstimateNewOrPickClientInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddEstimateNewOrPickClientInfoViewController.h; sourceTree = "<group>"; };
 		02C75241136A429F00EC4BF5 /* AddEstimateNewOrPickClientInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddEstimateNewOrPickClientInfoViewController.m; sourceTree = "<group>"; };
 		02C75242136A429F00EC4BF5 /* AddEstimateNewOrPickClientInfo.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddEstimateNewOrPickClientInfo.xib; sourceTree = "<group>"; };
@@ -332,6 +335,8 @@
 				02C25792132438C40057D944 /* DataStore.m */,
 				02CC9D83133FEB2C006160A7 /* Estimate.h */,
 				02CC9D84133FEB2C006160A7 /* Estimate.m */,
+				02C6509813D922B200ABEFF7 /* KeyValue.h */,
+				02C6509913D922B200ABEFF7 /* KeyValue.m */,
 				02B6326413B1D9D5003E4081 /* IndexedObject.h */,
 				02B6326513B1D9D5003E4081 /* IndexedObject.m */,
 				02DE9879137A10C1007C5FED /* LineItem.h */,
@@ -622,6 +627,7 @@
 				028CCBA113B795CD0073C88F /* MyInfo.m in Sources */,
 				028CCBD213B7A4910073C88F /* MyInfoViewController.m in Sources */,
 				0282274D13D66EBB00D995A4 /* DrimjasInfo.m in Sources */,
+				02C6509A13D922B200ABEFF7 /* KeyValue.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

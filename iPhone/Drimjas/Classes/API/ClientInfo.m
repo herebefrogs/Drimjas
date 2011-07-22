@@ -9,8 +9,9 @@
 #import "ClientInfo.h"
 
 // API
-#import "Estimate.h"
 #import "ContactInfo.h"
+#import "Estimate.h"
+#import "KeyValue.h"
 
 @implementation ClientInfo 
 
@@ -31,6 +32,9 @@
 	self.subEntityName = @"ClientInfo";
 }
 
+- (NSArray *)allPropertyNames {
+	return [NSArray arrayWithObjects:@"name", @"address1", @"address2", @"city", @"state", @"postalCode", @"country", nil];
+}
 #pragma mark -
 #pragma mark Public methods stack
 
@@ -38,11 +42,25 @@
 	return (name.length > 0);
 }
 
-- (NSInteger)numSetProperties {	
-	NSArray *properties = [NSArray arrayWithObjects:@"name", @"address1", @"address2", @"city", @"state", @"postalCode", @"country", nil];
+- (NSArray *)nonEmptyProperties {
+	NSMutableArray *nonEmptyProperties = [NSMutableArray arrayWithCapacity:1];
 
+	for (NSString *property in [self allPropertyNames]) {
+		NSString *value = [self valueForKey:property];
+		if (value.length > 0) {
+			KeyValue *pair = [[KeyValue alloc] initWithKey:property value:value];
+			[nonEmptyProperties addObject:pair];
+			[pair release];
+		}
+	}
+
+	return nonEmptyProperties;
+}
+
+- (NSInteger)countNonEmptyProperties {
 	NSInteger count = 0;
-	for (NSString *property in properties) {
+
+	for (NSString *property in [self allPropertyNames]) {
 		NSString *value = [self valueForKey:property];
 		if (value.length > 0) {
 			count++;
@@ -52,10 +70,8 @@
 	return count;
 }
 
-- (NSString *)getSetPropertyWithIndex:(NSUInteger)index {
-	NSArray *properties = [NSArray arrayWithObjects:@"name", @"address1", @"address2", @"city", @"state", @"postalCode", @"country", nil];
-
-	for (NSString *property in properties) {
+- (NSString *)nonEmptyPropertyWithIndex:(NSUInteger)index {
+	for (NSString *property in [self allPropertyNames]) {
 		NSString *value = [self valueForKey:property];
 		if (value.length > 0) {
 			if (index == 0) {

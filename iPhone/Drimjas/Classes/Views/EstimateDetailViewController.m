@@ -138,7 +138,7 @@
 		return 1;
 	}
 	else if (section == EstimateDetailSectionClientInfo) {
-		return [estimate.clientInfo numSetProperties];
+		return [estimate.clientInfo countNonEmptyProperties];
 	}
 	else if (section >= EstimateDetailSectionContactInfo && section < indexFirstLineItem) {
 		if (estimate.clientInfo.contactInfos.count == 0) {
@@ -182,7 +182,7 @@
 		cell.textLabel.text = [estimate orderNumber];
 	}
 	else if (indexPath.section == EstimateDetailSectionClientInfo) {
-		cell.textLabel.text = [estimate.clientInfo getSetPropertyWithIndex:indexPath.row];
+		cell.textLabel.text = [estimate.clientInfo nonEmptyPropertyWithIndex:indexPath.row];
 	}
 	else if (indexPath.section >= EstimateDetailSectionContactInfo && indexPath.section < indexFirstLineItem) {
 		ContactInfo *contactInfo = [estimate.clientInfo contactInfoAtIndex:indexPath.section - EstimateDetailSectionContactInfo];

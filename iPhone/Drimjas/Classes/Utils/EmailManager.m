@@ -68,7 +68,7 @@
 	[controller setToRecipients:toRecepients];
 	
 	// attach estimate PDF to email
-	NSData *pdfData = [[PDFManager getPDFDataForEstimate:estimate] retain];
+	NSData *pdfData = [[PDFManager pdfDataForEstimate:estimate] retain];
 	NSString *pdfName = [PDFManager getPDFNameForEstimate:estimate];
 	[controller addAttachmentData:pdfData mimeType:@"application/pdf" fileName:pdfName];
 	

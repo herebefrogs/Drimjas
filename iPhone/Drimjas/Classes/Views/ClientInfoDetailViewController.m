@@ -62,7 +62,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == 0) {
-		return [clientInfo numSetProperties];
+		return [clientInfo countNonEmptyProperties];
 	} else {
 		ContactInfo *contactInfo = [clientInfo contactInfoAtIndex:section - 1];
 
@@ -84,7 +84,7 @@
 	cell.selectionStyle = UITableViewCellSelectionStyleNone;
 
 	if (indexPath.section == 0) {
-		cell.textLabel.text = [clientInfo getSetPropertyWithIndex:indexPath.row];
+		cell.textLabel.text = [clientInfo nonEmptyPropertyWithIndex:indexPath.row];
 	} else {
 		ContactInfo *contactInfo = [clientInfo contactInfoAtIndex:indexPath.section - 1];
 
