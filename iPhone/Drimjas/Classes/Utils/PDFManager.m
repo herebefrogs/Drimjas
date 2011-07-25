@@ -17,31 +17,14 @@
 #import "MyInfo.h"
 // Utils
 #import "DrimjasInfo.h"
+#import "PageInfo.h"
+
 
 @implementation PDFManager
 
 
-NSUInteger MARGIN = 72;				// 72 pt = 1 inch = 2.54 cm
-NSUInteger PLAIN_FONT_SIZE = 10;
-NSUInteger LINE_PADDING = 2;		// vertical padding between 2 lines
-NSUInteger LABEL_PADDING = 10;		// horizontal padding between key & value columns
-
 #pragma mark -
 #pragma mark Internal utility messages implementation
-
-+ (CGRect)paperSizeForUserLocale {
-	NSString *countryCode = [[NSLocale autoupdatingCurrentLocale] objectForKey:NSLocaleCountryCode];
-	NSLog(@"country code: %@", countryCode);
-
-	// assumes United States and Canada are on Letter paper
-	// while the rest of the world is on ISO A4 paper
-	if ([countryCode isEqualToString:@"US"] || [countryCode isEqualToString:@"CA"]) {
-		return CGRectMake(0, 0, 612, 792);
-	} else {
-		// approximation based on 72pt/inch and 25.4mm/inch
-		return CGRectMake(0, 0, 595, 842);
-	}
-}
 
 // Use Core Text to draw the text in a frame on the page.
 + (CFRange)renderPage:(NSInteger)pageNum withTextRange:(CFRange)currentRange
@@ -83,15 +66,15 @@ NSUInteger LABEL_PADDING = 10;		// horizontal padding between key & value column
 	return currentRange;
 }
 
-+ (void)_drawPageNumber:(NSInteger)pageNum {
-	NSString* pageString = [NSString stringWithFormat:@"Page %d", pageNum];
++ (void)_pageInfo:(PageInfo *)pageInfo drawPageNumber:(NSInteger)pageNum {
+	NSString* pageString = [NSString stringWithFormat:@"%@ %d", NSLocalizedString(@"Page", "Page number on footer of PDF"), pageNum];
 	UIFont* theFont = [UIFont systemFontOfSize:12];
-	CGSize maxSize = CGSizeMake(612, 72);
+	CGSize maxSize = CGSizeMake(CGRectGetWidth(pageInfo.pageSize), 72);
 	
 	CGSize pageStringSize = [pageString sizeWithFont:theFont
 								   constrainedToSize:maxSize
                                        lineBreakMode:UILineBreakModeClip];
-	CGRect stringRect = CGRectMake(((612.0 - pageStringSize.width) / 2.0),
+	CGRect stringRect = CGRectMake(((CGRectGetWidth(pageInfo.pageSize) - pageStringSize.width) / 2.0),
 								   720.0 + ((72.0 - pageStringSize.height) / 2.0) ,
 								   pageStringSize.width,
 								   pageStringSize.height);
@@ -99,51 +82,26 @@ NSUInteger LABEL_PADDING = 10;		// horizontal padding between key & value column
 	[pageString drawInRect:stringRect withFont:theFont];
 }
 
-+ (CGPoint)_renderClientInfo:(ClientInfo *)clientInfo withPage:(CGRect)page {
-	UIFont *plainFont = [UIFont systemFontOfSize:PLAIN_FONT_SIZE];
-
-	NSUInteger x = MARGIN;
-	NSUInteger y = MARGIN;
-	NSUInteger maxKeyWidth = 0;
-	NSUInteger maxHeight = PLAIN_FONT_SIZE + LINE_PADDING;
-	// no wider than half the page (margins not included), no taller than 1 margin
-	CGSize maxSize = CGSizeMake(CGRectGetWidth(page)/2 - MARGIN, maxHeight);
-
++ (void)_pageInfo:(PageInfo *)pageInfo renderClientInfo:(ClientInfo *)clientInfo {
 	NSArray *properties = [clientInfo nonEmptyProperties];
-	// place all property names first
+
+	// place all property names first on half content width, all content height
+	pageInfo.maxWidth /= 2;
 	for (KeyValue *pair in properties) {
 		NSString *clientProperty = [NSString stringWithFormat:@"client.%@", pair.key];
-		NSString *text = NSLocalizedString(clientProperty, "Property name");
-
-		CGSize textSize = [text sizeWithFont:plainFont constrainedToSize:maxSize lineBreakMode:UILineBreakModeTailTruncation];
-
-		CGRect textPath = CGRectMake(x, y, textSize.width, textSize.height);
-
-		[text drawInRect:textPath withFont:plainFont];
-
-		y += textSize.height + LINE_PADDING;
-		maxKeyWidth = MAX(maxKeyWidth, textSize.width);
+		[pageInfo drawTextLeftAlign:NSLocalizedString(clientProperty, "Property name")];
 	}
 
-	x += maxKeyWidth + LABEL_PADDING;
-	y = MARGIN;
-	NSUInteger maxValueWidth = 0;
 	// line up all property values vertically
-	maxSize.width -= x;
+	pageInfo.x += pageInfo.maxTextWidth + pageInfo.labelPadding;
+	pageInfo.y = pageInfo.margin;
+	pageInfo.maxWidth -= pageInfo.x;
+	pageInfo.maxTextWidth = 0;
 	for (KeyValue *pair in properties) {
-		NSString *text = pair.value;
-		// TODO put this in a method
-		CGSize textSize = [text sizeWithFont:plainFont constrainedToSize:maxSize lineBreakMode:UILineBreakModeTailTruncation];
-
-		CGRect textPath = CGRectMake(x, y, textSize.width, textSize.height);
-
-		[text drawInRect:textPath withFont:plainFont];
-
-		y += textSize.height + LINE_PADDING;
-		maxValueWidth = MAX(maxValueWidth, textSize.width);
+		[pageInfo drawTextLeftAlign:pair.value];
 	}
 
-	return CGPointMake(x + maxValueWidth, y);
+	pageInfo.x += pageInfo.maxTextWidth;
 }
 
 #pragma mark -
@@ -152,18 +110,19 @@ NSUInteger LABEL_PADDING = 10;		// horizontal padding between key & value column
 + (NSMutableData *)pdfDataForEstimate:(Estimate *)estimate {
 	NSMutableData *pdfData = [[[NSMutableData alloc] initWithCapacity: 1024] autorelease];
 
-	CGRect page = [self paperSizeForUserLocale];
 	// start PDF data
-	UIGraphicsBeginPDFContextToData(pdfData, page, [self pdfInfoForEstimate:estimate]);
+	PageInfo *pageInfo = [[PageInfo alloc] init];
+	UIGraphicsBeginPDFContextToData(pdfData, pageInfo.pageSize, [self pdfInfoForEstimate:estimate]);
 
 	// open new page
-	UIGraphicsBeginPDFPageWithInfo(page, nil);
+	UIGraphicsBeginPDFPageWithInfo(pageInfo.pageSize, nil);
 
-	[PDFManager _renderClientInfo:estimate.clientInfo withPage:page];
-	[PDFManager _drawPageNumber:1];
+	[PDFManager _pageInfo:pageInfo renderClientInfo:estimate.clientInfo];
+	[PDFManager _pageInfo:pageInfo drawPageNumber:1];
 
 	// end PDF data
 	UIGraphicsEndPDFContext();
+	[pageInfo release];
 
 	return pdfData;
 }

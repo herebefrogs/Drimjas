@@ -168,6 +168,9 @@
 /* Estimate Email Body */
 "Estimate Email Body" = "Estimate Email Body Placeholder";
 
+/* Page number on footer of PDF */
+"Page" = "Page";
+
 /* Client properties as appearing on PDF */
 "client.name" = "Name:";
 "client.address1" = "Address:";

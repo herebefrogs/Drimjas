@@ -24,7 +24,4 @@
 // dictionary of PDF metadata
 + (NSDictionary *)pdfInfoForEstimate:(Estimate *)estimate;
 
-// paper size fit for user locale
-+ (CGRect)paperSizeForUserLocale;
-
 @end
