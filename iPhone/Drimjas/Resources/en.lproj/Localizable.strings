@@ -180,6 +180,11 @@
 "client.postalCode" = "Postal Code:";
 "client.country" = "Country:";
 
+/* Contact properties as appearing on PDF */
+"contact.name" = "Contact:";
+"contact.email" = "Email:";
+"contact.phone" = "Phone:";
+
 /****************** Line items section ****************/
 "Creative Fee" = "Creative Fee";
 "Creative Fee Description" = "Concept (details to be entered here) and time";

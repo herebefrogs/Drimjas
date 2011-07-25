@@ -148,7 +148,7 @@
 		else {
 			ContactInfo *contactInfo = [estimate.clientInfo contactInfoAtIndex:section - EstimateDetailSectionContactInfo];
 
-			return [contactInfo numSetProperties];
+			return [contactInfo countNonEmptyProperties];
 		}
 	}
 	else {
@@ -187,7 +187,7 @@
 	else if (indexPath.section >= EstimateDetailSectionContactInfo && indexPath.section < indexFirstLineItem) {
 		ContactInfo *contactInfo = [estimate.clientInfo contactInfoAtIndex:indexPath.section - EstimateDetailSectionContactInfo];
 
-		cell.textLabel.text = [contactInfo getSetPropertyWithIndex:indexPath.row];
+		cell.textLabel.text = [contactInfo nonEmptyPropertyWithIndex:indexPath.row];
 	}
 	else if (indexPath.section >= indexFirstLineItem && indexPath.section < indexLastSection) {
 		LineItemSelection *lineItem = (LineItemSelection *)[lineItemSelections objectAtIndex:(indexPath.section - indexFirstLineItem)];

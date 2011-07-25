@@ -178,6 +178,11 @@
 "client.postalCode" = "Code postale:";
 "client.country" = "Pays:";
 
+/* Contact properties as appearing on PDF */
+"contact.name" = "Contact:";
+"contact.email" = "E-mail:";
+"contact.phone" = "Téléphone:";
+
 /****************** Line items section ****************/
 "Creative Fee" = "Creative Fee";
 "Creative Fee Description" = "Concept (details to be entered here) and time";

@@ -20,7 +20,8 @@
 @property (nonatomic, retain) NSString *email;
 @property (nonatomic, retain) ClientInfo *clientInfo;
 
-- (NSInteger)numSetProperties;
-- (NSString *)getSetPropertyWithIndex:(NSInteger)index;
+- (NSArray *)nonEmptyProperties;
+- (NSInteger)countNonEmptyProperties;
+- (NSString *)nonEmptyPropertyWithIndex:(NSInteger)index;
 
 @end

@@ -66,7 +66,7 @@
 	} else {
 		ContactInfo *contactInfo = [clientInfo contactInfoAtIndex:section - 1];
 
-		return [contactInfo numSetProperties];
+		return [contactInfo countNonEmptyProperties];
 	}
 }
 
@@ -88,7 +88,7 @@
 	} else {
 		ContactInfo *contactInfo = [clientInfo contactInfoAtIndex:indexPath.section - 1];
 
-		cell.textLabel.text = [contactInfo getSetPropertyWithIndex:indexPath.row];
+		cell.textLabel.text = [contactInfo nonEmptyPropertyWithIndex:indexPath.row];
 	}
 
 	return cell;

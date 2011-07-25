@@ -11,6 +11,7 @@
 #import <CoreText/CoreText.h>
 // API
 #import "ClientInfo.h"
+#import "ContactInfo.h"
 #import "DataStore.h"
 #import "Estimate.h"
 #import "KeyValue.h"
@@ -83,13 +84,26 @@
 }
 
 + (void)_pageInfo:(PageInfo *)pageInfo renderClientInfo:(ClientInfo *)clientInfo {
-	NSArray *properties = [clientInfo nonEmptyProperties];
+	NSArray *clientProperties = [clientInfo nonEmptyProperties];
 
 	// place all property names first on half content width, all content height
 	pageInfo.maxWidth /= 2;
-	for (KeyValue *pair in properties) {
+
+	for (KeyValue *pair in clientProperties) {
 		NSString *clientProperty = [NSString stringWithFormat:@"client.%@", pair.key];
 		[pageInfo drawTextLeftAlign:NSLocalizedString(clientProperty, "Property name")];
+	}
+
+	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"index" ascending:YES];
+	for (ContactInfo *contactInfo in [clientInfo.contactInfos sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]]) {
+		// TODO capture this into a constant
+		pageInfo.y += pageInfo.plainFont.pointSize + 3 * pageInfo.linePadding;
+		pageInfo.maxHeight -= pageInfo.plainFont.pointSize + 3 * pageInfo.linePadding;
+		
+		for (KeyValue *pair in [contactInfo nonEmptyProperties]) {
+			NSString *contactKey = [NSString stringWithFormat:@"contact.%@", pair.key];
+			[pageInfo drawTextLeftAlign:NSLocalizedString(contactKey, "Property name")];
+		}
 	}
 
 	// line up all property values vertically
@@ -97,11 +111,23 @@
 	pageInfo.y = pageInfo.margin;
 	pageInfo.maxWidth -= pageInfo.x;
 	pageInfo.maxTextWidth = 0;
-	for (KeyValue *pair in properties) {
+	for (KeyValue *pair in clientProperties) {
 		[pageInfo drawTextLeftAlign:pair.value];
+	}
+	
+	for (ContactInfo *contactInfo in [clientInfo.contactInfos sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]]) {
+		// TODO capture this into a constant
+		pageInfo.y += pageInfo.plainFont.pointSize + 3 * pageInfo.linePadding;
+		pageInfo.maxHeight -= pageInfo.plainFont.pointSize + 3 * pageInfo.linePadding;
+		
+		for (KeyValue *pair in [contactInfo nonEmptyProperties]) {
+			[pageInfo drawTextLeftAlign:pair.value];
+		}
 	}
 
 	pageInfo.x += pageInfo.maxTextWidth;
+	
+	[sortDescriptor release];
 }
 
 #pragma mark -
