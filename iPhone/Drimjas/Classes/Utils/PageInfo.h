@@ -41,5 +41,8 @@
 @property (nonatomic, retain) UIFont *boldFont;
 
 - (void)drawTextLeftAlign:(NSString *)text;
+- (void)drawTextLeftAlign:(NSString *)text withFont:(UIFont *)font;
+- (void)drawTextRightAlign:(NSString *)text;
+- (void)drawTextRightAlign:(NSString *)text withFont:(UIFont *)font;
 
 @end

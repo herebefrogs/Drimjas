@@ -87,7 +87,12 @@
 	NSArray *clientProperties = [clientInfo nonEmptyProperties];
 
 	// place all property names first on half content width, all content height
-	pageInfo.maxWidth /= 2;
+	pageInfo.x = pageInfo.contentRect.origin.x;
+	pageInfo.y = pageInfo.contentRect.origin.y;
+	pageInfo.maxWidth = CGRectGetWidth(pageInfo.contentRect) / 2;
+	pageInfo.maxHeight = CGRectGetHeight(pageInfo.contentRect);
+	pageInfo.maxTextWidth = 0;
+	pageInfo.maxTextHeight = 0;
 
 	for (KeyValue *pair in clientProperties) {
 		NSString *clientProperty = [NSString stringWithFormat:@"client.%@", pair.key];
@@ -130,6 +135,25 @@
 	[sortDescriptor release];
 }
 
++ (void)_pageInfo:(PageInfo *)pageInfo renderMyInfo:(MyInfo *)myInfo {
+	// place all values right aligned on 2nd half content width, all content height
+	pageInfo.x = CGRectGetWidth(pageInfo.pageSize) / 2;
+	pageInfo.y = pageInfo.contentRect.origin.y;
+	pageInfo.maxWidth = CGRectGetWidth(pageInfo.contentRect) / 2;
+	pageInfo.maxHeight = CGRectGetHeight(pageInfo.contentRect);
+	pageInfo.maxTextWidth = 0;
+	pageInfo.maxTextHeight = 0;
+
+	for (KeyValue *pair in [myInfo nonEmptyProperties]) {
+		if ([pair.key isEqualToString:@"name"]) {
+			[pageInfo drawTextRightAlign:pair.value withFont:pageInfo.boldFont];
+		}
+		else {
+			[pageInfo drawTextRightAlign:pair.value];
+		}
+	}
+}
+
 #pragma mark -
 #pragma mark Public protocol implementation
 
@@ -144,6 +168,8 @@
 	UIGraphicsBeginPDFPageWithInfo(pageInfo.pageSize, nil);
 
 	[PDFManager _pageInfo:pageInfo renderClientInfo:estimate.clientInfo];
+	[PDFManager _pageInfo:pageInfo renderMyInfo:[[DataStore defaultStore] myInfo]];
+
 	[PDFManager _pageInfo:pageInfo drawPageNumber:1];
 
 	// end PDF data

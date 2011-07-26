@@ -35,6 +35,7 @@
 - (NSArray *)allPropertyNames {
 	return [NSArray arrayWithObjects:@"name", @"address1", @"address2", @"city", @"state", @"postalCode", @"country", nil];
 }
+
 #pragma mark -
 #pragma mark Public methods stack
 

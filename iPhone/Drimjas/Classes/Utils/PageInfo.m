@@ -45,13 +45,13 @@
 	self = [super init];
 	if (self) {
 		pageSize = [PageInfo _initPageSize];
-		margin = 72;					// 72 pt = 1 inch = 2.54 cm
+		margin = 64;					// 64 pt = 3/4 inch = 2.54 cm
 		linePadding = 2;
 		labelPadding = 10;
 
-		self.contentRect = CGRectMake(margin, margin, CGRectGetWidth(pageSize), CGRectGetHeight(pageSize));
-		self.x = margin;
-		self.y = margin;
+		self.contentRect = CGRectMake(margin, margin, CGRectGetWidth(pageSize) - 2*margin, CGRectGetHeight(pageSize) - 2*margin);
+		self.x = contentRect.origin.x;
+		self.y = contentRect.origin.y;
 		self.maxWidth = CGRectGetWidth(contentRect);
 		self.maxHeight = CGRectGetHeight(contentRect);
 		self.maxTextWidth = 0;
@@ -68,11 +68,17 @@
 }
 
 - (void)drawTextLeftAlign:(NSString *)text {
-	CGSize textSize = [text sizeWithFont:plainFont constrainedToSize:self.maxSize lineBreakMode:UILineBreakModeTailTruncation];
+	[self drawTextLeftAlign:text withFont:plainFont];
+}
+
+- (void)drawTextLeftAlign:(NSString *)text withFont:(UIFont*)font {
+	NSAssert(font != nil, @"can't draw left align text with nil font");
+
+	CGSize textSize = [text sizeWithFont:font constrainedToSize:self.maxSize lineBreakMode:UILineBreakModeTailTruncation];
 
 	CGRect textPath = CGRectMake(x, y, textSize.width, textSize.height);
 
-	[text drawInRect:textPath withFont:plainFont];
+	[text drawInRect:textPath withFont:font];
 
 	y += textSize.height + linePadding;
 	maxHeight -= textSize.height + linePadding;
@@ -81,6 +87,27 @@
 	maxTextHeight = MAX(maxTextHeight, textSize.height);
 }
 
+- (void)drawTextRightAlign:(NSString *)text {
+	[self drawTextRightAlign:text withFont:plainFont];
+}
+
+- (void)drawTextRightAlign:(NSString *)text withFont:(UIFont *)font {
+	NSAssert(font != nil, @"can't draw right align text with nil font");
+
+	CGSize textSize = [text sizeWithFont:font constrainedToSize:self.maxSize lineBreakMode:UILineBreakModeTailTruncation];
+
+	NSUInteger xFromRight = x + self.maxSize.width - textSize.width;
+
+	CGRect textPath = CGRectMake(xFromRight, y, textSize.width, textSize.height);
+
+	[text drawInRect:textPath withFont:font];
+
+	y += textSize.height + linePadding;
+	maxHeight -= textSize.height + linePadding;
+
+	maxTextWidth = MAX(maxTextWidth, textSize.width);
+	maxTextHeight = MAX(maxTextHeight, textSize.height);
+}
 
 
 - (void)dealloc {
