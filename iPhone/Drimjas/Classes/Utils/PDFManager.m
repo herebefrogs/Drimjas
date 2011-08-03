@@ -140,6 +140,30 @@
 					  CGRectGetHeight(pageInfo.contentRect) - pageInfo.maxHeight);
 }
 
++ (CGSize)_pageInfo:(PageInfo *)pageInfo renderDate:(NSDate *)date atHeight:(NSUInteger)height {
+	pageInfo.x = pageInfo.contentRect.origin.x;
+	pageInfo.y = pageInfo.contentRect.origin.y + height;
+	pageInfo.maxWidth = CGRectGetWidth(pageInfo.contentRect);
+	pageInfo.maxHeight = CGRectGetHeight(pageInfo.contentRect) - height + pageInfo.sectionPadding;
+
+	NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+	// TODO should find similar pattern from user's Region Settings so its localized
+	[dateFormat setDateFormat:@"EEEE MMMM dd, YYYY"];
+	NSString *estimateDate = [dateFormat stringFromDate:date];
+	[dateFormat release];
+
+	return [pageInfo drawTextRightAlign:estimateDate];
+}
+
++ (CGSize)_pageInfo:(PageInfo *)pageInfo renderBusinessNo:(NSString *)businessNo atHeight:(CGFloat)height {
+	pageInfo.x = pageInfo.contentRect.origin.x;
+	pageInfo.y = pageInfo.contentRect.origin.y + height;
+	pageInfo.maxWidth = CGRectGetWidth(pageInfo.contentRect);
+	pageInfo.maxHeight = CGRectGetHeight(pageInfo.contentRect) - height + pageInfo.sectionPadding;
+
+	return [pageInfo drawTextRightAlign:businessNo];
+}
+
 
 #pragma mark -
 #pragma mark Public protocol implementation
@@ -156,6 +180,12 @@
 
 	CGSize clientSize = [PDFManager _pageInfo:pageInfo renderClientInfo:estimate.clientInfo];
 	CGSize mySize = [PDFManager _pageInfo:pageInfo renderMyInfo:[[DataStore defaultStore] myInfo]];
+
+	CGFloat height = MAX(clientSize.height, mySize.height) + pageInfo.sectionPadding;
+	CGSize dateSize = [PDFManager _pageInfo:pageInfo renderDate:estimate.date atHeight:height];
+
+	height += dateSize.height;
+	[PDFManager _pageInfo:pageInfo renderBusinessNo:[[[DataStore defaultStore] myInfo] businessNumber] atHeight:height];
 
 	[PDFManager _pageInfo:pageInfo drawPageNumber:1];
 
