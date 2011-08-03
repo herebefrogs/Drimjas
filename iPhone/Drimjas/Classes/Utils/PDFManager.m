@@ -27,46 +27,6 @@
 #pragma mark -
 #pragma mark Internal utility messages implementation
 
-// Use Core Text to draw the text in a frame on the page.
-+ (CFRange)renderPage:(NSInteger)pageNum withTextRange:(CFRange)currentRange
-	   andFramesetter:(CTFramesetterRef)framesetter {
-
-	// Get the graphics context.
-	CGContextRef currentContext = UIGraphicsGetCurrentContext();
-	
-	// Put the text matrix into a known state. This ensures
-	// that no old scaling factors are left in place.
-	CGContextSetTextMatrix(currentContext, CGAffineTransformIdentity);
-	
-	// Create a path object to enclose the text. Use 72 point
-	// margins all around the text.
-	CGRect    frameRect = CGRectMake(72, 72, 468, 648);
-	CGMutablePathRef framePath = CGPathCreateMutable();
-	CGPathAddRect(framePath, NULL, frameRect);
-	
-	// Get the frame that will do the rendering.
-	// The currentRange variable specifies only the starting point. The framesetter
-	// lays out as much text as will fit into the frame.
-	CTFrameRef frameRef = CTFramesetterCreateFrame(framesetter, currentRange, framePath, NULL);
-	CGPathRelease(framePath);
-	
-	// Core Text draws from the bottom-left corner up, so flip
-	// the current transform prior to drawing.
-	CGContextTranslateCTM(currentContext, 0, 792);
-	CGContextScaleCTM(currentContext, 1.0, -1.0);
-	
-	// Draw the frame.
-	CTFrameDraw(frameRef, currentContext);
-	
-	// Update the current range based on what was drawn.
-	currentRange = CTFrameGetVisibleStringRange(frameRef);
-	currentRange.location += currentRange.length;
-	currentRange.length = 0;
-	CFRelease(frameRef);
-	
-	return currentRange;
-}
-
 + (void)_pageInfo:(PageInfo *)pageInfo drawPageNumber:(NSInteger)pageNum {
 	NSString* pageString = [NSString stringWithFormat:@"%@ %d", NSLocalizedString(@"Page", "Page number on footer of PDF"), pageNum];
 	UIFont* theFont = [UIFont systemFontOfSize:12];
@@ -83,76 +43,103 @@
 	[pageString drawInRect:stringRect withFont:theFont];
 }
 
-+ (void)_pageInfo:(PageInfo *)pageInfo renderClientInfo:(ClientInfo *)clientInfo {
-	NSArray *clientProperties = [clientInfo nonEmptyProperties];
++ (CGSize)_pageInfo:(PageInfo *)pageInfo renderClientInfo:(ClientInfo *)clientInfo {
+	NSUInteger oneEight = CGRectGetWidth(pageInfo.contentRect) / 8;
+	NSUInteger sevenSixteenth = CGRectGetWidth(pageInfo.contentRect) / 16 * 7;
+	NSUInteger maxWidth = 0;
 
 	// place all property names first on half content width, all content height
-	pageInfo.x = pageInfo.contentRect.origin.x;
 	pageInfo.y = pageInfo.contentRect.origin.y;
-	pageInfo.maxWidth = CGRectGetWidth(pageInfo.contentRect) / 2;
 	pageInfo.maxHeight = CGRectGetHeight(pageInfo.contentRect);
-	pageInfo.maxTextWidth = 0;
-	pageInfo.maxTextHeight = 0;
 
-	for (KeyValue *pair in clientProperties) {
+	for (KeyValue *pair in [clientInfo nonEmptyProperties]) {
+		pageInfo.x = pageInfo.contentRect.origin.x;
+		pageInfo.maxWidth = oneEight;
+
 		NSString *clientProperty = [NSString stringWithFormat:@"client.%@", pair.key];
-		[pageInfo drawTextLeftAlign:NSLocalizedString(clientProperty, "Property name")];
+		CGSize labelSize = [pageInfo drawTextLeftAlign:NSLocalizedString(clientProperty, "Property name")];
+
+		pageInfo.x += oneEight;
+		pageInfo.maxWidth = sevenSixteenth;
+
+		CGSize infoSize = [pageInfo drawTextLeftAlign:pair.value];
+
+		NSUInteger lineOffset = MAX(labelSize.height, infoSize.height) + pageInfo.linePadding;
+		pageInfo.y += lineOffset;
+		pageInfo.maxHeight -= lineOffset;
+		maxWidth = MAX(maxWidth, oneEight + infoSize.width);
 	}
 
 	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"index" ascending:YES];
 	for (ContactInfo *contactInfo in [clientInfo.contactInfos sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]]) {
-		// TODO capture this into a constant
-		pageInfo.y += pageInfo.plainFont.pointSize + 3 * pageInfo.linePadding;
-		pageInfo.maxHeight -= pageInfo.plainFont.pointSize + 3 * pageInfo.linePadding;
+		pageInfo.y += pageInfo.sectionPadding;
+		pageInfo.maxHeight -= pageInfo.sectionPadding;
 		
 		for (KeyValue *pair in [contactInfo nonEmptyProperties]) {
+			pageInfo.x = pageInfo.contentRect.origin.x;
+			pageInfo.maxWidth = oneEight;
+
 			NSString *contactKey = [NSString stringWithFormat:@"contact.%@", pair.key];
-			[pageInfo drawTextLeftAlign:NSLocalizedString(contactKey, "Property name")];
+			CGSize labelSize = [pageInfo drawTextLeftAlign:NSLocalizedString(contactKey, "Property name")];
+
+			pageInfo.x += oneEight;
+			pageInfo.maxWidth = sevenSixteenth;
+
+			CGSize infoSize = [pageInfo drawTextLeftAlign:pair.value];
+
+			NSUInteger lineOffset = MAX(labelSize.height, infoSize.height) + pageInfo.linePadding;
+			pageInfo.y += lineOffset;
+			pageInfo.maxHeight -= lineOffset;
+			maxWidth = MAX(maxWidth, oneEight + infoSize.width);
 		}
 	}
 
-	// line up all property values vertically
-	pageInfo.x += pageInfo.maxTextWidth + pageInfo.labelPadding;
-	pageInfo.y = pageInfo.margin;
-	pageInfo.maxWidth -= pageInfo.x;
-	pageInfo.maxTextWidth = 0;
-	for (KeyValue *pair in clientProperties) {
-		[pageInfo drawTextLeftAlign:pair.value];
-	}
-	
-	for (ContactInfo *contactInfo in [clientInfo.contactInfos sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]]) {
-		// TODO capture this into a constant
-		pageInfo.y += pageInfo.plainFont.pointSize + 3 * pageInfo.linePadding;
-		pageInfo.maxHeight -= pageInfo.plainFont.pointSize + 3 * pageInfo.linePadding;
-		
-		for (KeyValue *pair in [contactInfo nonEmptyProperties]) {
-			[pageInfo drawTextLeftAlign:pair.value];
-		}
-	}
-
-	pageInfo.x += pageInfo.maxTextWidth;
-	
-	[sortDescriptor release];
+	return CGSizeMake(maxWidth,
+					  CGRectGetHeight(pageInfo.contentRect) - pageInfo.maxHeight);
 }
 
-+ (void)_pageInfo:(PageInfo *)pageInfo renderMyInfo:(MyInfo *)myInfo {
-	// place all values right aligned on 2nd half content width, all content height
-	pageInfo.x = CGRectGetWidth(pageInfo.pageSize) / 2;
++ (CGSize)_pageInfo:(PageInfo *)pageInfo renderMyInfo:(MyInfo *)myInfo {
+	NSUInteger sevenSixteenth = CGRectGetWidth(pageInfo.contentRect) / 16 * 7;
+	NSUInteger maxWidth = 0;
+
+	pageInfo.x = pageInfo.contentRect.origin.x + CGRectGetWidth(pageInfo.contentRect) / 16 * 9;
 	pageInfo.y = pageInfo.contentRect.origin.y;
-	pageInfo.maxWidth = CGRectGetWidth(pageInfo.contentRect) / 2;
+	pageInfo.maxWidth = sevenSixteenth;
 	pageInfo.maxHeight = CGRectGetHeight(pageInfo.contentRect);
-	pageInfo.maxTextWidth = 0;
-	pageInfo.maxTextHeight = 0;
+
+	BOOL insert1stOffset = YES;
+	BOOL insert2ndOffset = YES;
 
 	for (KeyValue *pair in [myInfo nonEmptyProperties]) {
-		if ([pair.key isEqualToString:@"name"]) {
-			[pageInfo drawTextRightAlign:pair.value withFont:pageInfo.boldFont];
+		BOOL insertOffset = NO;
+
+		if ([pair.key isEqualToString:@"phone"] || (insert1stOffset && [pair.key isEqualToString:@"fax"])) {
+			insert1stOffset = NO;
+			insertOffset = YES;
 		}
-		else {
-			[pageInfo drawTextRightAlign:pair.value];
+		else if ([pair.key isEqualToString:@"email"] || (insert2ndOffset && [pair.key isEqualToString:@"website"])) {
+			insert2ndOffset = NO;
+			insertOffset = YES;
 		}
+		if (insertOffset) {
+			pageInfo.y += pageInfo.sectionPadding;
+			pageInfo.maxHeight -= pageInfo.sectionPadding;
+			insertOffset = NO;
+		}
+
+		CGSize infoSize = [pageInfo drawTextRightAlign:pair.value
+											  withFont:([pair.key isEqualToString:@"name"] ? pageInfo.boldFont : pageInfo.plainFont)];
+
+		NSUInteger lineOffset = infoSize.height + pageInfo.linePadding;
+		pageInfo.y += lineOffset;
+		pageInfo.maxHeight -= lineOffset;
+		maxWidth = MAX(maxWidth, infoSize.width);
 	}
+
+	return CGSizeMake(maxWidth,
+					  CGRectGetHeight(pageInfo.contentRect) - pageInfo.maxHeight);
 }
+
 
 #pragma mark -
 #pragma mark Public protocol implementation
@@ -167,8 +154,8 @@
 	// open new page
 	UIGraphicsBeginPDFPageWithInfo(pageInfo.pageSize, nil);
 
-	[PDFManager _pageInfo:pageInfo renderClientInfo:estimate.clientInfo];
-	[PDFManager _pageInfo:pageInfo renderMyInfo:[[DataStore defaultStore] myInfo]];
+	CGSize clientSize = [PDFManager _pageInfo:pageInfo renderClientInfo:estimate.clientInfo];
+	CGSize mySize = [PDFManager _pageInfo:pageInfo renderMyInfo:[[DataStore defaultStore] myInfo]];
 
 	[PDFManager _pageInfo:pageInfo drawPageNumber:1];
 

@@ -15,14 +15,12 @@
 @synthesize pageSize;
 @synthesize margin;
 @synthesize linePadding;
-@synthesize labelPadding;
+@synthesize sectionPadding;
 @synthesize contentRect;
 @synthesize x;
 @synthesize y;
 @synthesize maxWidth;
 @synthesize maxHeight;
-@synthesize maxTextWidth;
-@synthesize maxTextHeight;
 @synthesize plainFont;
 @synthesize boldFont;
 
@@ -44,21 +42,19 @@
 - (id)init {
 	self = [super init];
 	if (self) {
+		self.plainFont = [UIFont systemFontOfSize:10];
+		self.boldFont = [UIFont boldSystemFontOfSize:10];
+
 		pageSize = [PageInfo _initPageSize];
-		margin = 64;					// 64 pt = 3/4 inch = 2.54 cm
+		margin = 54;					// 54 pt = 3/4 inch = 2.54 cm
 		linePadding = 2;
-		labelPadding = 10;
+		sectionPadding = plainFont.pointSize + 2*linePadding;
 
 		self.contentRect = CGRectMake(margin, margin, CGRectGetWidth(pageSize) - 2*margin, CGRectGetHeight(pageSize) - 2*margin);
 		self.x = contentRect.origin.x;
 		self.y = contentRect.origin.y;
 		self.maxWidth = CGRectGetWidth(contentRect);
 		self.maxHeight = CGRectGetHeight(contentRect);
-		self.maxTextWidth = 0;
-		self.maxTextHeight = 0;
-
-		self.plainFont = [UIFont systemFontOfSize:10];
-		self.boldFont = [UIFont boldSystemFontOfSize:10];
 	}
 	return self;
 }
@@ -67,46 +63,38 @@
 	return CGSizeMake(maxWidth, maxHeight);
 }
 
-- (void)drawTextLeftAlign:(NSString *)text {
-	[self drawTextLeftAlign:text withFont:plainFont];
+- (CGSize)drawTextLeftAlign:(NSString *)text {
+	return [self drawTextLeftAlign:text withFont:plainFont];
 }
 
-- (void)drawTextLeftAlign:(NSString *)text withFont:(UIFont*)font {
+- (CGSize)drawTextLeftAlign:(NSString *)text withFont:(UIFont*)font {
 	NSAssert(font != nil, @"can't draw left align text with nil font");
 
-	CGSize textSize = [text sizeWithFont:font constrainedToSize:self.maxSize lineBreakMode:UILineBreakModeTailTruncation];
+	CGSize textSize = [text sizeWithFont:font constrainedToSize:self.maxSize lineBreakMode:UILineBreakModeWordWrap];
 
 	CGRect textPath = CGRectMake(x, y, textSize.width, textSize.height);
 
 	[text drawInRect:textPath withFont:font];
 
-	y += textSize.height + linePadding;
-	maxHeight -= textSize.height + linePadding;
-
-	maxTextWidth = MAX(maxTextWidth, textSize.width);
-	maxTextHeight = MAX(maxTextHeight, textSize.height);
+	return textSize;
 }
 
-- (void)drawTextRightAlign:(NSString *)text {
-	[self drawTextRightAlign:text withFont:plainFont];
+- (CGSize)drawTextRightAlign:(NSString *)text {
+	return [self drawTextRightAlign:text withFont:plainFont];
 }
 
-- (void)drawTextRightAlign:(NSString *)text withFont:(UIFont *)font {
+- (CGSize)drawTextRightAlign:(NSString *)text withFont:(UIFont *)font {
 	NSAssert(font != nil, @"can't draw right align text with nil font");
 
-	CGSize textSize = [text sizeWithFont:font constrainedToSize:self.maxSize lineBreakMode:UILineBreakModeTailTruncation];
+	CGSize textSize = [text sizeWithFont:font constrainedToSize:self.maxSize lineBreakMode:UILineBreakModeWordWrap];
 
 	NSUInteger xFromRight = x + self.maxSize.width - textSize.width;
 
 	CGRect textPath = CGRectMake(xFromRight, y, textSize.width, textSize.height);
 
-	[text drawInRect:textPath withFont:font];
+	[text drawInRect:textPath withFont:font lineBreakMode:UILineBreakModeWordWrap alignment:UITextAlignmentRight];
 
-	y += textSize.height + linePadding;
-	maxHeight -= textSize.height + linePadding;
-
-	maxTextWidth = MAX(maxTextWidth, textSize.width);
-	maxTextHeight = MAX(maxTextHeight, textSize.height);
+	return textSize;
 }
 
 

@@ -18,6 +18,13 @@
 @dynamic fax;
 @dynamic website;
 
+- (NSString *)phone {
+	return self.contactInfo.phone;
+}
+
+- (NSString *)email {
+	return self.contactInfo.email;
+}
 
 - (void)awakeFromInsert {
 	[super awakeFromInsert];
@@ -34,6 +41,11 @@
 
 + (BOOL)isMyInfoSet {
 	return StatusActive == [[[[DataStore defaultStore] myInfo] status] intValue];
+}
+
+- (NSArray *)allPropertyNames {
+	return [NSArray arrayWithObjects:@"name", @"address1", @"address2", @"city", @"state", @"postalCode", @"country",
+									 @"phone", @"fax", @"email", @"website", nil];
 }
 
 @end

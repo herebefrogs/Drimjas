@@ -19,6 +19,9 @@
 @property (nonatomic, retain) NSString *website;
 @property (nonatomic, readonly) ContactInfo* contactInfo;
 
+@property (nonatomic, readonly) NSString *phone;
+@property (nonatomic, readonly) NSString *email;
+
 + (BOOL)isMyInfoSet;
 
 @end
