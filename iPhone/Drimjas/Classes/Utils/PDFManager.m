@@ -140,7 +140,7 @@
 					  CGRectGetHeight(pageInfo.contentRect) - pageInfo.maxHeight);
 }
 
-+ (CGSize)_pageInfo:(PageInfo *)pageInfo renderDate:(NSDate *)date atHeight:(NSUInteger)height {
++ (CGSize)_pageInfo:(PageInfo *)pageInfo renderDate:(NSDate *)date atHeight:(CGFloat)height {
 	pageInfo.x = pageInfo.contentRect.origin.x;
 	pageInfo.y = pageInfo.contentRect.origin.y + height;
 	pageInfo.maxWidth = CGRectGetWidth(pageInfo.contentRect);
@@ -178,14 +178,25 @@
 	// open new page
 	UIGraphicsBeginPDFPageWithInfo(pageInfo.pageSize, nil);
 
+	// render client+contact info & my info side by side
 	CGSize clientSize = [PDFManager _pageInfo:pageInfo renderClientInfo:estimate.clientInfo];
 	CGSize mySize = [PDFManager _pageInfo:pageInfo renderMyInfo:[[DataStore defaultStore] myInfo]];
 
+	// render estimate date & business number
 	CGFloat height = MAX(clientSize.height, mySize.height) + pageInfo.sectionPadding;
 	CGSize dateSize = [PDFManager _pageInfo:pageInfo renderDate:estimate.date atHeight:height];
 
 	height += dateSize.height;
-	[PDFManager _pageInfo:pageInfo renderBusinessNo:[[[DataStore defaultStore] myInfo] businessNumber] atHeight:height];
+	CGSize businessSize = [PDFManager _pageInfo:pageInfo renderBusinessNo:[[[DataStore defaultStore] myInfo] businessNumber] atHeight:height];
+
+	height += businessSize.height + pageInfo.linePadding;
+	CGContextRef context = UIGraphicsGetCurrentContext();
+	CGContextBeginPath(context);
+	CGContextSetLineWidth(context, 1.5);
+	CGContextMoveToPoint(context, pageInfo.contentRect.origin.x, pageInfo.contentRect.origin.y + height);
+	CGContextAddLineToPoint(context, pageInfo.contentRect.origin.x + CGRectGetWidth(pageInfo.contentRect), pageInfo.contentRect.origin.y + height);
+	CGContextClosePath(context);
+	CGContextStrokePath(context);
 
 	[PDFManager _pageInfo:pageInfo drawPageNumber:1];
 
