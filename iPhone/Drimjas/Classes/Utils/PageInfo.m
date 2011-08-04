@@ -42,11 +42,11 @@
 - (id)init {
 	self = [super init];
 	if (self) {
-		self.plainFont = [UIFont systemFontOfSize:10];
-		self.boldFont = [UIFont boldSystemFontOfSize:10];
+		self.plainFont = [UIFont systemFontOfSize:8];
+		self.boldFont = [UIFont boldSystemFontOfSize:8];
 
 		pageSize = [PageInfo _initPageSize];
-		margin = 54;					// 54 pt = 3/4 inch = 2.54 cm
+		margin = 72;					// 72 pt = 1 inch = 2.54 cm
 		linePadding = 2;
 		sectionPadding = plainFont.pointSize + 2*linePadding;
 
