@@ -23,6 +23,7 @@
 @synthesize maxHeight;
 @synthesize plainFont;
 @synthesize boldFont;
+@synthesize bigBoldFont;
 
 
 + (CGRect)_initPageSize {
@@ -44,6 +45,7 @@
 	if (self) {
 		self.plainFont = [UIFont systemFontOfSize:8];
 		self.boldFont = [UIFont boldSystemFontOfSize:8];
+		self.bigBoldFont = [UIFont boldSystemFontOfSize:10];
 
 		pageSize = [PageInfo _initPageSize];
 		margin = 72;					// 72 pt = 1 inch = 2.54 cm
@@ -101,6 +103,7 @@
 - (void)dealloc {
 	[plainFont release];
 	[boldFont release];
+	[bigBoldFont release];
 	[super dealloc];
 }
 

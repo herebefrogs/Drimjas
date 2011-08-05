@@ -22,6 +22,7 @@
 
 	UIFont *plainFont;
 	UIFont *boldFont;
+	UIFont *bigBoldFont;
 }
 
 @property (nonatomic, readonly) CGRect pageSize;
@@ -36,6 +37,7 @@
 @property (nonatomic, readonly) CGSize maxSize;
 @property (nonatomic, retain) UIFont *plainFont;
 @property (nonatomic, retain) UIFont *boldFont;
+@property (nonatomic, retain) UIFont *bigBoldFont;
 
 - (CGSize)drawTextLeftAlign:(NSString *)text;
 - (CGSize)drawTextLeftAlign:(NSString *)text withFont:(UIFont *)font;

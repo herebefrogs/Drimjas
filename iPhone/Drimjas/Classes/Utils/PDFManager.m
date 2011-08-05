@@ -128,7 +128,7 @@
 		}
 
 		CGSize infoSize = [pageInfo drawTextRightAlign:pair.value
-											  withFont:([pair.key isEqualToString:@"name"] ? pageInfo.boldFont : pageInfo.plainFont)];
+											  withFont:([pair.key isEqualToString:@"name"] ? pageInfo.bigBoldFont : pageInfo.plainFont)];
 
 		NSUInteger lineOffset = infoSize.height + pageInfo.linePadding;
 		pageInfo.y += lineOffset;
@@ -144,7 +144,7 @@
 	pageInfo.x = pageInfo.contentRect.origin.x;
 	pageInfo.y = pageInfo.contentRect.origin.y + height;
 	pageInfo.maxWidth = CGRectGetWidth(pageInfo.contentRect);
-	pageInfo.maxHeight = CGRectGetHeight(pageInfo.contentRect) - height + pageInfo.sectionPadding;
+	pageInfo.maxHeight = CGRectGetHeight(pageInfo.contentRect) - height;
 
 	NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
 	// TODO should find similar pattern from user's Region Settings so its localized
@@ -159,11 +159,22 @@
 	pageInfo.x = pageInfo.contentRect.origin.x;
 	pageInfo.y = pageInfo.contentRect.origin.y + height;
 	pageInfo.maxWidth = CGRectGetWidth(pageInfo.contentRect);
-	pageInfo.maxHeight = CGRectGetHeight(pageInfo.contentRect) - height + pageInfo.sectionPadding;
+	pageInfo.maxHeight = CGRectGetHeight(pageInfo.contentRect) - height;
 
 	return [pageInfo drawTextRightAlign:businessNo];
 }
 
++ (CGSize)_pageInfo:(PageInfo *)pageInfo renderOrderNo:(NSString *)orderNo atHeight:(CGFloat)height {
+	pageInfo.x = pageInfo.contentRect.origin.x;
+	pageInfo.y = pageInfo.contentRect.origin.y + height;
+	pageInfo.maxWidth = CGRectGetWidth(pageInfo.contentRect);
+	pageInfo.maxHeight = CGRectGetHeight(pageInfo.contentRect) - height;
+
+	return [pageInfo drawTextLeftAlign:[NSString stringWithFormat:@"%@ #%@",
+												NSLocalizedString(@"Purchase Order", "Purchase Order label in PDF"),
+												orderNo]
+							  withFont:pageInfo.bigBoldFont];
+}
 
 #pragma mark -
 #pragma mark Public protocol implementation
@@ -189,6 +200,7 @@
 	height += dateSize.height;
 	CGSize businessSize = [PDFManager _pageInfo:pageInfo renderBusinessNo:[[[DataStore defaultStore] myInfo] businessNumber] atHeight:height];
 
+	// render horizontal line
 	height += businessSize.height + pageInfo.linePadding;
 	CGContextRef context = UIGraphicsGetCurrentContext();
 	CGContextBeginPath(context);
@@ -197,6 +209,10 @@
 	CGContextAddLineToPoint(context, pageInfo.contentRect.origin.x + CGRectGetWidth(pageInfo.contentRect), pageInfo.contentRect.origin.y + height);
 	CGContextClosePath(context);
 	CGContextStrokePath(context);
+
+	// render order number
+	height += pageInfo.sectionPadding;
+	[PDFManager _pageInfo:pageInfo renderOrderNo:estimate.orderNumber atHeight:height];
 
 	[PDFManager _pageInfo:pageInfo drawPageNumber:1];
 

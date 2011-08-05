@@ -183,6 +183,9 @@
 "contact.email" = "E-mail:";
 "contact.phone" = "Téléphone:";
 
+/* Purchase Order label */
+"Purchase Order" = "Numéro d'ordre";
+
 /****************** Line items section ****************/
 "Creative Fee" = "Creative Fee";
 "Creative Fee Description" = "Concept (details to be entered here) and time";
