@@ -44,16 +44,15 @@
 }
 
 + (CGSize)_pageInfo:(PageInfo *)pageInfo renderClientInfo:(ClientInfo *)clientInfo {
-	NSUInteger oneEight = CGRectGetWidth(pageInfo.contentRect) / 8;
-	NSUInteger sevenSixteenth = CGRectGetWidth(pageInfo.contentRect) / 16 * 7;
-	NSUInteger maxWidth = 0;
+	CGFloat oneEight = CGRectGetWidth(pageInfo.bounds) / 8;
+	CGFloat sevenSixteenth = CGRectGetWidth(pageInfo.bounds) / 16 * 7;
+	CGFloat usedWidth = 0.0;
 
 	// place all property names first on half content width, all content height
-	pageInfo.y = pageInfo.contentRect.origin.y;
-	pageInfo.maxHeight = CGRectGetHeight(pageInfo.contentRect);
+	pageInfo.y = pageInfo.bounds.origin.y;
 
 	for (KeyValue *pair in [clientInfo nonEmptyProperties]) {
-		pageInfo.x = pageInfo.contentRect.origin.x;
+		pageInfo.x = pageInfo.bounds.origin.x;
 		pageInfo.maxWidth = oneEight;
 
 		NSString *clientProperty = [NSString stringWithFormat:@"client.%@", pair.key];
@@ -64,19 +63,17 @@
 
 		CGSize infoSize = [pageInfo drawTextLeftAlign:pair.value];
 
-		NSUInteger lineOffset = MAX(labelSize.height, infoSize.height) + pageInfo.linePadding;
+		CGFloat lineOffset = MAX(labelSize.height, infoSize.height) + pageInfo.linePadding;
 		pageInfo.y += lineOffset;
-		pageInfo.maxHeight -= lineOffset;
-		maxWidth = MAX(maxWidth, oneEight + infoSize.width);
+		usedWidth = MAX(usedWidth, oneEight + infoSize.width);
 	}
 
 	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"index" ascending:YES];
 	for (ContactInfo *contactInfo in [clientInfo.contactInfos sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]]) {
 		pageInfo.y += pageInfo.sectionPadding;
-		pageInfo.maxHeight -= pageInfo.sectionPadding;
 		
 		for (KeyValue *pair in [contactInfo nonEmptyProperties]) {
-			pageInfo.x = pageInfo.contentRect.origin.x;
+			pageInfo.x = pageInfo.bounds.origin.x;
 			pageInfo.maxWidth = oneEight;
 
 			NSString *contactKey = [NSString stringWithFormat:@"contact.%@", pair.key];
@@ -87,25 +84,22 @@
 
 			CGSize infoSize = [pageInfo drawTextLeftAlign:pair.value];
 
-			NSUInteger lineOffset = MAX(labelSize.height, infoSize.height) + pageInfo.linePadding;
-			pageInfo.y += lineOffset;
-			pageInfo.maxHeight -= lineOffset;
-			maxWidth = MAX(maxWidth, oneEight + infoSize.width);
+			pageInfo.y += MAX(labelSize.height, infoSize.height) + pageInfo.linePadding;;
+			usedWidth = MAX(usedWidth, oneEight + infoSize.width);
 		}
 	}
 
-	return CGSizeMake(maxWidth,
-					  CGRectGetHeight(pageInfo.contentRect) - pageInfo.maxHeight);
+	CGFloat usedHeight = pageInfo.y - pageInfo.bounds.origin.y;
+	return CGSizeMake(usedWidth, usedHeight);
 }
 
 + (CGSize)_pageInfo:(PageInfo *)pageInfo renderMyInfo:(MyInfo *)myInfo {
-	NSUInteger sevenSixteenth = CGRectGetWidth(pageInfo.contentRect) / 16 * 7;
-	NSUInteger maxWidth = 0;
+	CGFloat sevenSixteenth = CGRectGetWidth(pageInfo.bounds) / 16 * 7;
+	CGFloat oneHeight = CGRectGetWidth(pageInfo.bounds) / 8;
+	CGFloat usedWidth = 0.0;
 
-	pageInfo.x = pageInfo.contentRect.origin.x + CGRectGetWidth(pageInfo.contentRect) / 16 * 9;
-	pageInfo.y = pageInfo.contentRect.origin.y;
-	pageInfo.maxWidth = sevenSixteenth;
-	pageInfo.maxHeight = CGRectGetHeight(pageInfo.contentRect);
+	pageInfo.x = pageInfo.bounds.origin.x + oneHeight + sevenSixteenth;
+	pageInfo.y = pageInfo.bounds.origin.y;
 
 	BOOL insert1stOffset = YES;
 	BOOL insert2ndOffset = YES;
@@ -123,28 +117,23 @@
 		}
 		if (insertOffset) {
 			pageInfo.y += pageInfo.sectionPadding;
-			pageInfo.maxHeight -= pageInfo.sectionPadding;
 			insertOffset = NO;
 		}
 
 		CGSize infoSize = [pageInfo drawTextRightAlign:pair.value
 											  withFont:([pair.key isEqualToString:@"name"] ? pageInfo.bigBoldFont : pageInfo.plainFont)];
 
-		NSUInteger lineOffset = infoSize.height + pageInfo.linePadding;
-		pageInfo.y += lineOffset;
-		pageInfo.maxHeight -= lineOffset;
-		maxWidth = MAX(maxWidth, infoSize.width);
+		pageInfo.y += infoSize.height + pageInfo.linePadding;
+		usedWidth = MAX(usedWidth, infoSize.width);
 	}
 
-	return CGSizeMake(maxWidth,
-					  CGRectGetHeight(pageInfo.contentRect) - pageInfo.maxHeight);
+	CGFloat usedHeight = pageInfo.y - pageInfo.bounds.origin.y;
+	return CGSizeMake(usedWidth, usedHeight);
 }
 
 + (CGSize)_pageInfo:(PageInfo *)pageInfo renderDate:(NSDate *)date atHeight:(CGFloat)height {
-	pageInfo.x = pageInfo.contentRect.origin.x;
-	pageInfo.y = pageInfo.contentRect.origin.y + height;
-	pageInfo.maxWidth = CGRectGetWidth(pageInfo.contentRect);
-	pageInfo.maxHeight = CGRectGetHeight(pageInfo.contentRect) - height;
+	pageInfo.x = pageInfo.bounds.origin.x;
+	pageInfo.y = pageInfo.bounds.origin.y + height;
 
 	NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
 	// TODO should find similar pattern from user's Region Settings so its localized
@@ -156,19 +145,15 @@
 }
 
 + (CGSize)_pageInfo:(PageInfo *)pageInfo renderBusinessNo:(NSString *)businessNo atHeight:(CGFloat)height {
-	pageInfo.x = pageInfo.contentRect.origin.x;
-	pageInfo.y = pageInfo.contentRect.origin.y + height;
-	pageInfo.maxWidth = CGRectGetWidth(pageInfo.contentRect);
-	pageInfo.maxHeight = CGRectGetHeight(pageInfo.contentRect) - height;
+	pageInfo.x = pageInfo.bounds.origin.x;
+	pageInfo.y = pageInfo.bounds.origin.y + height;
 
 	return [pageInfo drawTextRightAlign:businessNo];
 }
 
 + (CGSize)_pageInfo:(PageInfo *)pageInfo renderOrderNo:(NSString *)orderNo atHeight:(CGFloat)height {
-	pageInfo.x = pageInfo.contentRect.origin.x;
-	pageInfo.y = pageInfo.contentRect.origin.y + height;
-	pageInfo.maxWidth = CGRectGetWidth(pageInfo.contentRect);
-	pageInfo.maxHeight = CGRectGetHeight(pageInfo.contentRect) - height;
+	pageInfo.x = pageInfo.bounds.origin.x;
+	pageInfo.y = pageInfo.bounds.origin.y + height;
 
 	return [pageInfo drawTextLeftAlign:[NSString stringWithFormat:@"%@ #%@",
 												NSLocalizedString(@"Purchase Order", "Purchase Order label in PDF"),
@@ -187,34 +172,36 @@
 	UIGraphicsBeginPDFContextToData(pdfData, pageInfo.pageSize, [self pdfInfoForEstimate:estimate]);
 
 	// open new page
-	UIGraphicsBeginPDFPageWithInfo(pageInfo.pageSize, nil);
+	UIGraphicsBeginPDFPage();
+
+	MyInfo *myInfo = [[DataStore defaultStore] myInfo];
 
 	// render client+contact info & my info side by side
+	CGSize mySize = [PDFManager _pageInfo:pageInfo renderMyInfo:myInfo];
 	CGSize clientSize = [PDFManager _pageInfo:pageInfo renderClientInfo:estimate.clientInfo];
-	CGSize mySize = [PDFManager _pageInfo:pageInfo renderMyInfo:[[DataStore defaultStore] myInfo]];
 
 	// render estimate date & business number
-	CGFloat height = MAX(clientSize.height, mySize.height) + pageInfo.sectionPadding;
-	CGSize dateSize = [PDFManager _pageInfo:pageInfo renderDate:estimate.date atHeight:height];
+	CGFloat height = pageInfo.pageNo == 1 ? MAX(clientSize.height, mySize.height) + pageInfo.sectionPadding : clientSize.height;
+	CGSize lastSize = [PDFManager _pageInfo:pageInfo renderDate:estimate.date atHeight:height];
 
-	height += dateSize.height;
-	CGSize businessSize = [PDFManager _pageInfo:pageInfo renderBusinessNo:[[[DataStore defaultStore] myInfo] businessNumber] atHeight:height];
+	height += lastSize.height;
+	lastSize = [PDFManager _pageInfo:pageInfo renderBusinessNo:myInfo.businessNumber atHeight:height];
 
 	// render horizontal line
-	height += businessSize.height + pageInfo.linePadding;
+	height += lastSize.height + pageInfo.linePadding;
 	CGContextRef context = UIGraphicsGetCurrentContext();
 	CGContextBeginPath(context);
 	CGContextSetLineWidth(context, 1.5);
-	CGContextMoveToPoint(context, pageInfo.contentRect.origin.x, pageInfo.contentRect.origin.y + height);
-	CGContextAddLineToPoint(context, pageInfo.contentRect.origin.x + CGRectGetWidth(pageInfo.contentRect), pageInfo.contentRect.origin.y + height);
+	CGContextMoveToPoint(context, pageInfo.bounds.origin.x, pageInfo.bounds.origin.y + height);
+	CGContextAddLineToPoint(context, pageInfo.bounds.origin.x + CGRectGetWidth(pageInfo.bounds), pageInfo.bounds.origin.y + height);
 	CGContextClosePath(context);
 	CGContextStrokePath(context);
 
 	// render order number
 	height += pageInfo.sectionPadding;
-	[PDFManager _pageInfo:pageInfo renderOrderNo:estimate.orderNumber atHeight:height];
-
-	[PDFManager _pageInfo:pageInfo drawPageNumber:1];
+	lastSize = [PDFManager _pageInfo:pageInfo renderOrderNo:estimate.orderNumber atHeight:height];
+	
+	// render line items
 
 	// end PDF data
 	UIGraphicsEndPDFContext();

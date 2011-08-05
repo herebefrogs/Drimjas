@@ -11,14 +11,15 @@
 
 @interface PageInfo : NSObject {
 	CGRect pageSize;			// page format (Letter or A4) best fitting user's Region Format setting (margin including)
+	NSUInteger pageNo;			// current page number
 
-	NSUInteger margin;			// margins in points around drawable area of page
-	NSUInteger linePadding;		// vertical padding in points between 2 lines
-	NSUInteger sectionPadding;	// vertical padding in points between 2 groups of lines
+	CGFloat margin;				// margins in points around drawable area of page
+	CGFloat linePadding;		// vertical padding in points between 2 lines
+	CGFloat sectionPadding;		// vertical padding in points between 2 groups of lines
 
-	CGRect contentRect;				// area where text can be rendered (typically page size with margins removed)
-	NSUInteger x, y;				// current position in page
-	NSUInteger maxWidth, maxHeight;	// current maximum area where text can be rendered (typically content rect with x & y removed)
+	CGRect bounds;				// area where text can be rendered (typically page size with margins removed)
+	CGFloat x, y;				// current position in page
+	CGFloat maxWidth, maxHeight;	// current maximum area where text can be rendered (typically content rect with x & y removed)
 
 	UIFont *plainFont;
 	UIFont *boldFont;
@@ -26,14 +27,15 @@
 }
 
 @property (nonatomic, readonly) CGRect pageSize;
-@property (nonatomic, readonly) NSUInteger margin;
-@property (nonatomic, readonly) NSUInteger linePadding;
-@property (nonatomic, readonly) NSUInteger sectionPadding;
-@property (nonatomic, assign) NSUInteger x;
-@property (nonatomic, assign) NSUInteger y;
-@property (nonatomic, assign) CGRect contentRect;
-@property (nonatomic, assign) NSUInteger maxWidth;
-@property (nonatomic, assign) NSUInteger maxHeight;
+@property (nonatomic, readonly) NSUInteger pageNo;
+@property (nonatomic, readonly) CGFloat margin;
+@property (nonatomic, readonly) CGFloat linePadding;
+@property (nonatomic, readonly) CGFloat sectionPadding;
+@property (nonatomic, assign) CGFloat x;
+@property (nonatomic, assign) CGFloat y;
+@property (nonatomic, assign) CGRect bounds;
+@property (nonatomic, assign) CGFloat maxWidth;
+@property (nonatomic, assign) CGFloat maxHeight;
 @property (nonatomic, readonly) CGSize maxSize;
 @property (nonatomic, retain) UIFont *plainFont;
 @property (nonatomic, retain) UIFont *boldFont;
