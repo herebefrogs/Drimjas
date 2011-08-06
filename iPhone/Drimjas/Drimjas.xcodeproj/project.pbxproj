@@ -61,7 +61,6 @@
 		02C75244136A429F00EC4BF5 /* AddEstimateNewOrPickClientInfo.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02C75242136A429F00EC4BF5 /* AddEstimateNewOrPickClientInfo.xib */; };
 		02C81A441307853C009029E9 /* Application.png in Resources */ = {isa = PBXBuildFile; fileRef = 02C81A421307853C009029E9 /* Application.png */; };
 		02C81A451307853C009029E9 /* Application@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 02C81A431307853C009029E9 /* Application@2x.png */; };
-		02C81A59130788B8009029E9 /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = 02C81A56130788B8009029E9 /* iTunesArtwork */; };
 		02C81A5A130788B8009029E9 /* Search-Settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 02C81A57130788B8009029E9 /* Search-Settings.png */; };
 		02C81A5B130788B8009029E9 /* Search-Settings@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 02C81A58130788B8009029E9 /* Search-Settings@2x.png */; };
 		02C81A791307903C009029E9 /* Email.png in Resources */ = {isa = PBXBuildFile; fileRef = 02C81A771307903C009029E9 /* Email.png */; };
@@ -185,7 +184,6 @@
 		02C75242136A429F00EC4BF5 /* AddEstimateNewOrPickClientInfo.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddEstimateNewOrPickClientInfo.xib; sourceTree = "<group>"; };
 		02C81A421307853C009029E9 /* Application.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Application.png; path = Resources/Icons/Application.png; sourceTree = "<group>"; };
 		02C81A431307853C009029E9 /* Application@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Application@2x.png"; path = "Resources/Icons/Application@2x.png"; sourceTree = "<group>"; };
-		02C81A56130788B8009029E9 /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; name = iTunesArtwork; path = Resources/Icons/iTunesArtwork; sourceTree = "<group>"; };
 		02C81A57130788B8009029E9 /* Search-Settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Search-Settings.png"; path = "Resources/Icons/Search-Settings.png"; sourceTree = "<group>"; };
 		02C81A58130788B8009029E9 /* Search-Settings@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Search-Settings@2x.png"; path = "Resources/Icons/Search-Settings@2x.png"; sourceTree = "<group>"; };
 		02C81A771307903C009029E9 /* Email.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Email.png; path = Resources/Icons/Email.png; sourceTree = "<group>"; };
@@ -363,7 +361,6 @@
 				02C81A431307853C009029E9 /* Application@2x.png */,
 				02C81A57130788B8009029E9 /* Search-Settings.png */,
 				02C81A58130788B8009029E9 /* Search-Settings@2x.png */,
-				02C81A56130788B8009029E9 /* iTunesArtwork */,
 				023C7D8013099F9900FD360B /* Button.png */,
 				023C7D8113099F9900FD360B /* Button@2x.png */,
 				02CB99DE139BE16F00FF2A3C /* Contracts.png */,
@@ -552,7 +549,6 @@
 				029C645312EB8389000B6E51 /* Localizable.strings in Resources */,
 				02C81A441307853C009029E9 /* Application.png in Resources */,
 				02C81A451307853C009029E9 /* Application@2x.png in Resources */,
-				02C81A59130788B8009029E9 /* iTunesArtwork in Resources */,
 				02C81A5A130788B8009029E9 /* Search-Settings.png in Resources */,
 				02C81A5B130788B8009029E9 /* Search-Settings@2x.png in Resources */,
 				02C81A791307903C009029E9 /* Email.png in Resources */,
