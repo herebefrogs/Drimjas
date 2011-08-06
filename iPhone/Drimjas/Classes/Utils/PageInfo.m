@@ -25,6 +25,8 @@
 @synthesize plainFont;
 @synthesize boldFont;
 @synthesize bigBoldFont;
+@synthesize labelWidth;
+@synthesize clientOrMyInfoWidth;
 
 
 + (CGRect)_initPageSize {
@@ -57,6 +59,9 @@
 		bounds = CGRectMake(margin, margin, CGRectGetWidth(pageSize) - 2*margin, CGRectGetHeight(pageSize) - 2*margin);
 		self.x = bounds.origin.x;
 		self.y = bounds.origin.y;
+
+		labelWidth = CGRectGetWidth(bounds) / 8;
+		clientOrMyInfoWidth = CGRectGetWidth(bounds) * 7 / 16;
 	}
 	return self;
 }

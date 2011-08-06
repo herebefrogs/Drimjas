@@ -24,6 +24,9 @@
 	UIFont *plainFont;
 	UIFont *boldFont;
 	UIFont *bigBoldFont;
+
+	CGFloat labelWidth;				// base width for client/contact info labels
+	CGFloat clientOrMyInfoWidth;	// base width for client/contact/my info values
 }
 
 @property (nonatomic, readonly) CGRect pageSize;
@@ -40,6 +43,9 @@
 @property (nonatomic, retain) UIFont *plainFont;
 @property (nonatomic, retain) UIFont *boldFont;
 @property (nonatomic, retain) UIFont *bigBoldFont;
+@property (nonatomic, readonly) CGFloat labelWidth;
+@property (nonatomic, readonly) CGFloat clientOrMyInfoWidth;
+
 
 - (CGSize)drawTextLeftAlign:(NSString *)text;
 - (CGSize)drawTextLeftAlign:(NSString *)text withFont:(UIFont *)font;
