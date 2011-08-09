@@ -15,6 +15,7 @@
 
 @dynamic name;
 @dynamic percent;
+@dynamic taxNumber;
 
 - (void) awakeFromInsert {
 	[super awakeFromInsert];

@@ -170,6 +170,7 @@
 		02AA0BFF136DCB20005E9158 /* AddEstimateLineItemsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddEstimateLineItemsViewController.m; sourceTree = "<group>"; };
 		02AA0C00136DCB20005E9158 /* AddEstimateLineItems.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddEstimateLineItems.xib; sourceTree = "<group>"; };
 		02AD02E113397F5400FCF6AA /* WorkingTitle 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "WorkingTitle 3.xcdatamodel"; sourceTree = "<group>"; };
+		02B01D7F13F0DEA6001BEDE2 /* Drimjas 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Drimjas 2.xcdatamodel"; sourceTree = "<group>"; };
 		02B2C06B12DFF2DD00D3FEE0 /* EstimatesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EstimatesViewController.h; sourceTree = "<group>"; };
 		02B2C06C12DFF2DD00D3FEE0 /* EstimatesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EstimatesViewController.m; sourceTree = "<group>"; };
 		02B2C06D12DFF2DD00D3FEE0 /* Estimates.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Estimates.xib; sourceTree = "<group>"; };
@@ -742,8 +743,9 @@
 				028CCB9913B794C40073C88F /* WorkingTitle 11.xcdatamodel */,
 				02DFF86113C8C2CE00300ADD /* WorkingTitle 12.xcdatamodel */,
 				02DFF94913C8ECB700300ADD /* WorkingTitle 13.xcdatamodel */,
+				02B01D7F13F0DEA6001BEDE2 /* Drimjas 2.xcdatamodel */,
 			);
-			currentVersion = 02DFF94913C8ECB700300ADD /* WorkingTitle 13.xcdatamodel */;
+			currentVersion = 02B01D7F13F0DEA6001BEDE2 /* Drimjas 2.xcdatamodel */;
 			name = Drimjas.xcdatamodeld;
 			path = Resources/Drimjas.xcdatamodeld;
 			sourceTree = "<group>";

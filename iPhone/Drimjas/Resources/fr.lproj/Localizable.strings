@@ -113,8 +113,11 @@
 /* TaxesAndCurrencyView Tax Name Texfield placeholder */
 "Tax Name" = "Nom de la taxe";
 
-/* TaxesAndCurrencyView Tax Name Texfield placeholder */
+/* TaxesAndCurrencyView Tax Percent Texfield placeholder */
 "Percent" = "Percentage";
+
+/* TaxesAndCurrencyView Tax Number Texfield Placeholder */
+"Tax Number" = "Numéro de taxe de votre société";
 
 /* MyInfoViewController Navigation Item Title */
 "My Information" = "Mes informations";
@@ -125,15 +128,11 @@
 /* MyInfoViewController My Name Textfield Placholder */
 "My Company Name" = "Nom de ma société";
 
-/* MyInfoViewController Business Number Textfield Placeholder */
-"Business Number" = "Numéro d'immatriculation";
-
 /* MyInfoViewController Fax Textfield Placeholder */
 "Fax" = "Fax";
 
 /* MyInfoViewController Website Textfield Placeholder */
 "Website" = "Site Internet";
-
 
 /* EstimateDetail View Controller Navigation Item Title */
 "Review Estimate" = "Aperçu du Devis";

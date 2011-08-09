@@ -113,6 +113,7 @@
 @interface DataStore (TaxesAndCurrencyAccessors)
 
 @property (nonatomic, readonly) Currency *currency;
+@property (nonatomic, readonly) NSArray *taxes;
 @property (nonatomic, readonly) NSFetchedResultsController *taxesAndCurrencyFetchedResultsController;
 - (Tax *)createTax;
 - (BOOL)deleteTax:(Tax *)tax;

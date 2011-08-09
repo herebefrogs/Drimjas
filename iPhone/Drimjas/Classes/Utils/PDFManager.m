@@ -16,6 +16,7 @@
 #import "Estimate.h"
 #import "KeyValue.h"
 #import "MyInfo.h"
+#import "Tax.h"
 // Utils
 #import "DrimjasInfo.h"
 #import "PageInfo.h"
@@ -50,7 +51,7 @@ typedef enum {
 	ClientInfoWidth,
 	MyInfoX,
 	MyInfoWidth
-} XAndWidth;
+} HeaderXAndWidth;
 
 + (NSArray *)_pageInfo:(PageInfo *)pageInfo calculateWidthForClient:(ClientInfo *)clientInfo myInfo:(MyInfo *)myInfo {
 	CGFloat labelMax = 0.0;
@@ -258,14 +259,22 @@ typedef enum {
 	NSString *estimateDate = [dateFormat stringFromDate:date];
 	[dateFormat release];
 
-	return [pageInfo drawTextRightAlign:estimateDate];
+	CGSize dateSize = [pageInfo drawTextRightAlign:estimateDate];
+	dateSize.height += pageInfo.linePadding;
+	return dateSize;
 }
 
-+ (CGSize)_pageInfo:(PageInfo *)pageInfo renderBusinessNo:(NSString *)businessNo atHeight:(CGFloat)height {
++ (CGFloat)_pageInfo:(PageInfo *)pageInfo renderTaxNos:(NSArray *)taxes atHeight:(CGFloat)height {
 	pageInfo.x = pageInfo.bounds.origin.x;
 	pageInfo.y = pageInfo.bounds.origin.y + height;
 
-	return [pageInfo drawTextRightAlign:businessNo];
+	for (Tax *tax in taxes) {
+		CGSize taxSize = [pageInfo drawTextRightAlign:[NSString stringWithFormat:@"%@ #%@", tax.name, tax.taxNumber]];
+
+		pageInfo.y += taxSize.height + pageInfo.linePadding;
+	}
+
+	return pageInfo.y - (pageInfo.bounds.origin.y + height);
 }
 
 + (CGSize)_pageInfo:(PageInfo *)pageInfo renderOrderNo:(NSString *)orderNo atHeight:(CGFloat)height {
@@ -300,14 +309,14 @@ typedef enum {
 	CGFloat clientHeight = [PDFManager _pageInfo:pageInfo renderClientInfo:estimate.clientInfo xAndWidths:xAndWidths];
 
 	// render estimate date & business number
-	CGFloat height = pageInfo.pageNo == 1 ? MAX(clientHeight, myHeight) + pageInfo.sectionPadding : clientHeight;
+	CGFloat height = pageInfo.pageNo == 1 && myHeight > clientHeight ? myHeight + pageInfo.sectionPadding : clientHeight;
 	CGSize lastSize = [PDFManager _pageInfo:pageInfo renderDate:estimate.date atHeight:height];
 
 	height += lastSize.height;
-	lastSize = [PDFManager _pageInfo:pageInfo renderBusinessNo:myInfo.businessNumber atHeight:height];
+	CGFloat taxNosHeight = [PDFManager _pageInfo:pageInfo renderTaxNos:[[DataStore defaultStore] taxes] atHeight:height];
 
 	// render horizontal line
-	height += lastSize.height + pageInfo.linePadding;
+	height += taxNosHeight + pageInfo.linePadding;
 	CGContextRef context = UIGraphicsGetCurrentContext();
 	CGContextBeginPath(context);
 	CGContextSetLineWidth(context, 1.5);

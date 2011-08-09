@@ -14,7 +14,6 @@
 
 @implementation MyInfo
 
-@dynamic businessNumber;
 @dynamic fax;
 @dynamic website;
 

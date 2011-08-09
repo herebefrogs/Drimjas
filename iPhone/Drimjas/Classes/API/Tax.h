@@ -15,6 +15,7 @@
 
 @property (nonatomic, retain) NSString *name;
 @property (nonatomic, retain) NSNumber *percent;
+@property (nonatomic, retain) NSString *taxNumber;
 
 @end
 

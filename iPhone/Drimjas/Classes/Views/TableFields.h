@@ -67,6 +67,7 @@ typedef enum {
 typedef enum {
 	TaxesFieldName = 0,
 	TaxesFieldPercent,
+	TaxesFieldTaxNumber,
 	
 	numTaxesField
 } TaxesField;
@@ -79,7 +80,6 @@ typedef enum {
 	MyInfoFieldState,
 	MyInfoFieldPostalCode,
 	MyInfoFieldCountry,
-	MyInfoFieldBusinessNumber,
 	MyInfoFieldPhone,
 	MyInfoFieldFax,
 	MyInfoFieldEmail,

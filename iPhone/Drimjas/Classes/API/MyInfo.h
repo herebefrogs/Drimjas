@@ -14,7 +14,6 @@
 @interface MyInfo : ClientInfo {
 }
 
-@property (nonatomic, retain) NSString *businessNumber;
 @property (nonatomic, retain) NSString *fax;
 @property (nonatomic, retain) NSString *website;
 @property (nonatomic, readonly) ContactInfo* contactInfo;

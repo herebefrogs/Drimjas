@@ -201,6 +201,11 @@ BOOL _insertTax = NO;
 				tfCell.textField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
 				tfCell.textField.placeholder = NSLocalizedString(@"Percent", "TaxesAndCurrency Percent Textfield placeholder");
 			}
+			else if (indexPath.row == TaxesFieldTaxNumber) {
+				tfCell.textField.placeholder = NSLocalizedString(@"Tax Number", "TaxesAndCurrency Tax Number Textfield Placeholder");
+				tfCell.textField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
+				tfCell.textField.text = tax.taxNumber;
+			}
 		}
 	}
 }
@@ -297,6 +302,10 @@ BOOL _insertTax = NO;
 			[numberFormatter release];
 			// TODO show an overlay if nil
 		}
+		else if (row == TaxesFieldTaxNumber) {
+			tax.taxNumber = textField.text;
+		}
+		
 	}
 }
 

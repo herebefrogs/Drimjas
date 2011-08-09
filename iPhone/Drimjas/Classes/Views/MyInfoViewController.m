@@ -114,10 +114,6 @@
 		tfCell.textField.placeholder = NSLocalizedString(@"Country", "Country Text Field Placeholder");
 		tfCell.textField.text = myInfo.country;
 	}
-	else if (indexPath.row == MyInfoFieldBusinessNumber) {
-		tfCell.textField.placeholder = NSLocalizedString(@"Business Number", "Business Number Field Placeholder");
-		tfCell.textField.text = myInfo.businessNumber;
-	}
 	else if (indexPath.row == MyInfoFieldPhone) {
 		tfCell.textField.placeholder = NSLocalizedString(@"Phone", "Phone Text Field Placeholder");
 		tfCell.textField.text = myInfo.contactInfo.phone;
@@ -169,9 +165,6 @@
 	}
 	else if (textField.tag == MyInfoFieldCountry) {
 		myInfo.country = textField.text;
-	}
-	else if (textField.tag == MyInfoFieldBusinessNumber) {
-		myInfo.businessNumber = textField.text;
 	}
 	else if (textField.tag == MyInfoFieldPhone) {
 		myInfo.contactInfo.phone = textField.text;

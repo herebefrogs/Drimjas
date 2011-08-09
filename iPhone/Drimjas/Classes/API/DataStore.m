@@ -734,6 +734,11 @@ static DataStore *singleton_ = nil;
 	return currency_;
 }
 
+- (NSArray *)taxes {
+	NSPredicate *taxesOnlyPredicate = [NSPredicate predicateWithFormat:@"subEntityName = %@", @"Tax"];
+	return [self.taxesAndCurrencyFetchedResultsController.fetchedObjects filteredArrayUsingPredicate:taxesOnlyPredicate];
+}
+
 - (NSFetchedResultsController *)taxesAndCurrencyFetchedResultsController {
 	if (!taxesAndCurrencyFetchedResultsController_) {
 		NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
