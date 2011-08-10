@@ -10,7 +10,9 @@
 // API
 #import "ClientInfo.h"
 #import "DataStore.h"
+#import "LineItem.h"
 #import "LineItemSelection.h"
+#import "Tax.h"
 
 @implementation Estimate 
 
@@ -52,6 +54,44 @@
 
 - (BOOL)isEmpty {
 	return (self.clientInfo == nil) || (self.clientInfo.name == nil);
+}
+
+- (NSNumber *)subTotal {
+	CGFloat subTotal = 0;
+
+	for (LineItemSelection *lineItem in self.lineItems) {
+		// H & S is handled in total
+		if ([lineItem.lineItem.name isEqualToString:NSLocalizedString(@"Handling & Shipping","")]) {
+			continue;
+		}
+		subTotal += [lineItem.cost floatValue];
+	}
+
+	return [NSNumber numberWithFloat:subTotal];
+}
+
+- (NSNumber *)total {
+	CGFloat total = 0;
+	NSNumber *subTotal = self.subTotal;
+
+	for (Tax *tax in [[DataStore defaultStore] taxes]) {
+		total += [[tax costForSubTotal:subTotal] floatValue];
+	}
+
+	total += [self.handlingAndShippingCost floatValue];
+
+	total += [subTotal floatValue];
+
+	return [NSNumber numberWithFloat:total];
+}
+
+- (NSNumber *)handlingAndShippingCost {
+	for (LineItemSelection *lineItem in self.lineItems) {
+		if ([lineItem.lineItem.name isEqualToString:NSLocalizedString(@"Handling & Shipping", "")]) {
+			return lineItem.cost;
+		}
+	}
+	return [NSNumber numberWithInt:0];
 }
 
 #pragma mark -

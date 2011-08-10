@@ -33,4 +33,11 @@
 	[newLineItem addLineItemSelectionsObject:self];
 }
 
+- (NSNumber *)cost {
+	if (self.quantity != nil && self.unitCost != nil) {
+		return [NSNumber numberWithFloat:([self.quantity floatValue] * [self.unitCost floatValue])];
+	}
+	return [NSNumber numberWithFloat:0.0];
+}
+
 @end

@@ -185,6 +185,19 @@
 /* Purchase Order label */
 "Purchase Order" = "Numéro d'ordre";
 
+/* table header */
+"Item" = "Poste";
+"Description" = "Description";
+"Unit Cost" = "Coût unitaire";
+"Quantity" = "Quantité";
+"Cost" = "Coût";
+
+/* total columns header */
+"SUBTOTAL" = "SOUS TOTAL";
+"H & S" = "FRAIS DE LIVRAISON";
+"TOTAL" = "TOTAL";
+
+
 /****************** Line items section ****************/
 "Creative Fee" = "Creative Fee";
 "Creative Fee Description" = "Concept (details to be entered here) and time";

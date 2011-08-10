@@ -12,9 +12,12 @@
 // API
 #import "ClientInfo.h"
 #import "ContactInfo.h"
+#import "Currency.h"
 #import "DataStore.h"
 #import "Estimate.h"
 #import "KeyValue.h"
+#import "LineItemSelection.h"
+#import "LineItem.h"
 #import "MyInfo.h"
 #import "Tax.h"
 // Utils
@@ -53,7 +56,7 @@ typedef enum {
 	MyInfoWidth
 } HeaderXAndWidth;
 
-+ (NSArray *)_pageInfo:(PageInfo *)pageInfo calculateWidthForClient:(ClientInfo *)clientInfo myInfo:(MyInfo *)myInfo {
++ (NSArray *)_pageInfo:(PageInfo *)pageInfo headerColumnsWidthForClient:(ClientInfo *)clientInfo myInfo:(MyInfo *)myInfo {
 	CGFloat labelMax = 0.0;
 	CGFloat clientInfoMax = 0.0;
 	CGFloat myInfoMax = 0.0;
@@ -287,6 +290,147 @@ typedef enum {
 							  withFont:pageInfo.bigBoldFont];
 }
 
+typedef enum {
+	NameX = 0,
+	NameWidth,
+	DescriptionX,
+	DescriptionWidth,
+	UnitCostX,
+	UnitCostWidth,
+	QuantityX,
+	QuantityWidth,
+	CostX,
+	CostWidth
+} LineItemsXAndWidth;
+
++ (NSArray *)_pageInfo:(PageInfo *)pageInfo tableColumnsWidthForEstimate:(Estimate *)estimate {
+	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"index" ascending:YES];
+	NSArray *lineItems = [estimate.lineItems sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];
+	[sortDescriptor release];
+
+	CGFloat nameMax = 0.0;
+	CGFloat descriptionMax = 0.0;
+	CGFloat unitCostMax = 0.0;
+	CGFloat quantityMax = 0.0;
+	CGFloat	costMax = 0.0;
+
+	NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+	[numberFormatter setCurrencyCode:[[[DataStore defaultStore] currency] isoCode]];
+
+	// calculate the maximum width taken by each column if we had no width limitation
+	for (LineItemSelection *lineItem in lineItems) {
+		// skip H&S handled separately at the end of the PDF
+		if ([lineItem.lineItem.name isEqualToString:NSLocalizedString(@"Handling & Shipping", "")]) {
+			continue;
+		}
+
+		CGSize textSize = [lineItem.lineItem.name sizeWithFont:pageInfo.plainFont];
+		nameMax = MAX(nameMax, textSize.width);
+
+		textSize = [lineItem.details sizeWithFont:pageInfo.plainFont];
+		descriptionMax = MAX(descriptionMax, textSize.width);
+
+		[numberFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
+		NSNumber *value = lineItem.unitCost ? lineItem.unitCost : [NSNumber numberWithFloat:0.0];
+		textSize = [[numberFormatter stringFromNumber:value] sizeWithFont:pageInfo.plainFont];
+		unitCostMax = MAX(unitCostMax, textSize.width);
+
+		textSize = [[numberFormatter stringFromNumber:lineItem.cost] sizeWithFont:pageInfo.plainFont];
+		costMax = MAX(costMax, textSize.width);
+
+		[numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];		
+		value = lineItem.quantity ? lineItem.quantity : [NSNumber numberWithFloat:0.0];
+		textSize = [[numberFormatter stringFromNumber:value] sizeWithFont:pageInfo.plainFont];
+		quantityMax = MAX(quantityMax, textSize.width);
+	}
+
+	// calculate the maximum width taken by each column header
+	CGSize textSize = [NSLocalizedString(@"Cost","") sizeWithFont:pageInfo.boldFont];
+	costMax = MAX(costMax, textSize.width);
+
+	textSize = [NSLocalizedString(@"Quantity","") sizeWithFont:pageInfo.boldFont];
+	quantityMax = MAX(quantityMax, textSize.width);
+
+	textSize = [NSLocalizedString(@"Unit Cost","") sizeWithFont:pageInfo.boldFont];
+	unitCostMax = MAX(unitCostMax, textSize.width);
+
+	textSize = [NSLocalizedString(@"Description","") sizeWithFont:pageInfo.boldFont];
+	descriptionMax = MAX(descriptionMax, textSize.width);
+
+	textSize = [NSLocalizedString(@"Item","") sizeWithFont:pageInfo.boldFont];
+	nameMax = MAX(nameMax, textSize.width);
+
+	// calculate the maximum width taken by sub total, taxes, h&s and total values
+	[numberFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
+	NSNumber *subTotal = estimate.subTotal;
+	textSize = [[numberFormatter stringFromNumber:subTotal] sizeWithFont:pageInfo.plainFont];
+	costMax = MAX(costMax, textSize.width);
+
+	for (Tax *tax in [[DataStore defaultStore] taxes]) {
+		textSize = [[numberFormatter stringFromNumber:[tax costForSubTotal:subTotal]] sizeWithFont:pageInfo.plainFont];
+		costMax = MAX(costMax, textSize.width);
+	}
+
+	textSize = [[numberFormatter stringFromNumber:estimate.handlingAndShippingCost] sizeWithFont:pageInfo.plainFont];
+	costMax = MAX(costMax, textSize.width);
+
+	textSize = [[numberFormatter stringFromNumber:estimate.total] sizeWithFont:pageInfo.plainFont];
+	costMax = MAX(costMax, textSize.width);
+
+	[numberFormatter release];
+
+	// provision some space for padding on both side
+	CGFloat costWidth = costMax + 2 * pageInfo.linePadding;
+	CGFloat quantityWidth = quantityMax + 2 * pageInfo.linePadding;
+	CGFloat unitCostWidth = unitCostMax + 2 * pageInfo.linePadding;
+	CGFloat descriptionWidth = descriptionMax + 2 * pageInfo.linePadding;
+	CGFloat nameWidth = nameMax + 2 * pageInfo.linePadding;
+
+	CGFloat remainingWidth = CGRectGetWidth(pageInfo.bounds) - nameWidth - descriptionWidth - unitCostWidth - quantityWidth - costWidth;
+	if (remainingWidth > 0) {
+		// distribute remaining space evenly
+		CGFloat extra = remainingWidth / 5;
+		nameWidth += extra;
+		descriptionWidth += extra;
+		unitCostWidth += extra;
+		quantityWidth += extra;
+		costWidth += extra;
+	}
+	else {
+		// some wrapping must occur; spare unit cost, quantity and cost as nobody likes numbers that wrap
+		CGFloat remainingWidth = CGRectGetWidth(pageInfo.bounds) - unitCostWidth - quantityWidth - costWidth;
+
+		CGFloat idealNameWidth = remainingWidth / 3;
+		CGFloat idealDescWidth = remainingWidth * 2 / 3;
+		// arbitrarily decide that if none fit in 1/3 & 2/3 of the remaining space, both gets wrapped
+		if (nameWidth > idealNameWidth && descriptionWidth > idealDescWidth) {
+			nameWidth = idealNameWidth;
+			descriptionWidth = idealDescWidth;
+		}
+		// otherwise grant the other all the remaining space to limit wrapping as much as possible
+		else if (nameWidth < idealNameWidth) {
+			descriptionWidth = remainingWidth - nameWidth;
+		}
+		else {
+			nameWidth = remainingWidth - descriptionWidth;
+		}
+	}
+
+	return [NSArray arrayWithObjects:
+			[NSNumber numberWithFloat:pageInfo.bounds.origin.x],
+			[NSNumber numberWithFloat:nameWidth],
+			[NSNumber numberWithFloat:pageInfo.bounds.origin.x + nameWidth],
+			[NSNumber numberWithFloat:descriptionWidth],
+			[NSNumber numberWithFloat:pageInfo.bounds.origin.x + nameWidth + descriptionWidth],
+			[NSNumber numberWithFloat:unitCostWidth],
+			[NSNumber numberWithFloat:pageInfo.bounds.origin.x + nameWidth + descriptionWidth + unitCostWidth],
+			[NSNumber numberWithFloat:quantityWidth],
+			[NSNumber numberWithFloat:pageInfo.bounds.origin.x + nameWidth + descriptionWidth + unitCostWidth + quantityWidth],
+			[NSNumber numberWithFloat:costWidth],
+			nil
+		   ];
+}
+
 #pragma mark -
 #pragma mark Public protocol implementation
 
@@ -302,7 +446,7 @@ typedef enum {
 
 	MyInfo *myInfo = [[DataStore defaultStore] myInfo];
 
-	NSArray *xAndWidths = [PDFManager _pageInfo:pageInfo calculateWidthForClient:estimate.clientInfo myInfo:myInfo];
+	NSArray *xAndWidths = [PDFManager _pageInfo:pageInfo headerColumnsWidthForClient:estimate.clientInfo myInfo:myInfo];
 
 	// render client+contact info & my info side by side
 	CGFloat myHeight = [PDFManager _pageInfo:pageInfo renderMyInfo:myInfo xAndWidths:xAndWidths];
@@ -329,7 +473,8 @@ typedef enum {
 	height += pageInfo.sectionPadding;
 	lastSize = [PDFManager _pageInfo:pageInfo renderOrderNo:estimate.orderNumber atHeight:height];
 	
-	// render line items
+	// render line items table
+	xAndWidths = [PDFManager _pageInfo:pageInfo tableColumnsWidthForEstimate:estimate];
 
 	// end PDF data
 	UIGraphicsEndPDFContext();

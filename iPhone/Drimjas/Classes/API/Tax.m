@@ -25,4 +25,10 @@
 	self.index = [NSNumber numberWithInt:[[[[DataStore defaultStore] taxesAndCurrencyFetchedResultsController] sections] count]];
 }
 
+- (NSNumber *)costForSubTotal:(NSNumber *)subTotal {
+	CGFloat cost = [subTotal floatValue] * (self.percent != nil ? [self.percent floatValue] : 0.0) / 100.0;
+
+	return [NSNumber numberWithFloat:cost];
+}
+
 @end

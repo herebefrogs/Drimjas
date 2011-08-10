@@ -17,6 +17,8 @@
 @property (nonatomic, retain) NSNumber *percent;
 @property (nonatomic, retain) NSString *taxNumber;
 
+- (NSNumber *)costForSubTotal:(NSNumber *)subTotal;
+
 @end
 
 
