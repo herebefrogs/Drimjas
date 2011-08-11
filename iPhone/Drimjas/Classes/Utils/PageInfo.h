@@ -16,6 +16,7 @@
 	CGFloat margin;				// margins in points around drawable area of page
 	CGFloat linePadding;		// vertical padding in points between 2 lines
 	CGFloat sectionPadding;		// vertical padding in points between 2 groups of lines
+	CGFloat tablePadding;		// top/bottom/left/right padding inside a table cell
 
 	CGRect bounds;				// area where text can be rendered (typically page size with margins removed)
 	CGFloat x, y;				// current position in page
@@ -46,10 +47,21 @@
 @property (nonatomic, readonly) CGFloat labelWidth;
 @property (nonatomic, readonly) CGFloat clientOrMyInfoWidth;
 
+- (NSUInteger)openNewPage;
 
-- (CGSize)drawTextLeftAlign:(NSString *)text;
-- (CGSize)drawTextLeftAlign:(NSString *)text withFont:(UIFont *)font;
-- (CGSize)drawTextRightAlign:(NSString *)text;
-- (CGSize)drawTextRightAlign:(NSString *)text withFont:(UIFont *)font;
+- (CGSize)drawTextLeftJustified:(NSString *)text;
+- (CGSize)drawTextLeftJustified:(NSString *)text padding:(CGFloat)padding;
+- (CGSize)drawTextLeftJustified:(NSString *)text font:(UIFont *)font;
+- (CGSize)drawTextLeftJustified:(NSString *)text font:(UIFont *)font padding:(CGFloat)padding;
+
+- (CGSize)drawTextRightJustified:(NSString *)text;
+- (CGSize)drawTextRightJustified:(NSString *)text padding:(CGFloat)padding;
+- (CGSize)drawTextRightJustified:(NSString *)text font:(UIFont *)font;
+- (CGSize)drawTextRightJustified:(NSString *)text font:(UIFont *)font padding:(CGFloat)padding;
+
+- (CGSize)drawTextMiddleJustified:(NSString *)text;
+- (CGSize)drawTextMiddleJustified:(NSString *)text padding:(CGFloat)padding;
+- (CGSize)drawTextMiddleJustified:(NSString *)text font:(UIFont *)font;
+- (CGSize)drawTextMiddleJustified:(NSString *)text font:(UIFont *)font padding:(CGFloat)padding;
 
 @end

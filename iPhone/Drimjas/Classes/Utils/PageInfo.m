@@ -55,6 +55,7 @@
 		margin = 72.0;					// 72 pt = 1 inch = 2.54 cm
 		linePadding = 2.0;
 		sectionPadding = plainFont.pointSize + 2*linePadding;
+		tablePadding = 0.0;
 
 		bounds = CGRectMake(margin, margin, CGRectGetWidth(pageSize) - 2*margin, CGRectGetHeight(pageSize) - 2*margin);
 		self.x = bounds.origin.x;
@@ -79,8 +80,7 @@
 - (void)setMaxHeight:(CGFloat)newHeight {
 	if (newHeight < 0) {
 		// we've run out of height on this page, open a new one
-		UIGraphicsBeginPDFPage();
-		pageNo++;
+		[self openNewPage];
 		// reset y & height
 		self.y = bounds.origin.y;
 	}
@@ -90,42 +90,97 @@
 }
 
 - (CGSize)maxSize {
-	return CGSizeMake(maxWidth, maxHeight);
+	CGFloat padding = 2*tablePadding;
+	return CGSizeMake(maxWidth - padding, maxHeight - padding);
 }
 
-- (CGSize)drawTextLeftAlign:(NSString *)text {
-	return [self drawTextLeftAlign:text withFont:plainFont];
+- (NSUInteger)openNewPage {
+	UIGraphicsBeginPDFPage();
+	return ++pageNo;
 }
 
-- (CGSize)drawTextLeftAlign:(NSString *)text withFont:(UIFont*)font {
-	NSAssert(font != nil, @"can't draw left align text with nil font");
+- (CGSize)drawTextLeftJustified:(NSString *)text {
+	return [self drawTextLeftJustified:text font:plainFont];
+}
+
+- (CGSize)drawTextLeftJustified:(NSString *)text padding:(CGFloat)padding {
+	return [self drawTextLeftJustified:text font:plainFont padding:padding];
+}
+
+- (CGSize)drawTextLeftJustified:(NSString *)text font:(UIFont *)font {
+	return [self drawTextLeftJustified:text font:font padding: 0.0];
+}
+
+- (CGSize)drawTextLeftJustified:(NSString *)text font:(UIFont *)font padding:(CGFloat)padding {
+	NSAssert(font != nil, @"can't draw left justified text with nil font");
+	
+	tablePadding = padding;
 
 	CGSize textSize = [text sizeWithFont:font constrainedToSize:self.maxSize lineBreakMode:UILineBreakModeWordWrap];
 
-	CGRect textPath = CGRectMake(x, y, textSize.width, textSize.height);
+	CGRect textPath = CGRectMake(x + tablePadding, y + tablePadding, textSize.width, textSize.height);
 
 	[text drawInRect:textPath withFont:font];
 
 	return textSize;
 }
 
-- (CGSize)drawTextRightAlign:(NSString *)text {
-	return [self drawTextRightAlign:text withFont:plainFont];
+- (CGSize)drawTextRightJustified:(NSString *)text {
+	return [self drawTextRightJustified:text font:plainFont];
 }
 
-- (CGSize)drawTextRightAlign:(NSString *)text withFont:(UIFont *)font {
-	NSAssert(font != nil, @"can't draw right align text with nil font");
+- (CGSize)drawTextRightJustified:(NSString *)text padding:(CGFloat)padding {
+	return [self drawTextRightJustified:text font:plainFont padding:padding];
+}
+
+- (CGSize)drawTextRightJustified:(NSString *)text font:(UIFont *)font {
+	return [self drawTextRightJustified:text font:font padding:0.0];
+}
+
+- (CGSize)drawTextRightJustified:(NSString *)text font:(UIFont *)font padding:(CGFloat)padding {
+	NSAssert(font != nil, @"can't draw right justified text with nil font");
+
+	tablePadding = padding;
 
 	CGSize textSize = [text sizeWithFont:font constrainedToSize:self.maxSize lineBreakMode:UILineBreakModeWordWrap];
 
-	NSUInteger xFromRight = x + self.maxSize.width - textSize.width;
+	CGFloat xFromRight = x + self.maxWidth - textSize.width;
 
-	CGRect textPath = CGRectMake(xFromRight, y, textSize.width, textSize.height);
+	CGRect textPath = CGRectMake(xFromRight - tablePadding, y + tablePadding, textSize.width, textSize.height);
 
 	[text drawInRect:textPath withFont:font lineBreakMode:UILineBreakModeWordWrap alignment:UITextAlignmentRight];
 
 	return textSize;
 }
+
+- (CGSize)drawTextMiddleJustified:(NSString *)text {
+	return [self drawTextMiddleJustified:text font:plainFont];
+}
+
+- (CGSize)drawTextMiddleJustified:(NSString *)text padding:(CGFloat)padding {
+	return [self drawTextMiddleJustified:text font:plainFont padding:padding];
+}
+
+- (CGSize)drawTextMiddleJustified:(NSString *)text font:(UIFont *)font {
+	return [self drawTextMiddleJustified:text font:font padding:0.0];
+}
+
+- (CGSize)drawTextMiddleJustified:(NSString *)text font:(UIFont *)font padding:(CGFloat)padding {
+	NSAssert(font != nil, @"can't draw middle justified text with nil font");
+
+	tablePadding = padding;
+
+	CGSize textSize = [text sizeWithFont:font constrainedToSize:self.maxSize lineBreakMode:UILineBreakModeWordWrap];
+
+	CGFloat xFromLeft = x + (self.maxWidth - textSize.width) / 2;
+
+	CGRect textPath = CGRectMake(xFromLeft, y + tablePadding, textSize.width, textSize.height);
+
+	[text drawInRect:textPath withFont:font lineBreakMode:UILineBreakModeWordWrap alignment:UITextAlignmentCenter];
+
+	return textSize;
+}
+
 
 
 - (void)dealloc {

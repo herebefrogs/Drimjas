@@ -179,12 +179,12 @@ typedef enum {
 		pageInfo.maxWidth = labelWidth;
 
 		NSString *clientProperty = [NSString stringWithFormat:@"client.%@", pair.key];
-		CGSize labelSize = [pageInfo drawTextLeftAlign:NSLocalizedString(clientProperty, "Property name")];
+		CGSize labelSize = [pageInfo drawTextLeftJustified:NSLocalizedString(clientProperty, "Property name")];
 
 		pageInfo.x = clientInfoX;
 		pageInfo.maxWidth = clientInfoWidth;
 
-		CGSize infoSize = [pageInfo drawTextLeftAlign:pair.value];
+		CGSize infoSize = [pageInfo drawTextLeftJustified:pair.value];
 
 		CGFloat lineOffset = MAX(labelSize.height, infoSize.height) + pageInfo.linePadding;
 		pageInfo.y += lineOffset;
@@ -199,20 +199,19 @@ typedef enum {
 			pageInfo.maxWidth = labelWidth;
 
 			NSString *contactKey = [NSString stringWithFormat:@"contact.%@", pair.key];
-			CGSize labelSize = [pageInfo drawTextLeftAlign:NSLocalizedString(contactKey, "Property name")];
+			CGSize labelSize = [pageInfo drawTextLeftJustified:NSLocalizedString(contactKey, "Property name")];
 
 			pageInfo.x = clientInfoX;
 			pageInfo.maxWidth = clientInfoWidth;
 
-			CGSize infoSize = [pageInfo drawTextLeftAlign:pair.value];
+			CGSize infoSize = [pageInfo drawTextLeftJustified:pair.value];
 
 			pageInfo.y += MAX(labelSize.height, infoSize.height) + pageInfo.linePadding;;
 		}
 	}
 	[sortDescriptor release];
 
-	// return used height
-	return pageInfo.y - pageInfo.bounds.origin.y;
+	return pageInfo.y;
 }
 
 + (CGFloat)_pageInfo:(PageInfo *)pageInfo renderMyInfo:(MyInfo *)myInfo xAndWidths:(NSArray *)xAndWidths {
@@ -242,19 +241,17 @@ typedef enum {
 			insertOffset = NO;
 		}
 
-		CGSize infoSize = [pageInfo drawTextRightAlign:pair.value
-											  withFont:([pair.key isEqualToString:@"name"] ? pageInfo.bigBoldFont : pageInfo.plainFont)];
+		CGSize infoSize = [pageInfo drawTextRightJustified:pair.value
+											  font:([pair.key isEqualToString:@"name"] ? pageInfo.bigBoldFont : pageInfo.plainFont)];
 
 		pageInfo.y += infoSize.height + pageInfo.linePadding;
 	}
 
-	// return used height
-	return pageInfo.y - pageInfo.bounds.origin.y;
+	return pageInfo.y;
 }
 
-+ (CGSize)_pageInfo:(PageInfo *)pageInfo renderDate:(NSDate *)date atHeight:(CGFloat)height {
++ (void)_pageInfo:(PageInfo *)pageInfo renderDate:(NSDate *)date {
 	pageInfo.x = pageInfo.bounds.origin.x;
-	pageInfo.y = pageInfo.bounds.origin.y + height;
 
 	NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
 	// TODO should find similar pattern from user's Region Settings so its localized
@@ -262,32 +259,28 @@ typedef enum {
 	NSString *estimateDate = [dateFormat stringFromDate:date];
 	[dateFormat release];
 
-	CGSize dateSize = [pageInfo drawTextRightAlign:estimateDate];
-	dateSize.height += pageInfo.linePadding;
-	return dateSize;
+	CGSize dateSize = [pageInfo drawTextRightJustified:estimateDate];
+	pageInfo.y += dateSize.height + pageInfo.linePadding;
 }
 
-+ (CGFloat)_pageInfo:(PageInfo *)pageInfo renderTaxNos:(NSArray *)taxes atHeight:(CGFloat)height {
++ (void)_pageInfo:(PageInfo *)pageInfo renderTaxNos:(NSArray *)taxes {
 	pageInfo.x = pageInfo.bounds.origin.x;
-	pageInfo.y = pageInfo.bounds.origin.y + height;
 
 	for (Tax *tax in taxes) {
-		CGSize taxSize = [pageInfo drawTextRightAlign:[NSString stringWithFormat:@"%@ #%@", tax.name, tax.taxNumber]];
+		CGSize taxSize = [pageInfo drawTextRightJustified:[NSString stringWithFormat:@"%@ #%@", tax.name, tax.taxNumber]];
 
 		pageInfo.y += taxSize.height + pageInfo.linePadding;
 	}
-
-	return pageInfo.y - (pageInfo.bounds.origin.y + height);
 }
 
-+ (CGSize)_pageInfo:(PageInfo *)pageInfo renderOrderNo:(NSString *)orderNo atHeight:(CGFloat)height {
++ (void)_pageInfo:(PageInfo *)pageInfo renderOrderNo:(NSString *)orderNo {
 	pageInfo.x = pageInfo.bounds.origin.x;
-	pageInfo.y = pageInfo.bounds.origin.y + height;
 
-	return [pageInfo drawTextLeftAlign:[NSString stringWithFormat:@"%@ #%@",
-												NSLocalizedString(@"Purchase Order", "Purchase Order label in PDF"),
-												orderNo]
-							  withFont:pageInfo.bigBoldFont];
+	CGSize noSize = [pageInfo drawTextLeftJustified:[NSString stringWithFormat:@"%@ #%@",
+													 NSLocalizedString(@"Purchase Order", "Purchase Order label in PDF"),
+													 orderNo]
+											   font:pageInfo.bigBoldFont];
+	pageInfo.y += noSize.height + pageInfo.sectionPadding;
 }
 
 typedef enum {
@@ -431,6 +424,343 @@ typedef enum {
 		   ];
 }
 
+
++ (void)_pageInfo:(PageInfo *)pageInfo renderLineItems:(NSSet *)lineItemsSet xAndWidths:(NSArray *)xAndWidths {
+	NSAssert(xAndWidths.count == CostWidth + 1, @"Not enough x and width data to render line items");
+
+	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"index" ascending:YES];
+	NSArray *lineItems = [lineItemsSet sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];
+	[sortDescriptor release];
+
+	CGFloat nameX = [[xAndWidths objectAtIndex:NameX] floatValue];
+	CGFloat nameWidth = [[xAndWidths objectAtIndex:NameWidth] floatValue];
+	CGFloat descriptionX = [[xAndWidths objectAtIndex:DescriptionX] floatValue];
+	CGFloat descriptionWidth = [[xAndWidths objectAtIndex:DescriptionWidth] floatValue];
+	CGFloat unitCostX = [[xAndWidths objectAtIndex:UnitCostX] floatValue];
+	CGFloat unitCostWidth = [[xAndWidths objectAtIndex:UnitCostWidth] floatValue];
+	CGFloat quantityX = [[xAndWidths objectAtIndex:QuantityX] floatValue];
+	CGFloat quantityWidth = [[xAndWidths objectAtIndex:QuantityWidth] floatValue];
+	CGFloat costX = [[xAndWidths objectAtIndex:CostX] floatValue];
+	CGFloat costWidth = [[xAndWidths objectAtIndex:CostWidth] floatValue];
+
+	NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+	[numberFormatter setCurrencyCode:[[[DataStore defaultStore] currency] isoCode]];
+
+	// render table header
+	pageInfo.x = nameX;
+	pageInfo.maxWidth = nameWidth;
+	CGSize textSize = [pageInfo drawTextMiddleJustified:NSLocalizedString(@"Item","") font:pageInfo.boldFont padding:pageInfo.linePadding];
+	CGFloat maxRowHeight = textSize.height + 2 * pageInfo.linePadding;
+
+	pageInfo.x = descriptionX;
+	pageInfo.maxWidth = descriptionWidth;
+	textSize = [pageInfo drawTextMiddleJustified:NSLocalizedString(@"Description","") font:pageInfo.boldFont padding:pageInfo.linePadding];
+	maxRowHeight = MAX(maxRowHeight, textSize.height + 2 * pageInfo.linePadding);
+
+	pageInfo.x = unitCostX;
+	pageInfo.maxWidth = unitCostWidth;
+	textSize = [pageInfo drawTextMiddleJustified:NSLocalizedString(@"Unit Cost","") font:pageInfo.boldFont padding:pageInfo.linePadding];
+	maxRowHeight = MAX(maxRowHeight, textSize.height + 2 * pageInfo.linePadding);
+
+	pageInfo.x = quantityX;
+	pageInfo.maxWidth = quantityWidth;
+	textSize = [pageInfo drawTextMiddleJustified:NSLocalizedString(@"Quantity","") font:pageInfo.boldFont padding:pageInfo.linePadding];
+	maxRowHeight = MAX(maxRowHeight, textSize.height + 2 * pageInfo.linePadding);
+
+	pageInfo.x = costX;
+	pageInfo.maxWidth = costWidth;
+	textSize = [pageInfo drawTextMiddleJustified:NSLocalizedString(@"Cost","") font:pageInfo.boldFont padding:pageInfo.linePadding];
+	maxRowHeight = MAX(maxRowHeight, textSize.height + 2 * pageInfo.linePadding);
+
+	// render row frame
+	CGContextRef context = UIGraphicsGetCurrentContext();
+	CGContextBeginPath(context);
+	CGContextSetLineWidth(context, 0.5);
+	CGContextMoveToPoint(context, pageInfo.bounds.origin.x, pageInfo.y);
+	CGContextAddLineToPoint(context, pageInfo.bounds.origin.x + CGRectGetWidth(pageInfo.bounds), pageInfo.y);
+	CGContextAddLineToPoint(context, pageInfo.bounds.origin.x + CGRectGetWidth(pageInfo.bounds), pageInfo.y + maxRowHeight);
+	CGContextAddLineToPoint(context, pageInfo.bounds.origin.x, pageInfo.y + maxRowHeight);
+	CGContextClosePath(context);
+	CGContextStrokePath(context);
+
+	// render individual columns
+	CGContextBeginPath(context);
+	CGContextMoveToPoint(context, descriptionX, pageInfo.y);
+	CGContextAddLineToPoint(context, descriptionX, pageInfo.y + maxRowHeight);
+	CGContextClosePath(context);
+	CGContextStrokePath(context);
+
+	CGContextBeginPath(context);
+	CGContextMoveToPoint(context, unitCostX, pageInfo.y);
+	CGContextAddLineToPoint(context, unitCostX, pageInfo.y + maxRowHeight);
+	CGContextClosePath(context);
+	CGContextStrokePath(context);
+
+	CGContextBeginPath(context);
+	CGContextMoveToPoint(context, costX, pageInfo.y);
+	CGContextAddLineToPoint(context, costX, pageInfo.y + maxRowHeight);
+	CGContextClosePath(context);
+	CGContextStrokePath(context);
+
+	CGContextBeginPath(context);
+	CGContextMoveToPoint(context, quantityX, pageInfo.y);
+	CGContextAddLineToPoint(context, quantityX, pageInfo.y + maxRowHeight);
+	CGContextClosePath(context);
+	CGContextStrokePath(context);
+
+	pageInfo.y += maxRowHeight;
+
+	// render each line item in a row
+	for (LineItemSelection *lineItem in lineItems) {
+		// skip H&S handled separately at the end of the PDF
+		if ([lineItem.lineItem.name isEqualToString:NSLocalizedString(@"Handling & Shipping", "")]) {
+			continue;
+		}
+
+		// calculate the maximum row height before drawing any text if we had no limit (only name & description
+		// columns can wrap on multiple lines so it's safe to ignore unit cost, quantity and cost)
+		CGFloat currentHeight = pageInfo.maxHeight;
+		pageInfo.maxHeight = CGRectGetHeight(pageInfo.bounds);
+		pageInfo.x = nameX;
+		pageInfo.maxWidth = nameWidth;
+		textSize = [lineItem.lineItem.name  sizeWithFont:pageInfo.plainFont constrainedToSize:pageInfo.maxSize lineBreakMode:UILineBreakModeWordWrap];
+		maxRowHeight = textSize.height + 2 * pageInfo.linePadding;
+
+		pageInfo.x = descriptionX;
+		pageInfo.maxWidth = descriptionWidth;
+		textSize = [lineItem.details sizeWithFont:pageInfo.plainFont constrainedToSize:pageInfo.maxSize lineBreakMode:UILineBreakModeWordWrap];
+		maxRowHeight = MAX(maxRowHeight, textSize.height + 2 * pageInfo.linePadding);
+		pageInfo.maxHeight = currentHeight;
+
+		// skip to the next page if there isn't enough height left on the current one to draw the entire line
+		if (pageInfo.maxHeight < maxRowHeight) {
+			[pageInfo openNewPage];
+			pageInfo.y = pageInfo.bounds.origin.y;
+		}
+
+		pageInfo.x = nameX;
+		pageInfo.maxWidth = nameWidth;
+		[pageInfo drawTextLeftJustified:lineItem.lineItem.name padding:pageInfo.linePadding];
+
+		pageInfo.x = descriptionX;
+		pageInfo.maxWidth = descriptionWidth;
+		[pageInfo drawTextLeftJustified:lineItem.details padding:pageInfo.linePadding];
+
+		pageInfo.x = unitCostX;
+		pageInfo.maxWidth = unitCostWidth;
+		[numberFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
+		NSNumber *value = lineItem.unitCost ? lineItem.unitCost : [NSNumber numberWithFloat:0.0];
+		textSize = [pageInfo drawTextRightJustified:[numberFormatter stringFromNumber:value] padding:pageInfo.linePadding];
+
+		pageInfo.x = quantityX;
+		pageInfo.maxWidth = quantityWidth;
+		[numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
+		value = lineItem.quantity ? lineItem.quantity : [NSNumber numberWithFloat:0.0];
+		textSize = [pageInfo drawTextMiddleJustified:[numberFormatter stringFromNumber:value] padding:pageInfo.linePadding];
+
+		pageInfo.x = costX;
+		pageInfo.maxWidth = costWidth;
+		[numberFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
+		textSize = [pageInfo drawTextRightJustified:[numberFormatter stringFromNumber:lineItem.cost] padding:pageInfo.linePadding];
+
+		// render row frame
+		CGContextBeginPath(context);
+		CGContextSetLineWidth(context, 0.5);
+		CGContextMoveToPoint(context, pageInfo.bounds.origin.x, pageInfo.y);
+		CGContextAddLineToPoint(context, pageInfo.bounds.origin.x + CGRectGetWidth(pageInfo.bounds), pageInfo.y);
+		CGContextAddLineToPoint(context, pageInfo.bounds.origin.x + CGRectGetWidth(pageInfo.bounds), pageInfo.y + maxRowHeight);
+		CGContextAddLineToPoint(context, pageInfo.bounds.origin.x, pageInfo.y + maxRowHeight);
+		CGContextClosePath(context);
+		CGContextStrokePath(context);
+
+		// render individual columns
+		CGContextBeginPath(context);
+		CGContextMoveToPoint(context, descriptionX, pageInfo.y);
+		CGContextAddLineToPoint(context, descriptionX, pageInfo.y + maxRowHeight);
+		CGContextClosePath(context);
+		CGContextStrokePath(context);
+
+		CGContextBeginPath(context);
+		CGContextMoveToPoint(context, unitCostX, pageInfo.y);
+		CGContextAddLineToPoint(context, unitCostX, pageInfo.y + maxRowHeight);
+		CGContextClosePath(context);
+		CGContextStrokePath(context);
+
+		CGContextBeginPath(context);
+		CGContextMoveToPoint(context, costX, pageInfo.y);
+		CGContextAddLineToPoint(context, costX, pageInfo.y + maxRowHeight);
+		CGContextClosePath(context);
+		CGContextStrokePath(context);
+
+		CGContextBeginPath(context);
+		CGContextMoveToPoint(context, quantityX, pageInfo.y);
+		CGContextAddLineToPoint(context, quantityX, pageInfo.y + maxRowHeight);
+		CGContextClosePath(context);
+		CGContextStrokePath(context);
+
+		pageInfo.y += maxRowHeight;
+	}
+	[numberFormatter release];
+}
+
++ (void)_pageInfo:(PageInfo *)pageInfo renderTotalsAndTaxes:(Estimate *)estimate xAndWidths:(NSArray *)xAndWidths {
+	NSAssert(xAndWidths.count == CostWidth + 1, @"Not enough x and width data to render totals and taxes");
+
+	CGFloat unitCostX = [[xAndWidths objectAtIndex:UnitCostX] floatValue];
+	CGFloat unitCostWidth = [[xAndWidths objectAtIndex:UnitCostWidth] floatValue];
+	CGFloat quantityX = [[xAndWidths objectAtIndex:QuantityX] floatValue];
+	CGFloat quantityWidth = [[xAndWidths objectAtIndex:QuantityWidth] floatValue];
+	CGFloat costX = [[xAndWidths objectAtIndex:CostX] floatValue];
+	CGFloat costWidth = [[xAndWidths objectAtIndex:CostWidth] floatValue];
+
+	NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+	[numberFormatter setCurrencyCode:[[[DataStore defaultStore] currency] isoCode]];
+	[numberFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
+
+	NSNumber *subTotal = estimate.subTotal;
+	NSArray *taxes = [[DataStore defaultStore] taxes];
+
+	// calculate the maximum width of sub total, taxes, h&s and total labels
+	CGSize textSize = [NSLocalizedString(@"SUBTOTAL","") sizeWithFont:pageInfo.boldFont];
+	CGFloat labelWidth = textSize.width;
+	for (Tax *tax in taxes) {
+		textSize = [tax.name sizeWithFont:pageInfo.boldFont];
+		labelWidth = MAX(labelWidth, textSize.width);
+	}
+	textSize = [NSLocalizedString(@"H & S","") sizeWithFont:pageInfo.boldFont];
+	labelWidth = MAX(labelWidth, textSize.width);
+	textSize = [NSLocalizedString(@"TOTAL","") sizeWithFont:pageInfo.boldFont];
+	labelWidth = MAX(labelWidth, textSize.width);
+	// provision some space for padding on both side
+	labelWidth += 2 * pageInfo.linePadding;
+	CGFloat labelX = costX - labelWidth;
+
+	// adjust label width to align with quantity or unit cost column if label fits
+	if (labelWidth < quantityWidth) {
+		labelX = quantityX;
+		labelWidth = quantityWidth;
+	}
+	else if (labelWidth < (unitCostWidth + quantityWidth)) {
+		labelX = unitCostX;
+		labelWidth = unitCostWidth + quantityWidth;
+	}
+
+	// render sub total
+	pageInfo.x = labelX;
+	pageInfo.maxWidth = labelWidth;
+	[pageInfo drawTextMiddleJustified:NSLocalizedString(@"SUBTOTAL","") font:pageInfo.boldFont padding:pageInfo.linePadding];
+	pageInfo.x = costX;
+	pageInfo.maxWidth = costWidth;
+	textSize = [pageInfo drawTextRightJustified:[numberFormatter stringFromNumber:subTotal] padding:pageInfo.linePadding];
+	CGFloat maxRowHeight = textSize.height + 2 * pageInfo.linePadding;
+
+	// render row frame
+	CGContextRef context = UIGraphicsGetCurrentContext();
+	CGContextBeginPath(context);
+	CGContextSetLineWidth(context, 0.5);
+	CGContextMoveToPoint(context, labelX, pageInfo.y);
+	CGContextAddLineToPoint(context, pageInfo.bounds.origin.x + CGRectGetWidth(pageInfo.bounds), pageInfo.y);
+	CGContextAddLineToPoint(context, pageInfo.bounds.origin.x + CGRectGetWidth(pageInfo.bounds), pageInfo.y + maxRowHeight);
+	CGContextAddLineToPoint(context, labelX, pageInfo.y + maxRowHeight);
+	CGContextClosePath(context);
+	CGContextStrokePath(context);
+
+	CGContextBeginPath(context);
+	CGContextMoveToPoint(context, costX, pageInfo.y);
+	CGContextAddLineToPoint(context, costX, pageInfo.y + maxRowHeight);
+	CGContextClosePath(context);
+	CGContextStrokePath(context);
+
+	pageInfo.y += maxRowHeight;
+
+	// render taxes
+	for (Tax *tax in taxes) {
+		pageInfo.x = labelX;
+		pageInfo.maxWidth = labelWidth;
+		[pageInfo drawTextMiddleJustified:tax.name font:pageInfo.boldFont padding:pageInfo.linePadding];
+		pageInfo.x = costX;
+		pageInfo.maxWidth = costWidth;
+		textSize = [pageInfo drawTextRightJustified:[numberFormatter stringFromNumber:[tax costForSubTotal:subTotal]] padding:pageInfo.linePadding];
+		maxRowHeight = textSize.height + 2 * pageInfo.linePadding;
+
+		// render row frame
+		CGContextBeginPath(context);
+		CGContextSetLineWidth(context, 0.5);
+		CGContextMoveToPoint(context, labelX, pageInfo.y);
+		CGContextAddLineToPoint(context, pageInfo.bounds.origin.x + CGRectGetWidth(pageInfo.bounds), pageInfo.y);
+		CGContextAddLineToPoint(context, pageInfo.bounds.origin.x + CGRectGetWidth(pageInfo.bounds), pageInfo.y + maxRowHeight);
+		CGContextAddLineToPoint(context, labelX, pageInfo.y + maxRowHeight);
+		CGContextClosePath(context);
+		CGContextStrokePath(context);
+
+		CGContextBeginPath(context);
+		CGContextMoveToPoint(context, costX, pageInfo.y);
+		CGContextAddLineToPoint(context, costX, pageInfo.y + maxRowHeight);
+		CGContextClosePath(context);
+		CGContextStrokePath(context);
+
+		pageInfo.y += maxRowHeight;
+	}
+
+	pageInfo.y += 6 * pageInfo.linePadding;
+
+	// render h&s
+	pageInfo.x = labelX;
+	pageInfo.maxWidth = labelWidth;
+	[pageInfo drawTextMiddleJustified:NSLocalizedString(@"H & S","") font:pageInfo.boldFont padding:pageInfo.linePadding];
+	pageInfo.x = costX;
+	pageInfo.maxWidth = costWidth;
+	textSize = [pageInfo drawTextRightJustified:[numberFormatter stringFromNumber:estimate.handlingAndShippingCost] padding:pageInfo.linePadding];
+	maxRowHeight = textSize.height + 2 * pageInfo.linePadding;
+
+	// render row frame
+	CGContextBeginPath(context);
+	CGContextSetLineWidth(context, 0.5);
+	CGContextMoveToPoint(context, labelX, pageInfo.y);
+	CGContextAddLineToPoint(context, pageInfo.bounds.origin.x + CGRectGetWidth(pageInfo.bounds), pageInfo.y);
+	CGContextAddLineToPoint(context, pageInfo.bounds.origin.x + CGRectGetWidth(pageInfo.bounds), pageInfo.y + maxRowHeight);
+	CGContextAddLineToPoint(context, labelX, pageInfo.y + maxRowHeight);
+	CGContextClosePath(context);
+	CGContextStrokePath(context);
+
+	CGContextBeginPath(context);
+	CGContextMoveToPoint(context, costX, pageInfo.y);
+	CGContextAddLineToPoint(context, costX, pageInfo.y + maxRowHeight);
+	CGContextClosePath(context);
+	CGContextStrokePath(context);
+
+	pageInfo.y += maxRowHeight + 6 * pageInfo.linePadding;
+
+	// render total
+	pageInfo.x = labelX;
+	pageInfo.maxWidth = labelWidth;
+	[pageInfo drawTextMiddleJustified:NSLocalizedString(@"TOTAL","") font:pageInfo.boldFont padding:pageInfo.linePadding];
+	pageInfo.x = costX;
+	pageInfo.maxWidth = costWidth;
+	textSize = [pageInfo drawTextRightJustified:[numberFormatter stringFromNumber:estimate.total] padding:pageInfo.linePadding];
+	maxRowHeight = textSize.height + 2 * pageInfo.linePadding;
+
+	// render row frame
+	CGContextBeginPath(context);
+	CGContextSetLineWidth(context, 0.5);
+	CGContextMoveToPoint(context, labelX, pageInfo.y);
+	CGContextAddLineToPoint(context, pageInfo.bounds.origin.x + CGRectGetWidth(pageInfo.bounds), pageInfo.y);
+	CGContextAddLineToPoint(context, pageInfo.bounds.origin.x + CGRectGetWidth(pageInfo.bounds), pageInfo.y + maxRowHeight);
+	CGContextAddLineToPoint(context, labelX, pageInfo.y + maxRowHeight);
+	CGContextClosePath(context);
+	CGContextStrokePath(context);
+
+	CGContextBeginPath(context);
+	CGContextMoveToPoint(context, costX, pageInfo.y);
+	CGContextAddLineToPoint(context, costX, pageInfo.y + maxRowHeight);
+	CGContextClosePath(context);
+	CGContextStrokePath(context);
+
+	pageInfo.y += maxRowHeight;
+
+	[numberFormatter release];
+}
+
 #pragma mark -
 #pragma mark Public protocol implementation
 
@@ -449,32 +779,35 @@ typedef enum {
 	NSArray *xAndWidths = [PDFManager _pageInfo:pageInfo headerColumnsWidthForClient:estimate.clientInfo myInfo:myInfo];
 
 	// render client+contact info & my info side by side
-	CGFloat myHeight = [PDFManager _pageInfo:pageInfo renderMyInfo:myInfo xAndWidths:xAndWidths];
-	CGFloat clientHeight = [PDFManager _pageInfo:pageInfo renderClientInfo:estimate.clientInfo xAndWidths:xAndWidths];
+	CGFloat myY = [PDFManager _pageInfo:pageInfo renderMyInfo:myInfo xAndWidths:xAndWidths];
+	CGFloat clientY = [PDFManager _pageInfo:pageInfo renderClientInfo:estimate.clientInfo xAndWidths:xAndWidths];
 
 	// render estimate date & business number
-	CGFloat height = pageInfo.pageNo == 1 && myHeight > clientHeight ? myHeight + pageInfo.sectionPadding : clientHeight;
-	CGSize lastSize = [PDFManager _pageInfo:pageInfo renderDate:estimate.date atHeight:height];
-
-	height += lastSize.height;
-	CGFloat taxNosHeight = [PDFManager _pageInfo:pageInfo renderTaxNos:[[DataStore defaultStore] taxes] atHeight:height];
+	pageInfo.y = pageInfo.pageNo == 1 && myY > clientY ? myY + pageInfo.sectionPadding : clientY;
+	[PDFManager _pageInfo:pageInfo renderDate:estimate.date];
+	[PDFManager _pageInfo:pageInfo renderTaxNos:[[DataStore defaultStore] taxes]];
 
 	// render horizontal line
-	height += taxNosHeight + pageInfo.linePadding;
+	pageInfo.y += pageInfo.linePadding;
 	CGContextRef context = UIGraphicsGetCurrentContext();
 	CGContextBeginPath(context);
 	CGContextSetLineWidth(context, 1.5);
-	CGContextMoveToPoint(context, pageInfo.bounds.origin.x, pageInfo.bounds.origin.y + height);
-	CGContextAddLineToPoint(context, pageInfo.bounds.origin.x + CGRectGetWidth(pageInfo.bounds), pageInfo.bounds.origin.y + height);
+	CGContextMoveToPoint(context, pageInfo.bounds.origin.x, pageInfo.y);
+	CGContextAddLineToPoint(context, pageInfo.bounds.origin.x + CGRectGetWidth(pageInfo.bounds), pageInfo.y);
 	CGContextClosePath(context);
 	CGContextStrokePath(context);
 
 	// render order number
-	height += pageInfo.sectionPadding;
-	lastSize = [PDFManager _pageInfo:pageInfo renderOrderNo:estimate.orderNumber atHeight:height];
+	pageInfo.y += pageInfo.sectionPadding;
+	[PDFManager _pageInfo:pageInfo renderOrderNo:estimate.orderNumber];
 	
 	// render line items table
 	xAndWidths = [PDFManager _pageInfo:pageInfo tableColumnsWidthForEstimate:estimate];
+
+	pageInfo.y += pageInfo.sectionPadding;
+	[PDFManager _pageInfo:pageInfo renderLineItems:estimate.lineItems xAndWidths:xAndWidths];
+	pageInfo.y += 6 * pageInfo.linePadding;
+	[PDFManager _pageInfo:pageInfo renderTotalsAndTaxes:estimate xAndWidths:xAndWidths];
 
 	// end PDF data
 	UIGraphicsEndPDFContext();
