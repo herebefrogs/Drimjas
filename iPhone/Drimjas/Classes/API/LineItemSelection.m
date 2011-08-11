@@ -34,10 +34,15 @@
 }
 
 - (NSNumber *)cost {
-	if (self.quantity != nil && self.unitCost != nil) {
-		return [NSNumber numberWithFloat:([self.quantity floatValue] * [self.unitCost floatValue])];
-	}
-	return [NSNumber numberWithFloat:0.0];
+	return [NSNumber numberWithFloat:([self.nonNilQuantity floatValue] * [self.nonNilUnitCost floatValue])];
+}
+
+- (NSNumber *)nonNilQuantity {
+	return (self.quantity != nil) ? self.quantity : [NSNumber numberWithFloat:0.0];
+}
+
+- (NSNumber *)nonNilUnitCost {
+	return (self.unitCost != nil) ? self.unitCost : [NSNumber numberWithFloat:0.0];
 }
 
 @end

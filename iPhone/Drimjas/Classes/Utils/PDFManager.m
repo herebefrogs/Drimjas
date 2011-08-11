@@ -324,16 +324,14 @@ typedef enum {
 		descriptionMax = MAX(descriptionMax, textSize.width);
 
 		[numberFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
-		NSNumber *value = lineItem.unitCost ? lineItem.unitCost : [NSNumber numberWithFloat:0.0];
-		textSize = [[numberFormatter stringFromNumber:value] sizeWithFont:pageInfo.plainFont];
+		textSize = [[numberFormatter stringFromNumber:lineItem.nonNilUnitCost] sizeWithFont:pageInfo.plainFont];
 		unitCostMax = MAX(unitCostMax, textSize.width);
 
 		textSize = [[numberFormatter stringFromNumber:lineItem.cost] sizeWithFont:pageInfo.plainFont];
 		costMax = MAX(costMax, textSize.width);
 
 		[numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];		
-		value = lineItem.quantity ? lineItem.quantity : [NSNumber numberWithFloat:0.0];
-		textSize = [[numberFormatter stringFromNumber:value] sizeWithFont:pageInfo.plainFont];
+		textSize = [[numberFormatter stringFromNumber:lineItem.nonNilQuantity] sizeWithFont:pageInfo.plainFont];
 		quantityMax = MAX(quantityMax, textSize.width);
 	}
 
@@ -549,14 +547,12 @@ typedef enum {
 		pageInfo.x = unitCostX;
 		pageInfo.maxWidth = unitCostWidth;
 		[numberFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
-		NSNumber *value = lineItem.unitCost ? lineItem.unitCost : [NSNumber numberWithFloat:0.0];
-		textSize = [pageInfo drawTextRightJustified:[numberFormatter stringFromNumber:value] padding:pageInfo.linePadding];
+		textSize = [pageInfo drawTextRightJustified:[numberFormatter stringFromNumber:lineItem.nonNilUnitCost] padding:pageInfo.linePadding];
 
 		pageInfo.x = quantityX;
 		pageInfo.maxWidth = quantityWidth;
 		[numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
-		value = lineItem.quantity ? lineItem.quantity : [NSNumber numberWithFloat:0.0];
-		textSize = [pageInfo drawTextMiddleJustified:[numberFormatter stringFromNumber:value] padding:pageInfo.linePadding];
+		textSize = [pageInfo drawTextMiddleJustified:[numberFormatter stringFromNumber:lineItem.nonNilQuantity] padding:pageInfo.linePadding];
 
 		pageInfo.x = costX;
 		pageInfo.maxWidth = costWidth;

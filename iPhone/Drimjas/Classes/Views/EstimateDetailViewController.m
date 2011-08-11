@@ -203,11 +203,11 @@
 			NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
 
 			[numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
-			NSString *quantity = [numberFormatter stringFromNumber:lineItem.quantity];
+			NSString *quantity = [numberFormatter stringFromNumber:lineItem.nonNilQuantity];
 
 			[numberFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
 			[numberFormatter setCurrencyCode:[[[DataStore defaultStore] currency] isoCode]];
-			NSString *unitCost = [numberFormatter stringFromNumber:lineItem.unitCost];
+			NSString *unitCost = [numberFormatter stringFromNumber:lineItem.nonNilUnitCost];
 
 			cell.textLabel.text = [NSString stringWithFormat:@"%@ x %@", quantity, unitCost];
 			[numberFormatter release];

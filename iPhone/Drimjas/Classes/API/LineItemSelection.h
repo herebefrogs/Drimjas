@@ -25,5 +25,7 @@
 
 - (void)copyLineItem:(LineItem *)newLineItem;
 @property (nonatomic, readonly) NSNumber *cost; // quantity x unitCost
+@property (nonatomic, readonly) NSNumber *nonNilUnitCost;
+@property (nonatomic, readonly) NSNumber *nonNilQuantity;
 
 @end
