@@ -75,4 +75,16 @@
 	return nil;
 }
 
+- (NSString *)toRecipient {
+	if (self.email.length > 0) {
+		if (self.name.length > 0) {
+			return [NSString stringWithFormat:@"%@ <%@>", self.name, self.email];
+		}
+		else {
+			return self.email;
+		}
+	}
+	return nil;
+}
+
 @end

@@ -8,6 +8,7 @@
 
 #import "EmailManager.h"
 // API
+#import "ClientInfo.h"
 #import "Estimate.h"
 // Utils
 #import "PDFManager.h"
@@ -64,7 +65,7 @@
 							NSLocalizedString(@"Estimate", "Estimate Mail Subject"),
 							estimate.orderNumber]];
 	
-	NSArray *toRecepients = [NSArray arrayWithObjects:@"For Example <for@example.com>", nil];
+	NSArray *toRecepients = estimate.clientInfo.toRecipients;
 	[controller setToRecipients:toRecepients];
 	
 	// attach estimate PDF to email

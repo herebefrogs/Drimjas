@@ -105,5 +105,18 @@
 	[self removeContactInfosObject:contactInfo];
 }
 
+- (NSArray *)toRecipients {
+	NSMutableArray *recipients = [NSMutableArray arrayWithCapacity:1];
 
+	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"index" ascending:YES];
+	for (ContactInfo *contact in [self.contactInfos sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]]) {
+		NSString *recipient = contact.toRecipient;
+		if (recipient) {
+			[recipients addObject:recipient];
+		}
+	}
+	[sortDescriptor release];
+
+	return recipients;
+}
 @end
