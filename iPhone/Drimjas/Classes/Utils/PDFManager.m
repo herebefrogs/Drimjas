@@ -238,7 +238,6 @@ typedef enum {
 		}
 		if (insertOffset) {
 			pageInfo.y += pageInfo.sectionPadding;
-			insertOffset = NO;
 		}
 
 		CGSize infoSize = [pageInfo drawTextRightJustified:pair.value
@@ -547,17 +546,17 @@ typedef enum {
 		pageInfo.x = unitCostX;
 		pageInfo.maxWidth = unitCostWidth;
 		[numberFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
-		textSize = [pageInfo drawTextRightJustified:[numberFormatter stringFromNumber:lineItem.nonNilUnitCost] padding:pageInfo.linePadding];
+		[pageInfo drawTextRightJustified:[numberFormatter stringFromNumber:lineItem.nonNilUnitCost] padding:pageInfo.linePadding];
 
 		pageInfo.x = quantityX;
 		pageInfo.maxWidth = quantityWidth;
 		[numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
-		textSize = [pageInfo drawTextMiddleJustified:[numberFormatter stringFromNumber:lineItem.nonNilQuantity] padding:pageInfo.linePadding];
+		[pageInfo drawTextMiddleJustified:[numberFormatter stringFromNumber:lineItem.nonNilQuantity] padding:pageInfo.linePadding];
 
 		pageInfo.x = costX;
 		pageInfo.maxWidth = costWidth;
 		[numberFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
-		textSize = [pageInfo drawTextRightJustified:[numberFormatter stringFromNumber:lineItem.cost] padding:pageInfo.linePadding];
+		[pageInfo drawTextRightJustified:[numberFormatter stringFromNumber:lineItem.cost] padding:pageInfo.linePadding];
 
 		// render row frame
 		CGContextBeginPath(context);
