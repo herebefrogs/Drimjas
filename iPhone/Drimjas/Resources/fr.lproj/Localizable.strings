@@ -197,6 +197,10 @@
 "H & S" = "FRAIS DE LIVRAISON";
 "TOTAL" = "TOTAL";
 
+/* PDF footer */
+"If you have any questions, please don't hesitate to contact us!" = "N'hésitez pas à nous contacter si vous avez la moindre question!";
+"Thank you for your business." = "Merci pour votre confiance.";
+"Notes:" = "Notes:";
 
 /****************** Line items section ****************/
 "Creative Fee" = "Creative Fee";

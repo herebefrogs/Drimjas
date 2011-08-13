@@ -200,6 +200,11 @@
 "H & S" = "H & S";
 "TOTAL" = "TOTAL";
 
+/* PDF footer */
+"If you have any questions, please don't hesitate to contact us!" = "If you have any questions, please don't hesitate to contact us!";
+"Thank you for your business." = "Thank you for your business.";
+"Notes:" = "Notes:";
+
 /****************** Line items section ****************/
 "Creative Fee" = "Creative Fee";
 "Creative Fee Description" = "Concept (details to be entered here) and time";

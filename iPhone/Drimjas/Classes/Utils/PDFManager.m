@@ -761,6 +761,17 @@ typedef enum {
 	[numberFormatter release];
 }
 
++ (void)_renderPDFFooter:(PageInfo *)pageInfo {
+	pageInfo.x = pageInfo.bounds.origin.x;
+	CGSize textSize = [pageInfo drawTextMiddleJustified:NSLocalizedString(@"If you have any questions, please don't hesitate to contact us!","") font:pageInfo.boldFont];
+
+	pageInfo.y += textSize.height + 6 * pageInfo.linePadding;
+	textSize = [pageInfo drawTextMiddleJustified:NSLocalizedString(@"Thank you for your business.","") font:pageInfo.boldFont];
+
+	pageInfo.y += textSize.height + 6 * pageInfo.linePadding;
+	[pageInfo drawTextLeftJustified:NSLocalizedString(@"Notes:","") font:pageInfo.boldFont];
+}
+
 #pragma mark -
 #pragma mark Public protocol implementation
 
@@ -808,6 +819,10 @@ typedef enum {
 	[PDFManager _pageInfo:pageInfo renderLineItems:estimate.lineItems xAndWidths:xAndWidths];
 	pageInfo.y += 6 * pageInfo.linePadding;
 	[PDFManager _pageInfo:pageInfo renderTotalsAndTaxes:estimate xAndWidths:xAndWidths];
+
+	// render PDF footer
+	pageInfo.y += pageInfo.sectionPadding;
+	[PDFManager _renderPDFFooter:pageInfo];
 
 	// end PDF data
 	UIGraphicsEndPDFContext();
