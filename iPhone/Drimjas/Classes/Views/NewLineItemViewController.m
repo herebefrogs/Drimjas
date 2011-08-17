@@ -129,7 +129,7 @@ BOOL added = NO;
 	// forces currently edited textfield's value to be processed
 	[lastTextFieldEdited resignFirstResponder];
 
-	if ([lineItem isValid]) {
+	if (lineItem.isReady) {
 		// saving line item will be done when screen disappear
 		added = YES;
 

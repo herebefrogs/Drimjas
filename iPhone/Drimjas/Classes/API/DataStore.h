@@ -67,6 +67,7 @@
 - (Estimate *)createEstimateStub;
 - (Estimate *)saveEstimateStub;
 - (void)deleteEstimateStub;
+- (BOOL)saveEstimate:(Estimate *)estimate;
 - (BOOL)deleteEstimate:(Estimate *)estimate;
 
 @end

@@ -20,10 +20,27 @@
 @dynamic clientInfo;
 
 
-- (void) awakeFromInsert {
+- (void)awakeFromInsert {
 	[super awakeFromInsert];
 	
 	self.subEntityName = @"ContactInfo";
+}
+
+- (BOOL)isReady {
+	return (self.email.length > 0);
+}
+
+- (void)refreshStatus {
+	NSNumber *oldStatus = [self.status retain];
+
+	[super refreshStatus];
+
+	if (![oldStatus isEqualToNumber:self.status]) {
+		// notify underlying ClientInfo of the status change
+		[self.clientInfo refreshStatus];
+	}
+
+	[oldStatus release];
 }
 
 - (NSArray *)allPropertyNames {

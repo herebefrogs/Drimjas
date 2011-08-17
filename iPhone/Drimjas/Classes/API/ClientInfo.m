@@ -32,6 +32,32 @@
 	self.subEntityName = @"ClientInfo";
 }
 
+- (BOOL)isReady {
+	if (self.name.length > 0) {
+		for (ContactInfo* contactInfo in self.contactInfos) {
+			if (contactInfo.isReady) {
+				return YES;
+			}
+		}
+	}
+	return NO;
+}
+
+- (void)refreshStatus {
+	NSNumber *oldStatus = [self.status retain];
+
+	[super refreshStatus];
+
+	if (![oldStatus isEqualToNumber:self.status]) {
+		// notify all underlying Estimates of the status change
+		for (Estimate *estimate in self.estimates) {
+			[estimate refreshStatus];
+		}
+	}
+
+	[oldStatus release];
+}
+
 - (NSArray *)allPropertyNames {
 	return [NSArray arrayWithObjects:@"name", @"address1", @"address2", @"city", @"state", @"postalCode", @"country", nil];
 }
@@ -96,6 +122,7 @@
 - (void)bindContactInfo:(ContactInfo *)contactInfo {
 	contactInfo.clientInfo = self;
 	[self addContactInfosObject:contactInfo];
+	[self refreshStatus];
 }
 
 - (void)unbindContactInfo:(ContactInfo *)contactInfo {
@@ -103,6 +130,7 @@
 
 	contactInfo.clientInfo = nil;
 	[self removeContactInfosObject:contactInfo];
+	[self refreshStatus];
 }
 
 - (NSArray *)toRecipients {

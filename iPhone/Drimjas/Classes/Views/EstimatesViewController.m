@@ -42,6 +42,12 @@
 	estimates.delegate = self;
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+
+	[self.tableView reloadData];
+}
+
 // Override to allow orientations other than the default portrait orientation.
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     // Return YES for supported orientations.
@@ -58,9 +64,9 @@ CGFloat DRIMJAS_GREEN_G = 0.56;			// 143 from 0-255 to 0.0-1.0 range
 CGFloat DRIMJAS_GREEN_B = 0.0;
 CGFloat STATUS_RIGHT_PADDING = 10.0;
 
-- (void)_setStatusLabel:(NSNumber *)status forCell:(UITableViewCell *)cell {
+- (void)_setStatusLabel:(BOOL)ready forCell:(UITableViewCell *)cell {
 	UILabel *statusLabel = (UILabel *)[cell.contentView viewWithTag:STATUS_TAG];
-	if ([status intValue] == StatusReady) {
+	if (ready) {
 		statusLabel.text = NSLocalizedString(@"Ready","Ready status");
 		// Drimjas green
 		statusLabel.textColor = [UIColor colorWithRed:DRIMJAS_GREEN_R green:DRIMJAS_GREEN_G blue:DRIMJAS_GREEN_B alpha:1.0];
@@ -90,7 +96,7 @@ CGFloat STATUS_RIGHT_PADDING = 10.0;
 	Estimate *estimate = [estimates objectAtIndexPath:indexPath];
     cell.textLabel.text = estimate.clientInfo.name;
 	cell.detailTextLabel.text = estimate.orderNumber;
-	[self _setStatusLabel:estimate.status forCell:cell];
+	[self _setStatusLabel:estimate.isReady forCell:cell];
 
 	cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 }

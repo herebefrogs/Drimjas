@@ -246,8 +246,6 @@ static DataStore *singleton_ = nil;
 		fetchRequest.entity = [NSEntityDescription entityForName:@"Estimate"
 										  inManagedObjectContext:self.managedObjectContext];
 
-		// TODO fetch only active ones?
-
 		// Sort estimates by date (newest estimate first, oldest estimate last)
 		NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"date" ascending:NO];
 		fetchRequest.sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
@@ -296,22 +294,11 @@ static DataStore *singleton_ = nil;
 }
 
 - (Estimate *)saveEstimateStub {
-	NSNumber *active = [NSNumber numberWithInt:StatusReady];
-
-	// flag each stub as "active"
-	estimateStub_.status = active;
-	[self saveClientInfo:estimateStub_.clientInfo];
-	for (LineItemSelection *lineItem in estimateStub_.lineItems) {
-		lineItem.status = active;
-	}
-
-	// save the context
-	NSError *error;
-	if (![self.managedObjectContext save:&error]) {
+	if (![self saveEstimate:estimateStub_]) {
 		// TODO This is a serious error saying the record
 		//could not be saved. Advise the user to
 		//try again or restart the application.
-		NSLog(@"DataStore.saveEstimate:%@ failed with error %@, %@", estimateStub_, error, [error userInfo]);
+		NSLog(@"DataStore.saveEstimateStub:%@ failed", estimateStub_);
 	}
 
 	// note: after the context save, stubs have permanent IDs
@@ -331,6 +318,20 @@ static DataStore *singleton_ = nil;
 
 	[estimateStub_ release];
 	estimateStub_ = nil;
+}
+
+- (BOOL)saveEstimate:(Estimate *)estimate {
+	[self saveClientInfo:estimate.clientInfo];
+
+	for (LineItemSelection *lineItem in estimate.lineItems) {
+		[lineItem refreshStatus];
+	}
+
+	[estimate refreshStatus];
+
+	[self saveContext];
+
+	return YES;
 }
 
 - (BOOL)deleteEstimate:(Estimate *)estimate {
@@ -375,7 +376,7 @@ static DataStore *singleton_ = nil;
 		fetchRequest.entity = [NSEntityDescription entityForName:@"ClientInfo"
 										  inManagedObjectContext:self.managedObjectContext];
 
-		// fetch only "active" ClientInfo
+		// fetch only "ready" ClientInfo
 		fetchRequest.predicate = [NSPredicate predicateWithFormat:@"status = %@ AND subEntityName = %@", 
 																  [NSNumber numberWithInt:StatusReady], @"ClientInfo"]; 
 
@@ -412,13 +413,10 @@ static DataStore *singleton_ = nil;
 }
 
 - (BOOL)saveClientInfo:(ClientInfo *)clientInfo {
-	// TODO perform some validation to determine the status
-	NSNumber *active = [NSNumber numberWithInt:StatusReady];
-	clientInfo.status = active;
 	for (ContactInfo *contactInfo in clientInfo.contactInfos) {
-		contactInfo.status = active;
+		[contactInfo refreshStatus];
 	}
-	[active release];
+	[clientInfo refreshStatus];
 
 	[self saveContext];
 
@@ -434,6 +432,7 @@ static DataStore *singleton_ = nil;
 	// NOTE: this is pretty disruptive for underlying estimates but user has been warned
 	for (Estimate *estimate in immutableCopy) {
 		estimate.clientInfo = nil;
+		[estimate refreshStatus];
 	}
 	
 	[immutableCopy release];
@@ -569,7 +568,7 @@ static DataStore *singleton_ = nil;
 }
 
 - (BOOL)saveLineItem:(LineItem *)lineItem {
-	lineItem.status = [NSNumber numberWithInt:StatusReady];
+	[lineItem refreshStatus];
 
 	[self saveContext];
 
@@ -585,6 +584,7 @@ static DataStore *singleton_ = nil;
 	// NOTE: this is pretty disruptive for underlying estimates but user has been warned
 	for (LineItemSelection *lineItemSelection in immutableCopy) {
 		lineItemSelection.lineItem = nil;
+		[lineItemSelection refreshStatus];
 	}
 	
 	[immutableCopy release];
@@ -689,6 +689,8 @@ static DataStore *singleton_ = nil;
 	return (LineItemSelection *)[NSEntityDescription insertNewObjectForEntityForName:@"LineItemSelection"
 															  inManagedObjectContext:self.managedObjectContext];
 }
+
+// FIXME missing a save method, so when a line item is modified the estimate status isn't refreshed
 
 - (BOOL)deleteLineItemSelection:(LineItemSelection *)lineItemSelection {
 	// deassociate line item from deleted selection
@@ -799,11 +801,8 @@ static DataStore *singleton_ = nil;
 
 - (BOOL)saveTaxesAndCurrency {
 	if (taxesAndCurrencyFetchedResultsController_) {
-		NSNumber *active = [NSNumber numberWithInt:StatusReady];
 		for (IndexedObject *taxOrCurrency in taxesAndCurrencyFetchedResultsController_.fetchedObjects) {
-			if ([taxOrCurrency.status intValue] == StatusDraft) {
-				taxOrCurrency.status = active;
-			}
+			[taxOrCurrency refreshStatus];
 		}
 
 		[self saveContext];
@@ -855,10 +854,7 @@ static DataStore *singleton_ = nil;
 
 - (void)saveMyInfo {
 	if (myInfo_) {
-		// TODO also validate myInfo? what are the required fields
-		if ([myInfo_.status intValue] == StatusDraft) {
-			myInfo_.status = [NSNumber numberWithInt:StatusReady];
-		}
+		[myInfo_ refreshStatus];
 
 		[self saveContext];
 	}

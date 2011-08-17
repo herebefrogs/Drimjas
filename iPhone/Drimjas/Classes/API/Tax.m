@@ -17,12 +17,16 @@
 @dynamic percent;
 @dynamic taxNumber;
 
-- (void) awakeFromInsert {
+- (void)awakeFromInsert {
 	[super awakeFromInsert];
 
 	self.subEntityName = @"Tax";
 
 	self.index = [NSNumber numberWithInt:[[[[DataStore defaultStore] taxesAndCurrencyFetchedResultsController] sections] count]];
+}
+
+- (BOOL)isReady {
+	return (self.name.length > 0) && (self.percent) && (self.taxNumber.length > 0);
 }
 
 - (NSNumber *)costForSubTotal:(NSNumber *)subTotal {

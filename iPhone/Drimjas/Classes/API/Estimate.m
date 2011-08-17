@@ -52,6 +52,7 @@
 	return orderNumber;
 }
 
+// FIXME is this a problem with isReady?
 - (BOOL)isEmpty {
 	return (self.clientInfo == nil) || (self.clientInfo.name == nil);
 }
@@ -143,5 +144,15 @@
 	[self calculateNumber:[[[DataStore defaultStore] estimatesFetchedResultsController] fetchedObjects]];
 }
 
+- (BOOL)isReady {
+	if (self.clientInfo.isReady) {
+		for (LineItemSelection *lineItem in self.lineItems) {
+			if (lineItem.isReady) {
+				return YES;
+			}
+		}
+	}
+	return NO;
+}
 
 @end

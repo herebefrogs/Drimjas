@@ -14,7 +14,7 @@
 
 @dynamic isoCode;
 
-- (void) awakeFromInsert {
+- (void)awakeFromInsert {
 	[super awakeFromInsert];
 
 	self.subEntityName = @"Currency";
@@ -28,6 +28,11 @@
 	[numberFormatter release];
 }
 
+- (BOOL)isReady {
+	return (self.isoCode.length > 0);
+}
+
+// FIXME is that a problem with isReady
 + (BOOL)isCurrencySet {
 	return StatusReady == [[[[DataStore defaultStore] currency] status] intValue];
 }

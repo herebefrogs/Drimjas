@@ -174,8 +174,10 @@ BOOL _insertLineItem = NO;
 		}
 	}
 
+	// TODO these 2 lines should probably be in deleteLineItemSelection
 	// deassociate line item selection from estimate
 	[estimate removeLineItemsObject:deleted];
+	[estimate refreshStatus];
 	// delete line item selection
 	[[DataStore defaultStore] deleteLineItemSelection:deleted];
 }
@@ -379,14 +381,16 @@ BOOL _insertLineItem = NO;
 }
 
 - (IBAction)save:(id)sender {
-	// save estimate into estimates list
-	estimateDetailViewController.estimate = [[DataStore defaultStore] saveEstimateStub];
-
 	if (editMode) {
+		[[DataStore defaultStore] saveEstimate:estimate];
+
 		// go back to estimate detail view controller (just before in the stack)
 		[self.navigationController popViewControllerAnimated:YES];
 	}
 	else {
+		// save estimate into estimates list
+		estimateDetailViewController.estimate = [[DataStore defaultStore] saveEstimateStub];
+
 		// reset navigation controller to estimates list & estimate detail view controllers,
 		// discarding any estimate creation view controllers in between
 		UIViewController *rootController = [self.navigationController.viewControllers objectAtIndex:0];

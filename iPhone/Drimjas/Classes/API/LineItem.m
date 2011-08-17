@@ -18,8 +18,23 @@
 @dynamic lineItemSelections;
 
 
-- (BOOL)isValid {
+- (BOOL)isReady {
 	return (self.name.length > 0);
+}
+
+- (void)refreshStatus {
+	NSNumber *oldStatus = [self.status retain];
+
+	[super refreshStatus];
+
+	if (![oldStatus isEqualToNumber:self.status]) {
+		// notify all underlying LineItemSelection of the status change
+		for (LineItemSelection *lineItemSelection in self.lineItemSelections) {
+			[lineItemSelection refreshStatus];
+		}
+	}
+
+	[oldStatus release];
 }
 
 @end

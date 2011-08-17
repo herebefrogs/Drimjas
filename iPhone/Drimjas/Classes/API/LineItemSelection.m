@@ -20,11 +20,29 @@
 @dynamic lineItem;
 
 
-- (void) awakeFromInsert {
+- (void)awakeFromInsert {
 	[super awakeFromInsert];
 
 	self.subEntityName = @"LineItemSelection";
 }
+
+- (BOOL)isReady {
+	return (self.lineItem.isReady);
+}
+
+- (void)refreshStatus {
+	NSNumber *oldStatus = [self.status retain];
+
+	[super refreshStatus];
+
+	if (![oldStatus isEqualToNumber:self.status]) {
+		// notify underlying Estimate of the status change
+		[self.estimate refreshStatus];
+	}
+
+	[oldStatus release];
+}
+
 
 - (void)copyLineItem:(LineItem *)newLineItem {
 	// deassociate current line item
@@ -37,6 +55,7 @@
 		self.quantity = [NSNumber numberWithInt:1];
 	}
 	[newLineItem addLineItemSelectionsObject:self];
+	[self refreshStatus];
 }
 
 - (NSNumber *)cost {

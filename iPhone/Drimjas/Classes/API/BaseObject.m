@@ -14,4 +14,22 @@
 @dynamic subEntityName;
 @dynamic status;
 
+@dynamic isReady;
+
+- (void)refreshStatus {
+	// NOTE: if object is being deleted, change its status to Draft regardless of whether its requirements
+	// are satisfied or not so that objects which depend on it can update their status correctly
+	NSNumber *newStatus = [NSNumber numberWithInt:(self.isReady) && ![self isDeleted] ? StatusReady : StatusDraft];
+
+	if (![self.status isEqualToNumber:newStatus]) {
+		// only update status if different to avoid an infinite "willSave" notification loop
+		self.status = newStatus;
+	}
+}
+
+- (void)willSave {
+	// update status just before being persisted to disk
+	[self refreshStatus];
+}
+
 @end
