@@ -79,7 +79,7 @@
 
 		LineItem *lineItem = [lineItems objectAtIndexPath:indexPath];
 		cell.textLabel.text = NSLocalizedString(lineItem.name, "");
-		cell.detailTextLabel.text = NSLocalizedString(lineItem.details, "");
+		cell.detailTextLabel.text = NSLocalizedString(lineItem.desc, "");
 
 		if (optionsMode) {
 			// prevent line item cells from being selected

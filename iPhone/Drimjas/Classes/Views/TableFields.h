@@ -55,7 +55,7 @@ typedef enum {
 
 typedef enum {
 	LineItemFieldName = 0,
-	LineItemFieldDetails,
+	LineItemFieldDescription,
 
 	numLineItemField
 } LineItemField;

@@ -12,14 +12,14 @@
 
 @implementation LineItem
 
-@dynamic preset;
-@dynamic details;
+@dynamic defaults;
+@dynamic desc;
 @dynamic name;
 @dynamic lineItemSelections;
 
 
 - (BOOL)isValid {
-	return (self.name != nil && self.name.length > 0);
+	return (self.name.length > 0);
 }
 
 @end

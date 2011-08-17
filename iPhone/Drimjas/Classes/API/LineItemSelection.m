@@ -26,7 +26,7 @@
 
 	// associate new line item
 	self.lineItem = newLineItem;
-	self.details = newLineItem.details;
+	self.details = newLineItem.desc;
 	if ([newLineItem.name isEqualToString:NSLocalizedString(@"Handling & Shipping", "")]) {
 		self.quantity = [NSNumber numberWithInt:1];
 	}

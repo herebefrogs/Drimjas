@@ -530,13 +530,13 @@ static DataStore *singleton_ = nil;
 	}
 
 	for (NSString *name in plistItems) {
-		LineItem *lineItem = [self createLineItemWithPreset:YES];
+		LineItem *lineItem = [self createLineItemWithDefaults:YES];
 		lineItem.name = NSLocalizedString(name, "");
 		NSString *details_key = [name stringByAppendingString:@" Description"];
 		NSString *details = NSLocalizedString(details_key, "");
 		// some line items have no description, so avoid setting the lookup key as one
 		if (details != details_key) {
-			lineItem.details = details;
+			lineItem.desc = details;
 		}
 		[self saveLineItem:lineItem];
 	}
@@ -559,11 +559,11 @@ static DataStore *singleton_ = nil;
 	}
 }
 
-- (LineItem *)createLineItemWithPreset:(BOOL)preset {
+- (LineItem *)createLineItemWithDefaults:(BOOL)newDefaults {
 	LineItem *lineItem = (LineItem *)[NSEntityDescription insertNewObjectForEntityForName:@"LineItem"
 													 inManagedObjectContext:self.managedObjectContext];
 
-	lineItem.preset = [NSNumber numberWithInt:preset];
+	lineItem.defaults = [NSNumber numberWithInt:newDefaults];
 
 	return lineItem;
 }
@@ -599,13 +599,17 @@ static DataStore *singleton_ = nil;
 
 - (NSFetchedResultsController *)lineItemsFetchedResultsController {
 	if (lineItemsFetchedResultsController_ == nil) {
+		// TODO perform a seach on "Draft" LineItems (can be saved that way if application is paused
+		// on "New Line Item" screen with only description filled in and application is removed from memory)
+		// and delete all these unaccessible and incomplete objects from time to time
+
 		// LineItem fetch request
 		NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
 		
 		fetchRequest.entity = [NSEntityDescription entityForName:@"LineItem"
 										  inManagedObjectContext:self.managedObjectContext];
-		
-		// fetch only "active " LineItem
+
+		// fetch only "ready" LineItem
 		fetchRequest.predicate = [NSPredicate predicateWithFormat:@"status = %@", [NSNumber numberWithInt:StatusReady]];
 		
 		// sort LineItem alphabetically

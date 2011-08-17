@@ -103,7 +103,7 @@
 @interface DataStore (LineItemAccessors)
 
 - (NSFetchedResultsController *)lineItemsFetchedResultsController;
-- (LineItem *)createLineItemWithPreset:(BOOL)preset;
+- (LineItem *)createLineItemWithDefaults:(BOOL)newDefaults;
 - (BOOL)saveLineItem:(LineItem *)lineItem;
 - (BOOL)deleteLineItem:(LineItem *)lineItem;
 

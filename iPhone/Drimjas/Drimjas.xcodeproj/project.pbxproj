@@ -227,6 +227,7 @@
 		02E7BA0F1400194D00D60D6D /* Estimate@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Estimate@2x.png"; path = "Resources/Icons/Estimate@2x.png"; sourceTree = "<group>"; };
 		02E7BA101400194D00D60D6D /* EstimateHighlight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = EstimateHighlight.png; path = Resources/Icons/EstimateHighlight.png; sourceTree = "<group>"; };
 		02E7BA111400194D00D60D6D /* EstimateHighlight@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "EstimateHighlight@2x.png"; path = "Resources/Icons/EstimateHighlight@2x.png"; sourceTree = "<group>"; };
+		02F3ECBA13FB5CCF000ED8EF /* Drimjas 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Drimjas 3.xcdatamodel"; sourceTree = "<group>"; };
 		02F8E48813382D6500D75745 /* WorkingTitle 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "WorkingTitle 2.xcdatamodel"; sourceTree = "<group>"; };
 		02FA0481138F3C94001CF3B0 /* NewLineItemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewLineItemViewController.h; sourceTree = "<group>"; };
 		02FA0482138F3C94001CF3B0 /* NewLineItemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewLineItemViewController.m; sourceTree = "<group>"; };
@@ -760,8 +761,9 @@
 				02DFF86113C8C2CE00300ADD /* WorkingTitle 12.xcdatamodel */,
 				02DFF94913C8ECB700300ADD /* WorkingTitle 13.xcdatamodel */,
 				02B01D7F13F0DEA6001BEDE2 /* Drimjas 2.xcdatamodel */,
+				02F3ECBA13FB5CCF000ED8EF /* Drimjas 3.xcdatamodel */,
 			);
-			currentVersion = 02B01D7F13F0DEA6001BEDE2 /* Drimjas 2.xcdatamodel */;
+			currentVersion = 02F3ECBA13FB5CCF000ED8EF /* Drimjas 3.xcdatamodel */;
 			name = Drimjas.xcdatamodeld;
 			path = Resources/Drimjas.xcdatamodeld;
 			sourceTree = "<group>";

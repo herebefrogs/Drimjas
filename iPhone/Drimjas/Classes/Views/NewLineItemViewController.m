@@ -48,7 +48,7 @@ BOOL added = NO;
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
 
-	self.lineItem = [[DataStore defaultStore] createLineItemWithPreset:NO];
+	self.lineItem = [[DataStore defaultStore] createLineItemWithDefaults:NO];
 
 	[self.tableView reloadData];
 }
@@ -94,7 +94,7 @@ BOOL added = NO;
 	if (indexPath.row == LineItemFieldName) {
 		tfCell.textField.placeholder = NSLocalizedString(@"Line Item Name", "NewLineItem Name Textfield");
 	}
-	else if (indexPath.row == LineItemFieldDetails) {
+	else if (indexPath.row == LineItemFieldDescription) {
 		tfCell.textField.placeholder = NSLocalizedString(@"Description", "NewLineItem Description Textfield");
 	}
 }
@@ -112,8 +112,8 @@ BOOL added = NO;
 	if (row == LineItemFieldName) {
 		lineItem.name = textField.text;
 	}
-	else if (row == LineItemFieldDetails) {
-		lineItem.details = textField.text;
+	else if (row == LineItemFieldDescription) {
+		lineItem.desc = textField.text;
 	}
 }
 
