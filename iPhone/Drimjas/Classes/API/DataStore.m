@@ -296,7 +296,7 @@ static DataStore *singleton_ = nil;
 }
 
 - (Estimate *)saveEstimateStub {
-	NSNumber *active = [NSNumber numberWithInt:StatusActive];
+	NSNumber *active = [NSNumber numberWithInt:StatusReady];
 
 	// flag each stub as "active"
 	estimateStub_.status = active;
@@ -340,7 +340,7 @@ static DataStore *singleton_ = nil;
 		ClientInfo *clientInfo = estimate.clientInfo;
 		[clientInfo removeEstimatesObject:estimate];
 
-		if ([clientInfo.status intValue] == StatusCreated) {
+		if ([clientInfo.status intValue] == StatusDraft) {
 			[self deleteClientInfo:clientInfo andSave:NO];
 		}
 	}
@@ -377,7 +377,7 @@ static DataStore *singleton_ = nil;
 
 		// fetch only "active" ClientInfo
 		fetchRequest.predicate = [NSPredicate predicateWithFormat:@"status = %@ AND subEntityName = %@", 
-																  [NSNumber numberWithInt:StatusActive], @"ClientInfo"]; 
+																  [NSNumber numberWithInt:StatusReady], @"ClientInfo"]; 
 
 		// sort ClientInfo alphabetically
 		NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
@@ -413,7 +413,7 @@ static DataStore *singleton_ = nil;
 
 - (BOOL)saveClientInfo:(ClientInfo *)clientInfo {
 	// TODO perform some validation to determine the status
-	NSNumber *active = [NSNumber numberWithInt:StatusActive];
+	NSNumber *active = [NSNumber numberWithInt:StatusReady];
 	clientInfo.status = active;
 	for (ContactInfo *contactInfo in clientInfo.contactInfos) {
 		contactInfo.status = active;
@@ -569,7 +569,7 @@ static DataStore *singleton_ = nil;
 }
 
 - (BOOL)saveLineItem:(LineItem *)lineItem {
-	lineItem.status = [NSNumber numberWithInt:StatusActive];
+	lineItem.status = [NSNumber numberWithInt:StatusReady];
 
 	[self saveContext];
 
@@ -606,7 +606,7 @@ static DataStore *singleton_ = nil;
 										  inManagedObjectContext:self.managedObjectContext];
 		
 		// fetch only "active " LineItem
-		fetchRequest.predicate = [NSPredicate predicateWithFormat:@"status = %@", [NSNumber numberWithInt:StatusActive]];
+		fetchRequest.predicate = [NSPredicate predicateWithFormat:@"status = %@", [NSNumber numberWithInt:StatusReady]];
 		
 		// sort LineItem alphabetically
 		NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
@@ -795,9 +795,9 @@ static DataStore *singleton_ = nil;
 
 - (BOOL)saveTaxesAndCurrency {
 	if (taxesAndCurrencyFetchedResultsController_) {
-		NSNumber *active = [NSNumber numberWithInt:StatusActive];
+		NSNumber *active = [NSNumber numberWithInt:StatusReady];
 		for (IndexedObject *taxOrCurrency in taxesAndCurrencyFetchedResultsController_.fetchedObjects) {
-			if ([taxOrCurrency.status intValue] == StatusCreated) {
+			if ([taxOrCurrency.status intValue] == StatusDraft) {
 				taxOrCurrency.status = active;
 			}
 		}
@@ -852,8 +852,8 @@ static DataStore *singleton_ = nil;
 - (void)saveMyInfo {
 	if (myInfo_) {
 		// TODO also validate myInfo? what are the required fields
-		if ([myInfo_.status intValue] == StatusCreated) {
-			myInfo_.status = [NSNumber numberWithInt:StatusActive];
+		if ([myInfo_.status intValue] == StatusDraft) {
+			myInfo_.status = [NSNumber numberWithInt:StatusReady];
 		}
 
 		[self saveContext];

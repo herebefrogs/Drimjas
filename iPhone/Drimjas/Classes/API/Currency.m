@@ -30,7 +30,7 @@
 }
 
 + (BOOL)isCurrencySet {
-	return StatusActive == [[[[DataStore defaultStore] currency] status] intValue];
+	return StatusReady == [[[[DataStore defaultStore] currency] status] intValue];
 }
 
 @end

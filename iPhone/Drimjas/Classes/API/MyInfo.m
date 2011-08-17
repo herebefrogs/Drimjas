@@ -39,7 +39,7 @@
 }
 
 + (BOOL)isMyInfoSet {
-	return StatusActive == [[[[DataStore defaultStore] myInfo] status] intValue];
+	return StatusReady == [[[[DataStore defaultStore] myInfo] status] intValue];
 }
 
 - (NSArray *)allPropertyNames {

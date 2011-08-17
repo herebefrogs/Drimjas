@@ -15,15 +15,14 @@
 // unfortunately, entity.name cannot be accessed to filter sub-entities in a predicate
 @property (nonatomic, retain) NSString *subEntityName;
 
-// we make a distinction between "saved" in the Core Data sense (meaning object has been persisted
-// in the data store) and "saved" in the application sense (meaning object has completed the creation
-// process and is now a first-class citizen)
-// the status property tracks the latter
+// keeps track of the state of the managed object in the application context (is the object ready to
+// be used or still incomplete?)
+// does not indicate if the managed object has been saved/persisted in Core Data or not
 @property (nonatomic, retain) NSNumber *status;
 
 typedef enum {
-	StatusCreated = 1,	// managed object being filled during creation process
-	StatusActive = 2	// managed object has completed creation process and is a first-class citizen
+	StatusDraft = 1,	// managed object is still incomplete & missing required fields
+	StatusReady = 2	// managed object is complete & ready to be used in high level functions
 } Status;
 
 @end

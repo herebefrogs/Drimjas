@@ -48,7 +48,7 @@
 		self.estimate = [[DataStore defaultStore] estimateStub];
 
 		// if existing client info set, deassociate it
-		if ([estimate.clientInfo.status integerValue] == StatusActive) {
+		if ([estimate.clientInfo.status intValue] == StatusReady) {
 			[estimate.clientInfo removeEstimatesObject:estimate];
 
 			estimate.clientInfo = nil;
