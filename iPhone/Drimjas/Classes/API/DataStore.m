@@ -223,7 +223,7 @@ static DataStore *singleton_ = nil;
 				item.lineItem = [[[self lineItemsFetchedResultsController] fetchedObjects] objectAtIndex:index];
 			}
 			item.index = [NSNumber numberWithInt:i++];
-			item.details = [line_item_data valueForKey:@"details"];
+			item.desc = [line_item_data valueForKey:@"desc"];
 			item.quantity = [line_item_data valueForKey:@"quantity"];
 			item.unitCost = [line_item_data valueForKey:@"unit_cost"];
 			item.estimate = estimate;
@@ -532,11 +532,11 @@ static DataStore *singleton_ = nil;
 	for (NSString *name in plistItems) {
 		LineItem *lineItem = [self createLineItemWithDefaults:YES];
 		lineItem.name = NSLocalizedString(name, "");
-		NSString *details_key = [name stringByAppendingString:@" Description"];
-		NSString *details = NSLocalizedString(details_key, "");
+		NSString *desc_key = [name stringByAppendingString:@" Description"];
+		NSString *desc = NSLocalizedString(desc_key, "");
 		// some line items have no description, so avoid setting the lookup key as one
-		if (details != details_key) {
-			lineItem.desc = details;
+		if (desc != desc_key) {
+			lineItem.desc = desc;
 		}
 		[self saveLineItem:lineItem];
 	}

@@ -8,18 +8,17 @@
 
 #import <CoreData/CoreData.h>
 // API
-#import "BaseObject.h"
+#import "IndexedObject.h"
 
 @class Estimate;
 @class LineItem;
 
-@interface LineItemSelection : BaseObject {
+@interface LineItemSelection : IndexedObject {
 }
 
 @property (nonatomic, retain) NSNumber *quantity;
 @property (nonatomic, retain) NSNumber *unitCost;
-@property (nonatomic, retain) NSString *details;
-@property (nonatomic, retain) NSNumber *index;
+@property (nonatomic, retain) NSString *desc;		// cannot be named "description" as it collides with NSObject no-argument message
 @property (nonatomic, retain) Estimate *estimate;
 @property (nonatomic, retain) LineItem *lineItem;
 

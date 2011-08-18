@@ -319,7 +319,7 @@ typedef enum {
 		CGSize textSize = [lineItem.lineItem.name sizeWithFont:pageInfo.plainFont];
 		nameMax = MAX(nameMax, textSize.width);
 
-		textSize = [lineItem.details sizeWithFont:pageInfo.plainFont];
+		textSize = [lineItem.desc sizeWithFont:pageInfo.plainFont];
 		descriptionMax = MAX(descriptionMax, textSize.width);
 
 		[numberFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
@@ -525,7 +525,7 @@ typedef enum {
 
 		pageInfo.x = descriptionX;
 		pageInfo.maxWidth = descriptionWidth;
-		textSize = [lineItem.details sizeWithFont:pageInfo.plainFont constrainedToSize:pageInfo.maxSize lineBreakMode:UILineBreakModeWordWrap];
+		textSize = [lineItem.desc sizeWithFont:pageInfo.plainFont constrainedToSize:pageInfo.maxSize lineBreakMode:UILineBreakModeWordWrap];
 		maxRowHeight = MAX(maxRowHeight, textSize.height + 2 * pageInfo.linePadding);
 		pageInfo.maxHeight = currentHeight;
 
@@ -541,7 +541,7 @@ typedef enum {
 
 		pageInfo.x = descriptionX;
 		pageInfo.maxWidth = descriptionWidth;
-		[pageInfo drawTextLeftJustified:lineItem.details padding:pageInfo.linePadding];
+		[pageInfo drawTextLeftJustified:lineItem.desc padding:pageInfo.linePadding];
 
 		pageInfo.x = unitCostX;
 		pageInfo.maxWidth = unitCostWidth;

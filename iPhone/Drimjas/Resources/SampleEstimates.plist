@@ -146,7 +146,7 @@
 			<dict>
 				<key>name</key>
 				<string>Creative Fee</string>
-				<key>details</key>
+				<key>desc</key>
 				<string>Match photo shoot</string>
 				<key>quantity</key>
 				<integer>1</integer>
@@ -156,7 +156,7 @@
 			<dict>
 				<key>name</key>
 				<string>Licensing</string>
-				<key>details</key>
+				<key>desc</key>
 				<string>Nationwide billboard use of 3 images for 2 years</string>
 				<key>quantity</key>
 				<integer>1</integer>
@@ -166,7 +166,7 @@
 			<dict>
 				<key>name</key>
 				<string>Wardrobe Stylist Day(s)</string>
-				<key>details</key>
+				<key>desc</key>
 				<string>Clothing pull and consultation</string>
 				<key>quantity</key>
 				<integer>1</integer>
@@ -176,7 +176,7 @@
 			<dict>
 				<key>name</key>
 				<string>Location Scouting Day(s)</string>
-				<key>details</key>
+				<key>desc</key>
 				<string>Hiring of local specialist and inspection</string>
 				<key>quantity</key>
 				<integer>2</integer>
@@ -186,7 +186,7 @@
 			<dict>
 				<key>name</key>
 				<string>Hair &amp; Makeup Stylist Day(s)</string>
-				<key>details</key>
+				<key>desc</key>
 				<string>Stylist for shoot day</string>
 				<key>quantity</key>
 				<integer>1</integer>
@@ -196,7 +196,7 @@
 			<dict>
 				<key>name</key>
 				<string>Adult Talent</string>
-				<key>details</key>
+				<key>desc</key>
 				<string>Three models from Algonquin Agency</string>
 				<key>quantity</key>
 				<integer>1</integer>

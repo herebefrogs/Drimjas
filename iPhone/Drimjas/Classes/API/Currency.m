@@ -13,7 +13,6 @@
 @implementation Currency
 
 @dynamic isoCode;
-@dynamic index;
 
 - (void) awakeFromInsert {
 	[super awakeFromInsert];

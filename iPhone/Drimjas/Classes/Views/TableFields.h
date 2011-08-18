@@ -46,7 +46,7 @@ typedef enum {
 
 typedef enum {
 	LineItemSelectionFieldName = 0,
-	LineItemSelectionFieldDetails,
+	LineItemSelectionFieldDescription,
 	LineItemSelectionFieldQuantity,
 	LineItemSelectionFieldUnitCost,
 

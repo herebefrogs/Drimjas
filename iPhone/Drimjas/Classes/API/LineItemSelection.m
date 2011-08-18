@@ -15,10 +15,16 @@
 
 @dynamic quantity;
 @dynamic unitCost;
-@dynamic details;
-@dynamic index;
+@dynamic desc;
 @dynamic estimate;
 @dynamic lineItem;
+
+
+- (void) awakeFromInsert {
+	[super awakeFromInsert];
+
+	self.subEntityName = @"LineItemSelection";
+}
 
 - (void)copyLineItem:(LineItem *)newLineItem {
 	// deassociate current line item
@@ -26,7 +32,7 @@
 
 	// associate new line item
 	self.lineItem = newLineItem;
-	self.details = newLineItem.desc;
+	self.desc = newLineItem.desc;
 	if ([newLineItem.name isEqualToString:NSLocalizedString(@"Handling & Shipping", "")]) {
 		self.quantity = [NSNumber numberWithInt:1];
 	}

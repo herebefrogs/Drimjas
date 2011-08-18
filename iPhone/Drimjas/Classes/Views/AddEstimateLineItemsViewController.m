@@ -106,8 +106,8 @@
 
 			TextFieldCell *tfCell = (TextFieldCell *)cell;
 
-			if (indexPath.row == LineItemSelectionFieldDetails) {
-				tfCell.textField.text = lineItem.details;
+			if (indexPath.row == LineItemSelectionFieldDescription) {
+				tfCell.textField.text = lineItem.desc;
 				tfCell.textField.autocapitalizationType = UITextAutocapitalizationTypeSentences;
 				tfCell.textField.placeholder = NSLocalizedString(@"Description", "AddEstimateLineItemsViewController Description Textfield placeholder");
 			}
@@ -341,8 +341,8 @@ BOOL _insertLineItem = NO;
 
 	// TODO hide overlay view if any
 	// save textfield value into line item selection
-	if (row == LineItemSelectionFieldDetails) {
-		lineItem.details = textField.text;
+	if (row == LineItemSelectionFieldDescription) {
+		lineItem.desc = textField.text;
 	}
 	else if (row == LineItemSelectionFieldQuantity) {
 		lineItem.quantity = [self _numberWithString:textField.text];
