@@ -19,10 +19,6 @@
 		0236618A12F8FA8000CD39EE /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0236618912F8FA8000CD39EE /* CoreText.framework */; };
 		023AE59B13665C7000E8A88D /* BaseObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 023AE59A13665C7000E8A88D /* BaseObject.m */; };
 		023C7D6813099CD200FD360B /* Estimates.png in Resources */ = {isa = PBXBuildFile; fileRef = 023C7D6713099CD200FD360B /* Estimates.png */; };
-		023C7D8413099F9900FD360B /* Button.png in Resources */ = {isa = PBXBuildFile; fileRef = 023C7D8013099F9900FD360B /* Button.png */; };
-		023C7D8513099F9900FD360B /* Button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 023C7D8113099F9900FD360B /* Button@2x.png */; };
-		023C7D8613099F9900FD360B /* Title.png in Resources */ = {isa = PBXBuildFile; fileRef = 023C7D8213099F9900FD360B /* Title.png */; };
-		023C7D8713099F9900FD360B /* Title@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 023C7D8313099F9900FD360B /* Title@2x.png */; };
 		023C7DB91309A8D600FD360B /* Launch.png in Resources */ = {isa = PBXBuildFile; fileRef = 023C7DB71309A8D600FD360B /* Launch.png */; };
 		023C7DBA1309A8D600FD360B /* Launch@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 023C7DB81309A8D600FD360B /* Launch@2x.png */; };
 		023E06AD134D52A60026209B /* TextFieldTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 023E06AC134D52A60026209B /* TextFieldTableViewController.m */; };
@@ -83,6 +79,14 @@
 		02DE9887137A12D3007C5FED /* LineItems.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02DE9885137A12D3007C5FED /* LineItems.xib */; };
 		02E1C7A412E53834000D7747 /* EstimateDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02E1C7A212E53834000D7747 /* EstimateDetailViewController.m */; };
 		02E1C7A512E53834000D7747 /* EstimateDetail.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02E1C7A312E53834000D7747 /* EstimateDetail.xib */; };
+		02E7BA0A1400192B00D60D6D /* Contract.png in Resources */ = {isa = PBXBuildFile; fileRef = 02E7BA061400192B00D60D6D /* Contract.png */; };
+		02E7BA0B1400192B00D60D6D /* Contract@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 02E7BA071400192B00D60D6D /* Contract@2x.png */; };
+		02E7BA0C1400192B00D60D6D /* ContractHighlight.png in Resources */ = {isa = PBXBuildFile; fileRef = 02E7BA081400192B00D60D6D /* ContractHighlight.png */; };
+		02E7BA0D1400192B00D60D6D /* ContractHighlight@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 02E7BA091400192B00D60D6D /* ContractHighlight@2x.png */; };
+		02E7BA121400194D00D60D6D /* Estimate.png in Resources */ = {isa = PBXBuildFile; fileRef = 02E7BA0E1400194D00D60D6D /* Estimate.png */; };
+		02E7BA131400194D00D60D6D /* Estimate@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 02E7BA0F1400194D00D60D6D /* Estimate@2x.png */; };
+		02E7BA141400194D00D60D6D /* EstimateHighlight.png in Resources */ = {isa = PBXBuildFile; fileRef = 02E7BA101400194D00D60D6D /* EstimateHighlight.png */; };
+		02E7BA151400194D00D60D6D /* EstimateHighlight@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 02E7BA111400194D00D60D6D /* EstimateHighlight@2x.png */; };
 		02FA0484138F3C94001CF3B0 /* NewLineItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02FA0482138F3C94001CF3B0 /* NewLineItemViewController.m */; };
 		02FA0485138F3C94001CF3B0 /* NewLineItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02FA0483138F3C94001CF3B0 /* NewLineItem.xib */; };
 		02FA838E12F7A69B00C713AF /* PDFManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 02FA838D12F7A69B00C713AF /* PDFManager.m */; };
@@ -116,10 +120,6 @@
 		023AE59913665C7000E8A88D /* BaseObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseObject.h; sourceTree = "<group>"; };
 		023AE59A13665C7000E8A88D /* BaseObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseObject.m; sourceTree = "<group>"; };
 		023C7D6713099CD200FD360B /* Estimates.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Estimates.png; path = Resources/Icons/Estimates.png; sourceTree = "<group>"; };
-		023C7D8013099F9900FD360B /* Button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Button.png; path = Resources/Icons/Button.png; sourceTree = "<group>"; };
-		023C7D8113099F9900FD360B /* Button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Button@2x.png"; path = "Resources/Icons/Button@2x.png"; sourceTree = "<group>"; };
-		023C7D8213099F9900FD360B /* Title.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Title.png; path = Resources/Icons/Title.png; sourceTree = "<group>"; };
-		023C7D8313099F9900FD360B /* Title@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Title@2x.png"; path = "Resources/Icons/Title@2x.png"; sourceTree = "<group>"; };
 		023C7DB71309A8D600FD360B /* Launch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Launch.png; path = Resources/Icons/Launch.png; sourceTree = "<group>"; };
 		023C7DB81309A8D600FD360B /* Launch@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Launch@2x.png"; path = "Resources/Icons/Launch@2x.png"; sourceTree = "<group>"; };
 		023E06AB134D52A60026209B /* TextFieldTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextFieldTableViewController.h; sourceTree = "<group>"; };
@@ -219,6 +219,14 @@
 		02E1C7A112E53834000D7747 /* EstimateDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EstimateDetailViewController.h; sourceTree = "<group>"; };
 		02E1C7A212E53834000D7747 /* EstimateDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EstimateDetailViewController.m; sourceTree = "<group>"; };
 		02E1C7A312E53834000D7747 /* EstimateDetail.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EstimateDetail.xib; sourceTree = "<group>"; };
+		02E7BA061400192B00D60D6D /* Contract.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Contract.png; path = Resources/Icons/Contract.png; sourceTree = "<group>"; };
+		02E7BA071400192B00D60D6D /* Contract@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Contract@2x.png"; path = "Resources/Icons/Contract@2x.png"; sourceTree = "<group>"; };
+		02E7BA081400192B00D60D6D /* ContractHighlight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ContractHighlight.png; path = Resources/Icons/ContractHighlight.png; sourceTree = "<group>"; };
+		02E7BA091400192B00D60D6D /* ContractHighlight@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ContractHighlight@2x.png"; path = "Resources/Icons/ContractHighlight@2x.png"; sourceTree = "<group>"; };
+		02E7BA0E1400194D00D60D6D /* Estimate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Estimate.png; path = Resources/Icons/Estimate.png; sourceTree = "<group>"; };
+		02E7BA0F1400194D00D60D6D /* Estimate@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Estimate@2x.png"; path = "Resources/Icons/Estimate@2x.png"; sourceTree = "<group>"; };
+		02E7BA101400194D00D60D6D /* EstimateHighlight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = EstimateHighlight.png; path = Resources/Icons/EstimateHighlight.png; sourceTree = "<group>"; };
+		02E7BA111400194D00D60D6D /* EstimateHighlight@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "EstimateHighlight@2x.png"; path = "Resources/Icons/EstimateHighlight@2x.png"; sourceTree = "<group>"; };
 		02F8E48813382D6500D75745 /* WorkingTitle 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "WorkingTitle 2.xcdatamodel"; sourceTree = "<group>"; };
 		02FA0481138F3C94001CF3B0 /* NewLineItemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewLineItemViewController.h; sourceTree = "<group>"; };
 		02FA0482138F3C94001CF3B0 /* NewLineItemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewLineItemViewController.m; sourceTree = "<group>"; };
@@ -362,20 +370,24 @@
 				02C81A431307853C009029E9 /* Application@2x.png */,
 				02C81A57130788B8009029E9 /* Search-Settings.png */,
 				02C81A58130788B8009029E9 /* Search-Settings@2x.png */,
-				023C7D8013099F9900FD360B /* Button.png */,
-				023C7D8113099F9900FD360B /* Button@2x.png */,
+				02E7BA061400192B00D60D6D /* Contract.png */,
+				02E7BA071400192B00D60D6D /* Contract@2x.png */,
+				02E7BA081400192B00D60D6D /* ContractHighlight.png */,
+				02E7BA091400192B00D60D6D /* ContractHighlight@2x.png */,
 				02CB99DE139BE16F00FF2A3C /* Contracts.png */,
 				02CB99DF139BE16F00FF2A3C /* Contracts@2x.png */,
 				02C81A771307903C009029E9 /* Email.png */,
 				02C81A781307903C009029E9 /* Email@2x.png */,
+				02E7BA0E1400194D00D60D6D /* Estimate.png */,
+				02E7BA0F1400194D00D60D6D /* Estimate@2x.png */,
+				02E7BA101400194D00D60D6D /* EstimateHighlight.png */,
+				02E7BA111400194D00D60D6D /* EstimateHighlight@2x.png */,
 				023C7D6713099CD200FD360B /* Estimates.png */,
 				028917DE1308D1CD00945F4D /* Estimates@2x.png */,
 				02CB99E0139BE16F00FF2A3C /* Options.png */,
 				02CB99E1139BE16F00FF2A3C /* Options@2x.png */,
 				02C81A9213079755009029E9 /* Print.png */,
 				02C81A9313079755009029E9 /* Print@2x.png */,
-				023C7D8213099F9900FD360B /* Title.png */,
-				023C7D8313099F9900FD360B /* Title@2x.png */,
 			);
 			name = Icons;
 			sourceTree = "<group>";
@@ -558,10 +570,6 @@
 				02C81A9513079755009029E9 /* Print@2x.png in Resources */,
 				028917E21308D1CD00945F4D /* Estimates@2x.png in Resources */,
 				023C7D6813099CD200FD360B /* Estimates.png in Resources */,
-				023C7D8413099F9900FD360B /* Button.png in Resources */,
-				023C7D8513099F9900FD360B /* Button@2x.png in Resources */,
-				023C7D8613099F9900FD360B /* Title.png in Resources */,
-				023C7D8713099F9900FD360B /* Title@2x.png in Resources */,
 				023C7DB91309A8D600FD360B /* Launch.png in Resources */,
 				023C7DBA1309A8D600FD360B /* Launch@2x.png in Resources */,
 				02CC9C98133FC52D006160A7 /* TextFieldCell.xib in Resources */,
@@ -583,6 +591,14 @@
 				020886D113AC41D000164320 /* Contracts.xib in Resources */,
 				020886EB13AC439100164320 /* Options.xib in Resources */,
 				028CCBD313B7A4910073C88F /* MyInfo.xib in Resources */,
+				02E7BA0A1400192B00D60D6D /* Contract.png in Resources */,
+				02E7BA0B1400192B00D60D6D /* Contract@2x.png in Resources */,
+				02E7BA0C1400192B00D60D6D /* ContractHighlight.png in Resources */,
+				02E7BA0D1400192B00D60D6D /* ContractHighlight@2x.png in Resources */,
+				02E7BA121400194D00D60D6D /* Estimate.png in Resources */,
+				02E7BA131400194D00D60D6D /* Estimate@2x.png in Resources */,
+				02E7BA141400194D00D60D6D /* EstimateHighlight.png in Resources */,
+				02E7BA151400194D00D60D6D /* EstimateHighlight@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
