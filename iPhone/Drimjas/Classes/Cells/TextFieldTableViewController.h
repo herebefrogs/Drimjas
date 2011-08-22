@@ -18,7 +18,6 @@
 
 @property (nonatomic, retain) IBOutlet TextFieldCell *textFieldCell;
 
-- (BOOL)requiredFieldsProvided:(UITextField *)textField;
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
 
 @end

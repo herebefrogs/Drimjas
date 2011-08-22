@@ -26,8 +26,6 @@
 @property (nonatomic, retain) NSSet *contactInfos;
 @property (nonatomic, retain) NSSet *estimates;
 
-+ (BOOL)isNameValid:(NSString *)name;
-
 @property (nonatomic, readonly) NSArray *nonEmptyProperties;
 @property (nonatomic, readonly) NSInteger countNonEmptyProperties;
 - (NSString *)nonEmptyPropertyWithIndex:(NSUInteger)index;

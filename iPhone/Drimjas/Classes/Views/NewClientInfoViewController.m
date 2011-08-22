@@ -70,14 +70,6 @@
 	[self.tableView reloadData];
 }
 
-- (void)viewWillDisappear:(BOOL)animated {
-	// when pressing Back button, give a chance to textfield currently edited
-	// to save its text before previous view controller's viewWillAppear triggers
-	[lastTextFieldEdited resignFirstResponder];
-
-	[super viewWillDisappear:animated];
-}
-
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
 
@@ -151,19 +143,8 @@
 #pragma mark Button & Textfield delegate
 
 - (IBAction)next:(id)sender {
-	// retrieve client name cell if visible
-	TextFieldCell *cell = (TextFieldCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:ClientInfoFieldName inSection:0]];
-
-	// verify client name was provided before saving
-	if ((cell != nil && [ClientInfo isNameValid:cell.textField.text])
-		|| [ClientInfo isNameValid:estimate.clientInfo.name]) {
-
-		// hide keyboard
-		[lastTextFieldEdited resignFirstResponder];
-
-		contactInfosViewController.editMode = NO;
-		[self.navigationController pushViewController:contactInfosViewController animated:YES];
-	}
+	contactInfosViewController.editMode = NO;
+	[self.navigationController pushViewController:contactInfosViewController animated:YES];
 }
 
 - (IBAction)save:(id)sender {
@@ -172,10 +153,6 @@
 	[[DataStore defaultStore] saveClientInfo:estimate.clientInfo];
 
 	[self.navigationController popViewControllerAnimated:YES];
-}
-
-- (BOOL)requiredFieldsProvided:(UITextField *)textField {
-	return (textField.tag != ClientInfoFieldName || [ClientInfo isNameValid:textField.text]);
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {

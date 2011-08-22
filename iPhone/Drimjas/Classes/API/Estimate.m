@@ -52,11 +52,6 @@
 	return orderNumber;
 }
 
-// FIXME is this a problem with isReady?
-- (BOOL)isEmpty {
-	return (self.clientInfo == nil) || (self.clientInfo.name == nil);
-}
-
 - (NSNumber *)subTotal {
 	CGFloat subTotal = 0;
 

@@ -23,7 +23,6 @@
 
 @property (nonatomic, readonly) NSString *monthYear;
 @property (nonatomic, readonly) NSString *orderNumber;
-@property (nonatomic, readonly) BOOL isEmpty;
 
 @property (nonatomic, readonly) NSNumber *subTotal;
 @property (nonatomic, readonly) NSNumber *total;

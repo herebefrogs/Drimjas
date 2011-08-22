@@ -65,10 +65,6 @@
 #pragma mark -
 #pragma mark Public methods stack
 
-+ (BOOL)isNameValid:(NSString *)name {
-	return (name.length > 0);
-}
-
 - (BOOL)shouldBeDeleted {
 	// if client has never been saved before (it's still a stub associated to a stub estimate)
 	// or if in Draft state and associated to only 1 estimate or none (it won't be selectable

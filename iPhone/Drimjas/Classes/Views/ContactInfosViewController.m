@@ -62,14 +62,6 @@
 	[self.tableView reloadData];
 }
 
-- (void)viewWillDisappear:(BOOL)animated {
-	// when pressing Back button, give a chance to textfield currently edited
-	// to save its text before previous view controller's viewWillAppear triggers
-	[lastTextFieldEdited resignFirstResponder];
-
-	[super viewWillDisappear:animated];
-}
-
 - (void)viewDidDisappear:(BOOL)animated {
 	[super viewDidDisappear:animated];
 

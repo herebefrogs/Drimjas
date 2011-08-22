@@ -139,10 +139,6 @@ static DataStore *singleton_ = nil;
     NSError *error = nil;
 	NSManagedObjectContext *managedObjectContext = self.managedObjectContext;
     if ([managedObjectContext hasChanges]) {
-		// delete empty estimate stub to avoid blank line in Estimates view
-		if ([estimateStub_ isEmpty]) {
-			[self deleteEstimateStub];
-		}
 		// save changes
 		if (![managedObjectContext save:&error]) {
             /*

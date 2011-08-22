@@ -18,9 +18,17 @@
 #pragma mark -
 #pragma mark View lifecycle
 
+- (void)viewWillDisappear:(BOOL)animated {
+	// when pressing Back button, give a chance to textfield currently edited
+	// to save its text before previous view controller's viewWillAppear triggers
+	[lastTextFieldEdited resignFirstResponder];
+
+	[super viewWillDisappear:animated];
+}
+
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
-	
+
 	// clear last edited textfield
 	lastTextFieldEdited = nil;
 }
@@ -68,20 +76,9 @@
 	lastTextFieldEdited = textField;
 }
 
-- (BOOL)requiredFieldsProvided:(UITextField *)textField {
-	// subclasses should override this method to perfom checks on textfield value
-	return YES;
-}
-
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
-	// verify at least minimum fields have been provided
-	if ([self requiredFieldsProvided:textField]) {
-		// hide keyboard
-		[textField resignFirstResponder];
-		return YES;
-	}
-	// TODO show an overlay view next to text field to indicate it's empty
-	return NO;
+	// hide keyboard
+	return [textField resignFirstResponder];
 }
 
 - (BOOL) textFieldShouldReturn:(UITextField *)textField {
