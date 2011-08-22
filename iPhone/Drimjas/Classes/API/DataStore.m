@@ -341,7 +341,7 @@ static DataStore *singleton_ = nil;
 		ClientInfo *clientInfo = estimate.clientInfo;
 		[clientInfo removeEstimatesObject:estimate];
 
-		if ([clientInfo.status intValue] == StatusDraft) {
+		if ([clientInfo shouldBeDeleted]) {
 			[self deleteClientInfo:clientInfo andSave:NO];
 		}
 	}

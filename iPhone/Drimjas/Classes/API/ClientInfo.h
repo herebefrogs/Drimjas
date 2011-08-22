@@ -37,6 +37,7 @@
 - (void)unbindContactInfo:(ContactInfo *)contactInfo;
 
 @property (nonatomic, readonly) NSArray *toRecipients;
+@property (nonatomic, readonly) BOOL shouldBeDeleted;
 
 @end
 

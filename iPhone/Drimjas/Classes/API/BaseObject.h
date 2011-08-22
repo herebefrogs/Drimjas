@@ -10,6 +10,7 @@
 
 
 @interface BaseObject : NSManagedObject {
+	BOOL isPersistent;
 }
 
 // unfortunately, entity.name cannot be accessed to filter sub-entities in a predicate
@@ -26,7 +27,7 @@ typedef enum {
 	StatusReady = 2		// managed object is complete & ready to be used in high level functions
 } Status;
 
-
+@property (nonatomic, assign) BOOL isPersistent;
 @property (nonatomic, readonly) BOOL isReady;
 - (void)refreshStatus;
 

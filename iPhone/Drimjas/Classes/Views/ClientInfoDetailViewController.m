@@ -101,10 +101,10 @@
 	Estimate *estimate = [[DataStore defaultStore] estimateStub];
 
 	// delete or deassociate previously set client info
-	if ([estimate.clientInfo.status intValue] == StatusDraft) {
+	if ([estimate.clientInfo shouldBeDeleted]) {
 		[[DataStore defaultStore] deleteClientInfo:estimate.clientInfo andSave:NO];
 	}
-	else if ([estimate.clientInfo.status intValue] == StatusReady) {
+	else {
 		[estimate.clientInfo removeEstimatesObject:estimate];
 	}
 
