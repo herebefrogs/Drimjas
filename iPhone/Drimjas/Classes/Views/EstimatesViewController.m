@@ -52,11 +52,45 @@
 #pragma mark -
 #pragma mark Private implementation stack
 
+NSUInteger STATUS_TAG = 42;
+CGFloat DRIMJAS_GREEN_R = 0.31;			// 79 from 0-255 to 0.0-1.0 range
+CGFloat DRIMJAS_GREEN_G = 0.56;			// 143 from 0-255 to 0.0-1.0 range
+CGFloat DRIMJAS_GREEN_B = 0.0;
+CGFloat STATUS_RIGHT_PADDING = 10.0;
+
+- (void)_setStatusLabel:(NSNumber *)status forCell:(UITableViewCell *)cell {
+	UILabel *statusLabel = (UILabel *)[cell.contentView viewWithTag:STATUS_TAG];
+	if ([status intValue] == StatusReady) {
+		statusLabel.text = NSLocalizedString(@"Ready","Ready status");
+		// Drimjas green
+		statusLabel.textColor = [UIColor colorWithRed:DRIMJAS_GREEN_R green:DRIMJAS_GREEN_G blue:DRIMJAS_GREEN_B alpha:1.0];
+	} else {
+		statusLabel.text = NSLocalizedString(@"Draft","Draft status");
+		statusLabel.textColor = [UIColor redColor];
+	}
+}
+
+- (void)_createStatusLabelForCell:(UITableViewCell *)cell {
+	UILabel *statusLabel = [[[UILabel alloc] init] autorelease];
+	statusLabel.tag = STATUS_TAG;
+
+	// size & position
+	CGFloat w = MAX([NSLocalizedString(@"Ready","Ready status") sizeWithFont:statusLabel.font].width,
+					[NSLocalizedString(@"Draft","Draft status") sizeWithFont:statusLabel.font].width)
+				+ STATUS_RIGHT_PADDING;
+	CGFloat x = CGRectGetWidth(cell.contentView.bounds) - w;
+	statusLabel.frame = CGRectMake(x, 0.0, w, CGRectGetHeight(cell.contentView.bounds));
+	statusLabel.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleHeight;
+	statusLabel.textAlignment = UITextAlignmentCenter;
+
+	[cell.contentView addSubview:statusLabel];
+}
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
 	Estimate *estimate = [estimates objectAtIndexPath:indexPath];
     cell.textLabel.text = estimate.clientInfo.name;
 	cell.detailTextLabel.text = estimate.orderNumber;
+	[self _setStatusLabel:estimate.status forCell:cell];
 
 	cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 }
@@ -89,6 +123,7 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
+		[self _createStatusLabelForCell:cell];
     }
 
 	[self configureCell:cell atIndexPath:indexPath];

@@ -173,6 +173,12 @@
 /* Client info & line item estimates count */
 "Used in %u estimate(s)" = "Utilisé par %u devis";
 
+/* Ready status */
+"Ready" = "Prêt";
+
+/* Draft status */
+"Draft" = "Brouillon";
+
 /********************* Utils section ******************/
 /* Estimate PDF filename & Mail Subject */
 "Estimate" = "Devis";

@@ -176,6 +176,12 @@
 /* Client info & line item estimates count */
 "Used in %u estimate(s)" = "Used in %u estimate(s)";
 
+/* Ready status */
+"Ready" = "Ready";
+
+/* Draft status */
+"Draft" = "Draft";
+
 /********************* Utils section ******************/
 /* Estimate PDF filename & Mail Subject */
 "Estimate" = "Estimate";
