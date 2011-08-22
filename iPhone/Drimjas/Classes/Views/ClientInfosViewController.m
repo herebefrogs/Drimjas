@@ -59,6 +59,8 @@
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     ClientInfo *clientInfo = [clientInfos objectAtIndexPath:indexPath];
 	cell.textLabel.text = clientInfo.name;
+	cell.detailTextLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Used in %u estimate(s)","Client info estimates count"),
+														   [[clientInfo valueForKeyPath:@"estimates.@count"] intValue]];
 	cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 }
 
@@ -84,7 +86,7 @@
 
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
     }
 
 	[self configureCell:cell atIndexPath:indexPath];

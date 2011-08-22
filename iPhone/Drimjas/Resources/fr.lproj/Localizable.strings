@@ -158,6 +158,9 @@
 /* Options Line Items Title */
 "Line Items" = "Postes";
 
+/* Client info & line item estimates count */
+"Used in %u estimate(s)" = "Utilisé par %u devis";
+
 /********************* Utils section ******************/
 /* Estimate PDF filename & Mail Subject */
 "Estimate" = "Devis";

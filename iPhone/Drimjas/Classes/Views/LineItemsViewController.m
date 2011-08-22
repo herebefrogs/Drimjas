@@ -79,7 +79,12 @@
 
 		LineItem *lineItem = [lineItems objectAtIndexPath:indexPath];
 		cell.textLabel.text = NSLocalizedString(lineItem.name, "");
-		cell.detailTextLabel.text = NSLocalizedString(lineItem.desc, "");
+		if (optionsMode) {
+			cell.detailTextLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Used in %u estimate(s)", "Line item estimates count"),
+																   [[lineItem valueForKeyPath:@"lineItemSelections.@distinctUnionOfObjects.estimate"] count]];
+		} else {
+			cell.detailTextLabel.text = NSLocalizedString(lineItem.desc, "");
+		}
 
 		if (optionsMode) {
 			// prevent line item cells from being selected
