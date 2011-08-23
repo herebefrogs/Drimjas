@@ -82,9 +82,9 @@
 	return lineItemSelections.sections.count;
 }
 
-- (BOOL)_lineItem:(LineItemSelection *)lineItem isHandlingAndShippingQuantityAtIndexPath:(NSIndexPath *)indexPath {
+- (BOOL)_lineItem:(LineItemSelection *)lineItem isShippingAndHandlingQuantityAtIndexPath:(NSIndexPath *)indexPath {
 	return indexPath.row == LineItemSelectionFieldQuantity 
-			&& [lineItem.lineItem.name isEqualToString:NSLocalizedString(@"Handling & Shipping", "")];
+			&& [lineItem.lineItem.name isEqualToString:NSLocalizedString(@"Shipping & Handling", "")];
 }
 
 - (void)_configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
@@ -97,7 +97,7 @@
 			cell.textLabel.text = lineItem.lineItem.name;
 			cell.editingAccessoryType = UITableViewCellAccessoryDisclosureIndicator;
 		}
-		else if ([self _lineItem:lineItem isHandlingAndShippingQuantityAtIndexPath:indexPath]) {
+		else if ([self _lineItem:lineItem isShippingAndHandlingQuantityAtIndexPath:indexPath]) {
 			cell.textLabel.text = [lineItem.quantity stringValue];
 			cell.selectionStyle = UITableViewCellSelectionStyleNone;
 		}
@@ -199,7 +199,6 @@ BOOL _insertLineItem = NO;
 		// "add a line item" section has only 1 row
 		return 1;
 	} else {
-		// TODO special case: Handling & Shipping doesn't need a quantity row
 		return numLineItemSelectionField;
 	}
 }
@@ -210,7 +209,7 @@ BOOL _insertLineItem = NO;
 
     if (indexPath.section == [self _addLineItemSection]
 		|| indexPath.row == LineItemSelectionFieldName
-		|| [self _lineItem:[lineItemSelections.fetchedObjects objectAtIndex:indexPath.section] isHandlingAndShippingQuantityAtIndexPath:indexPath]) {
+		|| [self _lineItem:[lineItemSelections.fetchedObjects objectAtIndex:indexPath.section] isShippingAndHandlingQuantityAtIndexPath:indexPath]) {
 
 		static NSString *CellIdentifier = @"Cell";
 

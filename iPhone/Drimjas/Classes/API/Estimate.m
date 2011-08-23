@@ -60,8 +60,8 @@
 	CGFloat subTotal = 0;
 
 	for (LineItemSelection *lineItem in self.lineItems) {
-		// H & S is handled in total
-		if ([lineItem.lineItem.name isEqualToString:NSLocalizedString(@"Handling & Shipping","")]) {
+		// S & H is handled in total
+		if ([lineItem.lineItem.name isEqualToString:NSLocalizedString(@"Shipping & Handling","")]) {
 			continue;
 		}
 		subTotal += [lineItem.cost floatValue];
@@ -78,16 +78,16 @@
 		total += [[tax costForSubTotal:subTotal] floatValue];
 	}
 
-	total += [self.handlingAndShippingCost floatValue];
+	total += [self.shippingAndHandlingCost floatValue];
 
 	total += [subTotal floatValue];
 
 	return [NSNumber numberWithFloat:total];
 }
 
-- (NSNumber *)handlingAndShippingCost {
+- (NSNumber *)shippingAndHandlingCost {
 	for (LineItemSelection *lineItem in self.lineItems) {
-		if ([lineItem.lineItem.name isEqualToString:NSLocalizedString(@"Handling & Shipping", "")]) {
+		if ([lineItem.lineItem.name isEqualToString:NSLocalizedString(@"Shipping & Handling", "")]) {
 			return lineItem.cost;
 		}
 	}

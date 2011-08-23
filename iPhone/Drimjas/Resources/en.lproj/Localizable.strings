@@ -138,7 +138,7 @@
 "Review Estimate" = "Review Estimate";
 
 /* Review Estimate Order Number section title */
-"Order Number" = "Order Number";
+"Purchase Order Number" = "Purchase Order Number";
 
 /* Review Estimate Client Information section title */
 "Client Information" = "Client Information";
@@ -200,7 +200,7 @@
 
 /* total columns header */
 "SUBTOTAL" = "SUBTOTAL";
-"H & S" = "H & S";
+"S & H" = "S & H";
 "TOTAL" = "TOTAL";
 
 /* PDF footer */
@@ -266,5 +266,5 @@
 "Child Talent" = "Child Talent";
 "Child Talent Description" = "Model / subject billing";
 
-"Handling & Shipping" = "Handling & Shipping";
-"Handling & Shipping Description" = "";
+"Shipping & Handling" = "Shipping & Handling";
+"Shipping & Handling Description" = "";

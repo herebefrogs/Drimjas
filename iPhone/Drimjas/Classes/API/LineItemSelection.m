@@ -33,7 +33,7 @@
 	// associate new line item
 	self.lineItem = newLineItem;
 	self.desc = newLineItem.desc;
-	if ([newLineItem.name isEqualToString:NSLocalizedString(@"Handling & Shipping", "")]) {
+	if ([newLineItem.name isEqualToString:NSLocalizedString(@"Shipping & Handling", "")]) {
 		self.quantity = [NSNumber numberWithInt:1];
 	}
 	[newLineItem addLineItemSelectionsObject:self];

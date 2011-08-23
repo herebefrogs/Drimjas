@@ -125,7 +125,7 @@
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
 	switch (section) {
 		case EstimateDetailSectionOrderNumber:
-			return NSLocalizedString(@"Order Number", "Review Estimate Order Number section title");
+			return NSLocalizedString(@"Purchase Order Number", "Review Estimate Order Number section title");
 		default:
 			return nil;
 	}

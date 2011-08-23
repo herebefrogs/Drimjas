@@ -27,7 +27,7 @@
 
 @property (nonatomic, readonly) NSNumber *subTotal;
 @property (nonatomic, readonly) NSNumber *total;
-@property (nonatomic, readonly) NSNumber *handlingAndShippingCost;
+@property (nonatomic, readonly) NSNumber *shippingAndHandlingCost;
 
 @end
 

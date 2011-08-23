@@ -311,8 +311,8 @@ typedef enum {
 
 	// calculate the maximum width taken by each column if we had no width limitation
 	for (LineItemSelection *lineItem in lineItems) {
-		// skip H&S handled separately at the end of the PDF
-		if ([lineItem.lineItem.name isEqualToString:NSLocalizedString(@"Handling & Shipping", "")]) {
+		// skip S & H handled separately at the end of the PDF
+		if ([lineItem.lineItem.name isEqualToString:NSLocalizedString(@"Shipping & Handling", "")]) {
 			continue;
 		}
 
@@ -350,7 +350,7 @@ typedef enum {
 	textSize = [NSLocalizedString(@"Item","") sizeWithFont:pageInfo.boldFont];
 	nameMax = MAX(nameMax, textSize.width);
 
-	// calculate the maximum width taken by sub total, taxes, h&s and total values
+	// calculate the maximum width taken by sub total, taxes, S & H and total values
 	[numberFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
 	NSNumber *subTotal = estimate.subTotal;
 	textSize = [[numberFormatter stringFromNumber:subTotal] sizeWithFont:pageInfo.plainFont];
@@ -361,7 +361,7 @@ typedef enum {
 		costMax = MAX(costMax, textSize.width);
 	}
 
-	textSize = [[numberFormatter stringFromNumber:estimate.handlingAndShippingCost] sizeWithFont:pageInfo.plainFont];
+	textSize = [[numberFormatter stringFromNumber:estimate.shippingAndHandlingCost] sizeWithFont:pageInfo.plainFont];
 	costMax = MAX(costMax, textSize.width);
 
 	textSize = [[numberFormatter stringFromNumber:estimate.total] sizeWithFont:pageInfo.plainFont];
@@ -509,8 +509,8 @@ typedef enum {
 
 	// render each line item in a row
 	for (LineItemSelection *lineItem in lineItems) {
-		// skip H&S handled separately at the end of the PDF
-		if ([lineItem.lineItem.name isEqualToString:NSLocalizedString(@"Handling & Shipping", "")]) {
+		// skip S & H handled separately at the end of the PDF
+		if ([lineItem.lineItem.name isEqualToString:NSLocalizedString(@"Shipping & Handling", "")]) {
 			continue;
 		}
 
@@ -615,14 +615,14 @@ typedef enum {
 	NSNumber *subTotal = estimate.subTotal;
 	NSArray *taxes = [[DataStore defaultStore] taxes];
 
-	// calculate the maximum width of sub total, taxes, h&s and total labels
+	// calculate the maximum width of sub total, taxes, S & H and total labels
 	CGSize textSize = [NSLocalizedString(@"SUBTOTAL","") sizeWithFont:pageInfo.boldFont];
 	CGFloat labelWidth = textSize.width;
 	for (Tax *tax in taxes) {
 		textSize = [tax.name sizeWithFont:pageInfo.boldFont];
 		labelWidth = MAX(labelWidth, textSize.width);
 	}
-	textSize = [NSLocalizedString(@"H & S","") sizeWithFont:pageInfo.boldFont];
+	textSize = [NSLocalizedString(@"S & H","") sizeWithFont:pageInfo.boldFont];
 	labelWidth = MAX(labelWidth, textSize.width);
 	textSize = [NSLocalizedString(@"TOTAL","") sizeWithFont:pageInfo.boldFont];
 	labelWidth = MAX(labelWidth, textSize.width);
@@ -699,13 +699,13 @@ typedef enum {
 
 	pageInfo.y += 6 * pageInfo.linePadding;
 
-	// render h&s
+	// render S & H
 	pageInfo.x = labelX;
 	pageInfo.maxWidth = labelWidth;
-	[pageInfo drawTextMiddleJustified:NSLocalizedString(@"H & S","") font:pageInfo.boldFont padding:pageInfo.linePadding];
+	[pageInfo drawTextMiddleJustified:NSLocalizedString(@"S & H","") font:pageInfo.boldFont padding:pageInfo.linePadding];
 	pageInfo.x = costX;
 	pageInfo.maxWidth = costWidth;
-	textSize = [pageInfo drawTextRightJustified:[numberFormatter stringFromNumber:estimate.handlingAndShippingCost] padding:pageInfo.linePadding];
+	textSize = [pageInfo drawTextRightJustified:[numberFormatter stringFromNumber:estimate.shippingAndHandlingCost] padding:pageInfo.linePadding];
 	maxRowHeight = textSize.height + 2 * pageInfo.linePadding;
 
 	// render row frame
