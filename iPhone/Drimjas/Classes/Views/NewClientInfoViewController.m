@@ -57,13 +57,13 @@
 
 			estimate.clientInfo = nil;
 		}
+	}
 
-		// initialize new client information if needed
-		if (estimate.clientInfo == nil) {
-			ClientInfo *clientInfo = [[DataStore defaultStore] createClientInfo];
-			estimate.clientInfo = clientInfo;
-			[clientInfo addEstimatesObject:estimate];
-		}
+	// initialize new client information if needed
+	if (estimate.clientInfo == nil) {
+		ClientInfo *clientInfo = [[DataStore defaultStore] createClientInfo];
+		estimate.clientInfo = clientInfo;
+		[clientInfo addEstimatesObject:estimate];
 	}
 
 	// reload table data to match estimate object

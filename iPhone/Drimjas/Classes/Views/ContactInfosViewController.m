@@ -11,6 +11,7 @@
 #import "ClientInfo.h"
 #import "ContactInfo.h"
 #import "DataStore.h"
+#import "Estimate.h"
 // Cells
 #import "TextFieldCell.h"
 // Views
@@ -24,7 +25,7 @@
 @synthesize saveButton;
 @synthesize lineItemsSelectionViewController;
 @synthesize contactInfos;
-@synthesize clientInfo;
+@synthesize estimate;
 @synthesize editMode;
 
 #pragma mark -
@@ -51,9 +52,17 @@
     [super viewWillAppear:animated];
 
 	if (!editMode) {
-		self.clientInfo = [[[DataStore defaultStore] estimateStub] clientInfo];
+		self.estimate = [[DataStore defaultStore] estimateStub];
 	}
-	self.contactInfos = [[DataStore defaultStore] contactInfosForClientInfo:clientInfo];
+
+	// initialize new client information if needed
+	if (estimate.clientInfo == nil) {
+		ClientInfo *clientInfo = [[DataStore defaultStore] createClientInfo];
+		estimate.clientInfo = clientInfo;
+		[clientInfo addEstimatesObject:estimate];
+	}
+
+	self.contactInfos = [[DataStore defaultStore] contactInfosForClientInfo:estimate.clientInfo];
 	contactInfos.delegate = self;
 
 	self.navigationItem.rightBarButtonItem = editMode ? saveButton : nextButton;
@@ -65,7 +74,7 @@
 - (void)viewDidDisappear:(BOOL)animated {
 	[super viewDidDisappear:animated];
 
-	self.clientInfo = nil;
+	self.estimate = nil;
 	self.contactInfos = nil;
 }
 
@@ -87,7 +96,7 @@ BOOL _contactInfoInserted = NO;
 
 - (void)_insertContactInfoAtSection:(NSUInteger)section {
 	ContactInfo *contactInfo = [[DataStore defaultStore] createContactInfo];
-	[clientInfo bindContactInfo:contactInfo];
+	[estimate.clientInfo bindContactInfo:contactInfo];
 
 	_contactInfoInserted = YES;
 
@@ -110,7 +119,7 @@ BOOL _contactInfoInserted = NO;
 		contactInfo.index = [NSNumber numberWithInt:[contactInfo.index intValue] - 1];
 	}
 
-	[clientInfo unbindContactInfo:deleted];
+	[estimate.clientInfo unbindContactInfo:deleted];
 	[[DataStore defaultStore] deleteContactInfo:deleted];
 }
 
@@ -312,7 +321,7 @@ BOOL _contactInfoInserted = NO;
 - (IBAction)save:(id)sender {
 	[lastTextFieldEdited resignFirstResponder];
 
-	[[DataStore defaultStore] saveClientInfo:clientInfo];
+	[[DataStore defaultStore] saveClientInfo:estimate.clientInfo];
 
 	[self.navigationController popViewControllerAnimated:YES];
 }
@@ -337,7 +346,7 @@ BOOL _contactInfoInserted = NO;
 	self.saveButton = nil;
 	self.lineItemsSelectionViewController = nil;
 	self.contactInfos = nil;
-	self.clientInfo = nil;
+	self.estimate = nil;
 	// note: don't nil title or navigationController.tabBarItem.title
 	// as it may appear on the view currently displayed
 }
@@ -351,7 +360,7 @@ BOOL _contactInfoInserted = NO;
 	[saveButton release];
 	[lineItemsSelectionViewController release];
 	[contactInfos release];
-	[clientInfo release];
+	[estimate release];
     [super dealloc];
 }
 

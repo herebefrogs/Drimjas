@@ -304,7 +304,7 @@
 		[self.navigationController pushViewController:newClientInfoViewController animated:YES];
 	}
 	else if (edit.tag == EstimateDetailSectionContactInfo) {
-		contactInfosViewController.clientInfo = estimate.clientInfo;
+		contactInfosViewController.estimate = estimate;
 		contactInfosViewController.editMode = YES;
 		[self.navigationController pushViewController:contactInfosViewController animated:YES];
 	}

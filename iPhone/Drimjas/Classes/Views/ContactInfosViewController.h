@@ -11,7 +11,7 @@
 #import "TextFieldTableViewController.h"
 
 @class AddEstimateLineItemsViewController;
-@class ClientInfo;
+@class Estimate;
 
 @interface ContactInfosViewController : TextFieldTableViewController <NSFetchedResultsControllerDelegate> {
 	UIBarButtonItem *nextButton;
@@ -19,7 +19,7 @@
 	AddEstimateLineItemsViewController *lineItemsSelectionViewController;
 
 	NSFetchedResultsController *contactInfos;
-	ClientInfo *clientInfo;
+	Estimate *estimate;
 
 	BOOL editMode;
 }
@@ -28,7 +28,7 @@
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *saveButton;
 @property (nonatomic, retain) IBOutlet AddEstimateLineItemsViewController *lineItemsSelectionViewController;
 @property (nonatomic, retain) NSFetchedResultsController *contactInfos;
-@property (nonatomic, retain) ClientInfo *clientInfo;
+@property (nonatomic, retain) Estimate *estimate;
 @property (nonatomic, assign) BOOL editMode;
 
 
