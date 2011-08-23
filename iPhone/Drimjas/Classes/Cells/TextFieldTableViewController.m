@@ -50,6 +50,10 @@
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
 	// prevent textfield cells to be selected
 	cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
+	// Textfield defaults are:
+	// - autocapitalization: sentences
+	// - autocorrection: none
 }
 
 - (BOOL)tableView:(UITableView *)tableView shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath {

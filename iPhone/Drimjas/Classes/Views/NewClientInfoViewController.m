@@ -114,6 +114,7 @@
 	if (indexPath.row == ClientInfoFieldName) {
 		cell.textField.placeholder = NSLocalizedString(@"Client Name", "Client Name Text Field Placeholder");
 		cell.textField.text = estimate.clientInfo.name;
+		cell.textField.autocapitalizationType = UITextAutocapitalizationTypeWords;
 	}
 	else if (indexPath.row == ClientInfoFieldAddress1) {
 		cell.textField.placeholder = NSLocalizedString(@"Address 1", "Address 1 Text Field Placeholder");
@@ -134,6 +135,7 @@
 	else if (indexPath.row == ClientInfoFieldPostalCode) {
 		cell.textField.placeholder = NSLocalizedString(@"Postal Code", "Postal Code Text Field Placeholder");
 		cell.textField.text = estimate.clientInfo.postalCode;
+		cell.textField.autocapitalizationType = UITextAutocapitalizationTypeAllCharacters;
 	}
 	else if (indexPath.row == ClientInfoFieldCountry) {
 		cell.textField.placeholder = NSLocalizedString(@"Country", "Country Text Field Placeholder");

@@ -108,22 +108,24 @@
 
 			if (indexPath.row == LineItemSelectionFieldDescription) {
 				tfCell.textField.text = lineItem.desc;
-				tfCell.textField.autocapitalizationType = UITextAutocapitalizationTypeSentences;
 				tfCell.textField.placeholder = NSLocalizedString(@"Description", "AddEstimateLineItemsViewController Description Textfield placeholder");
+				tfCell.textField.autocorrectionType = UITextAutocorrectionTypeYes;
 			}
 			else if (indexPath.row == LineItemSelectionFieldQuantity) {
 				if ([lineItem.quantity intValue]) {
 					tfCell.textField.text = [lineItem.quantity stringValue];
 				}
-				tfCell.textField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
 				tfCell.textField.placeholder = NSLocalizedString(@"Quantity", "AddEstimateLineItemsViewController Quantity Textfield placeholder");
+				tfCell.textField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
+				tfCell.textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
 			}
 			else if (indexPath.row == LineItemSelectionFieldUnitCost) {
 				if ([lineItem.unitCost intValue]) {
 					tfCell.textField.text = [lineItem.unitCost stringValue];
 				}
-				tfCell.textField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
 				tfCell.textField.placeholder = NSLocalizedString(@"Unit Cost", "AddEstimateLineItemsViewController Unit Cost Textfield placeholder");
+				tfCell.textField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
+				tfCell.textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
 			}
 		}
 	}

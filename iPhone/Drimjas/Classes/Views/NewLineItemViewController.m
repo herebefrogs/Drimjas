@@ -93,9 +93,12 @@ BOOL added = NO;
 
 	if (indexPath.row == LineItemFieldName) {
 		tfCell.textField.placeholder = NSLocalizedString(@"Line Item Name", "NewLineItem Name Textfield");
+		tfCell.textField.autocorrectionType = UITextAutocorrectionTypeYes;
+
 	}
 	else if (indexPath.row == LineItemFieldDescription) {
 		tfCell.textField.placeholder = NSLocalizedString(@"Description", "NewLineItem Description Textfield");
+		tfCell.textField.autocorrectionType = UITextAutocorrectionTypeYes;
 	}
 }
 

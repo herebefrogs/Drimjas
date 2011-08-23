@@ -184,27 +184,28 @@ BOOL _insertTax = NO;
 
 			tfCell.textField.text = currency.isoCode;
 			tfCell.textField.placeholder = NSLocalizedString(@"Currency Code", "TaxesAndCurrency Currency Code Placeholder");
-			tfCell.textField.autocorrectionType = UITextAutocorrectionTypeNo;
+			tfCell.textField.autocapitalizationType = UITextAutocapitalizationTypeAllCharacters;
 		} else {
 			Tax *tax = [taxesAndCurrency.fetchedObjects objectAtIndex:indexPath.section];
 			
 			if (indexPath.row == TaxesFieldName) {
 				tfCell.textField.text = tax.name;
-				tfCell.textField.autocapitalizationType = UITextAutocapitalizationTypeAllCharacters;
-				tfCell.textField.autocorrectionType = UITextAutocorrectionTypeNo;
 				tfCell.textField.placeholder = NSLocalizedString(@"Tax Name", "TaxesAndCurrency Tax Name Textfield placeholder");
+				tfCell.textField.autocapitalizationType = UITextAutocapitalizationTypeAllCharacters;
 			}
 			else if (indexPath.row == TaxesFieldPercent) {
 				if ([tax.percent floatValue]) {
 					tfCell.textField.text = [tax.percent stringValue];
 				}
-				tfCell.textField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
 				tfCell.textField.placeholder = NSLocalizedString(@"Percent", "TaxesAndCurrency Percent Textfield placeholder");
+				tfCell.textField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
+				tfCell.textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
 			}
 			else if (indexPath.row == TaxesFieldTaxNumber) {
+				tfCell.textField.text = tax.taxNumber;
 				tfCell.textField.placeholder = NSLocalizedString(@"Tax Number", "TaxesAndCurrency Tax Number Textfield Placeholder");
 				tfCell.textField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
-				tfCell.textField.text = tax.taxNumber;
+				tfCell.textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
 			}
 		}
 	}

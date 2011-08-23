@@ -166,7 +166,7 @@
 "Estimate" = "Devis";
 
 /* Estimate Email Body */
-"Estimate Email Body" = "Corps Temporaire Du Courriel Pour Le Devis";
+"Estimate Email Body" = "";
 
 /* Page number on footer of PDF */
 "Page" = "Page";

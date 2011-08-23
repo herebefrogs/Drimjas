@@ -132,18 +132,18 @@ BOOL _contactInfoInserted = NO;
 		if (indexPath.row == ContactInfoFieldName) {
 			tfCell.textField.placeholder = NSLocalizedString(@"Contact Name", "Contact Name Text Field Placeholder");
 			tfCell.textField.text = contactInfo.name;
+			tfCell.textField.autocapitalizationType = UITextAutocapitalizationTypeWords;
 		}
 		else if (indexPath.row == ContactInfoFieldPhone) {
 			tfCell.textField.placeholder = NSLocalizedString(@"Phone", "Phone Text Field Placeholder");
 			tfCell.textField.keyboardType = UIKeyboardTypePhonePad;
-			// TODO add a phone number mask
+			tfCell.textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
 			tfCell.textField.text = contactInfo.phone;
 		}
 		else if (indexPath.row == ContactInfoFieldEmail) {
 			tfCell.textField.placeholder = NSLocalizedString(@"Email", "Email Text Field Placeholder");
 			tfCell.textField.keyboardType = UIKeyboardTypeEmailAddress;
 			tfCell.textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
-			tfCell.textField.autocorrectionType = UITextAutocorrectionTypeNo;
 			tfCell.textField.text = contactInfo.email;
 		}
 	}

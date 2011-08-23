@@ -169,7 +169,7 @@
 "Estimate" = "Estimate";
 
 /* Estimate Email Body */
-"Estimate Email Body" = "Estimate Email Body Placeholder";
+"Estimate Email Body" = "";
 
 /* Page number on footer of PDF */
 "Page" = "Page";

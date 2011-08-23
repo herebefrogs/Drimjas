@@ -89,6 +89,7 @@
 	if (indexPath.row == MyInfoFieldName) {
 		tfCell.textField.placeholder = NSLocalizedString(@"My Company Name", "My Company Name Text Field Placeholder");
 		tfCell.textField.text = myInfo.name;
+		tfCell.textField.autocapitalizationType = UITextAutocapitalizationTypeWords;
 	}
 	else if (indexPath.row == MyInfoFieldAddress1) {
 		tfCell.textField.placeholder = NSLocalizedString(@"Address 1", "Address 1 Text Field Placeholder");
@@ -109,6 +110,7 @@
 	else if (indexPath.row == MyInfoFieldPostalCode) {
 		tfCell.textField.placeholder = NSLocalizedString(@"Postal Code", "Postal Code Text Field Placeholder");
 		tfCell.textField.text = myInfo.postalCode;
+		tfCell.textField.autocapitalizationType = UITextAutocapitalizationTypeAllCharacters;
 	}
 	else if (indexPath.row == MyInfoFieldCountry) {
 		tfCell.textField.placeholder = NSLocalizedString(@"Country", "Country Text Field Placeholder");
@@ -118,18 +120,19 @@
 		tfCell.textField.placeholder = NSLocalizedString(@"Phone", "Phone Text Field Placeholder");
 		tfCell.textField.text = myInfo.contactInfo.phone;
 		tfCell.textField.keyboardType = UIKeyboardTypePhonePad;
+		tfCell.textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
 	}
 	else if (indexPath.row == MyInfoFieldFax) {
 		tfCell.textField.placeholder = NSLocalizedString(@"Fax", "Fax Text Field Placeholder");
 		tfCell.textField.text = myInfo.fax;
 		tfCell.textField.keyboardType = UIKeyboardTypePhonePad;
+		tfCell.textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
 	}
 	else if (indexPath.row == MyInfoFieldEmail) {
 		tfCell.textField.placeholder = NSLocalizedString(@"Email", "Email Text Field Placeholder");
 		tfCell.textField.text = myInfo.contactInfo.email;
 		tfCell.textField.keyboardType = UIKeyboardTypeEmailAddress;
 		tfCell.textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
-		tfCell.textField.autocorrectionType = UITextAutocorrectionTypeNo;
 	}
 	else if (indexPath.row == MyInfoFieldWebsite) {
 		tfCell.textField.placeholder = NSLocalizedString(@"Website", "Website Text Field Placeholder");
