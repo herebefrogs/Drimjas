@@ -35,16 +35,15 @@
 	return (self.name.length > 0) && (self.email.length > 0);
 }
 
++ (BOOL)isReadyStatus {
+	return [[[DataStore defaultStore] myInfo] isReady];
+}
+
 - (ContactInfo *)contactInfo {
 	NSAssert([[self.contactInfos allObjects] count] > 0, @"No contact info created");
 	NSAssert([[self.contactInfos allObjects] count] < 2, @"More than 1 contact info created");
 
 	return (ContactInfo *)[[self.contactInfos allObjects] objectAtIndex:0];
-}
-
-// FIXME is that a problem with isReady?
-+ (BOOL)isMyInfoSet {
-	return StatusReady == [[[[DataStore defaultStore] myInfo] status] intValue];
 }
 
 - (NSArray *)allPropertyNames {

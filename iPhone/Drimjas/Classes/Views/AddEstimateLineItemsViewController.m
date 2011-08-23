@@ -67,7 +67,7 @@
 
 	// show Next button if taxes & currency or my info aren't set yet
 	// show Save button if they are or if editing the line item selections from estimate detail screen
-	self.navigationItem.rightBarButtonItem = ([Currency isCurrencySet] && [MyInfo isMyInfoSet]) || editMode ? saveButton : nextButton;
+	self.navigationItem.rightBarButtonItem = ([Currency isReadyStatus] && [MyInfo isReadyStatus]) || editMode ? saveButton : nextButton;
 
 	[self.tableView reloadData];
 }
@@ -366,10 +366,10 @@ BOOL _insertLineItem = NO;
 #pragma mark Button delegate
 
 - (IBAction)next:(id)sender {
-	if (![Currency isCurrencySet]) {
+	if (![Currency isReadyStatus]) {
 		[self.navigationController pushViewController:taxesAndCurrencyViewController animated:YES];
 	}
-	else if (![MyInfo isMyInfoSet]) {
+	else if (![MyInfo isReadyStatus]) {
 		myInfoViewController.optionsMode = NO;
 		[self.navigationController pushViewController:myInfoViewController animated:YES];
 	}

@@ -32,9 +32,11 @@
 	return (self.isoCode.length > 0);
 }
 
-// FIXME is that a problem with isReady
-+ (BOOL)isCurrencySet {
-	return StatusReady == [[[[DataStore defaultStore] currency] status] intValue];
++ (BOOL)isReadyStatus {
+	// NOTE: isPersistent is used to make sure Taxes & Currency is at least presented once
+	// to user (since isoCode is prefilled, isReady would always return true)
+	Currency *currency = [[DataStore defaultStore] currency];
+	return (currency.isPersistent && currency.isReady);
 }
 
 @end

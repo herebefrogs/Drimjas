@@ -21,7 +21,7 @@
 @property (nonatomic, readonly) NSString *phone;
 @property (nonatomic, readonly) NSString *email;
 
-+ (BOOL)isMyInfoSet;
++ (BOOL)isReadyStatus;
 
 @end
 

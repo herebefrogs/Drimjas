@@ -15,6 +15,7 @@
 #import "Estimate.h"
 #import "LineItem.h"
 #import "LineItemSelection.h"
+#import "MyInfo.h"
 // Utils
 #import "PDFManager.h"
 // Cells
@@ -93,6 +94,10 @@
     [super viewWillAppear:animated];
 	// show toolbar with animation
 	[self.navigationController setToolbarHidden:NO animated:YES];
+
+	// let user email & print only when estimate & global settings are ready
+	emailButton.enabled = estimate.isReady && [Currency isReadyStatus] && [MyInfo isReadyStatus];
+	printButton.enabled = emailButton.enabled;
 
 	[self reloadIndexes];
 	[self.tableView reloadData];
