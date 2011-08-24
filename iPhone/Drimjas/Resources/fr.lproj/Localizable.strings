@@ -167,6 +167,9 @@
 /* Estimate Detail Edit button */
 "Edit" = "Modifier";
 
+/* NewContract Navigation Item Title */
+"Pick Estimate" = "Choisir un devis";
+
 /* Options Clients Title */
 "Clients" = "Clients";
 

@@ -170,6 +170,9 @@
 /* Estimate Detail Edit button */
 "Edit" = "Edit";
 
+/* NewContract Navigation Item Title */
+"Pick Estimate" = "Pick Estimate";
+
 /* Options Clients Title */
 "Clients" = "Clients";
 

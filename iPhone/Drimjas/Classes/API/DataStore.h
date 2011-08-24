@@ -31,6 +31,7 @@
 	Estimate *estimateStub_;
 
 	NSFetchedResultsController *estimatesFetchedResultsController_;
+	NSFetchedResultsController *contractReadyEstimatesFetchedResultsController_;
 	NSFetchedResultsController *clientInfosFetchedResultsController_;
 	NSFetchedResultsController *lineItemsFetchedResultsController_;
 	NSFetchedResultsController *contractsFetchedResultsController_;
@@ -65,6 +66,7 @@
 
 @property (nonatomic, retain, readonly) Estimate *estimateStub;
 - (NSFetchedResultsController *)estimatesFetchedResultsController;
+- (NSFetchedResultsController *)contractReadyEstimatesFetchedResultsController;
 - (Estimate *)createEstimateStub;
 - (Estimate *)saveEstimateStub;
 - (void)deleteEstimateStub;

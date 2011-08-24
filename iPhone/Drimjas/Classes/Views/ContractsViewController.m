@@ -55,7 +55,7 @@
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
 	Contract *contract = [contracts objectAtIndexPath:indexPath];
-    cell.textLabel.text = contract.estimate.clientInfo.name;
+	cell.textLabel.text = contract.estimate.clientInfo.name;
 	cell.detailTextLabel.text = contract.estimate.orderNumber;
 
 	cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;

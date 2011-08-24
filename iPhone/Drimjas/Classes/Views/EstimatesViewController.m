@@ -94,7 +94,7 @@ CGFloat STATUS_RIGHT_PADDING = 10.0;
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
 	Estimate *estimate = [estimates objectAtIndexPath:indexPath];
-    cell.textLabel.text = estimate.clientInfo.name;
+	cell.textLabel.text = estimate.clientInfo.name;
 	cell.detailTextLabel.text = estimate.orderNumber;
 	[self _setStatusLabel:estimate.isReady forCell:cell];
 

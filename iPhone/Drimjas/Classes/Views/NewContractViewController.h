@@ -9,8 +9,10 @@
 #import <UIKit/UIKit.h>
 
 
-@interface NewContractViewController : UITableViewController {
-
+@interface NewContractViewController : UITableViewController <NSFetchedResultsControllerDelegate> {
+	NSFetchedResultsController *estimates;
 }
+
+@property (nonatomic, retain) NSFetchedResultsController *estimates;
 
 @end

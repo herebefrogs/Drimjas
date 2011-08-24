@@ -235,27 +235,39 @@ static DataStore *singleton_ = nil;
 	}
 }
 
+- (NSFetchedResultsController *)initEstimatesFetchedResultsControllerWithStatusPredicate:(NSNumber *)status {
+	// Estimate fetch request
+	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+	fetchRequest.entity = [NSEntityDescription entityForName:@"Estimate"
+									  inManagedObjectContext:self.managedObjectContext];
+
+	if (status) {
+		fetchRequest.predicate = [NSPredicate predicateWithFormat:@"status = %@ AND contract = NIL", status];
+	}
+
+	// Sort estimates by date (newest estimate first, oldest estimate last)
+	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"date" ascending:NO];
+	fetchRequest.sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
+	[sortDescriptor release];
+
+	// buffer up to 16 Estimate
+	fetchRequest.fetchBatchSize = 16;
+
+	NSFetchedResultsController *fetchedResultsController = [[[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
+																								managedObjectContext:self.managedObjectContext
+																								  sectionNameKeyPath:@"monthYear"
+																										   cacheName:@"Root"]
+															autorelease];
+
+	[fetchRequest release];
+
+	return fetchedResultsController;
+}
+
 - (NSFetchedResultsController *)estimatesFetchedResultsController {
 	if (estimatesFetchedResultsController_ == nil) {
-		// Estimate fetch request
-		NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-		fetchRequest.entity = [NSEntityDescription entityForName:@"Estimate"
-										  inManagedObjectContext:self.managedObjectContext];
 
-		// Sort estimates by date (newest estimate first, oldest estimate last)
-		NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"date" ascending:NO];
-		fetchRequest.sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
-		[sortDescriptor release];
-
-		// buffer up to 16 Estimate
-		fetchRequest.fetchBatchSize = 16;
-
-		estimatesFetchedResultsController_ = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
-																				managedObjectContext:self.managedObjectContext
-																				   sectionNameKeyPath:@"monthYear"
-																						cacheName:@"Root"];
-
-		[fetchRequest release];
+		estimatesFetchedResultsController_ = [[self initEstimatesFetchedResultsControllerWithStatusPredicate:nil] retain];
 
 		NSError *error = nil;
 		if (![estimatesFetchedResultsController_ performFetch:&error]) {
@@ -270,9 +282,35 @@ static DataStore *singleton_ = nil;
 			[self loadSampleEstimates];
 		}
 #endif
-
 	}
 	return estimatesFetchedResultsController_;
+}
+
+- (NSFetchedResultsController *)contractReadyEstimatesFetchedResultsController {
+	if (contractReadyEstimatesFetchedResultsController_ == nil) {
+
+		contractReadyEstimatesFetchedResultsController_ = [[self initEstimatesFetchedResultsControllerWithStatusPredicate:[NSNumber numberWithInt:StatusReady]] retain];
+
+		NSError *error = nil;
+		if (![contractReadyEstimatesFetchedResultsController_ performFetch:&error]) {
+			// TODO This is a serious error saying the records
+			//could not be fetched. Advise the user to try
+			//again or restart the application.
+			NSLog(@"DataStore.contractReadyEstimatesFetchedResultsController: fetch failed with error %@, %@", error, [error userInfo]);
+		}
+
+#ifdef __LOAD_SAMPLE_ESTIMATES__
+		if (contractReadyEstimatesFetchedResultsController_.fetchedObjects.count == 0) {
+			// it will force that controller to load sample estimates
+			[self estimatesFetchedResultsController];
+
+			if (![contractReadyEstimatesFetchedResultsController_ performFetch:&error]) {
+				NSLog(@"DataStore.contractReadyEstimatesFetchedResultsController: re-fetch failed with error %@, %@", error, [error userInfo]);
+			}
+		}
+#endif
+	}
+	return contractReadyEstimatesFetchedResultsController_;
 }
 
 - (Estimate *)estimateStub {
@@ -905,6 +943,7 @@ static DataStore *singleton_ = nil;
 	[managedObjectContext_ release];
 	[persistentStoreCoordinator_ release];
 	[estimatesFetchedResultsController_ release];
+	[contractReadyEstimatesFetchedResultsController_ release];
 	[clientInfosFetchedResultsController_ release];
 	[lineItemsFetchedResultsController_ release];
 	[contractsFetchedResultsController_ release];
