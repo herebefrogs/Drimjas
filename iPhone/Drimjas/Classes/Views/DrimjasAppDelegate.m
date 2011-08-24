@@ -12,12 +12,17 @@
 // Views
 #import "StartupViewController.h"
 #import "EstimatesViewController.h"
+#import "ContractsViewController.h"
 #import "TabBarItems.h"
 
 
 @implementation DrimjasAppDelegate
 
-@synthesize window, startupViewController, tabBarController, estimatesViewController;
+@synthesize window;
+@synthesize startupViewController;
+@synthesize tabBarController;
+@synthesize estimatesViewController;
+@synthesize contractsViewController;
 
 
 #pragma mark -
@@ -36,7 +41,7 @@
 		[estimatesViewController add:nil];
 	}
 	else if (tag == TabBarItemContracts) {
-		NSLog(@"open \"new contract\" screen");
+		[contractsViewController add:nil];
 	}
 }
 
@@ -147,6 +152,7 @@
 
 - (void)dealloc {
 	[DataStore setDefaultStore:nil];
+	[contractsViewController release];
 	[estimatesViewController release];
 	[startupViewController release];
     [tabBarController release];

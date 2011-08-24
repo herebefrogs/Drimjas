@@ -12,10 +12,13 @@
 #import "Contract.h"
 #import "DataStore.h"
 #import "Estimate.h"
+// Views
+# import "NewContractViewController.h"
 
 @implementation ContractsViewController
 
 
+@synthesize newContractViewController;
 @synthesize contracts;
 
 
@@ -157,6 +160,14 @@
 
 
 #pragma mark -
+#pragma mark Button delegate
+
+- (IBAction)add:(id)sender {
+	[self.navigationController pushViewController:newContractViewController animated:YES];
+}
+
+
+#pragma mark -
 #pragma mark Memory management
 
 - (void)didReceiveMemoryWarning {
@@ -170,6 +181,7 @@
 #ifdef __ENABLE_UI_LOGS__
 	NSLog(@"ContractsViewController.viewDidUnload");
 #endif
+	self.newContractViewController = nil;
 	self.contracts = nil;
 }
 
@@ -178,6 +190,7 @@
 #ifdef __ENABLE_UI_LOGS__
 	NSLog(@"ContractsViewController.dealloc");
 #endif
+	[newContractViewController release];
 	[contracts release];
     [super dealloc];
 }

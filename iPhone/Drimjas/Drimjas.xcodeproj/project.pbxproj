@@ -70,6 +70,8 @@
 		02CB9A5F139C16B600FF2A3C /* EditSectionHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 02CB9A5E139C16B600FF2A3C /* EditSectionHeader.m */; };
 		02CB9A6D139C19ED00FF2A3C /* EditSectionHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02CB9A6C139C19ED00FF2A3C /* EditSectionHeader.xib */; };
 		02CC02EC1404836B007D1795 /* Contract.m in Sources */ = {isa = PBXBuildFile; fileRef = 02CC02EB1404836B007D1795 /* Contract.m */; };
+		02CC032A14048C0A007D1795 /* NewContractViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02CC032814048C0A007D1795 /* NewContractViewController.m */; };
+		02CC032B14048C0A007D1795 /* NewContract.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02CC032914048C0A007D1795 /* NewContract.xib */; };
 		02CC9C96133FC324006160A7 /* TextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 02CC9C95133FC324006160A7 /* TextFieldCell.m */; };
 		02CC9C98133FC52D006160A7 /* TextFieldCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02CC9C97133FC52D006160A7 /* TextFieldCell.xib */; };
 		02CC9D82133FEA36006160A7 /* ClientInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 02CC9D81133FEA36006160A7 /* ClientInfo.m */; };
@@ -203,6 +205,9 @@
 		02CC02E7140481A5007D1795 /* Drimjas 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Drimjas 4.xcdatamodel"; sourceTree = "<group>"; };
 		02CC02EA1404836B007D1795 /* Contract.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Contract.h; sourceTree = "<group>"; };
 		02CC02EB1404836B007D1795 /* Contract.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Contract.m; sourceTree = "<group>"; };
+		02CC032714048C0A007D1795 /* NewContractViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewContractViewController.h; sourceTree = "<group>"; };
+		02CC032814048C0A007D1795 /* NewContractViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewContractViewController.m; sourceTree = "<group>"; };
+		02CC032914048C0A007D1795 /* NewContract.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewContract.xib; sourceTree = "<group>"; };
 		02CC9C94133FC324006160A7 /* TextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextFieldCell.h; sourceTree = "<group>"; };
 		02CC9C95133FC324006160A7 /* TextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextFieldCell.m; sourceTree = "<group>"; };
 		02CC9C97133FC52D006160A7 /* TextFieldCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = TextFieldCell.xib; path = Resources/Cells/TextFieldCell.xib; sourceTree = "<group>"; };
@@ -297,6 +302,8 @@
 				028CCBD013B7A4910073C88F /* MyInfoViewController.m */,
 				021F684D12E67D8700ECDDDD /* NewClientInfoViewController.h */,
 				021F684E12E67D8700ECDDDD /* NewClientInfoViewController.m */,
+				02CC032714048C0A007D1795 /* NewContractViewController.h */,
+				02CC032814048C0A007D1795 /* NewContractViewController.m */,
 				02FA0481138F3C94001CF3B0 /* NewLineItemViewController.h */,
 				02FA0482138F3C94001CF3B0 /* NewLineItemViewController.m */,
 				020886E713AC439100164320 /* OptionsViewController.h */,
@@ -326,6 +333,7 @@
 				28AD73870D9D96C1002E5188 /* MainWindow.xib */,
 				028CCBD113B7A4910073C88F /* MyInfo.xib */,
 				021F684F12E67D8700ECDDDD /* NewClientInfo.xib */,
+				02CC032914048C0A007D1795 /* NewContract.xib */,
 				02FA0483138F3C94001CF3B0 /* NewLineItem.xib */,
 				020886E913AC439100164320 /* Options.xib */,
 				0299F96E1304D8ED001E1E3E /* Startup.xib */,
@@ -606,6 +614,7 @@
 				02E7BA131400194D00D60D6D /* Estimate@2x.png in Resources */,
 				02E7BA141400194D00D60D6D /* EstimateHighlight.png in Resources */,
 				02E7BA151400194D00D60D6D /* EstimateHighlight@2x.png in Resources */,
+				02CC032B14048C0A007D1795 /* NewContract.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -655,6 +664,7 @@
 				02C6509A13D922B200ABEFF7 /* KeyValue.m in Sources */,
 				02CE034613DD018F00C91A88 /* PageInfo.m in Sources */,
 				02CC02EC1404836B007D1795 /* Contract.m in Sources */,
+				02CC032A14048C0A007D1795 /* NewContractViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -45,7 +45,12 @@ NSInteger buttonTagClicked_ = 0;
 	for (UIView *subview in self.view.subviews) {
 		if (subview.tag == TabBarItemEstimates) {
 			UIButton *addEstimate = (UIButton *)subview;
-			[addEstimate setTitle:NSLocalizedString(@"Add Estimate", @"Startup View Controller Button")
+			[addEstimate setTitle:NSLocalizedString(@"New Estimate", @"Startup View Controller Estimate Button")
+						 forState:UIControlStateNormal];
+		}
+		else if (subview.tag == TabBarItemContracts) {
+			UIButton *addEstimate = (UIButton *)subview;
+			[addEstimate setTitle:NSLocalizedString(@"New Contract", @"Startup View Controller Contract Button")
 						 forState:UIControlStateNormal];
 		}
 	}

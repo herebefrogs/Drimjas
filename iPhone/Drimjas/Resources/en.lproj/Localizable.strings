@@ -8,8 +8,11 @@
 /* Startup View Controller & Options View Controller Navigation Item & Tab Bar Title */
 "Options" = "Options";
 
-/* Startup View Controller Button */
-"Add Estimate" = "Add Estimate";
+/* Startup View Controller Estimate Button */
+"New Estimate" = "New Estimate";
+
+/* Startup View Controller Contract Button */
+"New Contract" = "New Contract";
 
 /* AddEstimateNewOrPickClientInfo Navigation Item Title */
 "Add Client" = "Add Client";
