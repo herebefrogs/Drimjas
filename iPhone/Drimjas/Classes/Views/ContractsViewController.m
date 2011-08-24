@@ -13,12 +13,14 @@
 #import "DataStore.h"
 #import "Estimate.h"
 // Views
-# import "NewContractViewController.h"
+#import "NewContractViewController.h"
+#import "ContractDetailViewController.h"
 
 @implementation ContractsViewController
 
 
 @synthesize newContractViewController;
+@synthesize contractDetailViewController;
 @synthesize contracts;
 
 
@@ -106,7 +108,9 @@
 #pragma mark Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	NSLog(@"open contract detail view controller");
+	contractDetailViewController.contract = [contracts objectAtIndexPath:indexPath];
+
+	[self.navigationController pushViewController:contractDetailViewController animated:YES];
 }
 
 
@@ -182,6 +186,7 @@
 	NSLog(@"ContractsViewController.viewDidUnload");
 #endif
 	self.newContractViewController = nil;
+	self.contractDetailViewController = nil;
 	self.contracts = nil;
 }
 
@@ -191,6 +196,7 @@
 	NSLog(@"ContractsViewController.dealloc");
 #endif
 	[newContractViewController release];
+	[contractDetailViewController release];
 	[contracts release];
     [super dealloc];
 }
