@@ -33,6 +33,7 @@
 	NSFetchedResultsController *estimatesFetchedResultsController_;
 	NSFetchedResultsController *clientInfosFetchedResultsController_;
 	NSFetchedResultsController *lineItemsFetchedResultsController_;
+	NSFetchedResultsController *contractsFetchedResultsController_;
 
 	// general settings
 	Currency *currency_;
@@ -107,6 +108,13 @@
 - (LineItem *)createLineItemWithDefaults:(BOOL)newDefaults;
 - (BOOL)saveLineItem:(LineItem *)lineItem;
 - (BOOL)deleteLineItem:(LineItem *)lineItem;
+
+@end
+
+
+@interface DataStore (ContractAccessors)
+
+- (NSFetchedResultsController *)contractsFetchedResultsController;
 
 @end
 

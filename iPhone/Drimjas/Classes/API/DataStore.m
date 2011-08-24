@@ -702,6 +702,43 @@ static DataStore *singleton_ = nil;
 
 
 #pragma mark -
+#pragma mark Contract stack
+
+- (NSFetchedResultsController *)contractsFetchedResultsController {
+	if (contractsFetchedResultsController_ == nil) {
+		// Contract fetch request
+		NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+		fetchRequest.entity = [NSEntityDescription entityForName:@"Contract"
+										  inManagedObjectContext:self.managedObjectContext];
+
+		// Sort contracts by date (newest contract first, oldest contract last)
+		NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"estimate.date" ascending:NO];
+		fetchRequest.sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
+		[sortDescriptor release];
+
+		// buffer up to 16 Contracts
+		fetchRequest.fetchBatchSize = 16;
+
+		contractsFetchedResultsController_ = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
+																				 managedObjectContext:self.managedObjectContext
+																				   sectionNameKeyPath:@"estimate.monthYear"
+																							cacheName:@"Root"];
+
+		[fetchRequest release];
+
+		NSError *error = nil;
+		if (![contractsFetchedResultsController_ performFetch:&error]) {
+			// TODO This is a serious error saying the records
+			//could not be fetched. Advise the user to try
+			//again or restart the application.
+			NSLog(@"DataStore.contractsFetchedResultsController_: fetch failed with error %@, %@", error, [error userInfo]);
+		}
+	}
+	return contractsFetchedResultsController_;
+}
+
+
+#pragma mark -
 #pragma mark Currency stack
 
 - (Currency *)currency {
@@ -870,6 +907,7 @@ static DataStore *singleton_ = nil;
 	[estimatesFetchedResultsController_ release];
 	[clientInfosFetchedResultsController_ release];
 	[lineItemsFetchedResultsController_ release];
+	[contractsFetchedResultsController_ release];
 	[taxesAndCurrencyFetchedResultsController_ release];
 	[currency_ release];
 	[myInfo_ release];
