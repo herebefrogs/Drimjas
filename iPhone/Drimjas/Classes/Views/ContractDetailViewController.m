@@ -12,6 +12,9 @@
 @implementation ContractDetailViewController
 
 
+@synthesize contract;
+
+
 #pragma mark -
 #pragma mark View lifecycle
 
@@ -157,7 +160,7 @@
 	NSLog(@"ContractDetailViewController.viewDidUnload");
 #endif
     // Relinquish ownership of anything that can be recreated in viewDidLoad or on demand.
-    // For example: self.myOutlet = nil;
+	self.contract = nil;
 }
 
 
@@ -165,6 +168,7 @@
 #ifdef __ENABLE_UI_LOGS__
 	NSLog(@"ContractDetailViewController.dealloc");
 #endif
+	[contract release];
     [super dealloc];
 }
 

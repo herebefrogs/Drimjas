@@ -17,6 +17,9 @@
 
 @property (nonatomic, retain) Estimate *estimate;
 
+- (void)bindEstimate:(Estimate *)anEstimate;
+- (void)unbindEstimate:(Estimate *)anEstimate;
+
 @end
 
 

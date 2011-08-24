@@ -9,6 +9,7 @@
 #import "NewContractViewController.h"
 // API
 #import "ClientInfo.h"
+#import "Contract.h"
 #import "DataStore.h"
 #import "Estimate.h"
 // Views
@@ -98,6 +99,13 @@
 #pragma mark Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+	// create a new contract based on selected estimate
+	Contract *contract = [[DataStore defaultStore] createContract];
+	[contract bindEstimate:[estimates objectAtIndexPath:indexPath]];
+	[[DataStore defaultStore] saveContract:contract];
+
+	contractDetailViewController.contract = contract;
+
 	// reset navigation controller to contracts list & contract detail view controllers,
 	// discarding any contract creation view controllers in between
 	UIViewController *rootController = [self.navigationController.viewControllers objectAtIndex:0];

@@ -8,9 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+@class Contract;
 
 @interface ContractDetailViewController : UITableViewController {
-
+	Contract *contract;
 }
+
+@property (nonatomic, retain) Contract *contract;
 
 @end

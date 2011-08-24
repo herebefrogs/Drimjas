@@ -775,6 +775,20 @@ static DataStore *singleton_ = nil;
 	return contractsFetchedResultsController_;
 }
 
+- (Contract *)createContract {
+	return (Contract *)[NSEntityDescription insertNewObjectForEntityForName:@"Contract"
+													 inManagedObjectContext:self.managedObjectContext];
+}
+
+- (BOOL)saveContract:(Contract *)contract {
+	[contract refreshStatus];
+
+	[self saveContext];
+
+	return YES;
+}
+
+
 
 #pragma mark -
 #pragma mark Currency stack

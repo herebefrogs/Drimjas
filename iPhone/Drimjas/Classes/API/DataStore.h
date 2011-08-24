@@ -11,6 +11,7 @@
 @class Estimate;
 @class ClientInfo;
 @class ContactInfo;
+@class Contract;
 @class LineItemSelection;
 @class LineItem;
 @class Currency;
@@ -117,6 +118,8 @@
 @interface DataStore (ContractAccessors)
 
 - (NSFetchedResultsController *)contractsFetchedResultsController;
+- (Contract *)createContract;
+- (BOOL)saveContract:(Contract *)contract;
 
 @end
 
