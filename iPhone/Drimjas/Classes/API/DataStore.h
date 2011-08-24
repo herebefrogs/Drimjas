@@ -120,6 +120,7 @@
 - (NSFetchedResultsController *)contractsFetchedResultsController;
 - (Contract *)createContract;
 - (BOOL)saveContract:(Contract *)contract;
+- (BOOL)deleteContract:(Contract *)contract andSave:(BOOL)save;
 
 @end
 

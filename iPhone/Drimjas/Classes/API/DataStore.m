@@ -10,6 +10,7 @@
 // API
 #import "ClientInfo.h"
 #import	"ContactInfo.h"
+#import "Contract.h"
 #import "Estimate.h"
 #import "IndexedObject.h"
 #import "LineItemSelection.h"
@@ -382,6 +383,11 @@ static DataStore *singleton_ = nil;
 
 	for (LineItemSelection *lineItem in estimate.lineItems) {
 		[self deleteLineItemSelection:lineItem];
+	}
+
+	if (estimate.contract) {
+		// deleting an estimate does delete associated contract
+		[self deleteContract:estimate.contract andSave:NO];
 	}
 
 	[self.managedObjectContext deleteObject:estimate];
@@ -788,6 +794,18 @@ static DataStore *singleton_ = nil;
 	return YES;
 }
 
+- (BOOL)deleteContract:(Contract *)contract andSave:(BOOL)save {
+	// deleting a contract does not delete underlying estimate
+	[contract unbindEstimate:contract.estimate];
+
+	[self.managedObjectContext deleteObject:contract];
+
+	if (save) {
+		[self saveContext];
+	}
+
+	return YES;
+}
 
 
 #pragma mark -

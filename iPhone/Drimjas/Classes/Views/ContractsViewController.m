@@ -99,7 +99,7 @@
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-		NSLog(@"delete contract");
+		[[DataStore defaultStore] deleteContract:[contracts objectAtIndexPath:indexPath] andSave:YES];
     }  
 }
 
