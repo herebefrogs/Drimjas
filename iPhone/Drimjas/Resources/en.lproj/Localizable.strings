@@ -152,19 +152,16 @@
 /* EstimateDetail View Controller Navigation Item Title */
 "Estimate Detail" = "Estimate Detail";
 
-/* Estimate Detail Order Number section title */
+/* Estimate & Contract Detail Order Number section title */
 "Purchase Order Number" = "Purchase Order Number";
 
-/* Estimate Detail Client Information section title */
+/* Estimate & Contract Detail Client Information section title */
 "Client Information" = "Client Information";
 
-/* Estimate Detail Client Information section title */
-"Client Information" = "Client Information";
-
-/* Estimate Detail Contact Information section title */
+/* Estimate & Contract Detail Contact Information section title */
 "Contact Information" = "Contact Information";
 
-/* Estimate Detail Line Items section title */
+/* Estimate & Contract Detail Line Items section title */
 "Line Items" = "Line Items";
 
 /* Estimate Detail Edit button */
@@ -172,6 +169,9 @@
 
 /* NewContract Navigation Item Title */
 "Pick Estimate" = "Pick Estimate";
+
+/* ContractDetail Navigation Item Title */
+"Contract Detail" = "Contract Detail";
 
 /* Options Clients Title */
 "Clients" = "Clients";

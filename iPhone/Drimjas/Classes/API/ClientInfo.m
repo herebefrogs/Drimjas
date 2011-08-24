@@ -115,6 +115,7 @@
 }
 
 - (ContactInfo *)contactInfoAtIndex:(NSUInteger)index {
+	// TODO keep in a transient property and refresh when (un)binding ContactInfo?
 	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"index" ascending:YES];
 	ContactInfo *contactInfo = (ContactInfo *)[[self.contactInfos sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]] objectAtIndex:index];
 	[sortDescriptor release];

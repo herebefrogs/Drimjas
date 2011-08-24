@@ -12,7 +12,7 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="128"/>
+			<integer value="196"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -72,14 +72,14 @@
 				</object>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 				<bool key="IBUIHorizontal">NO</bool>
-				<object class="IBUINavigationController" key="IBUISelectedViewController" id="305059909">
-					<string key="IBUITitle">Estimates</string>
-					<object class="IBUITabBarItem" key="IBUITabBarItem" id="652701649">
-						<int key="IBUITag">1</int>
-						<string key="IBUITitle">Estimates</string>
+				<object class="IBUINavigationController" key="IBUISelectedViewController" id="545799180">
+					<string key="IBUITitle">Contracts</string>
+					<object class="IBUITabBarItem" key="IBUITabBarItem" id="327698455">
+						<int key="IBUITag">2</int>
+						<string key="IBUITitle">Contracts</string>
 						<object class="NSCustomResource" key="IBUIImage">
 							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">Estimates.png</string>
+							<string key="NSResourceName">Contracts.png</string>
 						</object>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<reference key="IBUITabBar"/>
@@ -91,7 +91,7 @@
 					</object>
 					<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 					<bool key="IBUIHorizontal">NO</bool>
-					<object class="IBUINavigationBar" key="IBUINavigationBar" id="485023561">
+					<object class="IBUINavigationBar" key="IBUINavigationBar" id="959006077">
 						<nil key="NSNextResponder"/>
 						<int key="NSvFlags">256</int>
 						<string key="NSFrameSize">{320, 44}</string>
@@ -101,7 +101,7 @@
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<int key="IBUIBarStyle">1</int>
 					</object>
-					<object class="IBUIToolbar" key="IBUIToolbar" id="1038878684">
+					<object class="IBUIToolbar" key="IBUIToolbar" id="970273871">
 						<nil key="NSNextResponder"/>
 						<int key="NSvFlags">256</int>
 						<string key="NSFrame">{{0, 436}, {320, 44}}</string>
@@ -114,21 +114,21 @@
 					</object>
 					<object class="NSMutableArray" key="IBUIViewControllers">
 						<bool key="EncodedWithXMLCoder">YES</bool>
-						<object class="IBUIViewController" id="149599049">
+						<object class="IBUIViewController" id="423219008">
 							<reference key="IBUIToolbarItems" ref="0"/>
-							<object class="IBUINavigationItem" key="IBUINavigationItem" id="767557560">
+							<object class="IBUINavigationItem" key="IBUINavigationItem" id="933254534">
 								<reference key="IBUINavigationBar"/>
-								<string key="IBUITitle">Estimates</string>
-								<object class="IBUIBarButtonItem" key="IBUIRightBarButtonItem" id="390307550">
+								<string key="IBUITitle">Contracts</string>
+								<object class="IBUIBarButtonItem" key="IBUIRightBarButtonItem" id="708885592">
 									<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 									<int key="IBUIStyle">1</int>
-									<reference key="IBUINavigationItem" ref="767557560"/>
+									<reference key="IBUINavigationItem" ref="933254534"/>
 									<int key="IBUISystemItemIdentifier">4</int>
 								</object>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 							</object>
-							<reference key="IBUIParentViewController" ref="305059909"/>
-							<string key="IBUINibName">Estimates</string>
+							<reference key="IBUIParentViewController" ref="545799180"/>
+							<string key="IBUINibName">Contracts</string>
 							<object class="IBUISimulatedOrientationMetrics" key="IBUISimulatedOrientationMetrics">
 								<int key="interfaceOrientation">1</int>
 							</object>
@@ -140,15 +140,14 @@
 				</object>
 				<object class="NSMutableArray" key="IBUIViewControllers">
 					<bool key="EncodedWithXMLCoder">YES</bool>
-					<reference ref="305059909"/>
-					<object class="IBUINavigationController" id="545799180">
-						<string key="IBUITitle">Contracts</string>
-						<object class="IBUITabBarItem" key="IBUITabBarItem" id="327698455">
-							<int key="IBUITag">2</int>
-							<string key="IBUITitle">Contracts</string>
+					<object class="IBUINavigationController" id="305059909">
+						<string key="IBUITitle">Estimates</string>
+						<object class="IBUITabBarItem" key="IBUITabBarItem" id="652701649">
+							<int key="IBUITag">1</int>
+							<string key="IBUITitle">Estimates</string>
 							<object class="NSCustomResource" key="IBUIImage">
 								<string key="NSClassName">NSImage</string>
-								<string key="NSResourceName">Contracts.png</string>
+								<string key="NSResourceName">Estimates.png</string>
 							</object>
 							<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 							<reference key="IBUITabBar"/>
@@ -160,7 +159,7 @@
 						</object>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<bool key="IBUIHorizontal">NO</bool>
-						<object class="IBUINavigationBar" key="IBUINavigationBar" id="959006077">
+						<object class="IBUINavigationBar" key="IBUINavigationBar" id="485023561">
 							<nil key="NSNextResponder"/>
 							<int key="NSvFlags">256</int>
 							<string key="NSFrameSize">{320, 44}</string>
@@ -170,22 +169,33 @@
 							<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 							<int key="IBUIBarStyle">1</int>
 						</object>
+						<object class="IBUIToolbar" key="IBUIToolbar" id="1038878684">
+							<nil key="NSNextResponder"/>
+							<int key="NSvFlags">256</int>
+							<string key="NSFrame">{{0, 436}, {320, 44}}</string>
+							<bool key="IBUIOpaque">NO</bool>
+							<bool key="IBUIClipsSubviews">YES</bool>
+							<int key="IBUIContentMode">4</int>
+							<bool key="IBUIMultipleTouchEnabled">YES</bool>
+							<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+							<int key="IBUIBarStyle">1</int>
+						</object>
 						<object class="NSMutableArray" key="IBUIViewControllers">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<object class="IBUIViewController" id="423219008">
+							<object class="IBUIViewController" id="149599049">
 								<reference key="IBUIToolbarItems" ref="0"/>
-								<object class="IBUINavigationItem" key="IBUINavigationItem" id="933254534">
-									<string key="IBUITitle">Contracts</string>
-									<object class="IBUIBarButtonItem" key="IBUIRightBarButtonItem" id="708885592">
+								<object class="IBUINavigationItem" key="IBUINavigationItem" id="767557560">
+									<string key="IBUITitle">Estimates</string>
+									<object class="IBUIBarButtonItem" key="IBUIRightBarButtonItem" id="390307550">
 										<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 										<int key="IBUIStyle">1</int>
-										<reference key="IBUINavigationItem" ref="933254534"/>
+										<reference key="IBUINavigationItem" ref="767557560"/>
 										<int key="IBUISystemItemIdentifier">4</int>
 									</object>
 									<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								</object>
-								<reference key="IBUIParentViewController" ref="545799180"/>
-								<string key="IBUINibName">Contracts</string>
+								<reference key="IBUIParentViewController" ref="305059909"/>
+								<string key="IBUINibName">Estimates</string>
 								<object class="IBUISimulatedOrientationMetrics" key="IBUISimulatedOrientationMetrics">
 									<int key="interfaceOrientation">1</int>
 								</object>
@@ -193,7 +203,9 @@
 								<bool key="IBUIHorizontal">NO</bool>
 							</object>
 						</object>
+						<bool key="IBUIToolbarHidden">NO</bool>
 					</object>
+					<reference ref="545799180"/>
 					<object class="IBUINavigationController" id="290024255">
 						<object class="IBUITabBarItem" key="IBUITabBarItem" id="13787961">
 							<int key="IBUITag">3</int>
@@ -443,6 +455,7 @@
 							<reference ref="327698455"/>
 							<reference ref="423219008"/>
 							<reference ref="959006077"/>
+							<reference ref="970273871"/>
 						</object>
 						<reference key="parent" ref="1034742383"/>
 					</object>
@@ -514,6 +527,11 @@
 						<reference key="object" ref="708885592"/>
 						<reference key="parent" ref="933254534"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">212</int>
+						<reference key="object" ref="970273871"/>
+						<reference key="parent" ref="545799180"/>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -583,7 +601,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">210</int>
+			<int key="maxID">212</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -917,6 +935,85 @@
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
+					<string key="className">ContractDetailViewController</string>
+					<string key="superclassName">UITableViewController</string>
+					<object class="NSMutableDictionary" key="actions">
+						<bool key="EncodedWithXMLCoder">YES</bool>
+						<object class="NSArray" key="dict.sortedKeys">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>email:</string>
+							<string>print:</string>
+						</object>
+						<object class="NSMutableArray" key="dict.values">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
+							<string>id</string>
+						</object>
+					</object>
+					<object class="NSMutableDictionary" key="actionInfosByName">
+						<bool key="EncodedWithXMLCoder">YES</bool>
+						<object class="NSArray" key="dict.sortedKeys">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>email:</string>
+							<string>print:</string>
+						</object>
+						<object class="NSMutableArray" key="dict.values">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<object class="IBActionInfo">
+								<string key="name">email:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">print:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+						</object>
+					</object>
+					<object class="NSMutableDictionary" key="outlets">
+						<bool key="EncodedWithXMLCoder">YES</bool>
+						<object class="NSArray" key="dict.sortedKeys">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>emailButton</string>
+							<string>printButton</string>
+							<string>spacerButton</string>
+						</object>
+						<object class="NSMutableArray" key="dict.values">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>UIBarButtonItem</string>
+							<string>UIBarButtonItem</string>
+							<string>UIBarButtonItem</string>
+						</object>
+					</object>
+					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<bool key="EncodedWithXMLCoder">YES</bool>
+						<object class="NSArray" key="dict.sortedKeys">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>emailButton</string>
+							<string>printButton</string>
+							<string>spacerButton</string>
+						</object>
+						<object class="NSMutableArray" key="dict.values">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<object class="IBToOneOutletInfo">
+								<string key="name">emailButton</string>
+								<string key="candidateClassName">UIBarButtonItem</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">printButton</string>
+								<string key="candidateClassName">UIBarButtonItem</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">spacerButton</string>
+								<string key="candidateClassName">UIBarButtonItem</string>
+							</object>
+						</object>
+					</object>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">Classes/Views/ContractDetailViewController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
 					<string key="className">ContractsViewController</string>
 					<string key="superclassName">UITableViewController</string>
 					<object class="NSMutableDictionary" key="actions">
@@ -931,14 +1028,35 @@
 						</object>
 					</object>
 					<object class="NSMutableDictionary" key="outlets">
-						<string key="NS.key.0">newContractViewController</string>
-						<string key="NS.object.0">NewContractViewController</string>
+						<bool key="EncodedWithXMLCoder">YES</bool>
+						<object class="NSArray" key="dict.sortedKeys">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>contractDetailViewController</string>
+							<string>newContractViewController</string>
+						</object>
+						<object class="NSMutableArray" key="dict.values">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>ContractDetailViewController</string>
+							<string>NewContractViewController</string>
+						</object>
 					</object>
 					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<string key="NS.key.0">newContractViewController</string>
-						<object class="IBToOneOutletInfo" key="NS.object.0">
-							<string key="name">newContractViewController</string>
-							<string key="candidateClassName">NewContractViewController</string>
+						<bool key="EncodedWithXMLCoder">YES</bool>
+						<object class="NSArray" key="dict.sortedKeys">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>contractDetailViewController</string>
+							<string>newContractViewController</string>
+						</object>
+						<object class="NSMutableArray" key="dict.values">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<object class="IBToOneOutletInfo">
+								<string key="name">contractDetailViewController</string>
+								<string key="candidateClassName">ContractDetailViewController</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">newContractViewController</string>
+								<string key="candidateClassName">NewContractViewController</string>
+							</object>
 						</object>
 					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
@@ -1371,6 +1489,17 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">NewContractViewController</string>
 					<string key="superclassName">UITableViewController</string>
+					<object class="NSMutableDictionary" key="outlets">
+						<string key="NS.key.0">contractDetailViewController</string>
+						<string key="NS.object.0">ContractDetailViewController</string>
+					</object>
+					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<string key="NS.key.0">contractDetailViewController</string>
+						<object class="IBToOneOutletInfo" key="NS.object.0">
+							<string key="name">contractDetailViewController</string>
+							<string key="candidateClassName">ContractDetailViewController</string>
+						</object>
+					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">Classes/Views/NewContractViewController.h</string>

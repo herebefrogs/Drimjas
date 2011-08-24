@@ -36,6 +36,7 @@
 	indexFirstLineItem = EstimateDetailSectionContactInfo + MAX(1, estimate.clientInfo.contactInfos.count);
 	indexLastSection = indexFirstLineItem + MAX(1, estimate.lineItems.count);
 
+	// TODO move this into Estimate, cached in a local transient array refreshed when (un)binding Line Item Selections
 	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"index" ascending:YES];
 	[lineItemSelections release];
 	lineItemSelections = [[estimate.lineItems sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]] retain];

@@ -61,6 +61,12 @@ typedef enum {
 } LineItemField;
 
 typedef enum {
+	ContractDetailSectionOrderNumber = 0,
+	ContractDetailSectionClientInfo,
+	ContractDetailSectionContactInfo,
+} ContractDetailSection;
+
+typedef enum {
 	TaxesAndCurrencySectionCurrency = 0,
 } TaxesAndCurrencySection;
 
