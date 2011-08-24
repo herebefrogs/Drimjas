@@ -69,6 +69,7 @@
 		02CB99E5139BE16F00FF2A3C /* Options@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 02CB99E1139BE16F00FF2A3C /* Options@2x.png */; };
 		02CB9A5F139C16B600FF2A3C /* EditSectionHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 02CB9A5E139C16B600FF2A3C /* EditSectionHeader.m */; };
 		02CB9A6D139C19ED00FF2A3C /* EditSectionHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02CB9A6C139C19ED00FF2A3C /* EditSectionHeader.xib */; };
+		02CC02EC1404836B007D1795 /* Contract.m in Sources */ = {isa = PBXBuildFile; fileRef = 02CC02EB1404836B007D1795 /* Contract.m */; };
 		02CC9C96133FC324006160A7 /* TextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 02CC9C95133FC324006160A7 /* TextFieldCell.m */; };
 		02CC9C98133FC52D006160A7 /* TextFieldCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02CC9C97133FC52D006160A7 /* TextFieldCell.xib */; };
 		02CC9D82133FEA36006160A7 /* ClientInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 02CC9D81133FEA36006160A7 /* ClientInfo.m */; };
@@ -199,6 +200,9 @@
 		02CB9A5D139C16B600FF2A3C /* EditSectionHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditSectionHeader.h; sourceTree = "<group>"; };
 		02CB9A5E139C16B600FF2A3C /* EditSectionHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditSectionHeader.m; sourceTree = "<group>"; };
 		02CB9A6C139C19ED00FF2A3C /* EditSectionHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = EditSectionHeader.xib; path = Resources/Cells/EditSectionHeader.xib; sourceTree = "<group>"; };
+		02CC02E7140481A5007D1795 /* Drimjas 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Drimjas 4.xcdatamodel"; sourceTree = "<group>"; };
+		02CC02EA1404836B007D1795 /* Contract.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Contract.h; sourceTree = "<group>"; };
+		02CC02EB1404836B007D1795 /* Contract.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Contract.m; sourceTree = "<group>"; };
 		02CC9C94133FC324006160A7 /* TextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextFieldCell.h; sourceTree = "<group>"; };
 		02CC9C95133FC324006160A7 /* TextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextFieldCell.m; sourceTree = "<group>"; };
 		02CC9C97133FC52D006160A7 /* TextFieldCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = TextFieldCell.xib; path = Resources/Cells/TextFieldCell.xib; sourceTree = "<group>"; };
@@ -342,6 +346,8 @@
 				02CC9D81133FEA36006160A7 /* ClientInfo.m */,
 				02A8E5451347C79D00BAAF36 /* ContactInfo.h */,
 				02A8E5461347C79D00BAAF36 /* ContactInfo.m */,
+				02CC02EA1404836B007D1795 /* Contract.h */,
+				02CC02EB1404836B007D1795 /* Contract.m */,
 				02C25791132438C40057D944 /* DataStore.h */,
 				02C25792132438C40057D944 /* DataStore.m */,
 				02CC9D83133FEB2C006160A7 /* Estimate.h */,
@@ -648,6 +654,7 @@
 				0282274D13D66EBB00D995A4 /* DrimjasInfo.m in Sources */,
 				02C6509A13D922B200ABEFF7 /* KeyValue.m in Sources */,
 				02CE034613DD018F00C91A88 /* PageInfo.m in Sources */,
+				02CC02EC1404836B007D1795 /* Contract.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -762,8 +769,9 @@
 				02DFF94913C8ECB700300ADD /* WorkingTitle 13.xcdatamodel */,
 				02B01D7F13F0DEA6001BEDE2 /* Drimjas 2.xcdatamodel */,
 				02F3ECBA13FB5CCF000ED8EF /* Drimjas 3.xcdatamodel */,
+				02CC02E7140481A5007D1795 /* Drimjas 4.xcdatamodel */,
 			);
-			currentVersion = 02F3ECBA13FB5CCF000ED8EF /* Drimjas 3.xcdatamodel */;
+			currentVersion = 02CC02E7140481A5007D1795 /* Drimjas 4.xcdatamodel */;
 			name = Drimjas.xcdatamodeld;
 			path = Resources/Drimjas.xcdatamodeld;
 			sourceTree = "<group>";

@@ -9,6 +9,7 @@
 #import "Estimate.h"
 // API
 #import "ClientInfo.h"
+#import "Contract.h"
 #import "DataStore.h"
 #import "LineItem.h"
 #import "LineItemSelection.h"
@@ -20,6 +21,7 @@
 @dynamic date;
 @dynamic clientInfo;
 @dynamic lineItems;
+@dynamic contract;
 
 #pragma mark -
 #pragma mark Public methods stack

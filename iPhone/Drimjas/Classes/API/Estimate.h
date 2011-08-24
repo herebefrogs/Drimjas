@@ -11,6 +11,7 @@
 #import "BaseObject.h"
 
 @class ClientInfo;
+@class Contract;
 @class LineItemSelection;
 
 @interface Estimate : BaseObject {
@@ -20,6 +21,7 @@
 @property (nonatomic, retain) NSDate *date;
 @property (nonatomic, retain) ClientInfo *clientInfo;
 @property (nonatomic, retain) NSSet *lineItems;
+@property (nonatomic, retain) Contract *contract;
 
 @property (nonatomic, readonly) NSString *monthYear;
 @property (nonatomic, readonly) NSString *orderNumber;
