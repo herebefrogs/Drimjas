@@ -11,11 +11,14 @@
 #import "ClientInfo.h"
 #import "DataStore.h"
 #import "Estimate.h"
+// Views
+#import "ContractDetailViewController.h"
 
 @implementation NewContractViewController
 
 
 @synthesize estimates;
+@synthesize contractDetailViewController;
 
 
 #pragma mark -
@@ -95,7 +98,13 @@
 #pragma mark Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	NSLog(@"create contract out of estimate");
+	// reset navigation controller to contracts list & contract detail view controllers,
+	// discarding any contract creation view controllers in between
+	UIViewController *rootController = [self.navigationController.viewControllers objectAtIndex:0];
+	[self.navigationController setViewControllers:[NSArray arrayWithObjects:rootController,
+												   contractDetailViewController,
+												   nil]
+										 animated:YES];
 }
 
 
@@ -164,6 +173,7 @@
 	NSLog(@"NewContractViewController.viewDidUnload");
 #endif
     // Relinquish ownership of anything that can be recreated in viewDidLoad or on demand.
+	self.contractDetailViewController = nil;
 	self.estimates = nil;
 }
 

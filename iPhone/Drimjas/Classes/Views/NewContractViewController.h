@@ -8,11 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+@class ContractDetailViewController;
 
 @interface NewContractViewController : UITableViewController <NSFetchedResultsControllerDelegate> {
+	ContractDetailViewController *contractDetailViewController;
+
 	NSFetchedResultsController *estimates;
 }
 
+@property (nonatomic, retain) IBOutlet ContractDetailViewController *contractDetailViewController;
 @property (nonatomic, retain) NSFetchedResultsController *estimates;
 
 @end

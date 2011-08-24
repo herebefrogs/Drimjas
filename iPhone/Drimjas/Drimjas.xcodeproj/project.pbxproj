@@ -51,6 +51,8 @@
 		02B2C06E12DFF2DD00D3FEE0 /* EstimatesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02B2C06C12DFF2DD00D3FEE0 /* EstimatesViewController.m */; };
 		02B2C06F12DFF2DD00D3FEE0 /* Estimates.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02B2C06D12DFF2DD00D3FEE0 /* Estimates.xib */; };
 		02B6326613B1D9D5003E4081 /* IndexedObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 02B6326513B1D9D5003E4081 /* IndexedObject.m */; };
+		02BDDE2D1405465100627A35 /* ContractDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02BDDE2B1405465100627A35 /* ContractDetailViewController.m */; };
+		02BDDE2E1405465100627A35 /* ContractDetail.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02BDDE2C1405465100627A35 /* ContractDetail.xib */; };
 		02C25793132438C40057D944 /* DataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 02C25792132438C40057D944 /* DataStore.m */; };
 		02C6509A13D922B200ABEFF7 /* KeyValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 02C6509913D922B200ABEFF7 /* KeyValue.m */; };
 		02C75243136A429F00EC4BF5 /* AddEstimateNewOrPickClientInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02C75241136A429F00EC4BF5 /* AddEstimateNewOrPickClientInfoViewController.m */; };
@@ -179,6 +181,9 @@
 		02B2C06D12DFF2DD00D3FEE0 /* Estimates.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Estimates.xib; sourceTree = "<group>"; };
 		02B6326413B1D9D5003E4081 /* IndexedObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IndexedObject.h; sourceTree = "<group>"; };
 		02B6326513B1D9D5003E4081 /* IndexedObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IndexedObject.m; sourceTree = "<group>"; };
+		02BDDE2A1405465100627A35 /* ContractDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContractDetailViewController.h; sourceTree = "<group>"; };
+		02BDDE2B1405465100627A35 /* ContractDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContractDetailViewController.m; sourceTree = "<group>"; };
+		02BDDE2C1405465100627A35 /* ContractDetail.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContractDetail.xib; sourceTree = "<group>"; };
 		02C25791132438C40057D944 /* DataStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataStore.h; sourceTree = "<group>"; };
 		02C25792132438C40057D944 /* DataStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataStore.m; sourceTree = "<group>"; };
 		02C6509813D922B200ABEFF7 /* KeyValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KeyValue.h; path = ../Utils/KeyValue.h; sourceTree = "<group>"; };
@@ -288,6 +293,8 @@
 				029DAC9F136BA00A00AF4A6F /* ClientInfosViewController.m */,
 				02A8E5481347C88600BAAF36 /* ContactInfosViewController.h */,
 				02A8E5491347C88600BAAF36 /* ContactInfosViewController.m */,
+				02BDDE2A1405465100627A35 /* ContractDetailViewController.h */,
+				02BDDE2B1405465100627A35 /* ContractDetailViewController.m */,
 				020886CD13AC41D000164320 /* ContractsViewController.h */,
 				020886CE13AC41D000164320 /* ContractsViewController.m */,
 				1D3623240D0F684500981E51 /* DrimjasAppDelegate.h */,
@@ -326,6 +333,7 @@
 				02AA0B5E136DAF13005E9158 /* ClientInfoDetail.xib */,
 				029DACA0136BA00A00AF4A6F /* ClientInfos.xib */,
 				02A8E54A1347C88600BAAF36 /* ContactInfos.xib */,
+				02BDDE2C1405465100627A35 /* ContractDetail.xib */,
 				020886CF13AC41D000164320 /* Contracts.xib */,
 				02E1C7A312E53834000D7747 /* EstimateDetail.xib */,
 				02B2C06D12DFF2DD00D3FEE0 /* Estimates.xib */,
@@ -615,6 +623,7 @@
 				02E7BA141400194D00D60D6D /* EstimateHighlight.png in Resources */,
 				02E7BA151400194D00D60D6D /* EstimateHighlight@2x.png in Resources */,
 				02CC032B14048C0A007D1795 /* NewContract.xib in Resources */,
+				02BDDE2E1405465100627A35 /* ContractDetail.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -665,6 +674,7 @@
 				02CE034613DD018F00C91A88 /* PageInfo.m in Sources */,
 				02CC02EC1404836B007D1795 /* Contract.m in Sources */,
 				02CC032A14048C0A007D1795 /* NewContractViewController.m in Sources */,
+				02BDDE2D1405465100627A35 /* ContractDetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
