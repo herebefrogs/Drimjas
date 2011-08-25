@@ -65,6 +65,7 @@
 		02C81A7A1307903C009029E9 /* Email@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 02C81A781307903C009029E9 /* Email@2x.png */; };
 		02C81A9413079755009029E9 /* Print.png in Resources */ = {isa = PBXBuildFile; fileRef = 02C81A9213079755009029E9 /* Print.png */; };
 		02C81A9513079755009029E9 /* Print@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 02C81A9313079755009029E9 /* Print@2x.png */; };
+		02C83FB314072B9B002C4874 /* Contract_Terms_and_Conditions.txt in Resources */ = {isa = PBXBuildFile; fileRef = 02C83FB114072B9B002C4874 /* Contract_Terms_and_Conditions.txt */; };
 		02CB99E2139BE16F00FF2A3C /* Contracts.png in Resources */ = {isa = PBXBuildFile; fileRef = 02CB99DE139BE16F00FF2A3C /* Contracts.png */; };
 		02CB99E3139BE16F00FF2A3C /* Contracts@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 02CB99DF139BE16F00FF2A3C /* Contracts@2x.png */; };
 		02CB99E4139BE16F00FF2A3C /* Options.png in Resources */ = {isa = PBXBuildFile; fileRef = 02CB99E0139BE16F00FF2A3C /* Options.png */; };
@@ -199,6 +200,8 @@
 		02C81A781307903C009029E9 /* Email@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Email@2x.png"; path = "Resources/Icons/Email@2x.png"; sourceTree = "<group>"; };
 		02C81A9213079755009029E9 /* Print.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Print.png; path = Resources/Icons/Print.png; sourceTree = "<group>"; };
 		02C81A9313079755009029E9 /* Print@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Print@2x.png"; path = "Resources/Icons/Print@2x.png"; sourceTree = "<group>"; };
+		02C83FB214072B9B002C4874 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = en; path = Resources/en.lproj/Contract_Terms_and_Conditions.txt; sourceTree = "<group>"; };
+		02C83FFB14073861002C4874 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text; name = fr; path = Resources/fr.lproj/Contract_Terms_and_Conditions.txt; sourceTree = "<group>"; };
 		02CB998A139BD56200FF2A3C /* TabBarItems.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabBarItems.h; sourceTree = "<group>"; };
 		02CB99DE139BE16F00FF2A3C /* Contracts.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Contracts.png; path = Resources/Icons/Contracts.png; sourceTree = "<group>"; };
 		02CB99DF139BE16F00FF2A3C /* Contracts@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Contracts@2x.png"; path = "Resources/Icons/Contracts@2x.png"; sourceTree = "<group>"; };
@@ -498,6 +501,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				02C83FB114072B9B002C4874 /* Contract_Terms_and_Conditions.txt */,
 				02943CAF1319AB8400A719AA /* Drimjas.xcdatamodeld */,
 				02C81A41130784C2009029E9 /* Icons */,
 				029C645112EB8389000B6E51 /* Localizable.strings */,
@@ -624,6 +628,7 @@
 				02E7BA151400194D00D60D6D /* EstimateHighlight@2x.png in Resources */,
 				02CC032B14048C0A007D1795 /* NewContract.xib in Resources */,
 				02BDDE2E1405465100627A35 /* ContractDetail.xib in Resources */,
+				02C83FB314072B9B002C4874 /* Contract_Terms_and_Conditions.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -688,6 +693,15 @@
 				029C647112EB84E9000B6E51 /* fr */,
 			);
 			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		02C83FB114072B9B002C4874 /* Contract_Terms_and_Conditions.txt */ = {
+			isa = PBXVariantGroup;
+			children = (
+				02C83FB214072B9B002C4874 /* en */,
+				02C83FFB14073861002C4874 /* fr */,
+			);
+			name = Contract_Terms_and_Conditions.txt;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

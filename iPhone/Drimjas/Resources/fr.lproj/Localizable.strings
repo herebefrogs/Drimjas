@@ -189,17 +189,20 @@
 "Draft" = "Brouillon";
 
 /********************* Utils section ******************/
-/* Estimate PDF filename & Mail Subject */
-"Estimate" = "Devis";
+/* Estimate PDF filename */
+"Estimate-%@.pdf" = "Devis-%@.pdf";
+
+/* Estimate Mail Subject & PDF title */
+"Estimate #%@" = "Devis #%@";
 
 /* Estimate Email Body */
 "Estimate Email Body" = "";
 
-/* Contract Mail Subject */
-"Contract %@" = "Contrat %@";
-
 /* Contract PDF filename */
 "Contract-%@.pdf" = "Contrat-%@.pdf";
+
+/* Contract Mail Subject */
+"Contract #%@" = "Contrat #%@";
 
 /* Contact Email Body */
 "Contract Email Body" = "";
@@ -235,6 +238,12 @@
 "SUBTOTAL" = "SOUS TOTAL";
 "S & H" = "FRAIS DE LIVRAISON";
 "TOTAL" = "TOTAL";
+
+/* contract signature */
+"Signature:" = "Signature:";
+
+/* contract signature date */
+"Date:" = "Date:";
 
 /* PDF footer */
 "If you have any questions, please don't hesitate to contact us!" = "N'hésitez pas à nous contacter si vous avez la moindre question!";

@@ -599,7 +599,7 @@ typedef enum {
 	[numberFormatter release];
 }
 
-+ (void)_pageInfo:(PageInfo *)pageInfo renderTotalsAndTaxes:(Estimate *)estimate xAndWidths:(NSArray *)xAndWidths {
++ (void)_pageInfo:(PageInfo *)pageInfo renderTotalsAndTaxes:(Estimate *)estimate forContract:(BOOL)contract xAndWidths:(NSArray *)xAndWidths {
 	NSAssert(xAndWidths.count == CostWidth + 1, @"Not enough x and width data to render totals and taxes");
 
 	CGFloat unitCostX = [[xAndWidths objectAtIndex:UnitCostX] floatValue];
@@ -700,6 +700,13 @@ typedef enum {
 
 	pageInfo.y += 6 * pageInfo.linePadding;
 
+	// render signature
+	if (contract) {
+		pageInfo.x = pageInfo.bounds.origin.x;
+		pageInfo.maxWidth = labelX - pageInfo.bounds.origin.x;
+		[pageInfo drawTextLeftJustified:NSLocalizedString(@"Signature:", "Contract signature") font:pageInfo.boldFont];
+	}
+
 	// render S & H
 	pageInfo.x = labelX;
 	pageInfo.maxWidth = labelWidth;
@@ -726,6 +733,13 @@ typedef enum {
 	CGContextStrokePath(context);
 
 	pageInfo.y += maxRowHeight + 6 * pageInfo.linePadding;
+
+	// render signature date
+	if (contract) {
+		pageInfo.x = pageInfo.bounds.origin.x;
+		pageInfo.maxWidth = labelX - pageInfo.bounds.origin.x;
+		[pageInfo drawTextLeftJustified:NSLocalizedString(@"Date:", "Contract signature date") font:pageInfo.boldFont];
+	}
 
 	// render total
 	pageInfo.x = labelX;
@@ -767,6 +781,84 @@ typedef enum {
 	pageInfo.y += textSize.height + 6 * pageInfo.linePadding;
 	[pageInfo drawTextLeftJustified:NSLocalizedString(@"Notes:","") font:pageInfo.boldFont];
 }
+
++ (void)_renderContractTermsAndConditions:(PageInfo *)pageInfo {
+	NSString *legalesePath = [[NSBundle mainBundle] pathForResource:@"Contract_Terms_And_Conditions" ofType:@"txt"];	
+	NSStringEncoding *encoding = nil;
+	NSError *error = nil;
+	NSString *legalese = [NSString stringWithContentsOfFile:legalesePath usedEncoding:encoding error:&error];
+
+	if (error) {
+		NSLog(@"loading Contract Terms & Conditions failed with error %@, %@", error, [error userInfo]);
+		return;
+	}
+
+	// interpolate business name
+	legalese = [NSString stringWithFormat:legalese, [[[DataStore defaultStore] myInfo] name]];
+	/*
+	 NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:[pageInfo.plainFont fontName], (NSString *)kCTFontNameAttribute,
+	 [NSNumber numberWithFloat:[pageInfo.plainFont pointSize]], (NSString *)kCTFontSizeAttribute,
+	 nil];
+	 CFAttributedStringRef currentText = CFAttributedStringCreate(NULL, (CFStringRef)legalese, (CFDictionaryRef)attributes);
+	 => size ignored
+	 */
+	/*
+	 CTFontRef font = CTFontCreateWithName((CFStringRef)pageInfo.plainFont.fontName, pageInfo.plainFont.pointSize, NULL);
+	 CFMutableAttributedStringRef currentText = CFAttributedStringCreateMutable(NULL, 0);
+	 CFAttributedStringReplaceString(currentText, CFRangeMake(0, 0), (CFStringRef)legalese);
+	 CFAttributedStringSetAttribute(currentText, CFRangeMake(0, CFAttributedStringGetLength(currentText)), kCTFontAttributeName, font);
+	 CFRelease(font);
+	 => <Error>: unsupported 'Zapf' version 00020000.
+	 */
+	
+	CFAttributedStringRef currentText = CFAttributedStringCreate(NULL, (CFStringRef)legalese, NULL);
+	CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString(currentText);
+	CFRange currentRange = CFRangeMake(0, 0);
+	BOOL done = NO;
+
+	do {
+		// open new page dedicated to legalese
+		[pageInfo openNewPage];
+
+		// Get the graphics context.
+		CGContextRef currentContext = UIGraphicsGetCurrentContext();
+
+		// Put the text matrix into a known state. This ensures
+		// that no old scaling factors are left in place.
+		CGContextSetTextMatrix(currentContext, CGAffineTransformIdentity);
+
+		// Create a path object to enclose the text.
+		CGMutablePathRef framePath = CGPathCreateMutable();
+		CGPathAddRect(framePath, NULL, pageInfo.bounds);
+
+		// Get the frame that will do the rendering.
+		// The currentRange variable specifies only the starting point. The framesetter
+		// lays out as much text as will fit into the frame.
+		CTFrameRef frameRef = CTFramesetterCreateFrame(framesetter, currentRange, framePath, NULL);
+		CGPathRelease(framePath);
+
+		// Core Text draws from the bottom-left corner up, so flip
+		// the current transform prior to drawing.
+		CGContextTranslateCTM(currentContext, 0, CGRectGetHeight(pageInfo.pageSize));
+		CGContextScaleCTM(currentContext, 1.0, -1.0);
+
+		// Draw the frame.
+		CTFrameDraw(frameRef, currentContext);
+
+		// Update the current range based on what was drawn.
+		currentRange = CTFrameGetVisibleStringRange(frameRef);
+		currentRange.location += currentRange.length;
+		currentRange.length = 0;
+		CFRelease(frameRef);
+
+		if (currentRange.location == CFAttributedStringGetLength((CFAttributedStringRef)currentText)) {
+			done = YES;
+		}
+	} while (!done);
+	CFRelease(framesetter);
+	CFRelease(currentText);
+}
+
 
 #pragma mark -
 #pragma mark Public protocol implementation
@@ -814,7 +906,7 @@ typedef enum {
 	pageInfo.y += pageInfo.sectionPadding;
 	[PDFManager _pageInfo:pageInfo renderLineItems:estimate.lineItems xAndWidths:xAndWidths];
 	pageInfo.y += 6 * pageInfo.linePadding;
-	[PDFManager _pageInfo:pageInfo renderTotalsAndTaxes:estimate xAndWidths:xAndWidths];
+	[PDFManager _pageInfo:pageInfo renderTotalsAndTaxes:estimate forContract:NO xAndWidths:xAndWidths];
 
 	// render PDF footer
 	pageInfo.y += pageInfo.sectionPadding;
@@ -855,7 +947,7 @@ typedef enum {
 }
 
 + (NSString *)pdfTitleForEstimate:(Estimate *)estimate {
-	return [NSString stringWithFormat:NSLocalizedString(@"Estimate #%@", @"Estimate PDF Title"),
+	return [NSString stringWithFormat:NSLocalizedString(@"Estimate #%@", @"Estimate PDF title"),
 									  estimate.orderNumber];
 }
 
@@ -871,13 +963,85 @@ typedef enum {
 
 
 + (NSMutableData *)pdfDataForContract:(Contract *)contract {
-	NSLog(@"generate contract PDF");
-	return nil;
+	NSMutableData *pdfData = [[[NSMutableData alloc] initWithCapacity: 1024] autorelease];
+
+	// start PDF data
+	PageInfo *pageInfo = [[PageInfo alloc] init];
+	UIGraphicsBeginPDFContextToData(pdfData, pageInfo.pageSize, [self pdfInfoForContract:(Contract *)contract]);
+
+	// open new page
+	UIGraphicsBeginPDFPage();
+
+	MyInfo *myInfo = [[DataStore defaultStore] myInfo];
+
+	NSArray *xAndWidths = [PDFManager _pageInfo:pageInfo headerColumnsWidthForClient:contract.estimate.clientInfo myInfo:myInfo];
+
+	// render client+contact info & my info side by side
+	CGFloat myY = [PDFManager _pageInfo:pageInfo renderMyInfo:myInfo xAndWidths:xAndWidths];
+	CGFloat clientY = [PDFManager _pageInfo:pageInfo renderClientInfo:contract.estimate.clientInfo xAndWidths:xAndWidths];
+
+	// render contract date & business number
+	pageInfo.y = pageInfo.pageNo == 1 && myY > clientY ? myY + pageInfo.sectionPadding : clientY;
+	[PDFManager _pageInfo:pageInfo renderDate:contract.estimate.date];
+	[PDFManager _pageInfo:pageInfo renderTaxNos:[[DataStore defaultStore] taxes]];
+
+	// render horizontal line
+	pageInfo.y += pageInfo.linePadding;
+	CGContextRef context = UIGraphicsGetCurrentContext();
+	CGContextBeginPath(context);
+	CGContextSetLineWidth(context, 1.5);
+	CGContextMoveToPoint(context, pageInfo.bounds.origin.x, pageInfo.y);
+	CGContextAddLineToPoint(context, pageInfo.bounds.origin.x + CGRectGetWidth(pageInfo.bounds), pageInfo.y);
+	CGContextClosePath(context);
+	CGContextStrokePath(context);
+
+	// render order number
+	pageInfo.y += pageInfo.sectionPadding;
+	[PDFManager _pageInfo:pageInfo renderOrderNo:contract.estimate.orderNumber];
+
+	// render line items table
+	xAndWidths = [PDFManager _pageInfo:pageInfo tableColumnsWidthForEstimate:contract.estimate];
+
+	pageInfo.y += pageInfo.sectionPadding;
+	[PDFManager _pageInfo:pageInfo renderLineItems:contract.estimate.lineItems xAndWidths:xAndWidths];
+
+	// render contract date & signature fields along with totals & taxes
+	pageInfo.y += 6 * pageInfo.linePadding;
+	[PDFManager _pageInfo:pageInfo renderTotalsAndTaxes:contract.estimate forContract:YES xAndWidths:xAndWidths];
+
+	// render PDF footer
+	pageInfo.y += pageInfo.sectionPadding;
+	[PDFManager _renderPDFFooter:pageInfo];
+
+	// render legalese
+	[PDFManager _renderContractTermsAndConditions:pageInfo];
+
+	// end PDF data
+	UIGraphicsEndPDFContext();
+	[pageInfo release];
+
+	return pdfData;
 }
 
 + (NSString *)pdfNameForContract:(Contract *)contract {
 	return [NSString stringWithFormat:NSLocalizedString(@"Contract-%@.pdf", "Contract PDF filename"),
 									  contract.estimate.orderNumber];
 }
+
++ (NSString *)pdfTitleForContract:(Contract *)contract {
+	return [NSString stringWithFormat:NSLocalizedString(@"Contract #%@", @"Contract PDF title"),
+									  contract.estimate.orderNumber];
+}
+
++ (NSDictionary *)pdfInfoForContract:(Contract *)contract {
+	DataStore *dataStore = [DataStore defaultStore];
+
+	return [NSDictionary dictionaryWithObjectsAndKeys:
+			[[dataStore myInfo] name], kCGPDFContextAuthor,
+			[DrimjasInfo title], kCGPDFContextCreator,
+			[self pdfTitleForContract:contract], kCGPDFContextTitle,
+			nil];
+}
+
 
 @end

@@ -25,7 +25,9 @@
 + (NSDictionary *)pdfInfoForEstimate:(Estimate *)estimate;	// dictionary of PDF metadata
 
 
-+ (NSMutableData *)pdfDataForContract:(Contract *)contract;
-+ (NSString *)pdfNameForContract:(Contract *)contract;
++ (NSMutableData *)pdfDataForContract:(Contract *)contract;	// PDF content
++ (NSString *)pdfNameForContract:(Contract *)contract;		// PDF filename
++ (NSString *)pdfTitleForContract:(Contract *)contract;		// PDF title as appearing in PDF metadata
++ (NSDictionary *)pdfInfoForContract:(Contract *)contract;	// dictionary of PDF metadata
 
 @end
