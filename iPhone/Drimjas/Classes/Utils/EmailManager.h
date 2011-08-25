@@ -12,6 +12,7 @@
 
 
 @class Estimate;
+@class Contract;
 @protocol MailNotifyDelegate;
 
 
@@ -21,6 +22,7 @@
 
 + (BOOL)isMailAvailable;
 + (void)mailEstimate:(Estimate *)estimate withDelegate:(UIViewController<MailNotifyDelegate>*)delegate;
++ (void)mailContract:(Contract *)contract withDelegate:(UIViewController<MailNotifyDelegate>*)delegate;
 
 @end
 

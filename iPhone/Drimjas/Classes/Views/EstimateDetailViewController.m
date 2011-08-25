@@ -321,12 +321,14 @@
 
 - (void)mailSent:(MFMailComposeResult)result withError:(NSError *)error {
 	if (result == MFMailComposeResultFailed) {
+		// TODO handle error
 		NSLog(@"EstimateDetailViewController.mailSent: failed to email estimate %@ with error %@, %@", estimate.clientInfo.name, error, [error userInfo]);
 	}
 }
 
 - (void)printJobCompleted:(BOOL)completed withError:(NSError *)error {
 	if (error) {
+		// TODO handle error
 		NSLog(@"EstimateDetailViewController.printJobCompleted: failed to print estimate %@ with error %@, %@", estimate.clientInfo.name, error, [error userInfo]);
 	}
 }

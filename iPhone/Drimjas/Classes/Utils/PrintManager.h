@@ -10,6 +10,7 @@
 #import <UIKit/UIKit.h>
 
 @class Estimate;
+@class Contract;
 @protocol PrintNotifyDelegate;
 
 
@@ -19,6 +20,7 @@
 
 + (BOOL)isPrintingAvailable;
 + (void)printEstimate:(Estimate *)estimate withDelegate:(id<PrintNotifyDelegate>)delegate;
++ (void)printContract:(Contract *)contract withDelegate:(id<PrintNotifyDelegate>)delegate;
 
 @end
 

@@ -7,10 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+// Utils
+#import "EmailManager.h"
+#import "PrintManager.h"
+
 
 @class Contract;
 
-@interface ContractDetailViewController : UITableViewController {
+@interface ContractDetailViewController : UITableViewController <PrintNotifyDelegate, MailNotifyDelegate> {
 	UIBarButtonItem *emailButton;
 	UIBarButtonItem *printButton;
 	UIBarButtonItem *spacerButton;

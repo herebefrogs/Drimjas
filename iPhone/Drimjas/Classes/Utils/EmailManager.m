@@ -9,6 +9,7 @@
 #import "EmailManager.h"
 // API
 #import "ClientInfo.h"
+#import "Contract.h"
 #import "Estimate.h"
 // Utils
 #import "PDFManager.h"
@@ -61,21 +62,47 @@
 	// FIXME not delegate but something that implement mailComposeController
 	controller.mailComposeDelegate = emailManager;
 	
-	[controller setSubject:[NSString stringWithFormat:@"%@ %@",
-							NSLocalizedString(@"Estimate", "Estimate Mail Subject"),
-							estimate.orderNumber]];
+	[controller setSubject:[NSString stringWithFormat:NSLocalizedString(@"Estimate #%@", "Estimate Mail Subject"),
+													  estimate.orderNumber]];
 	
 	NSArray *toRecepients = estimate.clientInfo.toRecipients;
 	[controller setToRecipients:toRecepients];
 	
 	// attach estimate PDF to email
 	NSData *pdfData = [[PDFManager pdfDataForEstimate:estimate] retain];
-	NSString *pdfName = [PDFManager getPDFNameForEstimate:estimate];
+	NSString *pdfName = [PDFManager pdfNameForEstimate:estimate];
 	[controller addAttachmentData:pdfData mimeType:@"application/pdf" fileName:pdfName];
 	
 	NSString *emailBody = NSLocalizedString(@"Estimate Email Body", @"Estimate Email Body");
 	[controller setMessageBody:emailBody isHTML:NO];
 	
+	[delegate presentModalViewController:controller animated:YES];
+	[controller release];
+	[pdfData release];
+}
+
++ (void)mailContract:(Contract *)contract withDelegate :(UIViewController<MailNotifyDelegate>*)delegate {
+	EmailManager* emailManager = [[EmailManager alloc] initWithDelegate:delegate];
+
+	MFMailComposeViewController *controller = [[MFMailComposeViewController alloc] init];
+
+	// FIXME not delegate but something that implement mailComposeController
+	controller.mailComposeDelegate = emailManager;
+
+	[controller setSubject:[NSString stringWithFormat:NSLocalizedString(@"Contract #%@", "Contract Mail Subject"),
+													  contract.estimate.orderNumber]];
+
+	NSArray *toRecepients = contract.estimate.clientInfo.toRecipients;
+	[controller setToRecipients:toRecepients];
+
+	// attach estimate PDF to email
+	NSData *pdfData = [[PDFManager pdfDataForContract:contract] retain];
+	NSString *pdfName = [PDFManager pdfNameForContract:contract];
+	[controller addAttachmentData:pdfData mimeType:@"application/pdf" fileName:pdfName];
+
+	NSString *emailBody = NSLocalizedString(@"Contract Email Body", @"Contract Email Body");
+	[controller setMessageBody:emailBody isHTML:NO];
+
 	[delegate presentModalViewController:controller animated:YES];
 	[controller release];
 	[pdfData release];

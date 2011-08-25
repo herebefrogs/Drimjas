@@ -9,19 +9,23 @@
 #import <Foundation/Foundation.h>
 
 @class Estimate;
+@class Contract;
 
 @interface PDFManager : NSObject {
 
 }
 
-+ (NSMutableData *)pdfDataForEstimate:(Estimate *)estimate;
 + (BOOL)savePDFFileForEstimate:(Estimate *)estimate;
-+ (NSString *)getPDFNameForEstimate:(Estimate *)estimate;
 + (NSString *)getPDFPathForEstimate:(Estimate *)estimate;
 
-// PDF title as appearing in PDF metadata
-+ (NSString *)pdfTitleForEstimate:(Estimate *)estimate;
-// dictionary of PDF metadata
-+ (NSDictionary *)pdfInfoForEstimate:(Estimate *)estimate;
+
++ (NSMutableData *)pdfDataForEstimate:(Estimate *)estimate;	// PDF content
++ (NSString *)pdfNameForEstimate:(Estimate *)estimate;		// PDF filename
++ (NSString *)pdfTitleForEstimate:(Estimate *)estimate;		// PDF title as appearing in PDF metadata
++ (NSDictionary *)pdfInfoForEstimate:(Estimate *)estimate;	// dictionary of PDF metadata
+
+
++ (NSMutableData *)pdfDataForContract:(Contract *)contract;
++ (NSString *)pdfNameForContract:(Contract *)contract;
 
 @end

@@ -8,6 +8,7 @@
 
 #import "PrintManager.h"
 // API
+#import "Contract.h"
 #import "Estimate.h"
 // Utils
 #import "PDFManager.h"
@@ -28,7 +29,7 @@ static id<PrintNotifyDelegate> _delegate;
 	_delegate = [delegate retain];
 
 	UIPrintInfo *printInfo = [UIPrintInfo printInfo];
-	printInfo.jobName = [PDFManager getPDFNameForEstimate:estimate];
+	printInfo.jobName = [PDFManager pdfNameForEstimate:estimate];
 	printInfo.outputType = UIPrintInfoOutputGeneral;
 	printInfo.orientation = UIPrintInfoOrientationPortrait;
 	printInfo.duplex = UIPrintInfoDuplexLongEdge;
@@ -50,13 +51,48 @@ static id<PrintNotifyDelegate> _delegate;
 		// free up pdf data
 	};
 
-/* Detect if iPad or iPhone to share same codebase	
+/* Detect if iPad or iPhone to share same codebase
 	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
 		[controller presentFromBarButtonItem:self.printButton animated:YES
 					completionHandler:handler];
 	} else { */
 	[controller presentAnimated:YES completionHandler:printCompleted];
-/*	} */	
+/*	} */
+}
+
++ (void)printContract:(Contract *)contract withDelegate:(id<PrintNotifyDelegate>)delegate {
+	_delegate = [delegate retain];
+
+	UIPrintInfo *printInfo = [UIPrintInfo printInfo];
+	printInfo.jobName = [PDFManager pdfNameForContract:contract];
+	printInfo.outputType = UIPrintInfoOutputGeneral;
+	printInfo.orientation = UIPrintInfoOrientationPortrait;
+	printInfo.duplex = UIPrintInfoDuplexLongEdge;
+
+	UIPrintInteractionController *controller = [UIPrintInteractionController sharedPrintController];
+	controller.printInfo = printInfo;
+
+	// set printing data
+	controller.printingItem = [PDFManager pdfDataForContract:contract];
+
+	// print completion handler/block/closure
+	void (^printCompleted)(UIPrintInteractionController *, BOOL, NSError *) =
+	^(UIPrintInteractionController *pic, BOOL completed, NSError *error) {
+
+		// notify delegate of print outcome
+		[_delegate printJobCompleted:completed withError:error];
+		// free up delegate
+		[_delegate release];
+		// free up pdf data
+	};
+
+	/* Detect if iPad or iPhone to share same codebase
+	 if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+	 [controller presentFromBarButtonItem:self.printButton animated:YES
+	 completionHandler:handler];
+	 } else { */
+	[controller presentAnimated:YES completionHandler:printCompleted];
+	/*	} */
 }
 
 @end

@@ -12,6 +12,7 @@
 // API
 #import "ClientInfo.h"
 #import "ContactInfo.h"
+#import "Contract.h"
 #import "Currency.h"
 #import "DataStore.h"
 #import "Estimate.h"
@@ -836,12 +837,6 @@ typedef enum {
 	return written;
 }
 
-+ (NSString *)getPDFNameForEstimate:(Estimate *)estimate {
-	return [NSString stringWithFormat:@"%@-%@.pdf",
-				estimate.orderNumber,
-				NSLocalizedString(@"Estimate", @"Estimate PDF Filename")];
-}
-
 + (NSString *)getPDFPathForEstimate:(Estimate *)estimate {
 	// locate application's Documents directory
 	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -850,14 +845,18 @@ typedef enum {
 	// replace Documents by application's tmp directory
 	path = [[path stringByDeletingLastPathComponent] stringByAppendingPathComponent:@"tmp"];
 
-	return [path stringByAppendingPathComponent:[PDFManager getPDFNameForEstimate:estimate]];
-				
+	return [path stringByAppendingPathComponent:[PDFManager pdfNameForEstimate:estimate]];
+}
+
+
++ (NSString *)pdfNameForEstimate:(Estimate *)estimate {
+	return [NSString stringWithFormat:NSLocalizedString(@"Estimate-%@.pdf", "Estimate PDF filename"),
+									  estimate.orderNumber];
 }
 
 + (NSString *)pdfTitleForEstimate:(Estimate *)estimate {
-	return [NSString stringWithFormat:@"%@ #%@",
-				NSLocalizedString(@"Estimate", @"Estimate PDF Title"),
-			estimate.orderNumber];
+	return [NSString stringWithFormat:NSLocalizedString(@"Estimate #%@", @"Estimate PDF Title"),
+									  estimate.orderNumber];
 }
 
 + (NSDictionary *)pdfInfoForEstimate:(Estimate *)estimate {
@@ -868,6 +867,17 @@ typedef enum {
 				[DrimjasInfo title], kCGPDFContextCreator,
 				[self pdfTitleForEstimate:estimate], kCGPDFContextTitle,
 				nil];
+}
+
+
++ (NSMutableData *)pdfDataForContract:(Contract *)contract {
+	NSLog(@"generate contract PDF");
+	return nil;
+}
+
++ (NSString *)pdfNameForContract:(Contract *)contract {
+	return [NSString stringWithFormat:NSLocalizedString(@"Contract-%@.pdf", "Contract PDF filename"),
+									  contract.estimate.orderNumber];
 }
 
 @end

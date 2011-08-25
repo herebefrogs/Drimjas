@@ -195,6 +195,15 @@
 /* Estimate Email Body */
 "Estimate Email Body" = "";
 
+/* Contract Mail Subject */
+"Contract %@" = "Contract %@";
+
+/* Contract PDF filename */
+"Contract-%@.pdf" = "Contract-%@.pdf";
+
+/* Contact Email Body */
+"Contract Email Body" = "";
+
 /* Page number on footer of PDF */
 "Page" = "Page";
 

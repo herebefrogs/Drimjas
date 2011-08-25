@@ -213,13 +213,28 @@
 #pragma mark Button delegate
 
 - (IBAction)email:(id)sender {
-	NSLog(@"email contract");
+	[EmailManager mailContract:contract withDelegate:self];
 }
 
 - (IBAction)print:(id)sender {
-	NSLog(@"print contract");
+	[PrintManager printContract:contract withDelegate:self];
 }
 
+
+#pragma mark -
+#pragma mark Print completed delegate
+
+- (void)mailSent:(MFMailComposeResult)result withError:(NSError *)error {
+	if (result == MFMailComposeResultFailed) {
+		NSLog(@"Contract∫DetailViewController.mailSent: failed to email contract %@ with error %@, %@", contract.estimate.clientInfo.name, error, [error userInfo]);
+	}
+}
+
+- (void)printJobCompleted:(BOOL)completed withError:(NSError *)error {
+	if (error) {
+		NSLog(@"ContractDetailViewController.printJobCompleted: failed to print contract %@ with error %@, %@", contract.estimate.clientInfo.name, error, [error userInfo]);
+	}
+}
 
 #pragma mark -
 #pragma mark Memory management
