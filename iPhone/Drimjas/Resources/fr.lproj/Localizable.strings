@@ -14,14 +14,14 @@
 /* AddEstimateNewOrPickClientInfo Navigation Item Title */
 "Add Client" = "Ajouter un Client";
 
-/* AddEstimateNewOrPickClientInfo New Client Section */
-"Add New Client Information" = "Ajouter un Nouveau Client";
-
-/* AddEstimateNewOrPickClientInfo Pick Existing Client Section */
-"Pick Existing Client Information" = "Choisir un Client Existant";
-
-/* NewClientInfo View Controller Navigation Item Title */
+/* AddEstimateNewOrPickClientInfo New Client Section & AddEstimateNewOrPickClientInfo Existing Client Section */
 "New Client" = "Nouveau Client";
+
+/* AddEstimateNewOrPickClientInfo Existing Client Section */
+"Existing Client" = "Client Existant";
+
+/* NewClientInfo View Controller Navigation Item Title (Edit) */
+"Edit Client" = "Editer Client";
 
 /* NewClientInfo View Controller Client Name Text Field Placeholder */
 "Client Name" = "Nom du client";
@@ -53,6 +53,9 @@
 /* ContactInfos Navigation Item Title */
 "Add Contact" = "Nouveau Contact";
 
+/* ContactInfos Navigation Item Title (Edit) */
+"Edit Contact" = "Editer Contact";
+
 /* ContactInfos Add A Contact Row */
 "Add a Contact" = "Ajouter un Contact";
 
@@ -65,14 +68,20 @@
 /* Email Text Field Placeholder */
 "Email" = "Adresse Electronique";
 
+/* ClientInfos Navigation Item Title (from Options) */
+"Manage Clients" = "Gérer les Clients";
+
 /* ClientInfos Navigation Item Title */
 "Pick Client" = "Choisir un Client";
 
 /* ClientInfoDetail Navigation Item Title */
-"Review Client" = "Aperçu du Client";
+"Client Detail" = "Aperçu du Client";
 
 /* AddEstimateLineItems Navigation Item Title */
 "Add Line Item" = "Nouveau Poste";
+
+/* AddEstimateLineItems Navigation Item Title (Edit) */
+"Edit Line Item" = "Editer Poste";
 
 /* AddEstimateLineItem Add A Line Item Row */
 "Add a Line Item" = "Ajouter un Poste";
@@ -88,6 +97,9 @@
 
 /* AddEstimateLineItems Unit Cost Textfield placeholder */
 "Unit Cost" = "Coût Unitaire";
+
+/* LineItems Navigation Item Title (from Options) */
+"Manage Line Items" = "Gérer les Postes";
 
 /* LineItems Navigation Item Title */
 "Pick Line Item" = "Choisir un Poste";
@@ -135,21 +147,21 @@
 "Website" = "Site Internet";
 
 /* EstimateDetail View Controller Navigation Item Title */
-"Review Estimate" = "Aperçu du Devis";
+"Estimate Detail" = "Aperçu du Devis";
 
-/* Review Estimate Order Number section title */
+/* Estimate Detail Order Number section title */
 "Purchase Order Number" = "Numéro d'ordre";
 
-/* Review Estimate Client Information section title */
+/* Estimate Detail Client Information section title */
 "Client Information" = "Client";
 
-/* Review Estimate Contact Information section title */
+/* Estimate Detail Contact Information section title */
 "Contact Information" = "Contacts";
 
-/* Review Estimate Line Items section title */
+/* Estimate Detail Line Items section title */
 "Line Items" = "Postes";
 
-/* Review Estimate Edit button */
+/* Estimate Detail Edit button */
 "Edit" = "Modifier";
 
 /* Options Clients Title */

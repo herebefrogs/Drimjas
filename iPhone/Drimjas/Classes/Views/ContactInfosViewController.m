@@ -35,7 +35,11 @@
 	NSLog(@"ContactInfosViewController.viewDidLoad");
 #endif
 	[super viewDidLoad];
-	self.title = NSLocalizedString(@"Add Contact", "ContactInfos Navigation Item Title");
+	if (editMode) {
+		self.title = NSLocalizedString(@"Edit Contact", "ContactInfos Navigation Item Title (Edit)");
+	} else {
+		self.title = NSLocalizedString(@"Add Contact", "ContactInfos Navigation Item Title");
+	}
 	nextButton.title = NSLocalizedString(@"Next", "Next Navigation Item Title");
 
 	// show add/delete widgets in front of rows

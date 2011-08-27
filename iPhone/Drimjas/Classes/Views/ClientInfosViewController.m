@@ -28,7 +28,11 @@
 	NSLog(@"ClientInfosViewController.viewDidLoad");
 #endif
     [super viewDidLoad];
-	self.title = NSLocalizedString(@"Pick Client", "ClientInfos Navigation Item Title");
+	if (optionsMode) {
+		self.title = NSLocalizedString(@"Manage Clients", "ClientInfos Navigation Item Title (from Options)");
+	} else {
+		self.title = NSLocalizedString(@"Pick Client", "ClientInfos Navigation Item Title");
+	}
 
 	self.clientInfos = [[DataStore defaultStore] clientInfosFetchedResultsController];
 	clientInfos.delegate = self;

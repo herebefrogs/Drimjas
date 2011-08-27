@@ -44,7 +44,11 @@
 	NSLog(@"AddEstimateLineItemsViewController.viewDidLoad");
 #endif
 	[super viewDidLoad];
-	self.title = NSLocalizedString(@"Add Line Item", "AddEstimateLineItems Navigation Item Title");
+	if (editMode) {
+		self.title = NSLocalizedString(@"Edit Line Item", "AddEstimateLineItems Navigation Item Title (Edit)");
+	} else {
+		self.title = NSLocalizedString(@"Add Line Item", "AddEstimateLineItems Navigation Item Title");
+	}
 	nextButton.title = NSLocalizedString(@"Next", "Next Navigation Item Title");
 
 	// show add/delete widgets in front of rows

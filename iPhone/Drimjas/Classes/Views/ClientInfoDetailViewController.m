@@ -32,7 +32,7 @@
 	NSLog(@"ClientInfoDetailViewController.viewDidLoad");
 #endif
     [super viewDidLoad];
-	self.title = NSLocalizedString(@"Review Client", "ClientInfoDetail Navigation Item Title");
+	self.title = NSLocalizedString(@"Client Detail", "ClientInfoDetail Navigation Item Title");
 	nextButton.title = NSLocalizedString(@"Next", "Next Navigation Item Title");
 	deleteButton.title = NSLocalizedString(@"Delete", "Delete Navigation Item Title");
 }

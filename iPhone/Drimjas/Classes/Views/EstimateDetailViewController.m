@@ -72,7 +72,7 @@
 	NSLog(@"EstimateDetailViewController.viewDidLoad");
 #endif
     [super viewDidLoad];
-	self.title = NSLocalizedString(@"Review Estimate", "EstimateDetail Navigation Item Title");
+	self.title = NSLocalizedString(@"Estimate Detail", "EstimateDetail Navigation Item Title");
 
 	NSMutableArray *items = [NSMutableArray arrayWithObject: spacerButton];
 	if ([EmailManager isMailAvailable]) {
@@ -125,7 +125,7 @@
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
 	switch (section) {
 		case EstimateDetailSectionOrderNumber:
-			return NSLocalizedString(@"Purchase Order Number", "Review Estimate Order Number section title");
+			return NSLocalizedString(@"Purchase Order Number", "Estimate Detail Order Number section title");
 		default:
 			return nil;
 	}

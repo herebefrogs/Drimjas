@@ -35,7 +35,11 @@
 	NSLog(@"NewClientInfoViewController.viewDidLoad");
 #endif
     [super viewDidLoad];
-	self.title = NSLocalizedString(@"New Client", "NewClientInfo Navigation Item Title");
+	if (editMode) {
+		self.title = NSLocalizedString(@"Edit Client", "NewClientInfo Navigation Item Title (Edit)");
+	} else {
+		self.title = NSLocalizedString(@"New Client", "NewClientInfo Navigation Item Title");
+	}
 	nextButton.title = NSLocalizedString(@"Next", "Next Navigation Item Title");
 }
 

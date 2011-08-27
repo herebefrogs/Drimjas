@@ -60,9 +60,9 @@
     }
     
 	if (indexPath.section == NewClientInfoSection) {
-		cell.textLabel.text = NSLocalizedString(@"Add New Client Information", @"AddEstimateNewOrPickClientInfo New Client Section");
+		cell.textLabel.text = NSLocalizedString(@"New Client", @"AddEstimateNewOrPickClientInfo New Client Section");
 	} else if (indexPath.section == PickClientInfoSection) {
-		cell.textLabel.text = NSLocalizedString(@"Pick Existing Client Information", @"AddEstimateNewOrPickClientInfo Pick Existing Client Section");
+		cell.textLabel.text = NSLocalizedString(@"Existing Client", @"AddEstimateNewOrPickClientInfo Existing Client Section");
 	}
 	
 	cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;

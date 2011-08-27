@@ -31,8 +31,11 @@
 	NSLog(@"LineItemsViewController.viewDidLoad");
 #endif
     [super viewDidLoad];
-
-	self.title = NSLocalizedString(@"Pick Line Item", "LineItemsViewController Navigation Item Title");
+	if (optionsMode) {
+		self.title = NSLocalizedString(@"Manage Line Items", "LineItemsViewController Navigation Item Title (from Options)");
+	} else {
+		self.title = NSLocalizedString(@"Pick Line Item", "LineItemsViewController Navigation Item Title");
+	}
 
 	self.lineItems = [[DataStore defaultStore] lineItemsFetchedResultsController];
 	lineItems.delegate = self;
@@ -60,7 +63,7 @@
 #pragma mark -
 #pragma mark Private method stack
 
-- (void)_showAddLineItem {
+- (void)_showNewLineItem {
 	newLineItemViewController.optionsMode = optionsMode;
 	if (!optionsMode) {
 		newLineItemViewController.lineItemSelection = lineItemSelection;
@@ -71,10 +74,10 @@
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
 	if (indexPath.row == 0) {
-		cell.textLabel.text = NSLocalizedString(@"Add a Line Item", "LineItemsViewController Add A Line Item Row");
+		cell.textLabel.text = NSLocalizedString(@"New Line Item", "LineItemsViewController New Line Item Row");
 		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 	} else {
-		// NOTE: reduce index path by 1 to account for extra "add a line item" row not in line items list
+		// NOTE: reduce index path by 1 to account for extra "new line item" row not in line items list
 		indexPath = [NSIndexPath indexPathForRow:indexPath.row - 1 inSection:indexPath.section];
 
 		LineItem *lineItem = [lineItems objectAtIndexPath:indexPath];
@@ -113,7 +116,7 @@
 	UITableViewCell *cell;
 
 	if (indexPath.row == 0) {
-		static NSString *CellIdentifier = @"AddLineItemCell";
+		static NSString *CellIdentifier = @"NewLineItemCell";
 
 		cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 		if (cell == nil) {
@@ -148,13 +151,13 @@
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-		// NOTE: reduce index path by 1 to account for extra "add a line item" row not in line items list
+		// NOTE: reduce index path by 1 to account for extra "new line item" row not in line items list
 		indexPath = [NSIndexPath indexPathForRow:indexPath.row - 1 inSection:indexPath.section];
 
 		[[DataStore defaultStore] deleteLineItem:[lineItems objectAtIndexPath:indexPath]];
     }
 	else if (editingStyle == UITableViewCellEditingStyleInsert) {
-		[self _showAddLineItem];
+		[self _showNewLineItem];
 	}
 }
 
@@ -164,10 +167,10 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	if (indexPath.row == 0) {
-		[self _showAddLineItem];
+		[self _showNewLineItem];
 	}
 	else if (!optionsMode) {
-		// NOTE: reduce index path by 1 to account for extra "add a line item" row not in line items list
+		// NOTE: reduce index path by 1 to account for extra "new line item" row not in line items list
 		indexPath = [NSIndexPath indexPathForRow:indexPath.row - 1 inSection:indexPath.section];
 
 		[lineItemSelection copyLineItem:[lineItems objectAtIndexPath:indexPath]];
@@ -188,7 +191,7 @@
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath {
     UITableView *tableView = self.tableView;
 
-	// NOTE: increase index path by 1 to account for extra "add a line item" row not in line items list
+	// NOTE: increase index path by 1 to account for extra "new line item" row not in line items list
 	indexPath = [NSIndexPath indexPathForRow:indexPath.row + 1 inSection:indexPath.section];
 
     switch(type) {
