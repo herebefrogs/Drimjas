@@ -99,6 +99,7 @@ typedef enum {
 	OptionsFieldLineItems,
 	OptionsFieldTaxes,
 	OptionsFieldMyInfo,
+	OptionsFieldAbout,
 
 	numOptionsField
 } OptionsField;

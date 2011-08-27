@@ -12,17 +12,20 @@
 @class LineItemsViewController;
 @class MyInfoViewController;
 @class TaxesAndCurrencyViewController;
+@class AboutViewController;
 
 @interface OptionsViewController : UITableViewController {
 	ClientInfosViewController *clientInfoViewController;
 	LineItemsViewController *lineItemsViewController;
 	TaxesAndCurrencyViewController *taxesAndCurrencyViewController;
 	MyInfoViewController *myInfoViewController;
+	AboutViewController *aboutViewController;
 }
 
 @property (nonatomic, retain) IBOutlet ClientInfosViewController *clientInfosViewController;
 @property (nonatomic, retain) IBOutlet LineItemsViewController *lineItemsViewController;
 @property (nonatomic, retain) IBOutlet TaxesAndCurrencyViewController *taxesAndCurrencyViewController;
 @property (nonatomic, retain) IBOutlet MyInfoViewController *myInfoViewController;
+@property (nonatomic, retain) IBOutlet AboutViewController *aboutViewController;
 
 @end

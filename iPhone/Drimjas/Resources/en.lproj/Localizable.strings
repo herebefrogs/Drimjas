@@ -179,6 +179,9 @@
 /* Options Line Items Title */
 "Line Items" = "Line Items";
 
+/* Options About Title */
+"About" = "About";
+
 /* Client info & line item estimates count */
 "Used in %u estimate(s)" = "Used in %u estimate(s)";
 

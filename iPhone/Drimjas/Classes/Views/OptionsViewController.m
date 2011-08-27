@@ -13,6 +13,7 @@
 #import "MyInfoViewController.h"
 #import "TableFields.h"
 #import "TaxesAndCurrencyViewController.h"
+#import "AboutViewController.h"
 
 @implementation OptionsViewController
 
@@ -20,6 +21,7 @@
 @synthesize lineItemsViewController;
 @synthesize taxesAndCurrencyViewController;
 @synthesize myInfoViewController;
+@synthesize aboutViewController;
 
 #pragma mark -
 #pragma mark View lifecycle
@@ -49,7 +51,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return 4;
+    return numOptionsField;
 }
 
 
@@ -74,6 +76,9 @@
 	}
 	else if (indexPath.row == OptionsFieldMyInfo) {
 		cell.textLabel.text = NSLocalizedString(@"My Information", "Options My Information Title");
+	}
+	else if (indexPath.row == OptionsFieldAbout) {
+		cell.textLabel.text = NSLocalizedString(@"About", "Options About Title");
 	}
 	
 	cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -102,6 +107,9 @@
 		myInfoViewController.optionsMode = YES;
 		[self.navigationController pushViewController:myInfoViewController animated:YES];
 	}
+	else if (indexPath.row == OptionsFieldAbout) {
+		[self.navigationController pushViewController:aboutViewController animated:YES];
+	}
 }
 
 
@@ -123,6 +131,7 @@
 	self.lineItemsViewController = nil;
 	self.taxesAndCurrencyViewController = nil;
     self.myInfoViewController = nil;
+	self.aboutViewController = nil;
 }
 
 
@@ -134,6 +143,7 @@
 	[lineItemsViewController release];
 	[taxesAndCurrencyViewController release];
 	[myInfoViewController release];
+	[aboutViewController release];
     [super dealloc];
 }
 
