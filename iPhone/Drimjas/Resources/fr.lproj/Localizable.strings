@@ -9,22 +9,22 @@
 "Options" = "Options";
 
 /* Startup View Controller Estimate Button */
-"New Estimate" = "Nouveau Devis";
+"New Estimate" = "Nouveau devis";
 
 /* Startup View Controller Contract Button */
-"New Contract" = "Nouveau Contrat";
+"New Contract" = "Nouveau contrat";
 
 /* AddEstimateNewOrPickClientInfo Navigation Item Title */
-"Add Client" = "Ajouter un Client";
+"Add Client" = "Ajouter un client";
 
 /* AddEstimateNewOrPickClientInfo New Client Section & AddEstimateNewOrPickClientInfo Existing Client Section */
-"New Client" = "Nouveau Client";
+"New Client" = "Nouveau client";
 
 /* AddEstimateNewOrPickClientInfo Existing Client Section */
-"Existing Client" = "Client Existant";
+"Existing Client" = "Client existant";
 
 /* NewClientInfo View Controller Navigation Item Title (Edit) */
-"Edit Client" = "Editer Client";
+"Edit Client" = "Modifier le client";
 
 /* NewClientInfo View Controller Client Name Text Field Placeholder */
 "Client Name" = "Nom du client";
@@ -39,10 +39,10 @@
 "City" = "Ville";
 
 /* NewClientInfo View Controller State/Province Field Placeholder */
-"State" = "Département";
+"State" = "Etat / Province";
 
 /* NewClientInfo View Controller Postal Code Field Placeholder */
-"Postal Code" = "Code Postale";
+"Postal Code" = "Code postale";
 
 /* NewClientInfo View Controller Country Field Placeholder */
 "Country" = "Pays";
@@ -54,43 +54,43 @@
 "Delete" = "Supprimer";
 
 /* ContactInfos Navigation Item Title */
-"Add Contact" = "Nouveau Contact";
+"Add Contact" = "Nouveau contact";
 
 /* ContactInfos Navigation Item Title (Edit) */
-"Edit Contact" = "Editer Contact";
+"Edit Contact" = "Modifier les contacts";
 
 /* ContactInfos Add A Contact Row */
-"Add a Contact" = "Ajouter un Contact";
+"Add a Contact" = "Ajouter un contact";
 
 /* Contact Name Text Field Placeholder */
-"Contact Name" = "Nom du Contact";
+"Contact Name" = "Nom du contact";
 
 /* Phone Text Field Placeholder */
 "Phone" = "Téléphone";
 
 /* Email Text Field Placeholder */
-"Email" = "Adresse Electronique";
+"Email" = "Adresse électronique";
 
 /* ClientInfos Navigation Item Title (from Options) */
-"Manage Clients" = "Gérer les Clients";
+"Manage Clients" = "Gérer les clients";
 
 /* ClientInfos Navigation Item Title */
-"Pick Client" = "Choisir un Client";
+"Pick Client" = "Choisir un client";
 
 /* ClientInfoDetail Navigation Item Title */
-"Client Detail" = "Aperçu du Client";
+"Client Detail" = "Aperçu du client";
 
 /* AddEstimateLineItems Navigation Item Title */
-"Add Line Item" = "Nouveau Poste";
+"Add Line Item" = "Nouveau poste";
 
 /* AddEstimateLineItems Navigation Item Title (Edit) */
-"Edit Line Item" = "Editer Poste";
+"Edit Line Item" = "Modifier les postes";
 
 /* AddEstimateLineItem Add A Line Item Row */
-"Add a Line Item" = "Ajouter un Poste";
+"Add a Line Item" = "Ajouter un poste";
 
 /* AddEstimateLineItems Line Item Textfield placeholder */
-"Select Line Item" = "Choisir un Poste";
+"Select Line Item" = "Choisir un poste";
 
 /* AddEstimateLineItems Description Textfield placeholder */
 "Description" = "Description";
@@ -99,19 +99,19 @@
 "Quantity" = "Quantité";
 
 /* AddEstimateLineItems Unit Cost Textfield placeholder */
-"Unit Cost" = "Coût Unitaire";
+"Unit Cost" = "Coût unitaire";
 
 /* LineItems Navigation Item Title (from Options) */
-"Manage Line Items" = "Gérer les Postes";
+"Manage Line Items" = "Gérer les postes";
 
 /* LineItems Navigation Item Title */
-"Pick Line Item" = "Choisir un Poste";
+"Pick Line Item" = "Choisir un poste";
 
 /* NewLineItems Navigation Item Title */
-"New Line Item" = "Nouveau Poste";
+"New Line Item" = "Nouveau poste";
 
 /* NewLineItem Name Textfield */
-"Line Item Name" = "Nom du Poste";
+"Line Item Name" = "Nom du poste";
 
 /* NewLineItem Name Textfield */
 "Description" = "Description";
@@ -129,7 +129,7 @@
 "Tax Name" = "Nom de la taxe";
 
 /* TaxesAndCurrencyView Tax Percent Texfield placeholder */
-"Percent" = "Percentage";
+"Percent" = "Pourcentage";
 
 /* TaxesAndCurrencyView Tax Number Texfield Placeholder */
 "Tax Number" = "Numéro de taxe de votre société";
@@ -150,7 +150,7 @@
 "Website" = "Site Internet";
 
 /* EstimateDetail View Controller Navigation Item Title */
-"Estimate Detail" = "Aperçu du Devis";
+"Estimate Detail" = "Aperçu du devis";
 
 /* Estimate & Contract Detail Order Number section title */
 "Purchase Order Number" = "Numéro d'ordre";
@@ -218,7 +218,7 @@
 "client.address1" = "Adresse:";
 "client.address2" = "Adresse:";
 "client.city" = "Ville:";
-"client.state" = "Département:";
+"client.state" = "Prov. / Etat:";
 "client.postalCode" = "Code postale:";
 "client.country" = "Pays:";
 
@@ -254,62 +254,62 @@
 "Notes:" = "Notes:";
 
 /****************** Line items section ****************/
-"Creative Fee" = "Creative Fee";
-"Creative Fee Description" = "Concept (details to be entered here) and time";
+"Creative Fee" = "Frais créatifs";
+"Creative Fee Description" = "Concept (détails à insérer ici) et durée";
 
-"Producer Day(s)" = "Producer Day(s)";
-"Producer Day(s) Description" = "Planning and organization of shoot";
+"Producer Day(s)" = "Producteur (jours)";
+"Producer Day(s) Description" = "Préparation et organisation de la scéance photo";
 
-"Licensing" = "Licensing";
-"Licensing Description" = "Licensing of image(s)";
+"Licensing" = "Droits";
+"Licensing Description" = "Droits à l'image";
 
-"Location Scouting Day(s)" = "Location Scouting Day(s)";
-"Location Scouting Day(s) Description" = "Location research, permit seeking, scouting and conditions forecasting";
+"Location Scouting Day(s)" = "Repérage (jours)";
+"Location Scouting Day(s) Description" = "Repérage du site, autorisations, anticipation des aléas";
 
-"Test Shoot Day(s)" = "Test Shoot Day(s)";
-"Test Shoot Day(s) Description" = "Shoot of stand-in subject, equipment check and post processing";
+"Test Shoot Day(s)" = "Scéance d'essai (jours)";
+"Test Shoot Day(s) Description" = "Scéance photo avec un sujet test, vérification de l'équipement photo et informatique";
 
-"Casting Day" = "Casting Day";
-"Casting Day Description" = "Expenses to modelling agencies, casting call and interview";
+"Casting Day" = "Casting (jours)";
+"Casting Day Description" = "Frais des agences de modèles, appels et entretiens";
 
-"Wardrobe Stylist Day(s)" = "Wardrobe Stylist Day(s)";
-"Wardrobe Stylist Day(s) Description" = "Shoot, pull, misc incidentals";
+"Wardrobe Stylist Day(s)" = "Costumier (jours)";
+"Wardrobe Stylist Day(s) Description" = "Habillage, logistique et autres";
 
-"Hair & Makeup Stylist Day(s)" = "Hair & Makeup Stylist Day(s)";
+"Hair & Makeup Stylist Day(s)" = "Coiffeur / Maquilleur (jours)";
 "Hair & Makeup Stylist Day(s) Description" = "";
 
-"Assistant Day(s)" = "Assistant Day(s)";
-"Assistant Day(s) Description" = "Photographer's assistant";
+"Assistant Day(s)" = "Assistant (jours)";
+"Assistant Day(s) Description" = "Assistant du photographe";
 
-"Digital Tech Day(s)" = "Digital Tech Day(s)";
-"Digital Tech Day(s) Description" = "Pre-production, production and post-production work";
+"Digital Tech Day(s)" = "Spécialiste numérique (jours)";
+"Digital Tech Day(s) Description" = "Assistance informatique, archivage des images, etc";
 
-"Retouching Hour(s)" = "Retouching Hour(s)";
-"Retouching Hour(s) Description" = "Pre-production, production and post-production";
+"Retouching Hour(s)" = "Retouchage (heures)";
+"Retouching Hour(s) Description" = "Pré-production, production et post-production";
 
-"Certificate of Insurance" = "Certificate of Insurance";
+"Certificate of Insurance" = "Certificat d'assurance";
 "Certificate of Insurance Description" = "";
 
-"Catering" = "Catering";
+"Catering" = "Repas";
 "Catering Description" = "";
 
-"Production Incidentals" = "Production Incidentals";
-"Production Incidentals Description" = "Mileage, Parking, Tolls, misc";
+"Production Incidentals" = "Frais de production";
+"Production Incidentals Description" = "Essence, parking, péages, etc";
 
-"Major Travel Expenses" = "Major Travel Expenses";
-"Major Travel Expenses Description" = "Flights, etc";
+"Major Travel Expenses" = "Frais de déplacement majeurs";
+"Major Travel Expenses Description" = "Vols, etc";
 
-"Lodging" = "Lodging";
-"Lodging Description" = "Hotels";
+"Lodging" = "Hébergement";
+"Lodging Description" = "Hôtels";
 
-"Media" = "Media";
-"Media Description" = "DVDs, prints, other media";
+"Media" = "Média";
+"Media Description" = "DVDs, tirage papier et autres";
 
-"Adult Talent" = "Adult Talent";
-"Adult Talent Description" = "Model / subject billing";
+"Adult Talent" = "Sujet adulte";
+"Adult Talent Description" = "Rémunération du modèle / sujet";
 
-"Child Talent" = "Child Talent";
-"Child Talent Description" = "Model / subject billing";
+"Child Talent" = "Sujet enfant";
+"Child Talent Description" = "Rémunération du modèle / sujet";
 
-"Shipping & Handling" = "Shipping & Handling";
+"Shipping & Handling" = "Frais de livraison";
 "Shipping & Handling Description" = "";
