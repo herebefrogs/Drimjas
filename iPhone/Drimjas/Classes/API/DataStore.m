@@ -495,6 +495,8 @@ static DataStore *singleton_ = nil;
 
 
 - (NSFetchedResultsController *)contactInfosForClientInfo:(ClientInfo *)clientInfo {
+	NSAssert(clientInfo, @"can't return ContactInfos for an empty ClientInfo");
+
 	// ContactInfo fetch request
 	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
 	fetchRequest.entity = [NSEntityDescription entityForName:@"ContactInfo"
@@ -688,6 +690,8 @@ static DataStore *singleton_ = nil;
 #pragma mark Line Item Selections stack
 
 - (NSFetchedResultsController *)lineItemSelectionsForEstimate:(Estimate *)estimate {
+	NSAssert(estimate, @"can't return LineItemSelections for an empty Estimate");
+
 	// LineItemSelection fetch request
 	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
 	fetchRequest.entity = [NSEntityDescription entityForName:@"LineItemSelection"

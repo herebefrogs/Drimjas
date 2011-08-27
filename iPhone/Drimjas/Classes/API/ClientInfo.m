@@ -124,12 +124,15 @@
 }
 
 - (void)bindContactInfo:(ContactInfo *)contactInfo {
+	NSAssert(contactInfo, @"can't bind empty ContactInfo");
+
 	contactInfo.clientInfo = self;
 	[self addContactInfosObject:contactInfo];
 	[self refreshStatus];
 }
 
 - (void)unbindContactInfo:(ContactInfo *)contactInfo {
+	NSAssert(contactInfo, @"can't unbind empty ContactInfo");
 	NSAssert(contactInfo.clientInfo == self, @"can't unbind ContactInfo which isn't bound to ClientInfo");
 
 	contactInfo.clientInfo = nil;

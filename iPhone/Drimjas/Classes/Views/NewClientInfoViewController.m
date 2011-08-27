@@ -70,13 +70,6 @@
 	[self.tableView reloadData];
 }
 
-- (void)viewDidDisappear:(BOOL)animated {
-    [super viewDidDisappear:animated];
-
-	// release estimate now that all textfield had a chance to save their input in it
-	self.estimate = nil;
-}
-
 // Override to allow orientations other than the default portrait orientation.
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     // Return YES for supported orientations.

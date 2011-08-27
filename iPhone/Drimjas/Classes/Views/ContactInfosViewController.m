@@ -71,13 +71,6 @@
 	[self.tableView reloadData];
 }
 
-- (void)viewDidDisappear:(BOOL)animated {
-	[super viewDidDisappear:animated];
-
-	self.estimate = nil;
-	self.contactInfos = nil;
-}
-
 // Override to allow orientations other than the default portrait orientation.
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     return YES;
