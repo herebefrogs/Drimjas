@@ -254,8 +254,7 @@ typedef enum {
 	pageInfo.x = pageInfo.bounds.origin.x;
 
 	NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-	// TODO should find similar pattern from user's Region Settings so its localized
-	[dateFormat setDateFormat:@"EEEE MMMM dd, YYYY"];
+	[dateFormat setDateStyle:NSDateFormatterFullStyle];
 	NSString *estimateDate = [dateFormat stringFromDate:date];
 	[dateFormat release];
 

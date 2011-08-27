@@ -40,7 +40,7 @@ NSInteger buttonTagClicked_ = 0;
 #endif
     [super viewDidLoad];
 
-	// IMPORTANT: as 0 is the tag for Estimates, all button objects
+	// IMPORTANT: as 1 is the tag for Estimates, all button objects
 	// in startup.xib must have their tag set to 1+
 	for (UIView *subview in self.view.subviews) {
 		if (subview.tag == TabBarItemEstimates) {
@@ -52,6 +52,17 @@ NSInteger buttonTagClicked_ = 0;
 			UIButton *addEstimate = (UIButton *)subview;
 			[addEstimate setTitle:NSLocalizedString(@"New Contract", @"Startup View Controller Contract Button")
 						 forState:UIControlStateNormal];
+		}
+	}
+	for (UITabBarItem *item in appDelegate.tabBarController.tabBar.items) {
+		if (item.tag == TabBarItemEstimates) {
+			item.title = NSLocalizedString(@"Estimates", @"Estimates Navigation Item Title");
+		}
+		else if (item.tag == TabBarItemContracts) {
+			item.title = NSLocalizedString(@"Contracts", @"Contracts Navigation Item Title");
+		}
+		else if (item.tag == TabBarItemOptions) {
+			item.title = NSLocalizedString(@"Options", @"Options Navigation Item Title");
 		}
 	}
 
