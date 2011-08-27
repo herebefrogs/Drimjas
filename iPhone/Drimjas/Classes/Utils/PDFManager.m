@@ -795,68 +795,14 @@ typedef enum {
 
 	// interpolate business name
 	legalese = [NSString stringWithFormat:legalese, [[[DataStore defaultStore] myInfo] name]];
-	/*
-	 NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:[pageInfo.plainFont fontName], (NSString *)kCTFontNameAttribute,
-	 [NSNumber numberWithFloat:[pageInfo.plainFont pointSize]], (NSString *)kCTFontSizeAttribute,
-	 nil];
-	 CFAttributedStringRef currentText = CFAttributedStringCreate(NULL, (CFStringRef)legalese, (CFDictionaryRef)attributes);
-	 => size ignored
-	 */
-	/*
-	 CTFontRef font = CTFontCreateWithName((CFStringRef)pageInfo.plainFont.fontName, pageInfo.plainFont.pointSize, NULL);
-	 CFMutableAttributedStringRef currentText = CFAttributedStringCreateMutable(NULL, 0);
-	 CFAttributedStringReplaceString(currentText, CFRangeMake(0, 0), (CFStringRef)legalese);
-	 CFAttributedStringSetAttribute(currentText, CFRangeMake(0, CFAttributedStringGetLength(currentText)), kCTFontAttributeName, font);
-	 CFRelease(font);
-	 => <Error>: unsupported 'Zapf' version 00020000.
-	 */
-	
-	CFAttributedStringRef currentText = CFAttributedStringCreate(NULL, (CFStringRef)legalese, NULL);
-	CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString(currentText);
-	CFRange currentRange = CFRangeMake(0, 0);
-	BOOL done = NO;
 
-	do {
-		// open new page dedicated to legalese
-		[pageInfo openNewPage];
+	// open new page dedicated to legalese
+	[pageInfo openNewPage];
 
-		// Get the graphics context.
-		CGContextRef currentContext = UIGraphicsGetCurrentContext();
+	pageInfo.x = pageInfo.bounds.origin.x;
+	pageInfo.y = pageInfo.bounds.origin.y;
 
-		// Put the text matrix into a known state. This ensures
-		// that no old scaling factors are left in place.
-		CGContextSetTextMatrix(currentContext, CGAffineTransformIdentity);
-
-		// Create a path object to enclose the text.
-		CGMutablePathRef framePath = CGPathCreateMutable();
-		CGPathAddRect(framePath, NULL, pageInfo.bounds);
-
-		// Get the frame that will do the rendering.
-		// The currentRange variable specifies only the starting point. The framesetter
-		// lays out as much text as will fit into the frame.
-		CTFrameRef frameRef = CTFramesetterCreateFrame(framesetter, currentRange, framePath, NULL);
-		CGPathRelease(framePath);
-
-		// Core Text draws from the bottom-left corner up, so flip
-		// the current transform prior to drawing.
-		CGContextTranslateCTM(currentContext, 0, CGRectGetHeight(pageInfo.pageSize));
-		CGContextScaleCTM(currentContext, 1.0, -1.0);
-
-		// Draw the frame.
-		CTFrameDraw(frameRef, currentContext);
-
-		// Update the current range based on what was drawn.
-		currentRange = CTFrameGetVisibleStringRange(frameRef);
-		currentRange.location += currentRange.length;
-		currentRange.length = 0;
-		CFRelease(frameRef);
-
-		if (currentRange.location == CFAttributedStringGetLength((CFAttributedStringRef)currentText)) {
-			done = YES;
-		}
-	} while (!done);
-	CFRelease(framesetter);
-	CFRelease(currentText);
+	[pageInfo drawTextLeftJustified:legalese font:[UIFont systemFontOfSize:7]];
 }
 
 
