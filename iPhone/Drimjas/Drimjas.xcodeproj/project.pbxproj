@@ -41,6 +41,8 @@
 		029F3683139DC9F800BA07A5 /* SampleEstimates.plist in Resources */ = {isa = PBXBuildFile; fileRef = 029F3682139DC9F800BA07A5 /* SampleEstimates.plist */; };
 		029F6755140944F5006BCBE0 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 029F6753140944F5006BCBE0 /* AboutViewController.m */; };
 		029F6756140944F5006BCBE0 /* About.xib in Resources */ = {isa = PBXBuildFile; fileRef = 029F6754140944F5006BCBE0 /* About.xib */; };
+		029F677814094E76006BCBE0 /* BarButtonItem.png in Resources */ = {isa = PBXBuildFile; fileRef = 029F677614094E76006BCBE0 /* BarButtonItem.png */; };
+		029F677914094E76006BCBE0 /* BarButtonItemHighlight.png in Resources */ = {isa = PBXBuildFile; fileRef = 029F677714094E76006BCBE0 /* BarButtonItemHighlight.png */; };
 		02A1FC8D13A1B47E00C2A3A9 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02A1FC8C13A1B47E00C2A3A9 /* QuartzCore.framework */; };
 		02A62E8B12FEF50500CAF63A /* PrintManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 02A62E8A12FEF50500CAF63A /* PrintManager.m */; };
 		02A8E5471347C79D00BAAF36 /* ContactInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 02A8E5461347C79D00BAAF36 /* ContactInfo.m */; };
@@ -164,6 +166,8 @@
 		029F6752140944F5006BCBE0 /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
 		029F6753140944F5006BCBE0 /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
 		029F6754140944F5006BCBE0 /* About.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = About.xib; sourceTree = "<group>"; };
+		029F677614094E76006BCBE0 /* BarButtonItem.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BarButtonItem.png; path = Resources/Icons/BarButtonItem.png; sourceTree = "<group>"; };
+		029F677714094E76006BCBE0 /* BarButtonItemHighlight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BarButtonItemHighlight.png; path = Resources/Icons/BarButtonItemHighlight.png; sourceTree = "<group>"; };
 		02A1FC8C13A1B47E00C2A3A9 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		02A62E8912FEF50500CAF63A /* PrintManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrintManager.h; sourceTree = "<group>"; };
 		02A62E8A12FEF50500CAF63A /* PrintManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrintManager.m; sourceTree = "<group>"; };
@@ -422,6 +426,8 @@
 				02CB99E1139BE16F00FF2A3C /* Options@2x.png */,
 				02C81A9213079755009029E9 /* Print.png */,
 				02C81A9313079755009029E9 /* Print@2x.png */,
+				029F677614094E76006BCBE0 /* BarButtonItem.png */,
+				029F677714094E76006BCBE0 /* BarButtonItemHighlight.png */,
 			);
 			name = Icons;
 			sourceTree = "<group>";
@@ -638,6 +644,8 @@
 				02BDDE2E1405465100627A35 /* ContractDetail.xib in Resources */,
 				02C83FB314072B9B002C4874 /* Contract_Terms_and_Conditions.txt in Resources */,
 				029F6756140944F5006BCBE0 /* About.xib in Resources */,
+				029F677814094E76006BCBE0 /* BarButtonItem.png in Resources */,
+				029F677914094E76006BCBE0 /* BarButtonItemHighlight.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

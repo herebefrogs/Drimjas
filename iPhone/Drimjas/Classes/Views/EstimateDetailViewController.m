@@ -239,28 +239,13 @@
 	editHeader.header.text = NSLocalizedString(title, "");
 	[editHeader.edit setTitle:NSLocalizedString(@"Edit", "") forState:UIControlStateNormal];
 	editHeader.edit.tag = tag;
-	
+
+	// round up the button's corners
 	CALayer *layer = editHeader.edit.layer;
     layer.cornerRadius = 6.0f;
     layer.masksToBounds = YES;
     layer.borderWidth = 1.0f;
     layer.borderColor = [UIColor colorWithWhite:0.5f alpha:0.2f].CGColor;
-	
-	CAGradientLayer *shineLayer = [CAGradientLayer layer];
-    shineLayer.frame = editHeader.edit.layer.bounds;
-    shineLayer.colors = [NSArray arrayWithObjects:
-                         (id)[UIColor colorWithWhite:1.0f alpha:0.4f].CGColor,
-                         (id)[UIColor colorWithWhite:1.0f alpha:0.2f].CGColor,
-                         (id)[UIColor colorWithWhite:0.75f alpha:0.2f].CGColor,
-                         (id)[UIColor colorWithWhite:0.2f alpha:0.2f].CGColor,
-                         nil];
-    shineLayer.locations = [NSArray arrayWithObjects:
-                            [NSNumber numberWithFloat:0.0f],
-                            [NSNumber numberWithFloat:0.5f],
-                            [NSNumber numberWithFloat:0.5f],
-                            [NSNumber numberWithFloat:1.0f],
-                            nil];
-    [editHeader.edit.layer addSublayer:shineLayer];
 
 	return editHeader;
 }
