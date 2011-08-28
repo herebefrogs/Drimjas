@@ -152,4 +152,12 @@
 	return NO;
 }
 
+- (void)refreshStatus {
+	// NOTE: don't bother refreshing status of an Estimate scheduled for deletion as nothing depends on it
+	if (![self isDeleted]) {
+		[super refreshStatus];
+	}
+}
+
+
 @end
