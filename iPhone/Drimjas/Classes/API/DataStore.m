@@ -912,6 +912,7 @@ static DataStore *singleton_ = nil;
 		for (IndexedObject *taxOrCurrency in taxesAndCurrencyFetchedResultsController_.fetchedObjects) {
 			[taxOrCurrency refreshStatus];
 		}
+		currency_.isPersistent = YES;
 
 		[self saveContext];
 	}

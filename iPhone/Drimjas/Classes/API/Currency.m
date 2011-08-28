@@ -32,6 +32,10 @@
 	return (self.isoCode.length > 0);
 }
 
+- (void)didSave {
+	// isPersistent will be set manually
+}
+
 + (BOOL)isReadyStatus {
 	// NOTE: isPersistent is used to make sure Taxes & Currency is at least presented once
 	// to user (since isoCode is prefilled, isReady would always return true)
