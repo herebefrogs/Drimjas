@@ -835,6 +835,7 @@ static DataStore *singleton_ = nil;
 
 		if (fetchedObjects.count > 0) {
 			currency_ = (Currency *)[fetchedObjects objectAtIndex:0];
+			currency_.isPersistent = YES;
 		} else {
 			currency_ = (Currency *)[NSEntityDescription insertNewObjectForEntityForName:@"Currency"
 																  inManagedObjectContext:self.managedObjectContext];
@@ -942,6 +943,7 @@ static DataStore *singleton_ = nil;
 
 		if (fetchedObjects.count > 0) {
 			myInfo_ = (MyInfo *)[fetchedObjects objectAtIndex:0];
+			myInfo_.isPersistent = YES;
 		} else {
 			myInfo_ = (MyInfo *)[NSEntityDescription insertNewObjectForEntityForName:@"MyInfo"
 																  inManagedObjectContext:self.managedObjectContext];
