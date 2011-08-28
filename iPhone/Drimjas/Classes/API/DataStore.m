@@ -885,10 +885,15 @@ static DataStore *singleton_ = nil;
 		}
 		
 		if (taxesAndCurrencyFetchedResultsController_.fetchedObjects.count == 0) {
-			// TODO call currency instead
-			[NSEntityDescription insertNewObjectForEntityForName:@"Currency" inManagedObjectContext:self.managedObjectContext];
-			// TODO fetched once more instead? is savecontext any use (given its not done in currency)
-			[self saveContext];
+			// force the creation of Currency object
+			self.currency;
+
+			if (![taxesAndCurrencyFetchedResultsController_ performFetch:&error]) {
+				// TODO This is a serious error saying the records
+				//could not be fetched. Advise the user to try
+				//again or restart the application.
+				NSLog(@"DataStore.taxesAndCurrencyFetchedResultsController: refetch failed with error %@, %@", error, [error userInfo]);
+			}
 		}
 	}
 	return taxesAndCurrencyFetchedResultsController_;
