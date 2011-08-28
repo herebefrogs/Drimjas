@@ -69,7 +69,7 @@
 	// if client has never been saved before (it's still a stub associated to a stub estimate)
 	// or if in Draft state and associated to only 1 estimate or none (it won't be selectable
 	// from existing clients screen or any other estimate)
-	return (!self.isPersistent) || (!self.isReady) && ([[self valueForKeyPath:@"estimates.@count"] intValue] <= 1);
+	return (!self.isPersistent) || (!self.isReady && [[self valueForKeyPath:@"estimates.@count"] intValue] <= 1);
 }
 
 - (NSArray *)nonEmptyProperties {
