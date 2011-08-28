@@ -518,7 +518,7 @@ static DataStore *singleton_ = nil;
 													   initWithFetchRequest:fetchRequest
 													   managedObjectContext:self.managedObjectContext
 													   sectionNameKeyPath:@"index"
-													   cacheName:@"Root"]
+													   cacheName:nil]
 													  autorelease];
 
 	[fetchRequest release];
@@ -713,7 +713,7 @@ static DataStore *singleton_ = nil;
 													  initWithFetchRequest:fetchRequest
 													  managedObjectContext:self.managedObjectContext
 													  sectionNameKeyPath:@"index"
-													  cacheName:@"Root"]
+													  cacheName:nil]
 													 autorelease];
 	
 	[fetchRequest release];
