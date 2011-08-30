@@ -45,7 +45,7 @@
 					<object class="IBUIImageView" id="162330072">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">293</int>
-						<string key="NSFrame">{{124, 20}, {72, 72}}</string>
+						<string key="NSFrame">{{124, 88}, {72, 72}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -57,7 +57,7 @@
 					<object class="IBUITextView" id="1000086275">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">293</int>
-						<string key="NSFrame">{{20, 100}, {280, 128}}</string>
+						<string key="NSFrame">{{20, 178}, {280, 80}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">1</int>
@@ -68,7 +68,8 @@
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<bool key="IBUIShowsVerticalScrollIndicator">NO</bool>
 						<bool key="IBUIEditable">NO</bool>
-						<string key="IBUIText">by David J Peacock Photography www.drimjas.com</string>
+						<string type="base64-UTF8" key="IBUIText">wqkgQ29weXJpZ2h0IDIwMTEKRGF2aWQgSiBQZWFjb2NrIFBob3RvZ3JhcGh5Cnd3dy5kcmltamFzLmNv
+bQ</string>
 						<int key="IBUITextAlignment">1</int>
 						<object class="IBUITextInputTraits" key="IBUITextInputTraits">
 							<int key="IBUIAutocapitalizationType">2</int>
@@ -159,15 +160,15 @@
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>AboutViewController</string>
 					<string>UIResponder</string>
-					<string>{{653, 214}, {320, 480}}</string>
+					<string>{{444, 217}, {320, 480}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSAffineTransform">
-						<bytes key="NSTransformStruct">P4AAAL+AAABC+AAAwrQAAA</bytes>
+						<bytes key="NSTransformStruct">P4AAAL+AAABC+AAAwzkAAA</bytes>
 					</object>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSAffineTransform">
-						<bytes key="NSTransformStruct">P4AAAL+AAABCQAAAw3UAAA</bytes>
+						<bytes key="NSTransformStruct">P4AAAL+AAABBoAAAw48AAA</bytes>
 					</object>
 				</object>
 			</object>
