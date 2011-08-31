@@ -782,7 +782,7 @@ typedef enum {
 }
 
 + (void)_renderContractTermsAndConditions:(PageInfo *)pageInfo {
-	NSString *legalesePath = [[NSBundle mainBundle] pathForResource:@"Contract_Terms_And_Conditions" ofType:@"txt"];	
+	NSString *legalesePath = [[NSBundle mainBundle] pathForResource:@"Contract_Terms_and_Conditions" ofType:@"txt" inDirectory:@"en.lproj"];	
 	NSStringEncoding *encoding = nil;
 	NSError *error = nil;
 	NSString *legalese = [NSString stringWithContentsOfFile:legalesePath usedEncoding:encoding error:&error];
