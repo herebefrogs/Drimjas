@@ -254,11 +254,10 @@ static DataStore *singleton_ = nil;
 	// buffer up to 16 Estimate
 	fetchRequest.fetchBatchSize = 16;
 
-	NSFetchedResultsController *fetchedResultsController = [[[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
+	NSFetchedResultsController *fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
 																								managedObjectContext:self.managedObjectContext
 																								  sectionNameKeyPath:@"monthYear"
-																										   cacheName:@"Root"]
-															autorelease];
+																										   cacheName:@"Root"];
 
 	[fetchRequest release];
 
