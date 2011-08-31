@@ -35,6 +35,9 @@
 	self.title = NSLocalizedString(@"Contracts", @"Contracts Navigation Item Title");
 	self.navigationController.tabBarItem.title = self.title;
 
+	// start with toolbar hidden (no animation)
+	self.navigationController.toolbarHidden = YES;
+
 	self.navigationItem.leftBarButtonItem = self.editButtonItem;
 
 	self.contracts = [[DataStore defaultStore] contractsFetchedResultsController];
