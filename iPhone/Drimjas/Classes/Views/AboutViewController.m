@@ -16,4 +16,8 @@
 	self.title = NSLocalizedString(@"About", "AboutViewController Navigation Title");
 }
 
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+	return YES;
+}
+
 @end
