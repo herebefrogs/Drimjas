@@ -115,7 +115,7 @@
 		02022CA51378CDFC00536FEA /* LineItemSelection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LineItemSelection.m; sourceTree = "<group>"; };
 		020886CD13AC41D000164320 /* ContractsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContractsViewController.h; sourceTree = "<group>"; };
 		020886CE13AC41D000164320 /* ContractsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContractsViewController.m; sourceTree = "<group>"; };
-		020886CF13AC41D000164320 /* Contracts.xib */ = {isa = PBXFileReference; explicitFileType = file.xib; path = Contracts.xib; sourceTree = "<group>"; };
+		020886CF13AC41D000164320 /* Contracts.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Contracts.xib; sourceTree = "<group>"; };
 		020886E713AC439100164320 /* OptionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionsViewController.h; sourceTree = "<group>"; };
 		020886E813AC439100164320 /* OptionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OptionsViewController.m; sourceTree = "<group>"; };
 		020886E913AC439100164320 /* Options.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Options.xib; sourceTree = "<group>"; };
