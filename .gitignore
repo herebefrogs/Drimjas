@@ -1,4 +1,6 @@
 iPhone/*/build
 iPhone/*/*.xcodeproj/*
 !iPhone/*/*.xcodeproj/project.pbxproj
-iPhone/*/Resources/*/.DS_Store
+.DS_Store
+iPhone/.DS_Store
+iPhone/*/.DS_Store
