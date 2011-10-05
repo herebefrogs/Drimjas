@@ -69,6 +69,7 @@
 									<int key="IBUIReturnKeyType">9</int>
 									<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								</object>
+								<int key="IBUIClearButtonMode">1</int>
 							</object>
 						</array>
 						<string key="NSFrameSize">{320, 44}</string>
