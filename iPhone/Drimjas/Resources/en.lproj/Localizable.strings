@@ -119,9 +119,6 @@
 /* TaxesAndCurrencyView Navigation Item Title & Options Taxes & Currency Title */
 "Taxes & Currency" = "Taxes & Currency";
 
-/* TaxesAndCurrency Currency Code Placeholder */
-"Currency Code" = "3-Letter Currency Code";
-
 /* TaxesAndCurrencyView Add a Tax Row */
 "Add a Tax" = "Add a Tax";
 
@@ -133,6 +130,9 @@
 
 /* TaxesAndCurrencyView Tax Number Texfield Placeholder */
 "Tax Number" = "Your Business Tax Number";
+
+/* CurrenciesViewController Navigation Item Title */
+"Pick Currency Code" = "Pick Currency Code";
 
 /* MyInfoViewController Navigation Item Title */
 "My Information" = "My Information";

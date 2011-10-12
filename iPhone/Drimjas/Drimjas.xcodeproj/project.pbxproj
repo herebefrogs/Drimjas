@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		02022CA61378CDFC00536FEA /* LineItemSelection.m in Sources */ = {isa = PBXBuildFile; fileRef = 02022CA51378CDFC00536FEA /* LineItemSelection.m */; };
+		020347D014451D730085CE11 /* CurrenciesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 020347CE14451D730085CE11 /* CurrenciesViewController.m */; };
+		020347D114451D730085CE11 /* Currencies.xib in Resources */ = {isa = PBXBuildFile; fileRef = 020347CF14451D730085CE11 /* Currencies.xib */; };
 		020886D013AC41D000164320 /* ContractsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 020886CE13AC41D000164320 /* ContractsViewController.m */; };
 		020886D113AC41D000164320 /* Contracts.xib in Resources */ = {isa = PBXBuildFile; fileRef = 020886CF13AC41D000164320 /* Contracts.xib */; };
 		020886EA13AC439100164320 /* OptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 020886E813AC439100164320 /* OptionsViewController.m */; };
@@ -113,6 +115,9 @@
 		02022C9F1378CD8700536FEA /* WorkingTitle 8.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "WorkingTitle 8.xcdatamodel"; sourceTree = "<group>"; };
 		02022CA41378CDFC00536FEA /* LineItemSelection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LineItemSelection.h; sourceTree = "<group>"; };
 		02022CA51378CDFC00536FEA /* LineItemSelection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LineItemSelection.m; sourceTree = "<group>"; };
+		020347CD14451D730085CE11 /* CurrenciesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurrenciesViewController.h; sourceTree = "<group>"; };
+		020347CE14451D730085CE11 /* CurrenciesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurrenciesViewController.m; sourceTree = "<group>"; };
+		020347CF14451D730085CE11 /* Currencies.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Currencies.xib; sourceTree = "<group>"; };
 		020886CD13AC41D000164320 /* ContractsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContractsViewController.h; sourceTree = "<group>"; };
 		020886CE13AC41D000164320 /* ContractsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContractsViewController.m; sourceTree = "<group>"; };
 		020886CF13AC41D000164320 /* Contracts.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Contracts.xib; sourceTree = "<group>"; };
@@ -311,6 +316,8 @@
 				02BDDE2B1405465100627A35 /* ContractDetailViewController.m */,
 				020886CD13AC41D000164320 /* ContractsViewController.h */,
 				020886CE13AC41D000164320 /* ContractsViewController.m */,
+				020347CD14451D730085CE11 /* CurrenciesViewController.h */,
+				020347CE14451D730085CE11 /* CurrenciesViewController.m */,
 				1D3623240D0F684500981E51 /* DrimjasAppDelegate.h */,
 				1D3623250D0F684500981E51 /* DrimjasAppDelegate.m */,
 				02E1C7A112E53834000D7747 /* EstimateDetailViewController.h */,
@@ -350,6 +357,7 @@
 				02A8E54A1347C88600BAAF36 /* ContactInfos.xib */,
 				02BDDE2C1405465100627A35 /* ContractDetail.xib */,
 				020886CF13AC41D000164320 /* Contracts.xib */,
+				020347CF14451D730085CE11 /* Currencies.xib */,
 				02E1C7A312E53834000D7747 /* EstimateDetail.xib */,
 				02B2C06D12DFF2DD00D3FEE0 /* Estimates.xib */,
 				02DE9885137A12D3007C5FED /* LineItems.xib */,
@@ -647,6 +655,7 @@
 				029F6756140944F5006BCBE0 /* About.xib in Resources */,
 				029F677814094E76006BCBE0 /* BarButtonItem.png in Resources */,
 				029F677914094E76006BCBE0 /* BarButtonItemHighlight.png in Resources */,
+				020347D114451D730085CE11 /* Currencies.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -699,6 +708,7 @@
 				02CC032A14048C0A007D1795 /* NewContractViewController.m in Sources */,
 				02BDDE2D1405465100627A35 /* ContractDetailViewController.m in Sources */,
 				029F6755140944F5006BCBE0 /* AboutViewController.m in Sources */,
+				020347D014451D730085CE11 /* CurrenciesViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -15,6 +15,7 @@
 // Cells
 #import "TextFieldCell.h"
 // Views
+#import "CurrenciesViewController.h"
 #import "MyInfoViewController.h"
 #import "EstimateDetailViewController.h"
 #import "TableFields.h"
@@ -25,6 +26,7 @@
 
 @synthesize nextButton;
 @synthesize saveButton;
+@synthesize currenciesViewController;
 @synthesize myInfoViewController;
 @synthesize estimateDetailViewController;
 @synthesize taxesAndCurrency;
@@ -129,7 +131,7 @@ BOOL _insertTax = NO;
 
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-	if (indexPath.section == [self _addTaxSection]) {
+	if (indexPath.section == [self _addTaxSection] || indexPath.section == TaxesAndCurrencySectionCurrency) {
 
 		static NSString *CellIdentifier = @"Cell";
 
@@ -174,39 +176,37 @@ BOOL _insertTax = NO;
 - (void)configureCell:(UITableViewCell *)aCell atIndexPath:(NSIndexPath *)indexPath {
 	if (indexPath.section == [self _addTaxSection]) {
 		aCell.textLabel.text = NSLocalizedString(@"Add a Tax", "TaxesAndCurrency Add A Tax Row");
-	} else {
-		[super configureCell:aCell atIndexPath:indexPath];
+	}
+    else if (indexPath.section == TaxesAndCurrencySectionCurrency) {
+        Currency *currency = [taxesAndCurrency.fetchedObjects objectAtIndex:indexPath.section];
 
-		TextFieldCell *tfCell = (TextFieldCell *)aCell;
+		aCell.textLabel.text = [[NSLocale currentLocale] displayNameForKey:NSLocaleCurrencyCode value:currency.isoCode] ;
+        aCell.editingAccessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    } else {
+        [super configureCell:aCell atIndexPath:indexPath];
 
-		if (indexPath.section == TaxesAndCurrencySectionCurrency) {
-			Currency *currency = [taxesAndCurrency.fetchedObjects objectAtIndex:indexPath.section];
+        TextFieldCell *tfCell = (TextFieldCell *)aCell;
 
-			tfCell.textField.text = currency.isoCode;
-			tfCell.textField.placeholder = NSLocalizedString(@"Currency Code", "TaxesAndCurrency Currency Code Placeholder");
-			tfCell.textField.autocapitalizationType = UITextAutocapitalizationTypeAllCharacters;
-		} else {
-			Tax *tax = [taxesAndCurrency.fetchedObjects objectAtIndex:indexPath.section];
-			
-			if (indexPath.row == TaxesFieldName) {
-				tfCell.textField.text = tax.name;
-				tfCell.textField.placeholder = NSLocalizedString(@"Tax Name", "TaxesAndCurrency Tax Name Textfield placeholder");
-				tfCell.textField.autocapitalizationType = UITextAutocapitalizationTypeAllCharacters;
-			}
-			else if (indexPath.row == TaxesFieldPercent) {
-				if ([tax.percent floatValue]) {
-					tfCell.textField.text = [tax.percent stringValue];
-				}
-				tfCell.textField.placeholder = NSLocalizedString(@"Percent", "TaxesAndCurrency Percent Textfield placeholder");
-				tfCell.textField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
-				tfCell.textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
-			}
-			else if (indexPath.row == TaxesFieldTaxNumber) {
-				tfCell.textField.text = tax.taxNumber;
-				tfCell.textField.placeholder = NSLocalizedString(@"Tax Number", "TaxesAndCurrency Tax Number Textfield Placeholder");
-				tfCell.textField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
-				tfCell.textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
-			}
+        Tax *tax = [taxesAndCurrency.fetchedObjects objectAtIndex:indexPath.section];
+
+        if (indexPath.row == TaxesFieldName) {
+            tfCell.textField.text = tax.name;
+            tfCell.textField.placeholder = NSLocalizedString(@"Tax Name", "TaxesAndCurrency Tax Name Textfield placeholder");
+            tfCell.textField.autocapitalizationType = UITextAutocapitalizationTypeAllCharacters;
+        }
+        else if (indexPath.row == TaxesFieldPercent) {
+            if ([tax.percent floatValue]) {
+                tfCell.textField.text = [tax.percent stringValue];
+            }
+            tfCell.textField.placeholder = NSLocalizedString(@"Percent", "TaxesAndCurrency Percent Textfield placeholder");
+            tfCell.textField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
+            tfCell.textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+        }
+        else if (indexPath.row == TaxesFieldTaxNumber) {
+            tfCell.textField.text = tax.taxNumber;
+            tfCell.textField.placeholder = NSLocalizedString(@"Tax Number", "TaxesAndCurrency Tax Number Textfield Placeholder");
+            tfCell.textField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
+            tfCell.textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
 		}
 	}
 }
@@ -218,6 +218,10 @@ BOOL _insertTax = NO;
 		
 		[self _insertTaxAtIndexPath:indexPath];
 	}
+    else if (indexPath.section == TaxesAndCurrencySectionCurrency) {
+        self.currenciesViewController.currency = [taxesAndCurrency.fetchedObjects objectAtIndex:indexPath.section];
+        [self.navigationController pushViewController:currenciesViewController animated:YES];
+    }
 }
 
 
@@ -285,28 +289,21 @@ BOOL _insertTax = NO;
 	NSUInteger section = textField.tag / 10;
 	NSUInteger row = textField.tag - (10 * section);
 
-	if (section == TaxesAndCurrencySectionCurrency) {
-		Currency *currency = [taxesAndCurrency.fetchedObjects objectAtIndex:section];
-		currency.isoCode = textField.text;
-	}
-	else {
-		Tax *tax = [taxesAndCurrency.fetchedObjects objectAtIndex:section];
+    Tax *tax = [taxesAndCurrency.fetchedObjects objectAtIndex:section];
 
-		// TODO hide overlay view if any
-		// save textfield value into tax
-		if (row == TaxesFieldName) {
-			tax.name = textField.text;
-		}
-		else if (row == TaxesFieldPercent) {
-			NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
-			tax.percent = [numberFormatter numberFromString:textField.text];
-			[numberFormatter release];
-			// TODO show an overlay if nil
-		}
-		else if (row == TaxesFieldTaxNumber) {
-			tax.taxNumber = textField.text;
-		}
-		
+    // TODO hide overlay view if any
+    // save textfield value into tax
+    if (row == TaxesFieldName) {
+        tax.name = textField.text;
+    }
+    else if (row == TaxesFieldPercent) {
+        NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+        tax.percent = [numberFormatter numberFromString:textField.text];
+        [numberFormatter release];
+        // TODO show an overlay if nil
+    }
+    else if (row == TaxesFieldTaxNumber) {
+        tax.taxNumber = textField.text;
 	}
 }
 
@@ -364,6 +361,7 @@ BOOL _insertTax = NO;
     // Relinquish ownership of anything that can be recreated in viewDidLoad or on demand.
     self.nextButton = nil;
     self.saveButton = nil;
+    self.currenciesViewController = nil;
 	self.myInfoViewController = nil;
 	self.estimateDetailViewController = nil;
 	self.taxesAndCurrency = nil;
@@ -376,6 +374,7 @@ BOOL _insertTax = NO;
 #endif
 	[nextButton release];
 	[saveButton release];
+    [currenciesViewController release];
 	[myInfoViewController release];
 	[estimateDetailViewController release];
 	[taxesAndCurrency release];

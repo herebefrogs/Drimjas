@@ -116,9 +116,6 @@
 /* NewLineItem Name Textfield */
 "Description" = "Description";
 
-/* TaxesAndCurrency Currency Code Placeholder */
-"Currency Code" = "Code de la devise à 3 lettres";
-
 /* TaxesAndCurrencyView Navigation Item Title & Options Taxes & Currency Title */
 "Taxes & Currency" = "Taxes & devise";
 
@@ -133,6 +130,9 @@
 
 /* TaxesAndCurrencyView Tax Number Texfield Placeholder */
 "Tax Number" = "Numéro de taxe de votre société";
+
+/* CurrenciesViewController Navigation Item Title */
+"Pick Currency Code" = "Choisir une devise";
 
 /* MyInfoViewController Navigation Item Title */
 "My Information" = "Mes informations";

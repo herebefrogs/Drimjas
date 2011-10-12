@@ -10,12 +10,14 @@
 // Cells
 #import "TextFieldTableViewController.h"
 
+@class CurrenciesViewController;
 @class MyInfoViewController;
 @class EstimateDetailViewController;
 
 @interface TaxesAndCurrencyViewController : TextFieldTableViewController <NSFetchedResultsControllerDelegate> {
 	UIBarButtonItem *nextButton;
 	UIBarButtonItem *saveButton;
+    CurrenciesViewController *currenciesViewController;
 	MyInfoViewController *myInfoViewController;
 	EstimateDetailViewController *estimateDetailViewController;
 
@@ -25,6 +27,7 @@
 
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *nextButton;
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *saveButton;
+@property (nonatomic, retain) IBOutlet CurrenciesViewController *currenciesViewController;
 @property (nonatomic, retain) IBOutlet MyInfoViewController *myInfoViewController;
 @property (nonatomic, retain) IBOutlet EstimateDetailViewController *estimateDetailViewController;
 
