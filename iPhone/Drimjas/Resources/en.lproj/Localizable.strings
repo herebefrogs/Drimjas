@@ -182,6 +182,13 @@
 /* Options About Title */
 "About" = "About";
 
+/* AboutViewController Info */
+"AboutViewController.info" = "© Copyright 2011
+David J Peacock Photography
+www.drimjas.com
+
+Version %@";
+
 /* Client info & line item estimates count */
 "Used in %u estimate(s)" = "Used in %u estimate(s)";
 

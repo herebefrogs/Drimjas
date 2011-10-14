@@ -10,7 +10,11 @@
 
 
 @interface AboutViewController : UIViewController {
-
+    UIImageView *logo;
+    UITextView *info;
 }
+
+@property (nonatomic, retain) IBOutlet UIImageView *logo;
+@property (nonatomic, retain) IBOutlet UITextView *info;
 
 @end
