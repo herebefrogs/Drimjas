@@ -1,5 +1,6 @@
 iPhone/*/build
 iPhone/*/*.xcodeproj/*
+!iPhone/*/*.xcodeproj/xcshareddata
 !iPhone/*/*.xcodeproj/project.pbxproj
 .DS_Store
 iPhone/.DS_Store
