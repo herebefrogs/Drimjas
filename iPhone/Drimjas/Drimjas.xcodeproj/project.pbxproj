@@ -575,7 +575,7 @@
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0410;
+				LastUpgradeCheck = 0420;
 				ORGANIZATIONNAME = "David J Peacock Photography";
 			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "Drimjas" */;
@@ -745,7 +745,7 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Drimjas_Prefix.pch;
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "Drimjas-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
 				PRODUCT_NAME = Drimjas;
@@ -759,7 +759,7 @@
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Drimjas_Prefix.pch;
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "Drimjas-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
 				PRODUCT_NAME = Drimjas;
@@ -776,7 +776,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
-				SDKROOT = iphoneos4.3;
+				SDKROOT = iphoneos;
 			};
 			name = Debug;
 		};
@@ -790,7 +790,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				SDKROOT = iphoneos4.3;
+				SDKROOT = iphoneos;
 			};
 			name = Release;
 		};
