@@ -54,20 +54,35 @@ NSInteger buttonTagClicked_ = 0;
 						 forState:UIControlStateNormal];
 		}
 	}
+
+    // localize items on main tab bar
+    NSMutableArray *items = [[NSMutableArray alloc] initWithCapacity:appDelegate.tabBarController.tabBar.items.count];
+    BOOL copyItem = NO;
 	for (UITabBarItem *item in appDelegate.tabBarController.tabBar.items) {
 		if (item.tag == TabBarItemEstimates) {
 			item.title = NSLocalizedString(@"Estimates", @"Estimates Navigation Item Title");
-		}
+            copyItem = YES;
+ 		}
 		else if (item.tag == TabBarItemContracts) {
 			item.title = NSLocalizedString(@"Contracts", @"Contracts Navigation Item Title");
+            copyItem = YES;
 		}
 		else if (item.tag == TabBarItemOptions) {
 			item.title = NSLocalizedString(@"Options", @"Options Navigation Item Title");
+            copyItem = YES;
 		}
+        
+        // make discardable copies for 1 time use in Startup screen's tab bar
+        if (copyItem) {
+            UITabBarItem *copy = [[UITabBarItem alloc] initWithTitle:item.title image:item.image tag:item.tag];
+            [items addObject:copy];
+            [copy release];
+            copyItem = NO;
+        }
 	}
 
-	// get authoritative list of tab bar items from main window
-	[tabBar setItems:appDelegate.tabBarController.tabBar.items animated:YES];
+	[tabBar setItems:items animated:NO];
+    [items release];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
