@@ -94,11 +94,20 @@
 - (void)_configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
 	if (indexPath.section == [self _addLineItemSection]) {
 		cell.textLabel.text = NSLocalizedString(@"Add a Line Item", "AddEstimateLineItem Add A Line Item Row");
+        cell.textLabel.textColor = [UIColor blackColor];
+        cell.editingAccessoryType = UITableViewCellAccessoryNone;
 	} else {
 		LineItemSelection *lineItem = [lineItemSelections.fetchedObjects objectAtIndex:indexPath.section];
 
 		if (indexPath.row == LineItemSelectionFieldName) {
-			cell.textLabel.text = lineItem.lineItem.name;
+            if (lineItem.lineItem) {
+                cell.textLabel.text = lineItem.lineItem.name;
+                cell.textLabel.textColor = [UIColor blackColor];
+            }
+            else {
+                cell.textLabel.text = NSLocalizedString(@"Pick Line Item", "");
+                cell.textLabel.textColor = [UIColor lightGrayColor];
+            }
 			cell.editingAccessoryType = UITableViewCellAccessoryDisclosureIndicator;
 		}
 		else if ([self _lineItem:lineItem isShippingAndHandlingQuantityAtIndexPath:indexPath]) {
