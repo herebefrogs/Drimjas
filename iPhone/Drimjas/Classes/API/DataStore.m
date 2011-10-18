@@ -162,18 +162,10 @@ static DataStore *singleton_ = nil;
 
 - (void)loadSampleEstimates {
 	NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"SampleEstimates" ofType:@"plist"];
-	NSData *plistXML = [[NSFileManager defaultManager] contentsAtPath:plistPath];
-
-	NSString *errorDesc = nil;
-	NSPropertyListFormat format;
-	NSArray *plistItems = (NSArray *)[NSPropertyListSerialization
-									  propertyListFromData:plistXML
-									  mutabilityOption:NSPropertyListImmutable
-									  format:&format
-									  errorDescription:&errorDesc];
+	NSArray *plistItems = [NSArray arrayWithContentsOfFile:plistPath];
 
 	if (plistItems == nil) {
-		NSLog(@"DataStore.loadSampleEstimates: read failed with error %@", errorDesc);
+		NSLog(@"DataStore.loadSampleEstimates: failed to read SamplesEstimates.plist");
 	}
 
 	for (NSDictionary *estimate_data in plistItems) {
@@ -552,21 +544,13 @@ static DataStore *singleton_ = nil;
 
 - (void)loadDefaultLineItems {
 	NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"LineItemDefaults" ofType:@"plist"];
-	NSData *plistXML = [[NSFileManager defaultManager] contentsAtPath:plistPath];
-
-	NSString *errorDesc = nil;
-	NSPropertyListFormat format;
-	NSArray *plistItems = (NSArray *)[NSPropertyListSerialization
-										  propertyListFromData:plistXML
-										  mutabilityOption:NSPropertyListImmutable
-										  format:&format
-										  errorDescription:&errorDesc];
+	NSArray *plistItems = [NSArray arrayWithContentsOfFile:plistPath];
 
 	if (plistItems == nil) {
 		// TODO This is a serious error saying the record
 		//could not be saved. Advise the user to
 		//try again or restart the application.
-		NSLog(@"DataStore.loadDefaultLineItems: read failed with error %@", errorDesc);
+		NSLog(@"DataStore.loadDefaultLineItems: failed to read LineItemDefaults.plist");
 	}
 
 	for (NSString *name in plistItems) {
