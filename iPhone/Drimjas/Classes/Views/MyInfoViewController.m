@@ -23,6 +23,7 @@
 
 @synthesize saveButton;
 @synthesize estimateDetailViewController;
+@synthesize professionsViewController;
 @synthesize myInfo;
 @synthesize optionsMode;
 
@@ -57,20 +58,18 @@
 #pragma mark Table view data source
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    return !optionsMode
+    return !optionsMode && section == MyInfoSectionProfession
 		? NSLocalizedString(@"This can later be changed from the Options tab", "MyInfoViewController Table Header")
 		: nil;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    // Return the number of sections.
-    return 1;
+    return numMyInfoSection;
 }
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    // Return the number of rows in the section.
-    return numMyInfoField;
+    return section == MyInfoSectionProfession ? 1 : numMyInfoField;
 }
 
 
@@ -80,66 +79,98 @@
 - (void)configureCell:(UITableViewCell *)aCell atIndexPath:(NSIndexPath *)indexPath {
 	[super configureCell:aCell atIndexPath:indexPath];
 
-	TextFieldCell *tfCell = (TextFieldCell *)aCell;
+    if (indexPath.section == MyInfoSectionProfession) {
+        // TODO if myInfo.profession set, then assign its value to cell.text and the text to black, otherwise put placeholder
+        aCell.textLabel.textColor = [UIColor lightGrayColor];
+        aCell.textLabel.text = NSLocalizedString(@"Profession", "Profession Placeholder");
+        aCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    }
+    else {
+        TextFieldCell *tfCell = (TextFieldCell *)aCell;
 
-	// don't bother keeping track of sections since there is only one
-	tfCell.textField.tag = indexPath.row;
+        // don't bother keeping track of sections since there is only one
+        tfCell.textField.tag = indexPath.row;
 
-	// initialize textfield value from estimate
-	if (indexPath.row == MyInfoFieldName) {
-		tfCell.textField.placeholder = NSLocalizedString(@"My Company Name", "My Company Name Text Field Placeholder");
-		tfCell.textField.text = myInfo.name;
-		tfCell.textField.autocapitalizationType = UITextAutocapitalizationTypeWords;
+        // initialize textfield value from estimate
+        if (indexPath.row == MyInfoFieldName) {
+            tfCell.textField.placeholder = NSLocalizedString(@"My Company Name", "My Company Name Text Field Placeholder");
+            tfCell.textField.text = myInfo.name;
+            tfCell.textField.autocapitalizationType = UITextAutocapitalizationTypeWords;
+        }
+        else if (indexPath.row == MyInfoFieldAddress1) {
+            tfCell.textField.placeholder = NSLocalizedString(@"Address 1", "Address 1 Text Field Placeholder");
+            tfCell.textField.text = myInfo.address1;
+        }
+        else if (indexPath.row == MyInfoFieldAddress2) {
+            tfCell.textField.placeholder = NSLocalizedString(@"Address 2", "Address 2 Text Field Placeholder");
+            tfCell.textField.text = myInfo.address2;
+        }
+        else if (indexPath.row == MyInfoFieldCity) {
+            tfCell.textField.placeholder = NSLocalizedString(@"City", "City Text Field Placeholder");
+            tfCell.textField.text = myInfo.city;
+        }
+        else if (indexPath.row == MyInfoFieldState) {
+            tfCell.textField.placeholder = NSLocalizedString(@"State", "State Text Field Placeholder");
+            tfCell.textField.text = myInfo.state;
+        }
+        else if (indexPath.row == MyInfoFieldPostalCode) {
+            tfCell.textField.placeholder = NSLocalizedString(@"Postal Code", "Postal Code Text Field Placeholder");
+            tfCell.textField.text = myInfo.postalCode;
+            tfCell.textField.autocapitalizationType = UITextAutocapitalizationTypeAllCharacters;
+        }
+        else if (indexPath.row == MyInfoFieldCountry) {
+            tfCell.textField.placeholder = NSLocalizedString(@"Country", "Country Text Field Placeholder");
+            tfCell.textField.text = myInfo.country;
+        }
+        else if (indexPath.row == MyInfoFieldPhone) {
+            tfCell.textField.placeholder = NSLocalizedString(@"Phone", "Phone Text Field Placeholder");
+            tfCell.textField.text = myInfo.contactInfo.phone;
+            tfCell.textField.keyboardType = UIKeyboardTypePhonePad;
+            tfCell.textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+        }
+        else if (indexPath.row == MyInfoFieldFax) {
+            tfCell.textField.placeholder = NSLocalizedString(@"Fax", "Fax Text Field Placeholder");
+            tfCell.textField.text = myInfo.fax;
+            tfCell.textField.keyboardType = UIKeyboardTypePhonePad;
+            tfCell.textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+        }
+        else if (indexPath.row == MyInfoFieldEmail) {
+            tfCell.textField.placeholder = NSLocalizedString(@"Email", "Email Text Field Placeholder");
+            tfCell.textField.text = myInfo.contactInfo.email;
+            tfCell.textField.keyboardType = UIKeyboardTypeEmailAddress;
+            tfCell.textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+        }
+        else if (indexPath.row == MyInfoFieldWebsite) {
+            tfCell.textField.placeholder = NSLocalizedString(@"Website", "Website Text Field Placeholder");
+            tfCell.textField.text = myInfo.website;
+            tfCell.textField.keyboardType = UIKeyboardTypeURL;
+            tfCell.textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+        }
+    }
+}
+
+// Customize the appearance of table view cells.
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+	if (indexPath.section == MyInfoSectionProfession) {
+
+		static NSString *CellIdentifier = @"Cell";
+
+		UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+		if (cell == nil) {
+			cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+		}
+
+		[self configureCell:cell atIndexPath:indexPath];
+
+		return cell;
 	}
-	else if (indexPath.row == MyInfoFieldAddress1) {
-		tfCell.textField.placeholder = NSLocalizedString(@"Address 1", "Address 1 Text Field Placeholder");
-		tfCell.textField.text = myInfo.address1;
+	else {
+		return [super tableView:tableView cellForRowAtIndexPath:indexPath];
 	}
-	else if (indexPath.row == MyInfoFieldAddress2) {
-		tfCell.textField.placeholder = NSLocalizedString(@"Address 2", "Address 2 Text Field Placeholder");
-		tfCell.textField.text = myInfo.address2;
-	}
-	else if (indexPath.row == MyInfoFieldCity) {
-		tfCell.textField.placeholder = NSLocalizedString(@"City", "City Text Field Placeholder");
-		tfCell.textField.text = myInfo.city;
-	}
-	else if (indexPath.row == MyInfoFieldState) {
-		tfCell.textField.placeholder = NSLocalizedString(@"State", "State Text Field Placeholder");
-		tfCell.textField.text = myInfo.state;
-	}
-	else if (indexPath.row == MyInfoFieldPostalCode) {
-		tfCell.textField.placeholder = NSLocalizedString(@"Postal Code", "Postal Code Text Field Placeholder");
-		tfCell.textField.text = myInfo.postalCode;
-		tfCell.textField.autocapitalizationType = UITextAutocapitalizationTypeAllCharacters;
-	}
-	else if (indexPath.row == MyInfoFieldCountry) {
-		tfCell.textField.placeholder = NSLocalizedString(@"Country", "Country Text Field Placeholder");
-		tfCell.textField.text = myInfo.country;
-	}
-	else if (indexPath.row == MyInfoFieldPhone) {
-		tfCell.textField.placeholder = NSLocalizedString(@"Phone", "Phone Text Field Placeholder");
-		tfCell.textField.text = myInfo.contactInfo.phone;
-		tfCell.textField.keyboardType = UIKeyboardTypePhonePad;
-		tfCell.textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
-	}
-	else if (indexPath.row == MyInfoFieldFax) {
-		tfCell.textField.placeholder = NSLocalizedString(@"Fax", "Fax Text Field Placeholder");
-		tfCell.textField.text = myInfo.fax;
-		tfCell.textField.keyboardType = UIKeyboardTypePhonePad;
-		tfCell.textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
-	}
-	else if (indexPath.row == MyInfoFieldEmail) {
-		tfCell.textField.placeholder = NSLocalizedString(@"Email", "Email Text Field Placeholder");
-		tfCell.textField.text = myInfo.contactInfo.email;
-		tfCell.textField.keyboardType = UIKeyboardTypeEmailAddress;
-		tfCell.textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
-	}
-	else if (indexPath.row == MyInfoFieldWebsite) {
-		tfCell.textField.placeholder = NSLocalizedString(@"Website", "Website Text Field Placeholder");
-		tfCell.textField.text = myInfo.website;
-		tfCell.textField.keyboardType = UIKeyboardTypeURL;
-		tfCell.textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
-	}
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self.navigationController pushViewController:self.professionsViewController animated:YES];
 }
 
 #pragma mark -
@@ -223,6 +254,7 @@
 
 	self.saveButton = nil;
 	self.estimateDetailViewController = nil;
+    self.professionsViewController = nil;
 	self.myInfo = nil;
 }
 
@@ -233,6 +265,7 @@
 #endif
 	[saveButton release];
 	[estimateDetailViewController release];
+    [professionsViewController release];
 	[myInfo release];
     [super dealloc];
 }

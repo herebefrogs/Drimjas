@@ -149,6 +149,12 @@
 /* MyInfoViewController Website Textfield Placeholder */
 "Website" = "Site Internet";
 
+/* MyInfoViewController Profession Placeholder */
+"Profession" = "Profession";
+
+/* ProfessionViewController Navigation Item Title */
+"Pick Profession" = "Choisir une profession";
+
 /* EstimateDetail View Controller Navigation Item Title */
 "Estimate Detail" = "Aperçu du devis";
 
@@ -320,3 +326,10 @@ Version %@";
 
 "Shipping & Handling" = "Frais de livraison";
 "Shipping & Handling Description" = "";
+
+/****************** Professions section ******************/
+"Photographer" = "Photographe";
+
+"Illustrator" = "Illustrateur";
+
+"Graphic Designer" = "Graphiste";

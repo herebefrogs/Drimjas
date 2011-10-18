@@ -79,6 +79,13 @@ typedef enum {
 } TaxesField;
 
 typedef enum {
+    MyInfoSectionProfession = 0,
+    MyInfoSectionOthers,
+
+    numMyInfoSection
+} MyInfoSection;
+
+typedef enum {
 	MyInfoFieldName = 0,
 	MyInfoFieldAddress1,
 	MyInfoFieldAddress2,

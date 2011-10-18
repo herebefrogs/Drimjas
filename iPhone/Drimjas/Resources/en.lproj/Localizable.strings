@@ -149,6 +149,12 @@
 /* MyInfoViewController Website Textfield Placeholder */
 "Website" = "Website";
 
+/* MyInfoViewController Profession Placeholder */
+"Profession" = "Profession";
+
+/* ProfessionViewController Navigation Item Title */
+"Pick Profession" = "Pick Profession";
+
 /* EstimateDetail View Controller Navigation Item Title */
 "Estimate Detail" = "Estimate Detail";
 
@@ -320,3 +326,10 @@ Version %@";
 
 "Shipping & Handling" = "Shipping & Handling";
 "Shipping & Handling Description" = "";
+
+/****************** Professions section ******************/
+"Photographer" = "Photographer";
+
+"Illustrator" = "Illustrator";
+
+"Graphic Designer" = "Graphic Designer";

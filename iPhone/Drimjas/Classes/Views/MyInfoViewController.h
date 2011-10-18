@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 // Cells
 #import "TextFieldTableViewController.h"
+#import "ProfessionsViewController.h"
 
 @class EstimateDetailViewController;
 @class MyInfo;
@@ -16,6 +17,7 @@
 @interface MyInfoViewController : TextFieldTableViewController <UITextFieldDelegate> {
 	UIBarButtonItem *saveButton;
 	EstimateDetailViewController *estimateDetailViewController;
+    ProfessionsViewController *professionsViewController;
 
 	MyInfo *myInfo;
 	BOOL optionsMode;
@@ -23,6 +25,7 @@
 
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *saveButton;
 @property (nonatomic, retain) IBOutlet EstimateDetailViewController *estimateDetailViewController;
+@property (nonatomic, retain) IBOutlet ProfessionsViewController *professionsViewController;
 
 @property (nonatomic, retain) MyInfo *myInfo;
 @property (nonatomic, assign) BOOL optionsMode;

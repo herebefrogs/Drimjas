@@ -10,6 +10,9 @@
 		02022CA61378CDFC00536FEA /* LineItemSelection.m in Sources */ = {isa = PBXBuildFile; fileRef = 02022CA51378CDFC00536FEA /* LineItemSelection.m */; };
 		020347D014451D730085CE11 /* CurrenciesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 020347CE14451D730085CE11 /* CurrenciesViewController.m */; };
 		020347D114451D730085CE11 /* Currencies.xib in Resources */ = {isa = PBXBuildFile; fileRef = 020347CF14451D730085CE11 /* Currencies.xib */; };
+		02049653144D063400B14002 /* Professions.plist in Resources */ = {isa = PBXBuildFile; fileRef = 02049652144D063400B14002 /* Professions.plist */; };
+		02049657144D0D1400B14002 /* ProfessionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02049655144D0D1400B14002 /* ProfessionsViewController.m */; };
+		02049658144D0D1400B14002 /* Professions.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02049656144D0D1400B14002 /* Professions.xib */; };
 		020886D013AC41D000164320 /* ContractsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 020886CE13AC41D000164320 /* ContractsViewController.m */; };
 		020886D113AC41D000164320 /* Contracts.xib in Resources */ = {isa = PBXBuildFile; fileRef = 020886CF13AC41D000164320 /* Contracts.xib */; };
 		020886EA13AC439100164320 /* OptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 020886E813AC439100164320 /* OptionsViewController.m */; };
@@ -118,6 +121,10 @@
 		020347CD14451D730085CE11 /* CurrenciesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurrenciesViewController.h; sourceTree = "<group>"; };
 		020347CE14451D730085CE11 /* CurrenciesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurrenciesViewController.m; sourceTree = "<group>"; };
 		020347CF14451D730085CE11 /* Currencies.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Currencies.xib; sourceTree = "<group>"; };
+		02049652144D063400B14002 /* Professions.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Professions.plist; path = Resources/Professions.plist; sourceTree = "<group>"; };
+		02049654144D0D1300B14002 /* ProfessionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfessionsViewController.h; sourceTree = "<group>"; };
+		02049655144D0D1400B14002 /* ProfessionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfessionsViewController.m; sourceTree = "<group>"; };
+		02049656144D0D1400B14002 /* Professions.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Professions.xib; sourceTree = "<group>"; };
 		020886CD13AC41D000164320 /* ContractsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContractsViewController.h; sourceTree = "<group>"; };
 		020886CE13AC41D000164320 /* ContractsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContractsViewController.m; sourceTree = "<group>"; };
 		020886CF13AC41D000164320 /* Contracts.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Contracts.xib; sourceTree = "<group>"; };
@@ -336,6 +343,8 @@
 				02FA0482138F3C94001CF3B0 /* NewLineItemViewController.m */,
 				020886E713AC439100164320 /* OptionsViewController.h */,
 				020886E813AC439100164320 /* OptionsViewController.m */,
+				02049654144D0D1300B14002 /* ProfessionsViewController.h */,
+				02049655144D0D1400B14002 /* ProfessionsViewController.m */,
 				0299F96C1304D8ED001E1E3E /* StartupViewController.h */,
 				0299F96D1304D8ED001E1E3E /* StartupViewController.m */,
 				02CB998A139BD56200FF2A3C /* TabBarItems.h */,
@@ -367,6 +376,7 @@
 				02CC032914048C0A007D1795 /* NewContract.xib */,
 				02FA0483138F3C94001CF3B0 /* NewLineItem.xib */,
 				020886E913AC439100164320 /* Options.xib */,
+				02049656144D0D1400B14002 /* Professions.xib */,
 				0299F96E1304D8ED001E1E3E /* Startup.xib */,
 				0288D99E13A9A306001E6641 /* TaxesAndCurrency.xib */,
 			);
@@ -531,6 +541,7 @@
 				02B2C05E12DFEFB300D3FEE0 /* Views */,
 				021C0D31137B73A2007E641C /* LineItemDefaults.plist */,
 				029F3682139DC9F800BA07A5 /* SampleEstimates.plist */,
+				02049652144D063400B14002 /* Professions.plist */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -656,6 +667,8 @@
 				029F677814094E76006BCBE0 /* BarButtonItem.png in Resources */,
 				029F677914094E76006BCBE0 /* BarButtonItemHighlight.png in Resources */,
 				020347D114451D730085CE11 /* Currencies.xib in Resources */,
+				02049653144D063400B14002 /* Professions.plist in Resources */,
+				02049658144D0D1400B14002 /* Professions.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -709,6 +722,7 @@
 				02BDDE2D1405465100627A35 /* ContractDetailViewController.m in Sources */,
 				029F6755140944F5006BCBE0 /* AboutViewController.m in Sources */,
 				020347D014451D730085CE11 /* CurrenciesViewController.m in Sources */,
+				02049657144D0D1400B14002 /* ProfessionsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
