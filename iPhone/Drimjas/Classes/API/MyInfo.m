@@ -15,6 +15,7 @@
 @implementation MyInfo
 
 @dynamic fax;
+@dynamic profession;
 @dynamic website;
 
 - (NSString *)phone {
@@ -47,6 +48,7 @@
 }
 
 - (NSArray *)allPropertyNames {
+    // leave aside "profession" since it doesn't appear on any PDF
 	return [NSArray arrayWithObjects:@"name", @"address1", @"address2", @"city", @"state", @"postalCode", @"country",
 									 @"phone", @"fax", @"email", @"website", nil];
 }

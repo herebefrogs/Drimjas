@@ -7,10 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MyInfo.h"
 
 @interface ProfessionsViewController : UITableViewController {
 @private
     NSArray *professions;
+    MyInfo *myInfo;
 }
+
+@property (nonatomic, retain) MyInfo *myInfo;
 
 @end

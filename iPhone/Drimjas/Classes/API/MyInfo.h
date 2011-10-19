@@ -15,6 +15,7 @@
 }
 
 @property (nonatomic, retain) NSString *fax;
+@property (nonatomic, retain) NSString *profession;
 @property (nonatomic, retain) NSString *website;
 @property (nonatomic, readonly) ContactInfo* contactInfo;
 

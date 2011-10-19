@@ -206,6 +206,7 @@
 		02BDDE2A1405465100627A35 /* ContractDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContractDetailViewController.h; sourceTree = "<group>"; };
 		02BDDE2B1405465100627A35 /* ContractDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContractDetailViewController.m; sourceTree = "<group>"; };
 		02BDDE2C1405465100627A35 /* ContractDetail.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContractDetail.xib; sourceTree = "<group>"; };
+		02BF6C2F144E603B00CA738D /* Drimjas 5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Drimjas 5.xcdatamodel"; sourceTree = "<group>"; };
 		02C25791132438C40057D944 /* DataStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataStore.h; sourceTree = "<group>"; };
 		02C25792132438C40057D944 /* DataStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataStore.m; sourceTree = "<group>"; };
 		02C6509813D922B200ABEFF7 /* KeyValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KeyValue.h; path = ../Utils/KeyValue.h; sourceTree = "<group>"; };
@@ -851,8 +852,9 @@
 				02B01D7F13F0DEA6001BEDE2 /* Drimjas 2.xcdatamodel */,
 				02F3ECBA13FB5CCF000ED8EF /* Drimjas 3.xcdatamodel */,
 				02CC02E7140481A5007D1795 /* Drimjas 4.xcdatamodel */,
+				02BF6C2F144E603B00CA738D /* Drimjas 5.xcdatamodel */,
 			);
-			currentVersion = 02CC02E7140481A5007D1795 /* Drimjas 4.xcdatamodel */;
+			currentVersion = 02BF6C2F144E603B00CA738D /* Drimjas 5.xcdatamodel */;
 			name = Drimjas.xcdatamodeld;
 			path = Resources/Drimjas.xcdatamodeld;
 			sourceTree = "<group>";

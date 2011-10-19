@@ -21,9 +21,11 @@
 
 
 @synthesize professions;
+@synthesize myInfo;
 
 - (void)dealloc {
     [professions release];
+    [myInfo release];
     [super dealloc];
 }
 
@@ -46,6 +48,7 @@
 - (void)viewDidUnload {
     [super viewDidUnload];
     self.professions = nil;
+    self.myInfo = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -53,7 +56,12 @@
 
     [self.tableView reloadData];
 
-    // TODO scroll to put selected row in the middle of the screen
+    if (self.myInfo.profession) {
+        // if set, put profession currently selected in the middle of the screen
+        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:[self.professions indexOfObject:self.myInfo.profession]
+                                                                  inSection:0]
+                              atScrollPosition:UITableViewScrollPositionTop animated:NO];
+    }
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
@@ -87,16 +95,19 @@
     // get the display name of the profession
     cell.textLabel.text = NSLocalizedString([self.professions objectAtIndex:indexPath.row], "");
 
-    // TODO place a checkmark on the row of the profession currently selected
-    cell.accessoryType = UITableViewCellAccessoryNone;
+    // place a checkmark on the row of the profession currently selected
+    if ([[self.professions objectAtIndex:indexPath.row] isEqualToString:self.myInfo.profession]) {
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+    }
+    else {
+        cell.accessoryType = UITableViewCellAccessoryNone;
+    }
 }
 
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"select profession %@", [self.professions objectAtIndex:indexPath.row]);
-
-    // TODO assign selected profession
+    self.myInfo.profession = [self.professions objectAtIndex:indexPath.row];
 
     [self.navigationController popViewControllerAnimated:YES];
 }

@@ -80,9 +80,14 @@
 	[super configureCell:aCell atIndexPath:indexPath];
 
     if (indexPath.section == MyInfoSectionProfession) {
-        // TODO if myInfo.profession set, then assign its value to cell.text and the text to black, otherwise put placeholder
-        aCell.textLabel.textColor = [UIColor lightGrayColor];
-        aCell.textLabel.text = NSLocalizedString(@"Profession", "Profession Placeholder");
+        if (myInfo.profession) {
+            aCell.textLabel.text = NSLocalizedString(myInfo.profession, "Localized Profession");
+            aCell.textLabel.textColor = [UIColor blackColor];
+        }
+        else {
+            aCell.textLabel.text = NSLocalizedString(@"Profession", "Profession Placeholder");
+            aCell.textLabel.textColor = [UIColor lightGrayColor];
+        }
         aCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     else {
@@ -170,6 +175,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    self.professionsViewController.myInfo = self.myInfo;
     [self.navigationController pushViewController:self.professionsViewController animated:YES];
 }
 
