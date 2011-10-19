@@ -35,9 +35,9 @@
     [super viewDidLoad];
 	self.title = NSLocalizedString(@"Pick Profession", "ProfessionsViewController Navigation Item Title");
 
-    // read professions from plist
+    // read professions list from plist
     NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"Professions" ofType:@"plist"];
-    NSArray *profs = [NSArray arrayWithContentsOfFile:plistPath];
+    NSArray *profs = [[NSDictionary dictionaryWithContentsOfFile:plistPath] objectForKey:@"professions"];
 
     // sort profession so their localized translations are in alphabetical order
     self.professions = [profs sortedArrayUsingComparator:^NSComparisonResult(NSString *prof1, NSString *prof2) {

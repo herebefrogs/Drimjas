@@ -26,6 +26,13 @@
 #import "PageInfo.h"
 
 
+@interface PDFManager ()
+
++ (NSString *)contractTermsForProfession:(NSString *)profession;
+
+@end
+
+
 @implementation PDFManager
 
 
@@ -782,18 +789,22 @@ typedef enum {
 }
 
 + (void)_renderContractTermsAndConditions:(PageInfo *)pageInfo {
-	NSString *legalesePath = [[NSBundle mainBundle] pathForResource:@"Contract_Terms_and_Conditions" ofType:@"txt" inDirectory:@"en.lproj"];	
+    MyInfo *myInfo = [[DataStore defaultStore] myInfo];
+
+    NSString *legaleseName = [PDFManager contractTermsForProfession:myInfo.profession];
+	NSString *legalesePath = [[NSBundle mainBundle] pathForResource:legaleseName
+                                                             ofType:@"txt"];
 	NSStringEncoding *encoding = nil;
 	NSError *error = nil;
 	NSString *legalese = [NSString stringWithContentsOfFile:legalesePath usedEncoding:encoding error:&error];
 
 	if (error) {
-		NSLog(@"loading Contract Terms & Conditions failed with error %@, %@", error, [error userInfo]);
+		NSLog(@"loading %@.txt failed with error %@, %@", legaleseName, error, [error userInfo]);
 		return;
 	}
 
 	// interpolate business name
-	legalese = [NSString stringWithFormat:legalese, [[[DataStore defaultStore] myInfo] name]];
+	legalese = [NSString stringWithFormat:legalese, myInfo.name];
 
 	// open new page dedicated to legalese
 	[pageInfo openNewPage];
@@ -802,6 +813,21 @@ typedef enum {
 	pageInfo.y = pageInfo.bounds.origin.y;
 
 	[pageInfo drawTextLeftJustified:legalese font:[UIFont systemFontOfSize:7]];
+}
+
++ (NSString *)contractTermsForProfession:(NSString *)profession {
+    // read professions specs from plist
+    NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"Professions" ofType:@"plist"];
+    NSDictionary *specs = [NSDictionary dictionaryWithContentsOfFile:plistPath];
+
+    NSUInteger index = [[specs objectForKey:@"professions"] indexOfObject:profession];
+
+    if (index == NSNotFound) {
+        NSLog(@"could not find profession %@ in plist", profession);
+        return nil;
+    }
+
+    return [[specs objectForKey:@"contract_terms_filenames"] objectAtIndex:index];
 }
 
 

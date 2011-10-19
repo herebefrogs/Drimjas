@@ -1,9 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
-<array>
-	<string>Photographer</string>
-	<string>Illustrator</string>
-	<string>Graphic Designer</string>
-</array>
+<dict>
+	<key>professions</key>
+	<array>
+		<string>Photographer</string>
+		<string>Illustrator</string>
+		<string>Graphic Designer</string>
+	</array>
+	<key>contract_terms_filenames</key>
+	<array>
+		<string>Contract_Terms_Photographer</string>
+		<string>Contract_Terms_Illustrator</string>
+		<string>Contract_Terms_Graphic_Designer</string>
+	</array>
+</dict>
 </plist>
