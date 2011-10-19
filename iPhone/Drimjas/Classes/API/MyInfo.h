@@ -22,7 +22,8 @@
 @property (nonatomic, readonly) NSString *phone;
 @property (nonatomic, readonly) NSString *email;
 
-+ (BOOL)isReadyStatus;
++ (BOOL)isReadyForEstimate;
++ (BOOL)isReadyForContract;
 
 @end
 

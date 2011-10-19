@@ -55,7 +55,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
 
-	self.navigationItem.rightBarButtonItem = optionsMode || [MyInfo isReadyStatus] ? saveButton : nextButton;
+	self.navigationItem.rightBarButtonItem = optionsMode || [MyInfo isReadyForEstimate] ? saveButton : nextButton;
 
 	// refresh table in case user is viewing Taxes & Currency screen from 1st Estimate creation & Options menu screens at the same time
 	[self.tableView reloadData];
@@ -311,7 +311,7 @@ BOOL _insertTax = NO;
 #pragma mark Button delegate
 
 - (IBAction)next:(id)sender {
-	if (![MyInfo isReadyStatus]) {
+	if (![MyInfo isReadyForEstimate]) {
 		[[DataStore defaultStore] saveTaxesAndCurrency];
 
 		myInfoViewController.optionsMode = NO;

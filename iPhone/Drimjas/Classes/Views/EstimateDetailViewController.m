@@ -97,7 +97,7 @@
 	[self.navigationController setToolbarHidden:NO animated:YES];
 
 	// let user email & print only when estimate & global settings are ready
-	emailButton.enabled = estimate.isReady && [Currency isReadyStatus] && [MyInfo isReadyStatus];
+	emailButton.enabled = estimate.isReady && [Currency isReadyStatus] && [MyInfo isReadyForEstimate];
 	printButton.enabled = emailButton.enabled;
 
 	[self reloadIndexes];

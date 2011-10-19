@@ -36,9 +36,15 @@
 	return (self.name.length > 0) && (self.email.length > 0);
 }
 
-+ (BOOL)isReadyStatus {
++ (BOOL)isReadyForEstimate {
 	return [[[DataStore defaultStore] myInfo] isReady];
 }
+
++ (BOOL)isReadyForContract {
+    MyInfo *myInfo = [[DataStore defaultStore] myInfo];
+	return [myInfo isReady] && (myInfo.profession.length > 0);
+}
+
 
 - (ContactInfo *)contactInfo {
 	NSAssert([[self.contactInfos allObjects] count] > 0, @"No contact info created");
