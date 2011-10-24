@@ -168,8 +168,7 @@ BOOL _insertLineItem = NO;
 - (void)_deleteLineItemSelectionForIndexPath:(NSIndexPath *)indexPath {
 	// NOTE: force textfield input to be processed while its tag is still valid
 	// (aka before sections get reordered as a result of the deletion)
-	[lastTextFieldEdited resignFirstResponder];
-	lastTextFieldEdited = nil;
+	[self.lastTextFieldEdited resignFirstResponder];
 	
 	LineItemSelection *deleted = [lineItemSelections.fetchedObjects objectAtIndex:indexPath.section];
 

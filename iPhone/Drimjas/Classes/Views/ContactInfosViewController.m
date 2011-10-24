@@ -99,8 +99,7 @@ BOOL _contactInfoInserted = NO;
 - (void) _deleteContactInfoAtSection:(NSUInteger)section {
 	// NOTE: force textfield input to be processed while its tag is still valid
 	// (aka before sections get reordered as a result of the deletion)
-	[lastTextFieldEdited resignFirstResponder];
-	lastTextFieldEdited = nil;
+	[self.lastTextFieldEdited resignFirstResponder];
 
 	ContactInfo *deleted = [contactInfos.fetchedObjects objectAtIndex:section];
 
@@ -312,7 +311,7 @@ BOOL _contactInfoInserted = NO;
 }
 
 - (IBAction)save:(id)sender {
-	[lastTextFieldEdited resignFirstResponder];
+	[self.lastTextFieldEdited resignFirstResponder];
 
 	[[DataStore defaultStore] saveClientInfo:estimate.clientInfo];
 

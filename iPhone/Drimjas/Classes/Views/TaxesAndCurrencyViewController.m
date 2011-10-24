@@ -77,7 +77,7 @@
 BOOL _insertTax = NO;
 
 - (void)_insertTaxAtIndexPath:(NSIndexPath *)indexPath {
-	_insertTax = YES;
+    _insertTax = YES;
 
 	[[DataStore defaultStore] createTax];
 }
@@ -85,8 +85,7 @@ BOOL _insertTax = NO;
 - (void)_deleteTaxAtIndexPath:(NSIndexPath *)indexPath {
 	// NOTE: force textfield input to be processed while its tag is still valid
 	// (aka before sections get reordered as a result of the deletion)
-	[lastTextFieldEdited resignFirstResponder];
-	lastTextFieldEdited = nil;
+	[self.lastTextFieldEdited resignFirstResponder];
 
 	NSAssert(indexPath.section != 0, @"Cannot delete Currency");
 
@@ -286,8 +285,8 @@ BOOL _insertTax = NO;
 #pragma mark Textfield delegate
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
-	NSUInteger section = textField.tag / 10;
-	NSUInteger row = textField.tag - (10 * section);
+    NSUInteger section = textField.tag / 10;
+    NSUInteger row = textField.tag - (10 * section);
 
     Tax *tax = [taxesAndCurrency.fetchedObjects objectAtIndex:section];
 
@@ -304,7 +303,7 @@ BOOL _insertTax = NO;
     }
     else if (row == TaxesFieldTaxNumber) {
         tax.taxNumber = textField.text;
-	}
+    }
 }
 
 #pragma mark -

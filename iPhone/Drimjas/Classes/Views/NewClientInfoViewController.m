@@ -141,7 +141,7 @@
 }
 
 - (IBAction)save:(id)sender {
-	[lastTextFieldEdited resignFirstResponder];
+	[self.lastTextFieldEdited resignFirstResponder];
 
 	[[DataStore defaultStore] saveClientInfo:estimate.clientInfo];
 

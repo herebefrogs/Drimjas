@@ -14,24 +14,7 @@
 @implementation TextFieldTableViewController
 
 @synthesize textFieldCell;
-
-#pragma mark -
-#pragma mark View lifecycle
-
-- (void)viewWillDisappear:(BOOL)animated {
-	// when pressing Back button, give a chance to textfield currently edited
-	// to save its text before previous view controller's viewWillAppear triggers
-	[lastTextFieldEdited resignFirstResponder];
-
-	[super viewWillDisappear:animated];
-}
-
-- (void)viewDidDisappear:(BOOL)animated {
-    [super viewDidDisappear:animated];
-
-	// clear last edited textfield
-	lastTextFieldEdited = nil;
-}
+@synthesize lastTextFieldEdited;
 
 #pragma mark -
 #pragma mark Table view delegate
@@ -73,12 +56,18 @@
 #pragma mark Textfield delegate
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
-	lastTextFieldEdited = textField;
+	self.lastTextFieldEdited = textField;
 }
 
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
 	// hide keyboard
-	return [textField resignFirstResponder];
+	BOOL hasResigned = [textField resignFirstResponder];
+
+    if (lastTextFieldEdited == textField && hasResigned) {
+        self.lastTextFieldEdited = nil;
+    }
+
+    return hasResigned;
 }
 
 - (BOOL) textFieldShouldReturn:(UITextField *)textField {
@@ -91,11 +80,13 @@
 - (void)viewDidUnload {
     // Relinquish ownership of anything that can be recreated in viewDidLoad or on demand.
 	self.textFieldCell = nil;
+    self.lastTextFieldEdited = nil;
 }
 
 
 - (void)dealloc {
 	[textFieldCell release];
+    [lastTextFieldEdited release];
     [super dealloc];
 }
 

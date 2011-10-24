@@ -12,11 +12,13 @@
 
 @interface TextFieldTableViewController : UITableViewController <UITextFieldDelegate> {
 	TextFieldCell *textFieldCell;
+@private
 	UITextField *lastTextFieldEdited;
 }
 
 
 @property (nonatomic, retain) IBOutlet TextFieldCell *textFieldCell;
+@property (nonatomic, retain) UITextField *lastTextFieldEdited;
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
 

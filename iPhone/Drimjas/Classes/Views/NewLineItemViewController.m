@@ -127,7 +127,7 @@ BOOL added = NO;
 // Customize the appearance of table view cells.
 - (IBAction)add:(id)sender {
 	// forces currently edited textfield's value to be processed
-	[lastTextFieldEdited resignFirstResponder];
+	[self.lastTextFieldEdited resignFirstResponder];
 
 	if (lineItem.isReady) {
 		// saving line item will be done when screen disappear
