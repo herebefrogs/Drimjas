@@ -800,32 +800,13 @@ static DataStore *singleton_ = nil;
 
 - (Currency *)currency {
 	if (currency_ == nil) {
-		// load currency from data store
-		NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-		fetchRequest.entity = [NSEntityDescription entityForName:@"Currency"
-										  inManagedObjectContext:self.managedObjectContext];
+        NSPredicate *currencyOnlyPredicate = [NSPredicate predicateWithFormat:@"subEntityName = %@", @"Currency"];
+        NSArray *currencies = [self.taxesAndCurrencyFetchedResultsController.fetchedObjects filteredArrayUsingPredicate:currencyOnlyPredicate];
 
-		NSError *error;
-		NSArray *fetchedObjects = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+        NSAssert(currencies.count > 0, @"No currency created");
+        NSAssert(currencies.count < 2, @"More than 1 currency created");
 
-		if (!fetchedObjects) {
-			// TODO Handle the error
-			// This is a serious error blablabla
-			NSLog(@"DataStore.currency: fetch failed with error %@, %@", error, [error userInfo]);
-		}
-		
-		NSAssert(fetchedObjects.count <= 1, @"More than 1 currency created");
-
-		if (fetchedObjects.count > 0) {
-			currency_ = (Currency *)[fetchedObjects objectAtIndex:0];
-			currency_.isPersistent = YES;
-		} else {
-			currency_ = (Currency *)[NSEntityDescription insertNewObjectForEntityForName:@"Currency"
-																  inManagedObjectContext:self.managedObjectContext];
-		}
-		[currency_ retain];
-
-		[fetchRequest release];
+        currency_ = [[currencies objectAtIndex:0] retain];
 	}
 
 	return currency_;
@@ -869,7 +850,8 @@ static DataStore *singleton_ = nil;
 		
 		if (taxesAndCurrencyFetchedResultsController_.fetchedObjects.count == 0) {
 			// force the creation of Currency object
-			self.currency;
+            [NSEntityDescription insertNewObjectForEntityForName:@"Currency"
+                                          inManagedObjectContext:self.managedObjectContext];
 
 			if (![taxesAndCurrencyFetchedResultsController_ performFetch:&error]) {
 				// TODO This is a serious error saying the records
