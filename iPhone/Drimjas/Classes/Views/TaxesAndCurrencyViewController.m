@@ -90,16 +90,18 @@ BOOL _insertTax = NO;
 	NSAssert(indexPath.section != 0, @"Cannot delete Currency");
 
 	Tax *deleted = [taxesAndCurrency.fetchedObjects objectAtIndex:indexPath.section];
-	
-	// shift all indexes down by 1 for taxes after the one being deleted
-	NSRange afterDeleted;
-	afterDeleted.location = indexPath.section;
-	afterDeleted.length = taxesAndCurrency.sections.count - indexPath.section;
-	for (Tax *tax in [taxesAndCurrency.fetchedObjects subarrayWithRange:afterDeleted]) {
-		if ([tax.index intValue] > indexPath.section) {
-			tax.index = [NSNumber numberWithInt:[tax.index intValue] - 1];
-		}
-	}
+    deleted.index = nil;
+
+    NSUInteger nextTaxIndex = indexPath.section + 1;
+    if (nextTaxIndex < [self _addTaxSection]) {
+        // shift all indexes down by 1 for taxes after the one being deleted
+        NSRange afterDeleted;
+        afterDeleted.location = nextTaxIndex;
+        afterDeleted.length = taxesAndCurrency.sections.count - nextTaxIndex;
+        for (Tax *tax in [taxesAndCurrency.fetchedObjects subarrayWithRange:afterDeleted]) {
+            tax.index = [NSNumber numberWithInt:[tax.index intValue] - 1];
+        }
+    }
 	
 	[[DataStore defaultStore] deleteTax:deleted];
 }

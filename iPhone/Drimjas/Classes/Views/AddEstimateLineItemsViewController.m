@@ -171,16 +171,18 @@ BOOL _insertLineItem = NO;
 	[self.lastTextFieldEdited resignFirstResponder];
 	
 	LineItemSelection *deleted = [lineItemSelections.fetchedObjects objectAtIndex:indexPath.section];
+    deleted.index = nil;
 
-	// shift all indexes down by 1 for line item selections after the one being deleted
-	NSRange afterDeleted;
-	afterDeleted.location = indexPath.section;
-	afterDeleted.length = lineItemSelections.sections.count - indexPath.section;
-	for (LineItemSelection *lineItem in [lineItemSelections.fetchedObjects subarrayWithRange:afterDeleted]) {
-		if ([lineItem.index intValue] > indexPath.section) {
-			lineItem.index = [NSNumber numberWithInt:[lineItem.index intValue] - 1];
-		}
-	}
+    NSUInteger nextLineItemIndex = indexPath.section + 1;
+    if (nextLineItemIndex < [self _addLineItemSection]) {
+        // shift all indexes down by 1 for line item selections after the one being deleted
+        NSRange afterDeleted;
+        afterDeleted.location = nextLineItemIndex;
+        afterDeleted.length = lineItemSelections.sections.count - nextLineItemIndex;
+        for (LineItemSelection *lineItem in [lineItemSelections.fetchedObjects subarrayWithRange:afterDeleted]) {
+            lineItem.index = [NSNumber numberWithInt:[lineItem.index intValue] - 1];
+        }
+    }
 
 	// TODO these 2 lines should probably be in deleteLineItemSelection
 	// deassociate line item selection from estimate

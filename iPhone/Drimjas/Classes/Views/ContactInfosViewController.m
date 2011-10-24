@@ -102,14 +102,18 @@ BOOL _contactInfoInserted = NO;
 	[self.lastTextFieldEdited resignFirstResponder];
 
 	ContactInfo *deleted = [contactInfos.fetchedObjects objectAtIndex:section];
+    deleted.index = nil;
 
-	// shift all indexes down by 1 for line item selections after the one being deleted
-	NSRange afterDeleted;
-	afterDeleted.location = section;
-	afterDeleted.length = contactInfos.sections.count - section;
-	for (ContactInfo *contactInfo in [contactInfos.fetchedObjects subarrayWithRange:afterDeleted]) {
-		contactInfo.index = [NSNumber numberWithInt:[contactInfo.index intValue] - 1];
-	}
+    NSUInteger nextContactIndex = section + 1;
+    if (nextContactIndex < [self _addContactInfoSection]) {
+        // shift all indexes down by 1 for line item selections after the one being deleted
+        NSRange afterDeleted;
+        afterDeleted.location = nextContactIndex;
+        afterDeleted.length = contactInfos.sections.count - nextContactIndex;
+        for (ContactInfo *contactInfo in [contactInfos.fetchedObjects subarrayWithRange:afterDeleted]) {
+            contactInfo.index = [NSNumber numberWithInt:[contactInfo.index intValue] - 1];
+        }
+    }
 
 	[estimate.clientInfo unbindContactInfo:deleted];
 	[[DataStore defaultStore] deleteContactInfo:deleted];
