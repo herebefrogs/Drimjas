@@ -14,13 +14,13 @@
 /* Startup View Controller Contract Button */
 "New Contract" = "New Contract";
 
-/* AddEstimateNewOrPickClientInfo Navigation Item Title */
+/* NewOrPickClientInfoViewController Navigation Item Title */
 "Add Client" = "Add Client";
 
-/* AddEstimateNewOrPickClientInfo New Client Section */
+/* NewOrPickClientInfoViewController New Client Section */
 "New Client" = "New Client";
 
-/* AddEstimateNewOrPickClientInfo Existing Client Section & NewClientInfo View Controller Navigation Item Title */
+/* NewOrPickClientInfoViewController Existing Client Section & NewClientInfo View Controller Navigation Item Title */
 "Existing Client" = "Existing Client";
 
 /* NewClientInfo View Controller Navigation Item Title (Edit) */

@@ -12,13 +12,13 @@
 #import "ClientInfo.h"
 #import "DataStore.h"
 // Views
-#import "AddEstimateNewOrPickClientInfoViewController.h"
+#import "NewOrPickClientInfoViewController.h"
 #import "EstimateDetailViewController.h"
 
 
 @implementation EstimatesViewController
 
-@synthesize newOrPickClientInfoViewController;
+@synthesize aNewOrPickClientInfoViewController;
 @synthesize estimateDetailViewController;
 @synthesize estimates;
 
@@ -209,7 +209,7 @@ CGFloat STATUS_RIGHT_PADDING = 10.0;
 #pragma mark Button delegate
 
 - (IBAction)add:(id)sender {
-	[self.navigationController pushViewController:newOrPickClientInfoViewController animated:YES];
+	[self.navigationController pushViewController:aNewOrPickClientInfoViewController animated:YES];
 }
 
 
@@ -229,7 +229,7 @@ CGFloat STATUS_RIGHT_PADDING = 10.0;
 #endif
     // Relinquish ownership of anything that can be recreated in viewDidLoad or on demand.
 	self.estimateDetailViewController = nil;
-	self.newOrPickClientInfoViewController = nil;
+	self.aNewOrPickClientInfoViewController = nil;
 	self.estimates = nil;
 	self.navigationItem.leftBarButtonItem = nil;
 	// note: don't nil title or navigationController.tabBarItem.title
@@ -242,7 +242,7 @@ CGFloat STATUS_RIGHT_PADDING = 10.0;
 	NSLog(@"EstimatesViewController.dealloc");
 #endif
 	[estimateDetailViewController release];
-	[newOrPickClientInfoViewController release];
+	[aNewOrPickClientInfoViewController release];
 	[estimates release];
     [super dealloc];
 }

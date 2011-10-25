@@ -67,8 +67,8 @@
 		02BF6C37144E75E600CA738D /* Contract_Terms_Illustrator.txt in Resources */ = {isa = PBXBuildFile; fileRef = 02BF6C36144E75E600CA738D /* Contract_Terms_Illustrator.txt */; };
 		02C25793132438C40057D944 /* DataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 02C25792132438C40057D944 /* DataStore.m */; };
 		02C6509A13D922B200ABEFF7 /* KeyValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 02C6509913D922B200ABEFF7 /* KeyValue.m */; };
-		02C75243136A429F00EC4BF5 /* AddEstimateNewOrPickClientInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02C75241136A429F00EC4BF5 /* AddEstimateNewOrPickClientInfoViewController.m */; };
-		02C75244136A429F00EC4BF5 /* AddEstimateNewOrPickClientInfo.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02C75242136A429F00EC4BF5 /* AddEstimateNewOrPickClientInfo.xib */; };
+		02C75243136A429F00EC4BF5 /* NewOrPickClientInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02C75241136A429F00EC4BF5 /* NewOrPickClientInfoViewController.m */; };
+		02C75244136A429F00EC4BF5 /* NewOrPickClientInfo.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02C75242136A429F00EC4BF5 /* NewOrPickClientInfo.xib */; };
 		02C81A441307853C009029E9 /* Application.png in Resources */ = {isa = PBXBuildFile; fileRef = 02C81A421307853C009029E9 /* Application.png */; };
 		02C81A451307853C009029E9 /* Application@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 02C81A431307853C009029E9 /* Application@2x.png */; };
 		02C81A5A130788B8009029E9 /* Search-Settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 02C81A57130788B8009029E9 /* Search-Settings.png */; };
@@ -216,9 +216,9 @@
 		02C25792132438C40057D944 /* DataStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataStore.m; sourceTree = "<group>"; };
 		02C6509813D922B200ABEFF7 /* KeyValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KeyValue.h; path = ../Utils/KeyValue.h; sourceTree = "<group>"; };
 		02C6509913D922B200ABEFF7 /* KeyValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KeyValue.m; path = ../Utils/KeyValue.m; sourceTree = "<group>"; };
-		02C75240136A429F00EC4BF5 /* AddEstimateNewOrPickClientInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddEstimateNewOrPickClientInfoViewController.h; sourceTree = "<group>"; };
-		02C75241136A429F00EC4BF5 /* AddEstimateNewOrPickClientInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddEstimateNewOrPickClientInfoViewController.m; sourceTree = "<group>"; };
-		02C75242136A429F00EC4BF5 /* AddEstimateNewOrPickClientInfo.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddEstimateNewOrPickClientInfo.xib; sourceTree = "<group>"; };
+		02C75240136A429F00EC4BF5 /* NewOrPickClientInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewOrPickClientInfoViewController.h; sourceTree = "<group>"; };
+		02C75241136A429F00EC4BF5 /* NewOrPickClientInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewOrPickClientInfoViewController.m; sourceTree = "<group>"; };
+		02C75242136A429F00EC4BF5 /* NewOrPickClientInfo.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewOrPickClientInfo.xib; sourceTree = "<group>"; };
 		02C81A421307853C009029E9 /* Application.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Application.png; path = Resources/Icons/Application.png; sourceTree = "<group>"; };
 		02C81A431307853C009029E9 /* Application@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Application@2x.png"; path = "Resources/Icons/Application@2x.png"; sourceTree = "<group>"; };
 		02C81A57130788B8009029E9 /* Search-Settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Search-Settings.png"; path = "Resources/Icons/Search-Settings.png"; sourceTree = "<group>"; };
@@ -315,8 +315,6 @@
 				029F6753140944F5006BCBE0 /* AboutViewController.m */,
 				02AA0BFE136DCB20005E9158 /* AddEstimateLineItemsViewController.h */,
 				02AA0BFF136DCB20005E9158 /* AddEstimateLineItemsViewController.m */,
-				02C75240136A429F00EC4BF5 /* AddEstimateNewOrPickClientInfoViewController.h */,
-				02C75241136A429F00EC4BF5 /* AddEstimateNewOrPickClientInfoViewController.m */,
 				02AA0B5C136DAF13005E9158 /* ClientInfoDetailViewController.h */,
 				02AA0B5D136DAF13005E9158 /* ClientInfoDetailViewController.m */,
 				029DAC9E136BA00A00AF4A6F /* ClientInfosViewController.h */,
@@ -345,6 +343,8 @@
 				02CC032814048C0A007D1795 /* NewContractViewController.m */,
 				02FA0481138F3C94001CF3B0 /* NewLineItemViewController.h */,
 				02FA0482138F3C94001CF3B0 /* NewLineItemViewController.m */,
+				02C75240136A429F00EC4BF5 /* NewOrPickClientInfoViewController.h */,
+				02C75241136A429F00EC4BF5 /* NewOrPickClientInfoViewController.m */,
 				020886E713AC439100164320 /* OptionsViewController.h */,
 				020886E813AC439100164320 /* OptionsViewController.m */,
 				02049654144D0D1300B14002 /* ProfessionsViewController.h */,
@@ -364,7 +364,6 @@
 			children = (
 				029F6754140944F5006BCBE0 /* About.xib */,
 				02AA0C00136DCB20005E9158 /* AddEstimateLineItems.xib */,
-				02C75242136A429F00EC4BF5 /* AddEstimateNewOrPickClientInfo.xib */,
 				02AA0B5E136DAF13005E9158 /* ClientInfoDetail.xib */,
 				029DACA0136BA00A00AF4A6F /* ClientInfos.xib */,
 				02A8E54A1347C88600BAAF36 /* ContactInfos.xib */,
@@ -379,6 +378,7 @@
 				021F684F12E67D8700ECDDDD /* NewClientInfo.xib */,
 				02CC032914048C0A007D1795 /* NewContract.xib */,
 				02FA0483138F3C94001CF3B0 /* NewLineItem.xib */,
+				02C75242136A429F00EC4BF5 /* NewOrPickClientInfo.xib */,
 				020886E913AC439100164320 /* Options.xib */,
 				02049656144D0D1400B14002 /* Professions.xib */,
 				0299F96E1304D8ED001E1E3E /* Startup.xib */,
@@ -641,7 +641,7 @@
 				023C7DBA1309A8D600FD360B /* Launch@2x.png in Resources */,
 				02CC9C98133FC52D006160A7 /* TextFieldCell.xib in Resources */,
 				02A8E54C1347C88600BAAF36 /* ContactInfos.xib in Resources */,
-				02C75244136A429F00EC4BF5 /* AddEstimateNewOrPickClientInfo.xib in Resources */,
+				02C75244136A429F00EC4BF5 /* NewOrPickClientInfo.xib in Resources */,
 				029DACA2136BA00A00AF4A6F /* ClientInfos.xib in Resources */,
 				02AA0B60136DAF13005E9158 /* ClientInfoDetail.xib in Resources */,
 				02AA0C02136DCB20005E9158 /* AddEstimateLineItems.xib in Resources */,
@@ -705,7 +705,7 @@
 				02A8E54B1347C88600BAAF36 /* ContactInfosViewController.m in Sources */,
 				023E06AD134D52A60026209B /* TextFieldTableViewController.m in Sources */,
 				023AE59B13665C7000E8A88D /* BaseObject.m in Sources */,
-				02C75243136A429F00EC4BF5 /* AddEstimateNewOrPickClientInfoViewController.m in Sources */,
+				02C75243136A429F00EC4BF5 /* NewOrPickClientInfoViewController.m in Sources */,
 				029DACA1136BA00A00AF4A6F /* ClientInfosViewController.m in Sources */,
 				02AA0B5F136DAF13005E9158 /* ClientInfoDetailViewController.m in Sources */,
 				02AA0C01136DCB20005E9158 /* AddEstimateLineItemsViewController.m in Sources */,

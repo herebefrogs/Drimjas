@@ -11,7 +11,7 @@
 @class NewClientInfoViewController;
 @class ClientInfosViewController;
 
-@interface AddEstimateNewOrPickClientInfoViewController : UITableViewController {
+@interface NewOrPickClientInfoViewController : UITableViewController {
 	NewClientInfoViewController *aNewClientInfoViewController;
 	ClientInfosViewController *clientInfosViewController;
 }

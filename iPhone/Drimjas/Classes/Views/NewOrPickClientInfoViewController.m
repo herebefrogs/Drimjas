@@ -6,7 +6,7 @@
 //  Copyright 2011 David J Peacock Photography. All rights reserved.
 //
 
-#import "AddEstimateNewOrPickClientInfoViewController.h"
+#import "NewOrPickClientInfoViewController.h"
 // API
 #import "DataStore.h"
 // Views
@@ -14,7 +14,7 @@
 #import "ClientInfosViewController.h"
 #import "TableFields.h"
 
-@implementation AddEstimateNewOrPickClientInfoViewController
+@implementation NewOrPickClientInfoViewController
 
 @synthesize aNewClientInfoViewController;
 @synthesize clientInfosViewController;
@@ -24,10 +24,10 @@
 
 - (void)viewDidLoad {
 #ifdef __ENABLE_UI_LOGS__
-	NSLog(@"AddEstimateNewOrPickClientInfoViewController.viewDidLoad");
+	NSLog(@"NewOrPickClientInfoViewController.viewDidLoad");
 #endif
     [super viewDidLoad];
-	self.title = NSLocalizedString(@"Add Client", "AddEstimateNewOrPickClientInfo Navigation Item Title");
+	self.title = NSLocalizedString(@"Add Client", "NewOrPickClientInfoViewController Navigation Item Title");
 }
 
 // Override to allow orientations other than the default portrait orientation.
@@ -60,9 +60,9 @@
     }
     
 	if (indexPath.section == NewClientInfoSection) {
-		cell.textLabel.text = NSLocalizedString(@"New Client", @"AddEstimateNewOrPickClientInfo New Client Section");
+		cell.textLabel.text = NSLocalizedString(@"New Client", @"NewOrPickClientInfoViewController New Client Section");
 	} else if (indexPath.section == PickClientInfoSection) {
-		cell.textLabel.text = NSLocalizedString(@"Existing Client", @"AddEstimateNewOrPickClientInfo Existing Client Section");
+		cell.textLabel.text = NSLocalizedString(@"Existing Client", @"NewOrPickClientInfoViewController Existing Client Section");
 	}
 	
 	cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -105,7 +105,7 @@
 	
 - (void)viewDidUnload {
 #ifdef __ENABLE_UI_LOGS__
-	NSLog(@"AddEstimateNewOrPickClientInfoViewController.viewDidUnload");
+	NSLog(@"NewOrPickClientInfoViewController.viewDidUnload");
 #endif
 	// Relinquish ownership of anything that can be recreated in viewDidLoad or on demand.
 	self.aNewClientInfoViewController = nil;
@@ -117,7 +117,7 @@
 
 - (void)dealloc {
 #ifdef __ENABLE_UI_LOGS__
-	NSLog(@"AddEstimateNewOrPickClientInfoViewController.dealloc");
+	NSLog(@"NewOrPickClientInfoViewController.dealloc");
 #endif
 	[aNewClientInfoViewController release];
 	[clientInfosViewController release];
