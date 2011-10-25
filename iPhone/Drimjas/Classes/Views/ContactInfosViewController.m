@@ -221,8 +221,7 @@ BOOL _contactInfoInserted = NO;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	if (indexPath.section == [self _addContactInfoSection]) {
-		UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
-		[cell setSelected:NO animated:YES];
+		[self.tableView deselectRowAtIndexPath:indexPath animated:YES];
 
 		[self _insertContactInfoAtSection:indexPath.section];
 	}
