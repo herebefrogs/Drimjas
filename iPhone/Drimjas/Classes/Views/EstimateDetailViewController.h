@@ -27,7 +27,7 @@
 
 	AddEstimateLineItemsViewController *lineItemSelectionsViewController;
 	ContactInfosViewController *contactInfosViewController;
-	NewClientInfoViewController *newClientInfoViewController;
+	NewClientInfoViewController *aNewClientInfoViewController;
 
 	Estimate *estimate;
 	NSInteger indexFirstLineItem;
@@ -41,7 +41,7 @@
 @property (nonatomic, retain) IBOutlet EditSectionHeader *editSectionHeader;
 @property (nonatomic, retain) IBOutlet AddEstimateLineItemsViewController *lineItemSelectionsViewController;
 @property (nonatomic, retain) IBOutlet ContactInfosViewController *contactInfosViewController;
-@property (nonatomic, retain) IBOutlet NewClientInfoViewController *newClientInfoViewController;
+@property (nonatomic, retain) IBOutlet NewClientInfoViewController *aNewClientInfoViewController;
 @property (nonatomic, retain) Estimate *estimate;
 
 - (IBAction)email:(id)sender;

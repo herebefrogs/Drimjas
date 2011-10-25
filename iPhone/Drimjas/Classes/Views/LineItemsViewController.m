@@ -17,7 +17,7 @@
 
 @implementation LineItemsViewController
 
-@synthesize newLineItemViewController;
+@synthesize aNewLineItemViewController;
 @synthesize lineItems;
 @synthesize lineItemSelection;
 @synthesize optionsMode;
@@ -64,12 +64,12 @@
 #pragma mark Private method stack
 
 - (void)_showNewLineItem {
-	newLineItemViewController.optionsMode = optionsMode;
+	aNewLineItemViewController.optionsMode = optionsMode;
 	if (!optionsMode) {
-		newLineItemViewController.lineItemSelection = lineItemSelection;
+		aNewLineItemViewController.lineItemSelection = lineItemSelection;
 	}
 
-	[self.navigationController pushViewController:newLineItemViewController animated:YES];
+	[self.navigationController pushViewController:aNewLineItemViewController animated:YES];
 }
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
@@ -235,7 +235,7 @@
     lineItems.delegate = nil;
 	self.lineItems = nil;
 	self.lineItemSelection = nil;
-	self.newLineItemViewController = nil;
+	self.aNewLineItemViewController = nil;
 }
 
 
@@ -245,7 +245,7 @@
 #endif
 	[lineItems release];
 	[lineItemSelection release];
-	[newLineItemViewController release];
+	[aNewLineItemViewController release];
     [super dealloc];
 }
 

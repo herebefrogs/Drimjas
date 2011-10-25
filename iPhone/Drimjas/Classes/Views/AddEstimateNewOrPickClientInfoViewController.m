@@ -16,7 +16,7 @@
 
 @implementation AddEstimateNewOrPickClientInfoViewController
 
-@synthesize newClientInfoViewController;
+@synthesize aNewClientInfoViewController;
 @synthesize clientInfosViewController;
 
 #pragma mark -
@@ -80,8 +80,8 @@
 	}
 
 	if (indexPath.section == NewClientInfoSection) {
-		newClientInfoViewController.editMode = NO;
-		[self.navigationController pushViewController:newClientInfoViewController animated:YES];
+		aNewClientInfoViewController.editMode = NO;
+		[self.navigationController pushViewController:aNewClientInfoViewController animated:YES];
 	}
 	else if (indexPath.section == PickClientInfoSection) {
 		clientInfosViewController.optionsMode = NO;
@@ -108,7 +108,7 @@
 	NSLog(@"AddEstimateNewOrPickClientInfoViewController.viewDidUnload");
 #endif
 	// Relinquish ownership of anything that can be recreated in viewDidLoad or on demand.
-	self.newClientInfoViewController = nil;
+	self.aNewClientInfoViewController = nil;
 	self.clientInfosViewController = nil;
 	// note: don't nil title or navigationController.tabBarItem.title
 	// as it may appear on the view currently displayed
@@ -119,7 +119,7 @@
 #ifdef __ENABLE_UI_LOGS__
 	NSLog(@"AddEstimateNewOrPickClientInfoViewController.dealloc");
 #endif
-	[newClientInfoViewController release];
+	[aNewClientInfoViewController release];
 	[clientInfosViewController release];
 	[super dealloc];
 }

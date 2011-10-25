@@ -53,7 +53,7 @@
 @synthesize editSectionHeader;
 @synthesize lineItemSelectionsViewController;
 @synthesize contactInfosViewController;
-@synthesize newClientInfoViewController;
+@synthesize aNewClientInfoViewController;
 @synthesize estimate;
 
 - (void)setEstimate:(Estimate *)newEstimate {
@@ -285,9 +285,9 @@
 	UIButton *edit = (UIButton *)sender;
 
 	if (edit.tag == EstimateDetailSectionClientInfo) {
-		newClientInfoViewController.estimate = estimate;
-		newClientInfoViewController.editMode = YES;
-		[self.navigationController pushViewController:newClientInfoViewController animated:YES];
+		aNewClientInfoViewController.estimate = estimate;
+		aNewClientInfoViewController.editMode = YES;
+		[self.navigationController pushViewController:aNewClientInfoViewController animated:YES];
 	}
 	else if (edit.tag == EstimateDetailSectionContactInfo) {
 		contactInfosViewController.estimate = estimate;
@@ -340,7 +340,7 @@
 	self.printButton = nil;
 	self.lineItemSelectionsViewController = nil;
 	self.contactInfosViewController = nil;
-	self.newClientInfoViewController = nil;
+	self.aNewClientInfoViewController = nil;
 	self.estimate = nil;
 	[lineItemSelections release];
 	lineItemSelections = nil;
@@ -357,7 +357,7 @@
 	[emailButton release];
 	[lineItemSelectionsViewController release];
 	[contactInfosViewController release];
-	[newClientInfoViewController release];
+	[aNewClientInfoViewController release];
 	[estimate release];
 	[lineItemSelections release];
     [super dealloc];

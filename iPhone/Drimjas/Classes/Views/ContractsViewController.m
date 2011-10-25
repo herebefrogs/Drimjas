@@ -19,7 +19,7 @@
 @implementation ContractsViewController
 
 
-@synthesize newContractViewController;
+@synthesize aNewContractViewController;
 @synthesize contractDetailViewController;
 @synthesize contracts;
 
@@ -170,7 +170,7 @@
 #pragma mark Button delegate
 
 - (IBAction)add:(id)sender {
-	[self.navigationController pushViewController:newContractViewController animated:YES];
+	[self.navigationController pushViewController:aNewContractViewController animated:YES];
 }
 
 
@@ -188,7 +188,7 @@
 #ifdef __ENABLE_UI_LOGS__
 	NSLog(@"ContractsViewController.viewDidUnload");
 #endif
-	self.newContractViewController = nil;
+	self.aNewContractViewController = nil;
 	self.contractDetailViewController = nil;
 	self.contracts = nil;
 }
@@ -198,7 +198,7 @@
 #ifdef __ENABLE_UI_LOGS__
 	NSLog(@"ContractsViewController.dealloc");
 #endif
-	[newContractViewController release];
+	[aNewContractViewController release];
 	[contractDetailViewController release];
 	[contracts release];
     [super dealloc];

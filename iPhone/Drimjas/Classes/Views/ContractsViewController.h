@@ -12,13 +12,13 @@
 @class ContractDetailViewController;
 
 @interface ContractsViewController : UITableViewController <NSFetchedResultsControllerDelegate> {
-	NewContractViewController *newContractViewController;
+	NewContractViewController *aNewContractViewController;
 	ContractDetailViewController *contractDetailViewController;
 
 	NSFetchedResultsController *contracts;
 }
 
-@property (nonatomic, retain) IBOutlet NewContractViewController *newContractViewController;
+@property (nonatomic, retain) IBOutlet NewContractViewController *aNewContractViewController;
 @property (nonatomic, retain) IBOutlet ContractDetailViewController *contractDetailViewController;
 @property (nonatomic, retain) NSFetchedResultsController *contracts;
 

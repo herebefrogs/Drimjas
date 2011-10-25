@@ -12,11 +12,11 @@
 @class ClientInfosViewController;
 
 @interface AddEstimateNewOrPickClientInfoViewController : UITableViewController {
-	NewClientInfoViewController *newClientInfoViewController;
+	NewClientInfoViewController *aNewClientInfoViewController;
 	ClientInfosViewController *clientInfosViewController;
 }
 
-@property (nonatomic, retain) IBOutlet NewClientInfoViewController *newClientInfoViewController;
+@property (nonatomic, retain) IBOutlet NewClientInfoViewController *aNewClientInfoViewController;
 @property (nonatomic, retain) IBOutlet ClientInfosViewController *clientInfosViewController;
 
 - (IBAction)cancel:(id)sender;
