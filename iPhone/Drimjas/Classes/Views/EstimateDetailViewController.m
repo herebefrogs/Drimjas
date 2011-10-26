@@ -17,6 +17,7 @@
 #import "LineItemSelection.h"
 #import "MyInfo.h"
 // Utils
+#import "EmailManager.h"
 #import "PDFManager.h"
 // Cells
 #import "EditSectionHeader.h"
@@ -25,6 +26,13 @@
 #import "ContactInfosViewController.h"
 #import "NewClientInfoViewController.h"
 #import "TableFields.h"
+
+
+@interface EstimateDetailViewController ()
+
+@property (nonatomic, retain) UIViewController *mailComposeViewController;
+
+@end
 
 
 @implementation EstimateDetailViewController
@@ -55,6 +63,7 @@
 @synthesize contactInfosViewController;
 @synthesize aNewClientInfoViewController;
 @synthesize estimate;
+@synthesize mailComposeViewController;
 
 - (void)setEstimate:(Estimate *)newEstimate {
 	[estimate release];
@@ -274,7 +283,9 @@
 #pragma mark Button delegate
 
 - (IBAction)email:(id)sender {
-	[EmailManager mailEstimate:estimate withDelegate:self];
+    self.mailComposeViewController = [EmailManager mailComposeViewControllerWithDelegate:self forEstimate:estimate];
+
+    [self.navigationController presentModalViewController:mailComposeViewController animated:YES];
 }
 
 - (IBAction)print:(id)sender {
@@ -302,14 +313,24 @@
 }
 
 #pragma mark -
-#pragma mark Print completed delegate
+#pragma mark Mail compose delegate
 
-- (void)mailSent:(MFMailComposeResult)result withError:(NSError *)error {
-	if (result == MFMailComposeResultFailed) {
+- (void)mailComposeController:(MFMailComposeViewController*)controller
+		  didFinishWithResult:(MFMailComposeResult)result
+						error:(NSError*)error {
+	// hide mail compose view
+	[self.navigationController dismissModalViewControllerAnimated:YES];
+
+    if (result == MFMailComposeResultFailed) {
 		// TODO handle error
-		NSLog(@"EstimateDetailViewController.mailSent: failed to email estimate %@ with error %@, %@", estimate.clientInfo.name, error, [error userInfo]);
+		NSLog(@"EstimateDetailViewController.mailComposeController:didFinishWithResult:error failed to email estimate %@ with error %@, %@", estimate.clientInfo.name, error, [error userInfo]);
 	}
+
+    self.mailComposeViewController = nil;
 }
+
+#pragma mark -
+#pragma mark Print completed delegate
 
 - (void)printJobCompleted:(BOOL)completed withError:(NSError *)error {
 	if (error) {
@@ -344,6 +365,7 @@
 	self.estimate = nil;
 	[lineItemSelections release];
 	lineItemSelections = nil;
+    self.mailComposeViewController = nil;
 }
 
 
@@ -360,6 +382,7 @@
 	[aNewClientInfoViewController release];
 	[estimate release];
 	[lineItemSelections release];
+    [mailComposeViewController release];
     [super dealloc];
 }
 

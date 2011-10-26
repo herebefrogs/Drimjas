@@ -7,14 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MessageUI/MessageUI.h>
 // Utils
-#import "EmailManager.h"
 #import "PrintManager.h"
 
 
 @class Contract;
 
-@interface ContractDetailViewController : UITableViewController <PrintNotifyDelegate, MailNotifyDelegate> {
+@interface ContractDetailViewController : UITableViewController <PrintNotifyDelegate, MFMailComposeViewControllerDelegate> {
 	UIBarButtonItem *emailButton;
 	UIBarButtonItem *printButton;
 	UIBarButtonItem *spacerButton;
@@ -23,6 +23,9 @@
 	NSInteger indexFirstLineItem;
 	NSInteger indexLastSection;
 	NSArray *lineItemSelections;
+
+    @private
+    UIViewController *mailComposeViewController;
 }
 
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *emailButton;

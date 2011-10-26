@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MessageUI/MessageUI.h>
 // Utils
-#import "EmailManager.h"
 #import "PrintManager.h"
 
 
@@ -18,7 +18,7 @@
 @class ContactInfosViewController;
 @class NewClientInfoViewController;
 
-@interface EstimateDetailViewController : UITableViewController <PrintNotifyDelegate, MailNotifyDelegate> {
+@interface EstimateDetailViewController : UITableViewController <PrintNotifyDelegate, MFMailComposeViewControllerDelegate> {
 	UIBarButtonItem *emailButton;
 	UIBarButtonItem *printButton;
 	UIBarButtonItem *spacerButton;
@@ -33,6 +33,8 @@
 	NSInteger indexFirstLineItem;
 	NSInteger indexLastSection;
 	NSArray *lineItemSelections;
+@private
+    UIViewController* mailComposeViewController;
 }
 
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *emailButton;

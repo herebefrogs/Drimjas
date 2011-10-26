@@ -10,25 +10,16 @@
 #import <UIKit/UIKit.h>
 #import <MessageUI/MessageUI.h>
 
-
 @class Estimate;
 @class Contract;
-@protocol MailNotifyDelegate;
 
 
-@interface EmailManager : NSObject <MFMailComposeViewControllerDelegate> {
-	UIViewController<MailNotifyDelegate> *_delegate;
-}
+@interface EmailManager : NSObject
 
 + (BOOL)isMailAvailable;
-+ (void)mailEstimate:(Estimate *)estimate withDelegate:(UIViewController<MailNotifyDelegate>*)delegate;
-+ (void)mailContract:(Contract *)contract withDelegate:(UIViewController<MailNotifyDelegate>*)delegate;
-
-@end
-
-// FIXME should be a UIViewController so we can call present/dismissModal...
-@protocol MailNotifyDelegate <NSObject>
-
-- (void)mailSent:(MFMailComposeResult)result withError:(NSError *)error;
++ (UIViewController *)mailComposeViewControllerWithDelegate:(id<MFMailComposeViewControllerDelegate>)delegate
+                                                forEstimate:(Estimate *)estimate;
++ (UIViewController *)mailComposeViewControllerWithDelegate:(id<MFMailComposeViewControllerDelegate>)delegate
+                                               forContract:(Contract *)contract;
 
 @end

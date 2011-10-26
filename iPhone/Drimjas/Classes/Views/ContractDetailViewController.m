@@ -23,6 +23,13 @@
 // Views
 #import "TableFields.h"
 
+@interface ContractDetailViewController ()
+
+@property (nonatomic, retain) UIViewController *mailComposeViewController;
+
+@end
+
+
 @implementation ContractDetailViewController
 
 
@@ -48,6 +55,7 @@
 @synthesize printButton;
 @synthesize spacerButton;
 @synthesize contract;
+@synthesize mailComposeViewController;
 
 - (void)setContract:(Contract *)newContract {
 	[contract release];
@@ -213,7 +221,9 @@
 #pragma mark Button delegate
 
 - (IBAction)email:(id)sender {
-	[EmailManager mailContract:contract withDelegate:self];
+    self.mailComposeViewController = [EmailManager mailComposeViewControllerWithDelegate:self forContract:contract];
+    
+    [self.navigationController presentModalViewController:mailComposeViewController animated:YES];
 }
 
 - (IBAction)print:(id)sender {
@@ -222,13 +232,25 @@
 
 
 #pragma mark -
-#pragma mark Print completed delegate
+#pragma mark Mail compose delegate
 
-- (void)mailSent:(MFMailComposeResult)result withError:(NSError *)error {
-	if (result == MFMailComposeResultFailed) {
-		NSLog(@"Contract∫DetailViewController.mailSent: failed to email contract %@ with error %@, %@", contract.estimate.clientInfo.name, error, [error userInfo]);
+- (void)mailComposeController:(MFMailComposeViewController*)controller
+		  didFinishWithResult:(MFMailComposeResult)result
+						error:(NSError*)error {
+	// hide mail compose view
+	[self.navigationController dismissModalViewControllerAnimated:YES];
+
+    if (result == MFMailComposeResultFailed) {
+		// TODO handle error
+		NSLog(@"ContractDetailViewController.mailComposeController:didFinishWithResult:error failed to email contract %@ with error %@, %@", contract.estimate.clientInfo.name, error, [error userInfo]);
 	}
+
+    self.mailComposeViewController = nil;
 }
+
+
+#pragma mark -
+#pragma mark Print completed delegate
 
 - (void)printJobCompleted:(BOOL)completed withError:(NSError *)error {
 	if (error) {
@@ -257,6 +279,7 @@
 	self.contract = nil;
 	[lineItemSelections release];
 	lineItemSelections = nil;
+    self.mailComposeViewController = nil;
 }
 
 
@@ -270,6 +293,7 @@
 	[contract release];
 	[lineItemSelections release];
     [super dealloc];
+    [mailComposeViewController release];
 }
 
 
