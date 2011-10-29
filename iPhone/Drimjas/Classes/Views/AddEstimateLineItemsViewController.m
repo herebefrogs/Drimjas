@@ -14,6 +14,7 @@
 #import "LineItem.h"
 #import	"Currency.h"
 #import "MyInfo.h"
+#import "Tax.h"
 // Cells
 #import "TextFieldCell.h"
 // Views
@@ -67,7 +68,7 @@
 
 	// show Next button if taxes & currency or my info aren't set yet
 	// show Save button if they are or if editing the line item selections from estimate detail screen
-	self.navigationItem.rightBarButtonItem = ([Currency isReadyStatus] && [MyInfo isReadyForEstimate]) || editMode ? saveButton : nextButton;
+	self.navigationItem.rightBarButtonItem = [DataStore areGlobalsReadyForEstimate] || editMode ? saveButton : nextButton;
 
 	[self.tableView reloadData];
 }
@@ -376,7 +377,7 @@ BOOL _insertLineItem = NO;
 #pragma mark Button delegate
 
 - (IBAction)next:(id)sender {
-	if (![Currency isReadyStatus]) {
+	if (![Currency isReadyStatus] || ![Tax isReadyStatus]) {
 		[self.navigationController pushViewController:taxesAndCurrencyViewController animated:YES];
 	}
 	else if (![MyInfo isReadyForEstimate]) {

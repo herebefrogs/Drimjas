@@ -99,7 +99,7 @@
 	[self.navigationController setToolbarHidden:NO animated:YES];
 
 	// let user email & print only when estimate & global settings are ready
-	emailButton.enabled = contract.isReady && [Currency isReadyStatus] && [MyInfo isReadyForContract];
+	emailButton.enabled = contract.isReady && [DataStore areGlobalsReadyForContract];
 	printButton.enabled = emailButton.enabled;
 
 	[self reloadIndexes];

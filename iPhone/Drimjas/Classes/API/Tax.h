@@ -18,6 +18,7 @@
 @property (nonatomic, retain) NSString *taxNumber;
 
 - (NSNumber *)costForSubTotal:(NSNumber *)subTotal;
++ (BOOL)isReadyStatus;
 
 @end
 

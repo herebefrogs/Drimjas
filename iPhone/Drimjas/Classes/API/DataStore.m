@@ -940,6 +940,18 @@ static DataStore *singleton_ = nil;
 	}
 }
 
+#pragma mark -
+#pragma mark Globals stack
+
++ (BOOL)areGlobalsReadyForEstimate {
+    return [Currency isReadyStatus] && [Tax isReadyStatus] && [MyInfo isReadyForEstimate];
+}
+
++ (BOOL)areGlobalsReadyForContract {
+    return [Currency isReadyStatus] && [Tax isReadyStatus] && [MyInfo isReadyForContract];
+}
+
+
 
 #pragma mark -
 #pragma mark Memory management stack

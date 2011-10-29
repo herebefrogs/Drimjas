@@ -29,6 +29,14 @@
 	return (self.name.length > 0) && (self.percent) && (self.taxNumber.length > 0);
 }
 
++ (BOOL)isReadyStatus {
+    BOOL isReady = YES;
+    for (Tax* tax in [[DataStore defaultStore] taxes]) {
+        isReady = isReady && [tax isReady];
+    }
+    return isReady;
+}
+
 - (NSNumber *)costForSubTotal:(NSNumber *)subTotal {
 	CGFloat cost = [subTotal floatValue] * (self.percent != nil ? [self.percent floatValue] : 0.0) / 100.0;
 

@@ -125,7 +125,7 @@
 @end
 
 
-@interface DataStore (TaxesAndCurrencyAccessors)
+@interface DataStore (TaxesCurrencyAndMyInfoAccessors)
 
 @property (nonatomic, readonly) Currency *currency;
 @property (nonatomic, readonly) NSArray *taxes;
@@ -134,12 +134,10 @@
 - (BOOL)deleteTax:(Tax *)tax;
 - (BOOL)saveTaxesAndCurrency;
 
-@end
-
-
-@interface DataStore (MyInfoAccessors)
-
 @property (nonatomic, readonly) MyInfo *myInfo;
 - (void)saveMyInfo;
+
++ (BOOL)areGlobalsReadyForEstimate;
++ (BOOL)areGlobalsReadyForContract;
 
 @end
