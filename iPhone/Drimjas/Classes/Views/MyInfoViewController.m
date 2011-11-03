@@ -15,6 +15,7 @@
 #import "TextFieldCell.h"
 // Views
 #import "EstimateDetailViewController.h"
+#import "ProfessionsViewController.h"
 #import "TableFields.h"
 
 

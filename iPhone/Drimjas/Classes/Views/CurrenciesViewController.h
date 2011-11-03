@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Currency.h"
+
+@class Currency;
 
 @interface CurrenciesViewController : UITableViewController {
 @private

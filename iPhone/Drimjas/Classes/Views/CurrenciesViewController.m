@@ -7,6 +7,8 @@
 //
 
 #import "CurrenciesViewController.h"
+// API
+#import "Currency.h"
 
 @interface CurrenciesViewController ()
 

@@ -9,9 +9,9 @@
 #import <UIKit/UIKit.h>
 // Cells
 #import "TextFieldTableViewController.h"
-#import "ProfessionsViewController.h"
 
 @class EstimateDetailViewController;
+@class ProfessionsViewController;
 @class MyInfo;
 
 @interface MyInfoViewController : TextFieldTableViewController <UITextFieldDelegate> {

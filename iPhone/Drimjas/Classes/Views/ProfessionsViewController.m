@@ -7,6 +7,8 @@
 //
 
 #import "ProfessionsViewController.h"
+// API
+#import "MyInfo.h"
 
 
 @interface ProfessionsViewController ()

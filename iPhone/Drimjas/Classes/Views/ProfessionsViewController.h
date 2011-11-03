@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "MyInfo.h"
+
+@class MyInfo;
 
 @interface ProfessionsViewController : UITableViewController {
 @private
