@@ -18,9 +18,9 @@
 	NSFetchedResultsController *contracts;
 }
 
-@property (nonatomic, retain) IBOutlet NewContractViewController *aNewContractViewController;
-@property (nonatomic, retain) IBOutlet ContractDetailViewController *contractDetailViewController;
-@property (nonatomic, retain) NSFetchedResultsController *contracts;
+@property (nonatomic, strong) IBOutlet NewContractViewController *aNewContractViewController;
+@property (nonatomic, strong) IBOutlet ContractDetailViewController *contractDetailViewController;
+@property (nonatomic, strong) NSFetchedResultsController *contracts;
 
 - (IBAction)add:(id)sender;
 

@@ -63,11 +63,6 @@
     self.info = nil;
 }
 
-- (void)dealloc {
-    [logo release];
-    [info release];
-    [super dealloc];
-}
 
 
 @end

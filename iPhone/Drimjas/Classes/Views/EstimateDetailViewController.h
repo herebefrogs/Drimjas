@@ -37,14 +37,14 @@
     UIViewController* mailComposeViewController;
 }
 
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *emailButton;
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *printButton;
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *spacerButton;
-@property (nonatomic, retain) IBOutlet EditSectionHeader *editSectionHeader;
-@property (nonatomic, retain) IBOutlet AddEstimateLineItemsViewController *lineItemSelectionsViewController;
-@property (nonatomic, retain) IBOutlet ContactInfosViewController *contactInfosViewController;
-@property (nonatomic, retain) IBOutlet NewClientInfoViewController *aNewClientInfoViewController;
-@property (nonatomic, retain) Estimate *estimate;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *emailButton;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *printButton;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *spacerButton;
+@property (nonatomic, strong) IBOutlet EditSectionHeader *editSectionHeader;
+@property (nonatomic, strong) IBOutlet AddEstimateLineItemsViewController *lineItemSelectionsViewController;
+@property (nonatomic, strong) IBOutlet ContactInfosViewController *contactInfosViewController;
+@property (nonatomic, strong) IBOutlet NewClientInfoViewController *aNewClientInfoViewController;
+@property (nonatomic, strong) Estimate *estimate;
 
 - (IBAction)email:(id)sender;
 - (IBAction)print:(id)sender;

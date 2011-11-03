@@ -23,11 +23,11 @@
 	BOOL optionsMode;
 }
 
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *saveButton;
-@property (nonatomic, retain) IBOutlet EstimateDetailViewController *estimateDetailViewController;
-@property (nonatomic, retain) IBOutlet ProfessionsViewController *professionsViewController;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *saveButton;
+@property (nonatomic, strong) IBOutlet EstimateDetailViewController *estimateDetailViewController;
+@property (nonatomic, strong) IBOutlet ProfessionsViewController *professionsViewController;
 
-@property (nonatomic, retain) MyInfo *myInfo;
+@property (nonatomic, strong) MyInfo *myInfo;
 @property (nonatomic, assign) BOOL optionsMode;
 
 - (IBAction)save:(id)sender;

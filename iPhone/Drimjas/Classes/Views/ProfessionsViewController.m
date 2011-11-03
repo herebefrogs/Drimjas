@@ -13,7 +13,7 @@
 
 @interface ProfessionsViewController ()
 
-@property (nonatomic, retain) NSArray *professions;
+@property (nonatomic, strong) NSArray *professions;
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
 
 @end
@@ -25,11 +25,6 @@
 @synthesize professions;
 @synthesize myInfo;
 
-- (void)dealloc {
-    [professions release];
-    [myInfo release];
-    [super dealloc];
-}
 
 #pragma mark - View lifecycle
 
@@ -85,7 +80,7 @@
 
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
 
     [self configureCell:cell atIndexPath:indexPath];

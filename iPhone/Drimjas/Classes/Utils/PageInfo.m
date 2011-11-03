@@ -183,12 +183,6 @@
 
 
 
-- (void)dealloc {
-	[plainFont release];
-	[boldFont release];
-	[bigBoldFont release];
-	[super dealloc];
-}
 
 @end
 

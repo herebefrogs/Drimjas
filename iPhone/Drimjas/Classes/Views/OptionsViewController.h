@@ -22,10 +22,10 @@
 	AboutViewController *aboutViewController;
 }
 
-@property (nonatomic, retain) IBOutlet ClientInfosViewController *clientInfosViewController;
-@property (nonatomic, retain) IBOutlet LineItemsViewController *lineItemsViewController;
-@property (nonatomic, retain) IBOutlet TaxesAndCurrencyViewController *taxesAndCurrencyViewController;
-@property (nonatomic, retain) IBOutlet MyInfoViewController *myInfoViewController;
-@property (nonatomic, retain) IBOutlet AboutViewController *aboutViewController;
+@property (nonatomic, strong) IBOutlet ClientInfosViewController *clientInfosViewController;
+@property (nonatomic, strong) IBOutlet LineItemsViewController *lineItemsViewController;
+@property (nonatomic, strong) IBOutlet TaxesAndCurrencyViewController *taxesAndCurrencyViewController;
+@property (nonatomic, strong) IBOutlet MyInfoViewController *myInfoViewController;
+@property (nonatomic, strong) IBOutlet AboutViewController *aboutViewController;
 
 @end

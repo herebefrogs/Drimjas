@@ -17,9 +17,9 @@
 	NSFetchedResultsController *estimates;
 }
 
-@property (nonatomic, retain) IBOutlet NewOrPickClientInfoViewController *aNewOrPickClientInfoViewController;
-@property (nonatomic, retain) IBOutlet EstimateDetailViewController *estimateDetailViewController;
-@property (nonatomic, retain) IBOutlet NSFetchedResultsController *estimates;
+@property (nonatomic, strong) IBOutlet NewOrPickClientInfoViewController *aNewOrPickClientInfoViewController;
+@property (nonatomic, strong) IBOutlet EstimateDetailViewController *estimateDetailViewController;
+@property (nonatomic, strong) IBOutlet NSFetchedResultsController *estimates;
 
 - (IBAction)add:(id)sender;
 

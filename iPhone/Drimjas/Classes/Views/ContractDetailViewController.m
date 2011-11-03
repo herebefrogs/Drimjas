@@ -25,7 +25,7 @@
 
 @interface ContractDetailViewController ()
 
-@property (nonatomic, retain) UIViewController *mailComposeViewController;
+@property (nonatomic, strong) UIViewController *mailComposeViewController;
 
 @end
 
@@ -42,9 +42,7 @@
 
 	// TODO move this into Estimate, cached in a local transient array refreshed when (un)binding Line Item Selections
 	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"index" ascending:YES];
-	[lineItemSelections release];
-	lineItemSelections = [[contract.estimate.lineItems sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]] retain];
-	[sortDescriptor release];
+	lineItemSelections = [contract.estimate.lineItems sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];
 }
 
 
@@ -58,9 +56,8 @@
 @synthesize mailComposeViewController;
 
 - (void)setContract:(Contract *)newContract {
-	[contract release];
 
-	contract = [newContract retain];
+	contract = newContract;
 	if (contract) {
 		[self reloadIndexes];
 	}
@@ -172,7 +169,7 @@
 
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
 
 	cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -209,7 +206,6 @@
 			NSString *unitCost = [numberFormatter stringFromNumber:lineItem.nonNilUnitCost];
 
 			cell.textLabel.text = [NSString stringWithFormat:@"%@ x %@", quantity, unitCost];
-			[numberFormatter release];
 		}
 	}
 
@@ -277,24 +273,11 @@
 	self.printButton = nil;
 	self.spacerButton = nil;
 	self.contract = nil;
-	[lineItemSelections release];
 	lineItemSelections = nil;
     self.mailComposeViewController = nil;
 }
 
 
-- (void)dealloc {
-#ifdef __ENABLE_UI_LOGS__
-	NSLog(@"ContractDetailViewController.dealloc");
-#endif
-	[emailButton release];
-	[printButton release];
-	[spacerButton release];
-	[contract release];
-	[lineItemSelections release];
-    [super dealloc];
-    [mailComposeViewController release];
-}
 
 
 @end

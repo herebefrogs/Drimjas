@@ -14,13 +14,13 @@
 @interface MyInfo : ClientInfo {
 }
 
-@property (nonatomic, retain) NSString *fax;
-@property (nonatomic, retain) NSString *profession;
-@property (nonatomic, retain) NSString *website;
-@property (nonatomic, readonly) ContactInfo* contactInfo;
+@property (nonatomic, strong) NSString *fax;
+@property (nonatomic, strong) NSString *profession;
+@property (nonatomic, strong) NSString *website;
+@property (weak, nonatomic, readonly) ContactInfo* contactInfo;
 
-@property (nonatomic, readonly) NSString *phone;
-@property (nonatomic, readonly) NSString *email;
+@property (weak, nonatomic, readonly) NSString *phone;
+@property (weak, nonatomic, readonly) NSString *email;
 
 + (BOOL)isReadyForEstimate;
 + (BOOL)isReadyForContract;

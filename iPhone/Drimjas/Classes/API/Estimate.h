@@ -17,18 +17,18 @@
 @interface Estimate : BaseObject {
 }
 
-@property (nonatomic, retain) NSNumber *number;
-@property (nonatomic, retain) NSDate *date;
-@property (nonatomic, retain) ClientInfo *clientInfo;
-@property (nonatomic, retain) NSSet *lineItems;
-@property (nonatomic, retain) Contract *contract;
+@property (nonatomic, strong) NSNumber *number;
+@property (nonatomic, strong) NSDate *date;
+@property (nonatomic, strong) ClientInfo *clientInfo;
+@property (nonatomic, strong) NSSet *lineItems;
+@property (nonatomic, strong) Contract *contract;
 
-@property (nonatomic, readonly) NSString *monthYear;
-@property (nonatomic, readonly) NSString *orderNumber;
+@property (weak, nonatomic, readonly) NSString *monthYear;
+@property (weak, nonatomic, readonly) NSString *orderNumber;
 
-@property (nonatomic, readonly) NSNumber *subTotal;
-@property (nonatomic, readonly) NSNumber *total;
-@property (nonatomic, readonly) NSNumber *shippingAndHandlingCost;
+@property (weak, nonatomic, readonly) NSNumber *subTotal;
+@property (weak, nonatomic, readonly) NSNumber *total;
+@property (weak, nonatomic, readonly) NSNumber *shippingAndHandlingCost;
 
 @end
 

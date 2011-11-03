@@ -16,8 +16,8 @@
 	UITabBar *tabBar;
 }
 
-@property (nonatomic, retain) IBOutlet DrimjasAppDelegate *appDelegate;
-@property (nonatomic, retain) IBOutlet UITabBar *tabBar;
+@property (nonatomic, strong) IBOutlet DrimjasAppDelegate *appDelegate;
+@property (nonatomic, strong) IBOutlet UITabBar *tabBar;
 
 - (IBAction)click:(id)sender;
 

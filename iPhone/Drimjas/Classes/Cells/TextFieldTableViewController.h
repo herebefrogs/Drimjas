@@ -17,8 +17,8 @@
 }
 
 
-@property (nonatomic, retain) IBOutlet TextFieldCell *textFieldCell;
-@property (nonatomic, retain) UITextField *lastTextFieldEdited;
+@property (nonatomic, strong) IBOutlet TextFieldCell *textFieldCell;
+@property (nonatomic, strong) UITextField *lastTextFieldEdited;
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
 

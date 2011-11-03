@@ -169,15 +169,6 @@ BOOL added = NO;
 }
 
 
-- (void)dealloc {
-#ifdef __ENABLE_UI_LOGS__
-	NSLog(@"NewLineItemViewController.dealloc");
-#endif
-	[addButton release];
-	[lineItem release];
-	[lineItemSelection release];
-    [super dealloc];
-}
 
 
 @end

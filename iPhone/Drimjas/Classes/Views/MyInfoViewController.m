@@ -163,7 +163,7 @@
 
 		UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 		if (cell == nil) {
-			cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+			cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
 		}
 
 		[self configureCell:cell atIndexPath:indexPath];
@@ -266,16 +266,6 @@
 }
 
 
-- (void)dealloc {
-#ifdef __ENABLE_UI_LOGS__
-	NSLog(@"MyInfoViewController.dealloc");
-#endif
-	[saveButton release];
-	[estimateDetailViewController release];
-    [professionsViewController release];
-	[myInfo release];
-    [super dealloc];
-}
 
 
 @end

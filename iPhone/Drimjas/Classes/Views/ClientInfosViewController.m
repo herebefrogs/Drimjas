@@ -90,7 +90,7 @@
 
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
 
 	[self configureCell:cell atIndexPath:indexPath];
@@ -168,14 +168,6 @@
 }
 
 
-- (void)dealloc {
-#ifdef __ENABLE_UI_LOGS__
-	NSLog(@"ClientInfosViewController.dealloc");
-#endif
-	[clientInfos release];
-	[clientInfoDetailViewController release];
-    [super dealloc];
-}
 
 
 @end

@@ -16,15 +16,15 @@
 @interface LineItemSelection : IndexedObject {
 }
 
-@property (nonatomic, retain) NSNumber *quantity;
-@property (nonatomic, retain) NSNumber *unitCost;
-@property (nonatomic, retain) NSString *desc;		// cannot be named "description" as it collides with NSObject no-argument message
-@property (nonatomic, retain) Estimate *estimate;
-@property (nonatomic, retain) LineItem *lineItem;
+@property (nonatomic, strong) NSNumber *quantity;
+@property (nonatomic, strong) NSNumber *unitCost;
+@property (nonatomic, strong) NSString *desc;		// cannot be named "description" as it collides with NSObject no-argument message
+@property (nonatomic, strong) Estimate *estimate;
+@property (nonatomic, strong) LineItem *lineItem;
 
 - (void)copyLineItem:(LineItem *)newLineItem;
-@property (nonatomic, readonly) NSNumber *cost; // quantity x unitCost
-@property (nonatomic, readonly) NSNumber *nonNilUnitCost;
-@property (nonatomic, readonly) NSNumber *nonNilQuantity;
+@property (weak, nonatomic, readonly) NSNumber *cost; // quantity x unitCost
+@property (weak, nonatomic, readonly) NSNumber *nonNilUnitCost;
+@property (weak, nonatomic, readonly) NSNumber *nonNilQuantity;
 
 @end

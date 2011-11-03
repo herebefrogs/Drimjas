@@ -138,7 +138,7 @@ BOOL _insertTax = NO;
 
 		UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 		if (cell == nil) {
-			cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+			cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
 		}
 
 		[self configureCell:cell atIndexPath:indexPath];
@@ -299,7 +299,6 @@ BOOL _insertTax = NO;
     else if (row == TaxesFieldPercent) {
         NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
         tax.percent = [numberFormatter numberFromString:textField.text];
-        [numberFormatter release];
         // TODO show an overlay if nil
     }
     else if (row == TaxesFieldTaxNumber) {
@@ -368,18 +367,6 @@ BOOL _insertTax = NO;
 }
 
 
-- (void)dealloc {
-#ifdef __ENABLE_UI_LOGS__
-	NSLog(@"TaxesAndCurrencyViewController.dealloc");
-#endif
-	[nextButton release];
-	[saveButton release];
-    [currenciesViewController release];
-	[myInfoViewController release];
-	[estimateDetailViewController release];
-	[taxesAndCurrency release];
-    [super dealloc];
-}
 
 
 @end

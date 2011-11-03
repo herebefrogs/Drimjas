@@ -16,8 +16,8 @@
 	ClientInfosViewController *clientInfosViewController;
 }
 
-@property (nonatomic, retain) IBOutlet NewClientInfoViewController *aNewClientInfoViewController;
-@property (nonatomic, retain) IBOutlet ClientInfosViewController *clientInfosViewController;
+@property (nonatomic, strong) IBOutlet NewClientInfoViewController *aNewClientInfoViewController;
+@property (nonatomic, strong) IBOutlet ClientInfosViewController *clientInfosViewController;
 
 - (IBAction)cancel:(id)sender;
 

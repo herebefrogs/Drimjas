@@ -13,9 +13,9 @@
 @interface Tax : IndexedObject {
 }
 
-@property (nonatomic, retain) NSString *name;
-@property (nonatomic, retain) NSNumber *percent;
-@property (nonatomic, retain) NSString *taxNumber;
+@property (nonatomic, strong) NSString *name;
+@property (nonatomic, strong) NSNumber *percent;
+@property (nonatomic, strong) NSString *taxNumber;
 
 - (NSNumber *)costForSubTotal:(NSNumber *)subTotal;
 + (BOOL)isReadyStatus;

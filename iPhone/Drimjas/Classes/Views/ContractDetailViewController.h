@@ -28,11 +28,11 @@
     UIViewController *mailComposeViewController;
 }
 
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *emailButton;
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *printButton;
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *spacerButton;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *emailButton;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *printButton;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *spacerButton;
 
-@property (nonatomic, retain) Contract *contract;
+@property (nonatomic, strong) Contract *contract;
 
 - (IBAction)email:(id)sender;
 - (IBAction)print:(id)sender;

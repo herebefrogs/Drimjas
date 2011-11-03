@@ -20,9 +20,9 @@
 	BOOL optionsMode;
 }
 
-@property (nonatomic, retain) IBOutlet NewLineItemViewController *aNewLineItemViewController;
-@property (nonatomic, retain) NSFetchedResultsController *lineItems;
-@property (nonatomic, retain) LineItemSelection *lineItemSelection;
+@property (nonatomic, strong) IBOutlet NewLineItemViewController *aNewLineItemViewController;
+@property (nonatomic, strong) NSFetchedResultsController *lineItems;
+@property (nonatomic, strong) LineItemSelection *lineItemSelection;
 @property (nonatomic, assign) BOOL optionsMode;
 
 @end

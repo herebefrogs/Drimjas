@@ -44,7 +44,7 @@
 }
 
 - (void)refreshStatus {
-	NSNumber *oldStatus = [self.status retain];
+	NSNumber *oldStatus = self.status;
 
 	[super refreshStatus];
 
@@ -55,7 +55,6 @@
 		}
 	}
 
-	[oldStatus release];
 }
 
 - (NSArray *)allPropertyNames {
@@ -80,7 +79,6 @@
 		if (value.length > 0) {
 			KeyValue *pair = [[KeyValue alloc] initWithKey:property value:value];
 			[nonEmptyProperties addObject:pair];
-			[pair release];
 		}
 	}
 
@@ -118,7 +116,6 @@
 	// TODO keep in a transient property and refresh when (un)binding ContactInfo?
 	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"index" ascending:YES];
 	ContactInfo *contactInfo = (ContactInfo *)[[self.contactInfos sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]] objectAtIndex:index];
-	[sortDescriptor release];
 
 	return contactInfo;
 }
@@ -150,7 +147,6 @@
 			[recipients addObject:recipient];
 		}
 	}
-	[sortDescriptor release];
 
 	return recipients;
 }

@@ -30,7 +30,7 @@
 
 @interface EstimateDetailViewController ()
 
-@property (nonatomic, retain) UIViewController *mailComposeViewController;
+@property (nonatomic, strong) UIViewController *mailComposeViewController;
 
 @end
 
@@ -46,9 +46,7 @@
 
 	// TODO move this into Estimate, cached in a local transient array refreshed when (un)binding Line Item Selections
 	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"index" ascending:YES];
-	[lineItemSelections release];
-	lineItemSelections = [[estimate.lineItems sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]] retain];
-	[sortDescriptor release];
+	lineItemSelections = [estimate.lineItems sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];
 }
 
 
@@ -66,9 +64,8 @@
 @synthesize mailComposeViewController;
 
 - (void)setEstimate:(Estimate *)newEstimate {
-	[estimate release];
 
-	estimate = [newEstimate retain];
+	estimate = newEstimate;
 	if (estimate) {
 		[self reloadIndexes];
 	}
@@ -188,7 +185,7 @@
 
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
 
 	cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -225,7 +222,6 @@
 			NSString *unitCost = [numberFormatter stringFromNumber:lineItem.nonNilUnitCost];
 
 			cell.textLabel.text = [NSString stringWithFormat:@"%@ x %@", quantity, unitCost];
-			[numberFormatter release];
 		}
 	}
 
@@ -363,28 +359,11 @@
 	self.contactInfosViewController = nil;
 	self.aNewClientInfoViewController = nil;
 	self.estimate = nil;
-	[lineItemSelections release];
 	lineItemSelections = nil;
     self.mailComposeViewController = nil;
 }
 
 
-- (void)dealloc {
-#ifdef __ENABLE_UI_LOGS__
-	NSLog(@"EstimateDetailViewController.dealloc");
-#endif
-	[editSectionHeader release];
-	[spacerButton release];
-	[printButton release];
-	[emailButton release];
-	[lineItemSelectionsViewController release];
-	[contactInfosViewController release];
-	[aNewClientInfoViewController release];
-	[estimate release];
-	[lineItemSelections release];
-    [mailComposeViewController release];
-    [super dealloc];
-}
 
 
 @end

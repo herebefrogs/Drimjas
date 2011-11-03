@@ -13,7 +13,7 @@
 @interface IndexedObject : BaseObject {
 }
 
-@property (nonatomic, retain) NSNumber *index;
+@property (nonatomic, strong) NSNumber *index;
 
 @end
 

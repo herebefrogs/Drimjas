@@ -15,10 +15,10 @@
 @interface LineItem : BaseObject {
 }
 
-@property (nonatomic, retain) NSNumber *defaults;
-@property (nonatomic, retain) NSString *desc;		// cannot be named "description" as it collides with NSObject no-argument message
-@property (nonatomic, retain) NSString *name;
-@property (nonatomic, retain) NSSet *lineItemSelections;
+@property (nonatomic, strong) NSNumber *defaults;
+@property (nonatomic, strong) NSString *desc;		// cannot be named "description" as it collides with NSObject no-argument message
+@property (nonatomic, strong) NSString *name;
+@property (nonatomic, strong) NSSet *lineItemSelections;
 
 @end
 

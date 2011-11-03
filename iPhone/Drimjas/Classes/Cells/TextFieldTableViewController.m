@@ -84,11 +84,6 @@
 }
 
 
-- (void)dealloc {
-	[textFieldCell release];
-    [lastTextFieldEdited release];
-    [super dealloc];
-}
 
 
 @end

@@ -25,7 +25,6 @@
 	// initialize ISO code from current Settings > International > Region Format
 	NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
 	self.isoCode = [numberFormatter currencyCode];
-	[numberFormatter release];
 }
 
 - (BOOL)isReady {

@@ -15,15 +15,15 @@
 @interface ContactInfo : IndexedObject {
 }
 
-@property (nonatomic, retain) NSString *name;
-@property (nonatomic, retain) NSString *phone;
-@property (nonatomic, retain) NSString *email;
-@property (nonatomic, retain) ClientInfo *clientInfo;
+@property (nonatomic, strong) NSString *name;
+@property (nonatomic, strong) NSString *phone;
+@property (nonatomic, strong) NSString *email;
+@property (nonatomic, strong) ClientInfo *clientInfo;
 
-@property (nonatomic, readonly) NSArray *nonEmptyProperties;
+@property (weak, nonatomic, readonly) NSArray *nonEmptyProperties;
 @property (nonatomic, readonly) NSInteger countNonEmptyProperties;
 - (NSString *)nonEmptyPropertyWithIndex:(NSInteger)index;
 
-@property (nonatomic, readonly) NSString *toRecipient;
+@property (weak, nonatomic, readonly) NSString *toRecipient;
 
 @end

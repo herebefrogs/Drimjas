@@ -13,7 +13,7 @@
 @interface Currency : IndexedObject {
 }
 
-@property (nonatomic, retain) NSString *isoCode;
+@property (nonatomic, strong) NSString *isoCode;
 
 + (BOOL)isReadyStatus;
 

@@ -23,7 +23,7 @@
 }
 
 - (void)refreshStatus {
-	NSNumber *oldStatus = [self.status retain];
+	NSNumber *oldStatus = self.status;
 
 	[super refreshStatus];
 
@@ -34,7 +34,6 @@
 		}
 	}
 
-	[oldStatus release];
 }
 
 @end

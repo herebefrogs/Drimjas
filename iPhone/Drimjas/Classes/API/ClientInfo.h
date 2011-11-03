@@ -16,17 +16,17 @@
 @interface ClientInfo : BaseObject {
 }
 
-@property (nonatomic, retain) NSString *name;
-@property (nonatomic, retain) NSString *address1;
-@property (nonatomic, retain) NSString *address2;
-@property (nonatomic, retain) NSString *city;
-@property (nonatomic, retain) NSString *state;
-@property (nonatomic, retain) NSString *postalCode;
-@property (nonatomic, retain) NSString *country;
-@property (nonatomic, retain) NSSet *contactInfos;
-@property (nonatomic, retain) NSSet *estimates;
+@property (nonatomic, strong) NSString *name;
+@property (nonatomic, strong) NSString *address1;
+@property (nonatomic, strong) NSString *address2;
+@property (nonatomic, strong) NSString *city;
+@property (nonatomic, strong) NSString *state;
+@property (nonatomic, strong) NSString *postalCode;
+@property (nonatomic, strong) NSString *country;
+@property (nonatomic, strong) NSSet *contactInfos;
+@property (nonatomic, strong) NSSet *estimates;
 
-@property (nonatomic, readonly) NSArray *nonEmptyProperties;
+@property (weak, nonatomic, readonly) NSArray *nonEmptyProperties;
 @property (nonatomic, readonly) NSInteger countNonEmptyProperties;
 - (NSString *)nonEmptyPropertyWithIndex:(NSUInteger)index;
 
@@ -34,7 +34,7 @@
 - (void)bindContactInfo:(ContactInfo *)contactInfo;
 - (void)unbindContactInfo:(ContactInfo *)contactInfo;
 
-@property (nonatomic, readonly) NSArray *toRecipients;
+@property (weak, nonatomic, readonly) NSArray *toRecipients;
 @property (nonatomic, readonly) BOOL shouldBeDeleted;
 
 @end

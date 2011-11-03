@@ -14,7 +14,7 @@
 	UIButton *edit;
 }
 
-@property (nonatomic, retain) IBOutlet UILabel* header;
-@property (nonatomic, retain) IBOutlet UIButton* edit;
+@property (nonatomic, strong) IBOutlet UILabel* header;
+@property (nonatomic, strong) IBOutlet UIButton* edit;
 
 @end

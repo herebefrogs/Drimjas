@@ -77,7 +77,7 @@ CGFloat STATUS_RIGHT_PADDING = 10.0;
 }
 
 - (void)_createStatusLabelForCell:(UITableViewCell *)cell {
-	UILabel *statusLabel = [[[UILabel alloc] init] autorelease];
+	UILabel *statusLabel = [[UILabel alloc] init];
 	statusLabel.tag = STATUS_TAG;
 
 	// size & position
@@ -128,7 +128,7 @@ CGFloat STATUS_RIGHT_PADDING = 10.0;
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
 		[self _createStatusLabelForCell:cell];
     }
 
@@ -237,15 +237,6 @@ CGFloat STATUS_RIGHT_PADDING = 10.0;
 }
 
 
-- (void)dealloc {
-#ifdef __ENABLE_UI_LOGS__
-	NSLog(@"EstimatesViewController.dealloc");
-#endif
-	[estimateDetailViewController release];
-	[aNewOrPickClientInfoViewController release];
-	[estimates release];
-    [super dealloc];
-}
 
 
 @end

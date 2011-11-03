@@ -16,7 +16,7 @@
 	NSFetchedResultsController *estimates;
 }
 
-@property (nonatomic, retain) IBOutlet ContractDetailViewController *contractDetailViewController;
-@property (nonatomic, retain) NSFetchedResultsController *estimates;
+@property (nonatomic, strong) IBOutlet ContractDetailViewController *contractDetailViewController;
+@property (nonatomic, strong) NSFetchedResultsController *estimates;
 
 @end

@@ -13,10 +13,6 @@
 
 @synthesize textField;
 
-- (void)dealloc {
-	[textField release];
-    [super dealloc];
-}
 
 
 @end

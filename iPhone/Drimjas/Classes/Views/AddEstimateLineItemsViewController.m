@@ -198,7 +198,6 @@ BOOL _insertLineItem = NO;
 
 	NSNumber *number = [numberFormatter numberFromString:string];
 
-	[numberFormatter release];
 
 	return number;
 }
@@ -234,7 +233,7 @@ BOOL _insertLineItem = NO;
 
 		cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 		if (cell == nil) {
-			cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+			cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
 		}
 	} else {
 		static NSString *CellIdentifier = @"TextFieldCell";
@@ -440,20 +439,6 @@ BOOL _insertLineItem = NO;
 }
 
 
-- (void)dealloc {
-#ifdef __ENABLE_UI_LOGS__
-	NSLog(@"AddEstimateLineItemsViewController.dealloc");
-#endif
-	[nextButton release];
-	[saveButton release];
-	[lineItemsViewController release];
-	[estimateDetailViewController release];
-	[taxesAndCurrencyViewController release];
-	[myInfoViewController release];
-	[lineItemSelections release];
-	[estimate release];
-    [super dealloc];
-}
 
 
 @end

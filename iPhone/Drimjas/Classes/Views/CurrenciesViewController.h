@@ -16,6 +16,6 @@
     Currency *currency;
 }
 
-@property (nonatomic, retain) Currency *currency;
+@property (nonatomic, strong) Currency *currency;
 
 @end

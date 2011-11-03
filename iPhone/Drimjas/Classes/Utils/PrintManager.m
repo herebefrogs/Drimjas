@@ -26,7 +26,7 @@ static id<PrintNotifyDelegate> _delegate;
 
 
 + (void)printEstimate:(Estimate *)estimate withDelegate:(id<PrintNotifyDelegate>)delegate {
-	_delegate = [delegate retain];
+	_delegate = delegate;
 
 	UIPrintInfo *printInfo = [UIPrintInfo printInfo];
 	printInfo.jobName = [PDFManager pdfNameForEstimate:estimate];
@@ -47,7 +47,6 @@ static id<PrintNotifyDelegate> _delegate;
 		// notify delegate of print outcome
 		[_delegate printJobCompleted:completed withError:error];
 		// free up delegate
-		[_delegate release];
 		// free up pdf data
 	};
 
@@ -61,7 +60,7 @@ static id<PrintNotifyDelegate> _delegate;
 }
 
 + (void)printContract:(Contract *)contract withDelegate:(id<PrintNotifyDelegate>)delegate {
-	_delegate = [delegate retain];
+	_delegate = delegate;
 
 	UIPrintInfo *printInfo = [UIPrintInfo printInfo];
 	printInfo.jobName = [PDFManager pdfNameForContract:contract];
@@ -82,7 +81,6 @@ static id<PrintNotifyDelegate> _delegate;
 		// notify delegate of print outcome
 		[_delegate printJobCompleted:completed withError:error];
 		// free up delegate
-		[_delegate release];
 		// free up pdf data
 	};
 

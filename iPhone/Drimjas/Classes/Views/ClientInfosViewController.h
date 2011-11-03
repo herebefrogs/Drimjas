@@ -17,8 +17,8 @@
 	BOOL optionsMode;
 }
 
-@property (nonatomic, retain) IBOutlet ClientInfoDetailViewController *clientInfoDetailViewController;
-@property (nonatomic, retain) NSFetchedResultsController *clientInfos;
+@property (nonatomic, strong) IBOutlet ClientInfoDetailViewController *clientInfoDetailViewController;
+@property (nonatomic, strong) NSFetchedResultsController *clientInfos;
 @property (nonatomic, assign) BOOL optionsMode;
 
 @end

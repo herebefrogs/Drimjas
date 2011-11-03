@@ -14,11 +14,6 @@
 @synthesize header;
 @synthesize edit;
 
-- (void)dealloc {
-	[header release];
-	[edit release];
-    [super dealloc];
-}
 
 
 @end

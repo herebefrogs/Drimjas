@@ -15,7 +15,7 @@
 @interface Contract : BaseObject {
 }
 
-@property (nonatomic, retain) Estimate *estimate;
+@property (nonatomic, strong) Estimate *estimate;
 
 - (void)bindEstimate:(Estimate *)anEstimate;
 - (void)unbindEstimate:(Estimate *)anEstimate;

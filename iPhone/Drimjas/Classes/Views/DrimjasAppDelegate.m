@@ -53,7 +53,6 @@
 	// initialize data store
 	DataStore *dataStore = [[DataStore alloc] initWithName:@"Drimjas"];
 	[DataStore setDefaultStore:dataStore];
-	[dataStore release];
 	
     // Add the tab bar controller's view to the window and display.
 	[self.window addSubview:tabBarController.view];
@@ -152,12 +151,6 @@
 
 - (void)dealloc {
 	[DataStore setDefaultStore:nil];
-	[contractsViewController release];
-	[estimatesViewController release];
-	[startupViewController release];
-    [tabBarController release];
-    [window release];
-    [super dealloc];
 }
 
 @end

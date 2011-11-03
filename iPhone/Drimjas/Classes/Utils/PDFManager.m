@@ -94,7 +94,6 @@ typedef enum {
 			clientInfoMax = MAX(textSize.width, clientInfoMax);
 		}
 	}
-	[sortDescriptor release];
 
 	// provision some extra space between label and client info
 	labelMax += 2 * pageInfo.linePadding;
@@ -217,7 +216,6 @@ typedef enum {
 			pageInfo.y += MAX(labelSize.height, infoSize.height) + pageInfo.linePadding;;
 		}
 	}
-	[sortDescriptor release];
 
 	return pageInfo.y;
 }
@@ -263,7 +261,6 @@ typedef enum {
 	NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
 	[dateFormat setDateStyle:NSDateFormatterFullStyle];
 	NSString *estimateDate = [dateFormat stringFromDate:date];
-	[dateFormat release];
 
 	CGSize dateSize = [pageInfo drawTextRightJustified:estimateDate];
 	pageInfo.y += dateSize.height + pageInfo.linePadding;
@@ -305,7 +302,6 @@ typedef enum {
 + (NSArray *)_pageInfo:(PageInfo *)pageInfo tableColumnsWidthForEstimate:(Estimate *)estimate {
 	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"index" ascending:YES];
 	NSArray *lineItems = [estimate.lineItems sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];
-	[sortDescriptor release];
 
 	CGFloat nameMax = 0.0;
 	CGFloat descriptionMax = 0.0;
@@ -374,7 +370,6 @@ typedef enum {
 	textSize = [[numberFormatter stringFromNumber:estimate.total] sizeWithFont:pageInfo.plainFont];
 	costMax = MAX(costMax, textSize.width);
 
-	[numberFormatter release];
 
 	// provision some space for padding on both side
 	CGFloat costWidth = costMax + 2 * pageInfo.linePadding;
@@ -434,7 +429,6 @@ typedef enum {
 
 	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"index" ascending:YES];
 	NSArray *lineItems = [lineItemsSet sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];
-	[sortDescriptor release];
 
 	CGFloat nameX = [[xAndWidths objectAtIndex:NameX] floatValue];
 	CGFloat nameWidth = [[xAndWidths objectAtIndex:NameWidth] floatValue];
@@ -602,7 +596,6 @@ typedef enum {
 
 		pageInfo.y += maxRowHeight;
 	}
-	[numberFormatter release];
 }
 
 + (void)_pageInfo:(PageInfo *)pageInfo renderTotalsAndTaxes:(Estimate *)estimate forContract:(BOOL)contract xAndWidths:(NSArray *)xAndWidths {
@@ -774,7 +767,6 @@ typedef enum {
 
 	pageInfo.y += maxRowHeight;
 
-	[numberFormatter release];
 }
 
 + (void)_renderPDFFooter:(PageInfo *)pageInfo {
@@ -835,7 +827,7 @@ typedef enum {
 #pragma mark Public protocol implementation
 
 + (NSMutableData *)pdfDataForEstimate:(Estimate *)estimate {
-	NSMutableData *pdfData = [[[NSMutableData alloc] initWithCapacity: 1024] autorelease];
+	NSMutableData *pdfData = [[NSMutableData alloc] initWithCapacity: 1024];
 
 	// start PDF data
 	PageInfo *pageInfo = [[PageInfo alloc] init];
@@ -885,17 +877,15 @@ typedef enum {
 
 	// end PDF data
 	UIGraphicsEndPDFContext();
-	[pageInfo release];
 
 	return pdfData;
 }
 
 + (BOOL)savePDFFileForEstimate:(Estimate *)estimate {
 	NSString *pdfPath = [PDFManager getPDFPathForEstimate:estimate];
-	NSData *pdfData = [[PDFManager pdfDataForEstimate:estimate] retain];
+	NSData *pdfData = [PDFManager pdfDataForEstimate:estimate];
 
 	BOOL written = [pdfData writeToFile:pdfPath atomically:NO];
-	[pdfData release];
 
 	return written;
 }
@@ -934,7 +924,7 @@ typedef enum {
 
 
 + (NSMutableData *)pdfDataForContract:(Contract *)contract {
-	NSMutableData *pdfData = [[[NSMutableData alloc] initWithCapacity: 1024] autorelease];
+	NSMutableData *pdfData = [[NSMutableData alloc] initWithCapacity: 1024];
 
 	// start PDF data
 	PageInfo *pageInfo = [[PageInfo alloc] init];
@@ -989,7 +979,6 @@ typedef enum {
 
 	// end PDF data
 	UIGraphicsEndPDFContext();
-	[pageInfo release];
 
 	return pdfData;
 }

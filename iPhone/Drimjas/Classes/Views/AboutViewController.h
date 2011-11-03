@@ -14,7 +14,7 @@
     UITextView *info;
 }
 
-@property (nonatomic, retain) IBOutlet UIImageView *logo;
-@property (nonatomic, retain) IBOutlet UITextView *info;
+@property (nonatomic, strong) IBOutlet UIImageView *logo;
+@property (nonatomic, strong) IBOutlet UITextView *info;
 
 @end

@@ -25,13 +25,13 @@
 	BOOL optionsMode;
 }
 
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *nextButton;
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *saveButton;
-@property (nonatomic, retain) IBOutlet CurrenciesViewController *currenciesViewController;
-@property (nonatomic, retain) IBOutlet MyInfoViewController *myInfoViewController;
-@property (nonatomic, retain) IBOutlet EstimateDetailViewController *estimateDetailViewController;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *nextButton;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *saveButton;
+@property (nonatomic, strong) IBOutlet CurrenciesViewController *currenciesViewController;
+@property (nonatomic, strong) IBOutlet MyInfoViewController *myInfoViewController;
+@property (nonatomic, strong) IBOutlet EstimateDetailViewController *estimateDetailViewController;
 
-@property (nonatomic, retain) NSFetchedResultsController *taxesAndCurrency;
+@property (nonatomic, strong) NSFetchedResultsController *taxesAndCurrency;
 @property (nonatomic, assign) BOOL optionsMode;
 
 - (IBAction)next:(id)sender;

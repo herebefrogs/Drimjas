@@ -62,7 +62,7 @@
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
     if (indexPath.row == OptionsFieldClients) {
@@ -135,17 +135,6 @@
 }
 
 
-- (void)dealloc {
-#ifdef __ENABLE_UI_LOGS__
-	NSLog(@"OptionsViewController.dealloc");
-#endif
-	[clientInfosViewController release];
-	[lineItemsViewController release];
-	[taxesAndCurrencyViewController release];
-	[myInfoViewController release];
-	[aboutViewController release];
-    [super dealloc];
-}
 
 
 @end

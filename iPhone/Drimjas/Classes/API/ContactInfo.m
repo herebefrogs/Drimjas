@@ -31,7 +31,7 @@
 }
 
 - (void)refreshStatus {
-	NSNumber *oldStatus = [self.status retain];
+	NSNumber *oldStatus = self.status;
 
 	[super refreshStatus];
 
@@ -40,7 +40,6 @@
 		[self.clientInfo refreshStatus];
 	}
 
-	[oldStatus release];
 }
 
 - (NSArray *)allPropertyNames {
@@ -58,7 +57,6 @@
 		if (value.length > 0) {
 			KeyValue *pair = [[KeyValue alloc] initWithKey:property value:value];
 			[nonEmptyProperties addObject:pair];
-			[pair release];
 		}
 	}
 	

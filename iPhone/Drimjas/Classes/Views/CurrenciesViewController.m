@@ -12,7 +12,7 @@
 
 @interface CurrenciesViewController ()
 
-@property (nonatomic, retain) NSArray *currencyCodes;
+@property (nonatomic, strong) NSArray *currencyCodes;
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
 
 @end
@@ -24,14 +24,6 @@
 @synthesize currencyCodes;
 @synthesize currency;
 
-- (void)dealloc {
-#ifdef __ENABLE_UI_LOGS__
-	NSLog(@"CurrenciesViewController.dealloc");
-#endif
-    [currencyCodes release];
-    [currency release];
-    [super dealloc];
-}
 
 #pragma mark - View lifecycle
 
@@ -90,7 +82,7 @@
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
     [self configureCell:cell atIndexPath:indexPath];

@@ -31,7 +31,6 @@
 	[dateFormat setDateFormat:@"MMMM YYYY"];
 
 	NSString *monthYear = [dateFormat stringFromDate:self.date];
-	[dateFormat release];
 
 	return monthYear;
 }
@@ -48,8 +47,6 @@
 							 [dateFormat stringFromDate:self.date],
 							 [numberFormatter stringFromNumber:self.number]];
 
-	[dateFormat release];
-	[numberFormatter release];
 
 	return orderNumber;
 }

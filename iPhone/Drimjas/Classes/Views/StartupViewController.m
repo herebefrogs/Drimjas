@@ -76,13 +76,11 @@ NSInteger buttonTagClicked_ = 0;
         if (copyItem) {
             UITabBarItem *copy = [[UITabBarItem alloc] initWithTitle:item.title image:item.image tag:item.tag];
             [items addObject:copy];
-            [copy release];
             copyItem = NO;
         }
 	}
 
 	[tabBar setItems:items animated:NO];
-    [items release];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
@@ -119,11 +117,6 @@ NSInteger buttonTagClicked_ = 0;
 }
 
 
-- (void)dealloc {
-	[appDelegate release];
-	[tabBar release];
-    [super dealloc];
-}
 
 
 @end

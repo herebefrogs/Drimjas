@@ -26,7 +26,7 @@
 
 + (UIViewController *)mailComposeViewControllerWithDelegate:(id<MFMailComposeViewControllerDelegate>)delegate
                                                 forEstimate:(Estimate *)estimate {
-	MFMailComposeViewController *controller = [[[MFMailComposeViewController alloc] init] autorelease];
+	MFMailComposeViewController *controller = [[MFMailComposeViewController alloc] init];
 	controller.mailComposeDelegate = delegate;
 	
 	[controller setSubject:[NSString stringWithFormat:NSLocalizedString(@"Estimate #%@", "Estimate Mail Subject"),
@@ -48,7 +48,7 @@
 
 + (UIViewController *)mailComposeViewControllerWithDelegate:(id<MFMailComposeViewControllerDelegate>)delegate
                                                 forContract:(Contract *)contract {
-	MFMailComposeViewController *controller = [[[MFMailComposeViewController alloc] init] autorelease];
+	MFMailComposeViewController *controller = [[MFMailComposeViewController alloc] init];
 	controller.mailComposeDelegate = delegate;
 
 	[controller setSubject:[NSString stringWithFormat:NSLocalizedString(@"Contract #%@", "Contract Mail Subject"),

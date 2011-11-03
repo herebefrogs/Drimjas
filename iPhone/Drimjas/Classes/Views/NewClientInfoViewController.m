@@ -202,16 +202,6 @@
 }
 
 
-- (void)dealloc {
-#ifdef __ENABLE_UI_LOGS__
-	NSLog(@"NewClientInfoViewController.dealloc");
-#endif
-	[nextButton release];
-	[saveButton release];
-	[contactInfosViewController release];
-	[estimate release];
-    [super dealloc];
-}
 
 
 @end

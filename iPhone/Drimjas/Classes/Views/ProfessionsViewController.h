@@ -16,6 +16,6 @@
     MyInfo *myInfo;
 }
 
-@property (nonatomic, retain) MyInfo *myInfo;
+@property (nonatomic, strong) MyInfo *myInfo;
 
 @end

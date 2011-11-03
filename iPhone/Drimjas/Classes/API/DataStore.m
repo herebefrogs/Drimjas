@@ -34,15 +34,14 @@ static DataStore *singleton_ = nil;
 
 + (void)setDefaultStore:(DataStore *)newDataStore {
 	if (newDataStore != singleton_) {
-		[singleton_ release];
-		singleton_ = [newDataStore retain];
+		singleton_ = newDataStore;
 	}
 }
 
 - (id)initWithName:(NSString *)storeName {
 	self = [super init];
 	if (self) {
-		storeName_ = [storeName retain];
+		storeName_ = storeName;
 	}
 	return self;
 }
@@ -228,7 +227,7 @@ static DataStore *singleton_ = nil;
 	}
 }
 
-- (NSFetchedResultsController *)initEstimatesFetchedResultsControllerWithStatusPredicate:(NSNumber *)status {
+- (NSFetchedResultsController *)getEstimatesFetchedResultsControllerWithStatusPredicate:(NSNumber *)status {
 	// Estimate fetch request
 	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
 	fetchRequest.entity = [NSEntityDescription entityForName:@"Estimate"
@@ -241,7 +240,6 @@ static DataStore *singleton_ = nil;
 	// Sort estimates by date (newest estimate first, oldest estimate last)
 	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"date" ascending:NO];
 	fetchRequest.sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
-	[sortDescriptor release];
 
 	// buffer up to 16 Estimate
 	fetchRequest.fetchBatchSize = 16;
@@ -251,7 +249,6 @@ static DataStore *singleton_ = nil;
 																								  sectionNameKeyPath:@"monthYear"
 																										   cacheName:@"Root"];
 
-	[fetchRequest release];
 
 	return fetchedResultsController;
 }
@@ -259,7 +256,7 @@ static DataStore *singleton_ = nil;
 - (NSFetchedResultsController *)estimatesFetchedResultsController {
 	if (estimatesFetchedResultsController_ == nil) {
 
-		estimatesFetchedResultsController_ = [[self initEstimatesFetchedResultsControllerWithStatusPredicate:nil] retain];
+		estimatesFetchedResultsController_ = [self getEstimatesFetchedResultsControllerWithStatusPredicate:nil];
 
 		NSError *error = nil;
 		if (![estimatesFetchedResultsController_ performFetch:&error]) {
@@ -281,7 +278,7 @@ static DataStore *singleton_ = nil;
 - (NSFetchedResultsController *)contractReadyEstimatesFetchedResultsController {
 	if (contractReadyEstimatesFetchedResultsController_ == nil) {
 
-		contractReadyEstimatesFetchedResultsController_ = [[self initEstimatesFetchedResultsControllerWithStatusPredicate:[NSNumber numberWithInt:StatusReady]] retain];
+		contractReadyEstimatesFetchedResultsController_ = [self getEstimatesFetchedResultsControllerWithStatusPredicate:[NSNumber numberWithInt:StatusReady]];
 
 		NSError *error = nil;
 		if (![contractReadyEstimatesFetchedResultsController_ performFetch:&error]) {
@@ -310,11 +307,9 @@ static DataStore *singleton_ = nil;
 }
 
 - (Estimate *)createEstimateStub {
-	[estimateStub_ release];
 
-	estimateStub_ = [(Estimate *)[NSEntityDescription insertNewObjectForEntityForName:@"Estimate"
-															   inManagedObjectContext:self.managedObjectContext]
-					 retain];
+	estimateStub_ = (Estimate *)[NSEntityDescription insertNewObjectForEntityForName:@"Estimate"
+															   inManagedObjectContext:self.managedObjectContext];
 
 	return estimateStub_;
 }
@@ -328,10 +323,9 @@ static DataStore *singleton_ = nil;
 	}
 
 	// note: after the context save, stubs have permanent IDs
-	Estimate *savedEstimate = [estimateStub_ autorelease];
+	Estimate *savedEstimate = estimateStub_;
 
 	// discard estimate stub
-	[estimateStub_ release];
 	estimateStub_ = nil;
 
 	return savedEstimate;
@@ -342,7 +336,6 @@ static DataStore *singleton_ = nil;
 		[self deleteEstimate:estimateStub_];
 	}
 
-	[estimateStub_ release];
 	estimateStub_ = nil;
 }
 
@@ -414,7 +407,6 @@ static DataStore *singleton_ = nil;
 		// sort ClientInfo alphabetically
 		NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
 		fetchRequest.sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
-		[sortDescriptor release];
 
 		// buffer up to 16 ClientInfo
 		fetchRequest.fetchBatchSize = 16;
@@ -425,7 +417,6 @@ static DataStore *singleton_ = nil;
 																					 sectionNameKeyPath:nil
 																							  cacheName:@"Root"];
 
-		[fetchRequest release];
 
 		NSError *error = nil;
 		if (![clientInfosFetchedResultsController_ performFetch:&error]) {
@@ -466,7 +457,6 @@ static DataStore *singleton_ = nil;
 		[estimate refreshStatus];
 	}
 	
-	[immutableCopy release];
 
 	for (ContactInfo *contactInfo in clientInfo.contactInfos) {
 		[self deleteContactInfo:contactInfo];
@@ -499,20 +489,17 @@ static DataStore *singleton_ = nil;
 	// sort ContactInfo by insertion order
 	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"index" ascending:YES];
 	fetchRequest.sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
-	[sortDescriptor release];
 
 	// buffer up to 16 ContactInfo
 	fetchRequest.fetchBatchSize = 16;
 
 	// ContactInfo fetched results controller
-	NSFetchedResultsController *contactInfos = [[[NSFetchedResultsController alloc]
+	NSFetchedResultsController *contactInfos = [[NSFetchedResultsController alloc]
 													   initWithFetchRequest:fetchRequest
 													   managedObjectContext:self.managedObjectContext
 													   sectionNameKeyPath:@"index"
-													   cacheName:nil]
-													  autorelease];
+													   cacheName:nil];
 
-	[fetchRequest release];
 
 	NSError *error = nil;
 	if (![contactInfos performFetch:&error]) {
@@ -612,7 +599,6 @@ static DataStore *singleton_ = nil;
 		[lineItemSelection refreshStatus];
 	}
 	
-	[immutableCopy release];
 
 	[self.managedObjectContext deleteObject:lineItem];
 
@@ -640,7 +626,6 @@ static DataStore *singleton_ = nil;
 		// sort LineItem alphabetically
 		NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
 		fetchRequest.sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
-		[sortDescriptor release];
 		
 		// buffer up to 16 LineItem
 		fetchRequest.fetchBatchSize = 16;
@@ -651,7 +636,6 @@ static DataStore *singleton_ = nil;
 																				   sectionNameKeyPath:nil
 																							cacheName:@"Root"];
 		
-		[fetchRequest release];
 		
 		NSError *error = nil;
 		if (![lineItemsFetchedResultsController_ performFetch:&error]) {
@@ -686,20 +670,17 @@ static DataStore *singleton_ = nil;
 	// sort LineItemSelections by insertion order
 	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"index" ascending:YES];
 	fetchRequest.sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
-	[sortDescriptor release];
 	
 	// buffer up to 16 LineItemSelections
 	fetchRequest.fetchBatchSize = 16;
 	
 	// LineItemSelection fetched results controller
-	NSFetchedResultsController *lineItemSelections = [[[NSFetchedResultsController alloc]
+	NSFetchedResultsController *lineItemSelections = [[NSFetchedResultsController alloc]
 													  initWithFetchRequest:fetchRequest
 													  managedObjectContext:self.managedObjectContext
 													  sectionNameKeyPath:@"index"
-													  cacheName:nil]
-													 autorelease];
+													  cacheName:nil];
 	
-	[fetchRequest release];
 	
 	NSError *error = nil;
 	if (![lineItemSelections performFetch:&error]) {
@@ -745,7 +726,6 @@ static DataStore *singleton_ = nil;
 		// Sort contracts by date (newest contract first, oldest contract last)
 		NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"estimate.date" ascending:NO];
 		fetchRequest.sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
-		[sortDescriptor release];
 
 		// buffer up to 16 Contracts
 		fetchRequest.fetchBatchSize = 16;
@@ -755,7 +735,6 @@ static DataStore *singleton_ = nil;
 																				   sectionNameKeyPath:@"estimate.monthYear"
 																							cacheName:@"Root"];
 
-		[fetchRequest release];
 
 		NSError *error = nil;
 		if (![contractsFetchedResultsController_ performFetch:&error]) {
@@ -806,7 +785,7 @@ static DataStore *singleton_ = nil;
         NSAssert(currencies.count > 0, @"No currency created");
         NSAssert(currencies.count < 2, @"More than 1 currency created");
 
-        currency_ = [[currencies objectAtIndex:0] retain];
+        currency_ = [currencies objectAtIndex:0];
 	}
 
 	return currency_;
@@ -829,7 +808,6 @@ static DataStore *singleton_ = nil;
 
 		NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"index" ascending:YES];
 		fetchRequest.sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
-		[sortDescriptor release];
 		
 		fetchRequest.fetchBatchSize = 16;
 		
@@ -838,7 +816,6 @@ static DataStore *singleton_ = nil;
 																			   sectionNameKeyPath:@"index"
 																						cacheName:@"Root"];
 		
-		[fetchRequest release];
 		
 		NSError *error = nil;
 		if (![taxesAndCurrencyFetchedResultsController_ performFetch:&error]) {
@@ -924,9 +901,7 @@ static DataStore *singleton_ = nil;
 			[myInfo_ bindContactInfo:contactInfo];
 			contactInfo.index = 0;
 		}
-		[myInfo_ retain];
 
-		[fetchRequest release];
 	}
 
 	return myInfo_;
@@ -959,22 +934,6 @@ static DataStore *singleton_ = nil;
 - (void)didReceiveMemoryWarning {
 }
 
-- (void)dealloc {
-	[managedObjectModel_ release];
-	[managedObjectContext_ release];
-	[persistentStoreCoordinator_ release];
-	[estimatesFetchedResultsController_ release];
-	[contractReadyEstimatesFetchedResultsController_ release];
-	[clientInfosFetchedResultsController_ release];
-	[lineItemsFetchedResultsController_ release];
-	[contractsFetchedResultsController_ release];
-	[taxesAndCurrencyFetchedResultsController_ release];
-	[currency_ release];
-	[myInfo_ release];
-	[estimateStub_ release];
-	[storeName_ release];
-	[super dealloc];
-}
 
 
 @end

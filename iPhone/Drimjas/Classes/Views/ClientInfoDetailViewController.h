@@ -20,10 +20,10 @@
 	BOOL optionsMode;
 }
 
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *deleteButton;
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *nextButton;
-@property (nonatomic, retain) IBOutlet AddEstimateLineItemsViewController *lineItemsViewController;
-@property (nonatomic, retain) ClientInfo *clientInfo;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *deleteButton;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *nextButton;
+@property (nonatomic, strong) IBOutlet AddEstimateLineItemsViewController *lineItemsViewController;
+@property (nonatomic, strong) ClientInfo *clientInfo;
 @property (nonatomic, assign) BOOL optionsMode;
 
 - (IBAction)delete:(id)sender;

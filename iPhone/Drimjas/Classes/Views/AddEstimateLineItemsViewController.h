@@ -30,15 +30,15 @@
 	BOOL editMode;
 }
 
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *nextButton;
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *saveButton;
-@property (nonatomic, retain) IBOutlet LineItemsViewController *lineItemsViewController;
-@property (nonatomic, retain) IBOutlet EstimateDetailViewController *estimateDetailViewController;
-@property (nonatomic, retain) IBOutlet TaxesAndCurrencyViewController *taxesAndCurrencyViewController;
-@property (nonatomic, retain) IBOutlet MyInfoViewController *myInfoViewController;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *nextButton;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *saveButton;
+@property (nonatomic, strong) IBOutlet LineItemsViewController *lineItemsViewController;
+@property (nonatomic, strong) IBOutlet EstimateDetailViewController *estimateDetailViewController;
+@property (nonatomic, strong) IBOutlet TaxesAndCurrencyViewController *taxesAndCurrencyViewController;
+@property (nonatomic, strong) IBOutlet MyInfoViewController *myInfoViewController;
 
-@property (nonatomic, retain) NSFetchedResultsController *lineItemSelections;
-@property (nonatomic, retain) Estimate *estimate;
+@property (nonatomic, strong) NSFetchedResultsController *lineItemSelections;
+@property (nonatomic, strong) Estimate *estimate;
 @property (nonatomic, assign) BOOL editMode;
 
 - (IBAction)next:(id)sender;

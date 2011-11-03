@@ -41,9 +41,9 @@
 @property (nonatomic, assign) CGFloat maxWidth;
 @property (nonatomic, assign) CGFloat maxHeight;
 @property (nonatomic, readonly) CGSize maxSize;
-@property (nonatomic, retain) UIFont *plainFont;
-@property (nonatomic, retain) UIFont *boldFont;
-@property (nonatomic, retain) UIFont *bigBoldFont;
+@property (nonatomic, strong) UIFont *plainFont;
+@property (nonatomic, strong) UIFont *boldFont;
+@property (nonatomic, strong) UIFont *bigBoldFont;
 @property (nonatomic, readonly) CGFloat labelWidth;
 @property (nonatomic, readonly) CGFloat clientOrMyInfoWidth;
 

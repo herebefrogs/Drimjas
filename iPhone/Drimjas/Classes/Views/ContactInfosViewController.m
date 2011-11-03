@@ -178,7 +178,7 @@ BOOL _contactInfoInserted = NO;
 
 		UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 		if (cell == nil) {
-			cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+			cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
 		}
 
 		[self configureCell:cell atIndexPath:indexPath];
@@ -347,17 +347,6 @@ BOOL _contactInfoInserted = NO;
 }
 
 
-- (void)dealloc {
-#ifdef __ENABLE_UI_LOGS__
-	NSLog(@"ContactInfosViewController.dealloc");
-#endif
-	[nextButton release];
-	[saveButton release];
-	[lineItemsSelectionViewController release];
-	[contactInfos release];
-	[estimate release];
-    [super dealloc];
-}
 
 
 @end

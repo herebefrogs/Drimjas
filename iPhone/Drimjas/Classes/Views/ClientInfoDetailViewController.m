@@ -78,7 +78,7 @@
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
 
 	cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -143,15 +143,6 @@
 }
 
 
-- (void)dealloc {
-#ifdef __ENABLE_UI_LOGS__
-	NSLog(@"ClientInfoDetailViewController.dealloc");
-#endif
-	[nextButton release];
-	[lineItemsViewController release];
-	[clientInfo release];
-    [super dealloc];
-}
 
 
 @end

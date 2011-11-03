@@ -56,7 +56,7 @@
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
 	if (indexPath.section == NewClientInfoSection) {
@@ -115,14 +115,6 @@
 	[super viewDidUnload];
 }
 
-- (void)dealloc {
-#ifdef __ENABLE_UI_LOGS__
-	NSLog(@"NewOrPickClientInfoViewController.dealloc");
-#endif
-	[aNewClientInfoViewController release];
-	[clientInfosViewController release];
-	[super dealloc];
-}
 
 @end
 
