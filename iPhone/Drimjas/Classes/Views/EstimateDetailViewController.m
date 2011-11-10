@@ -25,6 +25,7 @@
 #import "AddEstimateLineItemsViewController.h"
 #import "ContactInfosViewController.h"
 #import "NewClientInfoViewController.h"
+#import "PDFViewController.h"
 #import "TableFields.h"
 
 
@@ -55,11 +56,13 @@
 
 @synthesize emailButton;
 @synthesize printButton;
+@synthesize pdfButton;
 @synthesize spacerButton;
 @synthesize editSectionHeader;
 @synthesize lineItemSelectionsViewController;
 @synthesize contactInfosViewController;
 @synthesize aNewClientInfoViewController;
+@synthesize pdfViewController;
 @synthesize estimate;
 @synthesize mailComposeViewController;
 
@@ -82,7 +85,7 @@
     [super viewDidLoad];
 	self.title = NSLocalizedString(@"Estimate Detail", "EstimateDetail Navigation Item Title");
 
-	NSMutableArray *items = [NSMutableArray arrayWithObject: spacerButton];
+	NSMutableArray *items = [NSMutableArray arrayWithObjects: spacerButton, pdfButton, nil];
 	if ([EmailManager isMailAvailable]) {
 		// add Email button only if mail is available on iPhone
 		[items addObject:emailButton];
@@ -288,6 +291,11 @@
 	[PrintManager printEstimate:estimate withDelegate:self];
 }
 
+- (IBAction)view:(id)sender {
+    self.pdfViewController.pdfData = [PDFManager pdfDataForEstimate:self.estimate];
+    [self.navigationController pushViewController:pdfViewController animated:YES];
+}
+
 - (IBAction)modify:(id)sender {
 	UIButton *edit = (UIButton *)sender;
 
@@ -355,9 +363,11 @@
 	self.editSectionHeader = nil;
 	self.emailButton = nil;
 	self.printButton = nil;
+    self.pdfButton = nil;
 	self.lineItemSelectionsViewController = nil;
 	self.contactInfosViewController = nil;
 	self.aNewClientInfoViewController = nil;
+    self.pdfViewController = nil;
 	self.estimate = nil;
 	lineItemSelections = nil;
     self.mailComposeViewController = nil;

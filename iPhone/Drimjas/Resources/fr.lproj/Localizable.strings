@@ -173,6 +173,9 @@
 /* Estimate Detail Edit button */
 "Edit" = "Modifier";
 
+/* PDF View Controller Navigation Item Title */
+"PDF Preview" = "Aperçu du PDF";
+
 /* NewContract Navigation Item Title */
 "Pick Estimate" = "Choisir un devis";
 

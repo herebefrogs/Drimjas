@@ -19,8 +19,10 @@
 #import "MyInfo.h"
 // Utils
 #import "EmailManager.h"
+#import "PDFManager.h"
 #import "PrintManager.h"
 // Views
+#import "PDFViewController.h"
 #import "TableFields.h"
 
 @interface ContractDetailViewController ()
@@ -51,7 +53,9 @@
 
 @synthesize emailButton;
 @synthesize printButton;
+@synthesize pdfButton;
 @synthesize spacerButton;
+@synthesize pdfViewController;
 @synthesize contract;
 @synthesize mailComposeViewController;
 
@@ -75,7 +79,7 @@
     [super viewDidLoad];
 	self.title = NSLocalizedString(@"Contract Detail", "ContractDetail Navigation Item Title");
 
-	NSMutableArray *items = [NSMutableArray arrayWithObject: spacerButton];
+	NSMutableArray *items = [NSMutableArray arrayWithObjects: spacerButton, pdfButton, nil];
 	if ([EmailManager isMailAvailable]) {
 		// add Email button only if mail is available on iPhone
 		[items addObject:emailButton];
@@ -226,6 +230,10 @@
 	[PrintManager printContract:contract withDelegate:self];
 }
 
+- (IBAction)view:(id)sender {
+    self.pdfViewController.pdfData = [PDFManager pdfDataForContract:self.contract];
+    [self.navigationController pushViewController:self.pdfViewController animated:YES];
+}
 
 #pragma mark -
 #pragma mark Mail compose delegate
@@ -271,7 +279,9 @@
     // Relinquish ownership of anything that can be recreated in viewDidLoad or on demand.
 	self.emailButton = nil;
 	self.printButton = nil;
+    self.pdfButton = nil;
 	self.spacerButton = nil;
+    self.pdfViewController = nil;
 	self.contract = nil;
 	lineItemSelections = nil;
     self.mailComposeViewController = nil;

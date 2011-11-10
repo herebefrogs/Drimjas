@@ -60,8 +60,10 @@
 		02B2C06E12DFF2DD00D3FEE0 /* EstimatesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02B2C06C12DFF2DD00D3FEE0 /* EstimatesViewController.m */; };
 		02B2C06F12DFF2DD00D3FEE0 /* Estimates.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02B2C06D12DFF2DD00D3FEE0 /* Estimates.xib */; };
 		02B6326613B1D9D5003E4081 /* IndexedObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 02B6326513B1D9D5003E4081 /* IndexedObject.m */; };
+		02B8BCA4146B8404005A930B /* PDFViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02B8BCA2146B8404005A930B /* PDFViewController.m */; };
 		02BDDE2D1405465100627A35 /* ContractDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02BDDE2B1405465100627A35 /* ContractDetailViewController.m */; };
 		02BDDE2E1405465100627A35 /* ContractDetail.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02BDDE2C1405465100627A35 /* ContractDetail.xib */; };
+		02BF04D8146CE3AD007F165E /* PDF.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02BF04D7146CE3AD007F165E /* PDF.xib */; };
 		02BF6C31144E6C1C00CA738D /* Contract_Terms_Photographer.txt in Resources */ = {isa = PBXBuildFile; fileRef = 02BF6C30144E6C1C00CA738D /* Contract_Terms_Photographer.txt */; };
 		02BF6C35144E75A400CA738D /* Contract_Terms_Graphic_Designer.txt in Resources */ = {isa = PBXBuildFile; fileRef = 02BF6C34144E75A400CA738D /* Contract_Terms_Graphic_Designer.txt */; };
 		02BF6C37144E75E600CA738D /* Contract_Terms_Illustrator.txt in Resources */ = {isa = PBXBuildFile; fileRef = 02BF6C36144E75E600CA738D /* Contract_Terms_Illustrator.txt */; };
@@ -205,9 +207,12 @@
 		02B2C06D12DFF2DD00D3FEE0 /* Estimates.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Estimates.xib; sourceTree = "<group>"; };
 		02B6326413B1D9D5003E4081 /* IndexedObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IndexedObject.h; sourceTree = "<group>"; };
 		02B6326513B1D9D5003E4081 /* IndexedObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IndexedObject.m; sourceTree = "<group>"; };
+		02B8BCA1146B8404005A930B /* PDFViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFViewController.h; sourceTree = "<group>"; };
+		02B8BCA2146B8404005A930B /* PDFViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFViewController.m; sourceTree = "<group>"; };
 		02BDDE2A1405465100627A35 /* ContractDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContractDetailViewController.h; sourceTree = "<group>"; };
 		02BDDE2B1405465100627A35 /* ContractDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContractDetailViewController.m; sourceTree = "<group>"; };
 		02BDDE2C1405465100627A35 /* ContractDetail.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContractDetail.xib; sourceTree = "<group>"; };
+		02BF04D7146CE3AD007F165E /* PDF.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PDF.xib; sourceTree = "<group>"; };
 		02BF6C2F144E603B00CA738D /* Drimjas 5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Drimjas 5.xcdatamodel"; sourceTree = "<group>"; };
 		02BF6C30144E6C1C00CA738D /* Contract_Terms_Photographer.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Contract_Terms_Photographer.txt; path = Resources/Contract_Terms_Photographer.txt; sourceTree = "<group>"; };
 		02BF6C34144E75A400CA738D /* Contract_Terms_Graphic_Designer.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Contract_Terms_Graphic_Designer.txt; path = Resources/Contract_Terms_Graphic_Designer.txt; sourceTree = "<group>"; };
@@ -347,6 +352,8 @@
 				02C75241136A429F00EC4BF5 /* NewOrPickClientInfoViewController.m */,
 				020886E713AC439100164320 /* OptionsViewController.h */,
 				020886E813AC439100164320 /* OptionsViewController.m */,
+				02B8BCA1146B8404005A930B /* PDFViewController.h */,
+				02B8BCA2146B8404005A930B /* PDFViewController.m */,
 				02049654144D0D1300B14002 /* ProfessionsViewController.h */,
 				02049655144D0D1400B14002 /* ProfessionsViewController.m */,
 				0299F96C1304D8ED001E1E3E /* StartupViewController.h */,
@@ -380,6 +387,7 @@
 				02FA0483138F3C94001CF3B0 /* NewLineItem.xib */,
 				02C75242136A429F00EC4BF5 /* NewOrPickClientInfo.xib */,
 				020886E913AC439100164320 /* Options.xib */,
+				02BF04D7146CE3AD007F165E /* PDF.xib */,
 				02049656144D0D1400B14002 /* Professions.xib */,
 				0299F96E1304D8ED001E1E3E /* Startup.xib */,
 				0288D99E13A9A306001E6641 /* TaxesAndCurrency.xib */,
@@ -677,6 +685,7 @@
 				02BF6C31144E6C1C00CA738D /* Contract_Terms_Photographer.txt in Resources */,
 				02BF6C35144E75A400CA738D /* Contract_Terms_Graphic_Designer.txt in Resources */,
 				02BF6C37144E75E600CA738D /* Contract_Terms_Illustrator.txt in Resources */,
+				02BF04D8146CE3AD007F165E /* PDF.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -731,6 +740,7 @@
 				029F6755140944F5006BCBE0 /* AboutViewController.m in Sources */,
 				020347D014451D730085CE11 /* CurrenciesViewController.m in Sources */,
 				02049657144D0D1400B14002 /* ProfessionsViewController.m in Sources */,
+				02B8BCA4146B8404005A930B /* PDFViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
