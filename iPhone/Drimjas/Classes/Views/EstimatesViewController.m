@@ -11,6 +11,8 @@
 #import "Estimate.h"
 #import "ClientInfo.h"
 #import "DataStore.h"
+// Cells
+#import "EstimateCell.h"
 // Views
 #import "NewOrPickClientInfoViewController.h"
 #import "EstimateDetailViewController.h"
@@ -21,6 +23,7 @@
 @synthesize aNewOrPickClientInfoViewController;
 @synthesize estimateDetailViewController;
 @synthesize estimates;
+@synthesize estimateCell;
 
 #pragma mark -
 #pragma mark View lifecycle
@@ -58,45 +61,24 @@
 #pragma mark -
 #pragma mark Private implementation stack
 
-NSUInteger STATUS_TAG = 42;
 CGFloat DRIMJAS_GREEN_R = 0.31;			// 79 from 0-255 to 0.0-1.0 range
 CGFloat DRIMJAS_GREEN_G = 0.56;			// 143 from 0-255 to 0.0-1.0 range
 CGFloat DRIMJAS_GREEN_B = 0.0;
-CGFloat STATUS_RIGHT_PADDING = 10.0;
 
-- (void)_setStatusLabel:(BOOL)ready forCell:(UITableViewCell *)cell {
-	UILabel *statusLabel = (UILabel *)[cell.contentView viewWithTag:STATUS_TAG];
-	if (ready) {
-		statusLabel.text = NSLocalizedString(@"Ready","Ready status");
-		// Drimjas green
-		statusLabel.textColor = [UIColor colorWithRed:DRIMJAS_GREEN_R green:DRIMJAS_GREEN_G blue:DRIMJAS_GREEN_B alpha:1.0];
-	} else {
-		statusLabel.text = NSLocalizedString(@"Draft","Draft status");
-		statusLabel.textColor = [UIColor redColor];
-	}
-}
+- (void)configureCell:(UITableViewCell *)aCell atIndexPath:(NSIndexPath *)indexPath {
+    EstimateCell *cell = (EstimateCell *)aCell;
 
-- (void)_createStatusLabelForCell:(UITableViewCell *)cell {
-	UILabel *statusLabel = [[UILabel alloc] init];
-	statusLabel.tag = STATUS_TAG;
-
-	// size & position
-	CGFloat w = MAX([NSLocalizedString(@"Ready","Ready status") sizeWithFont:statusLabel.font].width,
-					[NSLocalizedString(@"Draft","Draft status") sizeWithFont:statusLabel.font].width)
-				+ STATUS_RIGHT_PADDING;
-	CGFloat x = CGRectGetWidth(cell.contentView.bounds) - w;
-	statusLabel.frame = CGRectMake(x, 0.0, w, CGRectGetHeight(cell.contentView.bounds));
-	statusLabel.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleHeight;
-	statusLabel.textAlignment = UITextAlignmentCenter;
-
-	[cell.contentView addSubview:statusLabel];
-}
-
-- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
 	Estimate *estimate = [estimates objectAtIndexPath:indexPath];
-	cell.textLabel.text = estimate.clientInfo.name;
-	cell.detailTextLabel.text = estimate.orderNumber;
-	[self _setStatusLabel:estimate.isReady forCell:cell];
+	cell.clientName.text = estimate.clientInfo.name;
+	cell.orderNumber.text = estimate.orderNumber;
+    if (estimate.isReady) {
+		cell.status.text = NSLocalizedString(@"Ready","Ready status");
+		// Drimjas green
+		cell.status.textColor = [UIColor colorWithRed:DRIMJAS_GREEN_R green:DRIMJAS_GREEN_G blue:DRIMJAS_GREEN_B alpha:1.0];
+	} else {
+		cell.status.text = NSLocalizedString(@"Draft","Draft status");
+		cell.status.textColor = [UIColor redColor];
+    }
 
 	cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 }
@@ -124,12 +106,13 @@ CGFloat STATUS_RIGHT_PADDING = 10.0;
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    static NSString *CellIdentifier = @"Cell";
+    static NSString *CellIdentifier = @"EstimateCell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
-		[self _createStatusLabelForCell:cell];
+		[[NSBundle mainBundle] loadNibNamed:CellIdentifier owner:self options:nil];
+        cell = (UITableViewCell *)estimateCell;
+		self.estimateCell = nil;
     }
 
 	[self configureCell:cell atIndexPath:indexPath];

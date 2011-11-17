@@ -109,6 +109,8 @@
 		02FA0484138F3C94001CF3B0 /* NewLineItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02FA0482138F3C94001CF3B0 /* NewLineItemViewController.m */; };
 		02FA0485138F3C94001CF3B0 /* NewLineItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02FA0483138F3C94001CF3B0 /* NewLineItem.xib */; };
 		02FA838E12F7A69B00C713AF /* PDFManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 02FA838D12F7A69B00C713AF /* PDFManager.m */; };
+		02FB96571474B30A00192FDB /* EstimateCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02FB96561474B30A00192FDB /* EstimateCell.xib */; };
+		02FB965A1474B68D00192FDB /* EstimateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 02FB96591474B68D00192FDB /* EstimateCell.m */; };
 		02FC633413062D7100681A03 /* EmailManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 02FC633313062D7100681A03 /* EmailManager.m */; };
 		1D3623260D0F684500981E51 /* DrimjasAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* DrimjasAppDelegate.m */; };
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
@@ -281,6 +283,9 @@
 		02FA0483138F3C94001CF3B0 /* NewLineItem.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewLineItem.xib; sourceTree = "<group>"; };
 		02FA838C12F7A69B00C713AF /* PDFManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFManager.h; sourceTree = "<group>"; };
 		02FA838D12F7A69B00C713AF /* PDFManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFManager.m; sourceTree = "<group>"; };
+		02FB96561474B30A00192FDB /* EstimateCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EstimateCell.xib; path = Resources/Cells/EstimateCell.xib; sourceTree = "<group>"; };
+		02FB96581474B68D00192FDB /* EstimateCell.h */ = {isa = PBXFileReference; fileEncoding = 4; path = EstimateCell.h; sourceTree = "<group>"; };
+		02FB96591474B68D00192FDB /* EstimateCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EstimateCell.m; sourceTree = "<group>"; };
 		02FC633213062D7100681A03 /* EmailManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmailManager.h; sourceTree = "<group>"; };
 		02FC633313062D7100681A03 /* EmailManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmailManager.m; sourceTree = "<group>"; };
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -467,6 +472,7 @@
 			children = (
 				02CC9C97133FC52D006160A7 /* TextFieldCell.xib */,
 				02CB9A6C139C19ED00FF2A3C /* EditSectionHeader.xib */,
+				02FB96561474B30A00192FDB /* EstimateCell.xib */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -480,6 +486,8 @@
 				02CC9C95133FC324006160A7 /* TextFieldCell.m */,
 				023E06AB134D52A60026209B /* TextFieldTableViewController.h */,
 				023E06AC134D52A60026209B /* TextFieldTableViewController.m */,
+				02FB96581474B68D00192FDB /* EstimateCell.h */,
+				02FB96591474B68D00192FDB /* EstimateCell.m */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -686,6 +694,7 @@
 				02BF6C35144E75A400CA738D /* Contract_Terms_Graphic_Designer.txt in Resources */,
 				02BF6C37144E75E600CA738D /* Contract_Terms_Illustrator.txt in Resources */,
 				02BF04D8146CE3AD007F165E /* PDF.xib in Resources */,
+				02FB96571474B30A00192FDB /* EstimateCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -741,6 +750,7 @@
 				020347D014451D730085CE11 /* CurrenciesViewController.m in Sources */,
 				02049657144D0D1400B14002 /* ProfessionsViewController.m in Sources */,
 				02B8BCA4146B8404005A930B /* PDFViewController.m in Sources */,
+				02FB965A1474B68D00192FDB /* EstimateCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

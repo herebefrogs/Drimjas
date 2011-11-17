@@ -10,16 +10,19 @@
 
 @class NewOrPickClientInfoViewController;
 @class EstimateDetailViewController;
+@class EstimateCell;
 
 @interface EstimatesViewController : UITableViewController <NSFetchedResultsControllerDelegate> {
 	NewOrPickClientInfoViewController *aNewOrPickClientInfoViewController;
 	EstimateDetailViewController *estimateDetailViewController;
 	NSFetchedResultsController *estimates;
+    EstimateCell *estimateCell;
 }
 
 @property (nonatomic, strong) IBOutlet NewOrPickClientInfoViewController *aNewOrPickClientInfoViewController;
 @property (nonatomic, strong) IBOutlet EstimateDetailViewController *estimateDetailViewController;
 @property (nonatomic, strong) IBOutlet NSFetchedResultsController *estimates;
+@property (nonatomic, strong) IBOutlet EstimateCell *estimateCell;
 
 - (IBAction)add:(id)sender;
 
