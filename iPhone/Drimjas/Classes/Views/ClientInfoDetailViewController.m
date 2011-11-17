@@ -53,6 +53,20 @@
 
 
 #pragma mark -
+#pragma mark Table view delegate
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    if (section == 0) {
+        return NSLocalizedString(@"Client Information", "");
+    }
+    else if (section == 1) {
+        return NSLocalizedString(@"Contact Information", "");
+    }
+    return nil;
+}
+
+
+#pragma mark -
 #pragma mark Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
