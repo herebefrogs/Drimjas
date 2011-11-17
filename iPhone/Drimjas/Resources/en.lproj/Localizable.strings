@@ -93,6 +93,7 @@
 "Select Line Item" = "Select Line Item";
 
 /* AddEstimateLineItems Description Textfield placeholder */
+/* NewLineItem Name Textfield */
 "Description" = "Description";
 
 /* AddEstimateLineItems Quantity Textfield placeholder */
@@ -112,9 +113,6 @@
 
 /* NewLineItem Name Textfield */
 "Line Item Name" = "Line Item Name";
-
-/* NewLineItem Name Textfield */
-"Description" = "Description";
 
 /* TaxesAndCurrencyView Navigation Item Title & Options Taxes & Currency Title */
 "Taxes & Currency" = "Taxes & Currency";
@@ -172,6 +170,19 @@
 
 /* Estimate Detail Edit button */
 "Edit" = "Edit";
+
+/* Estimate Detail cell labels */
+"Order #" = "Order #";
+"name" = "Name";
+"address1" = "Address";
+"address2" = "Address";
+"city" = "City";
+"state" = "State / Prov";
+"postalCode" = "Zip Code";
+"country" = "Country";
+"phone" = "Phone";
+"email" = "Email";
+"Name" = "Name";
 
 /* PDF View Controller Navigation Item Title */
 "PDF Preview" = "PDF Preview";
@@ -248,7 +259,6 @@ Version %@";
 
 /* table header */
 "Item" = "Item";
-"Description" = "Description";
 "Unit Cost" = "Unit Cost";
 "Quantity" = "Quantity";
 "Cost" = "Cost";

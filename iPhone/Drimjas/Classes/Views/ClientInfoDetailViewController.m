@@ -10,8 +10,9 @@
 // API
 #import "ClientInfo.h"
 #import "ContactInfo.h"
-#import "Estimate.h"
 #import "DataStore.h"
+#import "Estimate.h"
+#import "KeyValue.h"
 // View
 #import "AddEstimateLineItemsViewController.h"
 #import "TableFields.h"
@@ -92,17 +93,24 @@
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdentifier];
     }
 
 	cell.selectionStyle = UITableViewCellSelectionStyleNone;
 
 	if (indexPath.section == 0) {
-		cell.textLabel.text = [clientInfo nonEmptyPropertyWithIndex:indexPath.row];
-	} else {
+        KeyValue *keyVal = [[clientInfo nonEmptyProperties] objectAtIndex:indexPath.row];
+
+		cell.textLabel.text = NSLocalizedString(keyVal.key, "Name of ClientInfo property");
+        cell.detailTextLabel.text = keyVal.value;
+	}
+	else {
 		ContactInfo *contactInfo = [clientInfo contactInfoAtIndex:indexPath.section - 1];
 
-		cell.textLabel.text = [contactInfo nonEmptyPropertyWithIndex:indexPath.row];
+        KeyValue *keyVal = [[contactInfo nonEmptyProperties] objectAtIndex:indexPath.row];
+
+		cell.textLabel.text = NSLocalizedString(keyVal.key, "Name of ClientInfo property");
+        cell.detailTextLabel.text = keyVal.value;
 	}
 
 	return cell;

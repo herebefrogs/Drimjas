@@ -13,6 +13,7 @@
 #import "Currency.h"
 #import "DataStore.h"
 #import "Estimate.h"
+#import "KeyValue.h"
 #import "LineItem.h"
 #import "LineItemSelection.h"
 #import "MyInfo.h"
@@ -137,16 +138,6 @@
 }
 
 
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-	switch (section) {
-		case EstimateDetailSectionOrderNumber:
-			return NSLocalizedString(@"Purchase Order Number", "Estimate Detail Order Number section title");
-		default:
-			return nil;
-	}
-}
-
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 	if (section == EstimateDetailSectionOrderNumber) {
 		// order number
@@ -188,30 +179,39 @@
 
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdentifier];
     }
 
 	cell.selectionStyle = UITableViewCellSelectionStyleNone;
 
 	if (indexPath.section == EstimateDetailSectionOrderNumber) {
-		cell.textLabel.text = [estimate orderNumber];
+        cell.textLabel.text = NSLocalizedString(@"Order #", "Estimate Detail Order Number section title");
+		cell.detailTextLabel.text = [estimate orderNumber];
 	}
 	else if (indexPath.section == EstimateDetailSectionClientInfo) {
-		cell.textLabel.text = [estimate.clientInfo nonEmptyPropertyWithIndex:indexPath.row];
+        KeyValue *keyVal = [[estimate.clientInfo nonEmptyProperties] objectAtIndex:indexPath.row];
+
+		cell.textLabel.text = NSLocalizedString(keyVal.key, "Name of ClientInfo property");
+        cell.detailTextLabel.text = keyVal.value;
 	}
 	else if (indexPath.section >= EstimateDetailSectionContactInfo && indexPath.section < indexFirstLineItem) {
 		ContactInfo *contactInfo = [estimate.clientInfo contactInfoAtIndex:indexPath.section - EstimateDetailSectionContactInfo];
 
-		cell.textLabel.text = [contactInfo nonEmptyPropertyWithIndex:indexPath.row];
+        KeyValue *keyVal = [[contactInfo nonEmptyProperties] objectAtIndex:indexPath.row];
+
+		cell.textLabel.text = NSLocalizedString(keyVal.key, "Name of ClientInfo property");
+        cell.detailTextLabel.text = keyVal.value;
 	}
 	else if (indexPath.section >= indexFirstLineItem && indexPath.section < indexLastSection) {
 		LineItemSelection *lineItem = (LineItemSelection *)[lineItemSelections objectAtIndex:(indexPath.section - indexFirstLineItem)];
 
 		if (indexPath.row == LineItemSelectionFieldName) {
-			cell.textLabel.text = lineItem.lineItem.name;
+            cell.textLabel.text = NSLocalizedString(@"Name", "Estimate Detail Line item name");
+			cell.detailTextLabel.text = lineItem.lineItem.name;
 		}
 		else if (indexPath.row == LineItemSelectionFieldDescription && lineItem.desc.length > 0) {
-			cell.textLabel.text = lineItem.desc;
+            cell.textLabel.text = NSLocalizedString(@"Description", "Estimate Detail Line item description");
+			cell.detailTextLabel.text = lineItem.desc;
 		}
 		else if (indexPath.row == LineItemSelectionFieldQuantity
 				 || (indexPath.row == LineItemSelectionFieldDescription && lineItem.desc.length == 0)) {
@@ -224,7 +224,8 @@
 			[numberFormatter setCurrencyCode:[[[DataStore defaultStore] currency] isoCode]];
 			NSString *unitCost = [numberFormatter stringFromNumber:lineItem.nonNilUnitCost];
 
-			cell.textLabel.text = [NSString stringWithFormat:@"%@ x %@", quantity, unitCost];
+            cell.textLabel.text = NSLocalizedString(@"Cost", "Estimate Detail Line item quantity & unit cost");
+			cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ x %@", quantity, unitCost];
 		}
 	}
 
@@ -274,7 +275,12 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-	return 32.5;
+    if (section == EstimateDetailSectionClientInfo
+        || section == EstimateDetailSectionContactInfo
+        || section == indexFirstLineItem) {
+        return 32.5;
+    }
+    return 0;
 }
 
 

@@ -93,6 +93,7 @@
 "Select Line Item" = "Choisir un poste";
 
 /* AddEstimateLineItems Description Textfield placeholder */
+/* NewLineItem Name Textfield */
 "Description" = "Description";
 
 /* AddEstimateLineItems Quantity Textfield placeholder */
@@ -112,9 +113,6 @@
 
 /* NewLineItem Name Textfield */
 "Line Item Name" = "Nom du poste";
-
-/* NewLineItem Name Textfield */
-"Description" = "Description";
 
 /* TaxesAndCurrencyView Navigation Item Title & Options Taxes & Currency Title */
 "Taxes & Currency" = "Taxes & devise";
@@ -172,6 +170,19 @@
 
 /* Estimate Detail Edit button */
 "Edit" = "Modifier";
+
+/* Estimate Detail cell labels */
+"Order #" = "Ordre No";
+"name" = "Nom";
+"address1" = "Adresse";
+"address2" = "Adresse";
+"city" = "Ville";
+"state" = "Prov / Etat";
+"postalCode" = "Code postale";
+"country" = "Pays";
+"phone" = "Téléphone";
+"email" = "E-mail";
+"Name" = "Nom";
 
 /* PDF View Controller Navigation Item Title */
 "PDF Preview" = "Aperçu du PDF";
@@ -248,7 +259,6 @@ Version %@";
 
 /* table header */
 "Item" = "Poste";
-"Description" = "Description";
 "Unit Cost" = "Coût unitaire";
 "Quantity" = "Quantité";
 "Cost" = "Coût";
