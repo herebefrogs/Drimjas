@@ -66,6 +66,7 @@
 	cell.detailTextLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Used in %u estimate(s)","Client info estimates count"),
 														   [[clientInfo valueForKeyPath:@"estimates.@count"] intValue]];
 	cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+	cell.editingAccessoryType = UITableViewCellAccessoryDisclosureIndicator;
 }
 
 
