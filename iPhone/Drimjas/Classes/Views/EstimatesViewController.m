@@ -61,12 +61,12 @@
 #pragma mark -
 #pragma mark Private implementation stack
 
-CGFloat DRIMJAS_GREEN_R = 0.31;			// 79 from 0-255 to 0.0-1.0 range
-CGFloat DRIMJAS_GREEN_G = 0.56;			// 143 from 0-255 to 0.0-1.0 range
-CGFloat DRIMJAS_GREEN_B = 0.0;
-
 - (void)configureCell:(UITableViewCell *)aCell atIndexPath:(NSIndexPath *)indexPath {
     EstimateCell *cell = (EstimateCell *)aCell;
+
+    static CGFloat DRIMJAS_GREEN_R = 0.31;			// 79 from 0-255 to 0.0-1.0 range
+    static CGFloat DRIMJAS_GREEN_G = 0.56;			// 143 from 0-255 to 0.0-1.0 range
+    static CGFloat DRIMJAS_GREEN_B = 0.0;
 
 	Estimate *estimate = [estimates objectAtIndexPath:indexPath];
 	cell.clientName.text = estimate.clientInfo.name;

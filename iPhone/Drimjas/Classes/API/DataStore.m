@@ -13,6 +13,7 @@
 #import "Contract.h"
 #import "Estimate.h"
 #import "IndexedObject.h"
+#import "Invoice.h"
 #import "LineItemSelection.h"
 #import "LineItem.h"
 #import "Currency.h"
@@ -764,6 +765,11 @@ static DataStore *singleton_ = nil;
 	// deleting a contract does not delete underlying estimate
 	[contract unbindEstimate:contract.estimate];
 
+    if (contract.invoice) {
+        // deleting a contract does delete associated invoice
+        [self deleteInvoice:contract.invoice andSave:save];
+    }
+
 	[self.managedObjectContext deleteObject:contract];
 
 	if (save) {
@@ -773,6 +779,52 @@ static DataStore *singleton_ = nil;
 	return YES;
 }
 
+
+#pragma mark -
+#pragma mark Invoice stack
+
+- (NSFetchedResultsController *)invoicesFetchedResultsController {
+	if (invoicesFetchedResultsController_ == nil) {
+		// Invoice fetch request
+		NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+		fetchRequest.entity = [NSEntityDescription entityForName:@"Invoice"
+										  inManagedObjectContext:self.managedObjectContext];
+
+		// Sort invoices by date (newest invoice first, oldest invoice last)
+		NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"contract.estimate.date" ascending:NO];
+		fetchRequest.sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
+
+		// buffer up to 16 Invoices
+		fetchRequest.fetchBatchSize = 16;
+
+		invoicesFetchedResultsController_ = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
+																				 managedObjectContext:self.managedObjectContext
+																				   sectionNameKeyPath:@"contract.estimate.monthYear"
+																							cacheName:@"Root"];
+
+		NSError *error = nil;
+		if (![invoicesFetchedResultsController_ performFetch:&error]) {
+			// TODO This is a serious error saying the records
+			//could not be fetched. Advise the user to try
+			//again or restart the application.
+			NSLog(@"DataStore.invoicesFetchedResultsController_: fetch failed with error %@, %@", error, [error userInfo]);
+		}
+	}
+	return invoicesFetchedResultsController_;
+}
+
+- (BOOL)deleteInvoice:(Invoice *)invoice andSave:(BOOL)save {
+	// deleting an invoice does not delete underlying contract
+	[invoice unbindContract:invoice.contract];
+
+	[self.managedObjectContext deleteObject:invoice];
+
+	if (save) {
+		[self saveContext];
+	}
+
+	return YES;
+}
 
 #pragma mark -
 #pragma mark Currency stack

@@ -19,6 +19,8 @@
 @property (nonatomic, strong) NSSet *lineItems;
 @property (nonatomic, retain) NSNumber *paid;
 
+- (void)unbindContract:(Contract *)aContract;
+
 @end
 
 

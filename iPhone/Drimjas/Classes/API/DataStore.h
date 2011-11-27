@@ -12,6 +12,7 @@
 @class ClientInfo;
 @class ContactInfo;
 @class Contract;
+@class Invoice;
 @class LineItemSelection;
 @class LineItem;
 @class Currency;
@@ -36,6 +37,7 @@
 	NSFetchedResultsController *clientInfosFetchedResultsController_;
 	NSFetchedResultsController *lineItemsFetchedResultsController_;
 	NSFetchedResultsController *contractsFetchedResultsController_;
+	NSFetchedResultsController *invoicesFetchedResultsController_;
 
 	// general settings
 	Currency *currency_;
@@ -121,6 +123,14 @@
 - (Contract *)createContract;
 - (BOOL)saveContract:(Contract *)contract;
 - (BOOL)deleteContract:(Contract *)contract andSave:(BOOL)save;
+
+@end
+
+
+@interface DataStore (InvoicesAccessors)
+
+- (NSFetchedResultsController *)invoicesFetchedResultsController;
+- (BOOL)deleteInvoice:(Invoice *)invoice andSave:(BOOL)save;
 
 @end
 

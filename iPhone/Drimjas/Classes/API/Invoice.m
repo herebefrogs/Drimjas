@@ -31,4 +31,13 @@
 	return NO;
 }
 
+- (void)unbindContract:(Contract *)aContract {
+	NSAssert(aContract.invoice == self, @"can't unbind Contract which isn't bound to Invoice");
+
+	aContract.invoice = nil;
+	self.contract = nil;
+	[self refreshStatus];
+}
+
+
 @end

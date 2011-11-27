@@ -67,6 +67,10 @@ NSInteger buttonTagClicked_ = 0;
 			item.title = NSLocalizedString(@"Contracts", @"Contracts Navigation Item Title");
             copyItem = YES;
 		}
+		else if (item.tag == TabBarItemInvoices) {
+			item.title = NSLocalizedString(@"Invoices", @"Invoices Navigation Item Title");
+            copyItem = YES;
+		}
 		else if (item.tag == TabBarItemOptions) {
 			item.title = NSLocalizedString(@"Options", @"Options Navigation Item Title");
             copyItem = YES;

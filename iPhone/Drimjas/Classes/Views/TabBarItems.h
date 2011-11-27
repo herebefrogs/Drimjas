@@ -12,6 +12,7 @@
 typedef enum {
 	TabBarItemEstimates = 1,
 	TabBarItemContracts,
+    TabBarItemInvoices,
 	TabBarItemOptions,
 
 	numTabBarItem

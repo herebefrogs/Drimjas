@@ -107,6 +107,10 @@
 		02E7BA141400194D00D60D6D /* EstimateHighlight.png in Resources */ = {isa = PBXBuildFile; fileRef = 02E7BA101400194D00D60D6D /* EstimateHighlight.png */; };
 		02E7BA151400194D00D60D6D /* EstimateHighlight@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 02E7BA111400194D00D60D6D /* EstimateHighlight@2x.png */; };
 		02EE00721482B94900C020DE /* Invoice.m in Sources */ = {isa = PBXBuildFile; fileRef = 02EE00711482B94900C020DE /* Invoice.m */; };
+		02EE00761482C00500C020DE /* InvoicesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02EE00741482C00400C020DE /* InvoicesViewController.m */; };
+		02EE00791482C06E00C020DE /* Invoices.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02EE00781482C06E00C020DE /* Invoices.xib */; };
+		02EE007E1482C82600C020DE /* InvoiceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 02EE007D1482C82600C020DE /* InvoiceCell.m */; };
+		02EE00801482C89100C020DE /* InvoiceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02EE007F1482C89100C020DE /* InvoiceCell.xib */; };
 		02FA0484138F3C94001CF3B0 /* NewLineItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02FA0482138F3C94001CF3B0 /* NewLineItemViewController.m */; };
 		02FA0485138F3C94001CF3B0 /* NewLineItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02FA0483138F3C94001CF3B0 /* NewLineItem.xib */; };
 		02FA838E12F7A69B00C713AF /* PDFManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 02FA838D12F7A69B00C713AF /* PDFManager.m */; };
@@ -280,6 +284,12 @@
 		02EE006F1482B66F00C020DE /* Drimjas 6.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Drimjas 6.xcdatamodel"; sourceTree = "<group>"; };
 		02EE00701482B94900C020DE /* Invoice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Invoice.h; sourceTree = "<group>"; };
 		02EE00711482B94900C020DE /* Invoice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Invoice.m; sourceTree = "<group>"; };
+		02EE00731482C00400C020DE /* InvoicesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InvoicesViewController.h; sourceTree = "<group>"; };
+		02EE00741482C00400C020DE /* InvoicesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InvoicesViewController.m; sourceTree = "<group>"; };
+		02EE00781482C06E00C020DE /* Invoices.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Invoices.xib; sourceTree = "<group>"; };
+		02EE007C1482C82600C020DE /* InvoiceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InvoiceCell.h; sourceTree = "<group>"; };
+		02EE007D1482C82600C020DE /* InvoiceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InvoiceCell.m; sourceTree = "<group>"; };
+		02EE007F1482C89100C020DE /* InvoiceCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = InvoiceCell.xib; path = Resources/Cells/InvoiceCell.xib; sourceTree = "<group>"; };
 		02F3ECBA13FB5CCF000ED8EF /* Drimjas 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Drimjas 3.xcdatamodel"; sourceTree = "<group>"; };
 		02F8E48813382D6500D75745 /* WorkingTitle 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "WorkingTitle 2.xcdatamodel"; sourceTree = "<group>"; };
 		02FA0481138F3C94001CF3B0 /* NewLineItemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewLineItemViewController.h; sourceTree = "<group>"; };
@@ -347,6 +357,8 @@
 				02E1C7A212E53834000D7747 /* EstimateDetailViewController.m */,
 				02B2C06B12DFF2DD00D3FEE0 /* EstimatesViewController.h */,
 				02B2C06C12DFF2DD00D3FEE0 /* EstimatesViewController.m */,
+				02EE00731482C00400C020DE /* InvoicesViewController.h */,
+				02EE00741482C00400C020DE /* InvoicesViewController.m */,
 				02DE9883137A12D3007C5FED /* LineItemsViewController.h */,
 				02DE9884137A12D3007C5FED /* LineItemsViewController.m */,
 				028CCBCF13B7A4910073C88F /* MyInfoViewController.h */,
@@ -388,6 +400,7 @@
 				020347CF14451D730085CE11 /* Currencies.xib */,
 				02E1C7A312E53834000D7747 /* EstimateDetail.xib */,
 				02B2C06D12DFF2DD00D3FEE0 /* Estimates.xib */,
+				02EE00781482C06E00C020DE /* Invoices.xib */,
 				02DE9885137A12D3007C5FED /* LineItems.xib */,
 				28AD73870D9D96C1002E5188 /* MainWindow.xib */,
 				028CCBD113B7A4910073C88F /* MyInfo.xib */,
@@ -476,9 +489,10 @@
 		02CC9C99133FC53C006160A7 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				02CC9C97133FC52D006160A7 /* TextFieldCell.xib */,
 				02CB9A6C139C19ED00FF2A3C /* EditSectionHeader.xib */,
 				02FB96561474B30A00192FDB /* EstimateCell.xib */,
+				02EE007F1482C89100C020DE /* InvoiceCell.xib */,
+				02CC9C97133FC52D006160A7 /* TextFieldCell.xib */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -488,12 +502,14 @@
 			children = (
 				02CB9A5D139C16B600FF2A3C /* EditSectionHeader.h */,
 				02CB9A5E139C16B600FF2A3C /* EditSectionHeader.m */,
+				02FB96581474B68D00192FDB /* EstimateCell.h */,
+				02FB96591474B68D00192FDB /* EstimateCell.m */,
+				02EE007C1482C82600C020DE /* InvoiceCell.h */,
+				02EE007D1482C82600C020DE /* InvoiceCell.m */,
 				02CC9C94133FC324006160A7 /* TextFieldCell.h */,
 				02CC9C95133FC324006160A7 /* TextFieldCell.m */,
 				023E06AB134D52A60026209B /* TextFieldTableViewController.h */,
 				023E06AC134D52A60026209B /* TextFieldTableViewController.m */,
-				02FB96581474B68D00192FDB /* EstimateCell.h */,
-				02FB96591474B68D00192FDB /* EstimateCell.m */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -701,6 +717,8 @@
 				02BF6C37144E75E600CA738D /* Contract_Terms_Illustrator.txt in Resources */,
 				02BF04D8146CE3AD007F165E /* PDF.xib in Resources */,
 				02FB96571474B30A00192FDB /* EstimateCell.xib in Resources */,
+				02EE00791482C06E00C020DE /* Invoices.xib in Resources */,
+				02EE00801482C89100C020DE /* InvoiceCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -758,6 +776,8 @@
 				02B8BCA4146B8404005A930B /* PDFViewController.m in Sources */,
 				02FB965A1474B68D00192FDB /* EstimateCell.m in Sources */,
 				02EE00721482B94900C020DE /* Invoice.m in Sources */,
+				02EE00761482C00500C020DE /* InvoicesViewController.m in Sources */,
+				02EE007E1482C82600C020DE /* InvoiceCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

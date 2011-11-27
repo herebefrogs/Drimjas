@@ -5,6 +5,9 @@
 /* Startup View Controller & Contracts View Controller Navigation Item & Tab Bar Title */
 "Contracts" = "Contracts";
 
+/* Startup View Controller & Invoices View Controller Navigation Item & Tab Bar Title */
+"Invoices" = "Invoices";
+
 /* Startup View Controller & Options View Controller Navigation Item & Tab Bar Title */
 "Options" = "Options";
 
@@ -217,6 +220,12 @@ Version %@";
 
 /* Draft status */
 "Draft" = "Draft";
+
+/* Paid status */
+"Paid" = "Paid";
+
+/* Unpaid status */
+"Unpaid" = "Unpaid";
 
 /********************* Utils section ******************/
 /* Estimate PDF filename */
