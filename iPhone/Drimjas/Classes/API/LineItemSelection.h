@@ -11,6 +11,7 @@
 #import "IndexedObject.h"
 
 @class Estimate;
+@class Invoice;
 @class LineItem;
 
 @interface LineItemSelection : IndexedObject {
@@ -20,6 +21,7 @@
 @property (nonatomic, strong) NSNumber *unitCost;
 @property (nonatomic, strong) NSString *desc;		// cannot be named "description" as it collides with NSObject no-argument message
 @property (nonatomic, strong) Estimate *estimate;
+@property (nonatomic, strong) Invoice *invoice;
 @property (nonatomic, strong) LineItem *lineItem;
 
 - (void)copyLineItem:(LineItem *)newLineItem;

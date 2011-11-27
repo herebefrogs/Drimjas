@@ -9,10 +9,12 @@
 #import "Contract.h"
 // API
 #import "Estimate.h"
+#import "Invoice.h"
 
 @implementation Contract 
 
 @dynamic estimate;
+@dynamic invoice;
 
 
 - (BOOL)isReady {

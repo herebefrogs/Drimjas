@@ -106,6 +106,7 @@
 		02E7BA131400194D00D60D6D /* Estimate@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 02E7BA0F1400194D00D60D6D /* Estimate@2x.png */; };
 		02E7BA141400194D00D60D6D /* EstimateHighlight.png in Resources */ = {isa = PBXBuildFile; fileRef = 02E7BA101400194D00D60D6D /* EstimateHighlight.png */; };
 		02E7BA151400194D00D60D6D /* EstimateHighlight@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 02E7BA111400194D00D60D6D /* EstimateHighlight@2x.png */; };
+		02EE00721482B94900C020DE /* Invoice.m in Sources */ = {isa = PBXBuildFile; fileRef = 02EE00711482B94900C020DE /* Invoice.m */; };
 		02FA0484138F3C94001CF3B0 /* NewLineItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02FA0482138F3C94001CF3B0 /* NewLineItemViewController.m */; };
 		02FA0485138F3C94001CF3B0 /* NewLineItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02FA0483138F3C94001CF3B0 /* NewLineItem.xib */; };
 		02FA838E12F7A69B00C713AF /* PDFManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 02FA838D12F7A69B00C713AF /* PDFManager.m */; };
@@ -276,6 +277,9 @@
 		02E7BA0F1400194D00D60D6D /* Estimate@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Estimate@2x.png"; path = "Resources/Icons/Estimate@2x.png"; sourceTree = "<group>"; };
 		02E7BA101400194D00D60D6D /* EstimateHighlight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = EstimateHighlight.png; path = Resources/Icons/EstimateHighlight.png; sourceTree = "<group>"; };
 		02E7BA111400194D00D60D6D /* EstimateHighlight@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "EstimateHighlight@2x.png"; path = "Resources/Icons/EstimateHighlight@2x.png"; sourceTree = "<group>"; };
+		02EE006F1482B66F00C020DE /* Drimjas 6.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Drimjas 6.xcdatamodel"; sourceTree = "<group>"; };
+		02EE00701482B94900C020DE /* Invoice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Invoice.h; sourceTree = "<group>"; };
+		02EE00711482B94900C020DE /* Invoice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Invoice.m; sourceTree = "<group>"; };
 		02F3ECBA13FB5CCF000ED8EF /* Drimjas 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Drimjas 3.xcdatamodel"; sourceTree = "<group>"; };
 		02F8E48813382D6500D75745 /* WorkingTitle 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "WorkingTitle 2.xcdatamodel"; sourceTree = "<group>"; };
 		02FA0481138F3C94001CF3B0 /* NewLineItemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewLineItemViewController.h; sourceTree = "<group>"; };
@@ -284,7 +288,7 @@
 		02FA838C12F7A69B00C713AF /* PDFManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFManager.h; sourceTree = "<group>"; };
 		02FA838D12F7A69B00C713AF /* PDFManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFManager.m; sourceTree = "<group>"; };
 		02FB96561474B30A00192FDB /* EstimateCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EstimateCell.xib; path = Resources/Cells/EstimateCell.xib; sourceTree = "<group>"; };
-		02FB96581474B68D00192FDB /* EstimateCell.h */ = {isa = PBXFileReference; fileEncoding = 4; path = EstimateCell.h; sourceTree = "<group>"; };
+		02FB96581474B68D00192FDB /* EstimateCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EstimateCell.h; sourceTree = "<group>"; };
 		02FB96591474B68D00192FDB /* EstimateCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EstimateCell.m; sourceTree = "<group>"; };
 		02FC633213062D7100681A03 /* EmailManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmailManager.h; sourceTree = "<group>"; };
 		02FC633313062D7100681A03 /* EmailManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmailManager.m; sourceTree = "<group>"; };
@@ -418,10 +422,12 @@
 				02C25792132438C40057D944 /* DataStore.m */,
 				02CC9D83133FEB2C006160A7 /* Estimate.h */,
 				02CC9D84133FEB2C006160A7 /* Estimate.m */,
-				02C6509813D922B200ABEFF7 /* KeyValue.h */,
-				02C6509913D922B200ABEFF7 /* KeyValue.m */,
 				02B6326413B1D9D5003E4081 /* IndexedObject.h */,
 				02B6326513B1D9D5003E4081 /* IndexedObject.m */,
+				02EE00701482B94900C020DE /* Invoice.h */,
+				02EE00711482B94900C020DE /* Invoice.m */,
+				02C6509813D922B200ABEFF7 /* KeyValue.h */,
+				02C6509913D922B200ABEFF7 /* KeyValue.m */,
 				02DE9879137A10C1007C5FED /* LineItem.h */,
 				02DE987A137A10C1007C5FED /* LineItem.m */,
 				02022CA41378CDFC00536FEA /* LineItemSelection.h */,
@@ -751,6 +757,7 @@
 				02049657144D0D1400B14002 /* ProfessionsViewController.m in Sources */,
 				02B8BCA4146B8404005A930B /* PDFViewController.m in Sources */,
 				02FB965A1474B68D00192FDB /* EstimateCell.m in Sources */,
+				02EE00721482B94900C020DE /* Invoice.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -881,8 +888,9 @@
 				02F3ECBA13FB5CCF000ED8EF /* Drimjas 3.xcdatamodel */,
 				02CC02E7140481A5007D1795 /* Drimjas 4.xcdatamodel */,
 				02BF6C2F144E603B00CA738D /* Drimjas 5.xcdatamodel */,
+				02EE006F1482B66F00C020DE /* Drimjas 6.xcdatamodel */,
 			);
-			currentVersion = 02BF6C2F144E603B00CA738D /* Drimjas 5.xcdatamodel */;
+			currentVersion = 02EE006F1482B66F00C020DE /* Drimjas 6.xcdatamodel */;
 			name = Drimjas.xcdatamodeld;
 			path = Resources/Drimjas.xcdatamodeld;
 			sourceTree = "<group>";

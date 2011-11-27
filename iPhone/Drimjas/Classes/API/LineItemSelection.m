@@ -9,6 +9,7 @@
 #import "LineItemSelection.h"
 // API
 #import "Estimate.h"
+#import "Invoice.h"
 #import "LineItem.h"
 
 @implementation LineItemSelection
@@ -17,6 +18,7 @@
 @dynamic unitCost;
 @dynamic desc;
 @dynamic estimate;
+@dynamic invoice;
 @dynamic lineItem;
 
 
@@ -36,10 +38,10 @@
 	[super refreshStatus];
 
 	if (![oldStatus isEqualToNumber:self.status]) {
-		// notify underlying Estimate of the status change
+		// notify underlying Estimate & Invoice of the status change
 		[self.estimate refreshStatus];
+        [self.invoice refreshStatus];
 	}
-
 }
 
 

@@ -11,11 +11,13 @@
 #import "BaseObject.h"
 
 @class Estimate;
+@class Invoice;
 
 @interface Contract : BaseObject {
 }
 
 @property (nonatomic, strong) Estimate *estimate;
+@property (nonatomic, strong) Invoice *invoice;
 
 - (void)bindEstimate:(Estimate *)anEstimate;
 - (void)unbindEstimate:(Estimate *)anEstimate;
