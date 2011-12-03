@@ -1,82 +1,59 @@
 //
-//  InvoicesViewController.m
+//  NewInvoiceViewController.m
 //  Drimjas
 //
-//  Created by Jerome Lecomte on 11-11-27.
+//  Created by Jerome Lecomte on 11-12-02.
 //  Copyright (c) 2011 David J Peacock Photography. All rights reserved.
 //
 
-#import "InvoicesViewController.h"
+#import "NewInvoiceViewController.h"
 // API
 #import "ClientInfo.h"
 #import "Contract.h"
 #import "DataStore.h"
 #import "Estimate.h"
 #import "Invoice.h"
-// Cell
-#import "InvoiceCell.h"
-// Views
-#import "NewInvoiceViewController.h"
 
+@interface NewInvoiceViewController ()
 
-@interface InvoicesViewController ()
-
-- (void)configureCell:(UITableViewCell *)aCell atIndexPath:(NSIndexPath *)indexPath;
+- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
 
 @end
 
 
-@implementation InvoicesViewController
+@implementation NewInvoiceViewController
 
-@synthesize aNewInvoiceViewController;
-@synthesize invoiceCell;
-@synthesize invoices;
 
-- (void)didReceiveMemoryWarning
-{
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
-}
+@synthesize contracts;
+
 
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad
 {
 #ifdef __ENABLE_UI_LOGS__
-	NSLog(@"InvoicesViewController.viewDidLoad");
+	NSLog(@"NewInvoiceViewController.viewDidLoad");
 #endif
     [super viewDidLoad];
+	self.title = NSLocalizedString(@"Pick Contract", @"NewInvoice Navigation Item Title");
 
-	self.title = NSLocalizedString(@"Invoices", @"Invoices Navigation Item Title");
-	self.navigationController.tabBarItem.title = self.title;
-
-	// start with toolbar hidden (no animation)
-	self.navigationController.toolbarHidden = YES;
-
-	self.navigationItem.leftBarButtonItem = self.editButtonItem;
-
-    self.invoices = [[DataStore defaultStore] invoicesFetchedResultsController];
-    invoices.delegate = self;
+	self.contracts = [[DataStore defaultStore] invoiceReadyContractsFetchedResultsController];
+	contracts.delegate = self;
 }
 
 - (void)viewDidUnload
 {
 #ifdef __ENABLE_UI_LOGS__
-	NSLog(@"InvoicesViewController.viewDidUnload");
+	NSLog(@"NewInvoiceViewController.viewDidUnload");
 #endif
     [super viewDidUnload];
     // Release any retained subviews of the main view.
-    self.aNewInvoiceViewController = nil;
-    self.invoiceCell = nil;
-    self.invoices = nil;
+    self.contracts = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    // TODO try without [self.tableView reloadData] supposed to be done by super
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -86,56 +63,40 @@
 
 #pragma mark - Table view data source
 
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
-{
-	id <NSFetchedResultsSectionInfo> sectionInfo = [invoices.sections objectAtIndex:section];
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+	id <NSFetchedResultsSectionInfo> sectionInfo = [contracts.sections objectAtIndex:section];
     return [sectionInfo name];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return invoices.sections.count;
+    return contracts.sections.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-	id<NSFetchedResultsSectionInfo> sectionInfo = [invoices.sections objectAtIndex:section];
+	id<NSFetchedResultsSectionInfo> sectionInfo = [contracts.sections objectAtIndex:section];
     return [sectionInfo numberOfObjects];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"InvoiceCell";
-    
+    static NSString *CellIdentifier = @"Cell";
+
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-		[[NSBundle mainBundle] loadNibNamed:CellIdentifier owner:self options:nil];
-        cell = (UITableViewCell *)invoiceCell;
-		self.invoiceCell = nil;
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
-    
-    [self configureCell:cell atIndexPath:indexPath];
-    
+
+	[self configureCell:cell atIndexPath:indexPath];
+
     return cell;
 }
 
-- (void)configureCell:(UITableViewCell *)aCell atIndexPath:(NSIndexPath *)indexPath {
-    InvoiceCell *cell = (InvoiceCell *)aCell;
-
-    static CGFloat DRIMJAS_GREEN_R = 0.31;			// 79 from 0-255 to 0.0-1.0 range
-    static CGFloat DRIMJAS_GREEN_G = 0.56;			// 143 from 0-255 to 0.0-1.0 range
-    static CGFloat DRIMJAS_GREEN_B = 0.0;
-
-    Invoice *invoice = [invoices objectAtIndexPath:indexPath];
-    cell.clientName.text = invoice.contract.estimate.clientInfo.name;
-    cell.orderNumber.text = invoice.contract.estimate.orderNumber;
-    if ([invoice.paid boolValue]) {
-        cell.paid.text = NSLocalizedString(@"Paid", "Paid status");
-        cell.paid.textColor = [UIColor colorWithRed:DRIMJAS_GREEN_R green:DRIMJAS_GREEN_G blue:DRIMJAS_GREEN_B alpha:1.0];
-    } else {
-        cell.paid.text = NSLocalizedString(@"Unpaid", "Unpaid status");
-        cell.paid.textColor = [UIColor redColor];
-    }
+- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+	Contract *contract = [contracts objectAtIndexPath:indexPath];
+	cell.textLabel.text = contract.estimate.clientInfo.name;
+	cell.detailTextLabel.text = contract.estimate.orderNumber;
 
 	cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 }
@@ -144,23 +105,14 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"Open InvoiceDetailViewController");
+	// create a new contract based on selected estimate
+	Invoice *invoice = [[DataStore defaultStore] createInvoice];
+	[invoice bindContract:[contracts objectAtIndexPath:indexPath]];
+	[[DataStore defaultStore] saveInvoice:invoice];
+
+	// TODO reset navigation controller to invoices list & invoice detail view controllers,
+    [self.navigationController popViewControllerAnimated:YES];
 }
-
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-		[[DataStore defaultStore] deleteInvoice:[invoices objectAtIndexPath:indexPath] andSave:YES];
-    }
-}
-
-#pragma mark -
-#pragma mark Button delegate
-
-- (IBAction)add:(id)sender {
-	[self.navigationController pushViewController:aNewInvoiceViewController animated:YES];
-}
-
 
 #pragma mark -
 #pragma mark FetchedResultsController delegate
@@ -203,7 +155,6 @@
             break;
     }
 }
-
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
 	// The fetch controller has sent all current change notifications, so tell the table view to process all updates.

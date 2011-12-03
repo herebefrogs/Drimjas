@@ -37,6 +37,7 @@
 	NSFetchedResultsController *clientInfosFetchedResultsController_;
 	NSFetchedResultsController *lineItemsFetchedResultsController_;
 	NSFetchedResultsController *contractsFetchedResultsController_;
+    NSFetchedResultsController *invoiceReadyContractsFetchedResultsController_;
 	NSFetchedResultsController *invoicesFetchedResultsController_;
 
 	// general settings
@@ -120,6 +121,7 @@
 @interface DataStore (ContractAccessors)
 
 - (NSFetchedResultsController *)contractsFetchedResultsController;
+- (NSFetchedResultsController *)invoiceReadyContractsFetchedResultsController;
 - (Contract *)createContract;
 - (BOOL)saveContract:(Contract *)contract;
 - (BOOL)deleteContract:(Contract *)contract andSave:(BOOL)save;
@@ -130,6 +132,8 @@
 @interface DataStore (InvoicesAccessors)
 
 - (NSFetchedResultsController *)invoicesFetchedResultsController;
+- (Invoice *)createInvoice;
+- (BOOL)saveInvoice:(Invoice *)invoice;
 - (BOOL)deleteInvoice:(Invoice *)invoice andSave:(BOOL)save;
 
 @end

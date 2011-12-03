@@ -24,6 +24,7 @@
 @property (nonatomic, strong) Invoice *invoice;
 @property (nonatomic, strong) LineItem *lineItem;
 
+- (LineItemSelection *)copyLineItemSelectionForInvoice:(Invoice *)invoice;
 - (void)copyLineItem:(LineItem *)newLineItem;
 @property (weak, nonatomic, readonly) NSNumber *cost; // quantity x unitCost
 @property (weak, nonatomic, readonly) NSNumber *nonNilUnitCost;

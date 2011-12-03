@@ -31,6 +31,17 @@
 	return NO;
 }
 
+- (void)bindContract:(Contract *)aContract {
+    for (LineItemSelection *lineItem in aContract.estimate.lineItems) {
+        [self addLineItemsObject:[lineItem copyLineItemSelectionForInvoice:self]];
+    }
+
+	aContract.invoice = self;
+	self.contract = aContract;
+
+    [self refreshStatus];
+}
+
 - (void)unbindContract:(Contract *)aContract {
 	NSAssert(aContract.invoice == self, @"can't unbind Contract which isn't bound to Invoice");
 

@@ -8,6 +8,7 @@
 
 #import "LineItemSelection.h"
 // API
+#import "DataStore.h"
 #import "Estimate.h"
 #import "Invoice.h"
 #import "LineItem.h"
@@ -44,6 +45,24 @@
 	}
 }
 
+- (LineItemSelection *)copyLineItemSelectionForInvoice:(Invoice *)invoice {
+	LineItemSelection *copy = [[DataStore defaultStore] createLineItemSelection];
+
+	copy.invoice = invoice;
+	copy.lineItem = self.lineItem;
+	[copy.lineItem addLineItemSelectionsObject:copy];
+	copy.desc = self.desc;
+	copy.quantity = self.quantity;
+	copy.unitCost = self.unitCost;
+	copy.status = self.status;
+	// direct base class attributes
+	copy.index = self.index;
+	// base class's base class attributes
+	copy.status = self.status;
+	copy.subEntityName = self.subEntityName;
+
+    return copy;
+}
 
 - (void)copyLineItem:(LineItem *)newLineItem {
 	// deassociate current line item

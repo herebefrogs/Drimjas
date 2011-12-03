@@ -227,6 +227,9 @@ Version %@";
 /* Unpaid status */
 "Unpaid" = "Impayé";
 
+/* NewInvoice Navigation Item Title */
+"Pick Invoice" = "Choisir une facture";
+
 /********************* Utils section ******************/
 /* Estimate PDF filename */
 "Estimate-%@.pdf" = "Devis-%@.pdf";

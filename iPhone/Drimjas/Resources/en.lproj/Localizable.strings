@@ -227,6 +227,9 @@ Version %@";
 /* Unpaid status */
 "Unpaid" = "Unpaid";
 
+/* NewInvoice Navigation Item Title */
+"Pick Contract" = "Pick Contract";
+
 /********************* Utils section ******************/
 /* Estimate PDF filename */
 "Estimate-%@.pdf" = "Estimate-%@.pdf";

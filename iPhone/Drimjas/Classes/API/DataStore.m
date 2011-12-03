@@ -21,6 +21,16 @@
 #import "MyInfo.h"
 
 
+@interface DataStore ()
+
+- (NSFetchedResultsController *)fetchedResultsControllerForEntity:(NSString *)entity
+                                                        predicate:(NSPredicate *)predicate
+                                                   sortDescriptor:(NSSortDescriptor *)sortDescriptor
+                                               sectionNameKeyPath:(NSString *)keyPath;
+
+@end
+
+
 @implementation DataStore
 
 #pragma mark -
@@ -228,36 +238,35 @@ static DataStore *singleton_ = nil;
 	}
 }
 
-- (NSFetchedResultsController *)getEstimatesFetchedResultsControllerWithStatusPredicate:(NSNumber *)status {
-	// Estimate fetch request
+- (NSFetchedResultsController *)fetchedResultsControllerForEntity:(NSString *)entity
+                                                        predicate:(NSPredicate *)predicate
+                                                   sortDescriptor:(NSSortDescriptor *)sortDescriptor
+                                               sectionNameKeyPath:(NSString *)keyPath
+{
 	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-	fetchRequest.entity = [NSEntityDescription entityForName:@"Estimate"
+	fetchRequest.entity = [NSEntityDescription entityForName:entity
 									  inManagedObjectContext:self.managedObjectContext];
 
-	if (status) {
-		fetchRequest.predicate = [NSPredicate predicateWithFormat:@"status = %@ AND contract = NIL", status];
-	}
+    fetchRequest.predicate = predicate;
 
-	// Sort estimates by date (newest estimate first, oldest estimate last)
-	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"date" ascending:NO];
 	fetchRequest.sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
 
-	// buffer up to 16 Estimate
 	fetchRequest.fetchBatchSize = 16;
 
-	NSFetchedResultsController *fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
-																								managedObjectContext:self.managedObjectContext
-																								  sectionNameKeyPath:@"monthYear"
-																										   cacheName:@"Root"];
-
-
-	return fetchedResultsController;
+	return [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
+                                               managedObjectContext:self.managedObjectContext
+                                                 sectionNameKeyPath:keyPath
+                                                          cacheName:@"Root"];
 }
 
 - (NSFetchedResultsController *)estimatesFetchedResultsController {
 	if (estimatesFetchedResultsController_ == nil) {
 
-		estimatesFetchedResultsController_ = [self getEstimatesFetchedResultsControllerWithStatusPredicate:nil];
+        // Sort estimates by date (newest estimate first, oldest estimate last)
+		estimatesFetchedResultsController_ = [self fetchedResultsControllerForEntity:@"Estimate"
+                                                                           predicate:nil
+                                                                      sortDescriptor:[NSSortDescriptor sortDescriptorWithKey:@"date" ascending:NO]
+                                                                  sectionNameKeyPath:@"monthYear"];
 
 		NSError *error = nil;
 		if (![estimatesFetchedResultsController_ performFetch:&error]) {
@@ -279,7 +288,11 @@ static DataStore *singleton_ = nil;
 - (NSFetchedResultsController *)contractReadyEstimatesFetchedResultsController {
 	if (contractReadyEstimatesFetchedResultsController_ == nil) {
 
-		contractReadyEstimatesFetchedResultsController_ = [self getEstimatesFetchedResultsControllerWithStatusPredicate:[NSNumber numberWithInt:StatusReady]];
+        // Sort estimates by date (newest estimate first, oldest estimate last)
+		contractReadyEstimatesFetchedResultsController_ = [self fetchedResultsControllerForEntity:@"Estimate"
+                                                                                        predicate:[NSPredicate predicateWithFormat:@"status = %@ AND contract = NIL", [NSNumber numberWithInt:StatusReady]]
+                                                                                   sortDescriptor:[NSSortDescriptor sortDescriptorWithKey:@"date" ascending:NO]
+                                                                               sectionNameKeyPath:@"monthYear"];
 
 		NSError *error = nil;
 		if (![contractReadyEstimatesFetchedResultsController_ performFetch:&error]) {
@@ -707,8 +720,8 @@ static DataStore *singleton_ = nil;
 
 	[self.managedObjectContext deleteObject:lineItemSelection];
 	
-	// we only expect this method to be called by deleteEstimate: or as part of
-	// "line items" screen edition so let them save the modified context
+	// we only expect this method to be called by deleteEstimate:, deleteInvoice:
+    // or as part of "line items" screen edition so let them save the modified context
 	
 	return YES;
 }
@@ -719,23 +732,10 @@ static DataStore *singleton_ = nil;
 
 - (NSFetchedResultsController *)contractsFetchedResultsController {
 	if (contractsFetchedResultsController_ == nil) {
-		// Contract fetch request
-		NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-		fetchRequest.entity = [NSEntityDescription entityForName:@"Contract"
-										  inManagedObjectContext:self.managedObjectContext];
-
-		// Sort contracts by date (newest contract first, oldest contract last)
-		NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"estimate.date" ascending:NO];
-		fetchRequest.sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
-
-		// buffer up to 16 Contracts
-		fetchRequest.fetchBatchSize = 16;
-
-		contractsFetchedResultsController_ = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
-																				 managedObjectContext:self.managedObjectContext
-																				   sectionNameKeyPath:@"estimate.monthYear"
-																							cacheName:@"Root"];
-
+		contractsFetchedResultsController_ = [self fetchedResultsControllerForEntity:@"Contract"
+                                                                           predicate:nil
+                                                                      sortDescriptor:[[NSSortDescriptor alloc] initWithKey:@"estimate.date" ascending:NO]
+                                                                  sectionNameKeyPath:@"estimate.monthYear"];
 
 		NSError *error = nil;
 		if (![contractsFetchedResultsController_ performFetch:&error]) {
@@ -746,6 +746,25 @@ static DataStore *singleton_ = nil;
 		}
 	}
 	return contractsFetchedResultsController_;
+}
+
+- (NSFetchedResultsController *)invoiceReadyContractsFetchedResultsController {
+	if (invoiceReadyContractsFetchedResultsController_ == nil) {
+
+		invoiceReadyContractsFetchedResultsController_ = [self fetchedResultsControllerForEntity:@"Contract"
+                                                                                       predicate:[NSPredicate predicateWithFormat:@"status = %@ AND invoice = NIL", [NSNumber numberWithInt:StatusReady]]
+                                                                                  sortDescriptor:[[NSSortDescriptor alloc] initWithKey:@"estimate.date" ascending:NO]
+                                                                              sectionNameKeyPath:@"estimate.monthYear"];
+
+		NSError *error = nil;
+		if (![invoiceReadyContractsFetchedResultsController_ performFetch:&error]) {
+			// TODO This is a serious error saying the records
+			//could not be fetched. Advise the user to try
+			//again or restart the application.
+			NSLog(@"DataStore.invoiceReadyContractsFetchedResultsController: fetch failed with error %@, %@", error, [error userInfo]);
+		}
+	}
+	return invoiceReadyContractsFetchedResultsController_;
 }
 
 - (Contract *)createContract {
@@ -813,9 +832,28 @@ static DataStore *singleton_ = nil;
 	return invoicesFetchedResultsController_;
 }
 
+- (Invoice *)createInvoice;
+{
+	return (Invoice *)[NSEntityDescription insertNewObjectForEntityForName:@"Invoice"
+													 inManagedObjectContext:self.managedObjectContext];
+}
+
+- (BOOL)saveInvoice:(Invoice *)invoice
+{
+    [invoice refreshStatus];
+
+	[self saveContext];
+
+	return YES;
+}
+
 - (BOOL)deleteInvoice:(Invoice *)invoice andSave:(BOOL)save {
 	// deleting an invoice does not delete underlying contract
 	[invoice unbindContract:invoice.contract];
+
+    for (LineItemSelection *lineItem in invoice.lineItems) {
+		[self deleteLineItemSelection:lineItem];
+	}
 
 	[self.managedObjectContext deleteObject:invoice];
 

@@ -17,6 +17,8 @@
 		020886D113AC41D000164320 /* Contracts.xib in Resources */ = {isa = PBXBuildFile; fileRef = 020886CF13AC41D000164320 /* Contracts.xib */; };
 		020886EA13AC439100164320 /* OptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 020886E813AC439100164320 /* OptionsViewController.m */; };
 		020886EB13AC439100164320 /* Options.xib in Resources */ = {isa = PBXBuildFile; fileRef = 020886E913AC439100164320 /* Options.xib */; };
+		0213E3671489C946001D3D1D /* NewInvoiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0213E3651489C946001D3D1D /* NewInvoiceViewController.m */; };
+		0213E3681489C946001D3D1D /* NewInvoice.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0213E3661489C946001D3D1D /* NewInvoice.xib */; };
 		0216F77212FF46E9007BC60F /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0216F77112FF46E9007BC60F /* MessageUI.framework */; };
 		021C0D32137B73A2007E641C /* LineItemDefaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = 021C0D31137B73A2007E641C /* LineItemDefaults.plist */; };
 		021F685012E67D8700ECDDDD /* NewClientInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 021F684E12E67D8700ECDDDD /* NewClientInfoViewController.m */; };
@@ -142,6 +144,9 @@
 		020886E713AC439100164320 /* OptionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionsViewController.h; sourceTree = "<group>"; };
 		020886E813AC439100164320 /* OptionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OptionsViewController.m; sourceTree = "<group>"; };
 		020886E913AC439100164320 /* Options.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Options.xib; sourceTree = "<group>"; };
+		0213E3641489C946001D3D1D /* NewInvoiceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewInvoiceViewController.h; sourceTree = "<group>"; };
+		0213E3651489C946001D3D1D /* NewInvoiceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewInvoiceViewController.m; sourceTree = "<group>"; };
+		0213E3661489C946001D3D1D /* NewInvoice.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewInvoice.xib; sourceTree = "<group>"; };
 		0216F77112FF46E9007BC60F /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		021C0D31137B73A2007E641C /* LineItemDefaults.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = LineItemDefaults.plist; path = Resources/LineItemDefaults.plist; sourceTree = "<group>"; };
 		021E547313690BEA00849A20 /* WorkingTitle 7.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "WorkingTitle 7.xcdatamodel"; sourceTree = "<group>"; };
@@ -367,6 +372,8 @@
 				021F684E12E67D8700ECDDDD /* NewClientInfoViewController.m */,
 				02CC032714048C0A007D1795 /* NewContractViewController.h */,
 				02CC032814048C0A007D1795 /* NewContractViewController.m */,
+				0213E3641489C946001D3D1D /* NewInvoiceViewController.h */,
+				0213E3651489C946001D3D1D /* NewInvoiceViewController.m */,
 				02FA0481138F3C94001CF3B0 /* NewLineItemViewController.h */,
 				02FA0482138F3C94001CF3B0 /* NewLineItemViewController.m */,
 				02C75240136A429F00EC4BF5 /* NewOrPickClientInfoViewController.h */,
@@ -406,6 +413,7 @@
 				028CCBD113B7A4910073C88F /* MyInfo.xib */,
 				021F684F12E67D8700ECDDDD /* NewClientInfo.xib */,
 				02CC032914048C0A007D1795 /* NewContract.xib */,
+				0213E3661489C946001D3D1D /* NewInvoice.xib */,
 				02FA0483138F3C94001CF3B0 /* NewLineItem.xib */,
 				02C75242136A429F00EC4BF5 /* NewOrPickClientInfo.xib */,
 				020886E913AC439100164320 /* Options.xib */,
@@ -719,6 +727,7 @@
 				02FB96571474B30A00192FDB /* EstimateCell.xib in Resources */,
 				02EE00791482C06E00C020DE /* Invoices.xib in Resources */,
 				02EE00801482C89100C020DE /* InvoiceCell.xib in Resources */,
+				0213E3681489C946001D3D1D /* NewInvoice.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -778,6 +787,7 @@
 				02EE00721482B94900C020DE /* Invoice.m in Sources */,
 				02EE00761482C00500C020DE /* InvoicesViewController.m in Sources */,
 				02EE007E1482C82600C020DE /* InvoiceCell.m in Sources */,
+				0213E3671489C946001D3D1D /* NewInvoiceViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
