@@ -230,6 +230,9 @@ Version %@";
 /* NewInvoice Navigation Item Title */
 "Pick Invoice" = "Choisir une facture";
 
+/* InvoiceDetail Navigation Item Title */
+"Invoice Detail" = "Aperçu de la facture";
+
 /********************* Utils section ******************/
 /* Estimate PDF filename */
 "Estimate-%@.pdf" = "Devis-%@.pdf";

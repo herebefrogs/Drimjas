@@ -67,6 +67,13 @@ typedef enum {
 } ContractDetailSection;
 
 typedef enum {
+	InvoiceDetailSectionOrderNumber = 0,
+	InvoiceDetailSectionClientInfo,
+	InvoiceDetailSectionContactInfo,
+} InvoiceDetailSection;
+
+
+typedef enum {
 	TaxesAndCurrencySectionCurrency = 0,
 } TaxesAndCurrencySection;
 

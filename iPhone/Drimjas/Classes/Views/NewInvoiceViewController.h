@@ -8,10 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+@class InvoiceDetailViewController;
+
 @interface NewInvoiceViewController : UITableViewController <NSFetchedResultsControllerDelegate> {
+    InvoiceDetailViewController *invoiceDetailViewController;
     NSFetchedResultsController *contracts;
 }
 
+@property (nonatomic, strong) IBOutlet InvoiceDetailViewController *invoiceDetailViewController;
 @property (nonatomic, strong) NSFetchedResultsController *contracts;
 
 @end

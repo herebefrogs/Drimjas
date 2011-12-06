@@ -33,11 +33,11 @@
     PDFViewController *pdfViewController;
 
 	Estimate *estimate;
+@private
+    UIViewController* mailComposeViewController;
 	NSInteger indexFirstLineItem;
 	NSInteger indexLastSection;
 	NSArray *lineItemSelections;
-@private
-    UIViewController* mailComposeViewController;
 }
 
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *emailButton;

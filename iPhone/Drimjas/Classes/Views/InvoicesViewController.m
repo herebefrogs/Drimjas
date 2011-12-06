@@ -16,6 +16,7 @@
 // Cell
 #import "InvoiceCell.h"
 // Views
+#import "InvoiceDetailViewController.h"
 #import "NewInvoiceViewController.h"
 
 
@@ -29,6 +30,7 @@
 @implementation InvoicesViewController
 
 @synthesize aNewInvoiceViewController;
+@synthesize invoiceDetailViewController;
 @synthesize invoiceCell;
 @synthesize invoices;
 
@@ -69,14 +71,9 @@
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     self.aNewInvoiceViewController = nil;
+    self.invoiceDetailViewController = nil;
     self.invoiceCell = nil;
     self.invoices = nil;
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    // TODO try without [self.tableView reloadData] supposed to be done by super
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -144,7 +141,9 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"Open InvoiceDetailViewController");
+    invoiceDetailViewController.invoice = [invoices objectAtIndexPath:indexPath];
+
+    [self.navigationController pushViewController:invoiceDetailViewController animated:YES];
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath

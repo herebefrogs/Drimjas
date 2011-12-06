@@ -9,16 +9,19 @@
 #import <UIKit/UIKit.h>
 
 @class InvoiceCell;
+@class InvoiceDetailViewController;
 @class NewInvoiceViewController;
 
 @interface InvoicesViewController : UITableViewController <NSFetchedResultsControllerDelegate> {
     NewInvoiceViewController *aNewInvoiceViewController;
+    InvoiceDetailViewController *invoiceDetailViewController;
     InvoiceCell *invoiceCell;
 
     NSFetchedResultsController *invoices;
 }
 
-@property (strong, nonatomic) IBOutlet NewInvoiceViewController *aNewInvoiceViewController;
+@property (nonatomic, strong) IBOutlet NewInvoiceViewController *aNewInvoiceViewController;
+@property (nonatomic, strong) IBOutlet InvoiceDetailViewController *invoiceDetailViewController;
 @property (nonatomic, strong) IBOutlet InvoiceCell *invoiceCell;
 @property (nonatomic, strong) NSFetchedResultsController *invoices;
 

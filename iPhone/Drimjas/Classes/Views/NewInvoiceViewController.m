@@ -13,6 +13,8 @@
 #import "DataStore.h"
 #import "Estimate.h"
 #import "Invoice.h"
+// Views
+#import "InvoiceDetailViewController.h"
 
 @interface NewInvoiceViewController ()
 
@@ -23,8 +25,8 @@
 
 @implementation NewInvoiceViewController
 
-
 @synthesize contracts;
+@synthesize invoiceDetailViewController;
 
 
 #pragma mark - View lifecycle
@@ -49,6 +51,7 @@
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     self.contracts = nil;
+    //self.invoiceDetailViewController = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -110,8 +113,15 @@
 	[invoice bindContract:[contracts objectAtIndexPath:indexPath]];
 	[[DataStore defaultStore] saveInvoice:invoice];
 
-	// TODO reset navigation controller to invoices list & invoice detail view controllers,
-    [self.navigationController popViewControllerAnimated:YES];
+    invoiceDetailViewController.invoice = invoice;
+
+	// reset navigation controller to invoice list & invoice detail view controllers,
+	// discarding any invoice creation view controllers in between
+    UIViewController *rootController = [self.navigationController.viewControllers objectAtIndex:0];
+	[self.navigationController setViewControllers:[NSArray arrayWithObjects:rootController,
+                                                                            invoiceDetailViewController,
+                                                                            nil]
+										 animated:YES];
 }
 
 #pragma mark -

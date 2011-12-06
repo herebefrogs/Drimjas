@@ -230,6 +230,9 @@ Version %@";
 /* NewInvoice Navigation Item Title */
 "Pick Contract" = "Pick Contract";
 
+/* InvoiceDetail Navigation Item Title */
+"Invoice Detail" = "Invoice Detail";
+
 /********************* Utils section ******************/
 /* Estimate PDF filename */
 "Estimate-%@.pdf" = "Estimate-%@.pdf";

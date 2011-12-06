@@ -33,24 +33,12 @@
 @interface EstimateDetailViewController ()
 
 @property (nonatomic, strong) UIViewController *mailComposeViewController;
+- (void)reloadIndexes;
 
 @end
 
 
 @implementation EstimateDetailViewController
-
-#pragma mark -
-#pragma mark Private methods stack
-
-- (void)reloadIndexes {
-	indexFirstLineItem = EstimateDetailSectionContactInfo + MAX(1, estimate.clientInfo.contactInfos.count);
-	indexLastSection = indexFirstLineItem + MAX(1, estimate.lineItems.count);
-
-	// TODO move this into Estimate, cached in a local transient array refreshed when (un)binding Line Item Selections
-	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"index" ascending:YES];
-	lineItemSelections = [estimate.lineItems sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];
-}
-
 
 #pragma mark -
 #pragma mark Properties stack
@@ -73,6 +61,19 @@
 	if (estimate) {
 		[self reloadIndexes];
 	}
+}
+
+
+#pragma mark -
+#pragma mark Private methods stack
+
+- (void)reloadIndexes {
+	indexFirstLineItem = EstimateDetailSectionContactInfo + MAX(1, estimate.clientInfo.contactInfos.count);
+	indexLastSection = indexFirstLineItem + MAX(1, estimate.lineItems.count);
+
+	// TODO move this into Estimate, cached in a local transient array refreshed when (un)binding Line Item Selections
+	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"index" ascending:YES];
+	lineItemSelections = [estimate.lineItems sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];
 }
 
 
@@ -152,7 +153,7 @@
 			return 0;
 		}
 		else {
-			ContactInfo *contactInfo = [estimate.clientInfo contactInfoAtIndex:section - EstimateDetailSectionContactInfo];
+			ContactInfo *contactInfo = [estimate.clientInfo contactInfoAtIndex:(section - EstimateDetailSectionContactInfo)];
 
 			return [contactInfo countNonEmptyProperties];
 		}
@@ -195,7 +196,7 @@
         cell.detailTextLabel.text = keyVal.value;
 	}
 	else if (indexPath.section >= EstimateDetailSectionContactInfo && indexPath.section < indexFirstLineItem) {
-		ContactInfo *contactInfo = [estimate.clientInfo contactInfoAtIndex:indexPath.section - EstimateDetailSectionContactInfo];
+		ContactInfo *contactInfo = [estimate.clientInfo contactInfoAtIndex:(indexPath.section - EstimateDetailSectionContactInfo)];
 
         KeyValue *keyVal = [[contactInfo nonEmptyProperties] objectAtIndex:indexPath.row];
 
