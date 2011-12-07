@@ -279,9 +279,9 @@
     if (section == EstimateDetailSectionClientInfo
         || section == EstimateDetailSectionContactInfo
         || section == indexFirstLineItem) {
-        return 32.5;
+        return 36;
     }
-    return 0;
+    return UITableViewAutomaticDimension;
 }
 
 

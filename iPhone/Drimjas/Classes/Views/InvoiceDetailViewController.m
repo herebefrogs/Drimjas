@@ -220,7 +220,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     if (section == indexFirstLineItem) {
-        return 32.5;
+        return 36;
     }
     return UITableViewAutomaticDimension;
 }
