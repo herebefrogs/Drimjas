@@ -20,8 +20,6 @@
 // Utils
 #import "EmailManager.h"
 #import "PDFManager.h"
-// Cells
-#import "EditSectionHeader.h"
 // Views
 #import "AddEstimateLineItemsViewController.h"
 #import "ContactInfosViewController.h"
@@ -47,7 +45,6 @@
 @synthesize printButton;
 @synthesize pdfButton;
 @synthesize spacerButton;
-@synthesize editSectionHeader;
 @synthesize lineItemSelectionsViewController;
 @synthesize contactInfosViewController;
 @synthesize aNewClientInfoViewController;
@@ -237,39 +234,16 @@
 #pragma mark -
 #pragma mark Table view delegate
 
-- (UIView *)loadEditSectionHeaderForTag:(NSInteger)tag withTitle:(NSString *)title {
-	EditSectionHeader *editHeader = nil;
-
-	if (editSectionHeader == nil) {
-		[[NSBundle mainBundle] loadNibNamed:@"EditSectionHeader" owner:self options:nil];
-		editHeader = editSectionHeader;
-		self.editSectionHeader = nil;
-	}
-
-	editHeader.header.text = NSLocalizedString(title, "");
-	[editHeader.edit setTitle:NSLocalizedString(@"Edit", "") forState:UIControlStateNormal];
-	editHeader.edit.tag = tag;
-
-	// round up the button's corners
-	CALayer *layer = editHeader.edit.layer;
-    layer.cornerRadius = 6.0f;
-    layer.masksToBounds = YES;
-    layer.borderWidth = 1.0f;
-    layer.borderColor = [UIColor colorWithWhite:0.5f alpha:0.2f].CGColor;
-
-	return editHeader;
-}
-
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
 	switch (section) {
 		case EstimateDetailSectionClientInfo:
-			return [self loadEditSectionHeaderForTag:EstimateDetailSectionClientInfo withTitle:@"Client Information"];
+			return [self configureViewForHeaderInSection:section withTitle:@"Client Information"];
 			break;
 		case EstimateDetailSectionContactInfo:
-			return [self loadEditSectionHeaderForTag:EstimateDetailSectionContactInfo withTitle:@"Contact Information"];
+			return [self configureViewForHeaderInSection:section withTitle:@"Contact Information"];
 		default:
 			if (section == indexFirstLineItem) {
-				return [self loadEditSectionHeaderForTag:indexFirstLineItem withTitle:@"Line Items"];
+				return [self configureViewForHeaderInSection:section withTitle:@"Line Items"];
 			}
 			return nil;
 	}
@@ -364,10 +338,10 @@
 #ifdef __ENABLE_UI_LOGS__
 	NSLog(@"EstimateDetailViewController.viewDidUnload");
 #endif
+    [super viewDidUnload];
     // Relinquish ownership of anything that can be recreated in viewDidLoad or on demand.
 	self.title = nil;
 	self.toolbarItems = nil;
-	self.editSectionHeader = nil;
 	self.emailButton = nil;
 	self.printButton = nil;
     self.pdfButton = nil;

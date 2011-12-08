@@ -6,10 +6,10 @@
 //  Copyright 2011 David J Peacock Photography. All rights reserved.
 //
 
-#import "EditSectionHeader.h"
+#import "EditableSectionHeaderView.h"
 
 
-@implementation EditSectionHeader
+@implementation EditableSectionHeaderView
 
 @synthesize header;
 @synthesize edit;

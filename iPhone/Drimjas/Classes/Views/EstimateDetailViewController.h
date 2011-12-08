@@ -10,22 +10,21 @@
 #import <MessageUI/MessageUI.h>
 // Utils
 #import "PrintManager.h"
+// Cells
+#import "EditableSectionTableViewController.h"
 
 
 @class Estimate;
-@class EditSectionHeader;
 @class AddEstimateLineItemsViewController;
 @class ContactInfosViewController;
 @class NewClientInfoViewController;
 @class PDFViewController;
 
-@interface EstimateDetailViewController : UITableViewController <PrintNotifyDelegate, MFMailComposeViewControllerDelegate> {
+@interface EstimateDetailViewController : EditableSectionTableViewController <PrintNotifyDelegate, MFMailComposeViewControllerDelegate> {
 	UIBarButtonItem *emailButton;
 	UIBarButtonItem *printButton;
     UIBarButtonItem *pdfButton;
 	UIBarButtonItem *spacerButton;
-
-	EditSectionHeader *editSectionHeader;
 
 	AddEstimateLineItemsViewController *lineItemSelectionsViewController;
 	ContactInfosViewController *contactInfosViewController;
@@ -44,7 +43,6 @@
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *printButton;
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *pdfButton;
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *spacerButton;
-@property (nonatomic, strong) IBOutlet EditSectionHeader *editSectionHeader;
 @property (nonatomic, strong) IBOutlet AddEstimateLineItemsViewController *lineItemSelectionsViewController;
 @property (nonatomic, strong) IBOutlet ContactInfosViewController *contactInfosViewController;
 @property (nonatomic, strong) IBOutlet NewClientInfoViewController *aNewClientInfoViewController;
@@ -54,6 +52,5 @@
 - (IBAction)email:(id)sender;
 - (IBAction)print:(id)sender;
 - (IBAction)view:(id)sender;
-- (IBAction)modify:(id)sender;
 
 @end

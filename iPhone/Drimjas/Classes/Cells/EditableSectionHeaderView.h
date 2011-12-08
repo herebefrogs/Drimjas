@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 
-@interface EditSectionHeader : UIView {
+@interface EditableSectionHeaderView : UIView {
 	UILabel *header;
 	UIButton *edit;
 }

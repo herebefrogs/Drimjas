@@ -7,10 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+// Cells
+#import "EditableSectionTableViewController.h"
 
 @class Invoice;
 
-@interface InvoiceDetailViewController : UITableViewController {
+@interface InvoiceDetailViewController : EditableSectionTableViewController {
     Invoice *invoice;
 
     @private

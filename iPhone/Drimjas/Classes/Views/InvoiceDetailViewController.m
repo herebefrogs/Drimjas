@@ -212,7 +212,7 @@
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     if (section == indexFirstLineItem) {
-        NSLog(@"return Line Items - Modify");
+        return [self configureViewForHeaderInSection:section withTitle:@"Line Items"];
     }
     return nil;
 }
@@ -223,6 +223,14 @@
         return 36;
     }
     return UITableViewAutomaticDimension;
+}
+
+#pragma mark - Button delegate
+
+- (IBAction)modify:(id)sender
+{
+	UIButton *edit = (UIButton *)sender;
+    NSLog(@"Clicked edit button #%u", edit.tag);
 }
 
 @end
