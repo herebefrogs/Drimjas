@@ -188,6 +188,7 @@
 #ifdef __ENABLE_UI_LOGS__
 	NSLog(@"ContractsViewController.viewDidUnload");
 #endif
+    [super viewDidUnload];
 	self.aNewContractViewController = nil;
 	self.contractDetailViewController = nil;
 	self.contracts = nil;

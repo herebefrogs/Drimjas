@@ -180,6 +180,7 @@
 #ifdef __ENABLE_UI_LOGS__
 	NSLog(@"NewContractViewController.viewDidUnload");
 #endif
+    [super viewDidUnload];
     // Relinquish ownership of anything that can be recreated in viewDidLoad or on demand.
 	self.contractDetailViewController = nil;
 	self.estimates = nil;

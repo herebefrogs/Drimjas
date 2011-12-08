@@ -231,6 +231,7 @@
 #ifdef __ENABLE_UI_LOGS__
 	NSLog(@"LineItemsViewController.viewDidUnload");
 #endif
+    [super viewDidUnload];
     // Relinquish ownership of anything that can be recreated in viewDidLoad or on demand.
     lineItems.delegate = nil;
 	self.lineItems = nil;

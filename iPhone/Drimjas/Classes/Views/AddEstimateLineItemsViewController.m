@@ -426,6 +426,7 @@ BOOL _insertLineItem = NO;
 #ifdef __ENABLE_UI_LOGS__
 	NSLog(@"AddEstimateLineItemsViewController.viewDidUnload");
 #endif
+    [super viewDidUnload];
     // Relinquish ownership of anything that can be recreated in viewDidLoad or on demand.
     self.nextButton = nil;
     self.saveButton = nil;

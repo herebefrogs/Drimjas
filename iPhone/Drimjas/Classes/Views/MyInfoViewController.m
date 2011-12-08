@@ -258,7 +258,7 @@
 #ifdef __ENABLE_UI_LOGS__
 	NSLog(@"MyInfoViewController.viewDidUnload");
 #endif
-
+    [super viewDidUnload];
 	self.saveButton = nil;
 	self.estimateDetailViewController = nil;
     self.professionsViewController = nil;

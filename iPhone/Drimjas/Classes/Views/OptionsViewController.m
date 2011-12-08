@@ -127,6 +127,7 @@
 #ifdef __ENABLE_UI_LOGS__
 	NSLog(@"OptionsViewController.viewDidUnload");
 #endif
+    [super viewDidUnload];
 	self.clientInfosViewController = nil;
 	self.lineItemsViewController = nil;
 	self.taxesAndCurrencyViewController = nil;

@@ -357,6 +357,7 @@ BOOL _insertTax = NO;
 #ifdef __ENABLE_UI_LOGS__
 	NSLog(@"TaxesAndCurrencyViewController.viewDidUnload");
 #endif
+    [super viewDidUnload];
     // Relinquish ownership of anything that can be recreated in viewDidLoad or on demand.
     self.nextButton = nil;
     self.saveButton = nil;

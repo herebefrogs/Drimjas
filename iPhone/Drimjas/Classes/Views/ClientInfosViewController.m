@@ -162,6 +162,7 @@
 #ifdef __ENABLE_UI_LOGS__
 	NSLog(@"ClientInfosViewController.viewDidUnload");
 #endif
+    [super viewDidUnload];
     // Relinquish ownership of anything that can be recreated in viewDidLoad or on demand.
 	clientInfos.delegate = nil;
 	self.clientInfos = nil;
