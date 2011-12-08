@@ -10,6 +10,7 @@
 // API
 #import "Contract.h"
 #import "Estimate.h"
+#import "Invoice.h"
 // Utils
 #import "PDFManager.h"
 
@@ -46,8 +47,6 @@ static id<PrintNotifyDelegate> _delegate;
 
 		// notify delegate of print outcome
 		[_delegate printJobCompleted:completed withError:error];
-		// free up delegate
-		// free up pdf data
 	};
 
 /* Detect if iPad or iPhone to share same codebase
@@ -80,8 +79,6 @@ static id<PrintNotifyDelegate> _delegate;
 
 		// notify delegate of print outcome
 		[_delegate printJobCompleted:completed withError:error];
-		// free up delegate
-		// free up pdf data
 	};
 
 	/* Detect if iPad or iPhone to share same codebase
@@ -92,5 +89,38 @@ static id<PrintNotifyDelegate> _delegate;
 	[controller presentAnimated:YES completionHandler:printCompleted];
 	/*	} */
 }
+
++ (void)printInvoice:(Invoice *)invoice withDelegate:(id<PrintNotifyDelegate>)delegate {
+	_delegate = delegate;
+
+	UIPrintInfo *printInfo = [UIPrintInfo printInfo];
+	printInfo.jobName = [PDFManager pdfNameForInvoice:invoice];
+	printInfo.outputType = UIPrintInfoOutputGeneral;
+	printInfo.orientation = UIPrintInfoOrientationPortrait;
+	printInfo.duplex = UIPrintInfoDuplexLongEdge;
+
+	UIPrintInteractionController *controller = [UIPrintInteractionController sharedPrintController];
+	controller.printInfo = printInfo;
+
+	// set printing data
+	controller.printingItem = [PDFManager pdfDataForInvoice:invoice];
+
+	// print completion handler/block/closure
+	void (^printCompleted)(UIPrintInteractionController *, BOOL, NSError *) =
+    ^(UIPrintInteractionController *pic, BOOL completed, NSError *error) {
+
+		// notify delegate of print outcome
+		[_delegate printJobCompleted:completed withError:error];
+	};
+
+    /* Detect if iPad or iPhone to share same codebase
+     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+     [controller presentFromBarButtonItem:self.printButton animated:YES
+     completionHandler:handler];
+     } else { */
+	[controller presentAnimated:YES completionHandler:printCompleted];
+    /*	} */
+}
+
 
 @end

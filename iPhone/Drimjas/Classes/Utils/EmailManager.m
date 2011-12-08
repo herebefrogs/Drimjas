@@ -11,6 +11,7 @@
 #import "ClientInfo.h"
 #import "Contract.h"
 #import "Estimate.h"
+#import "Invoice.h"
 // Utils
 #import "PDFManager.h"
 
@@ -63,6 +64,28 @@
 	[controller addAttachmentData:pdfData mimeType:@"application/pdf" fileName:pdfName];
 
 	NSString *emailBody = NSLocalizedString(@"Contract Email Body", @"Contract Email Body");
+	[controller setMessageBody:emailBody isHTML:NO];
+
+    return controller;
+}
+
++ (UIViewController *)mailComposeViewControllerWithDelegate:(id<MFMailComposeViewControllerDelegate>)delegate
+                                                forInvoice:(Invoice *)invoice {
+	MFMailComposeViewController *controller = [[MFMailComposeViewController alloc] init];
+	controller.mailComposeDelegate = delegate;
+
+	[controller setSubject:[NSString stringWithFormat:NSLocalizedString(@"Invoice #%@", "Invoice Mail Subject"),
+                                                      invoice.contract.estimate.orderNumber]];
+
+	NSArray *toRecepients = invoice.contract.estimate.clientInfo.toRecipients;
+	[controller setToRecipients:toRecepients];
+
+	// attach invoice PDF to email
+	NSData *pdfData = [PDFManager pdfDataForInvoice:invoice];
+	NSString *pdfName = [PDFManager pdfNameForInvoice:invoice];
+	[controller addAttachmentData:pdfData mimeType:@"application/pdf" fileName:pdfName];
+
+	NSString *emailBody = NSLocalizedString(@"Invoice Email Body", @"Invoice Email Body");
 	[controller setMessageBody:emailBody isHTML:NO];
 
     return controller;

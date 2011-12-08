@@ -32,7 +32,7 @@
 		023C7DBA1309A8D600FD360B /* Launch@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 023C7DB81309A8D600FD360B /* Launch@2x.png */; };
 		023E06AD134D52A60026209B /* TextFieldTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 023E06AC134D52A60026209B /* TextFieldTableViewController.m */; };
 		0263BCE813AEE31200ECD5D2 /* Tax.m in Sources */ = {isa = PBXBuildFile; fileRef = 0263BCE713AEE31200ECD5D2 /* Tax.m */; };
-		0270C462149058E300A5A610 /* EditableSectionTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0270C461149058E300A5A610 /* EditableSectionTableViewController.m */; };
+		0270C462149058E300A5A610 /* DetailTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0270C461149058E300A5A610 /* DetailTableViewController.m */; };
 		0282274D13D66EBB00D995A4 /* DrimjasInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 0282274C13D66EBB00D995A4 /* DrimjasInfo.m */; };
 		0288D97D13A99E8F001E6641 /* Currency.m in Sources */ = {isa = PBXBuildFile; fileRef = 0288D97C13A99E8F001E6641 /* Currency.m */; };
 		0288D99F13A9A306001E6641 /* TaxesAndCurrencyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0288D99D13A9A306001E6641 /* TaxesAndCurrencyViewController.m */; };
@@ -171,8 +171,8 @@
 		0263BCE313AEE21400ECD5D2 /* WorkingTitle 10.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "WorkingTitle 10.xcdatamodel"; sourceTree = "<group>"; };
 		0263BCE613AEE31200ECD5D2 /* Tax.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tax.h; sourceTree = "<group>"; };
 		0263BCE713AEE31200ECD5D2 /* Tax.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tax.m; sourceTree = "<group>"; };
-		0270C460149058E300A5A610 /* EditableSectionTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditableSectionTableViewController.h; sourceTree = "<group>"; };
-		0270C461149058E300A5A610 /* EditableSectionTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditableSectionTableViewController.m; sourceTree = "<group>"; };
+		0270C460149058E300A5A610 /* DetailTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailTableViewController.h; sourceTree = "<group>"; };
+		0270C461149058E300A5A610 /* DetailTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailTableViewController.m; sourceTree = "<group>"; };
 		0282274B13D66EBB00D995A4 /* DrimjasInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrimjasInfo.h; sourceTree = "<group>"; };
 		0282274C13D66EBB00D995A4 /* DrimjasInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrimjasInfo.m; sourceTree = "<group>"; };
 		0288D97613A99C47001E6641 /* WorkingTitle 9.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "WorkingTitle 9.xcdatamodel"; sourceTree = "<group>"; };
@@ -521,8 +521,8 @@
 			children = (
 				02CB9A5D139C16B600FF2A3C /* EditableSectionHeaderView.h */,
 				02CB9A5E139C16B600FF2A3C /* EditableSectionHeaderView.m */,
-				0270C460149058E300A5A610 /* EditableSectionTableViewController.h */,
-				0270C461149058E300A5A610 /* EditableSectionTableViewController.m */,
+				0270C460149058E300A5A610 /* DetailTableViewController.h */,
+				0270C461149058E300A5A610 /* DetailTableViewController.m */,
 				02FB96581474B68D00192FDB /* EstimateCell.h */,
 				02FB96591474B68D00192FDB /* EstimateCell.m */,
 				02EE007C1482C82600C020DE /* InvoiceCell.h */,
@@ -803,7 +803,7 @@
 				02EE007E1482C82600C020DE /* InvoiceCell.m in Sources */,
 				0213E3671489C946001D3D1D /* NewInvoiceViewController.m in Sources */,
 				022D231B148DAE670041E5BE /* InvoiceDetailViewController.m in Sources */,
-				0270C462149058E300A5A610 /* EditableSectionTableViewController.m in Sources */,
+				0270C462149058E300A5A610 /* DetailTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -30,7 +30,6 @@
 
 @interface EstimateDetailViewController ()
 
-@property (nonatomic, strong) UIViewController *mailComposeViewController;
 - (void)reloadIndexes;
 
 @end
@@ -41,16 +40,10 @@
 #pragma mark -
 #pragma mark Properties stack
 
-@synthesize emailButton;
-@synthesize printButton;
-@synthesize pdfButton;
-@synthesize spacerButton;
 @synthesize lineItemSelectionsViewController;
 @synthesize contactInfosViewController;
 @synthesize aNewClientInfoViewController;
-@synthesize pdfViewController;
 @synthesize estimate;
-@synthesize mailComposeViewController;
 
 - (void)setEstimate:(Estimate *)newEstimate {
 
@@ -84,25 +77,11 @@
     [super viewDidLoad];
 	self.title = NSLocalizedString(@"Estimate Detail", "EstimateDetail Navigation Item Title");
 
-	NSMutableArray *items = [NSMutableArray arrayWithObjects: spacerButton, pdfButton, nil];
-	if ([EmailManager isMailAvailable]) {
-		// add Email button only if mail is available on iPhone
-		[items addObject:emailButton];
-	}
-	if ([PrintManager isPrintingAvailable]) {
-		// add Print button only if printing is available on iPhone
-		[items addObject:printButton];
-	}
-	[items addObject:spacerButton];
-	self.toolbarItems = items;
-
 	// note: navigation controller not set yet
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-	// show toolbar with animation
-	[self.navigationController setToolbarHidden:NO animated:YES];
 
 	// let user email & print only when estimate & global settings are ready
 	emailButton.enabled = estimate.isReady && [DataStore areGlobalsReadyForEstimate];
@@ -110,12 +89,6 @@
 
 	[self reloadIndexes];
 	[self.tableView reloadData];
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-	// hide toolbar with animation
-	[self.navigationController setToolbarHidden:YES animated:YES];
 }
 
 // Override to allow orientations other than the default portrait orientation.
@@ -341,17 +314,11 @@
     [super viewDidUnload];
     // Relinquish ownership of anything that can be recreated in viewDidLoad or on demand.
 	self.title = nil;
-	self.toolbarItems = nil;
-	self.emailButton = nil;
-	self.printButton = nil;
-    self.pdfButton = nil;
 	self.lineItemSelectionsViewController = nil;
 	self.contactInfosViewController = nil;
 	self.aNewClientInfoViewController = nil;
-    self.pdfViewController = nil;
 	self.estimate = nil;
 	lineItemSelections = nil;
-    self.mailComposeViewController = nil;
 }
 
 

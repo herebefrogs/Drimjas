@@ -18,8 +18,12 @@
 #import "KeyValue.h"
 #import "LineItem.h"
 #import "LineItemSelection.h"
+// Utils
+#import "EmailManager.h"
+#import "PDFManager.h"
 // Views
 #import "TableFields.h"
+#import "PDFViewController.h"
 
 @interface InvoiceDetailViewController ()
 
@@ -227,10 +231,52 @@
 
 #pragma mark - Button delegate
 
+- (IBAction)email:(id)sender {
+    self.mailComposeViewController = [EmailManager mailComposeViewControllerWithDelegate:self forInvoice:self.invoice];
+    
+    [self.navigationController presentModalViewController:mailComposeViewController animated:YES];
+}
+
+- (IBAction)print:(id)sender {
+	[PrintManager printInvoice:self.invoice withDelegate:self];
+}
+
+- (IBAction)view:(id)sender {
+    self.pdfViewController.pdfData = [PDFManager pdfDataForInvoice:self.invoice];
+    [self.navigationController pushViewController:pdfViewController animated:YES];
+}
+
 - (IBAction)modify:(id)sender
 {
 	UIButton *edit = (UIButton *)sender;
     NSLog(@"Clicked edit button #%u", edit.tag);
 }
+
+#pragma mark -
+#pragma mark Mail compose delegate
+
+- (void)mailComposeController:(MFMailComposeViewController*)controller
+		  didFinishWithResult:(MFMailComposeResult)result
+						error:(NSError*)error {
+	// hide mail compose view
+	[self.navigationController dismissModalViewControllerAnimated:YES];
+    
+    if (result == MFMailComposeResultFailed) {
+		// TODO handle error
+		NSLog(@"InvoiceDetailViewController.mailComposeController:didFinishWithResult:error failed to email invoice %@ with error %@, %@", invoice.contract.estimate.clientInfo.name, error, [error userInfo]);
+	}
+    
+    self.mailComposeViewController = nil;
+}
+
+#pragma mark -
+#pragma mark Print completed delegate
+
+- (void)printJobCompleted:(BOOL)completed withError:(NSError *)error {
+	if (error) {
+		NSLog(@"InvoiceDetailViewController.printJobCompleted: failed to print invoice %@ with error %@, %@", invoice.contract.estimate.clientInfo.name, error, [error userInfo]);
+	}
+}
+
 
 @end

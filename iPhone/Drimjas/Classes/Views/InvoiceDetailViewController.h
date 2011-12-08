@@ -8,11 +8,11 @@
 
 #import <UIKit/UIKit.h>
 // Cells
-#import "EditableSectionTableViewController.h"
+#import "DetailTableViewController.h"
 
 @class Invoice;
 
-@interface InvoiceDetailViewController : EditableSectionTableViewController {
+@interface InvoiceDetailViewController : DetailTableViewController {
     Invoice *invoice;
 
     @private

@@ -252,6 +252,15 @@ Version %@";
 /* Contact Email Body */
 "Contract Email Body" = "";
 
+/* Invoice PDF filename */
+"Invoice-%@.pdf" = "Invoice-%@.pdf";
+
+/* Invoice Mail Subject */
+"Invoice #%@" = "Invoice #%@";
+
+/* Invoice Email Body */
+"Invoice Email Body" = "";
+
 /* Page number on footer of PDF */
 "Page" = "Page";
 

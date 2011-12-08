@@ -12,6 +12,7 @@
 
 @class Estimate;
 @class Contract;
+@class Invoice;
 
 
 @interface EmailManager : NSObject
@@ -20,6 +21,8 @@
 + (UIViewController *)mailComposeViewControllerWithDelegate:(id<MFMailComposeViewControllerDelegate>)delegate
                                                 forEstimate:(Estimate *)estimate;
 + (UIViewController *)mailComposeViewControllerWithDelegate:(id<MFMailComposeViewControllerDelegate>)delegate
-                                               forContract:(Contract *)contract;
+                                                forContract:(Contract *)contract;
++ (UIViewController *)mailComposeViewControllerWithDelegate:(id<MFMailComposeViewControllerDelegate>)delegate
+                                                 forInvoice:(Invoice *)invoice;
 
 @end

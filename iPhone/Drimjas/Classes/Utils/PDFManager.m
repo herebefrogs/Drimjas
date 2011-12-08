@@ -16,6 +16,7 @@
 #import "Currency.h"
 #import "DataStore.h"
 #import "Estimate.h"
+#import "Invoice.h"
 #import "KeyValue.h"
 #import "LineItemSelection.h"
 #import "LineItem.h"
@@ -1001,6 +1002,17 @@ typedef enum {
 			[DrimjasInfo title], kCGPDFContextCreator,
 			[self pdfTitleForContract:contract], kCGPDFContextTitle,
 			nil];
+}
+
++ (NSMutableData *)pdfDataForInvoice:(Invoice *)invoice
+{
+    return nil;
+}
+
++ (NSString *)pdfNameForInvoice:(Invoice *)invoice
+{
+	return [NSString stringWithFormat:NSLocalizedString(@"Invoice-%@.pdf", "Invoice PDF filename"),
+                                      invoice.contract.estimate.orderNumber];
 }
 
 

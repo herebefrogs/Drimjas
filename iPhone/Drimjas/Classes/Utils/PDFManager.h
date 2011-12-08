@@ -10,6 +10,7 @@
 
 @class Estimate;
 @class Contract;
+@class Invoice;
 
 @interface PDFManager : NSObject {
 
@@ -29,5 +30,8 @@
 + (NSString *)pdfNameForContract:(Contract *)contract;		// PDF filename
 + (NSString *)pdfTitleForContract:(Contract *)contract;		// PDF title as appearing in PDF metadata
 + (NSDictionary *)pdfInfoForContract:(Contract *)contract;	// dictionary of PDF metadata
+
++ (NSMutableData *)pdfDataForInvoice:(Invoice *)invoice;	// PDF content
++ (NSString *)pdfNameForInvoice:(Invoice *)invoice;		// PDF filename
 
 @end

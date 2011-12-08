@@ -7,41 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <MessageUI/MessageUI.h>
-// Utils
-#import "PrintManager.h"
+// Cells
+#import "DetailTableViewController.h"
 
 
 @class Contract;
-@class PDFViewController;
 
-@interface ContractDetailViewController : UITableViewController <PrintNotifyDelegate, MFMailComposeViewControllerDelegate> {
-	UIBarButtonItem *emailButton;
-	UIBarButtonItem *printButton;
-    UIBarButtonItem *pdfButton;
-	UIBarButtonItem *spacerButton;
-
-    PDFViewController *pdfViewController;
-
+@interface ContractDetailViewController : DetailTableViewController {
 	Contract *contract;
 	NSInteger indexFirstLineItem;
 	NSInteger indexLastSection;
 	NSArray *lineItemSelections;
-
-    @private
-    UIViewController *mailComposeViewController;
 }
 
-@property (nonatomic, strong) IBOutlet UIBarButtonItem *emailButton;
-@property (nonatomic, strong) IBOutlet UIBarButtonItem *printButton;
-@property (nonatomic, strong) IBOutlet UIBarButtonItem *pdfButton;
-@property (nonatomic, strong) IBOutlet UIBarButtonItem *spacerButton;
-@property (nonatomic, strong) IBOutlet PDFViewController *pdfViewController;
-
 @property (nonatomic, strong) Contract *contract;
-
-- (IBAction)email:(id)sender;
-- (IBAction)print:(id)sender;
-- (IBAction)view:(id)sender;
 
 @end
