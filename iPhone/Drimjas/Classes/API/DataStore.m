@@ -707,6 +707,43 @@ static DataStore *singleton_ = nil;
 	return lineItemSelections;
 }
 
+- (NSFetchedResultsController *)lineItemSelectionsForInvoice:(Invoice *)invoice {
+	NSAssert(invoice, @"can't return LineItemSelections for an empty Invoice");
+
+	// LineItemSelection fetch request
+	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+	fetchRequest.entity = [NSEntityDescription entityForName:@"LineItemSelection"
+									  inManagedObjectContext:self.managedObjectContext];
+
+	// fetch only LineItemSelections associated to this Invoice
+	fetchRequest.predicate = [NSPredicate predicateWithFormat:@"invoice = %@", invoice];
+
+	// sort LineItemSelections by insertion order
+	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"index" ascending:YES];
+	fetchRequest.sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
+
+	// buffer up to 16 LineItemSelections
+	fetchRequest.fetchBatchSize = 16;
+
+	// LineItemSelection fetched results controller
+	NSFetchedResultsController *lineItemSelections = [[NSFetchedResultsController alloc]
+													  initWithFetchRequest:fetchRequest
+													  managedObjectContext:self.managedObjectContext
+													  sectionNameKeyPath:@"index"
+													  cacheName:nil];
+
+
+	NSError *error = nil;
+	if (![lineItemSelections performFetch:&error]) {
+		// TODO This is a serious error saying the records
+		//could not be fetched. Advise the user to try
+		//again or restart the application.
+		NSLog(@"DataStore.lineItemSelectionsForInvoice:%@ fetch failed with error %@, %@", invoice, error, [error userInfo]);
+	}
+
+	return lineItemSelections;
+}
+
 - (LineItemSelection *)createLineItemSelection {
 	return (LineItemSelection *)[NSEntityDescription insertNewObjectForEntityForName:@"LineItemSelection"
 															  inManagedObjectContext:self.managedObjectContext];

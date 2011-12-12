@@ -11,9 +11,11 @@
 #import "DetailTableViewController.h"
 
 @class Invoice;
+@class AddEstimateLineItemsViewController;
 
 @interface InvoiceDetailViewController : DetailTableViewController {
     Invoice *invoice;
+    AddEstimateLineItemsViewController *lineItemSelectionsViewController;
 
     @private
     NSInteger indexFirstLineItem;
@@ -22,5 +24,6 @@
 }
 
 @property (nonatomic, strong) Invoice *invoice;
+@property (nonatomic, strong) IBOutlet AddEstimateLineItemsViewController *lineItemSelectionsViewController;
 
 @end

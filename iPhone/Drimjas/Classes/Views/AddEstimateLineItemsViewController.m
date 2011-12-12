@@ -10,6 +10,7 @@
 // API
 #import "DataStore.h"
 #import "Estimate.h"
+#import "Invoice.h"
 #import "LineItemSelection.h"
 #import "LineItem.h"
 #import	"Currency.h"
@@ -34,6 +35,7 @@
 @synthesize myInfoViewController;
 @synthesize lineItemSelections;
 @synthesize estimate;
+@synthesize invoice;
 @synthesize editMode;
 
 #pragma mark -
@@ -63,7 +65,13 @@
 	if (!editMode) {
 		self.estimate = [[DataStore defaultStore] estimateStub];
 	}
-	self.lineItemSelections = [[DataStore defaultStore] lineItemSelectionsForEstimate:estimate];
+
+	if (estimate) {
+		self.lineItemSelections = [[DataStore defaultStore] lineItemSelectionsForEstimate:estimate];
+	}
+	else {
+		self.lineItemSelections = [[DataStore defaultStore] lineItemSelectionsForInvoice:invoice];
+	}
 	lineItemSelections.delegate = self;
 
 	// show Next button if taxes & currency or my info aren't set yet
@@ -160,8 +168,14 @@ BOOL _insertLineItem = NO;
 	_insertLineItem = YES;
 
 	lineItemSelection.index = [NSNumber numberWithInteger:lineItemSelections.sections.count];
-	lineItemSelection.estimate = estimate;
-	[estimate addLineItemsObject:lineItemSelection];
+    if (estimate) {
+        lineItemSelection.estimate = estimate;
+        [estimate addLineItemsObject:lineItemSelection];
+    }
+    else {
+        lineItemSelection.invoice = invoice;
+        [invoice addLineItemsObject:lineItemSelection];
+    }
 
 	[self _showLineItemsListWithLineItemSelection:lineItemSelection];
 }
@@ -186,9 +200,15 @@ BOOL _insertLineItem = NO;
     }
 
 	// TODO these 2 lines should probably be in deleteLineItemSelection
-	// deassociate line item selection from estimate
-	[estimate removeLineItemsObject:deleted];
-	[estimate refreshStatus];
+	if (estimate) {
+		// deassociate line item selection from estimate
+		[estimate removeLineItemsObject:deleted];
+		[estimate refreshStatus];
+	}
+	else {
+		[invoice removeLineItemsObject:deleted];
+		[invoice refreshStatus];
+	}
 	// delete line item selection
 	[[DataStore defaultStore] deleteLineItemSelection:deleted];
 }
@@ -392,7 +412,12 @@ BOOL _insertLineItem = NO;
 
 - (IBAction)save:(id)sender {
 	if (editMode) {
-		[[DataStore defaultStore] saveEstimate:estimate];
+		if (estimate) {
+			[[DataStore defaultStore] saveEstimate:estimate];
+		}
+		else {
+			[[DataStore defaultStore] saveInvoice:invoice];
+		}
 
 		// go back to estimate detail view controller (just before in the stack)
 		[self.navigationController popViewControllerAnimated:YES];
@@ -437,6 +462,7 @@ BOOL _insertLineItem = NO;
 	lineItemSelections.delegate = nil;
 	self.lineItemSelections = nil;
 	self.estimate = nil;
+	self.invoice = nil;
 }
 
 

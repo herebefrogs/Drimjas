@@ -15,6 +15,7 @@
 @class TaxesAndCurrencyViewController;
 @class MyInfoViewController;
 @class Estimate;
+@class Invoice;
 
 @interface AddEstimateLineItemsViewController : TextFieldTableViewController <NSFetchedResultsControllerDelegate> {
 	UIBarButtonItem *nextButton;
@@ -26,6 +27,7 @@
 
 	NSFetchedResultsController *lineItemSelections;
 	Estimate *estimate;
+	Invoice *invoice;
 
 	BOOL editMode;
 }
@@ -39,6 +41,7 @@
 
 @property (nonatomic, strong) NSFetchedResultsController *lineItemSelections;
 @property (nonatomic, strong) Estimate *estimate;
+@property (nonatomic, strong) Invoice *invoice;
 @property (nonatomic, assign) BOOL editMode;
 
 - (IBAction)next:(id)sender;

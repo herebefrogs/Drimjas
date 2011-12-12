@@ -24,6 +24,7 @@
 // Views
 #import "TableFields.h"
 #import "PDFViewController.h"
+#import "AddEstimateLineItemsViewController.h"
 
 @interface InvoiceDetailViewController ()
 
@@ -35,6 +36,7 @@
 @implementation InvoiceDetailViewController
 
 @synthesize invoice;
+@synthesize lineItemSelectionsViewController;
 
 - (void)setInvoice:(Invoice *)newInvoice
 {
@@ -79,6 +81,7 @@
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     self.invoice = nil;
+    self.lineItemSelectionsViewController = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -248,9 +251,11 @@
 
 - (IBAction)modify:(id)sender
 {
-	UIButton *edit = (UIButton *)sender;
-    NSLog(@"Clicked edit button #%u", edit.tag);
+    lineItemSelectionsViewController.invoice = self.invoice;
+    lineItemSelectionsViewController.editMode = YES;
+    [self.navigationController pushViewController:lineItemSelectionsViewController animated:YES];
 }
+
 
 #pragma mark -
 #pragma mark Mail compose delegate

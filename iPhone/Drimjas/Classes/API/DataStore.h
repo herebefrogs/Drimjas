@@ -102,6 +102,7 @@
 @interface DataStore (LineItemSelectionAccessors)
 
 - (NSFetchedResultsController *)lineItemSelectionsForEstimate:(Estimate *)estimate;
+- (NSFetchedResultsController *)lineItemSelectionsForInvoice:(Invoice *)invoice;
 - (LineItemSelection *)createLineItemSelection;
 - (BOOL)deleteLineItemSelection:(LineItemSelection *)lineItemSelection;
 
