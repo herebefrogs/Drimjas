@@ -13,6 +13,7 @@
 #import "StartupViewController.h"
 #import "EstimatesViewController.h"
 #import "ContractsViewController.h"
+#import "InvoicesViewController.h"
 #import "TabBarItems.h"
 
 
@@ -23,6 +24,7 @@
 @synthesize tabBarController;
 @synthesize estimatesViewController;
 @synthesize contractsViewController;
+@synthesize invoicesViewController;
 
 
 #pragma mark -
@@ -42,6 +44,9 @@
 	}
 	else if (tag == TabBarItemContracts) {
 		[contractsViewController add:nil];
+	}
+	else if (tag == TabBarItemInvoices) {
+		[invoicesViewController add:nil];
 	}
 }
 

@@ -11,6 +11,7 @@
 @class StartupViewController;
 @class EstimatesViewController;
 @class ContractsViewController;
+@class InvoicesViewController;
 
 @interface DrimjasAppDelegate : NSObject <UIApplicationDelegate, UITabBarControllerDelegate> {
     UIWindow *window;
@@ -18,6 +19,7 @@
 	
 	EstimatesViewController *estimatesViewController;
 	ContractsViewController *contractsViewController;
+	InvoicesViewController *invoicesViewController;
 	StartupViewController *startupViewController;
 }
 
@@ -26,6 +28,7 @@
 
 @property (nonatomic, strong) IBOutlet EstimatesViewController *estimatesViewController;
 @property (nonatomic, strong) IBOutlet ContractsViewController *contractsViewController;
+@property (nonatomic, strong) IBOutlet InvoicesViewController *invoicesViewController;
 @property (nonatomic, strong) IBOutlet StartupViewController *startupViewController;
 
 // startup screen methods

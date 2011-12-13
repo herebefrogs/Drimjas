@@ -17,6 +17,9 @@
 /* Startup View Controller Contract Button */
 "New Contract" = "Nouveau contrat";
 
+/* Startup View Controller Invoice Button */
+"New Invoice" = "Nouvelle facture";
+
 /* NewOrPickClientInfoViewController Navigation Item Title */
 "Add Client" = "Ajouter un client";
 

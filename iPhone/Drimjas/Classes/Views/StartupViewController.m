@@ -49,8 +49,13 @@ NSInteger buttonTagClicked_ = 0;
 						 forState:UIControlStateNormal];
 		}
 		else if (subview.tag == TabBarItemContracts) {
-			UIButton *addEstimate = (UIButton *)subview;
-			[addEstimate setTitle:NSLocalizedString(@"New Contract", @"Startup View Controller Contract Button")
+			UIButton *addContract = (UIButton *)subview;
+			[addContract setTitle:NSLocalizedString(@"New Contract", @"Startup View Controller Contract Button")
+						 forState:UIControlStateNormal];
+		}
+		else if (subview.tag == TabBarItemInvoices) {
+			UIButton *addInvoice = (UIButton *)subview;
+			[addInvoice setTitle:NSLocalizedString(@"New Invoice", @"Startup View Controller Invoice Button")
 						 forState:UIControlStateNormal];
 		}
 	}
