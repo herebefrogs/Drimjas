@@ -97,6 +97,8 @@
 		02CC9C98133FC52D006160A7 /* TextFieldCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02CC9C97133FC52D006160A7 /* TextFieldCell.xib */; };
 		02CC9D82133FEA36006160A7 /* ClientInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 02CC9D81133FEA36006160A7 /* ClientInfo.m */; };
 		02CC9D85133FEB2C006160A7 /* Estimate.m in Sources */ = {isa = PBXBuildFile; fileRef = 02CC9D84133FEB2C006160A7 /* Estimate.m */; };
+		02CDD9C8149AE3DC0077B1DB /* ContractCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 02CDD9C7149AE3DC0077B1DB /* ContractCell.m */; };
+		02CDD9CA149AE9770077B1DB /* ContractCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02CDD9C9149AE9770077B1DB /* ContractCell.xib */; };
 		02CE034613DD018F00C91A88 /* PageInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 02CE034513DD018F00C91A88 /* PageInfo.m */; };
 		02DE987B137A10C1007C5FED /* LineItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 02DE987A137A10C1007C5FED /* LineItem.m */; };
 		02DE9886137A12D3007C5FED /* LineItemsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02DE9884137A12D3007C5FED /* LineItemsViewController.m */; };
@@ -274,6 +276,9 @@
 		02CC9D81133FEA36006160A7 /* ClientInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClientInfo.m; sourceTree = "<group>"; };
 		02CC9D83133FEB2C006160A7 /* Estimate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Estimate.h; sourceTree = "<group>"; };
 		02CC9D84133FEB2C006160A7 /* Estimate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Estimate.m; sourceTree = "<group>"; };
+		02CDD9C6149AE3B90077B1DB /* ContractCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContractCell.h; sourceTree = "<group>"; };
+		02CDD9C7149AE3DC0077B1DB /* ContractCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContractCell.m; sourceTree = "<group>"; };
+		02CDD9C9149AE9770077B1DB /* ContractCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ContractCell.xib; path = Resources/Cells/ContractCell.xib; sourceTree = "<group>"; };
 		02CE034413DD018F00C91A88 /* PageInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PageInfo.h; sourceTree = "<group>"; };
 		02CE034513DD018F00C91A88 /* PageInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PageInfo.m; sourceTree = "<group>"; };
 		02DE9879137A10C1007C5FED /* LineItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LineItem.h; sourceTree = "<group>"; };
@@ -508,6 +513,7 @@
 		02CC9C99133FC53C006160A7 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				02CDD9C9149AE9770077B1DB /* ContractCell.xib */,
 				02CB9A6C139C19ED00FF2A3C /* EditableSectionHeaderView.xib */,
 				02FB96561474B30A00192FDB /* EstimateCell.xib */,
 				02EE007F1482C89100C020DE /* InvoiceCell.xib */,
@@ -519,10 +525,12 @@
 		02CC9CC8133FC9AD006160A7 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				02CB9A5D139C16B600FF2A3C /* EditableSectionHeaderView.h */,
-				02CB9A5E139C16B600FF2A3C /* EditableSectionHeaderView.m */,
+				02CDD9C6149AE3B90077B1DB /* ContractCell.h */,
+				02CDD9C7149AE3DC0077B1DB /* ContractCell.m */,
 				0270C460149058E300A5A610 /* DetailTableViewController.h */,
 				0270C461149058E300A5A610 /* DetailTableViewController.m */,
+				02CB9A5D139C16B600FF2A3C /* EditableSectionHeaderView.h */,
+				02CB9A5E139C16B600FF2A3C /* EditableSectionHeaderView.m */,
 				02FB96581474B68D00192FDB /* EstimateCell.h */,
 				02FB96591474B68D00192FDB /* EstimateCell.m */,
 				02EE007C1482C82600C020DE /* InvoiceCell.h */,
@@ -742,6 +750,7 @@
 				02EE00801482C89100C020DE /* InvoiceCell.xib in Resources */,
 				0213E3681489C946001D3D1D /* NewInvoice.xib in Resources */,
 				022D231C148DAE670041E5BE /* InvoiceDetail.xib in Resources */,
+				02CDD9CA149AE9770077B1DB /* ContractCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -804,6 +813,7 @@
 				0213E3671489C946001D3D1D /* NewInvoiceViewController.m in Sources */,
 				022D231B148DAE670041E5BE /* InvoiceDetailViewController.m in Sources */,
 				0270C462149058E300A5A610 /* DetailTableViewController.m in Sources */,
+				02CDD9C8149AE3DC0077B1DB /* ContractCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

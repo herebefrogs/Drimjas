@@ -1,21 +1,20 @@
 //
-//  StatusCell.m
+//  ContractCell.m
 //  Drimjas
 //
-//  Created by Jerome Lecomte on 11-11-16.
+//  Created by Jerome Lecomte on 11-12-15.
 //  Copyright (c) 2011 David J Peacock Photography. All rights reserved.
 //
 
-#import "EstimateCell.h"
+#import "ContractCell.h"
 // Views
-#import "EstimatesViewController.h"
+#import "ContractsViewController.h"
 
-@implementation EstimateCell
+@implementation ContractCell
 
 @synthesize clientName;
 @synthesize orderNumber;
-@synthesize status;
-@synthesize estimatesViewController;
+@synthesize contractsViewController;
 
 - (void)awakeFromNib {
 	wasShowingDeleteButton = NO;
@@ -29,18 +28,18 @@
 	if ((state & UITableViewCellStateShowingDeleteConfirmationMask)
 		&& (state & UITableViewCellStateShowingEditControlMask)
 		&& !wasShowingDeleteButton) {
-		// when cell is in edit mode, it will show a Delete button,
-		// notify its table view controller so it can choose to show
-		// a warning if appropriate for this estimate
+		// when cell in edit mode, it will show a Delete button,
+		// notify its view controller so it can choose to show a warning
+		// if appropriate for this contract
 		wasShowingDeleteButton = YES;
-		[estimatesViewController showDeleteWarningForCell:self];
+		[contractsViewController showDeleteWarningForCell:self];
 	}
 	else if (!(state & UITableViewCellStateShowingDeleteConfirmationMask) && wasShowingDeleteButton) {
-		// when cell is leaving edit mode, it will hide its Delete button,
-		// notify its view controller so it can hide the warning if it had
-		// been displayed for this estimate
+		// when cell is in edit mode, it will hide its Delete button,
+		// notify its view controller so it can hide the warning
+		// if it had been shown for this contract
 		wasShowingDeleteButton = NO;
-		[estimatesViewController hideDeleteWarningForCell:self];
+		[contractsViewController hideDeleteWarningForCell:self];
 	}
 }
 

@@ -20,6 +20,13 @@
 /* Startup View Controller Invoice Button */
 "New Invoice" = "New Invoice";
 
+/* Estimates View Controller Delete Warning */
+"1 Contract & 1 Invoice will be deleted" = "1 Contract & 1 Invoice will be deleted";
+"1 Contract will be deleted" = "1 Contract will be deleted";
+
+/* Contracts View Controller Delete Warning */
+"1 Invoice will be deleted" = "1 Invoice will be deleted";
+
 /* NewOrPickClientInfoViewController Navigation Item Title */
 "Add Client" = "Add Client";
 
