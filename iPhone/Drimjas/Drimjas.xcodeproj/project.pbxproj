@@ -259,7 +259,7 @@
 		02CB99DF139BE16F00FF2A3C /* Contracts@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Contracts@2x.png"; path = "Resources/Icons/Contracts@2x.png"; sourceTree = "<group>"; };
 		02CB99E0139BE16F00FF2A3C /* Options.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Options.png; path = Resources/Icons/Options.png; sourceTree = "<group>"; };
 		02CB99E1139BE16F00FF2A3C /* Options@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Options@2x.png"; path = "Resources/Icons/Options@2x.png"; sourceTree = "<group>"; };
-		02CB9A5D139C16B600FF2A3C /* EditableSectionHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; path = EditableSectionHeaderView.h; sourceTree = "<group>"; };
+		02CB9A5D139C16B600FF2A3C /* EditableSectionHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditableSectionHeaderView.h; sourceTree = "<group>"; };
 		02CB9A5E139C16B600FF2A3C /* EditableSectionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditableSectionHeaderView.m; sourceTree = "<group>"; };
 		02CB9A6C139C19ED00FF2A3C /* EditableSectionHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = EditableSectionHeaderView.xib; path = Resources/Cells/EditableSectionHeaderView.xib; sourceTree = "<group>"; };
 		02CC02E7140481A5007D1795 /* Drimjas 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Drimjas 4.xcdatamodel"; sourceTree = "<group>"; };

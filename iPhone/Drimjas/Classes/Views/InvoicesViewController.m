@@ -126,6 +126,7 @@
     Invoice *invoice = [invoices objectAtIndexPath:indexPath];
     cell.clientName.text = invoice.contract.estimate.clientInfo.name;
     cell.orderNumber.text = invoice.contract.estimate.orderNumber;
+
     if ([invoice.paid boolValue]) {
         cell.paid.text = NSLocalizedString(@"Paid", "Paid status");
         cell.paid.textColor = [UIColor colorWithRed:DRIMJAS_GREEN_R green:DRIMJAS_GREEN_G blue:DRIMJAS_GREEN_B alpha:1.0];
@@ -133,6 +134,9 @@
         cell.paid.text = NSLocalizedString(@"Unpaid", "Unpaid status");
         cell.paid.textColor = [UIColor redColor];
     }
+
+	// temporarily hide "paid/unpaid" field until we have a proper toggle to change it in invoice detail screen
+	cell.paid.text = nil;
 
 	cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 }
