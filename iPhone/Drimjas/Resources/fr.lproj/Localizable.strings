@@ -215,8 +215,11 @@ www.drimjas.com
 
 Version %@";
 
-/* Client info & line item estimates count */
+/* Client info estimates count */
 "Used in %u estimate(s)" = "Utilisé par %u devis";
+
+/* Line Items estimates & invoices count */
+"Used in %u estimate(s) and %u invoice(s)" = "Utilisé par %u devis et %u facture(s)";
 
 /* Ready status */
 "Ready" = "Prêt";

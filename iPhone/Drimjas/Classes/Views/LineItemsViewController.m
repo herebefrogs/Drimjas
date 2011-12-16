@@ -83,8 +83,13 @@
 		LineItem *lineItem = [lineItems objectAtIndexPath:indexPath];
 		cell.textLabel.text = NSLocalizedString(lineItem.name, "");
 		if (optionsMode) {
-			cell.detailTextLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Used in %u estimate(s)", "Line item estimates count"),
-																   [[lineItem valueForKeyPath:@"lineItemSelections.@distinctUnionOfObjects.estimate"] count]];
+			NSSet *lineItemsWithEstimates = [lineItem.lineItemSelections filteredSetUsingPredicate:[NSPredicate predicateWithFormat:@"estimate != nil"]];
+			NSSet *uniqueEstimates = [lineItemsWithEstimates valueForKeyPath:@"@distinctUnionOfObjects.estimate"];
+
+			NSSet *lineItemsWithInvoices = [lineItem.lineItemSelections filteredSetUsingPredicate:[NSPredicate predicateWithFormat:@"invoice != nil"]];
+			NSSet *uniqueInvoices = [lineItemsWithInvoices valueForKeyPath:@"@distinctUnionOfObjects.invoice"];
+
+			cell.detailTextLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Used in %u estimate(s) and %u invoice(s)", "Line item estimates count"), uniqueEstimates.count, uniqueInvoices.count];
 		} else {
 			cell.detailTextLabel.text = NSLocalizedString(lineItem.desc, "");
 		}
