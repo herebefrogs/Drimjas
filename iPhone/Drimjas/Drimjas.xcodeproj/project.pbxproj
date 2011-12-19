@@ -100,6 +100,7 @@
 		02CDD9C8149AE3DC0077B1DB /* ContractCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 02CDD9C7149AE3DC0077B1DB /* ContractCell.m */; };
 		02CDD9CA149AE9770077B1DB /* ContractCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02CDD9C9149AE9770077B1DB /* ContractCell.xib */; };
 		02CE034613DD018F00C91A88 /* PageInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 02CE034513DD018F00C91A88 /* PageInfo.m */; };
+		02DB8C6E149EF21700691A1E /* LineItemsMath.m in Sources */ = {isa = PBXBuildFile; fileRef = 02DB8C6D149EF21700691A1E /* LineItemsMath.m */; };
 		02DE987B137A10C1007C5FED /* LineItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 02DE987A137A10C1007C5FED /* LineItem.m */; };
 		02DE9886137A12D3007C5FED /* LineItemsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02DE9884137A12D3007C5FED /* LineItemsViewController.m */; };
 		02DE9887137A12D3007C5FED /* LineItems.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02DE9885137A12D3007C5FED /* LineItems.xib */; };
@@ -241,8 +242,8 @@
 		02BF6C36144E75E600CA738D /* Contract_Terms_Illustrator.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Contract_Terms_Illustrator.txt; path = Resources/Contract_Terms_Illustrator.txt; sourceTree = "<group>"; };
 		02C25791132438C40057D944 /* DataStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataStore.h; sourceTree = "<group>"; };
 		02C25792132438C40057D944 /* DataStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataStore.m; sourceTree = "<group>"; };
-		02C6509813D922B200ABEFF7 /* KeyValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KeyValue.h; path = ../Utils/KeyValue.h; sourceTree = "<group>"; };
-		02C6509913D922B200ABEFF7 /* KeyValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KeyValue.m; path = ../Utils/KeyValue.m; sourceTree = "<group>"; };
+		02C6509813D922B200ABEFF7 /* KeyValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyValue.h; sourceTree = "<group>"; };
+		02C6509913D922B200ABEFF7 /* KeyValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyValue.m; sourceTree = "<group>"; };
 		02C75240136A429F00EC4BF5 /* NewOrPickClientInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewOrPickClientInfoViewController.h; sourceTree = "<group>"; };
 		02C75241136A429F00EC4BF5 /* NewOrPickClientInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewOrPickClientInfoViewController.m; sourceTree = "<group>"; };
 		02C75242136A429F00EC4BF5 /* NewOrPickClientInfo.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewOrPickClientInfo.xib; sourceTree = "<group>"; };
@@ -281,6 +282,9 @@
 		02CDD9C9149AE9770077B1DB /* ContractCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ContractCell.xib; path = Resources/Cells/ContractCell.xib; sourceTree = "<group>"; };
 		02CE034413DD018F00C91A88 /* PageInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PageInfo.h; sourceTree = "<group>"; };
 		02CE034513DD018F00C91A88 /* PageInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PageInfo.m; sourceTree = "<group>"; };
+		02DB8C6B149EE6EE00691A1E /* Drimjas 7.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Drimjas 7.xcdatamodel"; sourceTree = "<group>"; };
+		02DB8C6C149EF21700691A1E /* LineItemsMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LineItemsMath.h; sourceTree = "<group>"; };
+		02DB8C6D149EF21700691A1E /* LineItemsMath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LineItemsMath.m; sourceTree = "<group>"; };
 		02DE9879137A10C1007C5FED /* LineItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LineItem.h; sourceTree = "<group>"; };
 		02DE987A137A10C1007C5FED /* LineItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LineItem.m; sourceTree = "<group>"; };
 		02DE9883137A12D3007C5FED /* LineItemsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LineItemsViewController.h; sourceTree = "<group>"; };
@@ -463,8 +467,6 @@
 				02B6326513B1D9D5003E4081 /* IndexedObject.m */,
 				02EE00701482B94900C020DE /* Invoice.h */,
 				02EE00711482B94900C020DE /* Invoice.m */,
-				02C6509813D922B200ABEFF7 /* KeyValue.h */,
-				02C6509913D922B200ABEFF7 /* KeyValue.m */,
 				02DE9879137A10C1007C5FED /* LineItem.h */,
 				02DE987A137A10C1007C5FED /* LineItem.m */,
 				02022CA41378CDFC00536FEA /* LineItemSelection.h */,
@@ -550,6 +552,10 @@
 				0282274C13D66EBB00D995A4 /* DrimjasInfo.m */,
 				02FC633213062D7100681A03 /* EmailManager.h */,
 				02FC633313062D7100681A03 /* EmailManager.m */,
+				02C6509813D922B200ABEFF7 /* KeyValue.h */,
+				02C6509913D922B200ABEFF7 /* KeyValue.m */,
+				02DB8C6C149EF21700691A1E /* LineItemsMath.h */,
+				02DB8C6D149EF21700691A1E /* LineItemsMath.m */,
 				02CE034413DD018F00C91A88 /* PageInfo.h */,
 				02CE034513DD018F00C91A88 /* PageInfo.m */,
 				02FA838C12F7A69B00C713AF /* PDFManager.h */,
@@ -814,6 +820,7 @@
 				022D231B148DAE670041E5BE /* InvoiceDetailViewController.m in Sources */,
 				0270C462149058E300A5A610 /* DetailTableViewController.m in Sources */,
 				02CDD9C8149AE3DC0077B1DB /* ContractCell.m in Sources */,
+				02DB8C6E149EF21700691A1E /* LineItemsMath.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -927,6 +934,7 @@
 		02943CAF1319AB8400A719AA /* Drimjas.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				02DB8C6B149EE6EE00691A1E /* Drimjas 7.xcdatamodel */,
 				02943CB01319AB8400A719AA /* WorkingTitle.xcdatamodel */,
 				02F8E48813382D6500D75745 /* WorkingTitle 2.xcdatamodel */,
 				02AD02E113397F5400FCF6AA /* WorkingTitle 3.xcdatamodel */,
@@ -946,7 +954,7 @@
 				02BF6C2F144E603B00CA738D /* Drimjas 5.xcdatamodel */,
 				02EE006F1482B66F00C020DE /* Drimjas 6.xcdatamodel */,
 			);
-			currentVersion = 02EE006F1482B66F00C020DE /* Drimjas 6.xcdatamodel */;
+			currentVersion = 02DB8C6B149EE6EE00691A1E /* Drimjas 7.xcdatamodel */;
 			name = Drimjas.xcdatamodeld;
 			path = Resources/Drimjas.xcdatamodeld;
 			sourceTree = "<group>";

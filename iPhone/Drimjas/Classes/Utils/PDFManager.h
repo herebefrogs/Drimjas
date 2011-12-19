@@ -32,6 +32,8 @@
 + (NSDictionary *)pdfInfoForContract:(Contract *)contract;	// dictionary of PDF metadata
 
 + (NSMutableData *)pdfDataForInvoice:(Invoice *)invoice;	// PDF content
-+ (NSString *)pdfNameForInvoice:(Invoice *)invoice;		// PDF filename
++ (NSString *)pdfNameForInvoice:(Invoice *)invoice;			// PDF filename
++ (NSString *)pdfTitleForInvoice:(Invoice *)invoice;		// PDF title as appearing in PDF metadata
++ (NSDictionary *)pdfInfoForInvoice:(Invoice *)invoice;		// dictionary of PDF metadata
 
 @end

@@ -270,6 +270,9 @@
 		// TODO handle error
 		NSLog(@"InvoiceDetailViewController.mailComposeController:didFinishWithResult:error failed to email invoice %@ with error %@, %@", invoice.contract.estimate.clientInfo.name, error, [error userInfo]);
 	}
+	else if (result == MFMailComposeResultSent || result == MFMailComposeResultSaved) {
+		[invoice issued];
+	}
     
     self.mailComposeViewController = nil;
 }
@@ -280,6 +283,9 @@
 - (void)printJobCompleted:(BOOL)completed withError:(NSError *)error {
 	if (error) {
 		NSLog(@"InvoiceDetailViewController.printJobCompleted: failed to print invoice %@ with error %@, %@", invoice.contract.estimate.clientInfo.name, error, [error userInfo]);
+	}
+	else if (completed) {
+		[invoice issued];
 	}
 }
 

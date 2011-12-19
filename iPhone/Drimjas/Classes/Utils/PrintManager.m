@@ -108,7 +108,6 @@ static id<PrintNotifyDelegate> _delegate;
 	// print completion handler/block/closure
 	void (^printCompleted)(UIPrintInteractionController *, BOOL, NSError *) =
     ^(UIPrintInteractionController *pic, BOOL completed, NSError *error) {
-
 		// notify delegate of print outcome
 		[_delegate printJobCompleted:completed withError:error];
 	};

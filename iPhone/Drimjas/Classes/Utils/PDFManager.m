@@ -24,6 +24,7 @@
 #import "Tax.h"
 // Utils
 #import "DrimjasInfo.h"
+#import "LineItemsMath.h"
 #import "PageInfo.h"
 
 
@@ -261,9 +262,9 @@ typedef enum {
 
 	NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
 	[dateFormat setDateStyle:NSDateFormatterFullStyle];
-	NSString *estimateDate = [dateFormat stringFromDate:date];
+	NSString *pdfDate = [dateFormat stringFromDate:date];
 
-	CGSize dateSize = [pageInfo drawTextRightJustified:estimateDate];
+	CGSize dateSize = [pageInfo drawTextRightJustified:pdfDate];
 	pageInfo.y += dateSize.height + pageInfo.linePadding;
 }
 
@@ -298,9 +299,9 @@ typedef enum {
 	CostWidth
 } LineItemsXAndWidth;
 
-+ (NSArray *)_pageInfo:(PageInfo *)pageInfo tableColumnsWidthForEstimate:(Estimate *)estimate {
++ (NSArray *)_pageInfo:(PageInfo *)pageInfo tableColumnsWidthForLineItems:(id<LineItemsOwner>)owner {
 	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"index" ascending:YES];
-	NSArray *lineItems = [estimate.lineItems sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];
+	NSArray *lineItems = [owner.lineItems sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];
 
 	CGFloat nameMax = 0.0;
 	CGFloat descriptionMax = 0.0;
@@ -354,7 +355,7 @@ typedef enum {
 
 	// calculate the maximum width taken by sub total, taxes, S & H and total values
 	[numberFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
-	NSNumber *subTotal = estimate.subTotal;
+	NSNumber *subTotal = owner.subTotal;
 	textSize = [[numberFormatter stringFromNumber:subTotal] sizeWithFont:pageInfo.plainFont];
 	costMax = MAX(costMax, textSize.width);
 
@@ -363,10 +364,10 @@ typedef enum {
 		costMax = MAX(costMax, textSize.width);
 	}
 
-	textSize = [[numberFormatter stringFromNumber:estimate.shippingAndHandlingCost] sizeWithFont:pageInfo.plainFont];
+	textSize = [[numberFormatter stringFromNumber:owner.shippingAndHandlingCost] sizeWithFont:pageInfo.plainFont];
 	costMax = MAX(costMax, textSize.width);
 
-	textSize = [[numberFormatter stringFromNumber:estimate.total] sizeWithFont:pageInfo.plainFont];
+	textSize = [[numberFormatter stringFromNumber:owner.total] sizeWithFont:pageInfo.plainFont];
 	costMax = MAX(costMax, textSize.width);
 
 
@@ -597,7 +598,7 @@ typedef enum {
 	}
 }
 
-+ (void)_pageInfo:(PageInfo *)pageInfo renderTotalsAndTaxes:(Estimate *)estimate forContract:(BOOL)contract xAndWidths:(NSArray *)xAndWidths {
++ (void)_pageInfo:(PageInfo *)pageInfo renderTotalsAndTaxes:(id<LineItemsOwner>)owner forContract:(BOOL)contract xAndWidths:(NSArray *)xAndWidths {
 	NSAssert(xAndWidths.count == CostWidth + 1, @"Not enough x and width data to render totals and taxes");
 
 	CGFloat unitCostX = [[xAndWidths objectAtIndex:UnitCostX] floatValue];
@@ -611,7 +612,7 @@ typedef enum {
 	[numberFormatter setCurrencyCode:[[[DataStore defaultStore] currency] isoCode]];
 	[numberFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
 
-	NSNumber *subTotal = estimate.subTotal;
+	NSNumber *subTotal = owner.subTotal;
 	NSArray *taxes = [[DataStore defaultStore] taxes];
 
 	// calculate the maximum width of sub total, taxes, S & H and total labels
@@ -711,7 +712,7 @@ typedef enum {
 	[pageInfo drawTextMiddleJustified:NSLocalizedString(@"S & H","") font:pageInfo.boldFont padding:pageInfo.linePadding];
 	pageInfo.x = costX;
 	pageInfo.maxWidth = costWidth;
-	textSize = [pageInfo drawTextRightJustified:[numberFormatter stringFromNumber:estimate.shippingAndHandlingCost] padding:pageInfo.linePadding];
+	textSize = [pageInfo drawTextRightJustified:[numberFormatter stringFromNumber:owner.shippingAndHandlingCost] padding:pageInfo.linePadding];
 	maxRowHeight = textSize.height + 2 * pageInfo.linePadding;
 
 	// render row frame
@@ -745,7 +746,7 @@ typedef enum {
 	[pageInfo drawTextMiddleJustified:NSLocalizedString(@"TOTAL","") font:pageInfo.boldFont padding:pageInfo.linePadding];
 	pageInfo.x = costX;
 	pageInfo.maxWidth = costWidth;
-	textSize = [pageInfo drawTextRightJustified:[numberFormatter stringFromNumber:estimate.total] padding:pageInfo.linePadding];
+	textSize = [pageInfo drawTextRightJustified:[numberFormatter stringFromNumber:owner.total] padding:pageInfo.linePadding];
 	maxRowHeight = textSize.height + 2 * pageInfo.linePadding;
 
 	// render row frame
@@ -766,6 +767,17 @@ typedef enum {
 
 	pageInfo.y += maxRowHeight;
 
+}
+
++ (void)_renderInvoiceFooter:(PageInfo *)pageInfo {
+    MyInfo *myInfo = [[DataStore defaultStore] myInfo];
+
+	NSString *invoiceFooter = NSLocalizedString(@"Amount due within 30 days of receiving invoice.\nPlease make cheque payable to %@", "");
+
+	pageInfo.x = pageInfo.bounds.origin.x;
+	CGSize textSize = [pageInfo drawTextMiddleJustified:[NSString stringWithFormat:invoiceFooter, myInfo.name]
+												   font:pageInfo.boldFont];
+	pageInfo.y += textSize.height;
 }
 
 + (void)_renderPDFFooter:(PageInfo *)pageInfo {
@@ -865,7 +877,7 @@ typedef enum {
 			   withFormat:NSLocalizedString(@"Purchase Order #%@ - Estimate", "Purchase Order Estimate label in PDF")];
 	
 	// render line items table
-	xAndWidths = [PDFManager _pageInfo:pageInfo tableColumnsWidthForEstimate:estimate];
+	xAndWidths = [PDFManager _pageInfo:pageInfo tableColumnsWidthForLineItems:estimate];
 
 	pageInfo.y += pageInfo.sectionPadding;
 	[PDFManager _pageInfo:pageInfo renderLineItems:estimate.lineItems xAndWidths:xAndWidths];
@@ -964,7 +976,7 @@ typedef enum {
 			   withFormat:NSLocalizedString(@"Purchase Order #%@ - Contract", "Purchase Order Contract label in PDF")];
 
 	// render line items table
-	xAndWidths = [PDFManager _pageInfo:pageInfo tableColumnsWidthForEstimate:contract.estimate];
+	xAndWidths = [PDFManager _pageInfo:pageInfo tableColumnsWidthForLineItems:contract.estimate];
 
 	pageInfo.y += pageInfo.sectionPadding;
 	[PDFManager _pageInfo:pageInfo renderLineItems:contract.estimate.lineItems xAndWidths:xAndWidths];
@@ -993,7 +1005,7 @@ typedef enum {
 
 + (NSString *)pdfTitleForContract:(Contract *)contract {
 	return [NSString stringWithFormat:NSLocalizedString(@"Contract #%@", @"Contract PDF title"),
-									  contract.estimate.orderNumber];
+			contract.estimate.orderNumber];
 }
 
 + (NSDictionary *)pdfInfoForContract:(Contract *)contract {
@@ -1008,7 +1020,70 @@ typedef enum {
 
 + (NSMutableData *)pdfDataForInvoice:(Invoice *)invoice
 {
-    return nil;
+	NSMutableData *pdfData = [[NSMutableData alloc] initWithCapacity:1024];
+
+	// start PDF data
+	PageInfo *pageInfo = [[PageInfo alloc] init];
+	UIGraphicsBeginPDFContextToData(pdfData, pageInfo.pageSize, [self pdfInfoForInvoice:invoice]);
+
+	// open new page
+	UIGraphicsBeginPDFPage();
+
+	MyInfo *myInfo = [[DataStore defaultStore] myInfo];
+
+	NSArray *xAndWidths = [PDFManager _pageInfo:pageInfo headerColumnsWidthForClient:invoice.contract.estimate.clientInfo myInfo:myInfo];
+
+	// render client+contact info & my info side by side
+	CGFloat myY = [PDFManager _pageInfo:pageInfo renderMyInfo:myInfo xAndWidths:xAndWidths];
+	CGFloat clientY = [PDFManager _pageInfo:pageInfo renderClientInfo:invoice.contract.estimate.clientInfo xAndWidths:xAndWidths];
+
+	// render invoice date & business number
+	pageInfo.y = pageInfo.pageNo == 1 && myY > clientY ? myY + pageInfo.sectionPadding : clientY;
+	NSDate *date = invoice.date;
+	if (date == nil) {
+		// if invoice never emailed or printed, set temporary date for viewing to today
+		date = [NSDate date];
+	}
+	[PDFManager _pageInfo:pageInfo renderDate:date];
+	[PDFManager _pageInfo:pageInfo renderTaxNos:[[DataStore defaultStore] taxes]];
+
+	// render horizontal line
+	pageInfo.y += pageInfo.linePadding;
+	CGContextRef context = UIGraphicsGetCurrentContext();
+	CGContextBeginPath(context);
+	CGContextSetLineWidth(context, 1.5);
+	CGContextMoveToPoint(context, pageInfo.bounds.origin.x, pageInfo.y);
+	CGContextAddLineToPoint(context, pageInfo.bounds.origin.x + CGRectGetWidth(pageInfo.bounds), pageInfo.y);
+	CGContextClosePath(context);
+	CGContextStrokePath(context);
+
+	// render order number
+	pageInfo.y += pageInfo.sectionPadding;
+	[PDFManager _pageInfo:pageInfo
+			renderOrderNo:invoice.contract.estimate.orderNumber
+			   withFormat:NSLocalizedString(@"Purchase Order #%@ - Invoice", "Purchase Order Invoice label in PDF")];
+
+	// render line items table
+	xAndWidths = [PDFManager _pageInfo:pageInfo tableColumnsWidthForLineItems:invoice];
+
+	pageInfo.y += pageInfo.sectionPadding;
+	[PDFManager _pageInfo:pageInfo renderLineItems:invoice.lineItems xAndWidths:xAndWidths];
+	pageInfo.y += 6 * pageInfo.linePadding;
+	// TODO dito
+	[PDFManager _pageInfo:pageInfo renderTotalsAndTaxes:invoice forContract:NO xAndWidths:xAndWidths];
+
+	// render invoice footer
+	pageInfo.y += pageInfo.sectionPadding;
+	[PDFManager _renderInvoiceFooter:pageInfo];
+
+	// render PDF footer
+	pageInfo.y += pageInfo.sectionPadding;
+	[PDFManager _renderPDFFooter:pageInfo];
+
+	// end PDF data
+	UIGraphicsEndPDFContext();
+
+	return pdfData;
 }
 
 + (NSString *)pdfNameForInvoice:(Invoice *)invoice
@@ -1016,6 +1091,23 @@ typedef enum {
 	return [NSString stringWithFormat:NSLocalizedString(@"Invoice-%@.pdf", "Invoice PDF filename"),
                                       invoice.contract.estimate.orderNumber];
 }
+
++ (NSString *)pdfTitleForInvoice:(Invoice *)invoice {
+	return [NSString stringWithFormat:NSLocalizedString(@"Invoice #%@", @"Invoice PDF title"),
+			invoice.contract.estimate.orderNumber];
+}
+
++ (NSDictionary *)pdfInfoForInvoice:(Invoice *)invoice {
+	DataStore *dataStore = [DataStore defaultStore];
+
+	return [NSDictionary dictionaryWithObjectsAndKeys:
+			[[dataStore myInfo] name], kCGPDFContextAuthor,
+			[DrimjasInfo title], kCGPDFContextCreator,
+			[self pdfTitleForInvoice:invoice], kCGPDFContextTitle,
+			nil];
+}
+
+
 
 
 @end

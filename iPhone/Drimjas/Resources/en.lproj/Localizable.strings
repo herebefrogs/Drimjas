@@ -297,6 +297,9 @@ Version %@";
 /* Purchase Order Contract label in PDF */
 "Purchase Order #%@ - Contract" = "Purchase Order #%@ - Contract";
 
+/* Purchase Order Invoice label in PDF */
+"Purchase Order #%@ - Invoice" = "Purchase Order #%@ - Invoice";
+
 /* table header */
 "Item" = "Item";
 "Unit Cost" = "Unit Cost";
@@ -313,6 +316,9 @@ Version %@";
 
 /* contract signature date */
 "Date:" = "Date:";
+
+/* Invoice footer */
+"Amount due within 30 days of receiving invoice.\nPlease make cheque payable to %@" = "Amount due within 30 days of receiving invoice.\nPlease make cheque payable to %@";
 
 /* PDF footer */
 "If you have any questions, please don't hesitate to contact us!" = "If you have any questions, please don't hesitate to contact us!";

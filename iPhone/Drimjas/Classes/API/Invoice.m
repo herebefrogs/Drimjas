@@ -10,6 +10,7 @@
 // API
 #import "ClientInfo.h"
 #import "Contract.h"
+#import "DataStore.h"
 #import "Estimate.h"
 #import "LineItemSelection.h"
 
@@ -17,6 +18,7 @@
 @implementation Invoice
 
 @dynamic contract;
+@dynamic date;
 @dynamic lineItems;
 @dynamic paid;
 
@@ -50,5 +52,29 @@
 	[self refreshStatus];
 }
 
+- (void)issued {
+	// set date at which invoice is first issued (here by email) if not already set
+	if (self.date == nil) {
+		self.date = [NSDate date];
+		[[DataStore defaultStore] saveInvoice:self];
+	}
+}
+
+
+
+#pragma mark - LineItemOwner stack
+
+- (NSNumber *)subTotal {
+	return [LineItemsMath subTotalForLineItems:self.lineItems];
+}
+
+- (NSNumber *)total {
+	return [LineItemsMath totalWithSubTotal:self.subTotal
+					shippingAndHandlingCost:self.shippingAndHandlingCost];
+}
+
+- (NSNumber *)shippingAndHandlingCost {
+	return [LineItemsMath shippingAndHandlingCostForLineItems:self.lineItems];
+}
 
 @end

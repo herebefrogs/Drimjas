@@ -9,11 +9,8 @@
 #import "Estimate.h"
 // API
 #import "ClientInfo.h"
-#import "Contract.h"
 #import "DataStore.h"
-#import "LineItem.h"
 #import "LineItemSelection.h"
-#import "Tax.h"
 
 @implementation Estimate 
 
@@ -52,41 +49,16 @@
 }
 
 - (NSNumber *)subTotal {
-	CGFloat subTotal = 0;
-
-	for (LineItemSelection *lineItem in self.lineItems) {
-		// S & H is handled in total
-		if ([lineItem.lineItem.name isEqualToString:NSLocalizedString(@"Shipping & Handling","")]) {
-			continue;
-		}
-		subTotal += [lineItem.cost floatValue];
-	}
-
-	return [NSNumber numberWithFloat:subTotal];
+	return [LineItemsMath subTotalForLineItems:self.lineItems];
 }
 
 - (NSNumber *)total {
-	CGFloat total = 0;
-	NSNumber *subTotal = self.subTotal;
-
-	for (Tax *tax in [[DataStore defaultStore] taxes]) {
-		total += [[tax costForSubTotal:subTotal] floatValue];
-	}
-
-	total += [self.shippingAndHandlingCost floatValue];
-
-	total += [subTotal floatValue];
-
-	return [NSNumber numberWithFloat:total];
+	return [LineItemsMath totalWithSubTotal:self.subTotal
+					shippingAndHandlingCost:self.shippingAndHandlingCost];
 }
 
 - (NSNumber *)shippingAndHandlingCost {
-	for (LineItemSelection *lineItem in self.lineItems) {
-		if ([lineItem.lineItem.name isEqualToString:NSLocalizedString(@"Shipping & Handling", "")]) {
-			return lineItem.cost;
-		}
-	}
-	return [NSNumber numberWithInt:0];
+	return [LineItemsMath shippingAndHandlingCostForLineItems:self.lineItems];
 }
 
 #pragma mark -

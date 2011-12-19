@@ -9,13 +9,14 @@
 #import <CoreData/CoreData.h>
 // API
 #import "BaseObject.h"
+// Utils
+#import "LineItemsMath.h"
 
 @class ClientInfo;
 @class Contract;
 @class LineItemSelection;
 
-@interface Estimate : BaseObject {
-}
+@interface Estimate : BaseObject <LineItemsOwner>
 
 @property (nonatomic, strong) NSNumber *number;
 @property (nonatomic, strong) NSDate *date;
@@ -25,10 +26,6 @@
 
 @property (weak, nonatomic, readonly) NSString *monthYear;
 @property (weak, nonatomic, readonly) NSString *orderNumber;
-
-@property (weak, nonatomic, readonly) NSNumber *subTotal;
-@property (weak, nonatomic, readonly) NSNumber *total;
-@property (weak, nonatomic, readonly) NSNumber *shippingAndHandlingCost;
 
 @end
 
