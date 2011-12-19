@@ -291,8 +291,11 @@ Version %@";
 "contact.email" = "Email:";
 "contact.phone" = "Phone:";
 
-/* Purchase Order label */
-"Purchase Order" = "Purchase Order";
+/* Purchase Order Estimate label in PDF */
+"Purchase Order #%@ - Estimate" = "Purchase Order #%@ - Estimate";
+
+/* Purchase Order Contract label in PDF */
+"Purchase Order #%@ - Contract" = "Purchase Order #%@ - Contract";
 
 /* table header */
 "Item" = "Item";

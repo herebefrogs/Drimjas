@@ -277,12 +277,10 @@ typedef enum {
 	}
 }
 
-+ (void)_pageInfo:(PageInfo *)pageInfo renderOrderNo:(NSString *)orderNo {
++ (void)_pageInfo:(PageInfo *)pageInfo renderOrderNo:(NSString *)orderNo withFormat:(NSString *)format {
 	pageInfo.x = pageInfo.bounds.origin.x;
 
-	CGSize noSize = [pageInfo drawTextLeftJustified:[NSString stringWithFormat:@"%@ #%@",
-													 NSLocalizedString(@"Purchase Order", "Purchase Order label in PDF"),
-													 orderNo]
+	CGSize noSize = [pageInfo drawTextLeftJustified:[NSString stringWithFormat:format, orderNo]
 											   font:pageInfo.bigBoldFont];
 	pageInfo.y += noSize.height + pageInfo.sectionPadding;
 }
@@ -862,7 +860,9 @@ typedef enum {
 
 	// render order number
 	pageInfo.y += pageInfo.sectionPadding;
-	[PDFManager _pageInfo:pageInfo renderOrderNo:estimate.orderNumber];
+	[PDFManager _pageInfo:pageInfo
+			renderOrderNo:estimate.orderNumber
+			   withFormat:NSLocalizedString(@"Purchase Order #%@ - Estimate", "Purchase Order Estimate label in PDF")];
 	
 	// render line items table
 	xAndWidths = [PDFManager _pageInfo:pageInfo tableColumnsWidthForEstimate:estimate];
@@ -959,7 +959,9 @@ typedef enum {
 
 	// render order number
 	pageInfo.y += pageInfo.sectionPadding;
-	[PDFManager _pageInfo:pageInfo renderOrderNo:contract.estimate.orderNumber];
+	[PDFManager _pageInfo:pageInfo
+			renderOrderNo:contract.estimate.orderNumber
+			   withFormat:NSLocalizedString(@"Purchase Order #%@ - Contract", "Purchase Order Contract label in PDF")];
 
 	// render line items table
 	xAndWidths = [PDFManager _pageInfo:pageInfo tableColumnsWidthForEstimate:contract.estimate];
