@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0200424014A01DBE005364DB /* Invoice.png in Resources */ = {isa = PBXBuildFile; fileRef = 0200423A14A01DBE005364DB /* Invoice.png */; };
+		0200424114A01DBE005364DB /* Invoice@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0200423B14A01DBE005364DB /* Invoice@2x.png */; };
+		0200424214A01DBE005364DB /* InvoiceHighlight.png in Resources */ = {isa = PBXBuildFile; fileRef = 0200423C14A01DBE005364DB /* InvoiceHighlight.png */; };
+		0200424314A01DBE005364DB /* InvoiceHighlight@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0200423D14A01DBE005364DB /* InvoiceHighlight@2x.png */; };
+		0200424414A01DBE005364DB /* Invoices.png in Resources */ = {isa = PBXBuildFile; fileRef = 0200423E14A01DBE005364DB /* Invoices.png */; };
+		0200424514A01DBE005364DB /* Invoices@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0200423F14A01DBE005364DB /* Invoices@2x.png */; };
 		02022CA61378CDFC00536FEA /* LineItemSelection.m in Sources */ = {isa = PBXBuildFile; fileRef = 02022CA51378CDFC00536FEA /* LineItemSelection.m */; };
 		020347D014451D730085CE11 /* CurrenciesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 020347CE14451D730085CE11 /* CurrenciesViewController.m */; };
 		020347D114451D730085CE11 /* Currencies.xib in Resources */ = {isa = PBXBuildFile; fileRef = 020347CF14451D730085CE11 /* Currencies.xib */; };
@@ -134,6 +140,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0200423A14A01DBE005364DB /* Invoice.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Invoice.png; path = Resources/Icons/Invoice.png; sourceTree = "<group>"; };
+		0200423B14A01DBE005364DB /* Invoice@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Invoice@2x.png"; path = "Resources/Icons/Invoice@2x.png"; sourceTree = "<group>"; };
+		0200423C14A01DBE005364DB /* InvoiceHighlight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = InvoiceHighlight.png; path = Resources/Icons/InvoiceHighlight.png; sourceTree = "<group>"; };
+		0200423D14A01DBE005364DB /* InvoiceHighlight@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "InvoiceHighlight@2x.png"; path = "Resources/Icons/InvoiceHighlight@2x.png"; sourceTree = "<group>"; };
+		0200423E14A01DBE005364DB /* Invoices.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Invoices.png; path = Resources/Icons/Invoices.png; sourceTree = "<group>"; };
+		0200423F14A01DBE005364DB /* Invoices@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Invoices@2x.png"; path = "Resources/Icons/Invoices@2x.png"; sourceTree = "<group>"; };
 		02022C9F1378CD8700536FEA /* WorkingTitle 8.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "WorkingTitle 8.xcdatamodel"; sourceTree = "<group>"; };
 		02022CA41378CDFC00536FEA /* LineItemSelection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LineItemSelection.h; sourceTree = "<group>"; };
 		02022CA51378CDFC00536FEA /* LineItemSelection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LineItemSelection.m; sourceTree = "<group>"; };
@@ -502,6 +514,12 @@
 				02E7BA111400194D00D60D6D /* EstimateHighlight@2x.png */,
 				023C7D6713099CD200FD360B /* Estimates.png */,
 				028917DE1308D1CD00945F4D /* Estimates@2x.png */,
+				0200423A14A01DBE005364DB /* Invoice.png */,
+				0200423B14A01DBE005364DB /* Invoice@2x.png */,
+				0200423C14A01DBE005364DB /* InvoiceHighlight.png */,
+				0200423D14A01DBE005364DB /* InvoiceHighlight@2x.png */,
+				0200423E14A01DBE005364DB /* Invoices.png */,
+				0200423F14A01DBE005364DB /* Invoices@2x.png */,
 				02CB99E0139BE16F00FF2A3C /* Options.png */,
 				02CB99E1139BE16F00FF2A3C /* Options@2x.png */,
 				02C81A9213079755009029E9 /* Print.png */,
@@ -757,6 +775,12 @@
 				0213E3681489C946001D3D1D /* NewInvoice.xib in Resources */,
 				022D231C148DAE670041E5BE /* InvoiceDetail.xib in Resources */,
 				02CDD9CA149AE9770077B1DB /* ContractCell.xib in Resources */,
+				0200424014A01DBE005364DB /* Invoice.png in Resources */,
+				0200424114A01DBE005364DB /* Invoice@2x.png in Resources */,
+				0200424214A01DBE005364DB /* InvoiceHighlight.png in Resources */,
+				0200424314A01DBE005364DB /* InvoiceHighlight@2x.png in Resources */,
+				0200424414A01DBE005364DB /* Invoices.png in Resources */,
+				0200424514A01DBE005364DB /* Invoices@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

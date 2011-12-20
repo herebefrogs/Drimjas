@@ -155,7 +155,7 @@
 						<int key="IBUIContentVerticalAlignment">0</int>
 						<double key="IBUIImageEdgeInsets.top">0.0</double>
 						<double key="IBUIImageEdgeInsets.bottom">0.0</double>
-						<double key="IBUIImageEdgeInsets.left">-60</double>
+						<double key="IBUIImageEdgeInsets.left">-65</double>
 						<double key="IBUIImageEdgeInsets.right">0.0</double>
 						<int key="IBUILineBreakMode">0</int>
 						<string key="IBUINormalTitle">Add Invoice</string>
@@ -163,6 +163,14 @@
 						<reference key="IBUISelectedTitleColor" ref="780129086"/>
 						<reference key="IBUINormalTitleColor" ref="698365714"/>
 						<reference key="IBUINormalTitleShadowColor" ref="786638126"/>
+						<object class="NSCustomResource" key="IBUIHighlightedImage">
+							<string key="NSClassName">NSImage</string>
+							<string key="NSResourceName">InvoiceHighlight.png</string>
+						</object>
+						<object class="NSCustomResource" key="IBUINormalImage">
+							<string key="NSClassName">NSImage</string>
+							<string key="NSResourceName">Invoice.png</string>
+						</object>
 						<reference key="IBUIFontDescription" ref="765503812"/>
 						<reference key="IBUIFont" ref="321315697"/>
 					</object>
@@ -172,7 +180,6 @@
 						<string key="NSFrame">{{0, 411}, {320, 49}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MCAwAA</bytes>
@@ -310,10 +317,13 @@
 				<string key="1.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="25.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="47.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<real value="2" key="47.IBUIButtonInspectorSelectedEdgeInsetMetadataKey"/>
 				<string key="52.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="60.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-				<real value="0.0" key="60.IBUIButtonInspectorSelectedStateConfigurationMetadataKey"/>
+				<real value="2" key="60.IBUIButtonInspectorSelectedEdgeInsetMetadataKey"/>
+				<real value="1" key="60.IBUIButtonInspectorSelectedStateConfigurationMetadataKey"/>
 				<string key="9.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<real value="2" key="9.IBUIButtonInspectorSelectedEdgeInsetMetadataKey"/>
 			</dictionary>
 			<dictionary class="NSMutableDictionary" key="unlocalizedProperties"/>
 			<nil key="activeLocalization"/>
@@ -481,6 +491,33 @@
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
+					<string key="className">ContractCell</string>
+					<string key="superclassName">UITableViewCell</string>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="clientName">UILabel</string>
+						<string key="contractsViewController">ContractsViewController</string>
+						<string key="orderNumber">UILabel</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="clientName">
+							<string key="name">clientName</string>
+							<string key="candidateClassName">UILabel</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="contractsViewController">
+							<string key="name">contractsViewController</string>
+							<string key="candidateClassName">ContractsViewController</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="orderNumber">
+							<string key="name">orderNumber</string>
+							<string key="candidateClassName">UILabel</string>
+						</object>
+					</dictionary>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/ContractCell.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
 					<string key="className">ContractDetailViewController</string>
 					<string key="superclassName">DetailTableViewController</string>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
@@ -504,12 +541,17 @@
 					</object>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="aNewContractViewController">NewContractViewController</string>
+						<string key="contractCell">ContractCell</string>
 						<string key="contractDetailViewController">ContractDetailViewController</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
 						<object class="IBToOneOutletInfo" key="aNewContractViewController">
 							<string key="name">aNewContractViewController</string>
 							<string key="candidateClassName">NewContractViewController</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="contractCell">
+							<string key="name">contractCell</string>
+							<string key="candidateClassName">ContractCell</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="contractDetailViewController">
 							<string key="name">contractDetailViewController</string>
@@ -577,6 +619,7 @@
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="contractsViewController">ContractsViewController</string>
 						<string key="estimatesViewController">EstimatesViewController</string>
+						<string key="invoicesViewController">InvoicesViewController</string>
 						<string key="startupViewController">StartupViewController</string>
 						<string key="tabBarController">UITabBarController</string>
 						<string key="window">UIWindow</string>
@@ -589,6 +632,10 @@
 						<object class="IBToOneOutletInfo" key="estimatesViewController">
 							<string key="name">estimatesViewController</string>
 							<string key="candidateClassName">EstimatesViewController</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="invoicesViewController">
+							<string key="name">invoicesViewController</string>
+							<string key="candidateClassName">InvoicesViewController</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="startupViewController">
 							<string key="name">startupViewController</string>
@@ -635,6 +682,7 @@
 					<string key="superclassName">UITableViewCell</string>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="clientName">UILabel</string>
+						<string key="estimatesViewController">EstimatesViewController</string>
 						<string key="orderNumber">UILabel</string>
 						<string key="status">UILabel</string>
 					</dictionary>
@@ -642,6 +690,10 @@
 						<object class="IBToOneOutletInfo" key="clientName">
 							<string key="name">clientName</string>
 							<string key="candidateClassName">UILabel</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="estimatesViewController">
+							<string key="name">estimatesViewController</string>
+							<string key="candidateClassName">EstimatesViewController</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="orderNumber">
 							<string key="name">orderNumber</string>
@@ -725,6 +777,104 @@
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">./Classes/EstimatesViewController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">InvoiceCell</string>
+					<string key="superclassName">UITableViewCell</string>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="clientName">UILabel</string>
+						<string key="orderNumber">UILabel</string>
+						<string key="paid">UILabel</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="clientName">
+							<string key="name">clientName</string>
+							<string key="candidateClassName">UILabel</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="orderNumber">
+							<string key="name">orderNumber</string>
+							<string key="candidateClassName">UILabel</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="paid">
+							<string key="name">paid</string>
+							<string key="candidateClassName">UILabel</string>
+						</object>
+					</dictionary>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/InvoiceCell.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">InvoiceDetailViewController</string>
+					<string key="superclassName">DetailTableViewController</string>
+					<object class="NSMutableDictionary" key="actions">
+						<string key="NS.key.0">toggled:</string>
+						<string key="NS.object.0">id</string>
+					</object>
+					<object class="NSMutableDictionary" key="actionInfosByName">
+						<string key="NS.key.0">toggled:</string>
+						<object class="IBActionInfo" key="NS.object.0">
+							<string key="name">toggled:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</object>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="lineItemSelectionsViewController">AddEstimateLineItemsViewController</string>
+						<string key="paidCell">PaidCell</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="lineItemSelectionsViewController">
+							<string key="name">lineItemSelectionsViewController</string>
+							<string key="candidateClassName">AddEstimateLineItemsViewController</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="paidCell">
+							<string key="name">paidCell</string>
+							<string key="candidateClassName">PaidCell</string>
+						</object>
+					</dictionary>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/InvoiceDetailViewController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">InvoicesViewController</string>
+					<string key="superclassName">UITableViewController</string>
+					<object class="NSMutableDictionary" key="actions">
+						<string key="NS.key.0">add:</string>
+						<string key="NS.object.0">id</string>
+					</object>
+					<object class="NSMutableDictionary" key="actionInfosByName">
+						<string key="NS.key.0">add:</string>
+						<object class="IBActionInfo" key="NS.object.0">
+							<string key="name">add:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</object>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="aNewInvoiceViewController">NewInvoiceViewController</string>
+						<string key="invoiceCell">InvoiceCell</string>
+						<string key="invoiceDetailViewController">InvoiceDetailViewController</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="aNewInvoiceViewController">
+							<string key="name">aNewInvoiceViewController</string>
+							<string key="candidateClassName">NewInvoiceViewController</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="invoiceCell">
+							<string key="name">invoiceCell</string>
+							<string key="candidateClassName">InvoiceCell</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="invoiceDetailViewController">
+							<string key="name">invoiceDetailViewController</string>
+							<string key="candidateClassName">InvoiceDetailViewController</string>
+						</object>
+					</dictionary>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/InvoicesViewController.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
@@ -845,6 +995,25 @@
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
+					<string key="className">NewInvoiceViewController</string>
+					<string key="superclassName">UITableViewController</string>
+					<object class="NSMutableDictionary" key="outlets">
+						<string key="NS.key.0">invoiceDetailViewController</string>
+						<string key="NS.object.0">InvoiceDetailViewController</string>
+					</object>
+					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<string key="NS.key.0">invoiceDetailViewController</string>
+						<object class="IBToOneOutletInfo" key="NS.object.0">
+							<string key="name">invoiceDetailViewController</string>
+							<string key="candidateClassName">InvoiceDetailViewController</string>
+						</object>
+					</object>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/NewInvoiceViewController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
 					<string key="className">NewLineItemViewController</string>
 					<string key="superclassName">TextFieldTableViewController</string>
 					<object class="NSMutableDictionary" key="actions">
@@ -924,6 +1093,28 @@
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">./Classes/PDFViewController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">PaidCell</string>
+					<string key="superclassName">UITableViewCell</string>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="label">UILabel</string>
+						<string key="toggle">UISwitch</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="label">
+							<string key="name">label</string>
+							<string key="candidateClassName">UILabel</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="toggle">
+							<string key="name">toggle</string>
+							<string key="candidateClassName">UISwitch</string>
+						</object>
+					</dictionary>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/PaidCell.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
@@ -1060,10 +1251,6 @@
 		</object>
 		<int key="IBDocument.localizationMode">0</int>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBCocoaTouchFramework</string>
-		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDependencyDefaults">
-			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaTouchPlugin.iPhoneOS</string>
-			<real value="1280" key="NS.object.0"/>
-		</object>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
@@ -1071,6 +1258,8 @@
 			<string key="ContractHighlight.png">{70, 70}</string>
 			<string key="Estimate.png">{70, 70}</string>
 			<string key="EstimateHighlight.png">{70, 70}</string>
+			<string key="Invoice.png">{70, 70}</string>
+			<string key="InvoiceHighlight.png">{70, 70}</string>
 			<string key="Launch.png">{320, 480}</string>
 		</dictionary>
 		<string key="IBCocoaTouchPluginVersion">933</string>
