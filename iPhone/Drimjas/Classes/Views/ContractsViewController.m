@@ -64,6 +64,14 @@
 	[self.tableView reloadData];
 }
 
+- (void)setEditing:(BOOL)editing animated:(BOOL)animated {
+	if (!editing) {
+		// must remove warning row, if it exists, before exiting editing mode
+		[self hideDeleteWarningForCell:[self.tableView cellForRowAtIndexPath:self.deleteIndexPath]];
+	}
+	[super setEditing:editing animated:animated];
+}
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     return YES;
 }
@@ -188,14 +196,19 @@
 	return UITableViewAutomaticDimension;
 }
 
+// when cell is "swiped to delete"
 - (void)tableView:(UITableView *)tableView willBeginEditingRowAtIndexPath:(NSIndexPath *)indexPath {
-	// when cell is "swiped to delete"...
 	[self showDeleteWarningForCell:[self.tableView cellForRowAtIndexPath:indexPath]];
+	// toggle Edit button to Done
+	self.editing = YES;
 }
 
+// when cell is un-"swiped to delete"
 - (void)tableView:(UITableView *)tableView didEndEditingRowAtIndexPath:(NSIndexPath *)indexPath {
-	// when cell is un-"swiped to delete"...
-	[self hideDeleteWarningForCell:[self.tableView cellForRowAtIndexPath:indexPath]];
+	// toggle Done button back to Edit
+	// (this will trigger our overriden setEditing:animated:
+	// which will remove the warning row if necessary)
+	self.editing = NO;
 }
 
 
