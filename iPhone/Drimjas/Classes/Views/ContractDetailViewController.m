@@ -3,7 +3,7 @@
 //  Drimjas
 //
 //  Created by Jerome Lecomte on 11-08-24.
-//  Copyright 2011 David J Peacock Photography. All rights reserved.
+//  Copyright 2014 David J Peacock - david@davidjpeacock.ca.  GPLv3
 //
 
 #import "ContractDetailViewController.h"

@@ -1,39 +1,39 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
-<dict>
-	<key>CFBundleDevelopmentRegion</key>
-	<string>English</string>
-	<key>CFBundleDisplayName</key>
-	<string>${PRODUCT_NAME}</string>
-	<key>CFBundleExecutable</key>
-	<string>${EXECUTABLE_NAME}</string>
-	<key>CFBundleIconFiles</key>
-	<array>
-		<string>Application</string>
-		<string>Application@2x</string>
-		<string>Search-Settings</string>
-		<string>Search-Settings@2x</string>
-	</array>
-	<key>UILaunchImageFile</key>
-	<string>Launch</string>
-	<key>CFBundleIdentifier</key>
-	<string>com.davidjpeacock.drimjas</string>
-	<key>CFBundleInfoDictionaryVersion</key>
-	<string>6.0</string>
-	<key>CFBundleName</key>
-	<string>${PRODUCT_NAME}</string>
-	<key>CFBundlePackageType</key>
-	<string>APPL</string>
-	<key>CFBundleSignature</key>
-	<string>????</string>
-	<key>CFBundleVersion</key>
-	<string>APP_VERSION</string>
-	<key>LSRequiresIPhoneOS</key>
-	<true/>
-	<key>UIFileSharingEnabled</key>
-	<false/>
-	<key>NSMainNibFile</key>
-	<string>MainWindow</string>
-</dict>
-</plist>
+APP_VERSION<?xml version="1.0" encoding="UTF-8"?>
+APP_VERSION<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+APP_VERSION<plist version="1.0">
+APP_VERSION<dict>
+APP_VERSION	<key>CFBundleDevelopmentRegion</key>
+APP_VERSION	<string>English</string>
+APP_VERSION	<key>CFBundleDisplayName</key>
+APP_VERSION	<string>${PRODUCT_NAME}</string>
+APP_VERSION	<key>CFBundleExecutable</key>
+APP_VERSION	<string>${EXECUTABLE_NAME}</string>
+APP_VERSION	<key>CFBundleIconFiles</key>
+APP_VERSION	<array>
+APP_VERSION		<string>Application</string>
+APP_VERSION		<string>Application@2x</string>
+APP_VERSION		<string>Search-Settings</string>
+APP_VERSION		<string>Search-Settings@2x</string>
+APP_VERSION	</array>
+APP_VERSION	<key>UILaunchImageFile</key>
+APP_VERSION	<string>Launch</string>
+APP_VERSION	<key>CFBundleIdentifier</key>
+APP_VERSION	<string>com.davidjpeacock.drimjas</string>
+APP_VERSION	<key>CFBundleInfoDictionaryVersion</key>
+APP_VERSION	<string>6.0</string>
+APP_VERSION	<key>CFBundleName</key>
+APP_VERSION	<string>${PRODUCT_NAME}</string>
+APP_VERSION	<key>CFBundlePackageType</key>
+APP_VERSION	<string>APPL</string>
+APP_VERSION	<key>CFBundleSignature</key>
+APP_VERSION	<string>????</string>
+APP_VERSION	<key>CFBundleVersion</key>
+APP_VERSION	<string></string>
+APP_VERSION	<key>LSRequiresIPhoneOS</key>
+APP_VERSION	<true/>
+APP_VERSION	<key>UIFileSharingEnabled</key>
+APP_VERSION	<false/>
+APP_VERSION	<key>NSMainNibFile</key>
+APP_VERSION	<string>MainWindow</string>
+APP_VERSION</dict>
+APP_VERSION</plist>
