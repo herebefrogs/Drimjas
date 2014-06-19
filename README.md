@@ -22,6 +22,8 @@ The below screenshots were taken before the final release that went to App Store
 back in 2011. Crucially the final major feature of Invoicing is not featured, 
 but why not build the code yourself and see where it's at?!
 
-|![Main Screen](https://github.com/davidjpeacock/Drimjas/raw/master/Screenshots/1-main.png)|![Line Items](https://github.com/davidjpeacock/Drimjas/raw/master/Screenshots/2-lineItems.png)|
-|![Estimates](https://github.com/davidjpeacock/Drimjas/raw/master/Screenshots/3-estimates.png)|![Contract Details](https://github.com/davidjpeacock/Drimjas/raw/master/Screenshots/4-contractDetails.png)|
-|![Taxes & Currency](https://github.com/davidjpeacock/Drimjas/raw/master/Screenshots/5-taxesAndCurrency.png)||
+![Main Screen](https://github.com/davidjpeacock/Drimjas/raw/master/Screenshots/1-main.png)
+![Line Items](https://github.com/davidjpeacock/Drimjas/raw/master/Screenshots/2-lineItems.png)
+![Estimates](https://github.com/davidjpeacock/Drimjas/raw/master/Screenshots/3-estimates.png)
+![Contract Details](https://github.com/davidjpeacock/Drimjas/raw/master/Screenshots/4-contractDetails.png)
+![Taxes & Currency](https://github.com/davidjpeacock/Drimjas/raw/master/Screenshots/5-taxesAndCurrency.png)
