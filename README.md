@@ -28,6 +28,6 @@ but why not build the code yourself and see where it's at?!
 
 ![Estimates](https://github.com/davidjpeacock/Drimjas/raw/master/Screenshots/3-estimates.png)
 
-![Contract Details]([https://github.com/davidjpeacock/Drimjas/raw/master/Screenshots/4-contractDetails.png)
+![Contract Details](https://github.com/davidjpeacock/Drimjas/raw/master/Screenshots/4-contractDetails.png)
 
 ![Taxes & Currency](https://github.com/davidjpeacock/Drimjas/raw/master/Screenshots/5-taxesAndCurrency.png)
