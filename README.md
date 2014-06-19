@@ -15,3 +15,5 @@ again, then when you're done Drimjas will generate a beautifully and professiona
 formatted document for emailing or printing.
 
 Never again worry about the paperwork hassles of life as a professional photographer!
+
+![Main Screen](https://github.com/davidjpeacock/Drimjas/blob/master/Screenshots/1-main.png)
