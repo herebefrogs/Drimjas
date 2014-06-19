@@ -27,3 +27,11 @@ but why not build the code yourself and see where it's at?!
 ![Estimates](https://github.com/davidjpeacock/Drimjas/raw/master/Screenshots/3-estimates.png)
 ![Contract Details](https://github.com/davidjpeacock/Drimjas/raw/master/Screenshots/4-contractDetails.png)
 ![Taxes & Currency](https://github.com/davidjpeacock/Drimjas/raw/master/Screenshots/5-taxesAndCurrency.png)
+
+### Contributing
+
+My collaborators and I have decided to give Drimjas a second life by opening up the source
+under the GPLv3 license.  We'd absolutely love to see Drimjas live on in ways we may not have
+originally envisioned.
+
+Pull requests are most welcome!
