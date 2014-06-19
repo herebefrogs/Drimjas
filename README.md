@@ -16,4 +16,4 @@ formatted document for emailing or printing.
 
 Never again worry about the paperwork hassles of life as a professional photographer!
 
-![Main Screen](https://github.com/davidjpeacock/Drimjas/blob/master/Screenshots/1-main.png)
+![Main Screen](https://github.com/davidjpeacock/Drimjas/raw/master/Screenshots/1-main.png)
