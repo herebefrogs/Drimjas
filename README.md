@@ -31,7 +31,7 @@ but why not build the code yourself and see where it's at?!
 ### Contributing
 
 My collaborators and I have decided to give Drimjas a second life by opening up the source
-under the GPLv3 license.  We'd absolutely love to see Drimjas live on in ways we may not have
+under the Apache 2 license.  We'd absolutely love to see Drimjas live on in ways we may not have
 originally envisioned.
 
 Pull requests are most welcome!
