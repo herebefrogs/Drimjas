@@ -3,7 +3,7 @@
 //  Drimjas
 //
 //  Created by Jerome Lecomte on 11-01-13.
-//  Copyright 2014 David J Peacock - david@davidjpeacock.ca.  GPLv3
+//  Copyright 2014 David J Peacock - david@davidjpeacock.ca.  Apache 2 License
 //
 
 #import "EstimatesViewController.h"

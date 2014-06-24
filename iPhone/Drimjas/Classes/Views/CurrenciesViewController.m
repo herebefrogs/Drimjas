@@ -3,7 +3,7 @@
 //  Drimjas
 //
 //  Created by Jerome Lecomte on 11-10-11.
-//  Copyright 2014 David J Peacock - david@davidjpeacock.ca.  GPLv3
+//  Copyright 2014 David J Peacock - david@davidjpeacock.ca.  Apache 2 License
 //
 
 #import "CurrenciesViewController.h"
